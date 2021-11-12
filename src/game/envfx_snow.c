@@ -101,6 +101,7 @@ void envfx_update_snowflake_count(s32 mode, Vec3s marioPos) {
     f32 waterLevel;
     switch (mode) {
         case ENVFX_SNOW_NORMAL:
+            gSnowParticleCount = gSnowParticleMaxCount;
             if (gSnowParticleMaxCount > gSnowParticleCount) {
                 if ((timer & 0x3F) == 0) {
                     gSnowParticleCount += 5;

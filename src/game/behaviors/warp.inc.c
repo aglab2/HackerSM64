@@ -7,7 +7,6 @@ void bhv_warp_loop(void) {
         if (radius == 0) {
             o->hitboxRadius = 50.0f;
         } else if (radius == 0xFF) {
-            o->hitboxRadius = 10000.0f;
         } else {
             o->hitboxRadius = radius * 10.0f;
         }

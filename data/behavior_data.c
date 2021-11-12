@@ -5994,3 +5994,12 @@ const BehaviorScript bhvIntroScene[] = {
         CALL_NATIVE(bhv_intro_scene_loop),
     END_LOOP(),
 };
+
+extern void bhv_death_fireball_loop();
+const BehaviorScript bhvDeathFireball[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_death_fireball_loop),
+    END_LOOP(),
+};
