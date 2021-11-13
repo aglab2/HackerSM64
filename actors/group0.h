@@ -344,4 +344,6 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "fireball/geo_header.h"
 
+#include "fightctl/collision_header.h"
+
 #endif

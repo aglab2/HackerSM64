@@ -1834,7 +1834,7 @@ s16 render_pause_courses_and_castle(void) {
             level_set_transition(-1, NULL);
             play_sound(SOUND_MENU_PAUSE_HIGHPRIO, gGlobalSoundSource);
 
-            if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
+            if (0) {
                 change_dialog_camera_angle();
                 gDialogBoxState = DIALOG_STATE_VERTICAL;
             } else {

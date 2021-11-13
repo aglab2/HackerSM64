@@ -32,3 +32,4 @@
 #endif
 
 #include "fireball/model.inc.c"
+#include "fightctl/collision.inc.c"

@@ -6003,3 +6003,42 @@ const BehaviorScript bhvDeathFireball[] = {
         CALL_NATIVE(bhv_death_fireball_loop),
     END_LOOP(),
 };
+
+extern void bhv_fight_init();
+extern void bhv_fight_loop();
+const BehaviorScript bhvFightCtl[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    LOAD_COLLISION_DATA(fightctl_collision),
+    SET_FLOAT(oCollisionDistance, 20000),
+        CALL_NATIVE(bhv_fight_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fight_loop),
+    END_LOOP(),
+};
+
+extern void bhv_moving_star();
+extern void bhv_moving_star_init();
+const BehaviorScript bhvStarMoving[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_moving_star_init),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_collect_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_collect_star_loop),
+        CALL_NATIVE(bhv_moving_star),
+    END_LOOP(),
+};
+
+extern void bhv_fight_switch_loop();
+const BehaviorScript bhvFightFloorSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fight_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

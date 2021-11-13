@@ -1342,5 +1342,12 @@ os16112*/
 #define /*0x110*/ os16110                                       OBJECT_FIELD_S16(0x22, 0)
 #define /*0x112*/ os16112                                       OBJECT_FIELD_S16(0x22, 1)
 
+#define oFieldCtlStar0  OBJECT_FIELD_OBJ(0x1B)
+#define oFieldCtlStar1  OBJECT_FIELD_OBJ(0x1C)
+#define oFieldCtlStar2  OBJECT_FIELD_OBJ(0x1D)
+#define oFieldCtlStar3  OBJECT_FIELD_OBJ(0x1E)
+
+#define oFieldCtlSwitch1  OBJECT_FIELD_OBJ(0x1F)
+#define oFieldCtlSwitch2  OBJECT_FIELD_OBJ(0x20)
 
 #endif // OBJECT_FIELDS_H

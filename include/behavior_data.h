@@ -530,5 +530,7 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 
 extern const BehaviorScript bhvDeathFireball[];
+extern const BehaviorScript bhvFightCtl[];
+extern const BehaviorScript bhvFightFloorSwitch[];
 
 #endif // BEHAVIOR_DATA_H

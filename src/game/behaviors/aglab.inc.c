@@ -1,3 +1,6 @@
+#include "seq_ids.h"
+#include "audio/external.h"
+
 extern int gTriggerHell;
 
 extern Vtx fireball_fireball_001_mesh_layer_5_vtx_0[];
@@ -134,20 +137,25 @@ void bhv_death_fireball_loop()
 
     if (gCurrentObject->oTimer < 200)
     {
-        cur_obj_scale(1.f + sins(gCurrentObject->oTimer * 2370) * 0.04f);
+        if ((gCurrentObject->oTimer % 10) == 0)
+        create_sound_spawner(SOUND_AIR_BOWSER_SPIT_FIRE);
+        cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + sins(gCurrentObject->oTimer * 2370) * 0.04f);
     }
     else if (gCurrentObject->oTimer < 250)
     {
-        // cur_obj_scale(1.f + sins(gCurrentObject->oTimer * 13370) * 0.2f);
+        cur_obj_play_sound_1(SOUND_AIR_BLOW_FIRE);
         int left = (gCurrentObject->oTimer - 200) * (gCurrentObject->oTimer - 200);
         int leftMax = 2500;
         int diffW = 3000 - 2370;
         float diffA = 0.3f - 0.04f;
-        cur_obj_scale(1.f + sins(gCurrentObject->oTimer * (2370 + diffW * left / leftMax)) * (0.04f + diffA * left / leftMax));
+        cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + sins(gCurrentObject->oTimer * (2370 + diffW * left / leftMax)) * (0.04f + diffA * left / leftMax));
     }
     else
     {
-        cur_obj_scale(1.f + (gCurrentObject->oTimer - 250) * 0.12f);
+        if (gCurrentObject->oTimer == 250)
+            create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
+    
+        cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + (gCurrentObject->oTimer - 250) * 0.15f);
     }
 
     // trap mario inside the cube
@@ -162,5 +170,322 @@ void bhv_death_fireball_loop()
     if (gCurrentObject->oTimer == 250)
     {
         level_trigger_warp(gMarioStates, 1 /*WARP_OP_LOOK_UP*/);
+    }
+}
+
+static void killPrimColor(Gfx* gfx, int off, int spd)
+{
+    u8* b = segmented_to_virtual(gfx);
+    u8* p = &b[8 * off + 7];
+    u8 v = *p;
+    if (v < spd)
+    {
+        v = 0;
+    }
+    else
+    {
+        v -= spd;
+    }
+
+    *p = v;
+}
+
+extern Gfx mat_sa_dl__9_f3d[]; // +18
+extern Gfx mat_sa_dl__10_f3d[]; // +18
+extern Gfx mat_sa_dl__11_f3d[]; // +18
+static void killCake()
+{
+    killPrimColor(mat_sa_dl__9_f3d, 18, 10);
+    killPrimColor(mat_sa_dl__10_f3d, 18, 10);
+    killPrimColor(mat_sa_dl__11_f3d, 18, 10);
+}
+
+extern Gfx mat_sa_dl__7_f3d_layer5_area1[]; // +23
+extern Gfx mat_sa_dl__4_f3d_layer5_area1[]; // +16
+extern Gfx mat_sa_dl__5_f3d_layer5_area1[]; // +16
+extern Gfx mat_sa_dl__6_f3d_layer5_area1[]; // +16
+extern Gfx mat_sa_dl__12_f3d_layer5_area1[]; // +23
+extern Gfx mat_sa_dl__13_f3d_layer5_area1[]; // +24
+
+extern Gfx mat_sa_dl_Color_M08_f3d[];
+extern Gfx mat_sa_dl_FrontColor_f3d[];
+static void killCourse()
+{
+    killPrimColor(mat_sa_dl__7_f3d_layer5_area1, 23, 5);
+    killPrimColor(mat_sa_dl__4_f3d_layer5_area1, 16, 5);
+    killPrimColor(mat_sa_dl__5_f3d_layer5_area1, 16, 5);
+    killPrimColor(mat_sa_dl__6_f3d_layer5_area1, 16, 5);
+    killPrimColor(mat_sa_dl__12_f3d_layer5_area1, 23, 5);
+    killPrimColor(mat_sa_dl__13_f3d_layer5_area1, 24, 5);
+    
+    killPrimColor(mat_sa_dl_Color_M08_f3d, 3, 2);
+    killPrimColor(mat_sa_dl_FrontColor_f3d, 3, 5);
+}
+
+extern f32 absf(f32 x);
+static void limitMarioMovementForCtl(f32 x, f32 z, f32 max)
+{
+    if (x + max < gMarioStates->pos[0])
+        gMarioStates->pos[0] = x + max;
+    if (x - max > gMarioStates->pos[0])
+        gMarioStates->pos[0] = x - max;
+        
+    if (z + max < gMarioStates->pos[2])
+        gMarioStates->pos[2] = z + max;
+    if (z - max > gMarioStates->pos[2])
+        gMarioStates->pos[2] = z - max;
+}
+
+static void find_all_spawner_stars(const BehaviorScript *behavior) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    struct Object** objInObj = &gCurrentObject->oFieldCtlStar0;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr && obj->oPosY > 100.f) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
+                *objInObj = obj;
+                objInObj++;
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
+static void raise_all_switches(const BehaviorScript *behavior)
+{
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    int cnt = 0;
+    int cnt2 = 0;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr && obj->oPosY < 0.f) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
+                obj->oPosY += 10.f;
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
+static void raise_all_troll_stars_for(const BehaviorScript *behavior, int dcenter)
+{
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    int cnt = 0;
+    int cnt2 = 0;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr && obj->oPosY < 100.f) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
+                cnt2++;
+                int need = 1;           
+                if (dcenter == 0)
+                {
+                    need = absf(obj->oPosX) > 400.f || (obj->oPosZ == 0 && obj->oPosX == 0); 
+                }
+                else if (dcenter == 1)
+                {
+                    need = absf(obj->oPosX) < 50.f;
+                }
+                else if (dcenter == 2)
+                {
+                    need = absf(obj->oPosX) < 400.f; 
+                }                
+
+                if (need)
+                {
+                    obj->oFaceAngleRoll = 0x8000;
+                    obj->oPosY += 10.f;
+                    cnt++;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+    
+    //print_text_fmt_int(20, 20, "%d", cnt);
+    //print_text_fmt_int(20, 40, "%d", cnt2);
+}
+
+extern const BehaviorScript bhvStar[];
+void bhv_fight_init()
+{
+    gCurrentObject->oHealth = 10;
+    find_all_spawner_stars(bhvStar);
+}
+
+extern const BehaviorScript bhvStarMoving[];
+void spawn_attack_stars()
+{
+    cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
+    struct Object** spawners = &gCurrentObject->oFieldCtlStar0;
+    for (int i = 0; i < 4; i++)
+    {
+        struct Object* spawner = spawners[i];
+        struct Object* n = spawn_object(spawner, MODEL_STAR, bhvStarMoving);
+        u16 angle = random_u16();
+        f32 spd = 15.f;
+        n->oVelX = sins(angle) * spd;
+        n->oVelY = 0;
+        n->oVelZ = coss(angle) * spd;
+        if (gCurrentObject->oHealth == 1)
+        {
+            n->oFaceAngleRoll = random_u16();
+        }
+
+        if (n->oPosX < 0)
+            n->oVelX = absf(n->oVelX);
+        if (n->oPosX > 0)
+            n->oVelX = -absf(n->oVelX);
+    }
+}
+
+extern f32 gGlobalSoundSource[];
+void bhv_fight_loop()
+{
+    if (0 == gCurrentObject->oAction)
+    {
+        load_object_collision_model();
+        if (gCurrentObject->oDistanceToMario < 250.f)
+        {
+            gCurrentObject->oAction = 1;
+        }
+    }
+    else if (1 == gCurrentObject->oAction)
+    {
+        if (gCurrentObject->oTimer == 0)
+            play_sound(SOUND_MENU_BOWSER_LAUGH, gGlobalSoundSource);
+    
+        // no more collision for any oAction past 0
+        killCake();
+        limitMarioMovementForCtl(gCurrentObject->oPosX, gCurrentObject->oPosZ, 180.f);
+    
+        if (gCurrentObject->oTimer == 30)
+        {
+            gCurrentObject->oAction = 2;
+        }
+    }
+    else if (2 == gCurrentObject->oAction)
+    {
+        killCourse();
+        raise_all_switches(bhvFightFloorSwitch);    
+        if (gCurrentObject->oTimer < 20)
+            limitMarioMovementForCtl(gCurrentObject->oPosX, gCurrentObject->oPosZ, 180.f);
+        if (gCurrentObject->oTimer == 55)
+        {
+            gCurrentObject->oAction = 3;
+        }
+    }
+    else if (3 == gCurrentObject->oAction)
+    {
+        if (gCurrentObject->oTimer == 0)
+            play_music(0, SEQUENCE_ARGS(4, SEQ_LEVEL_HOT), 0);
+    
+        print_text_fmt_int(145, 220, "%d", gCurrentObject->oHealth);
+
+        // on first hit we dont shoot
+        if (gCurrentObject->oHealth < 10)
+        {
+            // star spawning the attacks from the stars
+            struct Object** spawners = &gCurrentObject->oFieldCtlStar0;
+            for (int i = 0; i < 4; i++)
+            {
+                struct Object* spawner = spawners[i];
+                f32 scale = 1.f + (gCurrentObject->oTimer % 40) * 0.047f;
+                obj_scale_xyz(spawner, scale, scale, scale);
+            }
+            if (gCurrentObject->oHealth > 3)
+            {
+                if (!(gCurrentObject->oTimer % 50))
+                    spawn_attack_stars();
+            }
+            else
+            {
+                if (!(gCurrentObject->oTimer % 70))
+                    spawn_attack_stars();
+            }
+        }
+
+        if (gCurrentObject->oHealth == 7)
+        {
+            raise_all_troll_stars_for(bhvStar, 0);
+        }
+        else if (gCurrentObject->oHealth == 5)
+        {
+            raise_all_troll_stars_for(bhvStar, 1);
+        }
+        else if (gCurrentObject->oHealth == 3)
+        {
+            raise_all_troll_stars_for(bhvStar, 2);
+        }
+        else if (!gCurrentObject->oHealth)
+        {
+            level_trigger_warp(gMarioStates, 1 /*WARP_OP_LOOK_UP*/);
+        }
+    }
+}
+
+void bhv_moving_star_init()
+{
+    gCurrentObject->oBehParams = 0x10101010;
+}
+
+void bhv_moving_star()
+{
+    gCurrentObject->oPosX += gCurrentObject->oVelX;
+    gCurrentObject->oPosY += gCurrentObject->oVelY;
+    gCurrentObject->oPosZ += gCurrentObject->oVelZ;
+
+    if (gCurrentObject->oTimer > 200)
+    {
+        gCurrentObject->oVelY += 0.3f;
+    }
+
+    if (gCurrentObject->oTimer > 300)
+        gCurrentObject->activeFlags = 0;
+}
+
+extern const BehaviorScript bhvFightCtl[];
+extern const BehaviorScript bhvFightFloorSwitch[];
+void bhv_fight_switch_loop()
+{
+    if (0 == gCurrentObject->oAction)
+    {
+        // initial state, all are unpressed but we need to check if mao is pressed on us
+        if (gMarioObject->platform == gCurrentObject)
+        {
+            // reset the other switch
+            // I could cache these but I cba
+            struct Object* os = cur_obj_nearest_object_with_behavior(bhvFightFloorSwitch);
+            os->oAction = 0;
+
+            struct Object* ctl = cur_obj_nearest_object_with_behavior(bhvFightCtl);
+            ctl->oHealth--;
+
+            gCurrentObject->oAction = 1;
+        }
+        obj_scale_xyz(gCurrentObject, 1.2f, 1.2f, 1.2f);
+    }
+    else
+    {
+        // it is pressed, we do nothing basically
+        obj_scale_xyz(gCurrentObject, 1.2f, 0.1f, 1.2f);
     }
 }

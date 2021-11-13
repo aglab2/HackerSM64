@@ -1,6 +1,6 @@
 void scroll_castle_inside_dl_level_mesh_layer_1_vtx_11() {
 	int i = 0;
-	int count = 89;
+	int count = 85;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
@@ -22,7 +22,7 @@ void scroll_castle_inside_dl_level_mesh_layer_1_vtx_11() {
 
 void scroll_castle_inside_dl_level_001_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 188;
+	int count = 150;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -44,7 +44,7 @@ void scroll_castle_inside_dl_level_001_mesh_layer_5_vtx_0() {
 
 void scroll_castle_inside_dl_level_002_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 46;
+	int count = 44;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
