@@ -1,0 +1,17 @@
+extern const GeoLayout fireball_geo[];
+extern Lights1 fireball__28_f3d_lights;
+extern Lights1 fireball_f3d_material_lights;
+extern u8 fireball__28_rgba16[];
+extern u8 fireball_tex1_64x64_ed8a9d60158f2088_14_ci4[];
+extern u8 fireball_tex1_64x64_ed8a9d60158f2088_14_ci4_pal_rgba16[];
+extern Vtx fireball_fireball_mesh_layer_1_vtx_0[22];
+extern Gfx fireball_fireball_mesh_layer_1_tri_0[];
+extern Vtx fireball_fireball_001_mesh_layer_5_vtx_0[26];
+extern Gfx fireball_fireball_001_mesh_layer_5_tri_0[];
+extern Gfx mat_fireball__28_f3d[];
+extern Gfx mat_revert_fireball__28_f3d[];
+extern Gfx mat_fireball_f3d_material[];
+extern Gfx mat_revert_fireball_f3d_material[];
+extern Gfx fireball_fireball_mesh_layer_1[];
+extern Gfx fireball_fireball_001_mesh_layer_5[];
+extern Gfx fireball_material_revert_render_settings[];

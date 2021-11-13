@@ -221,7 +221,7 @@ McGee's Alice,\n\
 Madness Returns\n\
 \n\
 There are no stars\n\
-\n\
+\
 "))
 
 DEFINE_DIALOG(DIALOG_016, 1, 3, 30, 200, _("\

@@ -54,8 +54,9 @@ const LevelScript level_castle_grounds_entry[] = {
 
 	AREA(1, castle_grounds_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		MARIO_POS(0x01, 0, 750, -4734, 8608),
-		OBJECT(MODEL_NONE, 2895, 633, -13, 0, 0, 0, 0x00000000, bhvDeathFireball),
+		WARP_NODE(0xf2, LEVEL_CASTLE_COURTYARD, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_FIREBALL, 3889, 5595, 1630, 0, 0, 0, 0x00000000, bhvDeathFireball),
+		MARIO_POS(0x01, 0, 381, -4740, 8549),
 		OBJECT(MODEL_WOODEN_SIGNPOST, 1023, -4648, 7675, 0, -27, 0, (15 << 16), bhvMessagePanel),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
@@ -66,7 +67,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, 750, -4734, 8608),
+	MARIO_POS(0x01, 0, 381, -4740, 8549),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

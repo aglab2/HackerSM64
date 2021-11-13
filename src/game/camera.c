@@ -3597,19 +3597,19 @@ s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown
         currentState &= ~R_CBUTTONS;
     }
 
-    if (buttonsPressed & U_CBUTTONS) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && (buttonsPressed & U_CBUTTONS)) {
         currentState |= U_CBUTTONS;
         currentState &= ~D_CBUTTONS;
     }
-    if (!(buttonsDown & U_CBUTTONS)) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && !(buttonsDown & U_CBUTTONS)) {
         currentState &= ~U_CBUTTONS;
     }
 
-    if (buttonsPressed & D_CBUTTONS) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && (buttonsPressed & D_CBUTTONS)) {
         currentState |= D_CBUTTONS;
         currentState &= ~U_CBUTTONS;
     }
-    if (!(buttonsDown & D_CBUTTONS)) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && !(buttonsDown & D_CBUTTONS)) {
         currentState &= ~D_CBUTTONS;
     }
 
@@ -4421,7 +4421,7 @@ void radial_camera_input(struct Camera *c) {
     }
 
     // Zoom in / enter C-Up
-    if (gPlayer1Controller->buttonPressed & U_CBUTTONS) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && (gPlayer1Controller->buttonPressed & U_CBUTTONS)) {
         if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
             gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             play_sound_cbutton_up();
@@ -4431,7 +4431,7 @@ void radial_camera_input(struct Camera *c) {
     }
 
     // Zoom out
-    if (gPlayer1Controller->buttonPressed & D_CBUTTONS) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && (gPlayer1Controller->buttonPressed & D_CBUTTONS)) {
         if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
             gCameraMovementFlags |= CAM_MOVE_ALREADY_ZOOMED_OUT;
 #ifndef VERSION_JP
@@ -4458,7 +4458,7 @@ void handle_c_button_movement(struct Camera *c) {
     s16 cSideYaw;
 
     // Zoom in
-    if (gPlayer1Controller->buttonPressed & U_CBUTTONS) {
+    if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && (gPlayer1Controller->buttonPressed & U_CBUTTONS)) {
         if (c->mode != CAMERA_MODE_FIXED && (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT)) {
             gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             play_sound_cbutton_up();
@@ -4473,7 +4473,7 @@ void handle_c_button_movement(struct Camera *c) {
     }
     if (c->mode != CAMERA_MODE_FIXED) {
         // Zoom out
-        if (gPlayer1Controller->buttonPressed & D_CBUTTONS) {
+        if ((gCurrLevelNum != LEVEL_CASTLE_GROUNDS) && (gPlayer1Controller->buttonPressed & D_CBUTTONS)) {
             if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
                 gCameraMovementFlags |= CAM_MOVE_ALREADY_ZOOMED_OUT;
                 sZoomAmount = gCameraZoomDist + 400.f;
@@ -5744,6 +5744,9 @@ struct CameraTrigger sCamCastleGrounds[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamCastleCourtyard[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamSA[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
@@ -9944,7 +9947,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // LLL            | DDD
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // COURTYARD      | PSS

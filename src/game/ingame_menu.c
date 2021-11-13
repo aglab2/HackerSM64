@@ -1795,7 +1795,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-    if (gDialogLineNum < COURSE_STAGES_COUNT) {
+    if (0) {
         courseName = segmented_to_virtual(courseNameTbl[gDialogLineNum]);
         render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, gDialogLineNum);
         print_generic_string(x + 34, y - 5, textCoin);
@@ -1805,7 +1805,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
         u8 textStarX[] = { TEXT_STAR_X };
         courseName = segmented_to_virtual(courseNameTbl[COURSE_MAX]);
         print_generic_string(x + 40, y + 13, textStarX);
-        int_to_str(save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_BONUS_STAGES - 1, COURSE_MAX - 1), strVal);
+        int_to_str(0, strVal);
         print_generic_string(x + 60, y + 13, strVal);
     }
 
