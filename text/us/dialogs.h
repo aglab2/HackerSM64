@@ -213,12 +213,18 @@ Do you want to Save?\n\
 //You Bet//Not Now"))
 
 DEFINE_DIALOG(DIALOG_015, 1, 3, 30, 200, _("\
-Made by aglab2\n\
-Some model from\n\
-BroDute\n\
+  Peach's Cake Party\n\
+\n\
+          Made by aglab2\n\
+Hack for Mario Jams 3\n\
+Some model from BroDute\n\
+HackerSM64 used\n\
 Music from American\n\
 McGee's Alice,\n\
 Madness Returns\n\
+Tested by\n\
+Mushie64, Quills.\n\
+\n\
 \n\
 There are no stars\n\
 \

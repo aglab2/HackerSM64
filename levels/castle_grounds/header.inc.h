@@ -93,7 +93,7 @@ extern Vtx castle_grounds_dl_castle_mesh_layer_1_vtx_3[4];
 extern Gfx castle_grounds_dl_castle_mesh_layer_1_tri_3[];
 extern Vtx castle_grounds_dl_castle_mesh_layer_1_vtx_4[42];
 extern Gfx castle_grounds_dl_castle_mesh_layer_1_tri_4[];
-extern Vtx castle_grounds_dl_castle_mesh_layer_1_vtx_5[72];
+extern Vtx castle_grounds_dl_castle_mesh_layer_1_vtx_5[71];
 extern Gfx castle_grounds_dl_castle_mesh_layer_1_tri_5[];
 extern Vtx castle_grounds_dl_castle_mesh_layer_1_vtx_6[11];
 extern Gfx castle_grounds_dl_castle_mesh_layer_1_tri_6[];

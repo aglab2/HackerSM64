@@ -418,7 +418,7 @@ void bhv_fight_loop()
             }
             else
             {
-                if (!(gCurrentObject->oTimer % 70))
+                if (!(gCurrentObject->oTimer % 75))
                     spawn_attack_stars();
             }
         }
