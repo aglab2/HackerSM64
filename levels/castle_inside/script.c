@@ -69,7 +69,6 @@ const LevelScript level_castle_inside_entry[] = {
 		MARIO_POS(0x01, 0, 2692, 3, 3586),
 		OBJECT(MODEL_NONE, -6689, 819, -312, 0, 0, 0, (0x60 << 24) | (0xf0 << 16), bhvWarp),
 		OBJECT(MODEL_NONE, -4566, 1580, -342, 0, 0, 0, (0xc << 16), bhvAirborneStarCollectWarp),
-		OBJECT(MODEL_WOODEN_SIGNPOST, 5187, 1738, 655, 0, -123, 0, (8 << 16), bhvMessagePanel),
 		TERRAIN(castle_inside_area_1_collision),
 		MACRO_OBJECTS(castle_inside_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SNOW),

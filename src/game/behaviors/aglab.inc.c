@@ -137,6 +137,7 @@ void bhv_death_fireball_loop()
 
     if (gCurrentObject->oTimer < 200)
     {
+        cur_obj_shake_screen(2);
         if ((gCurrentObject->oTimer % 10) == 0)
         create_sound_spawner(SOUND_AIR_BOWSER_SPIT_FIRE);
         cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + sins(gCurrentObject->oTimer * 2370) * 0.04f);
@@ -341,10 +342,13 @@ void spawn_attack_stars()
         struct Object* spawner = spawners[i];
         struct Object* n = spawn_object(spawner, MODEL_STAR, bhvStarMoving);
         u16 angle = random_u16();
-        f32 spd = 15.f;
+        f32 spd = 5.f;
+        f32 accel = 0.07;
         n->oVelX = sins(angle) * spd;
         n->oVelY = 0;
         n->oVelZ = coss(angle) * spd;
+        n->oVelAccelX = sins(angle) * accel;
+        n->oVelAccelZ = coss(angle) * accel;
         if (gCurrentObject->oHealth == 1)
         {
             n->oFaceAngleRoll = random_u16();
@@ -449,6 +453,8 @@ void bhv_moving_star_init()
 
 void bhv_moving_star()
 {
+    gCurrentObject->oVelX += gCurrentObject->oVelAccelX;
+    gCurrentObject->oVelZ += gCurrentObject->oVelAccelZ;
     gCurrentObject->oPosX += gCurrentObject->oVelX;
     gCurrentObject->oPosY += gCurrentObject->oVelY;
     gCurrentObject->oPosZ += gCurrentObject->oVelZ;
@@ -479,6 +485,8 @@ void bhv_fight_switch_loop()
             struct Object* ctl = cur_obj_nearest_object_with_behavior(bhvFightCtl);
             ctl->oHealth--;
 
+            cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+            cur_obj_shake_screen(SHAKE_POS_SMALL);
             gCurrentObject->oAction = 1;
         }
         obj_scale_xyz(gCurrentObject, 1.2f, 1.2f, 1.2f);

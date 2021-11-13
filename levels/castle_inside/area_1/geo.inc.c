@@ -10,6 +10,7 @@ const GeoLayout castle_inside_area_1_geo[] = {
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, castle_inside_dl_level_001_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, castle_inside_dl_level_002_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, castle_inside_dl_level_003_mesh_layer_5),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_inside_dl_level_004_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

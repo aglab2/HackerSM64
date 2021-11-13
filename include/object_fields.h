@@ -1350,4 +1350,8 @@ os16112*/
 #define oFieldCtlSwitch1  OBJECT_FIELD_OBJ(0x1F)
 #define oFieldCtlSwitch2  OBJECT_FIELD_OBJ(0x20)
 
+#define oVelAccelX  OBJECT_FIELD_F32(0x1B)
+#define oVelAccelY  OBJECT_FIELD_F32(0x1C)
+#define oVelAccelZ  OBJECT_FIELD_F32(0x1D)
+
 #endif // OBJECT_FIELDS_H

@@ -52,7 +52,7 @@ s32 lava_boost_on_wall(struct MarioState *m) {
     }
 
     if (!(m->flags & MARIO_METAL_CAP)) {
-        m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+        m->hurtCounter += 32;
     }
 
     play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);
