@@ -5995,12 +5995,23 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+extern void bhv_death_fireball_init();
 extern void bhv_death_fireball_loop();
 const BehaviorScript bhvDeathFireball[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_death_fireball_init),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_UCODE_LARGE),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_death_fireball_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvDeathFireballCore[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        ADD_INT(oFaceAnglePitch, 0x69),
+        ADD_INT(oFaceAngleYaw, 0x85),
     END_LOOP(),
 };
 

@@ -1,0 +1,11 @@
+extern const GeoLayout core_geo[];
+extern Lights1 core_f3d_material_001_lights;
+extern u8 core_tex1_128x128_m_d2db42c109a2588d_14_mip1_ci4[];
+extern u8 core_tex1_128x128_m_d2db42c109a2588d_14_mip1_ci4_pal_rgba16[];
+extern Vtx core_Icosphere_mesh_layer_1_vtx_cull[8];
+extern Vtx core_Icosphere_mesh_layer_1_vtx_0[60];
+extern Gfx core_Icosphere_mesh_layer_1_tri_0[];
+extern Gfx mat_core_f3d_material_001[];
+extern Gfx mat_revert_core_f3d_material_001[];
+extern Gfx core_Icosphere_mesh_layer_1[];
+extern Gfx core_material_revert_render_settings[];

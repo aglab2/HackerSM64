@@ -110,12 +110,23 @@ void scroll_fireball1_vtx() {
 	currentX += deltaX;
 }
 
+extern const BehaviorScript bhvDeathFireballCore[];
+void bhv_death_fireball_init()
+{
+    gCurrentObject->oFieldCtlStar0 = spawn_object(gCurrentObject, MODEL_CORE, bhvDeathFireballCore);
+    gCurrentObject->oDrawingDistance = 50000.f;
+}
+
 void bhv_death_fireball_loop()
 {
     // move to Y with vel 20
     // move to X/Z with vel 10
 
     // to: 28, -385, 5090 
+
+    gCurrentObject->oFieldCtlStar0->oPosX = gCurrentObject->oPosX + 200.f;
+    gCurrentObject->oFieldCtlStar0->oPosY = gCurrentObject->oPosY + 200.f;
+    gCurrentObject->oFieldCtlStar0->oPosZ = gCurrentObject->oPosZ - 400.f;
 
     if (!gTriggerHell)
         return;
@@ -135,12 +146,23 @@ void bhv_death_fireball_loop()
     gCurrentObject->oPosY = -385 + (220 - gCurrentObject->oTimer) * 10;
     gCurrentObject->oPosZ = 5090 + (220 - gCurrentObject->oTimer) * -20;
 
-    if (gCurrentObject->oTimer < 200)
+    if (gCurrentObject->oTimer < 100)
     {
+        cur_obj_scale(0);
+    }
+    else if (gCurrentObject->oTimer < 140)
+    {
+        if ((gCurrentObject->oTimer % 10) == 0)
+            create_sound_spawner(SOUND_AIR_BOWSER_SPIT_FIRE);
+        cur_obj_scale((gCurrentObject->oTimer - 100) * (1.f / 40));
+    }
+    else if (gCurrentObject->oTimer < 200)
+    {
+        obj_scale_xyz(gCurrentObject->oFieldCtlStar0, 0, 0, 0);
         cur_obj_shake_screen(2);
         if ((gCurrentObject->oTimer % 10) == 0)
-        create_sound_spawner(SOUND_AIR_BOWSER_SPIT_FIRE);
-        cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + sins(gCurrentObject->oTimer * 2370) * 0.04f);
+            create_sound_spawner(SOUND_AIR_BOWSER_SPIT_FIRE);
+        cur_obj_scale(1.f + sins(gCurrentObject->oTimer * 2370) * 0.04f);
     }
     else if (gCurrentObject->oTimer < 250)
     {
@@ -149,14 +171,14 @@ void bhv_death_fireball_loop()
         int leftMax = 2500;
         int diffW = 3000 - 2370;
         float diffA = 0.3f - 0.04f;
-        cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + sins(gCurrentObject->oTimer * (2370 + diffW * left / leftMax)) * (0.04f + diffA * left / leftMax));
+        cur_obj_scale(1.f + sins(gCurrentObject->oTimer * (2370 + diffW * left / leftMax)) * (0.04f + diffA * left / leftMax));
     }
     else
     {
         if (gCurrentObject->oTimer == 250)
             create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
     
-        cur_obj_scale(1.2f + gCurrentObject->oTimer * 0.006f + (gCurrentObject->oTimer - 250) * 0.15f);
+        cur_obj_scale(1.f + (gCurrentObject->oTimer - 250) * 0.15f);
     }
 
     // trap mario inside the cube
@@ -325,9 +347,12 @@ static void raise_all_troll_stars_for(const BehaviorScript *behavior, int dcente
     //print_text_fmt_int(20, 40, "%d", cnt2);
 }
 
+static int sFightRetries = 0;
+static int sSavedRetries = 0;
 extern const BehaviorScript bhvStar[];
 void bhv_fight_init()
 {
+    sFightRetries++;
     gCurrentObject->oHealth = 10;
     find_all_spawner_stars(bhvStar);
 }
@@ -349,15 +374,40 @@ void spawn_attack_stars()
         n->oVelZ = coss(angle) * spd;
         n->oVelAccelX = sins(angle) * accel;
         n->oVelAccelZ = coss(angle) * accel;
-        if (gCurrentObject->oHealth == 1)
+        if (gCurrentObject->oHealth <= 1)
         {
             n->oFaceAngleRoll = random_u16();
         }
 
         if (n->oPosX < 0)
+        {
             n->oVelX = absf(n->oVelX);
+            n->oVelAccelX = absf(n->oVelAccelX);
+        }
         if (n->oPosX > 0)
+        {
             n->oVelX = -absf(n->oVelX);
+            n->oVelAccelX = -absf(n->oVelAccelX);
+        }
+    }
+}
+
+extern s16 atan2s(f32 y, f32 x);
+void spawn_homing()
+{    struct Object** spawners = &gCurrentObject->oFieldCtlStar0;
+    for (int i = 0; i < 4; i++)
+    {
+        struct Object* spawner = spawners[i];
+        struct Object* n = spawn_object(spawner, MODEL_TRANSPARENT_STAR, bhvStarMoving);
+        u16 angle = atan2s(spawner->oPosZ - gMarioStates->pos[2], spawner->oPosX - gMarioStates->pos[0]);
+        f32 spd = -10.f;
+        f32 accel = -0.07;
+        n->oVelX = sins(angle) * spd;
+        n->oVelY = 0;
+        n->oVelZ = coss(angle) * spd;
+        n->oVelAccelX = sins(angle) * accel;
+        n->oVelAccelZ = coss(angle) * accel;
+        n->oFaceAnglePitch = 0x4000;
     }
 }
 
@@ -402,7 +452,8 @@ void bhv_fight_loop()
         if (gCurrentObject->oTimer == 0)
             play_music(0, SEQUENCE_ARGS(4, SEQ_LEVEL_HOT), 0);
     
-        print_text_fmt_int(145, 220, "%d", gCurrentObject->oHealth);
+        if (gCurrentObject->oHealth >= 0)
+            print_text_fmt_int(145, 220, "%d", gCurrentObject->oHealth);
 
         // on first hit we dont shoot
         if (gCurrentObject->oHealth < 10)
@@ -415,15 +466,69 @@ void bhv_fight_loop()
                 f32 scale = 1.f + (gCurrentObject->oTimer % 40) * 0.047f;
                 obj_scale_xyz(spawner, scale, scale, scale);
             }
-            if (gCurrentObject->oHealth > 3)
+            // nerfing with more attempts
+            if (0 == sFightRetries)
             {
-                if (!(gCurrentObject->oTimer % 50))
-                    spawn_attack_stars();
+                if (gCurrentObject->oHealth > 3)
+                {
+                    if (!(gCurrentObject->oTimer % 30))
+                        spawn_attack_stars();
+                }
+                else
+                {
+                    if (!(gCurrentObject->oTimer % 40))
+                        spawn_attack_stars();
+                }
+
+                if (!(gCurrentObject->oTimer % 150))
+                    spawn_homing();
+            }
+            else if (sFightRetries > 2)
+            {
+                if (gCurrentObject->oHealth > 3 && sFightRetries == 3)
+                {
+                    if (!(gCurrentObject->oTimer % 60))
+                        spawn_attack_stars();
+                }
+                else
+                {
+                    if (!(gCurrentObject->oTimer % 75))
+                        spawn_attack_stars();
+                }
             }
             else
             {
-                if (!(gCurrentObject->oTimer % 75))
-                    spawn_attack_stars();
+                // 1, 2 or 3 attempts
+                if (gCurrentObject->oHealth > 3 && sFightRetries == 1)
+                {
+                    if (!(gCurrentObject->oTimer % 40))
+                        spawn_attack_stars();
+                }
+                else
+                {
+                    if (!(gCurrentObject->oTimer % 60))
+                        spawn_attack_stars();
+                }
+            }
+        }
+        else
+        {
+            if (sFightRetries)
+                print_text_fmt_int(20, 20, "ATTEMPT %d", sFightRetries);
+            else 
+                print_text_fmt_int(20, 20, "GAMER MODE", sFightRetries);
+
+            if (gPlayer1Controller->buttonPressed & L_TRIG)
+            {
+                if (sFightRetries)
+                {
+                    sSavedRetries = sFightRetries;
+                    sFightRetries = 0;
+                }
+                else
+                {
+                    sFightRetries = sSavedRetries;
+                }
             }
         }
 
@@ -439,9 +544,10 @@ void bhv_fight_loop()
         {
             raise_all_troll_stars_for(bhvStar, 2);
         }
-        else if (!gCurrentObject->oHealth)
+        else if (gCurrentObject->oHealth <= 0)
         {
-            level_trigger_warp(gMarioStates, 1 /*WARP_OP_LOOK_UP*/);
+            if (0 != sFightRetries || gCurrentObject->oHealth < 0)
+                level_trigger_warp(gMarioStates, 1 /*WARP_OP_LOOK_UP*/);
         }
     }
 }
@@ -484,6 +590,26 @@ void bhv_fight_switch_loop()
 
             struct Object* ctl = cur_obj_nearest_object_with_behavior(bhvFightCtl);
             ctl->oHealth--;
+            if (0 == sFightRetries)
+            {
+                s16 ra = random_u16();
+                for (int i = 0; i < 8; i++)
+                {
+                    int angle = ra + i * 0x2000; 
+                    struct Object* n = spawn_object(gCurrentObject, MODEL_TRANSPARENT_STAR, bhvStarMoving);
+                    f32 spd = 20.f - 2.f * ctl->oHealth;
+                    f32 accel = 0.07;
+                    n->oPosX += -sins(angle) * 1000.f;
+                    n->oPosY = 138.f;
+                    n->oPosZ += -coss(angle) * 1000.f;
+                    n->oVelX = sins(angle) * spd;
+                    n->oVelY = 0.f;
+                    n->oVelZ = coss(angle) * spd;
+                    n->oVelAccelX = sins(angle) * accel;
+                    n->oVelAccelZ = coss(angle) * accel;
+                    n->oFaceAngleRoll = 0x8000;
+                }
+            }
 
             cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
             cur_obj_shake_screen(SHAKE_POS_SMALL);

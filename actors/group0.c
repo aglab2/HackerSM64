@@ -33,3 +33,4 @@
 
 #include "fireball/model.inc.c"
 #include "fightctl/collision.inc.c"
+#include "core/model.inc.c"

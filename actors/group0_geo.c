@@ -18,3 +18,4 @@
 #include "mario/geo.inc.c"
 
 #include "fireball/geo.inc.c"
+#include "core/geo.inc.c"

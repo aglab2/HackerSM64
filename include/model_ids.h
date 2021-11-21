@@ -584,5 +584,6 @@
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
 #define MODEL_FIREBALL 0xff
+#define MODEL_CORE 0xfe
 
 #endif // MODEL_IDS_H
