@@ -26,4 +26,10 @@
 #include "levels/bob/grate_door/collision.inc.c"
 #include "levels/bob/areas/1/trajectory.inc.c"
 
+#include "levels/bob/tumbling_bridge_near/model.inc.c"
+#include "levels/bob/tumbling_bridge_near/collision.inc.c"
+#include "levels/bob/tumbling_bridge_far/model.inc.c"
+#include "levels/bob/rotating_platform/model.inc.c"
+#include "levels/bob/rotating_platform/collision.inc.c"
+
 #include "levels/bob/leveldata.inc.c"

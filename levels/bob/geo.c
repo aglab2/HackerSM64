@@ -18,4 +18,8 @@
 #include "levels/bob/grate_door/geo.inc.c"
 #include "levels/bob/areas/1/geo.inc.c"
 
+#include "levels/bob/tumbling_bridge_near/geo.inc.c"
+#include "levels/bob/tumbling_bridge_far/geo.inc.c"
+#include "levels/bob/rotating_platform/geo.inc.c"
+
 #include "levels/bob/geo.inc.c"

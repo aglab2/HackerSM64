@@ -1,9 +1,10 @@
 # Bob-Omb Battlefield
 short-name: bob
 full-name: Bob-Omb Battlefield
+texture-bin: grass
 texture-file: ["/texture.inc.c"]
 area-count: 1
-objects: [chain_chomp_gate, grate_door, seesaw_platform]
+objects: [chain_chomp_gate, grate_door, seesaw_platform, tumbling_bridge_far, tumbling_bridge_near]
 shared-path: []
 # loaded files
 skybox-bin: water

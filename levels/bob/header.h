@@ -9,6 +9,10 @@ extern const GeoLayout bob_geo_000458[];
 extern const GeoLayout bob_geo_000470[];
 extern const GeoLayout bob_geo_000488[];
 
+extern const Gfx wf_seg7_dl_0700E0F0[];
+extern const Gfx wf_seg7_dl_0700E3D0[];
+extern const Gfx wf_seg7_dl_0700BF50[];
+
 // leveldata
 extern const Gfx bob_seg7_dl_07004390[];
 extern const Gfx bob_seg7_dl_07009D80[];
