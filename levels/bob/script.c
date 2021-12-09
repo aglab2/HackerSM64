@@ -28,10 +28,10 @@ extern const GeoLayout wf_geo_000AC8[];
 const LevelScript level_bob_entry[] = {
 	INIT_LEVEL(),
 	LOAD_YAY0(0x07, _bob_segment_7SegmentRomStart, _bob_segment_7SegmentRomEnd), 
-    LOAD_YAY0_TEXTURE(0x09, _grass_yay0SegmentRomStart, _grass_yay0SegmentRomEnd),
+	LOAD_YAY0_TEXTURE(0x09, _grass_yay0SegmentRomStart, _grass_yay0SegmentRomEnd), 
 	LOAD_YAY0(0x0A, _water_skybox_yay0SegmentRomStart, _water_skybox_yay0SegmentRomEnd), 
-	//LOAD_YAY0(0x05, _group3_yay0SegmentRomStart, _group3_yay0SegmentRomEnd), 
-	//LOAD_RAW(0x0C, _group3_geoSegmentRomStart, _group3_geoSegmentRomEnd), 
+	LOAD_YAY0(0x05, _group3_yay0SegmentRomStart, _group3_yay0SegmentRomEnd), 
+	LOAD_RAW(0x0C, _group3_geoSegmentRomStart, _group3_geoSegmentRomEnd), 
 	LOAD_YAY0(0x06, _group14_yay0SegmentRomStart, _group14_yay0SegmentRomEnd), 
 	LOAD_RAW(0x0D, _group14_geoSegmentRomStart, _group14_geoSegmentRomEnd), 
 	LOAD_YAY0(0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd), 
@@ -41,13 +41,16 @@ const LevelScript level_bob_entry[] = {
 	ALLOC_LEVEL_POOL(),
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
-	//JUMP_LINK(script_func_global_4), 
+	JUMP_LINK(script_func_global_4), 
 	JUMP_LINK(script_func_global_15), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BUBBLY_TREE, bubbly_tree_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_COURTYARD_SPIKY_TREE, spiky_tree_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_CHAIN_CHOMP_GATE, bob_geo_000440), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM, bob_geo_000458), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, bob_geo_000470), 
+	LOAD_MODEL_FROM_GEO(MODEL_WF_ROTATING_PLATFORM, wf_geo_0009B8), 
+	LOAD_MODEL_FROM_GEO(MODEL_WF_TUMBLING_BRIDGE_PART, wf_geo_000AB0), 
+	LOAD_MODEL_FROM_GEO(MODEL_WF_TUMBLING_BRIDGE, wf_geo_000AC8), 
 
 	/* Fast64 begin persistent block [level commands] */
     LOAD_MODEL_FROM_GEO(MODEL_WF_ROTATING_PLATFORM,             wf_geo_0009B8),
@@ -56,6 +59,7 @@ const LevelScript level_bob_entry[] = {
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, bob_area_1),
+	/*
 		OBJECT(MODEL_BLACK_BOBOMB, -13011, -1836, -5583, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BLACK_BOBOMB, -11466, -1004, -5675, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BLACK_BOBOMB, -10361, 91, -2125, 0, 0, 0, 0x00000000, bhvBobomb),
@@ -88,6 +92,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_WF_ROTATING_PLATFORM, -5590, 2343, -2376, 0, 0, 0, (10 << 24), bhvRotatingPlatform),
 		OBJECT(MODEL_STAR, -3826, 1117, 2123, 0, 0, 0, 0x00000000, bhvStar),
 		OBJECT(MODEL_STAR, 9788, 3518, -6061, 0, 0, 0, (3 << 16), bhvStar),
+		*/
 		MARIO_POS(0x01, 0, -13371, -1894, -9343),
 		OBJECT(MODEL_NONE, -13360, -1894, -9341, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_COURTYARD_SPIKY_TREE, -9758, 91, -2063, 0, 0, 0, 0x00000000, bhvTree),

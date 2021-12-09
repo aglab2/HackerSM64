@@ -1380,7 +1380,7 @@ static const Gfx ssl_seg7_dl_07008C40[] = {
 
 // 0x07008DE0 - 0x07009170
 static const Gfx ssl_seg7_dl_07008DE0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, generic_09003000),
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, generic_09003000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&ssl_seg7_lights_07004BF8.l, 1),

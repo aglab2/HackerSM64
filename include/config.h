@@ -179,7 +179,7 @@
 // The number is the intensity of the silhouette, from 0-255.
 // NOTE: The overlap between Mario's model parts is visible on certain HLE plugins.
 // Also, this also disables anti-aliasing on Mario.
-#define SILHOUETTE 127
+// #define SILHOUETTE 127
 // Makes certain objects (mainly trees) transparent when the camera gets close
 #define OBJ_OPACITY_BY_CAM_DIST
 // Fixes the game reading the ia8 burn smoke texture as an rgba16
