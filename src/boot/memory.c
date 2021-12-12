@@ -22,6 +22,12 @@
 #include "usb/debug.h"
 #endif
 #include "game/puppyprint.h"
+#include "buffers/framebuffers.h"
+
+extern u8 _framebuffersSegmentBssStart[];
+extern u8 _framebuffersSegmentBssEnd[];
+extern u8 _zbufferSegmentBssStart[];
+extern u8 _zbufferSegmentBssEnd[];
 
 
 // round up to the next multiple
@@ -154,6 +160,11 @@ void *main_pool_alloc(u32 size, u32 side) {
         sPoolFreeSpace -= size;
         if (side == MEMORY_POOL_LEFT) {
             newListHead = (struct MainPoolBlock *) ((u8 *) sPoolListHeadL + size);
+            if (newListHead >= (u32)&_framebuffersSegmentBssStart && newListHead <= (u32)&_framebuffersSegmentBssEnd)
+                newListHead = ALIGN16((u32)&_framebuffersSegmentBssEnd);
+            if (newListHead >= (u32)&_zbufferSegmentBssStart && newListHead <= (u32)&_zbufferSegmentBssEnd)
+                newListHead = ALIGN16((u32)&_zbufferSegmentBssEnd);
+
             sPoolListHeadL->next = newListHead;
             newListHead->prev    = sPoolListHeadL;
             newListHead->next    = NULL;

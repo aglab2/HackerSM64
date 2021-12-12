@@ -101,13 +101,6 @@ SECTIONS
    END_SEG(boot)
 
    . = 0x80000400;
-   BEGIN_NOLOAD(zbuffer)
-   {
-      BUILD_DIR/src/buffers/zbuffer.o(.bss*);
-   }
-   END_NOLOAD(zbuffer)
-
-   . = _zbufferSegmentBssEnd;
    BEGIN_NOLOAD(buffers)
    {
       BUILD_DIR/src/buffers/buffers.o(.bss*);
@@ -265,14 +258,10 @@ SECTIONS
    END_NOLOAD(engine)
 
    . = _engineSegmentBssEnd;
-   BEGIN_NOLOAD(framebuffers)
-   {
-      BUILD_DIR/src/buffers/framebuffers.o(.bss*);
-   }
-   END_NOLOAD(framebuffers)
 
    __mainPoolStart = .;
-   __mainPoolSize = RAM_END - .;
+   frameBufferStart = RAM_END - (((SCREEN_WIDTH * SCREEN_HEIGHT) * 3) * 2);
+   __mainPoolSize = frameBufferStart - .;
 
    __expansionRamStart = 0x80400000;
    #ifndef USE_EXT_RAM
@@ -491,6 +480,20 @@ SECTIONS
 
 #undef STUB_LEVEL
 #undef DEFINE_LEVEL
+
+   . = 0x80400000;
+   BEGIN_NOLOAD(zbuffer)
+   {
+      BUILD_DIR/src/buffers/zbuffer.o(.bss*);
+   }
+   END_NOLOAD(zbuffer)
+
+   . = 0x80700000;
+   BEGIN_NOLOAD(framebuffers)
+   {
+      BUILD_DIR/src/buffers/framebuffers.o(.bss*);
+   }
+   END_NOLOAD(framebuffers)
 
    /* 4E9FA0-? [?] */
    BEGIN_SEG(assets, __romPos)

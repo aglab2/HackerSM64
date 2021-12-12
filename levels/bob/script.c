@@ -35,9 +35,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_YAY0(0x06, _group14_yay0SegmentRomStart, _group14_yay0SegmentRomEnd), 
 	LOAD_RAW(0x0D, _group14_geoSegmentRomStart, _group14_geoSegmentRomEnd), 
 	LOAD_YAY0(0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd), 
-	LOAD_RAW(0x0F, _common0_geoSegmentRomStart, _common0_geoSegmentRomEnd), 
-	LOAD_MIO0(0x7, _bob_segment_7SegmentRomStart, _bob_segment_7SegmentRomEnd), 
-	LOAD_MIO0(0xa, _water_skybox_mio0SegmentRomStart, _water_skybox_mio0SegmentRomEnd), 
+	LOAD_RAW(0x0F, _common0_geoSegmentRomStart, _common0_geoSegmentRomEnd),
 	ALLOC_LEVEL_POOL(),
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
@@ -94,6 +92,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_STAR, 9788, 3518, -6061, 0, 0, 0, (3 << 16), bhvStar),
 		*/
 		MARIO_POS(0x01, 0, -13371, -1894, -9343),
+	/*
 		OBJECT(MODEL_NONE, -13360, -1894, -9341, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_COURTYARD_SPIKY_TREE, -9758, 91, -2063, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_COURTYARD_SPIKY_TREE, -8753, 91, -2776, 0, 0, 0, 0x00000000, bhvTree),
@@ -130,6 +129,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, -8427, 476, 2568, 0, 0, 0, 0x00000000, bhvHiddenStarTrigger),
 		OBJECT(MODEL_NONE, -4767, 1108, 4427, 0, 0, 0, 0x00000000, bhvHiddenStarTrigger),
 		OBJECT(MODEL_NONE, -14261, -101, 2542, 0, 0, 0, 0x00000000, bhvHiddenStarTrigger),
+		*/
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
