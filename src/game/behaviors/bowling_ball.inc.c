@@ -1,5 +1,7 @@
 // bowling_ball.inc.c
 
+extern const Trajectory wf_area_1_spline_balls_path_1[];
+extern const Trajectory wf_area_1_spline_balls_path_2[];
 static struct ObjectHitbox sBowlingBallHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -56,11 +58,11 @@ void bowling_ball_set_hitbox(void) {
 void bowling_ball_set_waypoints(void) {
     switch (o->oBehParams2ndByte) {
         case BBALL_BP_STYPE_BOB_UPPER:
-            o->oPathedStartWaypoint = segmented_to_virtual(bob_seg7_metal_ball_path0);
+            o->oPathedStartWaypoint = segmented_to_virtual(wf_area_1_spline_balls_path_1);
             break;
 
         case BBALL_BP_STYPE_TTM:
-            o->oPathedStartWaypoint = segmented_to_virtual(ttm_seg7_trajectory_070170A0);
+            o->oPathedStartWaypoint = segmented_to_virtual(wf_area_1_spline_balls_path_2);
             break;
 
         case BBALL_BP_STYPE_BOB_LOWER:
@@ -160,7 +162,7 @@ void bhv_generic_bowling_ball_spawner_init(void) {
     switch (o->oBehParams2ndByte) {
         case BBALL_BP_STYPE_BOB_UPPER:
             o->oBBallSpawnerMaxSpawnDist = 7000.0f;
-            o->oBBallSpawnerSpawnOdds = 2.0f;
+            o->oBBallSpawnerSpawnOdds = 1.0f;
             break;
 
         case BBALL_BP_STYPE_TTM:
@@ -170,7 +172,7 @@ void bhv_generic_bowling_ball_spawner_init(void) {
 
         case BBALL_BP_STYPE_BOB_LOWER:
             o->oBBallSpawnerMaxSpawnDist = 6000.0f;
-            o->oBBallSpawnerSpawnOdds = 2.0f;
+            o->oBBallSpawnerSpawnOdds = 1.0f;
             break;
     }
 }
@@ -186,11 +188,10 @@ void bhv_generic_bowling_ball_spawner_loop(void) {
     }
 
     if ((o->oTimer & o->oBBallSpawnerPeriodMinus1) == 0) { /* Modulus */
-        if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, o->oBBallSpawnerMaxSpawnDist)
-            && (s32)(random_float() * o->oBBallSpawnerSpawnOdds) == 0) {
+        //if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, o->oBBallSpawnerMaxSpawnDist)) {
             struct Object *bowlingBall = spawn_object(o, MODEL_BOWLING_BALL, bhvBowlingBall);
             bowlingBall->oBehParams2ndByte = o->oBehParams2ndByte;
-        }
+        //}
     }
 }
 

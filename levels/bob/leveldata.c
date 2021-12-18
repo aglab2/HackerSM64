@@ -25,3 +25,12 @@
 #include "levels/bob/seesaw_platform/collision.inc.c"
 #include "levels/bob/grate_door/collision.inc.c"
 #include "levels/bob/areas/1/trajectory.inc.c"
+
+#include "levels/bob/leveldata.inc.c"
+
+#include "levels/wf/tumbling_bridge_near/model.inc.c"
+#include "levels/wf/tumbling_bridge_far/model.inc.c"
+#include "levels/wf/tumbling_bridge_near/collision.inc.c"
+#include "levels/wf/areas/1/14/model.inc.c"
+#include "levels/wf/areas/1/17/model.inc.c"
+#include "levels/wf/rotating_platform/collision.inc.c"

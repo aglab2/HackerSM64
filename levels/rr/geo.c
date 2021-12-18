@@ -35,9 +35,7 @@
 #include "levels/rr/areas/1/21/geo.inc.c"
 #include "levels/rr/flying_carpet/geo.inc.c"
 #include "levels/rr/swinging_platform/geo.inc.c"
-#include "levels/rr/rotating_bridge_platform/geo.inc.c"
 #include "levels/rr/cruiser_wing/geo.inc.c"
-#include "levels/rr/octagonal_platform/geo.inc.c"
 #include "levels/rr/sliding_platform/geo.inc.c"
 #include "levels/rr/pyramid_platform/geo.inc.c" // unused
 #include "levels/rr/elevator_platform/geo.inc.c"

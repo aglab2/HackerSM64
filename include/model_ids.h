@@ -37,7 +37,7 @@
 #define MODEL_WF_BUBBLY_TREE                   0x17        // bubbly_tree_geo
 #define MODEL_THI_BUBBLY_TREE                  0x17        // bubbly_tree_geo
 #define MODEL_COURTYARD_SPIKY_TREE             0x18        // spiky_tree_geo
-#define MODEL_CCM_SNOW_TREE                    0x19        // snow_tree_geo
+#define MODEL_CCM_SNOW_TREE                    0x18        // snow_tree_geo
 #define MODEL_SL_SNOW_TREE                     0x19        // snow_tree_geo
 #define MODEL_UNKNOWN_TREE_1A                  0x1A        // referenced in special presets, undefined
 #define MODEL_SSL_PALM_TREE                    0x1B        // palm_tree_geo

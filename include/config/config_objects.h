@@ -24,7 +24,7 @@
 
 // Floombas! These fellas sport custom behaviors (bhvFloomba, bhvFloombaTripletSpawner) and of course the iconic Floomba texture.
 // Also support macros (macro_floomba, macro_huge_floomba, macro_tiny_floomba, macro_floomba_triplet_spawner, macro_floomba_quintuplet_spawner).
-#define FLOOMBAS
+// #define FLOOMBAS
 
 // -- HOOT --
 

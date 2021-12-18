@@ -102,7 +102,8 @@ static const Vtx jrb_seg7_vertex_07010290[] = {
 
 // 0x07010390 - 0x07010548
 static const Gfx jrb_seg7_dl_07010390[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09008800),
+    // AGLAB water
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09008800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&jrb_seg7_lights_0700FEB8.l, 1),

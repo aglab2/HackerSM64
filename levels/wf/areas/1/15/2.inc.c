@@ -36,7 +36,8 @@ static const Vtx wf_seg7_vertex_0700ACE8[] = {
 
 // 0x0700ADE8 - 0x0700AE40
 static const Gfx wf_seg7_dl_0700ADE8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005800),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&wf_seg7_lights_0700AC70.l, 1),
@@ -49,7 +50,8 @@ static const Gfx wf_seg7_dl_0700ADE8[] = {
 
 // 0x0700AE40 - 0x0700AEC8
 static const Gfx wf_seg7_dl_0700AE40[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09002000),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09002000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700ACE8, 16, 0),

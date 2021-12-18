@@ -69,6 +69,7 @@ static const Vtx wf_seg7_vertex_0700BD70[] = {
 };
 
 // 0x0700BE30 - 0x0700BED8
+// USED
 static const Gfx wf_seg7_dl_0700BE30[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005000),
     gsDPLoadSync(),
@@ -89,6 +90,7 @@ static const Gfx wf_seg7_dl_0700BE30[] = {
 };
 
 // 0x0700BED8 - 0x0700BF50
+// USED
 static const Gfx wf_seg7_dl_0700BED8[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005800),
     gsDPLoadSync(),
@@ -103,6 +105,7 @@ static const Gfx wf_seg7_dl_0700BED8[] = {
 };
 
 // 0x0700BF50 - 0x0700BFE0
+// USED
 const Gfx wf_seg7_dl_0700BF50[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),

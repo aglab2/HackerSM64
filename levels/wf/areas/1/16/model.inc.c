@@ -159,7 +159,8 @@ static const Vtx wf_seg7_vertex_0700B650[] = {
 
 // 0x0700B750 - 0x0700B790
 static const Gfx wf_seg7_dl_0700B750[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09004800),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09004800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&wf_seg7_lights_0700B028.l, 1),
@@ -171,7 +172,8 @@ static const Gfx wf_seg7_dl_0700B750[] = {
 
 // 0x0700B790 - 0x0700B808
 static const Gfx wf_seg7_dl_0700B790[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005000),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700B070, 15, 0),
@@ -186,7 +188,8 @@ static const Gfx wf_seg7_dl_0700B790[] = {
 
 // 0x0700B808 - 0x0700B858
 static const Gfx wf_seg7_dl_0700B808[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005800),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09005800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700B1A0, 7, 0),
@@ -198,7 +201,8 @@ static const Gfx wf_seg7_dl_0700B808[] = {
 
 // 0x0700B858 - 0x0700B9A0
 static const Gfx wf_seg7_dl_0700B858[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09002800),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09002800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700B210, 15, 0),
@@ -229,7 +233,8 @@ static const Gfx wf_seg7_dl_0700B858[] = {
 
 // 0x0700B9A0 - 0x0700BA28
 static const Gfx wf_seg7_dl_0700B9A0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09002000),
+    // AGLAB grass
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09002000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wf_seg7_vertex_0700B650, 16, 0),

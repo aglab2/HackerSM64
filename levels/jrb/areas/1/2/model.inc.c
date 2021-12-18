@@ -370,7 +370,8 @@ static const Vtx jrb_seg7_vertex_070041C0[] = {
 
 // 0x070041F0 - 0x070044C8
 static const Gfx jrb_seg7_dl_070041F0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09003800),
+    // AGLAB water
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09003800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&jrb_seg7_lights_070030A8.l, 1),
@@ -429,7 +430,8 @@ static const Gfx jrb_seg7_dl_070041F0[] = {
 
 // 0x070044C8 - 0x07004658
 static const Gfx jrb_seg7_dl_070044C8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09001800),
+    // AGLAB water
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09001800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&jrb_seg7_lights_070030D8.l, 1),
@@ -464,7 +466,8 @@ static const Gfx jrb_seg7_dl_070044C8[] = {
 
 // 0x07004658 - 0x070046C0
 static const Gfx jrb_seg7_dl_07004658[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09002800),
+    // AGLAB water
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09002800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(jrb_seg7_vertex_07003A90, 8, 0),
@@ -477,7 +480,8 @@ static const Gfx jrb_seg7_dl_07004658[] = {
 
 // 0x070046C0 - 0x07004940
 static const Gfx jrb_seg7_dl_070046C0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09004800),
+    // AGLAB water
+    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, water_09004800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&jrb_seg7_lights_070030C0.l, 1),

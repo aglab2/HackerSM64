@@ -265,6 +265,7 @@ extern const Gfx transparent_star_seg3_dl_body[];
 extern const GeoLayout bubbly_tree_geo[];
 extern const GeoLayout spiky_tree_geo[];
 extern const GeoLayout snow_tree_geo[];
+extern const GeoLayout snow_tree2_geo[];
 extern const GeoLayout palm_tree_geo[];
 extern const Gfx tree_seg3_dl_bubbly[];
 extern const Gfx tree_seg3_dl_bubbly_transparent[];
@@ -272,6 +273,8 @@ extern const Gfx tree_seg3_dl_spiky[];
 extern const Gfx tree_seg3_dl_spiky_transparent[];
 extern const Gfx tree_seg3_dl_snowy_pine[];
 extern const Gfx tree_seg3_dl_snowy_pine_transparent[];
+extern const Gfx tree_seg3_dl_snowy_pine2[];
+extern const Gfx tree_seg3_dl_snowy_pine2_transparent[];
 extern const Gfx tree_seg3_dl_palm[];
 extern const Gfx tree_seg3_dl_palm_transparent[];
 

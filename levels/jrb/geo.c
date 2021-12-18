@@ -21,3 +21,10 @@
 #include "levels/jrb/wooden_ship/geo.inc.c"
 #include "levels/jrb/areas/1/geo.inc.c"
 #include "levels/jrb/areas/2/geo.inc.c"
+
+#include "levels/lll/sinking_rock_block/geo.inc.c"
+#include "levels/lll/sinking_square_platform/geo.inc.c"
+#include "levels/lll/sinking_rectangular_platform/geo.inc.c"
+#include "levels/lll/tilting_square_platform/geo.inc.c"
+
+#include "levels/jrb/geo.inc.c"

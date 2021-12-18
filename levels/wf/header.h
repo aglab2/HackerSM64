@@ -23,8 +23,6 @@ extern const GeoLayout wf_geo_000A00[];
 extern const GeoLayout wf_geo_000A40[];
 extern const GeoLayout wf_geo_000A58[];
 extern const GeoLayout wf_geo_000A98[];
-extern const GeoLayout wf_geo_000AB0[];
-extern const GeoLayout wf_geo_000AC8[];
 extern const GeoLayout wf_geo_000AE0[];
 extern const GeoLayout wf_geo_000AF8[];
 extern const GeoLayout wf_geo_000B10[];
@@ -55,19 +53,15 @@ extern const Gfx wf_seg7_dl_07009278[];
 extern const Gfx wf_seg7_dl_07009780[];
 extern const Gfx wf_seg7_dl_07009890[];
 extern const Gfx wf_seg7_dl_07009DB0[];
-extern const Gfx wf_seg7_dl_0700A170[];
 extern const Gfx wf_seg7_dl_0700ABA0[];
 extern const Gfx wf_seg7_dl_0700AEC8[];
 extern const Gfx wf_seg7_dl_0700AFB8[];
 extern const Gfx wf_seg7_dl_0700BA28[];
-extern const Gfx wf_seg7_dl_0700BF50[];
 extern const Gfx wf_seg7_dl_0700D028[];
 extern const Gfx wf_seg7_dl_0700D300[];
 extern const Gfx wf_seg7_dl_0700D708[];
 extern const Gfx wf_seg7_dl_0700D9F0[];
 extern const Gfx wf_seg7_dl_0700DE20[];
-extern const Gfx wf_seg7_dl_0700E0F0[];
-extern const Gfx wf_seg7_dl_0700E3D0[];
 extern const Gfx wf_seg7_dl_0700E760[];
 extern const Gfx wf_seg7_dl_0700E9B8[];
 extern const Gfx wf_seg7_dl_0700EB40[];
@@ -98,5 +92,12 @@ extern const struct MovtexQuadCollection wf_movtex_water[];
 
 // script
 extern const LevelScript level_wf_entry[];
+
+extern const Gfx rr_seg7_dl_0701AB78[];
+extern const Gfx rr_seg7_dl_0701A568[];
+extern const GeoLayout rr_geo_0008A8[];
+extern const GeoLayout rr_geo_000878[];
+
+#include "levels/wf/header.inc.h"
 
 #endif

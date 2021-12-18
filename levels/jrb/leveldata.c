@@ -39,3 +39,32 @@
 #include "levels/jrb/areas/2/collision.inc.c"
 #include "levels/jrb/areas/2/macro.inc.c"
 #include "levels/jrb/areas/2/movtext.inc.c"
+
+// 0x0700FC00 - 0x0700FC18
+static const Lights1 lll_seg7_lights_0700FC00 = gdSPDefLights1(
+    0x3f, 0x3f, 0x3f,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+// 0x0700FC48 - 0x0700FC60
+static const Lights1 lll_seg7_lights_0700FC48 = gdSPDefLights1(
+    0x19, 0x19, 0x19,
+    0x64, 0x64, 0x64, 0x28, 0x28, 0x28
+);
+
+// 0x0700FC60 - 0x0700FC78
+static const Lights1 lll_seg7_lights_0700FC60 = gdSPDefLights1(
+    0x32, 0x32, 0x32,
+    0xc8, 0xc8, 0xc8, 0x28, 0x28, 0x28
+);
+
+#include "levels/lll/sinking_rock_block/model.inc.c"
+#include "levels/lll/sinking_rock_block/collision.inc.c"
+#include "levels/lll/sinking_square_platform/model.inc.c"
+#include "levels/lll/sinking_square_platform/collision.inc.c"
+#include "levels/lll/sinking_rectangular_platform/model.inc.c"
+#include "levels/lll/sinking_rectangular_platform/collision.inc.c"
+#include "levels/lll/tilting_square_platform/model.inc.c"
+#include "levels/lll/tilting_square_platform/collision.inc.c"
+
+#include "levels/jrb/leveldata.inc.c"
