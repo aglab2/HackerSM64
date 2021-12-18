@@ -1,17 +1,16 @@
 #include "src/game/envfx_snow.h"
 
-const GeoLayout castle_grounds_area_2_geo[] = {
+const GeoLayout castle_grounds_area_3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, 3056, -1309, 239, castle_grounds_dl_ow1_003_mesh_layer_2),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE_DECAL, -9215, 2470, 7141, 90, 0, 0, castle_grounds_dl_ow1_004_mesh_layer_2),
 		GEO_OPEN_NODE(),
-			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_grounds_dl_ow1_003_mesh_layer_1),
-			GEO_DISPLAY_LIST(LAYER_ALPHA, castle_grounds_dl_ow1_003_mesh_layer_4),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_grounds_dl_ow1_004_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout castle_grounds_area_2[] = {
+const GeoLayout castle_grounds_area_3[] = {
 	GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
 	GEO_OPEN_NODE(),
 		GEO_ZBUFFER(0),
@@ -25,9 +24,9 @@ const GeoLayout castle_grounds_area_2[] = {
 		GEO_OPEN_NODE(),
 			GEO_CAMERA_FRUSTUM_WITH_FUNC(45.0000, 100, 30000, geo_camera_fov),
 			GEO_OPEN_NODE(),
-				GEO_CAMERA(CAMERA_MODE_8_DIRECTIONS, 2454, 1371, -673, 2454, 1171, -673, geo_camera_main),
+				GEO_CAMERA(CAMERA_MODE_8_DIRECTIONS, 14002, -116, -3734, 14002, -316, -3734, geo_camera_main),
 				GEO_OPEN_NODE(),
-					GEO_BRANCH(1, castle_grounds_area_2_geo),
+					GEO_BRANCH(1, castle_grounds_area_3_geo),
 					GEO_RENDER_OBJ(),
 					GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
 				GEO_CLOSE_NODE(),
@@ -35,7 +34,6 @@ const GeoLayout castle_grounds_area_2[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_grounds_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, castle_grounds_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, castle_grounds_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

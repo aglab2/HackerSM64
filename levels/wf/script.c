@@ -47,6 +47,9 @@ const LevelScript level_wf_entry[] = {
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, wf_area_1),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf0, LEVEL_CASTLE, 3, 0x21, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf1, LEVEL_CASTLE, 3, 0x22, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -12686, 6235, 4175, 0, 0, 0, (0 << 16), bhvBobBowlingBallSpawner),
 		OBJECT(MODEL_NONE, -7119, 7615, -943, 0, 0, 0, (1 << 16), bhvBobBowlingBallSpawner),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 862, 2946, 2236, 0, -21, 0, 0x00000000, bhvKoopa),
@@ -73,6 +76,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 7360, 4044, 3439, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 2079, 1883, 4546, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		MARIO_POS(0x01, 0, 10358, 2530, 7813),
+		OBJECT(MODEL_NONE, 10362, 2530, 7828, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_EXCLAMATION_BOX, 1788, 1527, 30, 0, 0, 0, (1 << 16), bhvExclamationBox),
 		OBJECT(MODEL_PURPLE_SWITCH, -5552, 536, -9493, 0, -30, 0, (0 << 16), bhvPurpleSwitchHiddenBoxes),
 		OBJECT(MODEL_RR_ROTATING_BRIDGE_PLATFORM, 206, 2510, -2535, 0, -21, 0, 0x00000000, bhvRrRotatingBridgePlatform),

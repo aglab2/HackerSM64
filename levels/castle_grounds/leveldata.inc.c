@@ -4,4 +4,7 @@
 #include "levels/castle_grounds/area_2/collision.inc.c"
 #include "levels/castle_grounds/area_2/macro.inc.c"
 #include "levels/castle_grounds/area_2/spline.inc.c"
+#include "levels/castle_grounds/area_3/collision.inc.c"
+#include "levels/castle_grounds/area_3/macro.inc.c"
+#include "levels/castle_grounds/area_3/spline.inc.c"
 #include "levels/castle_grounds/model.inc.c"

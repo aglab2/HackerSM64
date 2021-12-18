@@ -63,7 +63,7 @@
 #define PREVENT_DEATH_LOOP
 
 // The level that the game starts in after file select
-#define START_LEVEL LEVEL_CASTLE_GROUNDS
+#define START_LEVEL LEVEL_CASTLE
 
 
 // -- Compatibility safeguards. Don't mess with these unless you know what you're doing. --

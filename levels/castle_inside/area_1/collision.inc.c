@@ -1,4 +1,4 @@
-const Collision castle_grounds_area_1_collision[] = {
+const Collision castle_inside_area_1_collision[] = {
 	COL_INIT(),
 	COL_VERTEX_INIT(275),
 	COL_VERTEX(-6181, 165, 3927),

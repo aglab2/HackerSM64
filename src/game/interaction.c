@@ -906,7 +906,8 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
     u32 doorAction = ACT_UNINITIALIZED;
 #ifndef UNLOCK_ALL
     u32 saveFlags = save_file_get_flags();
-    s16 warpDoorId = (obj->oBehParams >> 24);
+    s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    s16 warpDoorId = 0; //(obj->oBehParams >> 24);
 #endif
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
@@ -938,6 +939,30 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
             }
 
             doorAction = ACT_UNLOCKING_KEY_DOOR;
+        }
+
+        // has 0x80 in the beginning of it -- consider it a star requirement instead
+        if (warpDoorId < 0)
+        {
+            s16 requiredNumStars = -warpDoorId;
+            if (numStars < requiredNumStars)
+            {        
+                if (!sDisplayingDoorText) {    
+                    u32 text = DIALOG_022 << 16;
+                    switch (requiredNumStars) {
+                        case  1: text = DIALOG_024 << 16; break;
+                        case  3: text = DIALOG_025 << 16; break;
+                        case  8: text = DIALOG_026 << 16; break;
+                        case 30: text = DIALOG_027 << 16; break;
+                        case 50: text = DIALOG_028 << 16; break;
+                        case 70: text = DIALOG_029 << 16; break;
+                    }
+                    text += requiredNumStars - numStars;
+                    set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, text);
+                }
+                sDisplayingDoorText = TRUE;
+                return FALSE;
+            }
         }
 #endif
 
