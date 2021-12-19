@@ -86,3 +86,21 @@ const GeoLayout palm_tree_geo[] = {
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
+
+// 0x16001048
+const GeoLayout palm_tree2_geo[] = {
+   GEO_CULLING_RADIUS(800),
+   GEO_OPEN_NODE(),
+#ifdef OBJ_OPACITY_BY_CAM_DIST
+      GEO_ASM(GEO_TRANSPARENCY_MODE_NORMAL, geo_update_layer_transparency),
+      GEO_SWITCH_CASE(2, geo_switch_anim_state),
+      GEO_OPEN_NODE(),
+#endif
+         GEO_DISPLAY_LIST(LAYER_ALPHA, tree_seg3_dl_palm2),
+#ifdef OBJ_OPACITY_BY_CAM_DIST
+         GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_seg3_dl_palm2_transparent),
+      GEO_CLOSE_NODE(),
+#endif
+   GEO_CLOSE_NODE(),
+   GEO_END(),
+};

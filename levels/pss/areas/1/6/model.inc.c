@@ -114,7 +114,8 @@ static const Vtx pss_seg7_vertex_0700DFF8[] = {
 
 // 0x0700E0A8 - 0x0700E0E0
 static const Gfx pss_seg7_dl_0700E0A8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mountain_09007000),
+    // AGLAB generic
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mountain_09007000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(pss_seg7_vertex_0700DB48, 4, 0),
@@ -136,7 +137,8 @@ static const Gfx pss_seg7_dl_0700E0E0[] = {
 
 // 0x0700E138 - 0x0700E2B0
 static const Gfx pss_seg7_dl_0700E138[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mountain_09005800),
+    // AGLAB generic
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, mountain_09005800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(pss_seg7_vertex_0700DC48, 15, 0),

@@ -19,3 +19,10 @@
 #include "levels/pss/areas/1/7/model.inc.c"
 #include "levels/pss/areas/1/collision.inc.c"
 #include "levels/pss/areas/1/macro.inc.c"
+
+#include "levels/ttc/rotating_cube/model.inc.c"
+#include "levels/ttc/rotating_prism/model.inc.c"
+#include "levels/ttc/rotating_cube/collision.inc.c"
+#include "levels/ttc/rotating_prism/collision.inc.c"
+
+#include "levels/pss/leveldata.inc.c"

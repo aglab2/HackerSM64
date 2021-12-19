@@ -13,8 +13,6 @@
 
 #include "levels/ttc/header.h"
 
-#include "levels/ttc/rotating_cube/geo.inc.c"
-#include "levels/ttc/rotating_prism/geo.inc.c"
 #include "levels/ttc/pendulum/geo.inc.c"
 #include "levels/ttc/large_treadmill/geo.inc.c"
 #include "levels/ttc/small_treadmill/geo.inc.c"

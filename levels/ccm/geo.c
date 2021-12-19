@@ -24,4 +24,6 @@
 #include "levels/ccm/areas/1/geo.inc.c"
 #include "levels/ccm/areas/2/geo.inc.c"
 
+#include "levels/wdw/water_level_diamond/geo.inc.c"
+
 #include "levels/ccm/geo.inc.c"

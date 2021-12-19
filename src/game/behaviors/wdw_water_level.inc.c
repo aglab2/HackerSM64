@@ -1,6 +1,7 @@
 // wdw_water_level.inc.c
 
 // called when WDW is loaded.
+extern struct GraphNodeTranslation *gWaterNode;
 void bhv_init_changing_water_level_loop(void) {
     if (o->oAction == WATER_LEVEL_ACT_INIT) {
         if (gEnvironmentRegions != NULL) {
@@ -12,6 +13,9 @@ void bhv_init_changing_water_level_loop(void) {
         gEnvironmentRegions[6] = gEnvironmentLevels[0] + sins(o->oWaterLevelTriggerAmbientWaves) * 20.0f;
         o->oWaterLevelTriggerAmbientWaves += 0x200;
     }
+    
+    if (gWaterNode)
+        gWaterNode->translation[1] = gEnvironmentRegions[6];
 }
 
 void bhv_water_level_diamond_loop(void) {

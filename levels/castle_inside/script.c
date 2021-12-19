@@ -49,6 +49,7 @@ const LevelScript level_castle_inside_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_8_STARS, castle_geo_000F00), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_50_STARS, castle_geo_000F00), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_70_STARS, castle_geo_000F00), 
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_WARP_PIPE, warp_pipe_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -88,6 +89,12 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(0x32, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x51, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x52, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x70, LEVEL_PSS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x71, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x72, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x60, LEVEL_TOTWC, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x61, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x62, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT_WITH_ACTS(MODEL_CASTLE_GROUNDS_METAL_DOOR, 2956, -5002, 9230, 0, 0, 0, 0x00000000, bhv1Up, 0),
 		OBJECT_WITH_ACTS(MODEL_CASTLE_GROUNDS_METAL_DOOR, 2956, -4600, 8858, 0, 0, 0, 0x00000000, bhv1Up, 0),
 		OBJECT(MODEL_NONE, 296, -3427, -583, 0, 0, 0, (0x32 << 16), bhvDeathWarp),
@@ -98,6 +105,12 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_NONE, 3221, -4767, 9037, 0, 0, 0, (0x51 << 16), bhvAirborneStarCollectWarp),
 		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 3340, -2975, -7320, 0, 0, 0, (0x92 << 16), bhvDoorWarp),
 		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 3474, -2975, -7321, 0, -180, 0, (0x91 << 16), bhvDoorWarp),
+		OBJECT(MODEL_THI_WARP_PIPE, 1904, -3069, 3976, 0, 0, 0, (0x70 << 16), bhvWarpPipe),
+		OBJECT(MODEL_NONE, 2341, -2892, 3977, 0, 0, 0, (0x72 << 16), bhvDeathWarp),
+		OBJECT(MODEL_NONE, 2367, -2860, 3965, 0, 0, 0, (0x71 << 16), bhvAirborneStarCollectWarp),
+		OBJECT(MODEL_THI_WARP_PIPE, 9422, -6190, 4798, 0, 0, 0, (0x60 << 16), bhvWarpPipe),
+		OBJECT(MODEL_NONE, 9109, -5887, 4748, 0, 0, 0, (0x62 << 16), bhvDeathWarp),
+		OBJECT(MODEL_NONE, 9117, -5895, 4773, 0, 0, 0, (0x61 << 16), bhvAirborneStarCollectWarp),
 		TERRAIN(castle_inside_area_2_collision),
 		MACRO_OBJECTS(castle_inside_area_2_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),

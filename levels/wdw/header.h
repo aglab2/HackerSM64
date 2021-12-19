@@ -7,7 +7,6 @@
 // geo
 extern const GeoLayout wdw_geo_000580[];
 extern const GeoLayout wdw_geo_000598[];
-extern const GeoLayout wdw_geo_0005C0[];
 extern const GeoLayout wdw_geo_0005E8[];
 extern const GeoLayout wdw_geo_000610[];
 extern const GeoLayout wdw_geo_000628[];
@@ -24,7 +23,6 @@ extern const Gfx wdw_seg7_dl_07012798[];
 extern const Gfx wdw_seg7_dl_07012908[];
 extern const Gfx wdw_seg7_dl_07012B90[];
 extern const Gfx wdw_seg7_dl_07012E88[];
-extern const Gfx wdw_seg7_dl_070131B8[];
 extern const Gfx wdw_seg7_dl_07013490[];
 extern const Gfx wdw_seg7_dl_07013B70[];
 extern const Gfx wdw_seg7_dl_07013E40[];

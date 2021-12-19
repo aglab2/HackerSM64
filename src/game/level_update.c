@@ -238,6 +238,7 @@ void init_door_warp(struct SpawnInfo *spawnInfo, u32 warpDestFlags) {
 void set_mario_initial_cap_powerup(struct MarioState *m) {
     u32 capCourseIndex = gCurrCourseNum - COURSE_CAP_COURSES;
 
+    /*
     switch (capCourseIndex) {
         case COURSE_COTMC - COURSE_CAP_COURSES:
             m->flags |= MARIO_METAL_CAP | MARIO_CAP_ON_HEAD;
@@ -254,6 +255,7 @@ void set_mario_initial_cap_powerup(struct MarioState *m) {
             m->capTimer = 600;
             break;
     }
+    */
 }
 
 void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg) {

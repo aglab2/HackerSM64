@@ -20,4 +20,11 @@ extern const MacroObject pss_seg7_macro_objs[];
 // script
 extern const LevelScript level_pss_entry[];
 
+extern const Gfx ttc_seg7_dl_0700EFE0[];
+extern const Gfx ttc_seg7_dl_0700ECB8[];
+extern const GeoLayout ttc_geo_000240[];
+extern const GeoLayout ttc_geo_000258[];
+
+#include "levels/pss/header.inc.h"
+
 #endif

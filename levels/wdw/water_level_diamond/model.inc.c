@@ -62,6 +62,11 @@ static const Vtx wdw_seg7_vertex_07013098[] = {
     {{{     0,    102,      0}, 0, {   478,    932}, {0x00, 0x58, 0xa6, 0xff}}},
 };
 
+// 0x07001000 - 0x07001800
+ALIGNED8 static const Texture wdw_seg7_texture_07001000[] = {
+#include "levels/wdw/2.rgba16.inc.c"
+};
+
 // 0x070130F8 - 0x070131B8
 static const Gfx wdw_seg7_dl_070130F8[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wdw_seg7_texture_07001000),

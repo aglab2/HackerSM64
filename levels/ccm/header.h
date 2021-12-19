@@ -57,6 +57,8 @@ extern const Trajectory ccm_seg7_trajectory_penguin_race[];
 // script
 extern const LevelScript level_ccm_entry[];
 
+extern const Gfx wdw_seg7_dl_070131B8[];
+extern const GeoLayout wdw_geo_0005C0[];
 
 #include "levels/ccm/header.inc.h"
 

@@ -46,4 +46,7 @@
 #include "levels/ccm/areas/2/macro.inc.c"
 #include "levels/ccm/areas/2/trajectory.inc.c"
 
+#include "levels/wdw/water_level_diamond/model.inc.c"
+#include "levels/wdw/water_level_diamond/collision.inc.c" // Unused
+
 #include "levels/ccm/leveldata.inc.c"

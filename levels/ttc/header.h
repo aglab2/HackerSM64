@@ -4,8 +4,6 @@
 #include "types.h"
 
 // geo
-extern const GeoLayout ttc_geo_000240[];
-extern const GeoLayout ttc_geo_000258[];
 extern const GeoLayout ttc_geo_000270[];
 extern const GeoLayout ttc_geo_000288[];
 extern const GeoLayout ttc_geo_0002A8[];
@@ -22,8 +20,6 @@ extern const GeoLayout ttc_geo_0003B8[];
 extern const Gfx ttc_seg7_dl_0700AD38[];
 extern const Gfx ttc_seg7_dl_0700B1D8[];
 extern const Gfx ttc_seg7_dl_0700E878[];
-extern const Gfx ttc_seg7_dl_0700ECB8[];
-extern const Gfx ttc_seg7_dl_0700EFE0[];
 extern const Gfx ttc_seg7_dl_0700F760[];
 extern const Gfx ttc_seg7_dl_0700FBB8[];
 extern const Gfx ttc_seg7_dl_0700FFE8[];

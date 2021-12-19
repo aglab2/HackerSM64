@@ -15,7 +15,6 @@
 
 #include "levels/wdw/square_floating_platform/geo.inc.c"
 #include "levels/wdw/arrow_lift/geo.inc.c"
-#include "levels/wdw/water_level_diamond/geo.inc.c"
 #include "levels/wdw/hidden_platform/geo.inc.c"
 #include "levels/wdw/express_elevator/geo.inc.c"
 #include "levels/wdw/rectangular_floating_platform/geo.inc.c"

@@ -401,6 +401,10 @@ void geo_layout_cmd_node_camera(void) {
 
    [cmd+var: void *displayList]
 */
+
+extern Gfx ccm_dl_water_thing_mesh_layer_5[];
+struct GraphNodeTranslationRotation *gWaterNode = 0;
+
 void geo_layout_cmd_node_translation_rotation(void) {
     struct GraphNodeTranslationRotation *graphNode;
 
@@ -440,6 +444,12 @@ void geo_layout_cmd_node_translation_rotation(void) {
 
     graphNode = init_graph_node_translation_rotation(gGraphNodePool, NULL, drawingLayer, displayList,
                                                      translation, rotation);
+                                                     
+    if (displayList == ccm_dl_water_thing_mesh_layer_5)
+    {
+        gWaterNode = graphNode;
+    }
+
     register_scene_graph_node(&graphNode->node);
 
     gGeoLayoutCommand = (u8 *) cmdPos;
@@ -475,6 +485,11 @@ void geo_layout_cmd_node_translation(void) {
 
     graphNode =
         init_graph_node_translation(gGraphNodePool, NULL, drawingLayer, displayList, translation);
+                                                 
+    if (displayList == ccm_dl_water_thing_mesh_layer_5)
+    {
+        gWaterNode = graphNode;
+    }
 
     register_scene_graph_node(&graphNode->node);
 
