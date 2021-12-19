@@ -33,3 +33,12 @@
 #include "levels/castle_grounds/areas/1/movtext.inc.c"
 
 #include "levels/castle_grounds/leveldata.inc.c"
+
+// 0x07079068 - 0x07079090
+const Trajectory *const inside_castle_seg7_trajectory_mips[] = {
+    castle_grounds_area_1_spline_mips_curve, castle_grounds_area_1_spline_mips_curve_001,
+    castle_grounds_area_1_spline_mips_curve_002, castle_grounds_area_1_spline_mips_curve_003,
+    castle_grounds_area_1_spline_mips_curve_004, castle_grounds_area_1_spline_mips_curve_005,
+    castle_grounds_area_1_spline_mips_curve_006, castle_grounds_area_1_spline_mips_curve_007,
+    castle_grounds_area_1_spline_mips_curve_008, castle_grounds_area_1_spline_mips_curve_009,
+};

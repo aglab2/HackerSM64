@@ -25,7 +25,6 @@
 #include "levels/lll/areas/1/13/geo.inc.c"
 #include "levels/lll/areas/1/14/geo.inc.c"
 #include "levels/lll/areas/1/15/geo.inc.c"
-#include "levels/lll/moving_octagonal_mesh_platform/geo.inc.c"
 #include "levels/lll/drawbridge_part/geo.inc.c"
 #include "levels/lll/rotating_block_fire_bars/geo.inc.c"
 #include "levels/lll/wooden_float_small/geo.inc.c"

@@ -83,7 +83,6 @@
 #include "levels/castle_inside/clock_minute_hand/collision.inc.c"
 #include "levels/castle_inside/clock_hour_hand/collision.inc.c"
 #include "levels/castle_inside/water_level_pillar/collision.inc.c"
-#include "levels/castle_inside/areas/3/trajectory.inc.c"
 #include "levels/castle_inside/areas/3/movtext.inc.c"
 
 #include "levels/castle_inside/leveldata.inc.c"

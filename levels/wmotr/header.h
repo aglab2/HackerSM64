@@ -16,4 +16,9 @@ extern const MacroObject wmotr_seg7_macro_objs[];
 // script
 extern const LevelScript level_wmotr_entry[];
 
+extern const Gfx lll_seg7_dl_07018380[];
+extern const GeoLayout lll_geo_000B08[];
+
+#include "levels/wmotr/header.inc.h"
+
 #endif

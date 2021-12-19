@@ -12,3 +12,14 @@
 #include "levels/wmotr/areas/1/model.inc.c"
 #include "levels/wmotr/areas/1/collision.inc.c"
 #include "levels/wmotr/areas/1/macro.inc.c"
+
+// 0x0700FC00 - 0x0700FC18
+static const Lights1 lll_seg7_lights_0700FC00 = gdSPDefLights1(
+    0x3f, 0x3f, 0x3f,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+#include "levels/lll/moving_octagonal_mesh_platform/model.inc.c"
+#include "levels/lll/moving_octagonal_mesh_platform/collision.inc.c"
+
+#include "levels/wmotr/leveldata.inc.c"

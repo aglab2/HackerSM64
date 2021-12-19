@@ -14,3 +14,6 @@
 #include "levels/wmotr/header.h"
 
 #include "levels/wmotr/areas/1/geo.inc.c"
+#include "levels/lll/moving_octagonal_mesh_platform/geo.inc.c"
+
+#include "levels/wmotr/geo.inc.c"

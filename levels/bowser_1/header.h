@@ -13,4 +13,13 @@ extern const Collision bowser_1_seg7_collision_level[];
 // script
 extern const LevelScript level_bowser_1_entry[];
 
+extern const Gfx ttc_seg7_dl_07010D38[];
+extern const Gfx ttc_seg7_dl_070102B8[];
+extern const Gfx ttc_seg7_dl_07010868[];
+extern const GeoLayout ttc_geo_0002C8[];
+extern const GeoLayout ttc_geo_0002E0[];
+extern const GeoLayout ttc_geo_0002F8[];
+
+#include "levels/bowser_1/header.inc.h"
+
 #endif

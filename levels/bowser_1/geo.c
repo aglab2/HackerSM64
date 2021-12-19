@@ -14,3 +14,9 @@
 #include "levels/bowser_1/header.h"
 
 #include "levels/bowser_1/areas/1/geo.inc.c"
+
+#include "levels/ttc/push_block/geo.inc.c"
+#include "levels/ttc/rotating_hexagon/geo.inc.c"
+#include "levels/ttc/rotating_triangle/geo.inc.c"
+
+#include "levels/bowser_1/geo.inc.c"

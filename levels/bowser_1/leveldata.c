@@ -11,3 +11,12 @@
 #include "levels/bowser_1/texture.inc.c"
 #include "levels/bowser_1/areas/1/1/model.inc.c"
 #include "levels/bowser_1/areas/1/collision.inc.c"
+
+#include "levels/ttc/push_block/collision.inc.c"
+#include "levels/ttc/rotating_hexagon/collision.inc.c"
+#include "levels/ttc/rotating_triangle/collision.inc.c"
+#include "levels/ttc/push_block/model.inc.c"
+#include "levels/ttc/rotating_hexagon/model.inc.c"
+#include "levels/ttc/rotating_triangle/model.inc.c"
+
+#include "levels/bowser_1/leveldata.inc.c"
