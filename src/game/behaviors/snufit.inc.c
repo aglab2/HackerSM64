@@ -65,15 +65,15 @@ Gfx *geo_snufit_scale_body(s32 callContext, struct GraphNode *node, UNUSED Mat4 
 void snufit_act_idle(void) {
     // This line would could cause a crash in certain PU situations,
     // if the game would not have already crashed.
-    s32 marioDist = (s32)(o->oDistanceToMario / 10.0f);
+    s32 marioDist = (s32)(o->oDistanceToMario / 100.0f);
 
-    if (o->oTimer > marioDist && o->oDistanceToMario < 800.0f) {
+    if (o->oTimer > marioDist && o->oDistanceToMario < 2000.0f) {
 
         // Controls an alternating scaling factor in a cos.
         o->oSnufitBodyScalePeriod
             = approach_s16_symmetric(o->oSnufitBodyScalePeriod, 0, 1500);
         o->oSnufitBodyBaseScale
-            = approach_s16_symmetric(o->oSnufitBodyBaseScale, 600, 15);
+            = approach_s16_symmetric(o->oSnufitBodyBaseScale, 600, 100);
 
         if ((s16) o->oSnufitBodyScalePeriod == 0 && o->oSnufitBodyBaseScale == 600) {
             o->oAction = SNUFIT_ACT_SHOOT;
@@ -114,7 +114,7 @@ void bhv_snufit_loop(void) {
         o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
 
         // Face Mario if he is within range.
-        if (o->oDistanceToMario < 800.0f) {
+        if (o->oDistanceToMario < 2000.0f) {
             obj_turn_pitch_toward_mario(120.0f, 2000);
 
             if ((s16) o->oMoveAnglePitch > 0x2000) {

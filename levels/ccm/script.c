@@ -94,7 +94,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -987, 571, -4012, 0, 0, 0, 0x00000000, bhvInitializeChangingWaterLevel),
 		TERRAIN(ccm_area_1_collision),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, 0x25),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

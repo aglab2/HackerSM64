@@ -22,7 +22,8 @@ static const Vtx bbh_seg7_vertex_0701F6C0[] = {
 
 // 0x0701F780 - 0x0701F7E8
 static const Gfx bbh_seg7_dl_0701F780[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09004800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09004800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&bbh_seg7_lights_0701F6A8.l, 1),

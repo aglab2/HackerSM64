@@ -156,7 +156,7 @@ extern Vtx castle_inside_dl_ow1_003_mesh_layer_1_vtx_9[4];
 extern Gfx castle_inside_dl_ow1_003_mesh_layer_1_tri_9[];
 extern Vtx castle_inside_dl_ow1_003_mesh_layer_1_vtx_10[8];
 extern Gfx castle_inside_dl_ow1_003_mesh_layer_1_tri_10[];
-extern Vtx castle_inside_dl_ow1_003_mesh_layer_1_vtx_11[55];
+extern Vtx castle_inside_dl_ow1_003_mesh_layer_1_vtx_11[59];
 extern Gfx castle_inside_dl_ow1_003_mesh_layer_1_tri_11[];
 extern Vtx castle_inside_dl_ow1_003_mesh_layer_1_vtx_12[12];
 extern Gfx castle_inside_dl_ow1_003_mesh_layer_1_tri_12[];

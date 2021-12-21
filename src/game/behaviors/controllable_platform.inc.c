@@ -127,7 +127,7 @@ void controllable_platform_shake_on_wall_hit(void) {
         o->oPosY = o->oControllablePlatformInitPosY + sins(o->oTimer * 0x2000) * 20.0f;
     }
 
-    if (o->oTimer == 32) {
+    if (o->oTimer == 16) {
         sControllablePlatformDirectionState = o->oControllablePlatformWallHitDirection;
         o->oFaceAnglePitch = 0;
         o->oFaceAngleRoll = 0;

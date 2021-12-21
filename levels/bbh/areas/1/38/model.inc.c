@@ -20,7 +20,8 @@ static const Vtx bbh_seg7_vertex_0701EE08[] = {
 
 // 0x0701EE48 - 0x0701EE90
 static const Gfx bbh_seg7_dl_0701EE48[] = {
-    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, spooky_0900A800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, spooky_0900A800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_0701ED88, 8, 0),
@@ -31,7 +32,8 @@ static const Gfx bbh_seg7_dl_0701EE48[] = {
 
 // 0x0701EE90 - 0x0701EEC8
 static const Gfx bbh_seg7_dl_0701EE90[] = {
-    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, spooky_0900B800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, spooky_0900B800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_0701EE08, 4, 0),

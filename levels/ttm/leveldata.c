@@ -40,7 +40,6 @@
 #include "levels/ttm/areas/1/21/1.inc.c"
 #include "levels/ttm/areas/1/21/2.inc.c"
 #include "levels/ttm/rolling_log/model.inc.c"
-#include "levels/ttm/areas/1/painting.inc.c"
 #include "levels/ttm/star_cage/1.inc.c"
 #include "levels/ttm/star_cage/2.inc.c"
 #include "levels/ttm/rolling_log/collision.inc.c"

@@ -22,3 +22,9 @@
 #include "levels/bbh/merry_go_round/geo.inc.c"
 #include "levels/bbh/coffin/geo.inc.c"
 #include "levels/bbh/areas/1/geo.inc.c"
+
+#include "levels/hmc/elevator_platform/geo.inc.c"
+#include "levels/hmc/arrow_platform/geo.inc.c"
+#include "levels/hmc/arrow_platform_button/geo.inc.c"
+
+#include "levels/bbh/geo.inc.c"

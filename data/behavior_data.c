@@ -5647,6 +5647,7 @@ const BehaviorScript bhvDorrie[] = {
     LOAD_ANIMATIONS(oAnimations, dorrie_seg6_anims_0600F638),
     SET_HOME(),
     SET_FLOAT(oCollisionDistance, 30000),
+    SET_FLOAT(oDrawingDistance, 8000),
     ADD_FLOAT(oPosX, 2000),
     CALL_NATIVE(bhv_init_room),
     BEGIN_LOOP(),

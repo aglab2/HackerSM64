@@ -320,7 +320,8 @@ static const Vtx bbh_seg7_vertex_0700CAA8[] = {
 
 // 0x0700CB58 - 0x0700CCB0
 static const Gfx bbh_seg7_dl_0700CB58[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09008800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09008800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&bbh_seg7_lights_0700BC68.l, 1),
@@ -353,7 +354,8 @@ static const Gfx bbh_seg7_dl_0700CB58[] = {
 
 // 0x0700CCB0 - 0x0700CD18
 static const Gfx bbh_seg7_dl_0700CCB0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09004800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09004800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_0700C088, 16, 0),
@@ -412,7 +414,8 @@ static const Gfx bbh_seg7_dl_0700CD18[] = {
 
 // 0x0700CF40 - 0x0700CFA8
 static const Gfx bbh_seg7_dl_0700CF40[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09003800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09003800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_0700C878, 16, 0),
@@ -425,7 +428,8 @@ static const Gfx bbh_seg7_dl_0700CF40[] = {
 
 // 0x0700CFA8 - 0x0700CFE0
 static const Gfx bbh_seg7_dl_0700CFA8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09002800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09002800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_0700C978, 4, 0),
@@ -435,7 +439,8 @@ static const Gfx bbh_seg7_dl_0700CFA8[] = {
 
 // 0x0700CFE0 - 0x0700D080
 static const Gfx bbh_seg7_dl_0700CFE0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09009000),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09009000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_0700C9B8, 15, 0),

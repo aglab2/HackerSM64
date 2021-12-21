@@ -907,7 +907,7 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
 #ifndef UNLOCK_ALL
     u32 saveFlags = save_file_get_flags();
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
-    s16 warpDoorId = 0; //(obj->oBehParams >> 24);
+    s16 warpDoorId = (obj->oBehParams >> 24);
 #endif
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {

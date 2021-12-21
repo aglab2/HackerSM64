@@ -391,7 +391,8 @@ static const Vtx bbh_seg7_vertex_07016C58[] = {
 
 // 0x07016D38 - 0x07016DC8
 static const Gfx bbh_seg7_dl_07016D38[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09004800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09004800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&bbh_seg7_lights_07015A90.l, 1),
@@ -409,7 +410,8 @@ static const Gfx bbh_seg7_dl_07016D38[] = {
 
 // 0x07016DC8 - 0x07016E10
 static const Gfx bbh_seg7_dl_07016DC8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09008800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09008800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_07015C08, 7, 0),
@@ -420,7 +422,8 @@ static const Gfx bbh_seg7_dl_07016DC8[] = {
 
 // 0x07016E10 - 0x07016FE8
 static const Gfx bbh_seg7_dl_07016E10[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09005000),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09005000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_07015C78, 15, 0),
@@ -461,7 +464,8 @@ static const Gfx bbh_seg7_dl_07016E10[] = {
 
 // 0x07016FE8 - 0x07017050
 static const Gfx bbh_seg7_dl_07016FE8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09000800),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09000800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_070162F8, 16, 0),
@@ -498,7 +502,8 @@ static const Gfx bbh_seg7_dl_070170B8[] = {
 
 // 0x07017100 - 0x07017148
 static const Gfx bbh_seg7_dl_07017100[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09009000),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09009000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_07016558, 8, 0),
@@ -509,7 +514,8 @@ static const Gfx bbh_seg7_dl_07017100[] = {
 
 // 0x07017148 - 0x07017378
 static const Gfx bbh_seg7_dl_07017148[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09007000),
+    // AGLAB spooky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, spooky_09007000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 64 * 32 - 1, CALC_DXT(64, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bbh_seg7_vertex_070165D8, 14, 0),

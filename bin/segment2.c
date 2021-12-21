@@ -2156,6 +2156,7 @@ const Gfx dl_hud_img_begin[] = {
     gsDPSetCycleType(G_CYC_COPY),
     gsDPSetTexturePersp(G_TP_NONE),
     gsDPSetAlphaCompare(G_AC_THRESHOLD),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
     gsDPSetBlendColor(255, 255, 255, 255),
     gsDPSetRenderMode(G_RM_NOOP, G_RM_NOOP2),
     gsDPSetTextureFilter(G_TF_POINT),
@@ -2180,6 +2181,7 @@ const Gfx dl_hud_img_end[] = {
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPSetTextureFilter(G_TF_BILERP),
     gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
     gsSPEndDisplayList(),
 };
 

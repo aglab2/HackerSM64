@@ -45,7 +45,24 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_ENDING,        // 0x20
     SEQ_MENU_FILE_SELECT,             // 0x21
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
-    SEQ_COUNT
+    SEQ_C1,
+	SEQ_C2,
+	SEQ_C3,
+	SEQ_C4,
+	SEQ_OW_BAIT,
+	SEQ_OW3,
+	SEQ_B1,
+	SEQ_MAV,
+	SEQ_100CC,
+	SEQ_SLIDE,
+	SEQ_TTC,
+	SEQ_EYE,
+	SEQ_BULLY,
+	SEQ_B3,
+	SEQ_F2,
+	SEQ_VC,
+	SEQ_OW1,
+	SEQ_COUNT
 };
 
 #endif // SEQ_IDS_H

@@ -2,6 +2,11 @@
 
 extern const Trajectory wf_area_1_spline_balls_path_1[];
 extern const Trajectory wf_area_1_spline_balls_path_2[];
+
+extern const Trajectory bbh_area_1_spline_NurbsCurve[];
+extern const Trajectory bbh_area_1_spline_NurbsCurve_001[];
+extern const Trajectory bbh_area_1_spline_NurbsCurve_002[];
+
 static struct ObjectHitbox sBowlingBallHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -66,15 +71,15 @@ void bowling_ball_set_waypoints(void) {
             break;
 
         case BBALL_BP_STYPE_BOB_LOWER:
-            o->oPathedStartWaypoint = segmented_to_virtual(bob_seg7_metal_ball_path1);
+            o->oPathedStartWaypoint = segmented_to_virtual(bbh_area_1_spline_NurbsCurve_002);
             break;
 
         case BBALL_BP_STYPE_THI_LARGE:
-            o->oPathedStartWaypoint = (struct Waypoint *) sThiHugeMetalBallTraj;
+            o->oPathedStartWaypoint = segmented_to_virtual(bbh_area_1_spline_NurbsCurve_001);
             break;
 
         case BBALL_BP_STYPE_THI_SMALL:
-            o->oPathedStartWaypoint = (struct Waypoint *) sThiTinyMetalBallTraj;
+            o->oPathedStartWaypoint = segmented_to_virtual(bbh_area_1_spline_NurbsCurve);
             break;
     }
 }
@@ -128,13 +133,11 @@ void bhv_bowling_ball_initialize_loop(void) {
             break;
 
         case BBALL_BP_STYPE_THI_LARGE:
-            o->oForwardVel = 25.0f;
+            o->oForwardVel = 17.0f;
             break;
 
         case BBALL_BP_STYPE_THI_SMALL:
-            o->oForwardVel = 10.0f;
-            cur_obj_scale(0.3f);
-            o->oGraphYOffset = 39.0f;
+            o->oForwardVel = 20.0f;
             break;
     }
 }

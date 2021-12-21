@@ -556,8 +556,8 @@ struct Painting ttm_slide_painting = {
     /* Texture Type */ PAINTING_IMAGE,
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
-    /* Rotation */    0.0f,   90.0f,
-    /* Position */ 3072.0f, 921.6f, -819.2f,
+    /* Rotation */    0.0f,   0.0f,
+    /* Position */ -6245.f, -2380.f, -9695.f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -573,5 +573,5 @@ struct Painting ttm_slide_painting = {
     /* Ripple Trigger */ RIPPLE_TRIGGER_PROXIMITY,
     /* Alpha */ 0xFF,
     /* Mario Below */  0x00, 0x00, 0x00, /* Whether or not Mario is below the painting */
-    /* Size */  460.8f,
+    /* Size */  386.f,
 };

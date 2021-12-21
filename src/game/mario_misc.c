@@ -187,26 +187,6 @@ void bhv_toad_message_init(void) {
     s32 dialogId = GET_BPARAM1(o->oBehParams);
     s32 enoughStars = TRUE;
 
-    switch (dialogId) {
-        case TOAD_STAR_1_DIALOG:
-            enoughStars = (starCount >= TOAD_STAR_1_REQUIREMENT);
-            if (saveFlags & SAVE_FLAG_COLLECTED_TOAD_STAR_1) {
-                dialogId = TOAD_STAR_1_DIALOG_AFTER;
-            }
-            break;
-        case TOAD_STAR_2_DIALOG:
-            enoughStars = (starCount >= TOAD_STAR_2_REQUIREMENT);
-            if (saveFlags & SAVE_FLAG_COLLECTED_TOAD_STAR_2) {
-                dialogId = TOAD_STAR_2_DIALOG_AFTER;
-            }
-            break;
-        case TOAD_STAR_3_DIALOG:
-            enoughStars = (starCount >= TOAD_STAR_3_REQUIREMENT);
-            if (saveFlags & SAVE_FLAG_COLLECTED_TOAD_STAR_3) {
-                dialogId = TOAD_STAR_3_DIALOG_AFTER;
-            }
-            break;
-    }
     if (enoughStars) {
         o->oToadMessageDialogId = dialogId;
         o->oToadMessageRecentlyTalked = FALSE;
