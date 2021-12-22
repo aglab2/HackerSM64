@@ -334,7 +334,8 @@ static const Vtx bitfs_seg7_vertex_07008928[] = {
 
 // 0x070089E8 - 0x07008A68
 static const Gfx bitfs_seg7_dl_070089E8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09001000),
+    // AGLAB sky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09001000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bitfs_seg7_vertex_070079C8, 16, 0),
@@ -349,7 +350,8 @@ static const Gfx bitfs_seg7_dl_070089E8[] = {
 
 // 0x07008A68 - 0x07008CE0
 static const Gfx bitfs_seg7_dl_07008A68[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09001800),
+    // AGLAB sky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09001800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bitfs_seg7_vertex_07007B08, 15, 0),
@@ -401,7 +403,8 @@ static const Gfx bitfs_seg7_dl_07008A68[] = {
 
 // 0x07008CE0 - 0x07008DB8
 static const Gfx bitfs_seg7_dl_07008CE0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09007000),
+    // AGLAB sky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09007000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bitfs_seg7_vertex_07008368, 16, 0),
@@ -422,7 +425,8 @@ static const Gfx bitfs_seg7_dl_07008CE0[] = {
 
 // 0x07008DB8 - 0x07008E20
 static const Gfx bitfs_seg7_dl_07008DB8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09000800),
+    // AGLAB sky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09000800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bitfs_seg7_vertex_070085A8, 16, 0),
@@ -435,7 +439,8 @@ static const Gfx bitfs_seg7_dl_07008DB8[] = {
 
 // 0x07008E20 - 0x07008E68
 static const Gfx bitfs_seg7_dl_07008E20[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09007800),
+    // AGLAB sky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09007800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bitfs_seg7_vertex_070086A8, 8, 0),

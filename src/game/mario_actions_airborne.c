@@ -174,9 +174,10 @@ s32 check_horizontal_wind(struct MarioState *m) {
         }
 
         m->vel[0] = m->slideVelX;
-        m->vel[2] = m->slideVelZ;
+        //m->vel[2] = m->slideVelZ;
+        m->vel[2] = 50.f;
         m->slideYaw = atan2s(m->slideVelZ, m->slideVelX);
-        m->forwardVel = speed * coss(m->faceAngle[1] - m->slideYaw);
+        m->forwardVel = -10.f; // speed * coss(m->faceAngle[1] - m->slideYaw);
         return TRUE;
     }
 

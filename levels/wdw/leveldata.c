@@ -18,7 +18,6 @@
 #include "levels/wdw/double_arrows/model.inc.c" // This is weird, but the only instance of a shared area object in a level. So we're treating it as a seperate model. It does not have collision anyway so it may have been combined in both areas by some sort of optimizer at compile time.
 #include "levels/wdw/square_floating_platform/model.inc.c"
 #include "levels/wdw/arrow_lift/model.inc.c"
-#include "levels/wdw/hidden_platform/model.inc.c"
 #include "levels/wdw/express_elevator/model.inc.c"
 #include "levels/wdw/rectangular_floating_platform/model.inc.c"
 #include "levels/wdw/rotating_platform/model.inc.c"
@@ -28,7 +27,6 @@
 #include "levels/wdw/areas/2/macro.inc.c"
 #include "levels/wdw/square_floating_platform/collision.inc.c"
 #include "levels/wdw/arrow_lift/collision.inc.c"
-#include "levels/wdw/hidden_platform/collision.inc.c"
 #include "levels/wdw/express_elevator/collision.inc.c"
 #include "levels/wdw/rectangular_floating_platform/collision.inc.c"
 #include "levels/wdw/rotating_platform/collision.inc.c"

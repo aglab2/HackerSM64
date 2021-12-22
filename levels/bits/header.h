@@ -86,7 +86,14 @@ extern const Collision bits_seg7_collision_0701B404[];
 extern const Collision bits_seg7_collision_0701B59C[];
 extern const Collision bits_seg7_collision_0701B734[];
 
+extern const Gfx wdw_seg7_dl_07013490[];
+
+extern const GeoLayout wdw_geo_0005E8[];
+
 // script
 extern const LevelScript level_bits_entry[];
+
+
+#include "levels/bits/header.inc.h"
 
 #endif

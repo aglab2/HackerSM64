@@ -48,7 +48,8 @@ static const Vtx rr_seg7_vertex_0701B710[] = {
 
 // 0x0701B770 - 0x0701B848
 static const Gfx rr_seg7_dl_0701B770[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09000800),
+    // AGLAB sky
+    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09000800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(rr_seg7_vertex_0701B530, 16, 0),

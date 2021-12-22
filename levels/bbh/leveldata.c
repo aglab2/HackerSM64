@@ -72,17 +72,17 @@
 
 // 0x07003000 - 0x07003800
 ALIGNED8 static const Texture hmc_seg7_texture_07003000[] = {
-#include "levels/hmc/3.rgba16.inc.c"
+#include "levels/bbh/3.rgba16.inc.c"
 };
 
 // 0x07004000 - 0x07004800
 ALIGNED8 static const Texture hmc_seg7_texture_07004000[] = {
-#include "levels/hmc/5.rgba16.inc.c"
+#include "levels/bbh/5.rgba16.inc.c"
 };
 
 // 0x07003800 - 0x07004000
 ALIGNED8 static const Texture hmc_seg7_texture_07003800[] = {
-#include "levels/hmc/4.rgba16.inc.c"
+#include "levels/bbh/4.rgba16.inc.c"
 };
 
 #include "levels/hmc/elevator_platform/model.inc.c"

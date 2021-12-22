@@ -84,6 +84,10 @@ ALIGNED8 static const Texture tree_seg3_texture_pine[] = {
 #include "actors/tree/pine_tree.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture tree_seg3_texture_pine2[] = {
+#include "actors/tree/pine_tree2.rgba16.inc.c"
+};
+
 // 0x03030F60
 static const Vtx tree_seg3_vertex_spiky[] = {
     {{{   128,    512,      0}, 0, {   990,      0}, {0x00, 0x00, 0x7f, 0xff}}},
@@ -114,6 +118,27 @@ const Gfx tree_seg3_sub_dl_spiky[] = {
     gsSPEndDisplayList(),
 };
 
+const Gfx tree_seg3_sub_dl_spiky2[] = {
+    gsSPClearGeometryMode(G_SHADING_SMOOTH),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPTileSync(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (64 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, tree_seg3_texture_pine2),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsSPLight(&tree_seg3_lights_0302DE10.l, 1),
+    gsSPLight(&tree_seg3_lights_0302DE10.a, 2),
+    gsSPVertex(tree_seg3_vertex_spiky, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsSPSetGeometryMode(G_SHADING_SMOOTH),
+    gsSPEndDisplayList(),
+};
+
 const Gfx tree_seg3_dl_spiky[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -124,6 +149,18 @@ const Gfx tree_seg3_dl_spiky_transparent[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_DECALFADEA, G_CC_DECALFADEA),
     gsSPBranchList(tree_seg3_sub_dl_spiky),
+};
+
+const Gfx tree_seg3_dl_spiky2[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsSPBranchList(tree_seg3_sub_dl_spiky2),
+};
+//! These shouldn't need to be separate. However, silhouette moment.
+const Gfx tree_seg3_dl_spiky2_transparent[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_DECALFADEA, G_CC_DECALFADEA),
+    gsSPBranchList(tree_seg3_sub_dl_spiky2),
 };
 
 // 0x03031048

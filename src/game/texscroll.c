@@ -19,6 +19,8 @@
 #include "src/game/texscroll/ccm_texscroll.inc.c"
 #include "src/game/texscroll/bbh_texscroll.inc.c"
 #include "src/game/texscroll/castle_courtyard_texscroll.inc.c"
+#include "src/game/texscroll/cotmc_texscroll.inc.c"
+#include "src/game/texscroll/bits_texscroll.inc.c"
 void scroll_textures() {
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_bob_segment_7SegmentRomStart)) {
 		scroll_textures_bob();
@@ -42,6 +44,14 @@ void scroll_textures() {
 
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_castle_courtyard_segment_7SegmentRomStart)) {
 		scroll_textures_castle_courtyard();
+	}
+
+	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_cotmc_segment_7SegmentRomStart)) {
+		scroll_textures_cotmc();
+	}
+
+	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_bits_segment_7SegmentRomStart)) {
+		scroll_textures_bits();
 	}
 
 }
