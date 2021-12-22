@@ -88,7 +88,17 @@ extern const Collision bits_seg7_collision_0701B734[];
 
 extern const Gfx wdw_seg7_dl_07013490[];
 
+extern const Gfx rr_seg7_dl_0701E670[];
+extern const Gfx rr_seg7_dl_07021100[];
+extern const Gfx rr_seg7_dl_07023B90[];
+extern const Gfx rr_seg7_dl_07026630[];
+extern const Gfx rr_seg7_dl_07028FA8[];
 extern const GeoLayout wdw_geo_0005E8[];
+extern const GeoLayout rr_geo_000958[];
+extern const GeoLayout rr_geo_000970[];
+extern const GeoLayout rr_geo_000988[];
+extern const GeoLayout rr_geo_0009A0[];
+extern const GeoLayout rr_geo_0009B8[];
 
 // script
 extern const LevelScript level_bits_entry[];

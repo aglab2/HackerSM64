@@ -47,5 +47,10 @@
 #include "levels/bits/areas/1/geo.inc.c"
 
 #include "levels/wdw/hidden_platform/geo.inc.c"
+#include "levels/rr/tricky_triangles_1/geo.inc.c"
+#include "levels/rr/tricky_triangles_2/geo.inc.c"
+#include "levels/rr/tricky_triangles_3/geo.inc.c"
+#include "levels/rr/tricky_triangles_4/geo.inc.c"
+#include "levels/rr/tricky_triangles_5/geo.inc.c"
 
 #include "levels/bits/geo.inc.c"

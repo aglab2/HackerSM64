@@ -40,8 +40,7 @@ static const Vtx bits_seg7_vertex_07016C58[] = {
 
 // 0x07016CD8 - 0x07016D10
 static const Gfx bits_seg7_dl_07016CD8[] = {
-    // AGLAB sky
-    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09007000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09007000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bits_seg7_vertex_07016B18, 4, 0),
@@ -51,8 +50,7 @@ static const Gfx bits_seg7_dl_07016CD8[] = {
 
 // 0x07016D10 - 0x07016DA0
 static const Gfx bits_seg7_dl_07016D10[] = {
-    // AGLAB sky
-    //gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09008000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sky_09008000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(bits_seg7_vertex_07016B58, 16, 0),

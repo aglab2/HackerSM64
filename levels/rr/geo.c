@@ -42,9 +42,4 @@
 #include "levels/rr/seesaw_platform/geo.inc.c"
 #include "levels/rr/donut_block/geo.inc.c"
 #include "levels/rr/l_platform/geo.inc.c" // also unused
-#include "levels/rr/tricky_triangles_1/geo.inc.c"
-#include "levels/rr/tricky_triangles_2/geo.inc.c"
-#include "levels/rr/tricky_triangles_3/geo.inc.c"
-#include "levels/rr/tricky_triangles_4/geo.inc.c"
-#include "levels/rr/tricky_triangles_5/geo.inc.c"
 #include "levels/rr/areas/1/geo.inc.c"

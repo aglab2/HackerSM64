@@ -33,11 +33,6 @@ extern const GeoLayout rr_geo_0008F0[];
 extern const GeoLayout rr_geo_000908[];
 extern const GeoLayout rr_geo_000920[];
 extern const GeoLayout rr_geo_000940[];
-extern const GeoLayout rr_geo_000958[];
-extern const GeoLayout rr_geo_000970[];
-extern const GeoLayout rr_geo_000988[];
-extern const GeoLayout rr_geo_0009A0[];
-extern const GeoLayout rr_geo_0009B8[];
 extern const GeoLayout rr_geo_0009D0[];
 
 // leveldata
@@ -76,11 +71,6 @@ extern const Gfx rr_seg7_dl_0701B4C0[];
 extern const Gfx rr_seg7_dl_0701B848[];
 extern const Gfx rr_seg7_dl_0701B980[];
 extern const Gfx rr_seg7_dl_0701BD08[];
-extern const Gfx rr_seg7_dl_0701E670[];
-extern const Gfx rr_seg7_dl_07021100[];
-extern const Gfx rr_seg7_dl_07023B90[];
-extern const Gfx rr_seg7_dl_07026630[];
-extern const Gfx rr_seg7_dl_07028FA8[];
 extern const Collision rr_seg7_collision_flying_carpet[];
 extern const Collision rr_seg7_collision_pendulum[];
 extern const Collision rr_seg7_collision_rotating_platform_with_fire[];

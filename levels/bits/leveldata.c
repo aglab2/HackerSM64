@@ -60,4 +60,15 @@
 #include "levels/wdw/hidden_platform/model.inc.c"
 #include "levels/wdw/hidden_platform/collision.inc.c"
 
+#include "levels/rr/tricky_triangles_1/model.inc.c"
+#include "levels/rr/tricky_triangles_2/model.inc.c"
+#include "levels/rr/tricky_triangles_3/model.inc.c"
+#include "levels/rr/tricky_triangles_4/model.inc.c"
+#include "levels/rr/tricky_triangles_5/model.inc.c"
+#include "levels/rr/tricky_triangles_1/collision.inc.c"
+#include "levels/rr/tricky_triangles_2/collision.inc.c"
+#include "levels/rr/tricky_triangles_3/collision.inc.c"
+#include "levels/rr/tricky_triangles_4/collision.inc.c"
+#include "levels/rr/tricky_triangles_5/collision.inc.c"
+
 #include "levels/bits/leveldata.inc.c"
