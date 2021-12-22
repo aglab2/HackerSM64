@@ -337,7 +337,7 @@ void print_act_selector_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     // Print the "MY SCORE" text if the coin score is more than 0
     if (save_file_get_course_coin_score(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) != 0) {
 #if MULTILANG
@@ -363,7 +363,7 @@ void print_act_selector_strings(void) {
 #endif
 
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     // Print the name of the selected act.
     if (sVisibleStars != 0) {
         selectedActName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + sSelectedActIndex]);

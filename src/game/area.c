@@ -312,6 +312,9 @@ void area_update_objects(void) {
  * transition type, time in frames, and the RGB color that will fill the screen.
  */
 void play_transition(s16 transType, s16 time, Color red, Color green, Color blue) {
+    red = 0;
+    green = 0;
+    blue = 0;
 #ifndef L3DEX2_ALONE
     gWarpTransition.isActive = TRUE;
     gWarpTransition.type = transType;
