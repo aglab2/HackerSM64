@@ -27,8 +27,6 @@
 #include "levels/wf/areas/1/18/geo.inc.c"
 #include "levels/wf/areas/1/19/geo.inc.c"
 #include "levels/wf/small_bomp/geo.inc.c"
-#include "levels/wf/large_bomp/geo.inc.c"
-#include "levels/wf/rotating_wooden_platform/geo.inc.c"
 #include "levels/wf/sliding_platform/geo.inc.c"
 #include "levels/wf/beta_extending_platform/geo.inc.c"
 #include "levels/wf/extending_platform/geo.inc.c"

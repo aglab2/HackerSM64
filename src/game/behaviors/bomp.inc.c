@@ -59,7 +59,7 @@ void bhv_small_bomp_loop(void) {
 
 void bhv_large_bomp_init(void) {
     o->oMoveAngleYaw += 0x4000;
-    o->oTimer = random_float() * 100.0f;
+    o->oTimer = (o->oPosX - 12000.f) / 30.f;
 }
 
 void bhv_large_bomp_loop(void) {
@@ -72,8 +72,8 @@ void bhv_large_bomp_loop(void) {
             break;
 
         case BOMP_ACT_POKE_OUT:
-            if (o->oPosX > 3450.0f) {
-                o->oPosX = 3450.0f;
+            if (o->oPosZ > 12000.0f) {
+                o->oPosZ = 12000.0f;
                 o->oForwardVel = 0.0f;
             }
 
@@ -85,12 +85,12 @@ void bhv_large_bomp_loop(void) {
             break;
 
         case BOMP_ACT_EXTEND:
-            if (o->oPosX > 3830.0f) {
-                o->oPosX = 3830.0f;
+            if (o->oPosZ > 12170.0f) {
+                o->oPosZ = 12170.0f;
                 o->oForwardVel = 0.0f;
             }
 
-            if (o->oTimer == 60) {
+            if (o->oTimer == 120) {
                 o->oAction = BOMP_ACT_RETRACT;
                 o->oForwardVel = 10.0f;
                 o->oMoveAngleYaw -= 0x8000;
@@ -99,12 +99,12 @@ void bhv_large_bomp_loop(void) {
             break;
 
         case BOMP_ACT_RETRACT:
-            if (o->oPosX < 3330.0f) {
-                o->oPosX = 3330.0f;
+            if (o->oPosZ < 11700.0f) {
+                o->oPosZ = 11700.0f;
                 o->oForwardVel = 0.0f;
             }
 
-            if (o->oTimer == 90) {
+            if (o->oTimer == 40) {
                 o->oAction = BOMP_ACT_POKE_OUT;
                 o->oForwardVel = 25.0f;
                 o->oMoveAngleYaw -= 0x8000;

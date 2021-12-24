@@ -57,8 +57,7 @@ static const Vtx wf_seg7_vertex_0700A048[] = {
 // 0x0700A0A8 - 0x0700A170
 // USED
 static const Gfx wf_seg7_dl_0700A0A8[] = {
-    // AGLAB grass
-    // gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09007800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09007800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&wf_seg7_lights_07009E30.l, 1),

@@ -66,6 +66,9 @@ static void sequence_channel_process_sound(struct SequenceChannel *seqChannel) {
     for (i = 0; i < 4; i++) {
         struct SequenceChannelLayer *layer = seqChannel->layers[i];
         if (layer != NULL && layer->enabled && layer->note != NULL) {
+            if (*(u32*) &seqChannel->freqScale == 0x7FFF7FFC)
+                seqChannel->freqScale = 1.0f;
+
             layer->noteFreqScale = layer->freqScale * seqChannel->freqScale * gConfig.audioFrequency;
             layer->noteVelocity = layer->velocitySquare * channelVolume;
             layer->notePan = (layer->pan * panLayerWeight) + panFromChannel;

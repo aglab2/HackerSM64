@@ -34,3 +34,14 @@
 #include "levels/wf/areas/1/14/model.inc.c"
 #include "levels/wf/areas/1/17/model.inc.c"
 #include "levels/wf/rotating_platform/collision.inc.c"
+
+// 0x07002000 - 0x07002800
+ALIGNED8 static const Texture wf_seg7_texture_07002000[] = {
+#include "levels/wf/4.rgba16.inc.c"
+};
+
+#include "levels/wf/large_bomp/model.inc.c"
+#include "levels/wf/large_bomp/collision.inc.c"
+#include "levels/wf/rotating_wooden_platform/1.inc.c"
+#include "levels/wf/rotating_wooden_platform/2.inc.c"
+#include "levels/wf/rotating_wooden_platform/collision.inc.c"

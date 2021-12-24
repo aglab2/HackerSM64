@@ -588,6 +588,9 @@ void process_notes(void) {
                 reverbVol = attributes->reverbVol;
             } else {
                 frequency = note->parentLayer->noteFreqScale;
+                if (*(u32*) &frequency == 0x7FFF7FFC)
+                    frequency = 1.0f;
+
                 velocity = note->parentLayer->noteVelocity;
                 pan = note->parentLayer->notePan;
                 reverbVol = note->parentLayer->seqChannel->reverbVol;
