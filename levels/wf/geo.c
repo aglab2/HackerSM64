@@ -40,3 +40,4 @@
 
 #include "levels/rr/octagonal_platform/geo.inc.c"
 #include "levels/rr/rotating_bridge_platform/geo.inc.c"
+#include "levels/rr/seesaw_platform/geo.inc.c"

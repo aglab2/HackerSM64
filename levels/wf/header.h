@@ -90,8 +90,10 @@ extern const LevelScript level_wf_entry[];
 
 extern const Gfx rr_seg7_dl_0701AB78[];
 extern const Gfx rr_seg7_dl_0701A568[];
+extern const Gfx rr_seg7_dl_0701B4C0[];
 extern const GeoLayout rr_geo_0008A8[];
 extern const GeoLayout rr_geo_000878[];
+extern const GeoLayout rr_geo_000908[];
 
 #include "levels/wf/header.inc.h"
 

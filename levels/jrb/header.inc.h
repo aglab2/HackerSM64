@@ -113,7 +113,7 @@ extern Gfx jrb_dl_c3_004_mesh_layer_4_tri_0[];
 extern Vtx jrb_dl_zgrass_mesh_layer_1_vtx_cull[8];
 extern Vtx jrb_dl_zgrass_mesh_layer_1_vtx_0[108];
 extern Gfx jrb_dl_zgrass_mesh_layer_1_tri_0[];
-extern Vtx jrb_dl_zgrass_mesh_layer_1_vtx_1[124];
+extern Vtx jrb_dl_zgrass_mesh_layer_1_vtx_1[126];
 extern Gfx jrb_dl_zgrass_mesh_layer_1_tri_1[];
 extern Vtx jrb_dl_zgrass_mesh_layer_1_vtx_2[52];
 extern Gfx jrb_dl_zgrass_mesh_layer_1_tri_2[];

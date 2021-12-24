@@ -37,7 +37,6 @@
 #include "levels/rr/sliding_platform/model.inc.c"
 #include "levels/rr/pyramid_platform/model.inc.c" // Unused
 #include "levels/rr/elevator_platform/model.inc.c"
-#include "levels/rr/seesaw_platform/model.inc.c"
 #include "levels/rr/donut_block/1.inc.c"
 #include "levels/rr/donut_block/2.inc.c"
 #include "levels/rr/l_platform/model.inc.c" // also unused
@@ -46,7 +45,6 @@
 #include "levels/rr/sliding_platform/collision.inc.c"
 #include "levels/rr/pyramid_platform/collision.inc.c"
 #include "levels/rr/elevator_platform/collision.inc.c"
-#include "levels/rr/seesaw_platform/collision.inc.c"
 #include "levels/rr/donut_block/collision.inc.c"
 #include "levels/rr/l_platform/collision.inc.c"
 #include "levels/rr/areas/1/collision.inc.c"

@@ -36,6 +36,8 @@ static s32 sGameOverTableIndex;
 static s16 sIntroFrameCounter;
 static s32 sTmCopyrightAlpha;
 
+extern Gfx intro_title_mesh_layer_1[];
+
 /**
  * Geo callback to render the "Super Mario 64" logo on the title screen
  */
@@ -72,7 +74,7 @@ Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUS
         guScale(scaleMat, scale[0], scale[1], scale[2]);
 
         gSPMatrix(dlIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-        gSPDisplayList(dlIter++, &intro_seg7_dl_main_logo);  // draw model
+        gSPDisplayList(dlIter++, &intro_title_mesh_layer_1);  // draw model
         gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
         gSPEndDisplayList(dlIter);
 
@@ -84,6 +86,7 @@ Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUS
 /**
  * Geo callback to render TM and Copyright on the title screen
  */
+extern Gfx mat_intro__1_f3d[];
 Gfx *geo_intro_tm_copyright(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     struct GraphNode *graphNode = node;
     Gfx *dl = NULL;
@@ -103,17 +106,22 @@ Gfx *geo_intro_tm_copyright(s32 callContext, struct GraphNode *node, UNUSED void
             SET_GRAPH_NODE_LAYER(graphNode->flags, LAYER_TRANSPARENT);
             gDPSetRenderMode(dlIter++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
         }
-        gSPDisplayList(dlIter++, &intro_seg7_dl_copyright_trademark); // draw model
+        // gSPDisplayList(dlIter++, &intro_seg7_dl_copyright_trademark); // draw model
         gSPEndDisplayList(dlIter);
 
         // Once the "Super Mario 64" logo has just about zoomed fully, fade in the "TM" and copyright text
         if (sIntroFrameCounter >= 19) {
-            sTmCopyrightAlpha += 26;
+            sTmCopyrightAlpha += 10;
             if (sTmCopyrightAlpha > 255) {
                 sTmCopyrightAlpha = 255;
             }
         }
     }
+
+    u8* envcolor = (u8*) segmented_to_virtual(&mat_intro__1_f3d[11]);
+    envcolor[4] = sTmCopyrightAlpha;
+    envcolor[5] = sTmCopyrightAlpha;
+    envcolor[6] = sTmCopyrightAlpha;
     return dl;
 }
 

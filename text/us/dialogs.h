@@ -1065,48 +1065,49 @@ with the depth they bring\n\
 as they enter."))
 
 DEFINE_DIALOG(DIALOG_082, 1, 4, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-injured easily.\n\
-\n\
-If you do lose your Cap,\n\
-you'll have to find it in\n\
-the course where you\n\
-lost it.\n\
-Oh, boy, it's not looking\n\
-good for Peach. She's\n\
-still trapped somewhere\n\
-inside the walls.\n\
-Please, Mario, you have\n\
-to help her! Did you know\n\
-that there are enemy\n\
-worlds inside the walls?\n\
-Yup. It's true. Bowser's\n\
-troops are there, too.\n\
-Oh, here, take this. I've\n\
-been keeping it for you."))
+Help meeeeeeee !\n\
+I'm stuck here, and I\n\
+don't even know why !\n\
+I'm sure Bowser's \n\
+minions are at it again.\n\
+I was arrested while I\n\
+was having my morning\n\
+jog in Toad Town...\n\
+And then, nothing.\n\
+I can't remember\n\
+anything until now.\n\
+I'm still feeling... they\n\
+were after my star...\n\
+TAKE IT NOW !"))
 
 DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
-There's something strange\n\
-about that clock. As you\n\
-jump inside, watch the\n\
-position of the big hand.\n\
-Oh, look what I found!\n\
-Here, Mario, catch!"))
+Look at all these paintings!\n\
+They bring horror in my\n\
+eyes, I am so afraid!\n\
+I can't even leave this\n\
+place, it is high!\n\
+Look, I found this though!"))
 
-DEFINE_DIALOG(DIALOG_084, 1, 3, 30, 200, _("\
-Yeeoww! Unhand me,\n\
-brute! I'm late, so late,\n\
-I must make haste!\n\
-This shiny thing? Mine!\n\
-It's mine. Finders,\n\
-keepers, losers...\n\
-Late, late, late...\n\
-Ouch! Take it then! A\n\
-gift from Bowser, it was.\n\
-Now let me be! I have a\n\
-date! I cannot be late\n\
-for tea!"))
+DEFINE_DIALOG(DIALOG_084, 1, 6, 30, 200, _("\
+Wow... Mario ?\n\
+What the hell are you\n\
+doing in this forest ?\n\
+Wait... you were trying\n\
+to get out from this\n\
+jail too ?\n\
+What a coincidence.\n\
+I actually found an\n\
+exit to it, then I\n\
+wandered in this forest,\n\
+and... got lost.\n\
+The evil guys who\n\
+arrested me... they\n\
+were after a Star I\n\
+had !\n\
+From now, take it.\n\
+I'm sure that it will be\n\
+in better hands now\n\
+that I give you that..."))
 
 DEFINE_DIALOG(DIALOG_085, 1, 5, 30, 200, _("\
 You don't stand a ghost\n\
@@ -1603,21 +1604,17 @@ with the big star. The\n\
 Princess must be inside!"))
 
 DEFINE_DIALOG(DIALOG_134, 1, 5, 30, 200, _("\
-The names of the Stars\n\
-are also hints for\n\
-finding them. They are\n\
-displayed at the beginning\n\
-of each course.\n\
-You can collect the Stars\n\
-in any order. You won't\n\
-find some Stars, enemies\n\
-or items unless you select\n\
-a specific Star.\n\
-After you collect some\n\
-Stars, you can try\n\
-another course.\n\
-We're all waiting for\n\
-your help!"))
+I jumped in the pipe...\n\
+and I saw... horrible\n\
+stuff. I saw the castle...\n\
+it is now a great mess...\n\
+I saw Bowser also.\n\
+I'm almost sure he's\n\
+behind all of that...\n\
+You're my last hope,\n\
+Mario ! Jump inside\n\
+and beat Bowser, for\n\
+our kingdom !"))
 
 DEFINE_DIALOG(DIALOG_135, 1, 5, 30, 200, _("\
 It was Bowser who stole\n\
@@ -1885,45 +1882,35 @@ bugging me! I think I'll\n\
 blow it away!"))
 
 DEFINE_DIALOG(DIALOG_154, 1, 5, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-easily injured. If you\n\
-lose it, look for it in the\n\
-course where you lost it.\n\
-Speaking of lost, the\n\
-Princess is still stuck in\n\
-the walls somewhere.\n\
-Please help, Mario!\n\
-\n\
-Oh, you know that there\n\
-are secret worlds in the\n\
-walls as well as in the\n\
-paintings, right?"))
+Since I gave this star...\n\
+I hope they will set\n\
+me free again.\n\
+Don't worry, Mario,\n\
+I'm still... alright..."))
 
 DEFINE_DIALOG(DIALOG_155, 1, 6, 30, 200, _("\
-Thanks to the power of\n\
-the Stars, life is\n\
-returning to the castle.\n\
-Please, Mario, you have\n\
-to give Bowser the boot!\n\
-\n\
-Here, let me tell you a\n\
-little something about the\n\
-castle. In the room with\n\
-the mirrors, look carefully\n\
-for anything that's not\n\
-reflected in the mirror.\n\
-And when you go to the\n\
-water town, you can flood\n\
-it with a high jump into\n\
-the painting."))
+Looking at this peak\n\
+makes me feel so\n\
+nostalgic... I don't even\n\
+know why... I mean,\n\
+I wasn't even born when\n\
+the Nuro Kingdom was\n\
+still alive ?\n\
+Come on... that's \n\
+nothing, mate...\n\
+the painting I saw in\n\
+that palace... it's not\n\
+that mountain at all...\n\
+no... no... please no..."))
 
 DEFINE_DIALOG(DIALOG_156, 1, 5, 30, 200, _("\
-The world inside the\n\
-clock is so strange!\n\
-When you jump inside,\n\
-watch the position of\n\
-the big hand!"))
+...I don't wan't to get\n\
+back home.\n\
+This forest is so calm\n\
+and relaxing, I could\n\
+stay here for hours...\n\
+Leave me alone, please.\n\
+I'm... meditating."))
 
 DEFINE_DIALOG(DIALOG_157, 1, 5, 30, 200, _("\
 Watch out! Don't let\n\

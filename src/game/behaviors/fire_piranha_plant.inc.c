@@ -64,14 +64,14 @@ static void fire_piranha_plant_act_hide(void) {
 
             if (GET_BPARAM2(o->oBehParams) != FIRE_PIRANHA_PLANT_BP_NORMAL && o->oHealth == 0) {
                 if (++sNumKilledFirePiranhaPlants == 5) {
-                    spawn_default_star(-6300.0f, -1850.0f, -6300.0f);
+                    spawn_default_star(-4742.0f, -1263.0f, 7540.0f);
                 }
 
                 obj_die_if_health_non_positive();
                 set_object_respawn_info_bits(o, RESPAWN_INFO_TYPE_NORMAL);
             }
         } else if (sNumActiveFirePiranhaPlants < 2 && o->oTimer > 100
-                   && o->oDistanceToMario > 100.0f && o->oDistanceToMario < 800.0f) {
+                   && o->oDistanceToMario < 1500.0f) {
             cur_obj_play_sound_2(SOUND_OBJ_PIRANHA_PLANT_APPEAR);
 
             o->oFirePiranhaPlantActive = TRUE;
@@ -106,7 +106,25 @@ static void fire_piranha_plant_act_grow(void) {
                           (s32)(140.0f * o->oFirePiranhaPlantNeutralScale),
                                (  2.5f * o->oFirePiranhaPlantNeutralScale),
                           MODEL_RED_FLAME_SHADOW,
+                          10.0f, 15.0f, 0x1000);
+            obj_spit_fire(0,
+                          (s32)( 30.0f * o->oFirePiranhaPlantNeutralScale),
+                          (s32)(140.0f * o->oFirePiranhaPlantNeutralScale),
+                               (  2.5f * o->oFirePiranhaPlantNeutralScale),
+                          MODEL_RED_FLAME_SHADOW,
                           20.0f, 15.0f, 0x1000);
+            obj_spit_fire(0,
+                          (s32)( 30.0f * o->oFirePiranhaPlantNeutralScale),
+                          (s32)(140.0f * o->oFirePiranhaPlantNeutralScale),
+                               (  2.5f * o->oFirePiranhaPlantNeutralScale),
+                          MODEL_RED_FLAME_SHADOW,
+                          30.0f, 15.0f, 0x1000);
+            obj_spit_fire(0,
+                          (s32)( 30.0f * o->oFirePiranhaPlantNeutralScale),
+                          (s32)(140.0f * o->oFirePiranhaPlantNeutralScale),
+                               (  2.5f * o->oFirePiranhaPlantNeutralScale),
+                          MODEL_RED_FLAME_SHADOW,
+                          40.0f, 15.0f, 0x1000);
         }
     } else if (o->oFirePiranhaPlantScale > o->oFirePiranhaPlantNeutralScale / 2) {
         cur_obj_become_tangible();

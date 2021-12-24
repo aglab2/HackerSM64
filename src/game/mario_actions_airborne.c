@@ -1291,7 +1291,7 @@ s32 act_air_hit_wall(struct MarioState *m) {
 
     if (++(m->actionTimer) <= FIRSTY_LAST_FRAME) {
         if (m->input & INPUT_A_PRESSED) {
-            m->vel[1] = 52.0f;
+            m->vel[1] = 22.0f;
             m->faceAngle[1] += 0x8000;
             return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
         }

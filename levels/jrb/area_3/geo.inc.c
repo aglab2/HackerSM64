@@ -3,7 +3,7 @@
 const GeoLayout jrb_area_3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, -2591, 701, -12127, jrb_dl_c3_002_mesh_layer_2),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE_DECAL, -2591, 701, -12127, 90, 0, 0, jrb_dl_c3_002_mesh_layer_2),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, jrb_dl_c3_002_mesh_layer_1),
 		GEO_CLOSE_NODE(),

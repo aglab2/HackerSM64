@@ -3,7 +3,6 @@
 const GeoLayout castle_inside_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 5509, 63, -433, 90, 0, 0, castle_inside_dl_ow1_002_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE_DECAL, 5509, -3561, -433, 90, 0, 0, castle_inside_dl_ow1_003_mesh_layer_2),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_ow1_003_mesh_layer_1),
