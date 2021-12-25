@@ -42,6 +42,13 @@ void bhv_gate_rotat_ctl_loop(void)
     }
 }
 
+void bhv_gate20_loop()
+{
+    int cnt = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    if (cnt >= 20)
+        o->activeFlags = 0;
+}
+
 extern Gfx mat_totwc_dl__auto_9_f3d[];
 void bhv_rainbow_ctl_loop()
 {
@@ -130,5 +137,48 @@ void bhv_bobomb_fight_ctl_loop()
             }
             o->activeFlags = 0;
         }
+    }
+}
+
+void bhv_fight_ctl_loop()
+{
+    if (0 == o->oAction)
+    {
+        if (o->oTimer > 100 && o->oDistanceToMario > 500.f)
+        {
+            o->oAction = 1;
+        }
+    }
+    else if (1 == o->oAction)
+    {
+        int timeLeft = 3600 - o->oTimer;
+        if (0 == timeLeft)
+        {
+            level_trigger_warp(gMarioStates, 19);
+            o->activeFlags = 0;
+        }
+        if (gMarioStates->action == ACT_FALL_AFTER_STAR_GRAB)
+        {
+            o->oFightCtlTimerLeft = timeLeft;
+            o->oAction = 2;
+        }
+        int f = 3 * (timeLeft % 30);
+        int s = (timeLeft / 30) % 60;
+        int m = timeLeft / 60 / 30;
+        
+        print_text_fmt_int(120, 20, "%d", m);
+        print_text_fmt_int(140, 20, "%02d", s);
+        print_text_fmt_int(170, 20, "%02d", f);
+    }
+    else if (2 == o->oAction)
+    {
+        int timeLeft = o->oFightCtlTimerLeft;
+        int f = 3 * (timeLeft % 30);
+        int s = (timeLeft / 30) % 60;
+        int m = timeLeft / 60 / 30;
+        
+        print_text_fmt_int(120, 20, "%d", m);
+        print_text_fmt_int(140, 20, "%02d", s);
+        print_text_fmt_int(170, 20, "%02d", f);
     }
 }

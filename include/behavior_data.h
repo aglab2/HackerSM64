@@ -543,9 +543,11 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvGateRotat[];
 extern const BehaviorScript bhvGateCtl[];
+extern const BehaviorScript bhvGate20[];
 extern const BehaviorScript bhvRainbowCtl[];
 extern const BehaviorScript bhvBitfsThing[];
 extern const BehaviorScript bhvKingBobombFaker[];
 extern const BehaviorScript bhvKingBobombCtl[];
+extern const BehaviorScript bhvFightDist[];
 
 #endif // BEHAVIOR_DATA_H

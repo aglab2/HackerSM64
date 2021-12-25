@@ -895,6 +895,9 @@ u32 interact_warp(struct MarioState *m, UNUSED u32 interactType, struct Object *
 #endif
 
             mario_stop_riding_object(m);
+            sPssSlideStarted = FALSE;
+            level_control_timer(TIMER_CONTROL_HIDE);
+            level_control_timer(TIMER_CONTROL_STOP);
             return set_mario_action(m, ACT_DISAPPEARED, (WARP_OP_WARP_OBJECT << 16) + 2);
         }
     }
@@ -967,8 +970,8 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
                     u32 text = DIALOG_022 << 16;
                     switch (requiredNumStars) {
                         case  1: text = DIALOG_024 << 16; break;
-                        case  3: text = DIALOG_025 << 16; break;
-                        case  8: text = DIALOG_026 << 16; break;
+                        case  4: text = DIALOG_025 << 16; break;
+                        case  14: text = DIALOG_026 << 16; break;
                         case 30: text = DIALOG_027 << 16; break;
                         case 50: text = DIALOG_028 << 16; break;
                         case 70: text = DIALOG_029 << 16; break;

@@ -293,19 +293,18 @@ basement..."))
 DEFINE_DIALOG(DIALOG_024, 1, 5, 95, 200, _("\
 You need Star power to\n\
 open this door. Recover a\n\
-Power Star from an enemy\n\
-inside one of the castle's\n\
-paintings."))
+Power Star from a guardian\n\
+of the prison"))
 
 DEFINE_DIALOG(DIALOG_025, 1, 4, 95, 200, _("\
 It takes the power of\n\
-3 Stars to open this\n\
+4 Stars to open this\n\
 door. You need [%] more\n\
 Stars."))
 
 DEFINE_DIALOG(DIALOG_026, 1, 4, 95, 200, _("\
 It takes the power of\n\
-8 Stars to open this\n\
+14 Stars to open this\n\
 door. You need [%] more\n\
 Stars."))
 
@@ -857,15 +856,21 @@ Good luck, Mario! Our\n\
 fate is in your hands."))
 
 DEFINE_DIALOG(DIALOG_067, 1, 5, 30, 200, _("\
-Tough luck, Mario!\n\
-Princess Toadstool isn't\n\
-here...Gwa ha ha!! Go\n\
-ahead--just try to grab\n\
-me by the tail!\n\
-You'll never be able to\n\
-swing ME around! A wimp\n\
-like you won't throw me\n\
-out of here! Never! Ha!"))
+You, whoever you are !\n\
+Are you actually trying\n\
+to escape my jail ?!\n\
+Don't think you will\n\
+do that now.\n\
+When you will quit this\n\
+light circle, you'll\n\
+have exactly 2 minutes\n\
+to pass all my trials,\n\
+if you want my key...\n\
+This key opens the\n\
+door to the rest of the\n\
+building. Have fun with\n\
+my challenge...\n\
+Ha ha ha ha ha ha ha !"))
 
 DEFINE_DIALOG(DIALOG_068, 1, 5, 30, 200, _("\
 It's Lethal Lava Land!\n\
@@ -1159,14 +1164,21 @@ But the wind makes a\n\
 comfy ride."))
 
 DEFINE_DIALOG(DIALOG_092, 1, 5, 30, 200, _("\
-Pestering me again, are\n\
-you, Mario? Can't you see\n\
-that I'm having a merry\n\
-little time, making\n\
-mischief with my minions?\n\
-Now, return those Stars!\n\
-My troops in the walls\n\
-need them! Bwa ha ha!"))
+You, whoever you are !\n\
+Are you actually trying\n\
+to escape my jail ?!\n\
+Don't think you will\n\
+do that now.\n\
+When you will quit this\n\
+light circle, you'll\n\
+have exactly 2 minutes\n\
+to pass all my trials,\n\
+if you want my key...\n\
+This key opens the\n\
+door to the rest of the\n\
+building. Have fun with\n\
+my challenge...\n\
+Ha ha ha ha ha ha ha !"))
 
 DEFINE_DIALOG(DIALOG_093, 1, 5, 30, 200, _("\
 Mario! You again! Well\n\

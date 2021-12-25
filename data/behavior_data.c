@@ -4630,7 +4630,9 @@ const BehaviorScript bhvHiddenStarTrigger[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
     SET_INT(oIntangibleTimer, 0),
+    SET_INT(oFaceAngleRoll, 0x8000), 
     BEGIN_LOOP(),
+        ADD_INT(oFaceAngleYaw, 248),
         CALL_NATIVE(bhv_hidden_star_trigger_loop),
     END_LOOP(),
 };
@@ -4881,6 +4883,7 @@ const BehaviorScript bhvArrowLift[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(wdw_seg7_collision_arrow_lift),
+    SCALE(/*Unused*/ 0, /*Field*/ 200),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_arrow_lift_loop),
@@ -6135,6 +6138,19 @@ const BehaviorScript bhvGateCtl[] = {
     END_LOOP(),
 };
 
+extern void bhv_gate20_loop();
+extern const Collision gate20_collision[];
+const BehaviorScript bhvGate20[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(gate20_collision),
+    SET_FLOAT(oDrawingDistance, 12000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gate20_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 void bhv_rainbow_ctl_loop(void);
 const BehaviorScript bhvRainbowCtl[] = {
     BEGIN(OBJ_LIST_LEVEL),
@@ -6164,5 +6180,14 @@ const BehaviorScript bhvKingBobombCtl[] = {
     CALL_NATIVE(bhv_bobomb_fight_ctl_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bobomb_fight_ctl_loop),
+    END_LOOP(),
+};
+
+extern void bhv_fight_ctl_loop();
+const BehaviorScript bhvFightDist[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fight_ctl_loop),
     END_LOOP(),
 };

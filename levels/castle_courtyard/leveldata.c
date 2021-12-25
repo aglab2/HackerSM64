@@ -21,3 +21,6 @@
 #include "levels/ttm/areas/1/painting.inc.c"
 
 #include "levels/castle_courtyard/leveldata.inc.c"
+
+#include "levels/castle_courtyard/gate20/model.inc.c"
+#include "levels/castle_courtyard/gate20/collision.inc.c"

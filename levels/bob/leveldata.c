@@ -45,3 +45,6 @@ ALIGNED8 static const Texture wf_seg7_texture_07002000[] = {
 #include "levels/wf/rotating_wooden_platform/1.inc.c"
 #include "levels/wf/rotating_wooden_platform/2.inc.c"
 #include "levels/wf/rotating_wooden_platform/collision.inc.c"
+
+#include "levels/wdw/arrow_lift/model.inc.c"
+#include "levels/wdw/arrow_lift/collision.inc.c"

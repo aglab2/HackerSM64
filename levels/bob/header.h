@@ -40,6 +40,9 @@ extern const Gfx wf_seg7_dl_0700E760[];
 extern const GeoLayout wf_geo_000A58[];
 extern const GeoLayout wf_geo_000A40[];
 
+extern const GeoLayout wdw_geo_000598[];
+extern const Gfx wdw_seg7_dl_07012E88[];
+
 // script
 extern const LevelScript level_bob_entry[];
 

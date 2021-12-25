@@ -189,8 +189,8 @@ static void apply_mario_inertia(void) {
     gMarioState->pos[2] += sMarioAmountDisplaced[2];
 
     // Drag
-    sMarioAmountDisplaced[0] *= 0.97f;
-    sMarioAmountDisplaced[2] *= 0.97f;
+    sMarioAmountDisplaced[0] *= 0.94f;
+    sMarioAmountDisplaced[2] *= 0.94f;
 
     // Stop applying inertia once Mario has landed, or when ground pounding
     if (!(gMarioState->action & ACT_FLAG_AIR) || (gMarioState->action == ACT_GROUND_POUND)) {

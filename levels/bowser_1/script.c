@@ -57,6 +57,7 @@ const LevelScript level_bowser_1_entry[] = {
 		OBJECT(MODEL_CHAIN_CHOMP, 816, 1658, 1693, 0, 0, 0, 0x00000000, bhvChainChomp),
 		OBJECT(MODEL_NONE, 860, 1334, -7989, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, -4794, 1691, -1705, -162, 0, 0, (16 << 16), bhvCoinFormation),
+		OBJECT(MODEL_NONE, 855, 1334, -7968, 0, 0, 0, 0x00000000, bhvFightDist),
 		OBJECT(MODEL_BOWLING_BALL, 838, 1506, -3403, 0, 0, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_BOWLING_BALL, 3212, 1643, 1742, 0, 0, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_BOWLING_BALL, 5428, 2973, 3548, 0, 0, 0, 0x00000000, bhvFireSpitter),

@@ -1268,6 +1268,8 @@
 #define /*0x100*/ oBobombCtlFake3 OBJECT_FIELD_OBJ(0x1E)
 #define /*0x100*/ oBobombCtlFake4 OBJECT_FIELD_OBJ(0x1F)
 
+#define /*0x100*/ oFightCtlTimerLeft OBJECT_FIELD_S32(0x1B)
+
 
 /*Custom general defines:
 

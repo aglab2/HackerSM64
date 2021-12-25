@@ -172,7 +172,8 @@ void bhv_hidden_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case HIDDEN_STAR_ACT_INACTIVE:
-            if (o->oHiddenStarTriggerCounter == 8) {
+            int target = gCurrLevelNum == LEVEL_WMOTR ? 3 : 8;
+            if (o->oHiddenStarTriggerCounter == target) {
                 o->oAction = HIDDEN_STAR_ACT_ACTIVE;
             }
             break;

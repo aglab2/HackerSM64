@@ -22,3 +22,8 @@ ALIGNED8 static const Texture bob_seg7_texture_07001800[] = {
 ALIGNED8 static const Texture bob_seg7_texture_07002000[] = {
 #include "levels/bob/4.rgba16.inc.c"
 };
+
+// 0x07001800 - 0x07002000
+ALIGNED8 static const Texture wdw_seg7_texture_07001800[] = {
+#include "levels/wdw/3.rgba16.inc.c"
+};

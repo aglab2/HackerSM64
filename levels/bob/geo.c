@@ -24,6 +24,8 @@ extern const Gfx wf_seg7_dl_0700E0F0[];
 extern const Gfx wf_seg7_dl_0700E3D0[];
 extern const Gfx wf_seg7_dl_0700A170[];
 
+#include "levels/wdw/arrow_lift/geo.inc.c"
+
 #include "levels/wf/large_bomp/geo.inc.c"
 #include "levels/wf/rotating_wooden_platform/geo.inc.c"
 #include "levels/wf/tumbling_bridge_near/geo.inc.c"

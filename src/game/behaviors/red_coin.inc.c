@@ -35,6 +35,14 @@ void bhv_red_coin_init(void) {
     }
 
     obj_set_hitbox(o, &sRedCoinHitbox);
+    if (gCurrLevelNum == LEVEL_WMOTR)
+    {
+        sRedCoinHitbox.damageOrCoinValue = 1;
+    }
+    else
+    {
+        sRedCoinHitbox.damageOrCoinValue = 2;
+    }
 }
 
 /**
@@ -50,7 +58,7 @@ void bhv_red_coin_loop(void) {
             o->parentObj->oHiddenStarTriggerCounter++;
 
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
+            if (gCurrLevelNum != LEVEL_WMOTR && o->parentObj->oHiddenStarTriggerCounter != 8) {
                 spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
             }
 

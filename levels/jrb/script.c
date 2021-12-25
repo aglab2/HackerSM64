@@ -151,7 +151,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_RED_COIN, 14560, -1299, 408, 0, -1, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 13540, -1299, 1493, 0, -1, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_LLL_SINKING_SQUARE_PLATFORMS, 3364, -1663, -1615, 0, 0, 0, 0x00000000, bhvLllSinkingSquarePlatforms),
-		OBJECT(MODEL_STAR, -2963, -1082, -4678, 0, 0, 0, (5 << 16), bhvStar),
+		OBJECT(MODEL_STAR, -2963, -1082, -4678, 0, 0, 0, (5 << 24), bhvStar),
 		OBJECT(MODEL_STAR, -12984, 515, 3207, 0, 0, 0, (2 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 12475, -412, 3286, 0, 0, 0, (3 << 24), bhvHiddenRedCoinStar),
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, 1944, -2345, -11217, 0, 174, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
