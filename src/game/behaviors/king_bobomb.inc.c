@@ -70,7 +70,14 @@ void king_bobomb_act_active(void) { // act 2
         }
 
         if (o->oKingBobombPlayerGrabEscapeCooldown == 0) {
-            o->oForwardVel = 3.0f;
+            if (o->oInteractionSubtype & INT_SUBTYPE_NOT_GRABBABLE)
+            {
+                o->oForwardVel = 0.5f;
+            }
+            else
+            {
+                o->oForwardVel = o->oHealth == 1 ? (20.f * sins(o->oTimer * 612)) : 3.0f;
+            }
             cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
         } else {
             o->oForwardVel = 0.0f;
@@ -84,7 +91,6 @@ void king_bobomb_act_active(void) { // act 2
 
     if (mario_is_far_below_object(1200.0f)) {
         o->oAction = KING_BOBOMB_ACT_INACTIVE;
-        stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
 }
 
@@ -150,7 +156,6 @@ void king_bobomb_act_activate(void) { // act 1
 
     if (mario_is_far_below_object(1200.0f)) {
         o->oAction = KING_BOBOMB_ACT_INACTIVE;
-        stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
 }
 
@@ -205,7 +210,7 @@ void king_bobomb_act_death(void) { // act 7
         spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, TINY_DIRT_PARTICLE_ANIM_STATE_YELLOW);
         cur_obj_shake_screen(SHAKE_POS_SMALL);
 
-        cur_obj_spawn_star_at_y_offset(2000.0f, 4500.0f, -4500.0f, 200.0f);
+        cur_obj_spawn_star_at_y_offset(0.f, 1000.f, 0.f, 0.0f);
 
         o->oAction = KING_BOBOMB_ACT_STOP_MUSIC;
     }
@@ -213,7 +218,6 @@ void king_bobomb_act_death(void) { // act 7
 
 void king_bobomb_act_stop_music(void) { // act 8
     if (o->oTimer == 60) {
-        stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
     }
 }
 
@@ -295,7 +299,6 @@ void king_bobomb_act_return_home(void) { // act 5
         case KING_BOBOMB_SUB_ACT_RETURN_HOME_WAIT_FOR_DIALOG:
             if (mario_is_far_below_object(1200.0f)) {
                 o->oAction = KING_BOBOMB_ACT_INACTIVE;
-                stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
             }
 
             if (cur_obj_can_mario_activate_textbox_2(500.0f, 100.0f)) {

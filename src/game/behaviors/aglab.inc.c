@@ -53,3 +53,82 @@ void bhv_bitfs_thing_loop()
 {
     o->oPosY = o->oHomeY - (1 + sins(o->oTimer * 300)) * 70.f;
 }
+
+void bhv_bobomb_fight_ctl_init()
+{
+    f32 d;
+    o->oBobombCtlMain = cur_obj_find_nearest_object_with_behavior(bhvKingBobomb, &d);
+}
+
+void bhv_bobomb_fight_ctl_loop()
+{
+    struct Object* b = o->oBobombCtlMain;
+
+    if (0 == o->oAction)
+    {
+        b->oInteractionSubtype |= INT_SUBTYPE_NOT_GRABBABLE;
+        if (b->oAction == 2 && b->oKingBobombShouldStomp == 2 && b->oHealth == 3)
+        {
+            o->oAction = 1;
+        }
+    }
+    if (1 == o->oAction)
+    {
+        f32 dtc = b->oPosX * b->oPosX + b->oPosZ * b->oPosZ;
+        if (dtc < 800.f * 800.f)
+        {
+            b->oPosZ += 40.f;
+        }
+        else
+        {
+            o->oAction = 2;
+        }
+    }
+    if (2 == o->oAction)
+    {
+        if (o->oTimer > 0x5f)
+        {
+            b->oInteractionSubtype &= ~INT_SUBTYPE_NOT_GRABBABLE;
+            o->oAction = 3;
+            return;
+        }
+        if ((o->oTimer % 0x20) == 0)
+        {
+            int i = o->oTimer / 0x20;
+            struct Object** fakes = &o->oBobombCtlFake1;
+            fakes[i] = spawn_object(b, 0xf3, bhvKingBobombFaker);
+            fakes[i]->oAction = 2;
+            fakes[i]->oKingBobombShouldStomp = 2;
+            fakes[i]->oInteractionSubtype |= INT_SUBTYPE_NOT_GRABBABLE;
+        }
+        o->oFaceAngleYaw += 0x200;
+        b->oFaceAngleYaw = o->oFaceAngleYaw;
+        b->oPosX = 800.f * sins(b->oFaceAngleYaw);
+        b->oPosZ = 800.f * coss(b->oFaceAngleYaw);
+    }
+    if (3 == o->oAction)
+    {
+        if (b->oHealth == 2 && (o->oTimer % 20) == 0)
+        {
+            struct Object* flameObj = spawn_object(b, MODEL_RED_FLAME, bhvBouncingFireballFlame);
+            f32 scale = 6.f;
+
+            obj_scale(flameObj, scale);
+            obj_become_tangible(flameObj);
+        }
+        if (b->oAction == 8)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                struct Object** fakes = &o->oBobombCtlFake1;
+                if (fakes[i])
+                {
+                    fakes[i]->activeFlags = 0;
+                    struct Object *explosion = spawn_object(fakes[i], MODEL_EXPLOSION, bhvExplosion);
+                    explosion->oGraphYOffset += 100.0f;
+                }
+            }
+            o->activeFlags = 0;
+        }
+    }
+}

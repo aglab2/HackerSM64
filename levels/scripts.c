@@ -223,6 +223,7 @@ const LevelScript script_func_global_4[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB,              water_bomb_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB_SHADOW,       water_bomb_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KING_BOBOMB,             king_bobomb_geo),
+    LOAD_MODEL_FROM_GEO(0xf3,             king_bobomb_fake_geo),
     RETURN(),
 };
 

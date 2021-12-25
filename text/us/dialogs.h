@@ -235,30 +235,26 @@ ride wherever you want to\n\
 go! Shred those enemies!"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
-I'm the Big Bob-omb, lord\n\
-of all blasting matter,\n\
-king of ka-booms the\n\
-world over!\n\
-How dare you scale my\n\
-mountain? By what right\n\
-do you set foot on my\n\
-imperial mountaintop?\n\
-You may have eluded my\n\
-guards, but you'll never\n\
-escape my grasp...\n\
-\n\
-...and you'll never take\n\
-away my Power Star. I\n\
-hereby challenge you,\n\
-Mario!\n\
-If you want the Star I\n\
-hold, you must prove\n\
-yourself in battle.\n\
-\n\
-Can you pick me up from\n\
-the back and hurl me to\n\
-this royal turf? I think\n\
-that you cannot!"))
+I'm the King Bob-omb,\n\
+from the former Nuro\n\
+Kingdom. How dare you \n\
+escape my prison ? \n\
+I thought you were right\n\
+now unconscious in your\n\
+cell ! I'm not letting you\n\
+go back home... The\n\
+Mushroom Kingdom is\n\
+currently being taken\n\
+over by Bowser. \n\
+By what right do you \n\
+want to fight with me ?\n\
+Saving the Mushroom\n\
+Kingdom, you say ?\n\
+What a nice coincidence,\n\
+I've always wanted to\n\
+beat up the brother of\n\
+the guy who destroyed\n\
+MY LAND ! Let's rumble."))
 
 DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
 I'm sleeping because...\n\
@@ -705,28 +701,27 @@ Star instead. You've\n\
 earned it!"))
 
 DEFINE_DIALOG(DIALOG_057, 1, 4, 30, 200, _("\
-Egad! My baby!! Have you\n\
-seen my baby??? She's\n\
-the most precious baby in\n\
-the whole wide world.\n\
-(They say she has my\n\
-beak...) I just can't\n\
-remember where I left\n\
-her.\n\
-Let's see...I stopped\n\
-for herring and ice cubes,\n\
-then I...oohh! I just\n\
-don't know!"))
+Could you help a\n\
+desperate mother who\n\
+can't find her son ?\n\
+I went to the beach\n\
+with him but then\n\
+I let him have fun with\n\
+other children, and\n\
+now he's nowhere to\n\
+be seen !\n\
+I'm afraid... I don't want\n\
+him to drown...\n\
+Please find him for me !"))
 
 DEFINE_DIALOG(DIALOG_058, 1, 4, 30, 200, _("\
-You found my precious,\n\
-precious baby! Where\n\
-have you been? How can\n\
-I ever thank you, Mario?\n\
-Oh, I do have this...\n\
-...Star. Here, take it\n\
-with my eternal\n\
-gratitude."))
+You've found him !\n\
+Finally I see my son\n\
+again ! How much\n\
+times I've told him\n\
+to stay close to the\n\
+coastline...\n\
+Have this as a reward."))
 
 DEFINE_DIALOG(DIALOG_059, 1, 4, 30, 200, _("\
 That's not my baby! She\n\
@@ -1362,47 +1357,46 @@ courses to activate the\n\
 Cap Blocks."))
 
 DEFINE_DIALOG(DIALOG_114, 1, 5, 95, 200, _("\
-It makes me so mad! We\n\
-build your houses, your\n\
-castles. We pave your\n\
-roads, and still you\n\
-walk all over us.\n\
-Do you ever say thank\n\
-you? No! Well, you're not\n\
-going to wipe your feet\n\
-on me! I think I'll crush\n\
-you just for fun!\n\
+It makes me so mad !\n\
+Nobody has respect for\n\
+us Whomps !\n\
+Everyone walks on us,\n\
+in this grassy valley!\n\
+So, I, the Big Whomp,\n\
+will ruin your life!\n\
 Do you have a problem\n\
-with that? Just try to\n\
-pound me, wimp! Ha!"))
+with that ?!"))
 
 DEFINE_DIALOG(DIALOG_115, 1, 5, 95, 200, _("\
 No! Crushed again!\n\
-I'm just a stepping stone,\n\
-after all. I won't gravel,\n\
-er, grovel. Here, you win.\n\
-Take this with you!"))
+I know the drill, you're\n\
+after my star, guy...\n\
+Take this with you,\n\
+I have nothing left !"))
 
 DEFINE_DIALOG(DIALOG_116, 1, 5, 95, 200, _("\
-Whaaa....Whaaat?\n\
-Can it be that a\n\
-pipsqueak like you has\n\
-defused the Bob-omb\n\
-king????\n\
-You might be fast enough\n\
-to ground me, but you'll\n\
-have to pick up the pace\n\
-if you want to take King\n\
-Bowser by the tail.\n\
-Methinks my troops could\n\
-learn a lesson from you!\n\
-Here is your Star, as I\n\
-promised, Mario.\n\
-\n\
-If you want to see me\n\
-again, select this Star\n\
-from the menu. For now,\n\
-farewell."))
+Well... you've beaten me !\n\
+But that's okay for me,\n\
+don't worry, Mario.\n\
+Even if I didn't take\n\
+my revenge on your\n\
+brother, I accomplished\n\
+Master Bowser's plan.\n\
+I did everything I could\n\
+to prevent every failure\n\
+possible on Bowser's\n\
+takeover.\n\
+And, now, I know he's\n\
+done. Peach's Castle is\n\
+his property now.\n\
+Weren't you wondering\n\
+why it was so easy for\n\
+you to escape the jail !\n\
+Bowser is waiting to have\n\
+a showdown with you !\n\
+And I followed his\n\
+instructions carefully.\n\
+For now, goodbye."))
 
 DEFINE_DIALOG(DIALOG_117, 1, 1, 95, 200, _("\
 Who...walk...here?\n\

@@ -1262,6 +1262,12 @@
 #define /*0x100*/ oGateCtlRotat  OBJECT_FIELD_OBJ(0x1B)
 #define /*0x100*/ oGateCtlState  OBJECT_FIELD_S32(0x1C)
 
+#define /*0x100*/ oBobombCtlMain OBJECT_FIELD_OBJ(0x1B)
+#define /*0x100*/ oBobombCtlFake1 OBJECT_FIELD_OBJ(0x1C)
+#define /*0x100*/ oBobombCtlFake2 OBJECT_FIELD_OBJ(0x1D)
+#define /*0x100*/ oBobombCtlFake3 OBJECT_FIELD_OBJ(0x1E)
+#define /*0x100*/ oBobombCtlFake4 OBJECT_FIELD_OBJ(0x1F)
+
 
 /*Custom general defines:
 

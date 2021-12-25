@@ -618,9 +618,9 @@ static s32 act_flutter_kick(struct MarioState *m) {
         return set_mario_action(m, ACT_SWIMMING_END, 0);
     }
 
-    m->forwardVel = approach_f32(m->forwardVel, 12.0f, 0.1f, 0.15f);
+    m->forwardVel = approach_f32(m->forwardVel, 70.0f, 0.1f, 0.15f);
     m->actionTimer = 1;
-    sSwimStrength = MIN_SWIM_STRENGTH;
+    sSwimStrength = 1000;
 
     if (m->forwardVel < 14.0f) {
         play_swimming_noise(m);
@@ -732,12 +732,12 @@ static s32 act_hold_flutter_kick(struct MarioState *m) {
         return set_mario_action(m, ACT_HOLD_SWIMMING_END, 0);
     }
 
-    m->forwardVel = approach_f32(m->forwardVel, 12.0f, 0.1f, 0.15f);
+    m->forwardVel = approach_f32(m->forwardVel, 72.0f, 0.1f, 0.15f);
     if (m->forwardVel < 14.0f) {
         play_swimming_noise(m);
         set_mario_animation(m, MARIO_ANIM_FLUTTERKICK_WITH_OBJ);
     }
-    common_swimming_step(m, 160);
+    common_swimming_step(m, 1000);
     return FALSE;
 }
 
@@ -757,11 +757,11 @@ static s32 act_water_shell_swimming(struct MarioState *m) {
         set_mario_action(m, ACT_FLUTTER_KICK, 0);
     }
 
-    m->forwardVel = approach_f32(m->forwardVel, 30.0f, 2.0f, 1.0f);
+    m->forwardVel = approach_f32(m->forwardVel, 70.0f, 2.0f, 1.0f);
 
     play_swimming_noise(m);
     set_mario_animation(m, MARIO_ANIM_FLUTTERKICK_WITH_OBJ);
-    common_swimming_step(m, 300);
+    common_swimming_step(m, 700);
 
     return FALSE;
 }

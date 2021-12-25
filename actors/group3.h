@@ -5,6 +5,7 @@
 
 // king_bobomb
 extern const GeoLayout king_bobomb_geo[];
+extern const GeoLayout king_bobomb_fake_geo[];
 extern const Gfx king_bobomb_seg5_dl_0500A4B8[];
 extern const Gfx king_bobomb_seg5_dl_0500A4F0[];
 extern const Gfx king_bobomb_seg5_dl_0500A5A0[];
