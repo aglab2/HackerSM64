@@ -8,13 +8,13 @@
 //#define DEBUG_ALL
 
 // Disables all debug options (except PUPPYPRINT)
-//#define DISABLE_ALL
+#define DISABLE_ALL
 
 // TEST LEVEL
 // Uncomment this define and set a test level in order to boot straight into said level.
 // This allows you to quickly test the level you're working on.
 // If you want the game to boot normally, just comment out the define again.
-#define TEST_LEVEL LEVEL_BOB
+#define TEST_LEVEL LEVEL_BOWSER_3
 
 // Enable debug level select. Hold L while the game boots to turn it on.
 // #define DEBUG_LEVEL_SELECT
@@ -29,7 +29,7 @@
 //#define CUSTOM_DEBUG
 
 // Include Puppyprint, a display library for text and large images.
-#define PUPPYPRINT
+// #define PUPPYPRINT
 // Include a custom, enhanced performance profiler (Requires PUPPYPRINT).
 #define PUPPYPRINT_DEBUG 1
 

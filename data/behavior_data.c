@@ -6191,3 +6191,11 @@ const BehaviorScript bhvFightDist[] = {
         CALL_NATIVE(bhv_fight_ctl_loop),
     END_LOOP(),
 };
+
+extern void bhv_warp_gate_block_loop();
+const BehaviorScript bhvWarpGateBlock[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_warp_gate_block_loop),
+    END_LOOP(),
+};

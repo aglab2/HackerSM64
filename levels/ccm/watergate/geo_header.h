@@ -1,0 +1,11 @@
+extern const GeoLayout watergate_geo[];
+extern Lights1 watergate_f3d_material_003_lights;
+extern u8 watergate__03_mon2_1_ci4[];
+extern u8 watergate__03_mon2_1_ci4_pal_rgba16[];
+extern Vtx watergate_Plane_mesh_layer_1_vtx_cull[8];
+extern Vtx watergate_Plane_mesh_layer_1_vtx_0[4];
+extern Gfx watergate_Plane_mesh_layer_1_tri_0[];
+extern Gfx mat_watergate_f3d_material_003[];
+extern Gfx mat_revert_watergate_f3d_material_003[];
+extern Gfx watergate_Plane_mesh_layer_1[];
+extern Gfx watergate_material_revert_render_settings[];

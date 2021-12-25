@@ -462,6 +462,8 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
             break;
 
         case LEVEL_BOWSER_3:
+            save_file_set_star_flags(fileIndex, COURSE_CAKE_END - 1, 1);
+            save_file_do_save(gCurrSaveFileNum - 1);
             break;
 
         default:

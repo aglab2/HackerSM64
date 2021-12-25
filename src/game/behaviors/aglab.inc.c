@@ -182,3 +182,19 @@ void bhv_fight_ctl_loop()
         print_text_fmt_int(170, 20, "%02d", f);
     }
 }
+
+void bhv_warp_gate_block_loop()
+{
+    if (gEnvironmentRegions[6] > 0.0f)
+    {
+        if (gMarioStates->pos[0] > o->oPosX)
+        {
+            gMarioStates->pos[0] = o->oPosX;
+        }
+        cur_obj_unhide();
+    }
+    else
+    {
+        cur_obj_hide();
+    }
+}

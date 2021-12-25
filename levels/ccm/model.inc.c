@@ -8946,7 +8946,7 @@ Gfx mat_revert_ccm_dl_f3d_material_002[] = {
 Gfx mat_ccm_dl_f3d_material[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE),
-	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ccm_dl_btl_map_075_fune09_ci4_pal_rgba16),
@@ -8970,7 +8970,7 @@ Gfx mat_ccm_dl_f3d_material[] = {
 
 Gfx mat_revert_ccm_dl_f3d_material[] = {
 	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPSetGeometryMode(G_CULL_BACK | G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };

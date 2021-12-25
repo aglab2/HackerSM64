@@ -29,3 +29,4 @@
 #include "levels/ccm/geo.inc.c"
 
 #include "levels/ccm/gate_rotat/geo.inc.c"
+#include "levels/ccm/watergate/geo.inc.c"

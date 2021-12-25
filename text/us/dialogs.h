@@ -1839,44 +1839,24 @@ If you slide really\n\
 fast, you'll win the Star!"))
 
 DEFINE_DIALOG(DIALOG_150, 1, 5, 30, 200, _("\
-Waaaa! You've flooded my\n\
-house! Wh-why?? Look at\n\
-this mess! What am I\n\
-going to do now?\n\
-\n\
-The ceiling's ruined, the\n\
-floor is soaked...what to\n\
-do, what to do? Huff...\n\
-huff...it makes me so...\n\
-MAD!!!\n\
-Everything's been going\n\
-wrong ever since I got\n\
-this Star...It's so shiny,\n\
-but it makes me feel...\n\
-strange..."))
+DON'T BREAK INTO\n\
+MY HOUSE YOU IDIOT !\n\
+My cave is my home,\n\
+every trespasser must\n\
+be beaten !"))
 
 DEFINE_DIALOG(DIALOG_151, 1, 4, 30, 200, _("\
-I can't take this\n\
-anymore! First you get\n\
-me all wet, then you\n\
-stomp on me!\n\
-Now I'm really, really,\n\
-REALLY mad!\n\
-Waaaaaaaaaaaaaaaaa!!!"))
+So you take things like\n\
+that ? Are you really\n\
+that DUMB to jump\n\
+on MY head ?!"))
 
 DEFINE_DIALOG(DIALOG_152, 1, 3, 30, 200, _("\
-Owwch! Uncle! Uncle!\n\
-Okay, I give up. Take this\n\
-Star!\n\
-Whew! I feel better now.\n\
-I don't really need it\n\
-anymore, anyway--\n\
-I can see the stars\n\
-through my ceiling at\n\
-night.\n\
-They make me feel...\n\
-...peaceful. Please, come\n\
-back and visit anytime."))
+Come on ! I did\n\
+everything I could to\n\
+get you. Now just get\n\
+this thing I have and\n\
+LEAVE ME ALONE..."))
 
 DEFINE_DIALOG(DIALOG_153, 1, 4, 30, 200, _("\
 Hey! Who's there?\n\
@@ -2076,11 +2056,11 @@ Press [B] again to throw\n\
 something you're holding."))
 
 DEFINE_DIALOG(DIALOG_168, 1, 5, 30, 200, _("\
-Hey! Knock it off! That's\n\
-the second time you've\n\
-nailed me. Now you're\n\
-asking for it, linguine\n\
-breath!"))
+You are such an\n\
+annoying guy !\n\
+CALM DOWN, or I'll\n\
+stop you from\n\
+attacking me !"))
 
 DEFINE_DIALOG(DIALOG_169, 1, 4, 30, 200, _("\
 Keep out!\n\

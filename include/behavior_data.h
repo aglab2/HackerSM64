@@ -549,5 +549,6 @@ extern const BehaviorScript bhvBitfsThing[];
 extern const BehaviorScript bhvKingBobombFaker[];
 extern const BehaviorScript bhvKingBobombCtl[];
 extern const BehaviorScript bhvFightDist[];
+extern const BehaviorScript bhvWarpGateBlock[];
 
 #endif // BEHAVIOR_DATA_H

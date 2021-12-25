@@ -66,4 +66,8 @@ extern const GeoLayout wdw_geo_0005C0[];
 
 #include "levels/ccm/gate_rotat/collision_header.h"
 
+#include "levels/ccm/watergate/geo_header.h"
+
+#include "levels/ccm/watergate/collision_header.h"
+
 #endif

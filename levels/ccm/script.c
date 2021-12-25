@@ -41,6 +41,7 @@ const LevelScript level_ccm_entry[] = {
 	JUMP_LINK(script_func_global_14), 
 	LOAD_MODEL_FROM_GEO(MODEL_WDW_WATER_LEVEL_DIAMOND, wdw_geo_0005C0), 
 	LOAD_MODEL_FROM_GEO(0xf2, gate_rotat), 
+	LOAD_MODEL_FROM_GEO(0xf3, watergate_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -111,6 +112,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -1092, 6095, 7630, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -4667, -1206, -940, 0, 0, 0, 0x00000000, bhvWaterLevelDiamond),
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -5917, 1344, -2471, 0, 0, 0, 0x00000000, bhvWaterLevelDiamond),
+		OBJECT(0xf3, -150, 425, 396, 0, 0, 0, 0x00000000, bhvWarpGateBlock),
 		OBJECT(MODEL_NONE, -987, 571, -4012, 0, 0, 0, 0x00000000, bhvInitializeChangingWaterLevel),
 		TERRAIN(ccm_area_1_collision),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),

@@ -60,3 +60,6 @@ ALIGNED8 const Texture gate_draw_s1[] = {
 ALIGNED8 const Texture gate_draw_s2[] = {
     #include "levels/ccm/s2.rgba16.inc.c"
 };
+
+#include "levels/ccm/watergate/model.inc.c"
+#include "levels/ccm/watergate/collision.inc.c"
