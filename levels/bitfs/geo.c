@@ -47,3 +47,5 @@
 #include "levels/bitfs/areas/1/geo.inc.c"
 
 #include "levels/bitfs/geo.inc.c"
+
+#include "levels/bitfs/bitfs_thing/geo.inc.c"

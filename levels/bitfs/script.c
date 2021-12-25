@@ -70,13 +70,18 @@ const LevelScript level_bitfs_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BITFS_SLIDING_PLATFORM, bitfs_geo_000740), 
 	LOAD_MODEL_FROM_GEO(MODEL_BITFS_TUMBLING_PLATFORM_PART, bitfs_geo_0006D8), 
 	LOAD_MODEL_FROM_GEO(MODEL_BITFS_TUMBLING_PLATFORM, bitfs_geo_0006F0), 
+	LOAD_MODEL_FROM_GEO(0xf2, bitfs_thing_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, bitfs_area_1),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf0, LEVEL_CASTLE, 2, 0x81, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf1, LEVEL_CASTLE, 2, 0x82, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_BULLY_BOSS, -3, 3476, -6, 0, 0, 0, 0x00000000, bhvBigBully),
-		OBJECT(MODEL_NONE, 28, 3476, -1896, 0, 0, 0, 0x00000000, bhvInstantActiveWarp),
+		OBJECT(0xf2, -1, 3476, -5, 0, 0, 0, 0x00000000, bhvBitfsThing),
+		OBJECT(MODEL_NONE, 28, 3476, -1896, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		MARIO_POS(0x01, 0, 21, 3476, -1902),
 		TERRAIN(bitfs_area_1_collision),
 		MACRO_OBJECTS(bitfs_area_1_macro_objs),

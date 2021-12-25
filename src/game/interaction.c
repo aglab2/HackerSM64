@@ -907,6 +907,7 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
 #ifndef UNLOCK_ALL
     u32 saveFlags = save_file_get_flags();
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    s16 bullyOK = save_file_get_course_star_count(gCurrSaveFileNum - 1, COURSE_BITFS - 1);
     s16 warpDoorId = (obj->oBehParams >> 24);
 #endif
 
@@ -927,6 +928,21 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
         }
 
         if (warpDoorId == 2 && !(saveFlags & SAVE_FLAG_UNLOCKED_BASEMENT_DOOR)) {
+            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_1)) {
+                if (!sDisplayingDoorText) {
+                    // Moat door skip was intended confirmed
+                    set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG,
+                                     (saveFlags & SAVE_FLAG_HAVE_KEY_2) ? DIALOG_023 : DIALOG_022);
+                }
+                sDisplayingDoorText = TRUE;
+
+                return FALSE;
+            }
+
+            doorAction = ACT_UNLOCKING_KEY_DOOR;
+        }
+
+        if (warpDoorId == 3 && !bullyOK) {
             if (!(saveFlags & SAVE_FLAG_HAVE_KEY_1)) {
                 if (!sDisplayingDoorText) {
                     // Moat door skip was intended confirmed

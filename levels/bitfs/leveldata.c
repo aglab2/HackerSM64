@@ -58,3 +58,6 @@
 #include "levels/bitfs/areas/1/movtext.inc.c"
 
 #include "levels/bitfs/leveldata.inc.c"
+
+#include "levels/bitfs/bitfs_thing/model.inc.c"
+#include "levels/bitfs/bitfs_thing/collision.inc.c"

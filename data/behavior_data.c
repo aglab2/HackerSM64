@@ -6124,3 +6124,17 @@ const BehaviorScript bhvRainbowCtl[] = {
         CALL_NATIVE(bhv_rainbow_ctl_loop),
     END_LOOP(),
 };
+
+void bhv_bitfs_thing_loop(void);
+const BehaviorScript bhvBitfsThing[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oCollisionDistance, 1000),
+    SET_FLOAT(oDrawingDistance, 30000),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(bitfs_thing_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bitfs_thing_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

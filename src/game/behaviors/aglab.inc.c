@@ -48,3 +48,8 @@ void bhv_rainbow_ctl_loop()
     u8* envc = segmented_to_virtual(mat_totwc_dl__auto_9_f3d) + 12 * 8 + 7;
     *envc = (1.5f + sins(o->oTimer * 937)) * 0x40;
 }
+
+void bhv_bitfs_thing_loop()
+{
+    o->oPosY = o->oHomeY - (1 + sins(o->oTimer * 300)) * 70.f;
+}

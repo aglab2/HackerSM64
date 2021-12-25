@@ -1,4 +1,4 @@
-void scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_4() {
+void scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_3() {
 	int i = 0;
 	int count = 20;
 	int width = 32 * 0x20;
@@ -6,7 +6,7 @@ void scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_4() {
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(castle_courtyard_dl_ow3_mesh_layer_1_vtx_4);
+	Vtx *vertices = segmented_to_virtual(castle_courtyard_dl_ow3_mesh_layer_1_vtx_3);
 
 	deltaX = (int)(-0.04999995231628418 * 0x20) % width;
 
@@ -43,6 +43,6 @@ void scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_20() {
 }
 
 void scroll_castle_courtyard() {
-	scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_4();
+	scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_3();
 	scroll_castle_courtyard_dl_ow3_mesh_layer_1_vtx_20();
 }

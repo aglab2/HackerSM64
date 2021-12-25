@@ -544,5 +544,6 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvGateRotat[];
 extern const BehaviorScript bhvGateCtl[];
 extern const BehaviorScript bhvRainbowCtl[];
+extern const BehaviorScript bhvBitfsThing[];
 
 #endif // BEHAVIOR_DATA_H
