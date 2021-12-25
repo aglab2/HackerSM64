@@ -50,3 +50,13 @@
 #include "levels/wdw/water_level_diamond/collision.inc.c" // Unused
 
 #include "levels/ccm/leveldata.inc.c"
+
+#include "levels/ccm/gate_rotat/model.inc.c"
+#include "levels/ccm/gate_rotat/collision.inc.c"
+
+ALIGNED8 const Texture gate_draw_s1[] = {
+    #include "levels/ccm/s1.rgba16.inc.c"
+};
+ALIGNED8 const Texture gate_draw_s2[] = {
+    #include "levels/ccm/s2.rgba16.inc.c"
+};

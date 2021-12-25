@@ -1,0 +1,11 @@
+extern const GeoLayout gate_rotat[];
+extern Lights1 gate_rotat___f3d_lights;
+extern u8 gate_rotat___ci4[];
+extern u8 gate_rotat___ci4_pal_rgba16[];
+extern Vtx gate_rotat_gate_mesh_layer_4_vtx_cull[8];
+extern Vtx gate_rotat_gate_mesh_layer_4_vtx_0[15];
+extern Gfx gate_rotat_gate_mesh_layer_4_tri_0[];
+extern Gfx mat_gate_rotat___f3d[];
+extern Gfx mat_revert_gate_rotat___f3d[];
+extern Gfx gate_rotat_gate_mesh_layer_4[];
+extern Gfx gate_rotat_material_revert_render_settings[];

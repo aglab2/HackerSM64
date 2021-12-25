@@ -4264,6 +4264,22 @@ const BehaviorScript bhvBowlingBall[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvBowlingFire[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 700),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oGraphYOffset, 130),
+    CALL_NATIVE(bhv_bowling_ball_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bowling_ball_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvTtmBowlingBallSpawner[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
@@ -6074,4 +6090,37 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+extern const Collision gate_rotat_collision[];
+const BehaviorScript bhvGateRotat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_UCODE_LARGE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_FLOAT(oCollisionDistance, 1000),
+    SET_FLOAT(oDrawingDistance, 30000),
+    LOAD_COLLISION_DATA(gate_rotat_collision),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        // CALL_NATIVE(bhv_gate_rotat),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
 
+void bhv_gate_rotat_ctl_init(void);
+void bhv_gate_rotat_ctl_loop(void);
+const BehaviorScript bhvGateCtl[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    CALL_NATIVE(bhv_gate_rotat_ctl_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gate_rotat_ctl_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+void bhv_rainbow_ctl_loop(void);
+const BehaviorScript bhvRainbowCtl[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rainbow_ctl_loop),
+    END_LOOP(),
+};

@@ -3179,7 +3179,7 @@ void init_camera(struct Camera *c) {
     Vec3f marioOffset;
     s32 i;
 
-    s8DirModeBaseYaw = 0x8000 + gMarioStates->faceAngle[1];
+    s8DirModeBaseYaw = (0x9000 + gMarioStates->faceAngle[1]) & 0xE000;
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;
@@ -5987,6 +5987,9 @@ struct CameraTrigger sCamVCUtM[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamSA[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamBitFS[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {

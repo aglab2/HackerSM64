@@ -27,3 +27,5 @@
 #include "levels/wdw/water_level_diamond/geo.inc.c"
 
 #include "levels/ccm/geo.inc.c"
+
+#include "levels/ccm/gate_rotat/geo.inc.c"

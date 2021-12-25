@@ -370,6 +370,7 @@ extern const BehaviorScript bhvMoneybagHidden[];
 extern const BehaviorScript bhvPitBowlingBall[];
 extern const BehaviorScript bhvFreeBowlingBall[];
 extern const BehaviorScript bhvBowlingBall[];
+extern const BehaviorScript bhvBowlingFire[];
 extern const BehaviorScript bhvTtmBowlingBallSpawner[];
 extern const BehaviorScript bhvBobBowlingBallSpawner[];
 extern const BehaviorScript bhvThiBowlingBallSpawner[];
@@ -540,5 +541,8 @@ extern const BehaviorScript bhvEndBirds1[];
 extern const BehaviorScript bhvEndBirds2[];
 extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
+extern const BehaviorScript bhvGateRotat[];
+extern const BehaviorScript bhvGateCtl[];
+extern const BehaviorScript bhvRainbowCtl[];
 
 #endif // BEHAVIOR_DATA_H

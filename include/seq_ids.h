@@ -56,12 +56,13 @@ enum SeqId {
 	SEQ_100CC,
 	SEQ_SLIDE,
 	SEQ_TTC,
-	SEQ_EYE,
 	SEQ_BULLY,
+	SEQ_EYE,
 	SEQ_B3,
 	SEQ_F2,
 	SEQ_VC,
 	SEQ_OW1,
+	SEQ_C5,
 	SEQ_COUNT
 };
 
