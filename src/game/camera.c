@@ -1827,6 +1827,7 @@ s32 mode_behind_mario(struct Camera *c) {
     }
     pan_ahead_of_player(c);
 
+    s8DirModeBaseYaw = snap_to_45_degrees(yaw);
     return yaw;
 }
 

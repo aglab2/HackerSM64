@@ -4632,7 +4632,7 @@ const BehaviorScript bhvHiddenStarTrigger[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oFaceAngleRoll, 0x8000), 
     BEGIN_LOOP(),
-        ADD_INT(oFaceAngleYaw, 248),
+        ADD_INT(oFaceAngleYaw, 348),
         CALL_NATIVE(bhv_hidden_star_trigger_loop),
     END_LOOP(),
 };

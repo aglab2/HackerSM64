@@ -44,6 +44,7 @@ u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
+u8 holdBToWarp[] = { TEXT_HUD_HOLD_B_TO_WARP };
 
 #if MULTILANG
 #define seg2_course_name_table course_name_table_eu_en
@@ -1835,6 +1836,8 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
         print_generic_string(x + 34, y - 5, textCoin);
         int_to_str(save_file_get_course_coin_score(gCurrSaveFileNum - 1, gDialogLineNum), strVal);
         print_generic_string(x + 54, y - 5, strVal);
+        // FIXME AGLAB
+        print_generic_string(x - 20, y + 120, holdBToWarp);
     } else { // Castle secret stars
         u8 textStarX[] = { TEXT_STAR_X };
         courseName = segmented_to_virtual(courseNameTbl[COURSE_MAX]);
@@ -1855,6 +1858,7 @@ s8 gCourseCompleteCoinsEqual = FALSE;
 s32 gCourseDoneMenuTimer = 0;
 s32 gCourseCompleteCoins = 0;
 s8 gHudFlash = HUD_FLASH_NONE;
+s32 gUseWarp = 15;
 
 s32 render_pause_courses_and_castle(void) {
     s16 index;
@@ -1902,6 +1906,7 @@ s32 render_pause_courses_and_castle(void) {
                 gMenuMode = MENU_MODE_NONE;
 
                 if (gDialogLineNum == MENU_OPT_EXIT_COURSE) {
+                    gUseWarp = 15;
                     index = gDialogLineNum;
                 } else { // MENU_OPT_CONTINUE or MENU_OPT_CAMERA_ANGLE_R
                     index = MENU_OPT_DEFAULT;
@@ -1922,8 +1927,13 @@ s32 render_pause_courses_and_castle(void) {
                 play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
                 gMenuMode = MENU_MODE_NONE;
                 gDialogBoxState = DIALOG_STATE_OPENING;
+                s32 doWarp = gDialogLineNum < 10 && gPlayer3Controller->buttonDown & B_BUTTON;
+                if (doWarp)
+                {
+                    gUseWarp = gDialogLineNum;
+                }
 
-                return MENU_OPT_DEFAULT;
+                return doWarp ? MENU_OPT_EXIT_COURSE : MENU_OPT_DEFAULT;
             }
             break;
     }

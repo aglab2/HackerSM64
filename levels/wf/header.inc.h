@@ -115,7 +115,7 @@ extern Vtx wf_dl_c2_mesh_layer_1_vtx_9[12];
 extern Gfx wf_dl_c2_mesh_layer_1_tri_9[];
 extern Vtx wf_dl_c2_mesh_layer_1_vtx_10[63];
 extern Gfx wf_dl_c2_mesh_layer_1_tri_10[];
-extern Vtx wf_dl_c2_mesh_layer_1_vtx_11[746];
+extern Vtx wf_dl_c2_mesh_layer_1_vtx_11[728];
 extern Gfx wf_dl_c2_mesh_layer_1_tri_11[];
 extern Vtx wf_dl_c2_mesh_layer_1_vtx_12[119];
 extern Gfx wf_dl_c2_mesh_layer_1_tri_12[];

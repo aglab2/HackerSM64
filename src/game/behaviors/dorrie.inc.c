@@ -31,18 +31,18 @@ void dorrie_act_move(void) {
         o->oForwardVel = 0.0f;
         o->oDorrieYawVel = 0;
     } else {
-        if (gMarioObject->platform == o) {
-            targetYaw = gMarioObject->oFaceAngleYaw;
-            targetSpeed = 10;
-        } else {
+        //if (gMarioObject->platform == o) {
+        //    targetYaw = gMarioObject->oFaceAngleYaw;
+        //    targetSpeed = 10;
+        //} else {
             s16 circularTurn = 0x4000 - atan2s(2000.0f, o->oDorrieDistToHome - 2000.0f);
             if ((s16)(o->oMoveAngleYaw - o->oDorrieAngleToHome) < 0) {
                 circularTurn = -circularTurn;
             }
 
             targetYaw = o->oDorrieAngleToHome + circularTurn;
-            targetSpeed = 5;
-        }
+            targetSpeed = gMarioObject->platform == o ? 60.f : 5.f;
+        //}
 
         obj_forward_vel_approach(targetSpeed, 0.5f);
         o->oDorrieYawVel =
@@ -118,7 +118,7 @@ void bhv_dorrie_update(void) {
             o->oPosZ = o->oHomeZ - o->oDorrieDistToHome * coss(o->oDorrieAngleToHome);
         }
 
-        o->oDorrieGroundPounded = cur_obj_is_mario_ground_pounding_platform();
+        o->oDorrieGroundPounded = FALSE; //  cur_obj_is_mario_ground_pounding_platform();
 
         if (gMarioObject->platform == o) {
             maxOffsetY = -17.0f;

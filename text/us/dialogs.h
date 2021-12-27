@@ -290,10 +290,10 @@ This key doesn't fit!\n\
 Maybe it's for the\n\
 basement..."))
 
-DEFINE_DIALOG(DIALOG_024, 1, 5, 95, 200, _("\
+DEFINE_DIALOG(DIALOG_024, 1, 4, 95, 200, _("\
 You need Star power to\n\
 open this door. Recover a\n\
-Power Star from a guardian\n\
+Power Star from a guard\n\
 of the prison"))
 
 DEFINE_DIALOG(DIALOG_025, 1, 4, 95, 200, _("\
@@ -1006,23 +1006,12 @@ awful prison!\n\
 Please!"))
 
 DEFINE_DIALOG(DIALOG_076, 1, 6, 30, 200, _("\
-Thanks to the power of\n\
-the Stars, life is\n\
-returning to the castle.\n\
-Please, Mario, you have\n\
-to give Bowser the boot!\n\
-\n\
-Here, let me tell you a\n\
-little something about the\n\
-castle. In the room with\n\
-the mirrors, look carefully\n\
-for anything that's not\n\
-reflected in the mirror.\n\
-And when you go to the\n\
-water town, you can flood\n\
-it with a high jump into\n\
-the painting. Oh, by the\n\
-way, look what I found!"))
+I wish I could get outta\n\
+here! I have been imprisoned\n\
+for so long....\n\
+Please, Mario, save us!\n\
+Oh, by the way,\n\
+look what I found!"))
 
 DEFINE_DIALOG(DIALOG_077, 1, 2, 150, 200, _("\
 It is decreed that one\n\
@@ -1180,20 +1169,10 @@ building. Have fun with\n\
 my challenge...\n\
 Ha ha ha ha ha ha ha !"))
 
-DEFINE_DIALOG(DIALOG_093, 1, 5, 30, 200, _("\
-Mario! You again! Well\n\
-that's just fine--I've\n\
-been looking for something\n\
-to fry with my fire\n\
-breath!\n\
-Your Star Power is\n\
-useless against me!\n\
-Your friends are all\n\
-trapped within the\n\
-walls...\n\
-And you'll never see the\n\
-Princess again!\n\
-Bwa ha ha ha!"))
+DEFINE_DIALOG(DIALOG_093, 1, 3, 30, 200, _("\
+This is the final\n\
+showdown time!\n\
+Brace yourself!"))
 
 DEFINE_DIALOG(DIALOG_094, 1, 4, 30, 200, _("\
 Get a good run up the\n\

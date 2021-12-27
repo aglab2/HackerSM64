@@ -10,6 +10,7 @@ const GeoLayout bob_area_1_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2705, 689, 3154, 90, 0, 0, bob_dl___top_001_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_ALPHA, 2705, 689, 3154, 90, 0, 0, bob_dl___top_002_mesh_layer_4),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2705, 689, 3154, 90, 0, 0, bob_dl___top_004_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 7713, -4084, -3826, 90, 0, 0, bob_dl_bg_mesh_layer_5),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2705, 689, 3154, 90, 0, 0, bob_dl_c1_a1_003_mesh_layer_1),
 	GEO_CLOSE_NODE(),

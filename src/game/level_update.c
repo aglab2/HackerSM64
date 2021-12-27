@@ -878,7 +878,7 @@ void update_hud_values(void) {
 #ifdef BREATH_METER
         s16 numBreathWedges = gMarioState->breath > 0 ? gMarioState->breath >> 8 : 0;
 #endif
-        COND_BIT((gCurrCourseNum >= COURSE_MIN), gHudDisplay.flags, HUD_DISPLAY_FLAG_COIN_COUNT);
+        COND_BIT((gCurrCourseNum >= COURSE_MIN) && gCurrLevelNum != LEVEL_BOWSER_1, gHudDisplay.flags, HUD_DISPLAY_FLAG_COIN_COUNT);
 
         if (gHudDisplay.coins < gMarioState->numCoins) {
             if (gGlobalTimer & 1) {
@@ -1007,6 +1007,11 @@ s32 play_mode_normal(void) {
     return FALSE;
 }
 
+extern s32 gUseWarp;
+static s32 warpTbl[] = {
+    LEVEL_BOB, LEVEL_WF, LEVEL_JRB, LEVEL_CCM, LEVEL_BBH, 
+};
+
 s32 play_mode_paused(void) {
     if (gMenuOptSelectIndex == MENU_OPT_NONE) {
         set_menu_mode(MENU_MODE_RENDER_PAUSE_SCREEN);
@@ -1019,10 +1024,19 @@ s32 play_mode_paused(void) {
         if (gDebugLevelSelect) {
             fade_into_special_warp(WARP_SPECIAL_LEVEL_SELECT, 1);
         } else {
-            struct ObjectWarpNode* warpNode = area_get_warp_node(0xf1);
-            initiate_warp(warpNode->node.destLevel, warpNode->node.destArea, warpNode->node.destNode, 0);
-            fade_into_special_warp(0, 0);
-            gSavedCourseNum = COURSE_NONE;
+            if (gUseWarp > 10)
+            {
+                struct ObjectWarpNode* warpNode = area_get_warp_node(0xf1);
+                initiate_warp(warpNode->node.destLevel, warpNode->node.destArea, warpNode->node.destNode, 0);
+                fade_into_special_warp(0, 0);
+                gSavedCourseNum = COURSE_NONE;
+            }
+            else
+            {
+                initiate_warp(warpTbl[gUseWarp], 1, 0xa, 0);
+                fade_into_special_warp(0, 0);
+                gSavedCourseNum = COURSE_NONE;
+            }
         }
 
         gCameraMovementFlags &= ~CAM_MOVE_PAUSE_SCREEN;

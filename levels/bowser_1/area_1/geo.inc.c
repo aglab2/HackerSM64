@@ -6,9 +6,9 @@ const GeoLayout bowser_1_area_1_geo[] = {
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, 3747, 0, 90, 0, 0, bowser_1_dl_f2_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, bowser_1_dl_f2_mesh_layer_2),
-			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bowser_1_dl_f2_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 0, 3747, 0, 90, 0, 0, bowser_1_dl_f2_001_mesh_layer_5),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 0, 3747, 0, 90, 0, 0, bowser_1_dl_f2_002_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

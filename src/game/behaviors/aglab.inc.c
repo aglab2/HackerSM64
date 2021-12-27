@@ -69,6 +69,7 @@ void bhv_bobomb_fight_ctl_init()
 
 void bhv_bobomb_fight_ctl_loop()
 {
+    o->oBobombCtlTimer++;
     struct Object* b = o->oBobombCtlMain;
 
     if (0 == o->oAction)

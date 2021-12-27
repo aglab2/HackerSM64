@@ -67,7 +67,7 @@ void snufit_act_idle(void) {
     // if the game would not have already crashed.
     s32 marioDist = (s32)(o->oDistanceToMario / 100.0f);
 
-    if (o->oTimer > marioDist && o->oDistanceToMario < 2000.0f) {
+    if (o->oTimer > marioDist && o->oDistanceToMario < 800.0f) {
 
         // Controls an alternating scaling factor in a cos.
         o->oSnufitBodyScalePeriod
@@ -114,7 +114,7 @@ void bhv_snufit_loop(void) {
         o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
 
         // Face Mario if he is within range.
-        if (o->oDistanceToMario < 2000.0f) {
+        if (o->oDistanceToMario < 1000.0f) {
             obj_turn_pitch_toward_mario(120.0f, 2000);
 
             if ((s16) o->oMoveAnglePitch > 0x2000) {

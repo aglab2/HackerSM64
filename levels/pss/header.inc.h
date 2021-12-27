@@ -62,7 +62,7 @@ extern Vtx pss_dl_wc_mesh_layer_1_vtx_6[71];
 extern Gfx pss_dl_wc_mesh_layer_1_tri_6[];
 extern Vtx pss_dl_wc_mesh_layer_1_vtx_7[14];
 extern Gfx pss_dl_wc_mesh_layer_1_tri_7[];
-extern Vtx pss_dl_wc_mesh_layer_1_vtx_8[30];
+extern Vtx pss_dl_wc_mesh_layer_1_vtx_8[38];
 extern Gfx pss_dl_wc_mesh_layer_1_tri_8[];
 extern Vtx pss_dl_wc_mesh_layer_1_vtx_9[26];
 extern Gfx pss_dl_wc_mesh_layer_1_tri_9[];
