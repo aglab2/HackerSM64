@@ -48,7 +48,7 @@ void bhv_snow_leaf_particle_spawn_init(void) {
     // Whether a tree uses snow particles or not is decided via the model IDs instead of the course number
     struct Object *nearestTree = cur_obj_nearest_object_with_behavior(bhvTree);
     if (nearestTree == NULL) return;
-    isSnow = gCurrLevelNum != LEVEL_BOB &&
+    isSnow = gCurrLevelNum != LEVEL_BOB && gCurrLevelNum != LEVEL_CASTLE_COURTYARD &&
         (nearestTree->header.gfx.sharedChild == gLoadedGraphNodes[MODEL_CCM_SNOW_TREE]
         || nearestTree->header.gfx.sharedChild == gLoadedGraphNodes[MODEL_SL_SNOW_TREE]);
 

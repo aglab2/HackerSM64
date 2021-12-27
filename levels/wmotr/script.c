@@ -53,7 +53,7 @@ const LevelScript level_wmotr_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -6507, 21, 2586, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -6507, 21, 2762, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		MARIO_POS(0x01, 0, -4668, 21, 2932),
-		OBJECT(MODEL_NONE, -4489, 21, 8317, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, -4489, 21, 8317, 0, 180, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, 4065, -397, -4498, 0, 0, 0, 0x00000000, bhvLllMovingOctagonalMeshPlatform),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, 3428, -397, -7267, 0, 0, 0, (1 << 16), bhvLllMovingOctagonalMeshPlatform),
 		OBJECT(MODEL_PURPLE_SWITCH, -3560, 21, 2535, 0, 0, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
