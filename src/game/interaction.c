@@ -1063,8 +1063,8 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
             switch (requiredNumStars) {
                 case  1: text = DIALOG_024 << 16; break;
-                case  3: text = DIALOG_025 << 16; break;
-                case  8: text = DIALOG_026 << 16; break;
+                case  4: text = DIALOG_025 << 16; break;
+                case 14: text = DIALOG_026 << 16; break;
                 case 30: text = DIALOG_027 << 16; break;
                 case 50: text = DIALOG_028 << 16; break;
                 case 70: text = DIALOG_029 << 16; break;

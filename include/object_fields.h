@@ -1271,6 +1271,8 @@
 
 #define /*0x100*/ oFightCtlTimerLeft OBJECT_FIELD_S32(0x1B)
 
+#define /*0x100*/ oWallCtlPrevColl OBJECT_FIELD_S32(0x1B)
+#define /*0x100*/ oWallCtlLastFrameColl OBJECT_FIELD_S32(0x1C)
 
 /*Custom general defines:
 

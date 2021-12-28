@@ -20,6 +20,8 @@ void bhv_gate_rotat_ctl_loop(void)
     {
         if (gMarioObject->platform == o)
         {
+            cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_CLICK);
+            cur_obj_shake_screen(1);
             o->oAction = 1;
             obj_scale_xyz(o, 1.f, 0.1f, 1.f);
             o->oGateCtlState++;
@@ -197,5 +199,26 @@ void bhv_warp_gate_block_loop()
     else
     {
         cur_obj_hide();
+    }
+}
+
+extern Gfx mat_jrb_dl_f3d_material[];
+void bhv_wall_ctl_loop()
+{
+    s16 coll = gMarioStates->floor ? gMarioStates->floor->type : 0;
+    u8* envc = segmented_to_virtual(mat_jrb_dl_f3d_material) + 19 * 8 + 7;
+    
+    if (o->oWallCtlLastFrameColl != coll)
+        o->oWallCtlPrevColl = o->oWallCtlLastFrameColl;
+
+    o->oWallCtlLastFrameColl = coll;
+
+    if (coll == SURFACE_HARD || (o->oWallCtlPrevColl == SURFACE_HARD && coll == SURFACE_BURNING))
+    {
+        *envc = 0;
+    }
+    else
+    {
+        *envc = 0xff;
     }
 }

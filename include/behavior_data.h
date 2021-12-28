@@ -550,5 +550,6 @@ extern const BehaviorScript bhvKingBobombFaker[];
 extern const BehaviorScript bhvKingBobombCtl[];
 extern const BehaviorScript bhvFightDist[];
 extern const BehaviorScript bhvWarpGateBlock[];
+extern const BehaviorScript bhvWallCtl[];
 
 #endif // BEHAVIOR_DATA_H

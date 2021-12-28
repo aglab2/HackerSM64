@@ -41,7 +41,7 @@ void dorrie_act_move(void) {
             }
 
             targetYaw = o->oDorrieAngleToHome + circularTurn;
-            targetSpeed = gMarioObject->platform == o ? 60.f : 5.f;
+            targetSpeed = gMarioObject->platform == o ? 30.f : 5.f;
         //}
 
         obj_forward_vel_approach(targetSpeed, 0.5f);

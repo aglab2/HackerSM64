@@ -1496,11 +1496,10 @@ here. Pound on his back to\n\
 make him lower his head.\n\
 Don't become his lunch."))
 
-DEFINE_DIALOG(DIALOG_128, 1, 4, 95, 200, _("\
-You must fight with\n\
-honor! It is against the\n\
-royal rules to throw the\n\
-king out of the ring!"))
+DEFINE_DIALOG(DIALOG_128, 1, 3, 95, 200, _("\
+Good try but I'm not\n\
+going to give up!\n\
+You will be gone!"))
 
 DEFINE_DIALOG(DIALOG_129, 1, 5, 30, 200, _("\
 Welcome to the Vanish\n\

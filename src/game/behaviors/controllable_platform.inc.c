@@ -171,7 +171,7 @@ void bhv_controllable_platform_loop(void) {
             break;
 
         case 1:
-            o->oVelZ = 10.0f;
+            o->oVelZ = 8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ + 300.0, 50.0f);
             wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX, o->oPosY, o->oPosZ + 300.0, 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ + 300.0, 50.0f);
@@ -179,7 +179,7 @@ void bhv_controllable_platform_loop(void) {
             break;
 
         case 2:
-            o->oVelZ = -10.0f;
+            o->oVelZ = -8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ - 300.0, 50.0f);
             wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX, o->oPosY, o->oPosZ - 300.0, 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ - 300.0, 50.0f);
@@ -187,7 +187,7 @@ void bhv_controllable_platform_loop(void) {
             break;
 
         case 3:
-            o->oVelX = 10.0f;
+            o->oVelX = 8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 300.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
             wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX + 300.0, o->oPosY, o->oPosZ, 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX + 300.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
@@ -195,7 +195,7 @@ void bhv_controllable_platform_loop(void) {
             break;
 
         case 4:
-            o->oVelX = -10.0f;
+            o->oVelX = -8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX - 300.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
             wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX - 300.0, o->oPosY, o->oPosZ, 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 300.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
