@@ -222,3 +222,42 @@ void bhv_wall_ctl_loop()
         *envc = 0xff;
     }
 }
+
+extern void bhv_pipe_raiser_init()
+{
+    f32 d;
+    o->oPipeRaiserPipe = cur_obj_find_nearest_object_with_behavior(bhvWarpPipe, &d);
+}
+
+extern void bhv_pipe_raiser_loop()
+{
+    if (gCurrActNum == 6)
+    {
+        o->oPipeRaiserPipe->oPosX = o->oPosX;
+        o->oPipeRaiserPipe->oPosY = o->oPosY;
+        o->oPipeRaiserPipe->oPosZ = o->oPosZ;
+        o->oAction = 1;
+    }
+
+    if (0 == o->oAction)
+    {
+        if (o->oDistanceToMario > 500.f)
+            return;
+
+        if (gMarioStates->action == ACT_EMERGE_FROM_PIPE)
+        {
+            o->oAction = 1;
+            o->oPipeRaiserPipe->oPosX = o->oPosX;
+            o->oPipeRaiserPipe->oPosZ = o->oPosZ;
+        }
+    }
+    else
+    {
+        o->oPipeRaiserPipe->oPosY += 10.f;
+        if (o->oPipeRaiserPipe->oPosY > o->oPosY)
+        {
+            o->oPipeRaiserPipe->oPosY = o->oPosY;
+            o->activeFlags = 0;
+        }
+    }
+}

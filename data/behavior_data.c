@@ -6207,3 +6207,14 @@ const BehaviorScript bhvWallCtl[] = {
         CALL_NATIVE(bhv_wall_ctl_loop),
     END_LOOP(),
 };
+
+extern void bhv_pipe_raiser_init();
+extern void bhv_pipe_raiser_loop();
+const BehaviorScript bhvPipeRaiser[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    CALL_NATIVE(bhv_pipe_raiser_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pipe_raiser_loop),
+    END_LOOP(),
+};
