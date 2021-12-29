@@ -3,9 +3,9 @@
 const GeoLayout castle_inside_area_3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9215, 2470, 7141, castle_inside_dl_ow1_005_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9215, 2470, 7141, castle_inside_dl_ow1_006_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -9215, 2470, 7141, castle_inside_dl_ow1_007_mesh_layer_4),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -9215, 2470, 7141, 90, 0, 0, castle_inside_dl_ow1_005_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -9215, 2470, 7141, 90, 0, 0, castle_inside_dl_ow1_006_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_ALPHA, -9215, 2470, 7141, 90, 0, 0, castle_inside_dl_ow1_007_mesh_layer_4),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE_DECAL, -4395, 4415, -2025, 90, 0, -90, castle_inside_dl_ow1_010_mesh_layer_2),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_ow1_010_mesh_layer_1),

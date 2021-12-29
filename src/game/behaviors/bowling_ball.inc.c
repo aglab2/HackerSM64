@@ -96,7 +96,8 @@ void bhv_bowling_ball_roll_loop(void) {
         o->oForwardVel = 70.0f;
     }
 
-    bowling_ball_set_hitbox();
+    if (o->header.gfx.sharedChild != gLoadedGraphNodes[MODEL_RED_FLAME])
+        bowling_ball_set_hitbox();
 
     if (followStatus == PATH_REACHED_END) {
         if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 7000)) {
@@ -107,6 +108,7 @@ void bhv_bowling_ball_roll_loop(void) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 
+    if (o->header.gfx.sharedChild != gLoadedGraphNodes[MODEL_RED_FLAME])
     if ((collisionFlags & OBJ_COL_FLAG_GROUNDED) && (o->oVelY > 5.0f)) {
         cur_obj_play_sound_2(SOUND_GENERAL_QUIET_POUND1_LOWPRIO);
     }
@@ -129,15 +131,15 @@ void bhv_bowling_ball_initialize_loop(void) {
             break;
 
         case BBALL_BP_STYPE_BOB_LOWER:
-            o->oForwardVel = 20.0f;
+            o->oForwardVel = 30.0f;
             break;
 
         case BBALL_BP_STYPE_THI_LARGE:
-            o->oForwardVel = 17.0f;
+            o->oForwardVel = 20.0f;
             break;
 
         case BBALL_BP_STYPE_THI_SMALL:
-            o->oForwardVel = 20.0f;
+            o->oForwardVel = 30.0f;
             break;
     }
 }
@@ -208,10 +210,10 @@ void bhv_thi_bowling_ball_spawner_loop(void) {
         return;
     }
 
-    if ((o->oTimer % 256) == 0) {
+    if ((o->oTimer % 33) == 0) {
         if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 12000)
             && (s32)(random_float() * 1.5) == 0) {
-            struct Object *bowlingBall = spawn_object(o, MODEL_BOWLING_BALL, bhvBowlingBall);
+            struct Object *bowlingBall = spawn_object(o, MODEL_RED_FLAME, bhvBowlingFire);
             bowlingBall->oBehParams2ndByte = o->oBehParams2ndByte;
         }
     }

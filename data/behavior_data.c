@@ -4295,6 +4295,8 @@ const BehaviorScript bhvBowlingFire[] = {
     CALL_NATIVE(bhv_bowling_ball_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bowling_ball_loop),
+        SET_INT(oInteractStatus, INT_STATUS_NONE),
+        ANIMATE_TEXTURE(oAnimState, 2),
     END_LOOP(),
 };
 

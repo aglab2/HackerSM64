@@ -95,7 +95,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_NONE, 10234, -1244, 11902, 0, -22, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_CHUCKYA, 13850, -870, 2878, 0, 90, 0, 0x00000000, bhvChuckya),
 		OBJECT(MODEL_CHUCKYA, -382, -586, -9409, 0, 0, 0, (0 << 16), bhvChuckya),
-		OBJECT(MODEL_CHUCKYA, -1588, -2426, 5868, 0, -22, 0, 0x00000000, bhvChuckya),
+		OBJECT(MODEL_CHUCKYA, -1067, -2426, 7883, 0, -22, 0, 0x00000000, bhvChuckya),
 		OBJECT(MODEL_CHUCKYA, -8165, 200, 792, 0, -22, 0, 0x00000000, bhvChuckya),
 		OBJECT(MODEL_CHUCKYA, 5998, -500, -5561, 0, -22, 0, 0x00000000, bhvChuckya),
 		OBJECT(MODEL_NONE, -2694, -1551, 9500, 0, 0, 0, (2 << 16), bhvCoinFormation),

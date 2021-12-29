@@ -126,11 +126,24 @@ void bhv_bobomb_fight_ctl_loop()
             obj_scale(flameObj, scale);
             obj_become_tangible(flameObj);
         }
-        if (b->oAction == 8)
+        if (b->oHealth == 1)
         {
+            struct Object** fakes = &o->oBobombCtlFake1;
             for (int i = 0; i < 4; i++)
             {
-                struct Object** fakes = &o->oBobombCtlFake1;
+                if (fakes[i])
+                {
+                    fakes[i]->oInteractionSubtype &= ~INT_SUBTYPE_GRABS_MARIO;
+                    fakes[i]->oInteractType = 0;
+                    push_mario_out_of_object(gMarioStates, fakes[i], -5.0f);
+                }
+            }
+        }
+        if (b->oAction == 8)
+        {
+            struct Object** fakes = &o->oBobombCtlFake1;
+            for (int i = 0; i < 4; i++)
+            {
                 if (fakes[i])
                 {
                     fakes[i]->activeFlags = 0;
