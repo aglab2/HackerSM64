@@ -377,6 +377,15 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
+#define CREDITS_SIZE 8
+const char* gCreditsStr[CREDITS_SIZE];
+int gCreditsAlign[CREDITS_SIZE];
+int gCreditsLength[CREDITS_SIZE];
+u8 gCreditsEnvColor[CREDITS_SIZE];
+int gCreditsPosX[CREDITS_SIZE];
+int gCreditsPosY[CREDITS_SIZE];
+int gCreditsLastSize = 0;
+
 void render_game(void) {
 #if PUPPYPRINT_DEBUG
     OSTime first   = osGetTime();
@@ -397,6 +406,20 @@ void render_game(void) {
         render_text_labels();
         do_cutscene_handler();
         print_displaying_credits_entry();
+        
+        if (gCurrCourseNum == COURSE_LLL && gCreditsEnvColor)
+        {
+            for (int i = 0; i < CREDITS_SIZE; i++)
+            {
+                if (!gCreditsEnvColor[i])
+                    continue;
+                    
+                print_set_envcolour(200, 200, 200, gCreditsEnvColor[i]);
+                s32 siz = print_small_text(gCreditsPosX[i], gCreditsPosY[i], gCreditsStr[i], gCreditsAlign[i], gCreditsLength[i], 1);
+                if (i == 0)
+                    gCreditsLastSize = siz;
+            }
+        }
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
                       SCREEN_HEIGHT - gBorderHeight);
         gMenuOptSelectIndex = render_menus_and_dialogs();

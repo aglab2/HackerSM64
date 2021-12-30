@@ -802,13 +802,13 @@ void puppyprint_profiler_process(void) {
 #endif
 
 void print_set_envcolour(s32 r, s32 g, s32 b, s32 a) {
-    if ((r != currEnv[0])
-        || (g != currEnv[1])
-        || (b != currEnv[2])
-        || (a != currEnv[3])) {
+    //if ((r != currEnv[0])
+    //    || (g != currEnv[1])
+    //    || (b != currEnv[2])
+    //    || (a != currEnv[3])) {
         gDPSetEnvColor(gDisplayListHead++, (Color)r, (Color)g, (Color)b, (Color)a);
         vec4_set(currEnv, r, g, b, a);
-    }
+    //}
 }
 
 #define BLANK 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT
@@ -898,7 +898,7 @@ const Gfx dl_small_text_begin[] = {
 s8 shakeToggle = 0;
 s8  waveToggle = 0;
 
-void print_small_text(s32 x, s32 y, const char *str, s32 align, s32 amount, s32 font) {
+s32 print_small_text(s32 x, s32 y, const char *str, s32 align, s32 amount, s32 font) {
     s32 textX = 0;
     s32 textY = 0;
     s32 offsetY = 0;
@@ -1012,6 +1012,7 @@ void print_small_text(s32 x, s32 y, const char *str, s32 align, s32 amount, s32 
     }
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+    return textPos[0];
 }
 
 s32 text_iterate_command(const char *str, s32 i, s32 runCMD) {

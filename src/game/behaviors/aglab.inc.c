@@ -274,3 +274,199 @@ extern void bhv_pipe_raiser_loop()
         }
     }
 }
+
+#define CREDITS_SIZE 8
+extern const char* gCreditsStr[CREDITS_SIZE];
+extern int gCreditsLength[CREDITS_SIZE];
+extern int gCreditsAlign[CREDITS_SIZE];
+extern u8 gCreditsEnvColor[CREDITS_SIZE];
+extern int gCreditsPosX[CREDITS_SIZE];
+extern int gCreditsPosY[CREDITS_SIZE];
+extern s32 gCreditsLastSize;
+
+void bhv_peach_ending_cs_init()
+{
+    gCamera->cutscene = CUTSCENE_INTRO_PEACH;
+}
+
+static void fade_in_text(int i)
+{
+    if (gCreditsEnvColor[i] < 240)
+    {
+        gCreditsEnvColor[i] += 10;
+    }
+    else
+    {
+        gCreditsEnvColor[i] = 250;
+    }
+}
+
+static void fade_out_text(int i)
+{
+    if (gCreditsEnvColor[i] > 10)
+    {
+        gCreditsEnvColor[i] -= 10;
+    }
+    else
+    {
+        gCreditsEnvColor[i] = 0;
+    }
+}
+
+static void fade_out_all()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        fade_out_text(i);
+    }
+}
+
+static void set_text(int i, const char* line, int length, int align, int x, int y)
+{
+    gCreditsStr[i] = line;
+    gCreditsLength[i] = length;
+    gCreditsAlign[i] = align;
+    gCreditsPosX[i] = x;
+    gCreditsPosY[i] = y;
+}
+
+// couple spaces for laziness
+static const char sThanksYou[] = "Thank you for playing      ";
+
+static void fade_in_text_fast(int i)
+{
+    if (gCreditsEnvColor[i] < 225)
+    {
+        gCreditsEnvColor[i] += 25;
+    }
+    else
+    {
+        gCreditsEnvColor[i] = 250;
+    }
+}
+
+void bhv_peach_ending_cs_loop()
+{
+    gCamera->cutscene = CUTSCENE_INTRO_PEACH;
+    if (gMarioObject) 
+        gMarioObject->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+
+    gHudDisplay.flags = HUD_DISPLAY_NONE;
+    gMarioStates->health = 0x880;
+
+    if (o->oTimer < 45)
+    {
+        set_text(0, "ESCAPE FROM THE JAIL", -1, 1, 160, 100);
+        fade_in_text(0);
+    }
+    else if (o->oTimer < 90)
+    {
+        set_text(1, "DEFINITIVE EDITION", -1, 1, 160, 120);
+        fade_in_text(1);
+    }
+    else if (o->oTimer < 150)
+    {
+        set_text(2, "Made by aglab2", -1, 1, 160, 140);
+        fade_in_text(2);
+    }
+    else if (o->oTimer < 200)
+    {
+        fade_out_all();
+    }
+    else if (o->oTimer < 230)
+    {
+        set_text(0, "ORIGINAL HACK", -1, 1, 160, 110);
+        fade_in_text(0);
+    }
+    else if (o->oTimer < 300)
+    {
+        set_text(1, "TheGael95", -1, 1, 160, 130);
+        fade_in_text(1);
+    }
+    else if (o->oTimer < 350)
+    {
+        fade_out_all();
+    }
+    else if (o->oTimer < 370)
+    {
+        set_text(0, "TOOLS USED", -1, 1, 160, 100);
+        fade_in_text(0);
+    }
+    else if (o->oTimer < 450)
+    {
+        set_text(1, "HackerSM64", -1, 0, 80, 120);
+        fade_in_text(1);
+        set_text(2, "Blender", -1, 0, 80, 140);
+        fade_in_text(2);
+        set_text(3, "Sketchup", -1, 2, 220, 120);
+        fade_in_text(3);
+        set_text(4, "Fast64", -1, 2, 220, 140);
+        fade_in_text(4);
+    }
+    else if (o->oTimer < 500)
+    {
+        fade_out_all();
+    }
+    else if (o->oTimer < 530)
+    {
+        set_text(0, "TESTING", -1, 1, 160, 110);
+        fade_in_text(0);
+    }
+    else if (o->oTimer < 600)
+    {
+        set_text(1, "ZenonX", -1, 0, 80, 130);
+        fade_in_text(1);
+        set_text(3, "Crash", -1, 2, 220, 130);
+        fade_in_text(3);
+    }
+    else if (o->oTimer < 650)
+    {
+        fade_out_all();
+    }
+    else if (o->oTimer < 680)
+    {
+        set_text(0, "SPECIAL THANKS", -1, 1, 160, 100);
+        fade_in_text(0);
+    }
+    else if (o->oTimer < 750)
+    {
+        set_text(1, "scuttlebug_raiser", -1, 0, 30, 120);
+        fade_in_text(1);
+        set_text(2, "ArcticJaguar", -1, 0, 30, 140);
+        fade_in_text(2);
+        set_text(3, "ToasterKetchup", -1, 2, 270, 120);
+        fade_in_text(3);
+        set_text(4, "octaviosidoni", -1, 2, 270, 140);
+        fade_in_text(4);
+    }
+    else if (o->oTimer < 820)
+    {
+        fade_out_all();
+    }
+    else if (o->oTimer < 1010)
+    {
+        int segTimer = o->oTimer - 820;
+        int curLetter = segTimer / 9;
+        if (0 == (segTimer % 9))
+            gCreditsEnvColor[1] = 0;
+
+        set_text(0, sThanksYou, curLetter, 0, 100, 120);
+        set_text(1, sThanksYou + curLetter, 1, 0, 100 + gCreditsLastSize, 120);
+        gCreditsEnvColor[0] = 250;
+        
+        if (0 != (segTimer % 9))
+            fade_in_text_fast(1);
+    }
+    else if (o->oTimer < 1050)
+    {
+        if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 50)
+        {
+            set_text(2, "and getting all the stars!", -1, 1, 160, 140);
+            fade_in_text(2);
+        }
+    }
+    else
+    {
+        fade_out_all();
+    }
+}

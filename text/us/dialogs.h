@@ -379,12 +379,12 @@ around while flying, and\n\
 press [Z] to land."))
 
 DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
+       GAME OVER\n\
+\n\
+\n\
+\n\
+\n\
+    To be continued in ZA1\n\
 Press [B] to read signs,\n\
 too. Use the Control Stick\n\
 in the center of the\n\

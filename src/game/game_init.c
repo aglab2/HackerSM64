@@ -556,6 +556,30 @@ void run_demo_inputs(void) {
 
 #endif
 
+void kill_inputs()
+{    
+    // Eliminate the unused bits.
+    gControllers[0].controllerData->button &= VALID_BUTTONS;
+
+    // Check if a demo inputs list exists and if so,
+    // run the active demo input list.
+        // Clear player 2's inputs if they exist. Player 2's controller
+        // cannot be used to influence a demo. At some point, Nintendo
+        // may have planned for there to be a demo where 2 players moved
+        // around instead of just one, so clearing player 2's influence from
+        // the demo had to have been necessary to perform this. Co-op mode, perhaps?
+        if (gControllers[0].controllerData != NULL) {
+            gControllers[0].controllerData->stick_x = 0;
+            gControllers[0].controllerData->stick_y = 0;
+            gControllers[0].controllerData->button = 0;
+        }
+        if (gControllers[1].controllerData != NULL) {
+            gControllers[1].controllerData->stick_x = 0;
+            gControllers[1].controllerData->stick_y = 0;
+            gControllers[1].controllerData->button = 0;
+        }
+}
+
 /**
  * Take the updated controller struct and calculate the new x, y, and distance floats.
  */
@@ -613,6 +637,10 @@ void read_controller_inputs(s32 threadID) {
 #if !defined(DISABLE_DEMO) && defined(KEEP_MARIO_HEAD)
     run_demo_inputs();
 #endif
+    if (gCurrCourseNum == COURSE_LLL)
+    {
+        kill_inputs();
+    }
 
     for (i = 0; i < 2; i++) {
         struct Controller *controller = &gControllers[i];

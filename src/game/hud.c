@@ -602,7 +602,7 @@ void render_hud(void) {
 
         if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES) print_text(10, 40, "SURFACE POOL FULL");
         if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_NODES) print_text(10, 60, "SURFACE NODE POOL FULL");
-
+    
 #ifdef CUSTOM_DEBUG
         if (gCustomDebugMode) {
             render_debug_mode();

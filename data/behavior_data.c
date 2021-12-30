@@ -6220,3 +6220,13 @@ const BehaviorScript bhvPipeRaiser[] = {
         CALL_NATIVE(bhv_pipe_raiser_loop),
     END_LOOP(),
 };
+
+extern void bhv_peach_ending_cs_init();
+extern void bhv_peach_ending_cs_loop();
+const BehaviorScript bhvPeachEndingCS[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    CALL_NATIVE(bhv_peach_ending_cs_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_peach_ending_cs_loop),
+    END_LOOP(),
+};

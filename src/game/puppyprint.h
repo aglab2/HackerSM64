@@ -93,7 +93,7 @@ extern void puppyprint_profiler_finished(void);
 extern void print_set_envcolour(s32 r, s32 g, s32 b, s32 a);
 extern void prepare_blank_box(void);
 extern void finish_blank_box(void);
-extern void print_small_text(s32 x, s32 y, const char *str, s32 align, s32 amount, s32 font);
+extern s32 print_small_text(s32 x, s32 y, const char *str, s32 align, s32 amount, s32 font);
 extern void render_multi_image(Texture *image, s32 x, s32 y, s32 width, s32 height, s32 scaleX, s32 scaleY, s32 mode);
 extern s32  get_text_height(const char *str);
 extern s32  get_text_width(const char *str, s32 font);
