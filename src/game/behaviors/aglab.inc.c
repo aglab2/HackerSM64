@@ -433,7 +433,7 @@ void bhv_peach_ending_cs_loop()
     }
     else if (o->oTimer < 750)
     {
-        set_text(1, "scuttlebug_raiser", -1, 0, 30, 120);
+        set_text(1, "scuttlebug raiser", -1, 0, 30, 120);
         fade_in_text(1);
         set_text(2, "ArcticJaguar", -1, 0, 30, 140);
         fade_in_text(2);
@@ -441,6 +441,10 @@ void bhv_peach_ending_cs_loop()
         fade_in_text(3);
         set_text(4, "octaviosidoni", -1, 2, 270, 140);
         fade_in_text(4);
+        set_text(5, "Yoshi Milkman", -1, 0, 30, 160);
+        fade_in_text(5);
+        set_text(6, "HackerSM64 discord", -1, 2, 270, 160);
+        fade_in_text(6);
     }
     else if (o->oTimer < 820)
     {
