@@ -120,7 +120,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_EXCLAMATION_BOX, -4183, -1207, 10080, 0, -22, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -14079, -973, -649, 0, -22, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -1664, -1029, 2170, 0, -22, 0, (6 << 16), bhvExclamationBox),
-		OBJECT(MODEL_EXCLAMATION_BOX, 15275, -1211, 4453, 0, -22, 0, (6 << 16), bhvExclamationBox),
+		OBJECT(MODEL_EXCLAMATION_BOX, 15157, -1211, 4453, 0, -22, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -5314, -3, 3294, 0, -22, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, 11655, -962, 12435, 0, -22, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, 9273, -822, 2793, 0, 0, 0, (3 << 16), bhvExclamationBox),

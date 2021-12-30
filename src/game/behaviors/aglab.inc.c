@@ -160,7 +160,10 @@ void bhv_fight_ctl_loop()
 {
     if (0 == o->oAction)
     {
-        if (o->oTimer > 100 && o->oDistanceToMario > 500.f)
+        f32 dx = o->oPosX - gMarioObject->oPosX;
+        f32 dz = o->oPosZ - gMarioObject->oPosZ;
+        f32 dtm = dx*dx + dz*dz;
+        if (o->oTimer > 100 && dtm > 250000.f)
         {
             o->oAction = 1;
         }
