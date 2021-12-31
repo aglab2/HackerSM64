@@ -59,7 +59,7 @@ extern u8 bowser_1_dl_btl_map_036_036_01_ci8_pal_rgba16[];
 extern u8 bowser_1_dl__auto_98_ci4[];
 extern u8 bowser_1_dl__auto_98_ci4_pal_rgba16[];
 extern Vtx bowser_1_dl_f2_mesh_layer_1_vtx_cull[8];
-extern Vtx bowser_1_dl_f2_mesh_layer_1_vtx_0[104];
+extern Vtx bowser_1_dl_f2_mesh_layer_1_vtx_0[48];
 extern Gfx bowser_1_dl_f2_mesh_layer_1_tri_0[];
 extern Vtx bowser_1_dl_f2_mesh_layer_1_vtx_1[21];
 extern Gfx bowser_1_dl_f2_mesh_layer_1_tri_1[];

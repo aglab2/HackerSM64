@@ -157,7 +157,7 @@ extern Vtx castle_courtyard_dl_ow3_mesh_layer_1_vtx_10[27];
 extern Gfx castle_courtyard_dl_ow3_mesh_layer_1_tri_10[];
 extern Vtx castle_courtyard_dl_ow3_mesh_layer_1_vtx_11[38];
 extern Gfx castle_courtyard_dl_ow3_mesh_layer_1_tri_11[];
-extern Vtx castle_courtyard_dl_ow3_mesh_layer_1_vtx_12[119];
+extern Vtx castle_courtyard_dl_ow3_mesh_layer_1_vtx_12[94];
 extern Gfx castle_courtyard_dl_ow3_mesh_layer_1_tri_12[];
 extern Vtx castle_courtyard_dl_ow3_mesh_layer_1_vtx_13[12];
 extern Gfx castle_courtyard_dl_ow3_mesh_layer_1_tri_13[];
