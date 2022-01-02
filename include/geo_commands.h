@@ -59,6 +59,8 @@ enum GeoLayoutCommands {
     /*0x1F*/ GEO_CMD_NOP_1F,
     /*0x20*/ GEO_CMD_NODE_CULLING_RADIUS,
     /*0x21*/ GEO_CMD_BONE,
+    
+    /*0x22*/ GEO_CMD_NODE_CULL,
 };
 
 // geo layout macros
@@ -186,6 +188,12 @@ enum GeoLayoutCommands {
 #define GEO_RENDER_RANGE(minDistance, maxDistance) \
     CMD_BBH(GEO_CMD_NODE_LEVEL_OF_DETAIL, 0x00, 0x0000), \
     CMD_HH(minDistance, maxDistance)
+
+#define GEO_CULL(x0, x1, y0, y1, z0, z1) \
+    CMD_BBH(GEO_CMD_NODE_CULL, 0x00, 0x0000), \
+    CMD_HH(x0, x1), \
+    CMD_HH(y0, y1), \
+    CMD_HH(z0, z1) 
 
 /**
  * 0x0E: Create switch-case scene graph node

@@ -76,6 +76,8 @@ enum GraphNodeTypes {
     GRAPH_NODE_TYPE_CULLING_RADIUS,
     GRAPH_NODE_TYPE_ROOT,
     GRAPH_NODE_TYPE_START,
+
+    GRAPH_NODE_TYPE_CULL,
 };
 #else
 // Whether the node type has a function pointer of type GraphNodeFunc
@@ -209,6 +211,16 @@ struct GraphNodeLevelOfDetail {
     /*0x00*/ struct GraphNode node;
     /*0x14*/ s16 minDistance;
     /*0x16*/ s16 maxDistance;
+};
+
+struct GraphNodeCull {
+    /*0x00*/ struct GraphNode node;
+    /*0x14*/ s16 x0;
+    /*0x16*/ s16 x1;
+    /*0x14*/ s16 y0;
+    /*0x16*/ s16 y1;
+    /*0x14*/ s16 z0;
+    /*0x16*/ s16 z1;
 };
 
 /** GraphNode that renders exactly one of its children.
