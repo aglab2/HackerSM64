@@ -544,9 +544,24 @@ void geo_process_cull(struct GraphNodeCull *node)
     // if (!__unlikely(!gIsConsole))
 #endif
     {
-        active = node->x0 < gMarioStates->pos[0] && gMarioStates->pos[0] < node->x1
-              && node->y0 < gMarioStates->pos[1] && gMarioStates->pos[1] < node->y1
-              && node->z0 < gMarioStates->pos[2] && gMarioStates->pos[2] < node->z1;
+        if (node->z1 == 32000)
+        {
+            if (node->z0 < gMarioStates->pos[2])
+            {
+                active = TRUE;
+            }
+            else
+            {
+                active = node->x0 < gMarioStates->pos[0] && gMarioStates->pos[0] < node->x1
+                      && node->y0 < gMarioStates->pos[1] && gMarioStates->pos[1] < node->y1;
+            }
+        }
+        else
+        {
+            active = node->x0 < gMarioStates->pos[0] && gMarioStates->pos[0] < node->x1
+                  && node->y0 < gMarioStates->pos[1] && gMarioStates->pos[1] < node->y1
+                  && node->z0 < gMarioStates->pos[2] && gMarioStates->pos[2] < node->z1;
+        }
     }
 
     if (active
