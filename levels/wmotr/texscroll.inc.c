@@ -1,14 +1,14 @@
-void scroll_wmotr_dl_mc_mesh_layer_1_vtx_10() {
+void scroll_wmotr_dl_mc_mesh_layer_1_vtx_4() {
 	int i = 0;
-	int count = 103;
+	int count = 76;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(wmotr_dl_mc_mesh_layer_1_vtx_10);
+	Vtx *vertices = segmented_to_virtual(wmotr_dl_mc_mesh_layer_1_vtx_4);
 
-	deltaX = (int)(0.25 * 0x20) % width;
+	deltaX = (int)(0.40000009536743164 * 0x20) % width;
 
 	if (absi(currentX) > width) {
 		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
@@ -20,7 +20,7 @@ void scroll_wmotr_dl_mc_mesh_layer_1_vtx_10() {
 	currentX += deltaX;
 }
 
-void scroll_wmotr_dl_mc_mesh_layer_1_vtx_19() {
+void scroll_wmotr_dl_mc_mesh_layer_1_vtx_13() {
 	int i = 0;
 	int count = 6;
 	int width = 32 * 0x20;
@@ -28,7 +28,7 @@ void scroll_wmotr_dl_mc_mesh_layer_1_vtx_19() {
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(wmotr_dl_mc_mesh_layer_1_vtx_19);
+	Vtx *vertices = segmented_to_virtual(wmotr_dl_mc_mesh_layer_1_vtx_13);
 
 	deltaY = (int)(0.5199999809265137 * 0x20) % height;
 
@@ -42,7 +42,36 @@ void scroll_wmotr_dl_mc_mesh_layer_1_vtx_19() {
 	currentY += deltaY;
 }
 
+void scroll_sts_mat_wmotr_dl___f3d_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_wmotr_dl___f3d_layer1);
+	shift_s(mat, 35, PACK_TILESIZE(0, 1));
+};
+
+void scroll_wmotr_dl_mc_004_mesh_layer_1_vtx_7() {
+	int i = 0;
+	int count = 21;
+	int width = 64 * 0x20;
+	int height = 64 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	Vtx *vertices = segmented_to_virtual(wmotr_dl_mc_004_mesh_layer_1_vtx_7);
+
+	deltaX = (int)(0.40000009536743164 * 0x20) % width;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+	}
+	currentX += deltaX;
+}
+
 void scroll_wmotr() {
-	scroll_wmotr_dl_mc_mesh_layer_1_vtx_10();
-	scroll_wmotr_dl_mc_mesh_layer_1_vtx_19();
+	scroll_wmotr_dl_mc_mesh_layer_1_vtx_4();
+	scroll_wmotr_dl_mc_mesh_layer_1_vtx_13();
+	scroll_sts_mat_wmotr_dl___f3d_layer1();
+	scroll_wmotr_dl_mc_004_mesh_layer_1_vtx_7();
 }

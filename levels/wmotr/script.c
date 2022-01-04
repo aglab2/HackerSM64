@@ -164,14 +164,14 @@ const LevelScript level_wmotr_entry[] = {
 		OBJECT(MODEL_NONE, -4496, 474, 8336, 0, 0, 0, 0x00000000, bhvHiddenRedCoinStar),
 		TERRAIN(wmotr_area_1_collision),
 		MACRO_OBJECTS(wmotr_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_100CC),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, -4668, 21, 2932),
+	MARIO_POS(0x01, 0, -4510, 21, 8325),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
