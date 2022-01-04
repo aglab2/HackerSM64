@@ -82,6 +82,14 @@ struct RenderModeContainer {
     u32 modes[LAYER_COUNT];
 };
 
+#define RM_AA_ZB_TEX_EDGE_DECAL(clk) \
+    AA_EN | Z_CMP | IM_RD | CVG_DST_WRAP |        \
+    CVG_X_ALPHA | ALPHA_CVG_SEL | ZMODE_DEC | TEX_EDGE |    \
+    GBL_c##clk(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)
+    
+#define	G_RM_AA_ZB_TEX_EDGE_DECAL	RM_AA_ZB_TEX_EDGE_DECAL(1)
+#define	G_RM_AA_ZB_TEX_EDGE_DECAL2	RM_AA_ZB_TEX_EDGE_DECAL(2)
+
 /* Rendermode settings for cycle 1 for all 8 or 13 layers. */
 struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_OPA_SURF,                      // LAYER_FORCE
@@ -104,7 +112,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         /* z-buffered */
         G_RM_ZB_OPA_SURF,                   // LAYER_FORCE
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE
-        G_RM_AA_ZB_OPA_INTER,               // LAYER_OPAQUE_INTER
+        G_RM_AA_ZB_TEX_EDGE_DECAL,               // LAYER_OPAQUE_INTER
         G_RM_AA_ZB_OPA_DECAL,               // LAYER_OPAQUE_DECAL
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_ALPHA
 #if SILHOUETTE
@@ -141,7 +149,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         /* z-buffered */
         G_RM_ZB_OPA_SURF2,                  // LAYER_FORCE
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE
-        G_RM_AA_ZB_OPA_INTER2,              // LAYER_OPAQUE_INTER
+        G_RM_AA_ZB_TEX_EDGE_DECAL2,              // LAYER_OPAQUE_INTER
         G_RM_AA_ZB_OPA_DECAL2,              // LAYER_OPAQUE_DECAL
         G_RM_AA_ZB_TEX_EDGE2,               // LAYER_ALPHA
 #if SILHOUETTE
