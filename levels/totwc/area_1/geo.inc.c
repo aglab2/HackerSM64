@@ -8,6 +8,7 @@ const GeoLayout totwc_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, totwc_dl_s2_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, totwc_dl_s2_001_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, totwc_dl_s2_003_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 5436, 0, -1983, 90, 0, 0, totwc_dl_zbg_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

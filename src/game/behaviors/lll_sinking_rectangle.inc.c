@@ -26,5 +26,5 @@ void bhv_lll_sinking_rectangular_platform_loop(void) {
 }
 
 void bhv_lll_sinking_square_platforms_loop(void) {
-    sinking_rectangular_plat_actions(0.5f, 0x100);
+    sinking_rectangular_plat_actions(0.5f, 0x100 + o->oBehParams2ndByte);
 }

@@ -549,7 +549,7 @@ void geo_process_cull(struct GraphNodeCull *node)
 {
     s32 active = TRUE;
 #ifdef AUTO_LOD
-    // if (!__unlikely(!gIsConsole))
+    if (!__unlikely(!gIsConsole))
 #endif
     {
         if (node->z1 == 32000)

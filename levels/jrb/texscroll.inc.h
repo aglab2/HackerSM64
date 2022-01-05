@@ -1,4 +1,9 @@
-extern void scroll_jrb_dl_zzthing_mesh_layer_5_vtx_0();
+extern void scroll_jrb_dl_c3_005_mesh_layer_1_vtx_1();
+extern void scroll_jrb_dl_c3_005_mesh_layer_5_vtx_0();
+extern void scroll_jrb_dl_c3_006_mesh_layer_5_vtx_0();
+extern void scroll_jrb_dl_c3_007_mesh_layer_5_vtx_0();
+extern void scroll_jrb_dl_c3_008_mesh_layer_5_vtx_0();
+extern void scroll_jrb_dl_c3_009_mesh_layer_5_vtx_0();
 extern void scroll_jrb_dl_c3_a2_mesh_layer_5_vtx_0();
-extern void scroll_jrb_dl_c3_a2_004_mesh_layer_5_vtx_0();
+extern void scroll_jrb_dl_c3_a2_004_mesh_layer_6_vtx_0();
 extern void scroll_jrb();
