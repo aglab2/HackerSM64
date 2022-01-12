@@ -72,4 +72,4 @@
 // -- WIGGLER --
 
 // The number of segments Wiggler has, not including the head. Vanilla is 4.
-#define WIGGLER_NUM_SEGMENTS     9
+#define WIGGLER_NUM_SEGMENTS     2

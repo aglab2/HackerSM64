@@ -1807,7 +1807,9 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 #if ENABLE_RUMBLE
         queue_rumble_particles(m);
 #endif
-
+        if (gIsConsole && gCurrCourseNum == COURSE_JRB) {
+            gMarioState->particleFlags &= ~PARTICLE_DUST;
+        }
         return gMarioState->particleFlags;
     }
 

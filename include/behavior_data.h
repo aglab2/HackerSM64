@@ -553,5 +553,7 @@ extern const BehaviorScript bhvWarpGateBlock[];
 extern const BehaviorScript bhvWallCtl[];
 extern const BehaviorScript bhvPipeRaiser[];
 extern const BehaviorScript bhvPeachEndingCS[];
+extern const BehaviorScript bhvSandColorCtl[];
+extern const BehaviorScript bhvSnowColorCtl[];
 
 #endif // BEHAVIOR_DATA_H

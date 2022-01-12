@@ -2873,6 +2873,7 @@ void update_camera(struct Camera *c) {
         if (cam_select_alt_mode(CAM_SELECTION_NONE) == CAM_SELECTION_MARIO) {
             if (gPlayer1Controller->buttonPressed & R_TRIG) {
                 if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
+                    s8DirModeBaseYaw = (0x9000 + gMarioStates->faceAngle[1]) & 0xE000;
                     set_cam_angle(CAM_ANGLE_MARIO);
                 } else {
                     set_cam_angle(CAM_ANGLE_LAKITU);

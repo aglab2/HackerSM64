@@ -17,15 +17,17 @@ ALIGNED8 static const Texture burn_smoke_seg4_sub_dl_texture[] = {
 };
 
 // 0x04022000 - 0x04022028
-const Gfx burn_smoke_seg4_sub_dl_begin[] = {
+Gfx burn_smoke_seg4_sub_dl_begin[] = {
     gsDPPipeSync(),
 #ifdef BURN_SMOKE_FIX
     gsDPSetCombineMode(G_CC_MODULATEIFADEA, G_CC_MODULATEIFADEA),
 #else
     gsDPSetCombineMode(G_CC_MODULATERGBA, G_CC_MODULATERGBA),
 #endif
+    gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetAlphaCompare(G_AC_DITHER),
     gsSPEndDisplayList(),
 };
 
@@ -42,6 +44,8 @@ const Gfx burn_smoke_seg4_sub_dl_end[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
     gsSPSetGeometryMode(G_LIGHTING),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetRenderMode(G_RM_AA_ZB_XLU_INTER, G_RM_AA_ZB_XLU_INTER2),
     gsSPEndDisplayList(),
 };
 

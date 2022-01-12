@@ -119,6 +119,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_RR_OCTAGONAL_PLATFORM, -4673, 2810, -5670, 90, -46, 0, (1 << 16), bhvOctagonalPlatformRotating),
 		OBJECT(MODEL_RR_OCTAGONAL_PLATFORM, -3145, 2810, -11172, 90, -86, 0, (1 << 16), bhvOctagonalPlatformRotating),
 		OBJECT(MODEL_RR_OCTAGONAL_PLATFORM, -508, 2810, -9657, 90, -148, 0, (1 << 16), bhvOctagonalPlatformRotating),
+		OBJECT(MODEL_NONE, 603, 2795, 2578, 0, -21, 0, 0x00000000, bhvSnowColorCtl),
 		OBJECT(MODEL_STAR, -5282, 1178, 10393, 0, 0, 0, 0x00000000, bhvStar),
 		OBJECT(MODEL_STAR, -12398, 9825, 3848, 0, 0, 0, (1 << 24), bhvStar),
 		OBJECT(MODEL_STAR, 2233, 3228, -8347, 0, 0, 0, (2 << 24), bhvStar),

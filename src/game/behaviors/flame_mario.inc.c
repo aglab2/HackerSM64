@@ -1,6 +1,21 @@
 // flame_mario.inc.c
 
+extern Gfx burn_smoke_seg4_sub_dl_begin[];
+
+static void fix_smoke_emu()
+{
+    u32* smoketh = (u32*) segmented_to_virtual(burn_smoke_seg4_sub_dl_begin);
+    smoketh[4] = 0;
+    smoketh[5] = 0;
+    smoketh[10] = 0;
+    smoketh[11] = 0;
+}
+
 void bhv_black_smoke_upward_loop(void) {
+    if (__builtin_expect(!gIsConsole, FALSE))
+    {
+        fix_smoke_emu();
+    }
     spawn_object_with_scale(o, MODEL_BURN_SMOKE, bhvBlackSmokeBowser, o->header.gfx.scale[0]);
 }
 
@@ -17,6 +32,7 @@ void bhv_black_smoke_bowser_loop(void) {
     o->oPosY += o->oVelY;
 }
 
+extern u8 gIsConsole;
 void bhv_black_smoke_mario_loop(void) {
     if (o->oTimer == 0) {
         cur_obj_set_pos_relative(gMarioObject, 0, 0, -30.0f);
@@ -28,7 +44,8 @@ void bhv_black_smoke_mario_loop(void) {
     o->oMoveAngleYaw += o->oAngleVelYaw;
     o->oPosY += o->oVelY;
 #ifdef BURN_SMOKE_FIX
-    cur_obj_scale(1.0f + (o->oTimer / 16.0f));
+    f32 scd = gIsConsole ? 30.f : 16.f;
+    cur_obj_scale(1.0f + (o->oTimer / scd));
     o->oOpacity -= 4;
     if (o->oOpacity < 10) {
         obj_mark_for_deletion(o);
@@ -40,6 +57,10 @@ void bhv_flame_mario_loop(void) {
     cur_obj_scale(2.0f);
 
     if (o->oTimer & 1) {
+        if (__builtin_expect(!gIsConsole, FALSE))
+        {
+            fix_smoke_emu();
+        }
         spawn_object(o, MODEL_BURN_SMOKE, bhvBlackSmokeMario);
     }
 

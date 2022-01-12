@@ -508,3 +508,77 @@ void bhv_peach_ending_cs_loop()
         fade_out_all();
     }
 }
+
+extern Gfx mat_bbh_dl__auto_6_f3d[];
+void bhv_sand_color_ctl_loop()
+{
+
+}
+
+// Only 15 colors here for whatever reason lol
+extern u8 wf_dl__11_ci4_pal_rgba16[];
+extern u8 wf_dl__09_stone00_2_ci4_pal_rgba16[];
+void bhv_snow_color_ctl_init()
+{
+    // Clear all colors
+    {
+        u8* ptr = segmented_to_virtual(wf_dl__11_ci4_pal_rgba16);
+        for (int i = 0; i < 15; i++)
+        {
+            ptr[2 * i + 1] &= ~1;
+        }
+    }
+    {
+        u8* ptr = segmented_to_virtual(wf_dl__09_stone00_2_ci4_pal_rgba16);
+        for (int i = 0; i < 16; i++)
+        {
+            ptr[2 * i + 1] &= ~1;
+        }
+    }
+}
+
+extern Gfx mat_wf_dl__11_f3d_layer1[];
+extern Gfx mat_wf_dl_wall2_layer1[];
+
+void bhv_snow_color_ctl_loop()
+{
+    {
+        u8* ptr = segmented_to_virtual(mat_wf_dl__11_f3d_layer1) + 36 * 8 + 4;
+        ptr[0] = 58 / 5 * (1 + sins(o->oTimer * 0x400));
+        ptr[1] = 35 / 4 * (1 + sins(o->oTimer * 0x400));
+        ptr[2] = 76 / 3 * (1 + sins(o->oTimer * 0x400));
+    }
+    {
+        u8* ptr = segmented_to_virtual(mat_wf_dl_wall2_layer1) + 36 * 8 + 4;
+        ptr[0] = 58 / 6 * (1 + sins(o->oTimer * 0x400));
+        ptr[1] = 35 / 5 * (1 + sins(o->oTimer * 0x400));
+        ptr[2] = 76 / 4 * (1 + sins(o->oTimer * 0x400));
+    }
+
+    // do color thingy
+    if (48 == (o->oTimer % 64))
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            {
+                u8* ptr = segmented_to_virtual(wf_dl__11_ci4_pal_rgba16);
+                int off = random_u16() % 15;
+                u8* bapart = &ptr[2 * off + 1];
+                // flip bit, this is slightly scuffed but i cant think of a better way to do this
+                u8 bit = *bapart & 1;
+                bit ^= 1;
+                *bapart &= ~1;
+                *bapart |= bit;
+            }
+            {
+                u8* ptr = segmented_to_virtual(wf_dl__09_stone00_2_ci4_pal_rgba16);
+                int off = random_u16() % 16;
+                u8* bapart = &ptr[2 * off + 1];
+                u8 bit = *bapart & 1;
+                bit ^= 1;
+                *bapart &= ~1;
+                *bapart |= bit;
+            }
+        }
+    }
+}

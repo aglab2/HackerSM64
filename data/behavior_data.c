@@ -6230,3 +6230,21 @@ const BehaviorScript bhvPeachEndingCS[] = {
         CALL_NATIVE(bhv_peach_ending_cs_loop),
     END_LOOP(),
 };
+
+extern void bhv_sand_color_ctl_loop();
+const BehaviorScript bhvSandColorCtl[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sand_color_ctl_loop),
+    END_LOOP(),
+};
+
+extern void bhv_snow_color_ctl_init();
+extern void bhv_snow_color_ctl_loop();
+const BehaviorScript bhvSnowColorCtl[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    CALL_NATIVE(bhv_snow_color_ctl_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_snow_color_ctl_loop),
+    END_LOOP(),
+};
