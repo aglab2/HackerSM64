@@ -6248,3 +6248,31 @@ const BehaviorScript bhvSnowColorCtl[] = {
         CALL_NATIVE(bhv_snow_color_ctl_loop),
     END_LOOP(),
 };
+
+extern void bhv_trimo_init();
+extern void bhv_trimo_loop();
+const BehaviorScript bhvTrimo[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 30000),
+    LOAD_COLLISION_DATA(trimo_collision),
+    CALL_NATIVE(bhv_trimo_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_trimo_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_trimo_init2();
+extern void bhv_trimo_loop2();
+const BehaviorScript bhvTrimo2[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 30000),
+    LOAD_COLLISION_DATA(trimo_collision),
+    CALL_NATIVE(bhv_trimo_init2),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_trimo_loop2),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

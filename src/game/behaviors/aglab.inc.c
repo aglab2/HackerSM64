@@ -582,3 +582,105 @@ void bhv_snow_color_ctl_loop()
         }
     }
 }
+
+extern const Trajectory jrb_area_1_spline_trimo_1[];
+extern const Trajectory jrb_area_1_spline_trimo_2[];
+void bhv_trimo_init()
+{
+    o->oForwardVel = 50.f;
+}
+
+void bhv_trimo_loop()
+{
+    if (0 == o->oAction)
+    {
+        if (o->oTimer == 0)
+        {
+            struct Waypoint* path = segmented_to_virtual(jrb_area_1_spline_trimo_2);
+            path += o->oBehParams2ndByte;
+            // very nice culprit
+            o->oBehParams2ndByte = 0;
+            o->oPathedPrevWaypointFlags = 0;
+            o->oPathedStartWaypoint = o->oPathedPrevWaypoint = path;
+            o->oPosX = path->pos[0];
+            o->oPosZ = path->pos[2];
+        }
+
+        cur_obj_follow_path();
+        o->oPosY += 10.f / 25.f;
+        
+        // lazy lmfao
+        cur_obj_rotate_yaw_toward(o->oPathedTargetYaw, 10000);
+        cur_obj_rotate_face_angle_using_vel();
+        obj_scale(o, 0.04f * o->oTimer);
+        if (25 == o->oTimer)
+            o->oAction = 1;
+    }
+    else if (1 == o->oAction)
+    {
+        int status = cur_obj_follow_path();
+        if (status == PATH_REACHED_END)
+        {
+            o->oAction = 2;
+        }
+        
+        cur_obj_rotate_yaw_toward(o->oPathedTargetYaw, 3000);
+        cur_obj_rotate_face_angle_using_vel();
+        cur_obj_compute_vel_xz();
+
+        o->oPosX += o->oVelX;
+        o->oPosZ += o->oVelZ;
+    }
+    else
+    {
+        o->oPosX += o->oVelX;
+        o->oPosZ += o->oVelZ;
+        obj_scale(o, 0.1f * (10 - o->oTimer));
+        if (10 == o->oTimer)
+        {
+            o->oAction = 0;
+            o->oPosY -= 10.f;
+        }
+    }
+}
+
+void bhv_trimo_init2()
+{
+    o->oForwardVel = 50.f;
+    o->oPosY += 10.f;
+}
+
+void bhv_trimo_loop2()
+{
+    if (0 == o->oAction)
+    {
+        if (o->oTimer == 0)
+        {
+            struct Waypoint* path = segmented_to_virtual(jrb_area_1_spline_trimo_1);
+            path += o->oBehParams2ndByte;
+            // very nice culprit
+            o->oBehParams2ndByte = 0;
+            o->oPathedPrevWaypointFlags = 0;
+            o->oPathedStartWaypoint = o->oPathedPrevWaypoint = path;
+            o->oPosX = path->pos[0];
+            o->oPosZ = path->pos[2];
+        }
+
+        cur_obj_follow_path();
+        o->oAction = 1;
+    }
+    else
+    {
+        if (cur_obj_follow_path() == PATH_REACHED_END)
+        {
+            o->oAction = 0;
+        }
+    }
+    
+    cur_obj_rotate_yaw_toward(o->oPathedTargetYaw, 3000);
+    cur_obj_rotate_face_angle_using_vel();
+    cur_obj_compute_vel_xz();
+
+    o->oPosX += o->oVelX;
+    o->oPosZ += o->oVelZ;
+}

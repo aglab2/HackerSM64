@@ -68,3 +68,6 @@ static const Lights1 lll_seg7_lights_0700FC60 = gdSPDefLights1(
 #include "levels/lll/tilting_square_platform/collision.inc.c"
 
 #include "levels/jrb/leveldata.inc.c"
+
+#include "levels/jrb/trimo/model.inc.c"
+#include "levels/jrb/trimo/collision.inc.c"

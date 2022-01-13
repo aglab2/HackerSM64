@@ -28,3 +28,5 @@
 #include "levels/lll/tilting_square_platform/geo.inc.c"
 
 #include "levels/jrb/geo.inc.c"
+
+#include "levels/jrb/trimo/geo.inc.c"

@@ -74,4 +74,8 @@ extern const GeoLayout lll_geo_000BF8[];
 
 #include "levels/jrb/header.inc.h"
 
+#include "levels/jrb/trimo/geo_header.h"
+
+#include "levels/jrb/trimo/collision_header.h"
+
 #endif

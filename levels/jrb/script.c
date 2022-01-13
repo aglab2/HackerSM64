@@ -55,6 +55,7 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_LLL_SINKING_RECTANGULAR_PLATFORM, lll_geo_000BC8), 
 	LOAD_MODEL_FROM_GEO(MODEL_LLL_TILTING_SQUARE_PLATFORM, lll_geo_000BF8), 
 	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TRIMO, trimo_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -135,7 +136,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 10360, -1551, 5375, 0, -22, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 12912, -870, 2984, 0, -22, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, -4459, -1551, 5086, 0, -22, 0, 0x00000000, bhvKoopa),
-		MARIO_POS(0x01, 0, 14342, -1230, 3551),
+		MARIO_POS(0x01, 0, -3556, -1551, 9572),
 		OBJECT(MODEL_NONE, 11039, -596, 12239, 0, -113, 0, (0xa << 16), bhvSpinAirborneWarp),
 		OBJECT(MODEL_PIRANHA_PLANT, -7767, -556, 4831, 0, -22, 0, 0x00000000, bhvPiranhaPlant),
 		OBJECT(MODEL_PIRANHA_PLANT, -3191, -1551, 3281, 0, -22, 0, 0x00000000, bhvPiranhaPlant),
@@ -171,6 +172,13 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, 1944, -2345, -11217, 0, 174, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, 4238, -1540, -10229, 0, -136, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, 5443, -923, -8999, 0, -144, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
+		OBJECT(MODEL_TRIMO, 9008, -1551, 5349, 0, -1, 0, 0x00000000, bhvTrimo),
+		OBJECT(MODEL_TRIMO, 12105, -1551, 5306, 0, -1, 0, (1 << 16), bhvTrimo),
+		OBJECT(MODEL_TRIMO, 13702, -1551, 6772, 0, -1, 0, (2 << 16), bhvTrimo),
+		OBJECT(MODEL_TRIMO, -4287, -1551, 9380, 0, -1, 0, 0x00000000, bhvTrimo2),
+		OBJECT(MODEL_TRIMO, -5577, -1551, 7911, 0, -1, 0, (1 << 16), bhvTrimo2),
+		OBJECT(MODEL_TRIMO, -5175, -1551, 5762, 0, -1, 0, (3 << 16), bhvTrimo2),
+		OBJECT(MODEL_TRIMO, -3930, -1551, 7369, 0, -1, 0, (5 << 16), bhvTrimo2),
 		OBJECT(MODEL_NONE, -13943, 365, 2555, 0, 0, 0, 0x00000000, bhvWallCtl),
 		OBJECT(MODEL_NONE, -1088, -2426, 6090, 0, -69, 0, (0xc << 16), bhvWarp),
 		OBJECT(MODEL_THI_WARP_PIPE, -6611, -767, 8139, 0, 0, 0, (0xb << 16), bhvWarpPipe),
@@ -219,7 +227,7 @@ const LevelScript level_jrb_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, 14342, -1230, 3551),
+	MARIO_POS(0x01, 0, -3556, -1551, 9572),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

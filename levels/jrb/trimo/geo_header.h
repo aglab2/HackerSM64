@@ -1,0 +1,11 @@
+extern const GeoLayout trimo_geo[];
+extern Lights1 trimo_f3d_material_lights;
+extern u8 trimo_spike_ci8[];
+extern u8 trimo_spike_ci8_pal_rgba16[];
+extern Vtx trimo_Plane_mesh_layer_1_vtx_cull[8];
+extern Vtx trimo_Plane_mesh_layer_1_vtx_0[3];
+extern Gfx trimo_Plane_mesh_layer_1_tri_0[];
+extern Gfx mat_trimo_f3d_material[];
+extern Gfx mat_revert_trimo_f3d_material[];
+extern Gfx trimo_Plane_mesh_layer_1[];
+extern Gfx trimo_material_revert_render_settings[];
