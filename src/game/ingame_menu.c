@@ -1720,6 +1720,99 @@ void render_pause_castle_menu_box(s16 x, s16 y) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+static int gDialogNumToCourseNumMap[] = 
+{
+    /* 0 */ COURSE_BOB,
+    /* 1 */ COURSE_WF,
+    /* 2 */ COURSE_JRB,
+    /* 3 */ COURSE_CCM,
+    /* 4 */ COURSE_BBH,
+
+    // ow0
+    /* 5 */ COURSE_SA,
+
+    // ow1
+    /* 6 */ COURSE_WMOTR,
+    /* 7 */ COURSE_BITDW,
+
+    // ow2
+    /* 8 */  COURSE_PSS,
+    /* 9 */ COURSE_TOTWC,
+    /* 10 */ COURSE_BITFS,
+
+    // ow3
+    /* 11 */ COURSE_COTMC,
+    /* 12 */ COURSE_BITS,
+    /* 13 */ COURSE_CAKE_END,
+
+    // just some filler because I am lazy
+    // course_num_to_dialog_num must never find this ;)
+    COURSE_RR,
+    COURSE_RR,
+    COURSE_RR,
+    COURSE_RR,
+    COURSE_RR,
+
+    // make sure bonus stages is the end
+    COURSE_BONUS_STAGES,
+};
+
+static int gDialogNumToStarCount[] = 
+{
+    /* 0 */ 6,
+    /* 1 */ 6,
+    /* 2 */ 6,
+    /* 3 */ 6,
+    /* 4 */ 6,
+
+    // ow0
+    /* 5 */ 1,
+
+    // ow1
+    /* 6 */ 1,
+    /* 7 */ 1,
+
+    // ow2
+    /* 8 */  2,
+    /* 9 */ 1,
+    /* 10 */ 1,
+
+    // ow3
+    /* 11 */ 2,
+    /* 12 */ 1,
+    /* 13 */ 1,
+
+    // just some filler because I am lazy
+    // course_num_to_dialog_num must never find this ;)
+    6,
+    6,
+    6,
+    6,
+    6,
+
+    // make sure bonus stages is the end
+    6,
+};
+
+// cbaing lookup in gDialogNumToCourseNumMap that is O(n)
+// it is barely ever used so I just accept perf implications
+int course_num_to_dialog_num(int course)
+{
+    int i = 0;
+    while (1)
+    {
+        int iCourseNum = gDialogNumToCourseNumMap[i];
+        // we reached The End, just output default value
+        if (COURSE_BONUS_STAGES == iCourseNum || COURSE_RR == iCourseNum)
+            return COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES);
+
+        if (course == iCourseNum)
+            return i;
+
+        i++;
+    }
+}
+
 void highlight_last_course_complete_stars(void) {
     u8 doneCourseIndex;
 
@@ -1733,7 +1826,7 @@ void highlight_last_course_complete_stars(void) {
         }
     }
 
-    gDialogLineNum = doneCourseIndex;
+    gDialogLineNum = course_num_to_dialog_num(doneCourseIndex + 1);
 }
 
 void print_hud_pause_colorful_str(void) {
@@ -1747,7 +1840,7 @@ void print_hud_pause_colorful_str(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
-void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseIndex) {
+void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseIndex, s16 maxStarCount) {
     s16 hasStar = 0;
 
     u8 str[COURSE_STAGES_COUNT * 2];
@@ -1776,7 +1869,7 @@ void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseInd
         nextStar++;
     }
 
-    if (starCount == nextStar && starCount != 6) {
+    if (starCount == nextStar && starCount != maxStarCount) {
         str[nextStar * 2] = DIALOG_CHAR_STAR_OPEN;
         str[nextStar * 2 + 1] = DIALOG_CHAR_SPACE;
         nextStar++;
@@ -1812,7 +1905,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     }
 
     if (gDialogLineNum != COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES)) {
-        while (save_file_get_course_star_count(gCurrSaveFileNum - 1, gDialogLineNum) == 0) {
+        while (save_file_get_course_star_count(gCurrSaveFileNum - 1, gDialogNumToCourseNumMap[gDialogLineNum] - 1) == 0) {
             if (gDialogLineNum >= prevCourseIndex) {
                 gDialogLineNum++;
             } else {
@@ -1831,12 +1924,12 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     if (gDialogLineNum <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) { // Main courses
-        courseName = segmented_to_virtual(courseNameTbl[gDialogLineNum]);
-        render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, gDialogLineNum);
+        int courseNum = gDialogNumToCourseNumMap[gDialogLineNum];
+        courseName = segmented_to_virtual(courseNameTbl[courseNum - 1]);
+        render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, courseNum - 1, gDialogNumToStarCount[gDialogLineNum]);
         print_generic_string(x + 34, y - 5, textCoin);
-        int_to_str(save_file_get_course_coin_score(gCurrSaveFileNum - 1, gDialogLineNum), strVal);
+        int_to_str(save_file_get_course_coin_score(gCurrSaveFileNum - 1, courseNum - 1), strVal);
         print_generic_string(x + 54, y - 5, strVal);
-        // FIXME AGLAB
         print_generic_string(x - 20, y + 120, holdBToWarp);
     } else { // Castle secret stars
         u8 textStarX[] = { TEXT_STAR_X };
@@ -1927,7 +2020,7 @@ s32 render_pause_courses_and_castle(void) {
                 play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
                 gMenuMode = MENU_MODE_NONE;
                 gDialogBoxState = DIALOG_STATE_OPENING;
-                s32 doWarp = gDialogLineNum < 10 && gPlayer3Controller->buttonDown & B_BUTTON;
+                s32 doWarp = gDialogLineNum < 15 && gPlayer3Controller->buttonDown & B_BUTTON;
                 if (doWarp)
                 {
                     gUseWarp = gDialogLineNum;

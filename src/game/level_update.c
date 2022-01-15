@@ -1009,7 +1009,34 @@ s32 play_mode_normal(void) {
 
 extern s32 gUseWarp;
 static s32 warpTbl[] = {
-    LEVEL_BOB, LEVEL_WF, LEVEL_JRB, LEVEL_CCM, LEVEL_BBH, 
+    /* 0 */ LEVEL_BOB,
+    /* 1 */ LEVEL_WF,
+    /* 2 */ LEVEL_JRB,
+    /* 3 */ LEVEL_CCM,
+    /* 4 */ LEVEL_BBH,
+
+    // ow0
+    /* 5 */ LEVEL_SA,
+
+    // ow1
+    /* 6 */ LEVEL_WMOTR,
+    /* 7 */ LEVEL_BOWSER_1,
+
+    // ow2
+    /* 8 */  LEVEL_PSS,
+    /* 9 */  LEVEL_TOTWC,
+    /* 10 */ LEVEL_BITFS,
+
+    // ow3
+    /* 11 */ LEVEL_COTMC,
+    /* 12 */ LEVEL_BITS,
+    /* 13 */ LEVEL_BOWSER_3,
+
+    LEVEL_RR,
+    LEVEL_RR,
+    LEVEL_RR,
+    LEVEL_RR,
+    LEVEL_RR,
 };
 
 s32 play_mode_paused(void) {
@@ -1024,7 +1051,7 @@ s32 play_mode_paused(void) {
         if (gDebugLevelSelect) {
             fade_into_special_warp(WARP_SPECIAL_LEVEL_SELECT, 1);
         } else {
-            if (gUseWarp > 10)
+            if (gUseWarp >= 15)
             {
                 struct ObjectWarpNode* warpNode = area_get_warp_node(0xf1);
                 initiate_warp(warpNode->node.destLevel, warpNode->node.destArea, warpNode->node.destNode, 0);
