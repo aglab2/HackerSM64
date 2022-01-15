@@ -209,6 +209,7 @@ const LevelScript script_func_global_2[] = {
     LOAD_MODEL_FROM_DL( MODEL_CAP_SWITCH_EXCLAMATION,  cap_switch_exclamation_seg5_dl_05002E00, LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_CAP_SWITCH,              cap_switch_geo),
     LOAD_MODEL_FROM_DL( MODEL_CAP_SWITCH_BASE,         cap_switch_base_seg5_dl_05003120,        LAYER_OPAQUE),
+    LOAD_MODEL_FROM_GEO(MODEL_FWOOSH,                  fwoosh_geo),
     RETURN(),
 };
 
@@ -250,7 +251,6 @@ const LevelScript script_func_global_7[] = {
     LOAD_MODEL_FROM_DL( MODEL_DL_MONTY_MOLE_HOLE,      monty_mole_hole_seg5_dl_05000840, LAYER_TRANSPARENT_DECAL),
     LOAD_MODEL_FROM_GEO(MODEL_MONTY_MOLE,              monty_mole_geo),
     LOAD_MODEL_FROM_GEO(MODEL_UKIKI,                   ukiki_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_FWOOSH,                  fwoosh_geo),
     RETURN(),
 };
 

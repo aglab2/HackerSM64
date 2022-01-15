@@ -15,3 +15,4 @@
 #include "heave_ho/geo.inc.c"
 
 #include "capswitch/geo.inc.c"
+#include "fwoosh/geo.inc.c"

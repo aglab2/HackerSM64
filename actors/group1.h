@@ -105,4 +105,9 @@ extern const Gfx capswitch_seg5_dl_050033B0[];
 extern const Collision capswitch_collision_050033D0[];
 extern const Collision capswitch_collision_05003448[];
 
+// fwoosh
+extern const GeoLayout fwoosh_geo[];
+extern const Gfx fwoosh_seg5_dl_05016008[];
+extern const Gfx fwoosh_seg5_dl_05016040[];
+
 #endif

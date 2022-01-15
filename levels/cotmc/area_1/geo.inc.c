@@ -3,13 +3,14 @@
 const GeoLayout cotmc_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, -1021, 983, 3524, cotmc_dl__bg_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE_DECAL, 90, 0, 0, cotmc_dl_s1_mesh_layer_2),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, cotmc_dl_s1_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, cotmc_dl_s1_002_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, cotmc_dl_s1_003_mesh_layer_1),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 1912, -2344, -696, 90, 0, 0, cotmc_dl_zbg_mesh_layer_5),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE_INTER, 90, 0, 0, cotmc_dl_s1_004_mesh_layer_3),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -30,6 +31,7 @@ const GeoLayout cotmc_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, cotmc_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, cotmc_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, cotmc_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, cotmc_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),

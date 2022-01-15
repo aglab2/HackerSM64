@@ -6,8 +6,8 @@ struct ObjectHitbox sStrongWindParticleHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 20,
-    /* height:            */ 70,
+    /* radius:            */ 50,
+    /* height:            */ 150,
     /* hurtboxRadius:     */ 20,
     /* hurtboxHeight:     */ 70,
 };

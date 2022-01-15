@@ -76,18 +76,14 @@ static void cloud_fwoosh_update(void) {
             }
         } else {
             // Return to normal size
-            approach_f32_ptr(&o->header.gfx.scale[0], 3.0f, 0.012f);
+            approach_f32_ptr(&o->header.gfx.scale[0], 3.0f, 0.05f);
             o->oCloudFwooshMovementRadius += 0xC8;
 
             // If mario stays nearby for 100 frames, begin blowing
-            if (o->oDistanceToMario < 1000.0f) {
-                if (o->oTimer > 100) {
+                if (o->oTimer > 10) {
                     o->oCloudBlowing = TRUE;
                     o->oCloudGrowSpeed = 0.14f;
                 }
-            } else {
-                o->oTimer = 0;
-            }
 
             o->oCloudCenterX = o->oHomeX + 100.0f * coss(o->oCloudFwooshMovementRadius);
             o->oPosZ = o->oHomeZ + 100.0f * sins(o->oCloudFwooshMovementRadius);

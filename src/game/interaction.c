@@ -1168,8 +1168,8 @@ u32 interact_strong_wind(struct MarioState *m, UNUSED u32 interactType, struct O
         m->vel[1] = 12.0f;
 
         play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
-        update_mario_sound_and_camera(m);
-        return set_mario_action(m, ACT_GETTING_BLOWN, 0);
+        //update_mario_sound_and_camera(m);
+        //return set_mario_action(m, ACT_GETTING_BLOWN, 0);
     }
 
     return FALSE;

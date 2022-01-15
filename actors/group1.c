@@ -31,3 +31,4 @@ UNUSED static const u64 binid_5 = 5;
 
 #include "capswitch/model.inc.c"
 #include "capswitch/collision.inc.c"
+#include "fwoosh/model.inc.c"

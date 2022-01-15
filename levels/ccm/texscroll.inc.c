@@ -1,14 +1,14 @@
-void scroll_ccm_dl_c4_mesh_layer_1_vtx_13() {
+void scroll_ccm_dl_c4_mesh_layer_1_vtx_14() {
 	int i = 0;
-	int count = 20;
+	int count = 14;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(ccm_dl_c4_mesh_layer_1_vtx_13);
+	Vtx *vertices = segmented_to_virtual(ccm_dl_c4_mesh_layer_1_vtx_14);
 
-	deltaY = (int)(1.0 * 0x20) % height;
+	deltaY = (int)(-0.7099999189376831 * 0x20) % height;
 
 	if (absi(currentY) > height) {
 		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
@@ -19,6 +19,11 @@ void scroll_ccm_dl_c4_mesh_layer_1_vtx_13() {
 	}
 	currentY += deltaY;
 }
+
+void scroll_sts_mat_ccm_dl__auto_8_f3d_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_ccm_dl__auto_8_f3d_layer1);
+	shift_t(mat, 35, PACK_TILESIZE(0, 1));
+};
 
 void scroll_ccm_dl_water_thing_mesh_layer_5_vtx_0() {
 	int i = 0;
@@ -58,6 +63,7 @@ void scroll_ccm_dl_water_thing_mesh_layer_5_vtx_0() {
 }
 
 void scroll_ccm() {
-	scroll_ccm_dl_c4_mesh_layer_1_vtx_13();
+	scroll_ccm_dl_c4_mesh_layer_1_vtx_14();
+	scroll_sts_mat_ccm_dl__auto_8_f3d_layer1();
 	scroll_ccm_dl_water_thing_mesh_layer_5_vtx_0();
 }
