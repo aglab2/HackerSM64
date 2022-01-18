@@ -112,7 +112,7 @@ static u32 sBackwardKnockbackActions[][3] = {
 
 static u8 sDisplayingDoorText = FALSE;
 static u8 sJustTeleported = FALSE;
-static u8 sPssSlideStarted = FALSE;
+u8 sPssSlideStarted = FALSE;
 
 /**
  * Returns the type of cap Mario is wearing.

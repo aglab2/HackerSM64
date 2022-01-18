@@ -1468,13 +1468,24 @@ Right: To Waterfall\n\
 Left: Metal Cap Switch"))
 
 DEFINE_DIALOG(DIALOG_124, 1, 4, 30, 200, _("\
-Work Elevator\n\
-Danger!!\n\
-Read instructions\n\
-thoroughly!\n\
-Elevator continues in the\n\
-direction of the arrow\n\
-activated."))
+Don't attack me, Mario !\n\
+Even if I'm working for\n\
+the jail's owner... I am\n\
+still friendly enough.\n\
+He used to be the king\n\
+of an forgotten land...\n\
+then one day, the\n\
+land simply vanished.\n\
+He had no choice but\n\
+fuse his land with the\n\
+Mushroom Kingdom...\n\
+but he's full of bitterness.\n\
+He wants to take a\n\
+revenge on the guy who\n\
+caused the loss of his\n\
+land... that explains\n\
+why there are lots of\n\
+imprisoned people."))
 
 DEFINE_DIALOG(DIALOG_125, 1, 3, 30, 200, _("\
 Hazy Maze-Exit\n\
@@ -1482,9 +1493,15 @@ Danger! Closed.\n\
 Turn back now."))
 
 DEFINE_DIALOG(DIALOG_126, 2, 3, 30, 200, _("\
-Up: Black Hole\n\
-Right: Work Elevator\n\
-/// Hazy Maze"))
+Don't be stressed out\n\
+if you find magic\n\
+paintings here, Mario.\n\
+They were used back\n\
+when the jail was not\n\
+surrounded by woods.\n\
+They helped the prisoners\n\
+to feel... more free.\n\
+That's kinda cool !"))
 
 DEFINE_DIALOG(DIALOG_127, 3, 4, 30, 200, _("\
 Underground Lake\n\

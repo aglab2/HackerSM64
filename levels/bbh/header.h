@@ -114,9 +114,11 @@ extern const LevelScript level_bbh_entry[];
 extern const Gfx hmc_seg7_dl_07022AA0[];
 extern const Gfx hmc_seg7_dl_07022DA0[];
 extern const Gfx hmc_seg7_dl_07023090[];
+extern const Gfx hmc_seg7_dl2_07023090[];
 extern const GeoLayout hmc_geo_0005D0[];
 extern const GeoLayout hmc_geo_0005A0[];
 extern const GeoLayout hmc_geo_0005B8[];
+extern const GeoLayout hmc_geo2_0005B8[];
 
 #include "levels/bbh/header.inc.h"
 

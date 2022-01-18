@@ -6276,3 +6276,22 @@ const BehaviorScript bhvTrimo2[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+extern void bhv_silly_willy_loop();
+const BehaviorScript bhvSillyWilly[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_silly_willy_loop),
+    END_LOOP(),
+};
+
+extern void bhv_time_thing_loop();
+const BehaviorScript bhvTimeThing[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_time_thing_loop),
+    END_LOOP(),
+};

@@ -57,18 +57,31 @@ void bhv_controllable_platform_sub_loop(void) {
 void bhv_controllable_platform_init(void) {
     struct Object *sp34;
 
-    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 0,
-                                     51, 204, 0, 0, 0);
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
+                                     0, 51, 204, 0, 0, 0);
     sp34->oBehParams2ndByte = 1;
-    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 0,
-                                     51, -204, 0, -0x8000, 0);
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
+                                     0, 51, -204, 0, -0x8000, 0);
     sp34->oBehParams2ndByte = 2;
-    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 204,
-                                     51, 0, 0, 0x4000, 0);
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
+                                     204, 51, 0, 0, 0x4000, 0);
     sp34->oBehParams2ndByte = 3;
     sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub,
                                      -204, 51, 0, 0, -0x4000, 0);
     sp34->oBehParams2ndByte = 4;
+
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
+                                     204, 51, 204, 0, 0x2000, 0);
+    sp34->oBehParams2ndByte = 5;
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
+                                     -204, 51, -204, 0, -0x6000, 0);
+    sp34->oBehParams2ndByte = 6;
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
+                                     204, 51, -204, 0, 0x6000, 0);
+    sp34->oBehParams2ndByte = 7;
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub,
+                                     -204, 51, 204, 0, -0x2000, 0);
+    sp34->oBehParams2ndByte = 8;
 
     sControllablePlatformDirectionState = 0;
 
@@ -78,7 +91,7 @@ void bhv_controllable_platform_init(void) {
 void controllable_platform_hit_wall(s8 nextDirection) {
     o->oControllablePlatformWallHitDirection = nextDirection;
     o->oTimer = 0;
-    sControllablePlatformDirectionState = 5;
+    sControllablePlatformDirectionState = 9;
 
     cur_obj_play_sound_2(SOUND_GENERAL_QUIET_POUND1);
 #if ENABLE_RUMBLE
@@ -112,7 +125,7 @@ void controllable_platform_check_walls(s8 nextDirection, s8 wallDisplacement[3],
     }
 
     if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400)) {
-        sControllablePlatformDirectionState = 6;
+        sControllablePlatformDirectionState = 10;
         o->oControllablePlatformIsFarFromMario = 1;
         o->oTimer = 0;
     }
@@ -143,7 +156,7 @@ void controllable_platform_tilt_from_mario(void) {
         || gMarioObject->platform == cur_obj_nearest_object_with_behavior(bhvControllablePlatformSub)) {
         o->oFaceAnglePitch = dz * 4;
         o->oFaceAngleRoll = -dx * 4;
-        if (sControllablePlatformDirectionState == 6) {
+        if (sControllablePlatformDirectionState == 10) {
             sControllablePlatformDirectionState = 0;
             o->oTimer = 0;
             o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -165,7 +178,7 @@ void bhv_controllable_platform_loop(void) {
             o->oFaceAnglePitch /= 2;
             o->oFaceAngleRoll /= 2;
             if (o->oControllablePlatformIsFarFromMario == 1 && o->oTimer > 30) {
-                sControllablePlatformDirectionState = 6;
+                sControllablePlatformDirectionState = 10;
                 o->oTimer = 0;
             }
             break;
@@ -173,7 +186,7 @@ void bhv_controllable_platform_loop(void) {
         case 1:
             o->oVelZ = 8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ + 300.0, 50.0f);
-            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX, o->oPosY, o->oPosZ + 300.0, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX,         o->oPosY, o->oPosZ + 300.0, 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ + 300.0, 50.0f);
             controllable_platform_check_walls(2, wallDisplacement, dist1, dist2, dist3);
             break;
@@ -181,7 +194,7 @@ void bhv_controllable_platform_loop(void) {
         case 2:
             o->oVelZ = -8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ - 300.0, 50.0f);
-            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX, o->oPosY, o->oPosZ - 300.0, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX,         o->oPosY, o->oPosZ - 300.0, 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ - 300.0, 50.0f);
             controllable_platform_check_walls(1, wallDisplacement, dist1, dist2, dist3);
             break;
@@ -189,7 +202,7 @@ void bhv_controllable_platform_loop(void) {
         case 3:
             o->oVelX = 8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 300.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
-            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX + 300.0, o->oPosY, o->oPosZ, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX + 300.0, o->oPosY, o->oPosZ        , 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX + 300.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
             controllable_platform_check_walls(4, wallDisplacement, dist1, dist2, dist3);
             break;
@@ -197,17 +210,53 @@ void bhv_controllable_platform_loop(void) {
         case 4:
             o->oVelX = -8.0f;
             wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX - 300.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
-            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX - 300.0, o->oPosY, o->oPosZ, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX - 300.0, o->oPosY, o->oPosZ        , 50.0f);
             wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 300.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
             controllable_platform_check_walls(3, wallDisplacement, dist1, dist2, dist3);
             break;
 
         case 5:
+            o->oVelX = 8.0f;
+            o->oVelZ = 8.0f;
+            wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX,         o->oPosY, o->oPosZ        , 50.0f);
+            wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
+            controllable_platform_check_walls(2, wallDisplacement, dist1, dist2, dist3);
+            break;
+
+        case 6:
+            o->oVelX = -8.0f;
+            o->oVelZ = -8.0f;
+            wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX,         o->oPosY, o->oPosZ        , 50.0f);
+            wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
+            controllable_platform_check_walls(1, wallDisplacement, dist1, dist2, dist3);
+            break;
+
+        case 7:
+            o->oVelX = 8.0f;
+            o->oVelZ = -8.0f;
+            wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX,         o->oPosY, o->oPosZ        , 50.0f);
+            wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
+            controllable_platform_check_walls(4, wallDisplacement, dist1, dist2, dist3);
+            break;
+
+        case 8:
+            o->oVelX = -8.0f;
+            o->oVelZ = 8.0f;
+            wallDisplacement[0] = obj_find_wall_displacement(dist1, o->oPosX + 250.0, o->oPosY, o->oPosZ + 250.0, 50.0f);
+            wallDisplacement[1] = obj_find_wall_displacement(dist2, o->oPosX,         o->oPosY, o->oPosZ        , 50.0f);
+            wallDisplacement[2] = obj_find_wall_displacement(dist3, o->oPosX - 250.0, o->oPosY, o->oPosZ - 250.0, 50.0f);
+            controllable_platform_check_walls(3, wallDisplacement, dist1, dist2, dist3);
+            break;
+
+        case 9:
             controllable_platform_shake_on_wall_hit();
             return;
             break;
 
-        case 6:
+        case 10:
             if (obj_flicker_and_disappear(o, 150)) {
                 spawn_object_abs_with_rot(o, 0, MODEL_HMC_METAL_PLATFORM, bhvControllablePlatform,
                                           o->oHomeX, o->oHomeY, o->oHomeZ, 0, 0, 0);
@@ -218,7 +267,7 @@ void bhv_controllable_platform_loop(void) {
     controllable_platform_tilt_from_mario();
     o->oPosX += o->oVelX;
     o->oPosZ += o->oVelZ;
-    if (sControllablePlatformDirectionState != 0 && sControllablePlatformDirectionState != 6) {
+    if (sControllablePlatformDirectionState != 0 && sControllablePlatformDirectionState != 10) {
         cur_obj_play_sound_1(SOUND_ENV_ELEVATOR2);
     }
 }

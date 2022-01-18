@@ -1,6 +1,6 @@
 void scroll_sa_dl_eye_002_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 32;
+	int count = 45;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 

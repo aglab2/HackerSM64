@@ -94,7 +94,8 @@
 // hmc
 #define MODEL_HMC_METAL_PLATFORM               0x36        // hmc_geo_0005A0
 #define MODEL_HMC_METAL_ARROW_PLATFORM         0x37        // hmc_geo_0005B8
-#define MODEL_HMC_ELEVATOR_PLATFORM            0x38        // hmc_geo_0005D0
+#define MODEL_HMC_METAL_ARROW_PLATFORM2        0x38        // hmc_geo_0005B8
+#define MODEL_HMC_ELEVATOR_PLATFORM            0xff        // hmc_geo_0005D0
 #define MODEL_HMC_ROLLING_ROCK                 0x39        // hmc_geo_000548
 #define MODEL_HMC_ROCK_PIECE                   0x3A        // hmc_geo_000570 - unused
 #define MODEL_HMC_ROCK_SMALL_PIECE             0x3B        // hmc_geo_000588 - unused

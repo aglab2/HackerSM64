@@ -278,7 +278,10 @@ extern void bhv_pipe_raiser_init()
 
 extern void bhv_pipe_raiser_loop()
 {
-    if (gCurrActNum == 6)
+    int isEndStarObtained = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_BOB)) & 0x4;
+    int isSpawnedAtMidpoint = gCurrActNum == 4 || gCurrActNum == 5;
+
+    if (isEndStarObtained && !isSpawnedAtMidpoint)
     {
         o->oPipeRaiserPipe->oPosX = o->oPosX;
         o->oPipeRaiserPipe->oPosY = o->oPosY;
@@ -702,4 +705,119 @@ void bhv_trimo_loop2()
 
     o->oPosX += o->oVelX;
     o->oPosZ += o->oVelZ;
+}
+
+extern const Trajectory pss_area_1_spline_sillycurve[];
+s32 gSillyWilly = 0;
+void bhv_silly_willy_loop()
+{
+    gSillyWilly = o->oAction ? 1 + (o->oPathedPrevWaypoint - o->oPathedStartWaypoint) : 0;
+
+    if (0 == o->oAction)
+    {
+        if (o->oDistanceToMario < 500.f)
+        {
+            o->oAction = 1;
+            o->oPathedPrevWaypointFlags = 0;
+            struct Waypoint* path = segmented_to_virtual(pss_area_1_spline_sillycurve);
+            o->oPathedStartWaypoint = o->oPathedPrevWaypoint = path;
+            o->oForwardVel = 60.f;
+        }
+    }
+    else
+    {
+        if (o->oTimer == 20)
+            play_sound(SOUND_MARIO_MAMA_MIA, gMarioStates->marioObj->header.gfx.cameraToObject);
+
+        if (cur_obj_follow_path() == PATH_REACHED_END)
+        {
+            // reset to the initial state
+            o->oAction = 0;
+            o->oPosX = o->oHomeX;
+            o->oPosY = o->oHomeY;
+            o->oPosZ = o->oHomeZ;
+        }
+        else
+        {
+            // update self - initial values memery
+            if (o->oTimer == 0)
+            {
+                o->oMoveAngleYaw   = o->oPathedTargetYaw;
+                o->oMoveAnglePitch = o->oPathedTargetPitch;
+            }
+
+            // reset timer to fix point
+            if (o->oSubAction != gSillyWilly)
+            {
+                if (gSillyWilly == 3 || gSillyWilly == 4 || gSillyWilly == 9)
+                {
+                    o->oPosX = (o->oPathedPrevWaypoint)->pos[0];
+                    o->oPosY = (o->oPathedPrevWaypoint)->pos[1];
+                    o->oPosZ = (o->oPathedPrevWaypoint)->pos[2];
+                    o->oMoveAngleYaw   = o->oPathedTargetYaw;
+                    o->oMoveAnglePitch = o->oPathedTargetPitch;
+                }
+            }
+            o->oSubAction = gSillyWilly;
+
+            // turn the object
+            o->oMoveAngleYaw   = (s16) approach_s16_symmetric(o->oMoveAngleYaw,   (s16) o->oPathedTargetYaw, 0x800);
+            o->oMoveAnglePitch = (s16) approach_s16_symmetric(o->oMoveAnglePitch, (s16) o->oPathedTargetPitch, 0x600);
+            cur_obj_set_pos_via_transform();
+
+            // update mao
+            gMarioStates->action = ACT_BUTT_SLIDE;
+            gMarioStates->pos[0] = o->oPosX;
+            gMarioStates->pos[1] = o->oPosY;
+            gMarioStates->pos[2] = o->oPosZ;
+            gMarioStates->faceAngle[0] = o->oMoveAnglePitch;
+            gMarioStates->faceAngle[1] = o->oMoveAngleYaw;
+            gMarioStates->slideYaw = o->oMoveAngleYaw;
+            gMarioStates->slideVelX = o->oVelX;
+            gMarioStates->slideVelZ = o->oVelZ;
+        }
+    }
+}
+
+static u8 sTimerColors[] = {
+    0x26, 0xFF, 0x66,
+    0x27, 0xA1, 0xFF,
+    0xFF, 0x86, 0x36,
+};
+
+extern Gfx mat_pss_dl_time_layer1[];
+extern Gfx mat_pss_dl_arrow_layer1[];
+extern u8 sPssSlideStarted;
+void bhv_time_thing_loop()
+{
+    if (sPssSlideStarted)
+    {
+        u8* ptr = segmented_to_virtual(mat_pss_dl_arrow_layer1);
+        u8* colors = ptr + 22 * 8 + 4;
+        int off = (o->oTimer / 8) % 3;
+        colors[0] = sTimerColors[off + 0];
+        colors[1] = sTimerColors[off + 1];
+        colors[2] = sTimerColors[off + 2];
+        
+        ptr = segmented_to_virtual(mat_pss_dl_time_layer1);
+        colors = ptr + 22 * 8 + 4;
+        off = (off + 1) % 3;
+        colors[0] = sTimerColors[off + 0];
+        colors[1] = sTimerColors[off + 1];
+        colors[2] = sTimerColors[off + 2];
+    }
+    else
+    {
+        u8* ptr = segmented_to_virtual(mat_pss_dl_arrow_layer1);
+        u8* colors = ptr + 22 * 8 + 4;
+        colors[0] = 0x10;
+        colors[1] = 0x10;
+        colors[2] = 0x10;
+
+        ptr = segmented_to_virtual(mat_pss_dl_time_layer1);
+        colors = ptr + 22 * 8 + 4;
+        colors[0] = 0x10;
+        colors[1] = 0x10;
+        colors[2] = 0x10;
+    }
 }

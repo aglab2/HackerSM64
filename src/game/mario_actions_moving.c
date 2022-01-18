@@ -1424,9 +1424,40 @@ s32 common_slide_action_with_jump(struct MarioState *m, u32 stopAction, u32 jump
     return FALSE;
 }
 
+extern s32 gSillyWilly;
 s32 act_butt_slide(struct MarioState *m) {
-    s32 cancel = common_slide_action_with_jump(m, ACT_BUTT_SLIDE_STOP, ACT_JUMP, ACT_BUTT_SLIDE_AIR,
+    s32 cancel = FALSE;
+    if (gSillyWilly == 0)
+    {
+        cancel = common_slide_action_with_jump(m, ACT_BUTT_SLIDE_STOP, ACT_JUMP, ACT_BUTT_SLIDE_AIR,
                                                MARIO_ANIM_SLIDE);
+    }
+    else
+    {
+        play_sound(SOUND_MOVING_TERRAIN_SLIDE + m->terrainSoundAddend, m->marioObj->header.gfx.cameraToObject);
+        vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
+        struct Surface* thing = NULL;
+        f32 hthing = 0;
+        if (4 <= gSillyWilly && gSillyWilly <= 8)
+        {
+            hthing = find_ceil(m->pos[0], m->pos[1] - 20.f, m->pos[2], &thing);
+        }
+        else
+        {
+            hthing = find_floor(m->pos[0], m->pos[1] + 20.f, m->pos[2], &thing);
+        }
+        if (hthing)
+            m->marioObj->header.gfx.pos[1] = hthing;
+        s16 angle = 4 <= gSillyWilly && gSillyWilly <= 8 ? 0x8000 : 0;
+        print_text_fmt_int(20, 20, "%d", gSillyWilly);
+        vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], angle);
+    #if ENABLE_RUMBLE
+        reset_rumble_timers_slip();
+    #endif
+
+        adjust_sound_for_speed(m);
+        set_mario_animation(m, MARIO_ANIM_SLIDE);
+    }
     tilt_body_butt_slide(m);
     return cancel;
 }

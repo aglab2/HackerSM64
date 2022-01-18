@@ -85,6 +85,10 @@ ALIGNED8 static const Texture hmc_seg7_texture_07003800[] = {
 #include "levels/bbh/4.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture hmc_seg7_texture2_07003800[] = {
+#include "levels/bbh/5.rgba16.inc.c"
+};
+
 #include "levels/hmc/elevator_platform/model.inc.c"
 #include "levels/hmc/elevator_platform/collision.inc.c"
 

@@ -557,5 +557,7 @@ extern const BehaviorScript bhvSandColorCtl[];
 extern const BehaviorScript bhvSnowColorCtl[];
 extern const BehaviorScript bhvTrimo[];
 extern const BehaviorScript bhvTrimo2[];
+extern const BehaviorScript bhvSillyWilly[];
+extern const BehaviorScript bhvTimeThing[];
 
 #endif // BEHAVIOR_DATA_H
