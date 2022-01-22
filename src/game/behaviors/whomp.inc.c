@@ -36,6 +36,10 @@ void whomp_init(void) {
             o->oAction = 2;
         }
     } else if (o->oDistanceToMario < 500.0f) {
+        if (gCurrAreaIndex == 1 && gCurrCourseNum == COURSE_BOB)
+        {
+            obj_scale_xyz(o, 2.f, 1.f, 1.f);
+        }
         o->oAction = 1;
     }
 

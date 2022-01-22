@@ -6295,3 +6295,26 @@ const BehaviorScript bhvTimeThing[] = {
         CALL_NATIVE(bhv_time_thing_loop),
     END_LOOP(),
 };
+
+extern void bhv_ronpa_init();
+extern void bhv_ronpa_loop();
+const BehaviorScript bhvRonpa[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_HOME(),
+    // incredibly ugly
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    SET_FLOAT(oCollisionDistance, 10000),
+    CALL_NATIVE(bhv_ronpa_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ronpa_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvTubeCommon[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+    // -
+    END_LOOP(),
+};

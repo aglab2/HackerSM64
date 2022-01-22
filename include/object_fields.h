@@ -1276,6 +1276,12 @@
 
 #define /*0x100*/ oPipeRaiserPipe  OBJECT_FIELD_OBJ(0x1B)
 
+#define /*0x100*/ oRonpaCurr  OBJECT_FIELD_OBJ(0x1B)
+#define /*0x100*/ oRonpaNext  OBJECT_FIELD_OBJ(0x1C)
+#define /*0x100*/ oRonpaDist  OBJECT_FIELD_F32(0x1D)
+#define /*0x100*/ oRonpaPrev  OBJECT_FIELD_OBJ(0x1E)
+#define /*0x100*/ oRonpaStar  OBJECT_FIELD_OBJ(0x1F)
+
 /*Custom general defines:
 
 For general s32 ints, use o->oF4, oF8, oFC, o100, o104, o108, o10C, and o110

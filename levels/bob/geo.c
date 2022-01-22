@@ -32,3 +32,6 @@ extern const Gfx wf_seg7_dl_0700A170[];
 #include "levels/wf/tumbling_bridge_far/geo.inc.c"
 #include "levels/wf/areas/1/14/geo.inc.c"
 #include "levels/wf/areas/1/17/geo.inc.c"
+
+#include "levels/wf/kickable_board/geo.inc.c"
+#include "levels/wf/sliding_platform/geo.inc.c"

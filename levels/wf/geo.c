@@ -27,12 +27,10 @@
 #include "levels/wf/areas/1/18/geo.inc.c"
 #include "levels/wf/areas/1/19/geo.inc.c"
 #include "levels/wf/small_bomp/geo.inc.c"
-#include "levels/wf/sliding_platform/geo.inc.c"
 #include "levels/wf/beta_extending_platform/geo.inc.c"
 #include "levels/wf/extending_platform/geo.inc.c"
 #include "levels/wf/breakable_wall_right/geo.inc.c"
 #include "levels/wf/breakable_wall_left/geo.inc.c"
-#include "levels/wf/kickable_board/geo.inc.c"
 #include "levels/wf/tower_door/geo.inc.c"
 #include "levels/wf/areas/1/geo.inc.c"
 

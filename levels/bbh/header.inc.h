@@ -90,7 +90,7 @@ extern Vtx bbh_dl_c5_mesh_layer_1_vtx_1[149];
 extern Gfx bbh_dl_c5_mesh_layer_1_tri_1[];
 extern Vtx bbh_dl_c5_mesh_layer_1_vtx_2[111];
 extern Gfx bbh_dl_c5_mesh_layer_1_tri_2[];
-extern Vtx bbh_dl_c5_mesh_layer_1_vtx_3[50];
+extern Vtx bbh_dl_c5_mesh_layer_1_vtx_3[49];
 extern Gfx bbh_dl_c5_mesh_layer_1_tri_3[];
 extern Vtx bbh_dl_c5_mesh_layer_1_vtx_4[8];
 extern Gfx bbh_dl_c5_mesh_layer_1_tri_4[];

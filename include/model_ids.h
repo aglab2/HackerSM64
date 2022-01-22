@@ -575,4 +575,9 @@
 
 #define MODEL_TRIMO 0xf5
 
+#define MODEL_TUBE1 0xf6
+#define MODEL_TUBE2 0xf7
+#define MODEL_TUBE3 0xf8
+#define MODEL_TUBE4 0xf9
+
 #endif // MODEL_IDS_H

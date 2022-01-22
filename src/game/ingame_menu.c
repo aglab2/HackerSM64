@@ -1927,9 +1927,13 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
         int courseNum = gDialogNumToCourseNumMap[gDialogLineNum];
         courseName = segmented_to_virtual(courseNameTbl[courseNum - 1]);
         render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, courseNum - 1, gDialogNumToStarCount[gDialogLineNum]);
-        print_generic_string(x + 34, y - 5, textCoin);
-        int_to_str(save_file_get_course_coin_score(gCurrSaveFileNum - 1, courseNum - 1), strVal);
-        print_generic_string(x + 54, y - 5, strVal);
+        if (gDialogLineNum < 5)
+        {
+            print_generic_string(x + 34, y - 5, textCoin);
+            int_to_str(save_file_get_course_coin_score(gCurrSaveFileNum - 1, courseNum - 1), strVal);
+            print_generic_string(x + 54, y - 5, strVal);
+        }
+    
         print_generic_string(x - 20, y + 120, holdBToWarp);
     } else { // Castle secret stars
         u8 textStarX[] = { TEXT_STAR_X };

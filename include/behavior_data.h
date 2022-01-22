@@ -559,5 +559,6 @@ extern const BehaviorScript bhvTrimo[];
 extern const BehaviorScript bhvTrimo2[];
 extern const BehaviorScript bhvSillyWilly[];
 extern const BehaviorScript bhvTimeThing[];
+extern const BehaviorScript bhvRonpa[];
 
 #endif // BEHAVIOR_DATA_H

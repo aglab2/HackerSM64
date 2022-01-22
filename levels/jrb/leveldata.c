@@ -71,3 +71,7 @@ static const Lights1 lll_seg7_lights_0700FC60 = gdSPDefLights1(
 
 #include "levels/jrb/trimo/model.inc.c"
 #include "levels/jrb/trimo/collision.inc.c"
+#include "levels/jrb/tube1/model.inc.c"
+#include "levels/jrb/tube2/model.inc.c"
+#include "levels/jrb/tube3/model.inc.c"
+#include "levels/jrb/tube4/model.inc.c"

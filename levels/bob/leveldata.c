@@ -48,3 +48,10 @@ ALIGNED8 static const Texture wf_seg7_texture_07002000[] = {
 
 #include "levels/wdw/arrow_lift/model.inc.c"
 #include "levels/wdw/arrow_lift/collision.inc.c"
+
+#include "levels/wf/kickable_board/1.inc.c"
+#include "levels/wf/kickable_board/2.inc.c"
+#include "levels/wf/kickable_board/collision.inc.c"
+
+#include "levels/wf/sliding_platform/model.inc.c"
+#include "levels/wf/sliding_platform/collision.inc.c"

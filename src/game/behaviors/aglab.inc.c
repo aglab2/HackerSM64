@@ -821,3 +821,134 @@ void bhv_time_thing_loop()
         colors[2] = 0x10;
     }
 }
+
+// tube half length = 1133
+// tube radius = 1058
+extern const BehaviorScript bhvTubeCommon[];
+extern const BehaviorScript bhvStar[];
+void bhv_ronpa_init()
+{
+    o->oRonpaCurr = spawn_object(o, MODEL_TUBE1, bhvTubeCommon);
+    o->oRonpaCurr->oPosX = o->oPosX;
+    o->oRonpaCurr->oPosY = o->oPosY + 1058.f;
+    o->oRonpaCurr->oPosZ = o->oPosZ;
+    
+    o->oRonpaNext = spawn_object(o, MODEL_TUBE1, bhvTubeCommon);
+    o->oRonpaNext->oPosX = o->oPosX;
+    o->oRonpaNext->oPosY = o->oPosY + 1058.f;
+    o->oRonpaNext->oPosZ = o->oPosZ + 2 * 1133.f;
+
+    f32 d;
+    o->oRonpaStar = cur_obj_find_nearest_object_with_behavior(bhvStar, &d);
+    o->oRonpaStar->oPosZ = 9000.f;
+    
+    // mario stupidity
+    o->oPosY -= 307.f;
+    o->oHomeY -= 307.f;
+    obj_scale_xyz(o, 1.f, 1.f, 10.f);
+}
+
+static u16 gActiveMasks[] = 
+{ 0x0, 0x0, 0x0, 0x0, 
+  0b0000001001001001,
+  0x0, 
+  0b0100100100100100,
+  0b1101101101101101,
+  0b1001001001001001,
+  0b0110110110110110,
+  0x0, 
+};
+
+extern Gfx mat_jrb_dl_sand_ded[];
+void bhv_ronpa_loop()
+{
+    if (0 == o->oAction)
+    {
+        u8* alpha = (u8*)segmented_to_virtual(mat_jrb_dl_sand_ded) + 8 * 19 + 7;
+        if (gMarioStates->pos[2] > -4500.f)
+        {
+            o->oAction = 1;
+            *alpha = 0;
+        }
+        else
+        {
+            f32 pos = 1.f - (gMarioStates->pos[2] + 7000.f) / 2500.f;
+            pos = CLAMP(pos, 0.f, 1.f);
+            *alpha = pos * 255;
+        }
+    }
+    else if (1 == o->oAction)
+    {
+        if (gMarioStates->pos[2] > -4500.f)
+            load_object_collision_model();
+    
+        gMarioStates->pos[0] = o->oPosX;
+        if (gMarioStates->pos[2] > o->oHomeZ)
+        {
+            o->oAction = 2;
+        }
+    }
+    else if (2 == o->oAction)
+    {
+        s16 angleSpd = atan2s(1058.f, gMarioStates->vel[0]);
+        if (gMarioStates->vel[2] < 0.f)
+            gMarioStates->vel[2] = 0.f;
+        
+        o->oRonpaDist += gMarioStates->vel[2];
+        o->oRonpaStar->oPosZ -= gMarioStates->vel[2];
+        
+        // the objects are moving the other way to do trickery
+        o->oRonpaCurr->oPosZ = o->oHomeZ - o->oRonpaDist;
+        o->oRonpaCurr->oFaceAngleRoll -= angleSpd;
+        
+        // next and prev are inheriting the stats of curr but with an offset
+        o->oRonpaNext->oPosZ = o->oRonpaCurr->oPosZ + 2 * 1133.f;
+        o->oRonpaNext->oFaceAngleRoll = o->oRonpaCurr->oFaceAngleRoll;
+        if (o->oRonpaPrev)
+        {
+            o->oRonpaPrev->oPosZ = o->oRonpaCurr->oPosZ - 2 * 1133.f;
+            o->oRonpaPrev->oFaceAngleRoll = o->oRonpaCurr->oFaceAngleRoll;
+        }
+        
+        // clamp angle to 12 direction values
+        s16 turnAngle = (o->oRonpaCurr->oFaceAngleRoll + 0x10000 / 24) % (0x10000 / 12);
+        if (turnAngle < 0)
+            turnAngle += 0x10000 / 12;
+
+        turnAngle -= 0x10000 / 24;
+        f32 h = sins(turnAngle) * sins(turnAngle) * 1058.f;
+
+        u16 turnNum = o->oRonpaCurr->oFaceAngleRoll + 0x10000 / 24;
+        turnNum /= (0x10000 / 12);
+
+        o->oPosY = o->oHomeY - h / 2 + 10.f;
+        // this is causing really weird stutters on the camera so whatever
+        // o->oFaceAngleRoll = turnAngle;
+        gMarioStates->pos[0] = o->oPosX;
+        gMarioStates->pos[2] = o->oPosZ;
+
+        s32 turnStep = o->oSubAction * 2 + (o->oRonpaDist > 0);
+        s32 inactive = gActiveMasks[turnStep] & (1 << turnNum);
+
+        if (!inactive || o->oRonpaDist < -1033.f || o->oRonpaDist > 1033.f || (-100.f < o->oRonpaDist && o->oRonpaDist < 100.f))
+        {
+           load_object_collision_model();
+        }
+        
+        if (o->oRonpaDist > 1133.f)
+        {
+            o->oSubAction++;
+            if (o->oRonpaPrev)
+            {
+                o->oRonpaPrev->activeFlags = 0;
+            }
+            o->oRonpaPrev = o->oRonpaCurr;
+            o->oRonpaCurr = o->oRonpaNext;
+            o->oRonpaNext = spawn_object(o, o->oSubAction < 4 ? MODEL_TUBE1 + o->oSubAction : MODEL_TUBE1, bhvTubeCommon);
+            o->oRonpaNext->oPosX = o->oRonpaCurr->oPosX;
+            o->oRonpaNext->oPosY = o->oRonpaCurr->oPosY;
+            o->oRonpaNext->oPosZ = o->oRonpaCurr->oPosZ + 2 * 1133.f;
+            o->oRonpaDist -= 2 * 1133.f;
+        }
+    }
+}

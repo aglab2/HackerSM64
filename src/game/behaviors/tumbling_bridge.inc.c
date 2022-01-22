@@ -31,7 +31,7 @@ void bhv_tumbling_bridge_platform_loop(void) {
 
         case 1:
             cur_obj_update_floor_height();
-            if (o->oTimer > 5) {
+            if (o->oTimer > 120) {
                 o->oAction++;
                 cur_obj_play_sound_2(SOUND_GENERAL_PLATFORM);
             }

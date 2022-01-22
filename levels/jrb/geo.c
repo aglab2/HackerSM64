@@ -30,3 +30,7 @@
 #include "levels/jrb/geo.inc.c"
 
 #include "levels/jrb/trimo/geo.inc.c"
+#include "levels/jrb/tube1/geo.inc.c"
+#include "levels/jrb/tube2/geo.inc.c"
+#include "levels/jrb/tube3/geo.inc.c"
+#include "levels/jrb/tube4/geo.inc.c"

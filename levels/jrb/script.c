@@ -56,6 +56,10 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_LLL_TILTING_SQUARE_PLATFORM, lll_geo_000BF8), 
 	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TRIMO, trimo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TUBE1, tube1_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TUBE2, tube2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TUBE3, tube3_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TUBE4, tube4_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -136,7 +140,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 10360, -1551, 5375, 0, -22, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 12912, -870, 2984, 0, -22, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, -4459, -1551, 5086, 0, -22, 0, 0x00000000, bhvKoopa),
-		MARIO_POS(0x01, 0, -3556, -1551, 9572),
+		MARIO_POS(0x01, 0, -1496, -2426, 7460),
 		OBJECT(MODEL_NONE, 11039, -596, 12239, 0, -113, 0, (0xa << 16), bhvSpinAirborneWarp),
 		OBJECT(MODEL_PIRANHA_PLANT, -7767, -556, 4831, 0, -22, 0, 0x00000000, bhvPiranhaPlant),
 		OBJECT(MODEL_PIRANHA_PLANT, -3191, -1551, 3281, 0, -22, 0, 0x00000000, bhvPiranhaPlant),
@@ -215,8 +219,10 @@ const LevelScript level_jrb_entry[] = {
 		WARP_NODE(0x0A, LEVEL_JRB, 0x01, 0xc, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf0, LEVEL_CASTLE, 2, 0x31, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_CASTLE, 2, 0x32, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_CANNON_BASE, 3529, -205, -7322, 0, 0, 0, 0x00000000, bhvCannon),
-		OBJECT(MODEL_STAR, 3636, -125, -4989, 0, 0, 0, (1 << 24), bhvStar),
+		OBJECT(MODEL_NONE, 3560, -205, -6750, 0, 0, 0, (4 << 16), bhvCoinFormation),
+		OBJECT(MODEL_EXCLAMATION_BOX, 3537, 50, -7572, 0, 0, 0, (3 << 16), bhvExclamationBox),
+		OBJECT(MODEL_NONE, 3542, -205, -2763, 0, 0, 0, 0x00000000, bhvRonpa),
+		OBJECT(MODEL_STAR, 3537, -125, -5499, 0, 0, 0, (1 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 3562, -205, -8282, 0, 0, 0, (0xa << 16), bhvWarp),
 		TERRAIN(jrb_area_3_collision),
 		MACRO_OBJECTS(jrb_area_3_macro_objs),
@@ -227,7 +233,7 @@ const LevelScript level_jrb_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, -3556, -1551, 9572),
+	MARIO_POS(0x01, 0, -1496, -2426, 7460),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
