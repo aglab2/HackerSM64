@@ -30,3 +30,6 @@
 #include "src/s2d_engine/config.h"
 #include FONT_C_FILE
 #endif
+
+#include "secret/model.inc.c"
+#include "hollowstar/model.inc.c"

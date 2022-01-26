@@ -1,6 +1,7 @@
 // hidden_star.inc.c
 
 void bhv_hidden_star_init(void) {
+    cur_obj_set_model(MODEL_HOLLOW_STAR);
     s16 remainingTriggers = count_objects_with_behavior(bhvHiddenStarTrigger);
     if (remainingTriggers == 0) {
         struct Object *starObj = spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvStar, o->oPosX, o->oPosY, o->oPosZ, 0, 0, 0);
@@ -27,6 +28,11 @@ void bhv_hidden_star_loop(void) {
             }
             break;
     }
+}
+
+void bhv_hidden_star_trigger_init(void) 
+{
+    cur_obj_set_model(MODEL_SECRET);
 }
 
 void bhv_hidden_star_trigger_loop(void) {

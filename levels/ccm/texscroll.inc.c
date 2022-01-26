@@ -1,6 +1,6 @@
 void scroll_ccm_dl_c4_mesh_layer_1_vtx_14() {
 	int i = 0;
-	int count = 14;
+	int count = 17;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 

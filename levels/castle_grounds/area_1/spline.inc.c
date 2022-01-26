@@ -1,25 +1,25 @@
 const Trajectory castle_grounds_area_1_spline_mips_curve[] = {
 	TRAJECTORY_POS( 0, -32, 0, 82),
-	TRAJECTORY_POS( 1, -712, 0, -648),
-	TRAJECTORY_POS( 2, -387, 527, -969),
-	TRAJECTORY_POS( 3, -194, 0, -1284),
-	TRAJECTORY_POS( 4, -256, 0, -751),
+	TRAJECTORY_POS( 1, -526, 0, -262),
+	TRAJECTORY_POS( 2, -480, 0, -849),
+	TRAJECTORY_POS( 3, -150, 0, -948),
+	TRAJECTORY_POS( 4, 352, 0, -630),
 	TRAJECTORY_END(),
 };
 const Trajectory castle_grounds_area_1_spline_mips_curve_001[] = {
-	TRAJECTORY_POS( 0, -189, 0, -659),
+	TRAJECTORY_POS( 0, 172, 0, -1610),
 	TRAJECTORY_POS( 1, 559, 0, -1417),
-	TRAJECTORY_POS( 2, 1004, 12, -1077),
+	TRAJECTORY_POS( 2, 850, 0, -1111),
 	TRAJECTORY_POS( 3, 929, 0, -418),
 	TRAJECTORY_POS( 4, 578, 0, -113),
 	TRAJECTORY_END(),
 };
 const Trajectory castle_grounds_area_1_spline_mips_curve_002[] = {
-	TRAJECTORY_POS( 0, 404, 0, -46),
+	TRAJECTORY_POS( 0, 382, 0, -99),
 	TRAJECTORY_POS( 1, -214, 0, -258),
-	TRAJECTORY_POS( 2, -585, 0, 256),
-	TRAJECTORY_POS( 3, -26, 0, 654),
-	TRAJECTORY_POS( 4, -544, 0, 967),
+	TRAJECTORY_POS( 2, -477, 0, 80),
+	TRAJECTORY_POS( 3, -285, 0, 580),
+	TRAJECTORY_POS( 4, 249, 0, 894),
 	TRAJECTORY_END(),
 };
 const Trajectory castle_grounds_area_1_spline_mips_curve_003[] = {
@@ -41,9 +41,9 @@ const Trajectory castle_grounds_area_1_spline_mips_curve_004[] = {
 const Trajectory castle_grounds_area_1_spline_mips_curve_005[] = {
 	TRAJECTORY_POS( 0, -724, 0, 1358),
 	TRAJECTORY_POS( 1, -270, 0, 1538),
-	TRAJECTORY_POS( 2, 474, 0, 1323),
-	TRAJECTORY_POS( 3, 235, 0, 484),
-	TRAJECTORY_POS( 4, 284, 0, 37),
+	TRAJECTORY_POS( 2, 243, 0, 1188),
+	TRAJECTORY_POS( 3, 197, 0, 573),
+	TRAJECTORY_POS( 4, 420, 0, 11),
 	TRAJECTORY_END(),
 };
 const Trajectory castle_grounds_area_1_spline_mips_curve_006[] = {

@@ -4621,6 +4621,7 @@ const BehaviorScript bhvBowserCourseRedCoinStar[] = {
 const BehaviorScript bhvHiddenStar[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
     CALL_NATIVE(bhv_hidden_star_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_star_loop),
@@ -4631,10 +4632,12 @@ const BehaviorScript bhvHiddenStarTrigger[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
-    SET_INT(oIntangibleTimer, 0),
-    SET_INT(oFaceAngleRoll, 0x8000), 
+    SET_INT(oIntangibleTimer, 0), 
+    SET_INT(oFaceAnglePitch, 0),
+    SET_INT(oFaceAngleRoll, 0),
+    CALL_NATIVE(bhv_hidden_star_trigger_init),
     BEGIN_LOOP(),
-        ADD_INT(oFaceAngleYaw, 348),
+        ADD_INT(oFaceAngleYaw, 548),
         CALL_NATIVE(bhv_hidden_star_trigger_loop),
     END_LOOP(),
 };

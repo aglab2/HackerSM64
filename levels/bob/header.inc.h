@@ -211,7 +211,7 @@ extern Vtx bob_dl_level_2_mesh_layer_1_vtx_4[16];
 extern Gfx bob_dl_level_2_mesh_layer_1_tri_4[];
 extern Vtx bob_dl_level_2_mesh_layer_1_vtx_5[4];
 extern Gfx bob_dl_level_2_mesh_layer_1_tri_5[];
-extern Vtx bob_dl_level_2_mesh_layer_1_vtx_6[7];
+extern Vtx bob_dl_level_2_mesh_layer_1_vtx_6[9];
 extern Gfx bob_dl_level_2_mesh_layer_1_tri_6[];
 extern Vtx bob_dl_level_2_mesh_layer_4_vtx_cull[8];
 extern Vtx bob_dl_level_2_mesh_layer_4_vtx_0[112];

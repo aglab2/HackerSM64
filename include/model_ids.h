@@ -580,4 +580,7 @@
 #define MODEL_TUBE3 0xf8
 #define MODEL_TUBE4 0xf9
 
+#define MODEL_SECRET 0xef
+#define MODEL_HOLLOW_STAR 0xee
+
 #endif // MODEL_IDS_H
