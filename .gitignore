@@ -52,9 +52,9 @@ build/*
 .assets-local.txt
 
 # Assets. Generally ignored, but ones with "custom" in the name are fine.
-/levels/**/*.png
-/actors/**/*.png
-/textures/**/*.png
+#/levels/**/*.png
+#/actors/**/*.png
+#/textures/**/*.png
 /assets/**/*.bin
 /sound/**/*.aiff
 !/levels/**/*custom*.png
