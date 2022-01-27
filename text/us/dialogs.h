@@ -137,8 +137,8 @@ DEFINE_DIALOG(DIALOG_008, 1, 3, 30, 200, _("\
 \n\
 ---FLOOD DETECTOR---\n\
 \n\
-Should the detector touch\n\
-the with water, area\n\
+Should detector be touched\n\
+by the water, area\n\
 will be inaccessible."))
 
 DEFINE_DIALOG(DIALOG_009, 1, 5, 30, 200, _("\

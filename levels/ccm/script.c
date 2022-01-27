@@ -62,7 +62,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, 672, 540, 2383, -180, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 3749, 96, 2375, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BREAKABLE_BOX, 5730, -337, -1042, 0, 0, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, 5730, -337, -1168, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, 5730, -337, -1223, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_CHUCKYA, 2841, 718, 5241, 0, 0, 0, (2 << 16), bhvChuckya),
 		OBJECT(MODEL_CHUCKYA, 2551, -4, 1775, 0, 0, 0, (2 << 16), bhvChuckya),
 		OBJECT(MODEL_NONE, 2972, 1103, 4474, 0, -90, 0, (0 << 16), bhvCoinFormation),

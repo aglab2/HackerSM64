@@ -14,7 +14,7 @@ struct ObjectHitbox sBreakableBoxHitbox = {
 
 void breakable_box_init(void) {
     o->oHiddenObjectSwitchObj = NULL;
-    o->oAnimState = BREAKABLE_BOX_ANIM_STATE_CORK_BOX;
+    o->oAnimState = 0;
     switch (o->oBehParams2ndByte) {
         case BREAKABLE_BOX_BP_NO_COINS: o->oNumLootCoins = 0; break;
         case BREAKABLE_BOX_BP_3_COINS:  o->oNumLootCoins = 3; break;
@@ -25,7 +25,8 @@ void breakable_box_init(void) {
 
 void hidden_breakable_box_actions(void) {
     struct Object *switchObj;
-    obj_set_hitbox(o, &sBreakableBoxHitbox);
+    // obj_set_hitbox(o, &sBreakableBoxHitbox);
+    o->oAnimState = 1;
     cur_obj_set_model(MODEL_BREAKABLE_BOX);
     switch (o->oAction) {
         case BREAKABLE_BOX_ACT_HIDDEN:
@@ -47,14 +48,17 @@ void hidden_breakable_box_actions(void) {
         case BREAKABLE_BOX_ACT_ACTIVE:
             cur_obj_become_tangible();
             if (cur_obj_wait_then_blink(360, 20)) o->oAction = BREAKABLE_BOX_ACT_HIDDEN;
+            /*
             if (cur_obj_was_attacked_or_ground_pounded()) {
                 spawn_mist_particles();
                 spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, TINY_DIRT_PARTICLE_ANIM_STATE_YELLOW);
                 o->oAction = BREAKABLE_BOX_ACT_BROKEN;
                 cur_obj_play_sound_2(SOUND_GENERAL_BREAK_BOX);
             }
+            */
             load_object_collision_model();
             break;
+            /*
         case BREAKABLE_BOX_ACT_BROKEN:
             cur_obj_become_intangible();
             cur_obj_disable_rendering();
@@ -64,6 +68,7 @@ void hidden_breakable_box_actions(void) {
                 o->oAction = BREAKABLE_BOX_ACT_HIDDEN;
             }
             break;
+            */
     }
 }
 
