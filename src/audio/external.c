@@ -2185,9 +2185,7 @@ void play_music(u8 player, u16 seqArgs, u16 fadeTimer) {
     // (That handling probably ought to occur even when the queue is full...)
     for (i = 0; i < sBackgroundMusicQueueSize; i++) {
         if (sBackgroundMusicQueue[i].seqId == seqId) {
-            if (i == 0) {
-                seq_player_play_sequence(SEQ_PLAYER_LEVEL, seqId, fadeTimer);
-            } else if (!gSequencePlayers[SEQ_PLAYER_LEVEL].enabled) {
+            if (i != 0 && !gSequencePlayers[SEQ_PLAYER_LEVEL].enabled) {
                 stop_background_music(sBackgroundMusicQueue[0].seqId);
             }
             return;
