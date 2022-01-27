@@ -208,6 +208,7 @@ extern Gfx mat_ccm_dl__3_f3d_layer1[];
 extern Gfx mat_ccm_dl__1_f3d_layer1[];
 extern Gfx mat_ccm_dl__10_f3d_layer1[];
 extern Gfx mat_ccm_dl__12_f3d_layer1[];
+extern Gfx mat_ccm_dl_f3d_material_005[];
 void bhv_warp_gate_block_loop()
 {
     u8 envcolor = (1 + sins(o->oTimer * 0x200)) * 30;
@@ -234,6 +235,10 @@ void bhv_warp_gate_block_loop()
     {
         u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl__12_f3d_layer1) + 21 * 8 + 7;
         *envc = envcolor;
+    }
+    {
+        u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl_f3d_material_005) + 12 * 8 + 7;
+        *envc = 30 + envcolor;
     }
     if (gEnvironmentRegions[6] > 0.0f)
     {
