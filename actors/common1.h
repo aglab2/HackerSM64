@@ -256,6 +256,14 @@ extern const Gfx star_seg3_dl_body[];
 extern const Gfx star_seg3_sub_dl_eyes[];
 extern const Gfx star_seg3_dl_eyes[];
 
+extern Gfx omm_star_glow_gfx[];
+extern Gfx omm_star_ray_0_gfx[];
+extern Gfx omm_star_ray_1_gfx[];
+extern Gfx omm_star_ray_2_gfx[];
+extern Gfx omm_star_ray_3_gfx[];
+extern Gfx omm_star_ray_4_gfx[];
+extern Gfx omm_star_ray_5_gfx[];
+
 // transparent_star
 extern const GeoLayout transparent_star_geo[];
 extern const Gfx transparent_star_seg3_sub_dl_body[];
