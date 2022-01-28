@@ -24,6 +24,7 @@ void bhv_recovery_heart_loop(void) {
     } else {
         o->oSpinningHeartPlayedSound = 0;
 
+        if (gCurrCourseNum != COURSE_SA)
         if ((o->oAngleVelYaw -= 50) < 400) {
             o->oAngleVelYaw = 400;
             o->oSpinningHeartTotalSpin = 0;

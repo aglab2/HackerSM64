@@ -41,7 +41,7 @@ void dorrie_act_move(void) {
             }
 
             targetYaw = o->oDorrieAngleToHome + circularTurn;
-            targetSpeed = gMarioObject->platform == o ? 30.f : 5.f;
+            targetSpeed = gMarioObject->platform == o ? 30.f : 0.f;
         //}
 
         obj_forward_vel_approach(targetSpeed, 0.5f);
@@ -96,9 +96,14 @@ void dorrie_act_raise_head(void) {
     }
 }
 
+void bhv_dorrie_init(void)
+{
+    o->oPosX = 8286.f;
+    o->oPosZ = -2758.f;
+}
+
 void bhv_dorrie_update(void) {
     f32 maxOffsetY;
-
     if (!(o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
         o->oDorrieForwardDistToMario = o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw);
 

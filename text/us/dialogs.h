@@ -254,9 +254,12 @@ I'm sleeping because...\n\
 like being disturbed.\n\
 Please walk quietly."))
 
-DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
-Shhh! Please walk\n\
-quietly in the hallway!"))
+DEFINE_DIALOG(DIALOG_019, 1, 3, 30, 200, _("\
+Did you know you can\n\
+control the camera\n\
+with a Dpad?\n\
+Dpad Left and Right\n\
+are very helpful!"))
 
 DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
 Dear Mario:\n\
@@ -419,27 +422,19 @@ For now, reporting live,\n\
 this has been the\n\
 Lakitu Bros."))
 
-DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
-There are four camera, or\n\
-『[C],』 Buttons. Press [C]^\n\
-to look around using the\n\
-Control Stick.\n\
+DEFINE_DIALOG(DIALOG_035, 1, 4, 30, 200, _("\
+Behold the Ancient Beast!\n\
 \n\
-You'll usually see Mario\n\
-through Lakitu's camera.\n\
-It is the camera\n\
-recommended for normal\n\
-play.\n\
-You can change angles by\n\
-pressing [C]>. If you press\n\
-[R], the view switches to\n\
-Mario's camera, which\n\
-is directly behind him.\n\
-Press [R] again to return\n\
-to Lakitu's camera. Press\n\
-[C]| to see Mario from\n\
-afar, using either\n\
-Lakitu's or Mario's view."))
+---ARMORED DORRIE---\n\
+\n\
+You don't have controls\n\
+over the beast anymore\n\
+but, hey, at least you\n\
+go very fast!\n\
+\n\
+Please enjoy!\n\
+Have a nice trip!\n\
+"))
 
 DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
 OBSERVATION PLATFORM\n\

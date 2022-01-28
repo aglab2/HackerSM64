@@ -5682,6 +5682,7 @@ const BehaviorScript bhvUnagiSubobject[] = {
     END_LOOP(),
 };
 
+extern void bhv_dorrie_init();
 const BehaviorScript bhvDorrie[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(dorrie_seg6_collision_0600F644),
@@ -5692,6 +5693,7 @@ const BehaviorScript bhvDorrie[] = {
     SET_FLOAT(oDrawingDistance, 8000),
     ADD_FLOAT(oPosX, 2000),
     CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_dorrie_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_dorrie_update),
         CALL_NATIVE(load_object_collision_model),
@@ -6210,6 +6212,14 @@ const BehaviorScript bhvWallCtl[] = {
     BEGIN(OBJ_LIST_LEVEL),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wall_ctl_loop),
+    END_LOOP(),
+};
+
+extern void bhv_wall_ctl_c5_loop();
+const BehaviorScript bhvWallCtlC5[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wall_ctl_c5_loop),
     END_LOOP(),
 };
 

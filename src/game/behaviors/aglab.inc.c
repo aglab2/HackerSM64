@@ -211,7 +211,9 @@ extern Gfx mat_ccm_dl__12_f3d_layer1[];
 extern Gfx mat_ccm_dl_f3d_material_005[];
 void bhv_warp_gate_block_loop()
 {
-    u8 envcolor = (1 + sins(o->oTimer * 0x200)) * 30;
+    f32 off = (1 + sins(o->oTimer * 0x200));
+    u8 envcolor = off * 40;
+    u8 envcolor2 = off * 30;
     {
         u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl___f3d_layer1) + 21 * 8 + 7;
         *envc = envcolor;
@@ -238,7 +240,7 @@ void bhv_warp_gate_block_loop()
     }
     {
         u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl_f3d_material_005) + 12 * 8 + 7;
-        *envc = 30 + envcolor;
+        *envc = 30 + envcolor2;
     }
     if (gEnvironmentRegions[6] > 0.0f)
     {
@@ -273,6 +275,16 @@ void bhv_wall_ctl_loop()
     {
         *envc = 0xff;
     }
+}
+
+extern Gfx mat_bbh_dl__auto_9_f3d_layer1[];
+void bhv_wall_ctl_c5_loop()
+{
+    u8* envc = (u8*) segmented_to_virtual(mat_bbh_dl__auto_9_f3d_layer1) + 36 * 8;
+    f32 off = (1.f + sins(0x100 * o->oTimer));
+    envc[4] = 43 / 2 * off;
+    envc[5] = 207 / 2 * off;
+    envc[6] = 156 / 2 * off;
 }
 
 extern void bhv_pipe_raiser_init()

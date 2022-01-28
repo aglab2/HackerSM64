@@ -551,6 +551,7 @@ extern const BehaviorScript bhvKingBobombCtl[];
 extern const BehaviorScript bhvFightDist[];
 extern const BehaviorScript bhvWarpGateBlock[];
 extern const BehaviorScript bhvWallCtl[];
+extern const BehaviorScript bhvWallCtlC5[];
 extern const BehaviorScript bhvPipeRaiser[];
 extern const BehaviorScript bhvPeachEndingCS[];
 extern const BehaviorScript bhvSandColorCtl[];
