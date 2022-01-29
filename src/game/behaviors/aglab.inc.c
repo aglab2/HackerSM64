@@ -399,6 +399,9 @@ static void fade_in_text_fast(int i)
     }
 }
 
+extern struct SaveBuffer gSaveBuffer;
+static char sGameTime[] = "Game Time: 0:00:00'00";
+
 void bhv_peach_ending_cs_loop()
 {
     gCamera->cutscene = CUTSCENE_INTRO_PEACH;
@@ -408,10 +411,32 @@ void bhv_peach_ending_cs_loop()
     gHudDisplay.flags = HUD_DISPLAY_NONE;
     gMarioStates->health = 0x880;
 
+    if (0 == o->oTimer)
+    {
+        s32 timeLeft = gSaveBuffer.files[gCurrSaveFileNum - 1][0].timer;
+        s32 f = 3 * (timeLeft % 30);
+        s32 s = (timeLeft / 30) % 60;
+        s32 m = (timeLeft / 60 / 30) % 60;
+        s32 h = timeLeft / 60 / 30 / 60;
+
+        sprintf(sGameTime + 10, "%02d", h);
+        if (sGameTime[10] == '0')
+            sGameTime[10] = ' ';
+
+        sGameTime[12] = ':';
+        sprintf(sGameTime + 13, "%02d", m);
+        sGameTime[15] = ':';
+        sprintf(sGameTime + 16, "%02d", s);
+        sGameTime[18] = '\'';
+        sprintf(sGameTime + 19, "%02d", f);
+    }
+
     if (o->oTimer < 45)
     {
         set_text(0, "ESCAPE FROM THE JAIL", -1, 1, 160, 100);
+        set_text(3, sGameTime, -1, 1, 160, 20);
         fade_in_text(0);
+        fade_in_text(3);
     }
     else if (o->oTimer < 90)
     {
@@ -981,4 +1006,103 @@ void bhv_ronpa_loop()
             o->oRonpaDist -= 2 * 1133.f;
         }
     }
+}
+
+extern u8 bob_dl__2_ci4_pal_rgba16[]; // 14 colors
+extern u8 bob_dl__5_ci4_pal_rgba16[]; // 10 colors
+void bhv_troll_ctl_loop()
+{
+    struct Surface* floor = gMarioStates->floor;
+    if (!floor)
+        return;
+
+    int type = floor->type;
+    if (48 == type)
+    {
+
+    }
+    if (35 == type)
+    {
+        // kill color
+        if (!o->oTrollOffset)
+        {
+            o->oTrollOffset = 1;
+            cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
+        }
+        u8* ptr0 = segmented_to_virtual(bob_dl__2_ci4_pal_rgba16);
+        u8* ptr1 = segmented_to_virtual(bob_dl__5_ci4_pal_rgba16);
+        int off0 = o->oTimer % 14;
+        int off1 = o->oTimer % 10;
+        u8* bapart = &ptr0[2 * off0 + 1];
+        *bapart &= ~1;
+        bapart = &ptr1[2 * off1 + 1];
+        *bapart &= ~1;
+    }
+}
+
+static struct Object *cur_obj_find_nearest_object_with_behavior_y_biased(const BehaviorScript *behavior) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    struct Object *obj = (struct Object *) listHead->next;
+    struct Object *closestObj = NULL;
+    f32 minDist = 0x200000000;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr
+            && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+            && obj != o
+        ) {
+            f32 dx = o->oPosX - obj->oPosX;
+            f32 dy = o->oPosY - obj->oPosY;
+            f32 dz = o->oPosZ - obj->oPosZ;
+            f32 objDist = dx*dx + 10*dy*dy + dz*dz;
+            if (objDist < minDist) {
+                closestObj = obj;
+                minDist = objDist;
+            }
+        }
+
+        obj = (struct Object *) obj->header.next;
+    }
+
+    return closestObj;
+}
+
+void bhv_red_coin_radar_loop()
+{
+    if (gPlayer1Controller->buttonPressed & 32)
+    {
+        if (obj_is_hidden(o))
+        {
+            cur_obj_unhide();
+        }
+        else
+        {
+            cur_obj_hide();
+        }
+    }
+    
+    obj_scale(o, 0.3f);
+    struct Object* red = cur_obj_find_nearest_object_with_behavior_y_biased(bhvRedCoin);
+    if (!red)
+    {
+        o->activeFlags = 0;
+        return;
+    }
+
+    o->oPosX = gMarioStates->pos[0];
+    o->oPosY = gMarioStates->pos[1] + 150.f;
+    o->oPosZ = gMarioStates->pos[2];
+
+    f32 dx = o->oPosX - red->oPosX;
+    f32 dy = o->oPosY - red->oPosY;
+    f32 dz = o->oPosZ - red->oPosZ;
+    f32 l = sqrtf(dx*dx + dz*dz);
+
+    s16 yaw = atan2s(dz, dx) + 0x8000;
+    s16 pitch = atan2s(l, dy);
+    o->oFaceAngleYaw = yaw;
+    o->oPosX += sins(yaw) * 80.f;
+    o->oPosZ += coss(yaw) * 80.f;
+    o->oFaceAnglePitch = pitch;
 }

@@ -223,7 +223,7 @@ extern Vtx wmotr_dl_mc_004_mesh_layer_1_vtx_2[6];
 extern Gfx wmotr_dl_mc_004_mesh_layer_1_tri_2[];
 extern Vtx wmotr_dl_mc_004_mesh_layer_1_vtx_3[49];
 extern Gfx wmotr_dl_mc_004_mesh_layer_1_tri_3[];
-extern Vtx wmotr_dl_mc_004_mesh_layer_1_vtx_4[62];
+extern Vtx wmotr_dl_mc_004_mesh_layer_1_vtx_4[86];
 extern Gfx wmotr_dl_mc_004_mesh_layer_1_tri_4[];
 extern Vtx wmotr_dl_mc_004_mesh_layer_1_vtx_5[15];
 extern Gfx wmotr_dl_mc_004_mesh_layer_1_tri_5[];

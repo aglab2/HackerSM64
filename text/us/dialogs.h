@@ -379,13 +379,7 @@ DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
 \n\
 \n\
 \n\
-    To be continued in ZA1\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+    To be continued in ZA1"))
 
 DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
 Good afternoon. The\n\
@@ -486,10 +480,18 @@ the beginning of the\n\
 course.\n\
 //--The Big Bob-omb"))
 
-DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
-Warning!\n\
-Cold, Cold Crevasse\n\
-Below!"))
+DEFINE_DIALOG(DIALOG_040, 1, 4, 30, 200, _("\
+Hey, hey!\n\
+You don't need to\n\
+beat a slide time to\n\
+get a star!\n\
+Just reach the end of\n\
+the slide while TIME is\n\
+on and you got it!\n\
+\n\
+If you want bragging\n\
+rights though, you\n\
+show me a 21!"))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
 I win! You lose!\n\
@@ -500,23 +502,16 @@ messin' with Koopa the\n\
 Quick.\n\
 Better luck next time!"))
 
-DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
-Caution! Narrow Bridge!\n\
-Cross slowly!\n\
-\n\
-\n\
-You can jump to the edge\n\
-of the cliff and hang on,\n\
-and you can climb off the\n\
-edge if you move slowly.\n\
-When you want to let go,\n\
-either press [Z] or press\n\
-the Control Stick in the\n\
-direction of Mario's back.\n\
-To climb up, press Up on\n\
-the Control Stick. To\n\
-scurry up quickly, press\n\
-the [A] Button."))
+DEFINE_DIALOG(DIALOG_042, 1, 5, 30, 200, _("\
+Curious what is that\n\
+weird arrow near you?\n\
+It is a red coin radar!\n\
+It helps you find the\n\
+closest red coin!\n\
+Don't want backseating?\n\
+No problem, just press L\n\
+button and radar will\n\
+disappear!"))
 
 DEFINE_DIALOG(DIALOG_043, 1, 5, 30, 200, _("\
 If you jump and hold the\n\

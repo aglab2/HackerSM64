@@ -18,3 +18,5 @@
 #include "levels/totwc/cloud/collision.inc.c" // Blank File
 
 #include "levels/totwc/leveldata.inc.c"
+
+#include "levels/totwc/redcoinradar/model.inc.c"

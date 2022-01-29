@@ -63,6 +63,7 @@ const LevelScript level_pss_entry[] = {
 		OBJECT(MODEL_NONE, 11531, 9111, 11190, -13, -25, 4, 0x00000000, bhvSillyWilly),
 		OBJECT(MODEL_NONE, -5165, 2881, 3104, -13, -25, 4, 0x00000000, bhvTimeThing),
 		OBJECT(MODEL_STAR, -7527, 6449, -4038, 0, -18, 0, 0x00000000, bhvStar),
+		OBJECT(MODEL_WOODEN_SIGNPOST, 5183, 14201, 2768, 0, -163, 0, (40 << 16), bhvMessagePanel),
 		TERRAIN(pss_area_1_collision),
 		MACRO_OBJECTS(pss_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_SLIDE),

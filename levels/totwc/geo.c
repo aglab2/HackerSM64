@@ -17,3 +17,5 @@
 #include "levels/totwc/areas/1/geo.inc.c"
 
 #include "levels/totwc/geo.inc.c"
+
+#include "levels/totwc/redcoinradar/geo.inc.c"

@@ -21,4 +21,6 @@ extern const LevelScript level_totwc_entry[];
 
 #include "levels/totwc/header.inc.h"
 
+#include "levels/totwc/redcoinradar/geo_header.h"
+
 #endif

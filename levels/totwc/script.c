@@ -40,6 +40,7 @@ const LevelScript level_totwc_entry[] = {
 	JUMP_LINK(script_func_global_15), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, totwc_geo_000160), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE, palm_tree2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RED_COIN_RADAR, redcoinradar_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -49,6 +50,7 @@ const LevelScript level_totwc_entry[] = {
 		WARP_NODE(0xf0, LEVEL_CASTLE, 2, 0x61, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_CASTLE, 2, 0x62, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_AMP, 2233, 1976, 328, 0, 0, 0, (2 << 16), bhvHomingAmp),
+		OBJECT(MODEL_RED_COIN_RADAR, 4441, -994, 12133, 0, 0, 0, (2 << 16), bhvRedCoinRadar),
 		OBJECT(MODEL_BLACK_BOBOMB, 4729, 4809, -3319, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BLACK_BOBOMB, 5563, 1892, 3424, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BLACK_BOBOMB, 6884, 4688, -2467, 0, 0, 0, 0x00000000, bhvBobomb),
@@ -68,6 +70,7 @@ const LevelScript level_totwc_entry[] = {
 		OBJECT(MODEL_NONE, 4490, 1892, 5057, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 3429, 4211, 2041, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -1573, 5080, -4368, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
+		OBJECT(MODEL_WOODEN_SIGNPOST, 1227, -994, 11752, 0, 85, 0, (42 << 16), bhvMessagePanel),
 		OBJECT(MODEL_PIRANHA_PLANT, 4841, 1892, 2822, 0, -39, 0, 0x00000000, bhvPiranhaPlant),
 		OBJECT(MODEL_PIRANHA_PLANT, 2900, 1892, 6277, 0, -39, 0, 0x00000000, bhvPiranhaPlant),
 		OBJECT(MODEL_PIRANHA_PLANT, 5114, 4688, -2504, 0, -39, 0, 0x00000000, bhvPiranhaPlant),

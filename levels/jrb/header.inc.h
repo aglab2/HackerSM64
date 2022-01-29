@@ -145,7 +145,7 @@ extern Vtx jrb_dl_c3_005_mesh_layer_5_vtx_cull[8];
 extern Vtx jrb_dl_c3_005_mesh_layer_5_vtx_0[4];
 extern Gfx jrb_dl_c3_005_mesh_layer_5_tri_0[];
 extern Vtx jrb_dl_c3_005_mesh_layer_3_vtx_cull[8];
-extern Vtx jrb_dl_c3_005_mesh_layer_3_vtx_0[70];
+extern Vtx jrb_dl_c3_005_mesh_layer_3_vtx_0[72];
 extern Gfx jrb_dl_c3_005_mesh_layer_3_tri_0[];
 extern Vtx jrb_dl_c3_006_mesh_layer_1_vtx_cull[8];
 extern Vtx jrb_dl_c3_006_mesh_layer_1_vtx_0[14];

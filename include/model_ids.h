@@ -583,4 +583,6 @@
 #define MODEL_SECRET 0xef
 #define MODEL_HOLLOW_STAR 0xee
 
+#define MODEL_RED_COIN_RADAR 0xf7
+
 #endif // MODEL_IDS_H

@@ -1282,6 +1282,8 @@
 #define /*0x100*/ oRonpaPrev  OBJECT_FIELD_OBJ(0x1E)
 #define /*0x100*/ oRonpaStar  OBJECT_FIELD_OBJ(0x1F)
 
+#define /*0x100*/ oTrollOffset OBJECT_FIELD_S32(0x1B)
+
 /*Custom general defines:
 
 For general s32 ints, use o->oF4, oF8, oFC, o100, o104, o108, o10C, and o110

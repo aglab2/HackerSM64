@@ -1449,7 +1449,6 @@ s32 act_butt_slide(struct MarioState *m) {
         if (hthing)
             m->marioObj->header.gfx.pos[1] = hthing;
         s16 angle = 4 <= gSillyWilly && gSillyWilly <= 8 ? 0x8000 : 0;
-        print_text_fmt_int(20, 20, "%d", gSillyWilly);
         vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], angle);
     #if ENABLE_RUMBLE
         reset_rumble_timers_slip();

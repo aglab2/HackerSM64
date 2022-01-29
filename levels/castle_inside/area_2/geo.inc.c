@@ -3,8 +3,9 @@
 const GeoLayout castle_inside_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, 5509, -3561, -433, castle_inside_dl_ow1_003_mesh_layer_2),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_INTER, 5509, -3561, -433, castle_inside_dl_ow1_003_mesh_layer_3),
 		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, castle_inside_dl_ow1_003_mesh_layer_2),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_ow1_003_mesh_layer_1),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_ow1_003_mesh_layer_4),
 		GEO_CLOSE_NODE(),
@@ -44,6 +45,7 @@ const GeoLayout castle_inside_area_2[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, castle_inside_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, castle_inside_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),

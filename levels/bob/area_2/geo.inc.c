@@ -6,6 +6,7 @@ const GeoLayout bob_area_2_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, -44236, -360, 9595, bob_dl__bg_001_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 8578, -360, 9595, bob_dl_c1_a2_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 8578, -360, 9595, bob_dl_c1_a2_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 8578, -360, 9595, bob_dl_c1_a2_003_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -25,6 +26,7 @@ const GeoLayout bob_area_2[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bob_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),

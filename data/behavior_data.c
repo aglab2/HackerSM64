@@ -6331,3 +6331,20 @@ const BehaviorScript bhvTubeCommon[] = {
     // -
     END_LOOP(),
 };
+
+extern void bhv_troll_ctl_loop();
+const BehaviorScript bhvTrollCtl[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_troll_ctl_loop),
+    END_LOOP(),
+};
+
+extern void bhv_red_coin_radar_loop();
+const BehaviorScript bhvRedCoinRadar[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_red_coin_radar_loop),
+    END_LOOP(),
+};

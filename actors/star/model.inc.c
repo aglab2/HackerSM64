@@ -149,7 +149,7 @@ static const Vtx omm_star_glow_vertices[] = {
 };
 
 static const Gfx omm_star_glow_triangles[] = {
-    gsSPVertex(omm_star_glow_vertices, 33, 0),
+    gsSPVertex(omm_star_glow_vertices, 32, 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsSP1Triangle(0, 3, 4, 0),
@@ -180,16 +180,19 @@ static const Gfx omm_star_glow_triangles[] = {
     gsSP2Triangles(12, 28, 13, 0, 13, 28, 29, 0),
     gsSP2Triangles(13, 29, 14, 0, 14, 29, 30, 0),
     gsSP2Triangles(14, 30, 15, 0, 15, 30, 31, 0),
-    gsSP2Triangles(15, 31, 16, 0, 16, 31, 32, 0),
-    gsSP2Triangles(16, 32, 1, 0, 1, 32, 17, 0),
+    // thanks pc port
+    gsSPVertex(omm_star_glow_vertices + 32, 1, 2),
+    gsSP2Triangles(15, 31, 16, 0, 16, 31, 2, 0),
+    gsSP2Triangles(16, 2, 1, 0, 1, 2, 17, 0),
     gsSPEndDisplayList(),
 };
 
 const Gfx omm_star_glow_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xc3, 0x0b, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
-    gsSPDisplayList(omm_star_glow_triangles),
+	gsSPDisplayList(omm_star_glow_triangles),
     gsSPSetGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
     gsDPSetEnvColor(0xFF, 0xFF, 0xFF, 0xFF),
@@ -260,6 +263,7 @@ static const Gfx omm_star_ray_5_triangles[] = {
 };
 
 Gfx omm_star_ray_0_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xba, 0x01, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
@@ -271,6 +275,7 @@ Gfx omm_star_ray_0_gfx[] = {
 };
 
 Gfx omm_star_ray_1_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xba, 0x01, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
@@ -282,6 +287,7 @@ Gfx omm_star_ray_1_gfx[] = {
 };
 
 Gfx omm_star_ray_2_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xba, 0x01, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
@@ -293,6 +299,7 @@ Gfx omm_star_ray_2_gfx[] = {
 };
 
 Gfx omm_star_ray_3_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xba, 0x01, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
@@ -304,6 +311,7 @@ Gfx omm_star_ray_3_gfx[] = {
 };
 
 Gfx omm_star_ray_4_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xba, 0x01, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
@@ -315,6 +323,7 @@ Gfx omm_star_ray_4_gfx[] = {
 };
 
 Gfx omm_star_ray_5_gfx[] = {
+    gsDPPipeSync(),
     gsDPSetEnvColor(0xFF, 0xba, 0x01, 0xFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineLERP(SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, ENVIRONMENT, 0),
