@@ -3358,7 +3358,7 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
     }
     if (gCameraMovementFlags & CAM_MOVE_PAUSE_SCREEN) {
         if (sFramesPaused >= 2) {
-            if (sZoomOutAreaMasks[areaMaskIndex] & areaBit) {
+            if (FALSE) {
 
                 camera->focus[0] = gCamera->areaCenX;
                 camera->focus[1] = (sMarioCamState->pos[1] + gCamera->areaCenY) / 2;
@@ -10334,7 +10334,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 1, 0, 0, 0), // BBH            | CCM
 	ZOOMOUT_AREA_MASK(1, 1, 1, 1, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 1, 1), // SSL            | BOB
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 1, 1, 1), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
 	ZOOMOUT_AREA_MASK(1, 1, 1, 0, 1, 1, 0, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR

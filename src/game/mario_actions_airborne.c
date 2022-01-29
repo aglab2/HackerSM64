@@ -51,8 +51,18 @@ s32 lava_boost_on_wall(struct MarioState *m) {
     }
 
     if (!(m->flags & MARIO_METAL_CAP)) {
-        int buffed = (gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 2) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_BBH && gCurrAreaIndex == 2);
-        m->hurtCounter += !buffed ? 12 : 32;
+        if ((gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 2) || (gCurrCourseNum == COURSE_BBH && gCurrAreaIndex == 2))
+        {
+            m->hurtCounter += 32;
+        }
+        else if (gCurrCourseNum == COURSE_WF)
+        {
+            m->hurtCounter += 20;
+        }
+        else
+        {
+            m->hurtCounter += 12;
+        }
     }
 
     play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);
@@ -1503,8 +1513,18 @@ s32 act_lava_boost(struct MarioState *m) {
             if (m->floor->type == SURFACE_BURNING) {
                 m->actionState = ACT_STATE_LAVA_BOOST_HIT_LAVA;
                 if (!(m->flags & MARIO_METAL_CAP)) {
-                    int buffed = (gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 2) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_BBH && gCurrAreaIndex == 2);
-                    m->hurtCounter += !buffed ? 12 : 32;
+                    if ((gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 2) || (gCurrCourseNum == COURSE_BBH && gCurrAreaIndex == 2))
+                    {
+                        m->hurtCounter += 32;
+                    }
+                    else if (gCurrCourseNum == COURSE_WF)
+                    {
+                        m->hurtCounter += 20;
+                    }
+                    else
+                    {
+                        m->hurtCounter += 12;
+                    }
                 }
                 m->vel[1] = 84.0f;
                 play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);

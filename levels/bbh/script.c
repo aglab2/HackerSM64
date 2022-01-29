@@ -124,7 +124,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_SCUTTLEBUG, -15206, 2669, 5188, 0, 0, 0, 0x00000000, bhvScuttlebug),
 		OBJECT(MODEL_NONE, -2995, -685, 9616, 0, 0, 0, 0x00000000, bhvSandColorCtl),
 		OBJECT(MODEL_STAR, -5490, -228, 4884, 0, 0, 0, 0x00000000, bhvStar),
-		OBJECT(MODEL_STAR, -15190, 3519, 9705, 0, 0, 0, (1 << 24), bhvStar),
+		OBJECT(MODEL_STAR, -15190, 3519, 8703, 0, 0, 0, (1 << 24), bhvStar),
 		OBJECT(MODEL_STAR, 13904, 804, -4113, 0, 0, 0, (2 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 7311, -1869, -2937, 0, 0, 0, (3 << 24), bhvHiddenRedCoinStar),
 		OBJECT(MODEL_WOODEN_SIGNPOST, 7521, -2358, -3117, 0, -42, 0, (35 << 16), bhvMessagePanel),

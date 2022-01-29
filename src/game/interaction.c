@@ -1889,8 +1889,18 @@ void check_death_barrier(struct MarioState *m) {
 void check_lava_boost(struct MarioState *m) {
     if (!(m->action & ACT_FLAG_RIDING_SHELL) && m->pos[1] < m->floorHeight + 10.0f) {
         if (!(m->flags & MARIO_METAL_CAP)) {
-            int buffed = (gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 2) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_BBH && gCurrAreaIndex == 2);
-            m->hurtCounter += !buffed ? 12 : 32;
+            if ((gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 2) || (gCurrCourseNum == COURSE_BBH && gCurrAreaIndex == 2))
+            {
+                m->hurtCounter += 32;
+            }
+            else if (gCurrCourseNum == COURSE_WF)
+            {
+                m->hurtCounter += 20;
+            }
+            else
+            {
+                m->hurtCounter += 12;
+            }
         }
 
         update_mario_sound_and_camera(m);

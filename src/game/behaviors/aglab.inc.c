@@ -555,15 +555,15 @@ void bhv_peach_ending_cs_loop()
 }
 
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
-extern Gfx mat_bbh_dl__auto_6_f3d[];
-extern Gfx mat_bbh_dl_____[];
+extern Gfx mat_bbh_dl__auto_6_f3d_layer1[];
+extern Gfx mat_bbh_dl______layer1[];
 void bhv_sand_color_ctl_loop()
 {
     {
         // X -6000, -580
         f32 val = -(gMarioStates->pos[0] + 580.f) / (6000.f - 580.f);
         f32 dist = CLAMP(val, 0.f, 1.f);
-        u8* data = (u8*) segmented_to_virtual(mat_bbh_dl_____) + 20 * 8;
+        u8* data = (u8*) segmented_to_virtual(mat_bbh_dl______layer1) + 21 * 8;
         data[4] = 255 - (255 - 254) * dist;
         data[5] = 255 - (255 - 159) * dist;
         data[6] = 255 - (255 - 152) * dist;
@@ -572,7 +572,7 @@ void bhv_sand_color_ctl_loop()
         // Z 13500, 8800
         f32 val = (13500.f - gMarioStates->pos[2]) / (13500.f - 8800.f);
         f32 dist = CLAMP(val, 0.f, 1.f);
-        u8* data = (u8*) segmented_to_virtual(mat_bbh_dl__auto_6_f3d) + 20 * 8;
+        u8* data = (u8*) segmented_to_virtual(mat_bbh_dl__auto_6_f3d_layer1) + 21 * 8;
         data[4] = 255 - (255 - 230) * dist;
         data[5] = 255 - (255 - 193) * dist;
         data[6] = 255 - (255 - 254) * dist;
