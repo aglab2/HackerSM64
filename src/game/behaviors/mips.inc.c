@@ -137,6 +137,15 @@ void bhv_mips_act_follow_path(void) {
     // Retrieve current waypoint.
     struct Waypoint **pathBase = segmented_to_virtual(&inside_castle_seg7_trajectory_mips);
     struct Waypoint *waypoint = segmented_to_virtual(*(pathBase + o->oMipsStartWaypointIndex));
+    u8* a = getFlowerAlphaColor(o->oMipsStartWaypointIndex);
+    if (*a >= 205)
+    {
+        *a = 255;
+    }
+    else
+    {
+        *a += 50;
+    }
 
     // Set start waypoint and follow the path from there.
     o->oPathedStartWaypoint = waypoint;
@@ -298,6 +307,19 @@ void bhv_mips_thrown(void) {
  */
 void bhv_mips_loop(void) {
     // Determine what to do based on MIPS' held status.
+    for (int i = 0; i < 10; i++)
+    {
+        u8* a = getFlowerAlphaColor(i);
+        if (*a >= 10)
+        {
+            *a -= 10;
+        }
+        else
+        {
+            *a = 0;
+        }
+    }
+
     switch (o->oHeldState) {
         case HELD_FREE:
             bhv_mips_free();

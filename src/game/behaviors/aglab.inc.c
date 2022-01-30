@@ -1118,7 +1118,7 @@ void bhv_gg_loop()
     {
         if (gMarioStates->pos[1] < o->oPosY)
         {
-            print_text_centered(160, 20, "CLEAR");
+            print_text_centered(160, 20, "BAD ENDING CLEAR");
         }
     }
 }
