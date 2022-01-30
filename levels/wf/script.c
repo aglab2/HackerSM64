@@ -44,6 +44,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RR_SWINGING_PLATFORM, rr_geo_000860), 
 	LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TREE, snow_tree_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CCM_SNOW_TREE, snow_tree2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TRIANGLE, sl_geo_000390), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -79,6 +80,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, -5518, 2752, -10137, 0, -21, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_BLACK_BOBOMB, -9996, 5817, 5215, 0, -21, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 7827, 3144, -3621, 0, -21, 0, 0x00000000, bhvKoopa),
+		OBJECT(MODEL_NONE, 10867, 57, 3238, 0, -21, 0, 0x00000000, bhvSnowMoundSpawn),
 		OBJECT(MODEL_EXCLAMATION_BOX, 6872, 4689, 4456, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -6944, 9586, -1279, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -346, 1589, 121, 0, 0, 0, (6 << 16), bhvExclamationBox),
@@ -128,7 +130,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_STAR, -12398, 9825, 3848, 0, 0, 0, (1 << 24), bhvStar),
 		OBJECT(MODEL_STAR, 2233, 3228, -8347, 0, 0, 0, (2 << 24), bhvStar),
 		OBJECT(MODEL_STAR, 9360, 3291, -11264, 0, 0, 0, (3 << 24), bhvStar),
-		OBJECT(MODEL_STAR, 8759, 464, 2481, 0, 0, 0, (4 << 24), bhvStar),
+		OBJECT(MODEL_STAR, 9402, 543, 2716, 0, 0, 0, (4 << 24), bhvStar),
 		OBJECT(MODEL_STAR, 5826, 6315, 7486, 0, 0, 0, (5 << 24), bhvStar),
 		OBJECT(MODEL_SL_SNOW_TREE, 8230, 1883, 7397, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_SL_SNOW_TREE, 6730, 1883, 7291, 0, 0, 0, 0x00000000, bhvTree),

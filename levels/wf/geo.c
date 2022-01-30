@@ -41,3 +41,5 @@
 #include "levels/rr/seesaw_platform/geo.inc.c"
 
 #include "levels/rr/swinging_platform/geo.inc.c"
+
+#include "levels/sl/snow_mound/geo.inc.c"

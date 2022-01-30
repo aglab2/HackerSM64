@@ -92,6 +92,9 @@ extern const GeoLayout rr_geo_000878[];
 extern const GeoLayout rr_geo_000908[];
 extern const GeoLayout rr_geo_000860[];
 
+extern const Gfx sl_seg7_dl_0700A780[];
+extern const GeoLayout sl_geo_000390[];
+
 #include "levels/wf/header.inc.h"
 
 #endif

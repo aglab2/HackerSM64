@@ -8,6 +8,7 @@ const GeoLayout wf_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_b3_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_b3_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_b7_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, wf_dl_b7_mesh_layer_4),
 		GEO_CULL(-20000, 10000, -20000, 20000, -20000, 20000),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_b8_mesh_layer_1),

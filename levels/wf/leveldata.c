@@ -63,3 +63,6 @@
 
 #include "levels/rr/swinging_platform/model.inc.c"
 #include "levels/rr/swinging_platform/collision.inc.c"
+
+#include "levels/sl/snow_mound/model.inc.c"
+#include "levels/sl/snow_mound/collision.inc.c"

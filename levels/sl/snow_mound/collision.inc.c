@@ -8,7 +8,7 @@ const Collision sl_seg7_collision_sliding_snow_mound[] = {
     COL_VERTEX(0, 102, -255),
     COL_VERTEX(-101, 0, 256),
     COL_VERTEX(-101, 0, -255),
-    COL_TRI_INIT(SURFACE_DEFAULT, 6),
+    COL_TRI_INIT(SURFACE_BURNING, 6),
     COL_TRI(0, 1, 2),
     COL_TRI(0, 3, 1),
     COL_TRI(3, 4, 1),
