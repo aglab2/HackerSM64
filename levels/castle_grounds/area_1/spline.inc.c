@@ -16,7 +16,7 @@ const Trajectory castle_grounds_area_1_spline_mips_curve_001[] = {
 };
 const Trajectory castle_grounds_area_1_spline_mips_curve_002[] = {
 	TRAJECTORY_POS( 0, 340, 0, -284),
-	TRAJECTORY_POS( 1, -214, 0, -258),
+	TRAJECTORY_POS( 1, -214, 0, -242),
 	TRAJECTORY_POS( 2, -393, 0, 119),
 	TRAJECTORY_POS( 3, -285, 0, 521),
 	TRAJECTORY_POS( 4, 201, 0, 733),

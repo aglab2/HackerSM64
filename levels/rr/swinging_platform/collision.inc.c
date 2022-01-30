@@ -30,7 +30,7 @@ const Collision rr_seg7_collision_pendulum[] = {
     COL_VERTEX(-48, -101, 0),
     COL_VERTEX(54, -101, 0),
     COL_VERTEX(120, 0, 0),
-    COL_TRI_INIT(SURFACE_DEFAULT, 40),
+    COL_TRI_INIT(SURFACE_DEEP_QUICKSAND, 40),
     COL_TRI(9, 12, 13),
     COL_TRI(0, 1, 2),
     COL_TRI(2, 3, 4),

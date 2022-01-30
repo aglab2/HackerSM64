@@ -60,3 +60,6 @@
 #include "levels/rr/rotating_bridge_platform/collision.inc.c"
 #include "levels/rr/seesaw_platform/model.inc.c"
 #include "levels/rr/seesaw_platform/collision.inc.c"
+
+#include "levels/rr/swinging_platform/model.inc.c"
+#include "levels/rr/swinging_platform/collision.inc.c"

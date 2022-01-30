@@ -7,7 +7,51 @@
  * Initializes MIPS' physics parameters and checks if he should be active,
  * hiding him if necessary.
  */
+
+extern Gfx castle_grounds_dl_flower0_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower1_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower2_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower3_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower4_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower5_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower6_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower7_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower8_mesh_layer_5[];
+extern Gfx castle_grounds_dl_flower9_mesh_layer_5[];
+
+// lazy again
+static u8* getFlowerAlphaColor(int num)
+{
+    switch (num)
+    {
+    case 0:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower0_mesh_layer_5) + 15;
+    case 1:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower1_mesh_layer_5) + 15;
+    case 2:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower2_mesh_layer_5) + 15;
+    case 3:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower3_mesh_layer_5) + 15;
+    case 4:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower4_mesh_layer_5) + 15;
+    case 5:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower5_mesh_layer_5) + 15;
+    case 6:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower6_mesh_layer_5) + 15;
+    case 7:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower7_mesh_layer_5) + 15;
+    case 8:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower8_mesh_layer_5) + 15;
+    case 9:
+        return (u8*) segmented_to_virtual(castle_grounds_dl_flower9_mesh_layer_5) + 15;
+    }
+}
+
 void bhv_mips_init(void) {
+    for (int i = 0; i < 10; i++)
+    {
+        *getFlowerAlphaColor(i) = 0;
+    }
 #ifndef UNLOCK_ALL
     // Retrieve star flags for Castle Secret Stars on current save file.
     u8 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));

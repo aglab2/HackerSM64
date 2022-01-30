@@ -19,10 +19,10 @@ static struct LllOctagonalMeshAction gLllOctagonalMeshAction0[] = {
     // instruction                time  moveAngle  forwardVel
     { LLL_OCTMESH_WAIT_FOR_MARIO,    0,         0,          0 },
     { LLL_OCTMESH_LINEAR_MOVE,      30,    0x8000,          0 }, // 90 degrees
-    { LLL_OCTMESH_CHANGE_DIR,      300,       900,         30 },
+    { LLL_OCTMESH_CHANGE_DIR,      150,       900,         30 },
     { LLL_OCTMESH_CHANGE_DIR,       30,         0,        -30 },
     { LLL_OCTMESH_LINEAR_MOVE,      30,   0,          0 }, // 90 degrees
-    { LLL_OCTMESH_CHANGE_DIR,      300,       900,         30 },
+    { LLL_OCTMESH_CHANGE_DIR,      150,       900,         30 },
     { LLL_OCTMESH_CHANGE_DIR,       30,         0,        -30 },
     { LLL_OCTMESH_RESET,             0,         0,          0 }
 };
@@ -32,10 +32,10 @@ static struct LllOctagonalMeshAction gLllOctagonalMeshAction1[] = {
     // instruction                time  moveAngle  forwardVel
     { LLL_OCTMESH_WAIT_FOR_MARIO,    0,         0,          0 },
     { LLL_OCTMESH_LINEAR_MOVE,      30,    0,          0 }, // 90 degrees
-    { LLL_OCTMESH_CHANGE_DIR,      300,       900,         30 },
+    { LLL_OCTMESH_CHANGE_DIR,      150,       900,         30 },
     { LLL_OCTMESH_CHANGE_DIR,       30,         0,        -30 },
     { LLL_OCTMESH_LINEAR_MOVE,      30,   0x8000,          0 }, // 90 degrees
-    { LLL_OCTMESH_CHANGE_DIR,      300,       900,         30 },
+    { LLL_OCTMESH_CHANGE_DIR,      150,       900,         30 },
     { LLL_OCTMESH_CHANGE_DIR,       30,         0,        -30 },
     { LLL_OCTMESH_RESET,             0,         0,          0 }
 };
@@ -48,7 +48,7 @@ s32 lll_octagonal_mesh_move(struct LllOctagonalMeshAction *actionTable, s32 acti
     switch (action->instruction) {
         case LLL_OCTMESH_WAIT_FOR_MARIO:
             o->oMoveAngleYaw = action->moveAngle;
-            o->oForwardVel = action->forwardVel / 100.0f;
+            o->oForwardVel = action->forwardVel / 50.0f;
             if (cur_obj_is_mario_on_platform()) {
                 actionOffset++;
                 o->oTimer = 0;
@@ -57,7 +57,7 @@ s32 lll_octagonal_mesh_move(struct LllOctagonalMeshAction *actionTable, s32 acti
 
         case LLL_OCTMESH_LINEAR_MOVE:
             o->oMoveAngleYaw = action->moveAngle;
-            o->oForwardVel = action->forwardVel / 100.0f;
+            o->oForwardVel = action->forwardVel / 50.0f;
             if (o->oTimer > action->time) {
                 actionOffset++;
                 o->oTimer = 0;
@@ -65,7 +65,7 @@ s32 lll_octagonal_mesh_move(struct LllOctagonalMeshAction *actionTable, s32 acti
             break;
 
         case LLL_OCTMESH_CHANGE_DIR:
-            approach_f32_signed(&o->oForwardVel, action->moveAngle / 100.0f, action->forwardVel / 100.0f);
+            approach_f32_signed(&o->oForwardVel, action->moveAngle / 50.0f, action->forwardVel / 50.0f);
             if (o->oTimer > action->time) {
                 actionOffset++;
                 o->oTimer = 0;

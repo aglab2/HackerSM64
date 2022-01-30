@@ -1122,3 +1122,55 @@ void bhv_gg_loop()
         }
     }
 }
+
+void bhv_music_switcher_loop()
+{
+    if (0 == o->oAction)
+    {
+        if (1500 == o->oTimer)
+        {
+            seq_player_fade_out(0, 100);
+        }
+        if (1530 == o->oTimer)
+        {
+            seq_player_play_sequence(0, 0x37, 0);
+            o->oAction = 1;
+        }
+    }
+    if (1 == o->oAction)
+    {
+        if (1200 == o->oTimer)
+        {
+            seq_player_fade_out(0, 100);
+        }
+        if (1230 == o->oTimer)
+        {
+            seq_player_play_sequence(0, 0x38, 0);
+            o->oAction = 2;
+        }
+    }
+    if (2 == o->oAction)
+    {
+        if (1500 == o->oTimer)
+        {
+            seq_player_fade_out(0, 100);
+        }
+        if (1530 == o->oTimer)
+        {
+            seq_player_play_sequence(0, 0x39, 0);
+            o->oAction = 3;
+        }
+    }
+    if (3 == o->oAction)
+    {
+        if (1300 == o->oTimer)
+        {
+            seq_player_fade_out(0, 100);
+        }
+        if (1330 == o->oTimer)
+        {
+            seq_player_play_sequence(0, 0x2b, 0);
+            o->oAction = 0;
+        }
+    }
+}

@@ -6356,3 +6356,11 @@ const BehaviorScript bhvGG[] = {
         CALL_NATIVE(bhv_gg_loop),
     END_LOOP(),
 };
+
+extern void bhv_music_switcher_loop();
+const BehaviorScript bhvMusicSwitcher[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_music_switcher_loop),
+    END_LOOP(),
+};
