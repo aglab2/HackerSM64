@@ -6348,3 +6348,11 @@ const BehaviorScript bhvRedCoinRadar[] = {
         CALL_NATIVE(bhv_red_coin_radar_loop),
     END_LOOP(),
 };
+
+extern void bhv_gg_loop();
+const BehaviorScript bhvGG[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gg_loop),
+    END_LOOP(),
+};

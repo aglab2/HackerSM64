@@ -1455,14 +1455,14 @@ Even if I'm working for\n\
 the jail's owner... I am\n\
 still friendly enough.\n\
 He used to be the king\n\
-of an forgotten land...\n\
+of a forgotten land...\n\
 then one day, the\n\
 land simply vanished.\n\
 He had no choice but\n\
 fuse his land with the\n\
 Mushroom Kingdom...\n\
 but he's full of bitterness.\n\
-He wants to take a\n\
+He wants to take\n\
 revenge on the guy who\n\
 caused the loss of his\n\
 land... that explains\n\

@@ -563,5 +563,6 @@ extern const BehaviorScript bhvTimeThing[];
 extern const BehaviorScript bhvRonpa[];
 extern const BehaviorScript bhvTrollCtl[];
 extern const BehaviorScript bhvRedCoinRadar[];
+extern const BehaviorScript bhvGG[];
 
 #endif // BEHAVIOR_DATA_H

@@ -76,6 +76,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_GOOMBA, -2983, 264, -786, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BOBOMB_BUDDY, -2352, 165, 131, 0, 0, 0, (124 << 24) | (124 << 16), bhvBobombBuddy),
 		OBJECT(MODEL_BOBOMB_BUDDY, 7470, -718, 6411, 0, 0, 0, (126 << 24) | (126 << 16), bhvBobombBuddy),
+		OBJECT(MODEL_NONE, -6052, 1254, 2162, 0, 0, 0, 0x00000000, bhvGG),
 		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 7256, -856, -1041, 0, 0, 0, (0xb << 16), bhvDoorWarp),
 		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 7217, -856, 651, 0, 0, 0, (-1 << 24) | (0xc << 16), bhvDoorWarp),
 		OBJECT(MODEL_NONE, 7258, -468, -701, 0, 0, 0, (0x22 << 16), bhvDeathWarp),

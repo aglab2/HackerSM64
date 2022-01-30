@@ -1106,3 +1106,19 @@ void bhv_red_coin_radar_loop()
     o->oPosZ += coss(yaw) * 80.f;
     o->oFaceAnglePitch = pitch;
 }
+
+void bhv_gg_loop()
+{
+    struct Surface* floor = gMarioStates->floor;
+    if (!floor)
+        return;
+
+    int type = floor->type;
+    if (SURFACE_HARD == type)
+    {
+        if (gMarioStates->pos[1] < o->oPosY)
+        {
+            print_text_centered(160, 20, "CLEAR");
+        }
+    }
+}
