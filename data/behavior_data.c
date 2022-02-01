@@ -6364,3 +6364,12 @@ const BehaviorScript bhvMusicSwitcher[] = {
         CALL_NATIVE(bhv_music_switcher_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvDoorStop[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    LOAD_COLLISION_DATA(bob_seg7_collision_gate),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

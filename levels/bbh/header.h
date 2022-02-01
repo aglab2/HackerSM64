@@ -120,6 +120,9 @@ extern const GeoLayout hmc_geo_0005A0[];
 extern const GeoLayout hmc_geo_0005B8[];
 extern const GeoLayout hmc_geo2_0005B8[];
 
+extern const GeoLayout bob_geo_000470[];
+extern const Gfx bob_seg7_dl_0700E8A0[];
+
 #include "levels/bbh/header.inc.h"
 
 #endif

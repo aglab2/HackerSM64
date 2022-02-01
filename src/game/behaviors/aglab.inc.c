@@ -63,15 +63,28 @@ void bhv_bitfs_thing_loop()
     o->oPosY = o->oHomeY - (1 + sins(o->oTimer * 300)) * 70.f;
 }
 
+s32 gIsKingBuffed = 0;
 void bhv_bobomb_fight_ctl_init()
 {
     f32 d;
     o->oBobombCtlMain = cur_obj_find_nearest_object_with_behavior(bhvKingBobomb, &d);
+    gIsKingBuffed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) > 50;
 }
 
 void bhv_bobomb_fight_ctl_loop()
 {
     o->oBobombCtlTimer++;
+
+    if (3100 == o->oBobombCtlTimer)
+    {
+        seq_player_fade_out(0, 100);
+    }
+    if (3130 == o->oBobombCtlTimer)
+    {
+        seq_player_play_sequence(0, SEQ_F2, 0);
+        o->oBobombCtlTimer = 0;
+    }
+    
     struct Object* b = o->oBobombCtlMain;
 
     if (0 == o->oAction)
@@ -122,7 +135,6 @@ void bhv_bobomb_fight_ctl_loop()
         {
             struct Object* flameObj = spawn_object(b, MODEL_RED_FLAME, bhvBouncingFireballFlame);
             f32 scale = 6.f;
-
             obj_scale(flameObj, scale);
             obj_become_tangible(flameObj);
         }
@@ -481,6 +493,10 @@ void bhv_peach_ending_cs_loop()
         fade_in_text(3);
         set_text(4, "Fast64", -1, 2, 220, 140);
         fade_in_text(4);
+        set_text(5, "seq64", -1, 0, 80, 160);
+        fade_in_text(5);
+        set_text(6, "Anvil Studio", -1, 2, 220, 160);
+        fade_in_text(6);
     }
     else if (o->oTimer < 500)
     {
@@ -488,15 +504,23 @@ void bhv_peach_ending_cs_loop()
     }
     else if (o->oTimer < 530)
     {
-        set_text(0, "TESTING", -1, 1, 160, 110);
+        set_text(0, "TESTING", -1, 1, 160, 90);
         fade_in_text(0);
     }
     else if (o->oTimer < 600)
     {
-        set_text(1, "ZenonX", -1, 0, 80, 130);
+        set_text(1, "ZenonX", -1, 0, 80, 110);
         fade_in_text(1);
-        set_text(3, "Crash", -1, 2, 220, 130);
+        set_text(2, "Crash", -1, 2, 220, 110);
+        fade_in_text(2);
+        set_text(3, "TheReverserOfTime", -1, 0, 80, 130);
         fade_in_text(3);
+        set_text(4, "GTM", -1, 2, 220, 130);
+        fade_in_text(4);
+        set_text(5, "Mushie64", -1, 0, 80, 150);
+        fade_in_text(5);
+        set_text(6, "WSRM2022", -1, 2, 220, 150);
+        fade_in_text(6);
     }
     else if (o->oTimer < 650)
     {
@@ -1169,6 +1193,7 @@ void bhv_music_switcher_loop()
         }
         if (1330 == o->oTimer)
         {
+            print_text_centered(160, 20, "SKILL ISSUE");
             seq_player_play_sequence(0, 0x2b, 0);
             o->oAction = 0;
         }

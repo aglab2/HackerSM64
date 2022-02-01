@@ -18,12 +18,10 @@
 #include "levels/bob/areas/1/6/model.inc.c"
 #include "levels/bob/chain_chomp_gate/model.inc.c"
 #include "levels/bob/seesaw_platform/model.inc.c"
-#include "levels/bob/grate_door/model.inc.c"
 #include "levels/bob/areas/1/collision.inc.c"
 #include "levels/bob/areas/1/macro.inc.c"
 #include "levels/bob/chain_chomp_gate/collision.inc.c"
 #include "levels/bob/seesaw_platform/collision.inc.c"
-#include "levels/bob/grate_door/collision.inc.c"
 #include "levels/bob/areas/1/trajectory.inc.c"
 
 #include "levels/bob/leveldata.inc.c"

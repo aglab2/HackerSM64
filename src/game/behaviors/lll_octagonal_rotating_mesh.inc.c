@@ -40,8 +40,15 @@ static struct LllOctagonalMeshAction gLllOctagonalMeshAction1[] = {
     { LLL_OCTMESH_RESET,             0,         0,          0 }
 };
 
+// pausechamp
+static struct LllOctagonalMeshAction gLllOctagonalMeshAction2[] = {
+    // instruction                time  moveAngle  forwardVel
+    { LLL_OCTMESH_WAIT_FOR_MARIO,    0,         0,          0 },
+    { LLL_OCTMESH_RESET,             0,         0,          0 }
+};
+
 // picked by oBehParams2ndByte
-static struct LllOctagonalMeshAction *gLllOctagonalMeshActionList[] = { gLllOctagonalMeshAction0, gLllOctagonalMeshAction1 };
+static struct LllOctagonalMeshAction *gLllOctagonalMeshActionList[] = { gLllOctagonalMeshAction0, gLllOctagonalMeshAction1, gLllOctagonalMeshAction2 };
 
 s32 lll_octagonal_mesh_move(struct LllOctagonalMeshAction *actionTable, s32 actionOffset) {
     struct LllOctagonalMeshAction *action = &(actionTable[actionOffset]);

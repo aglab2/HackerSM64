@@ -28,3 +28,5 @@
 #include "levels/hmc/arrow_platform_button/geo.inc.c"
 
 #include "levels/bbh/geo.inc.c"
+
+#include "levels/bob/grate_door/geo.inc.c"

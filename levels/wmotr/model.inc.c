@@ -11796,7 +11796,7 @@ Gfx mat_revert_wmotr_dl__3_f3d[] = {
 Gfx mat_wmotr_dl__5_f3d[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
-	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wmotr_dl__5_ci4_pal_rgba16),
@@ -11819,7 +11819,7 @@ Gfx mat_wmotr_dl__5_f3d[] = {
 
 Gfx mat_revert_wmotr_dl__5_f3d[] = {
 	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPSetGeometryMode(G_CULL_BACK | G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };

@@ -51,6 +51,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM, hmc_geo_0005B8), 
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM2, hmc_geo2_0005B8), 
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_WOODEN_DOOR, wooden_door_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, bob_geo_000470), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -100,11 +101,14 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, 8862, -283, 3348, 0, 53, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -2081, -685, 9077, 0, 177, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -5681, -685, 11740, 0, 133, 0, 0x00000000, bhvCoinFormation),
+		OBJECT_WITH_ACTS(MODEL_BOB_BARS_GRILLS, -1820, -685, 8713, 0, -179, 0, 0x00000000, bhvDoorStop, ACT_5 | ACT_6),
+		OBJECT_WITH_ACTS(MODEL_BOB_BARS_GRILLS, -471, -685, 10259, 0, -88, 0, 0x00000000, bhvDoorStop, ACT_5 | ACT_6),
+		OBJECT_WITH_ACTS(MODEL_BOB_BARS_GRILLS, -6155, -685, 11850, 0, -45, 0, 0x00000000, bhvDoorStop, ACT_6),
 		OBJECT(MODEL_NONE, -2138, -685, 12474, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -5033, -685, 10943, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 2939, -685, 7800, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_HEART, 15385, 732, 752, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
-		MARIO_POS(0x01, 90, 6794, -1249, -885),
+		MARIO_POS(0x01, 90, -5618, -685, 11490),
 		OBJECT(MODEL_NONE, 487, -685, 14126, 0, -108, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT_WITH_ACTS(MODEL_HMC_METAL_PLATFORM, -8574, -464, 5687, 0, 0, 0, 0x00000000, bhvControllablePlatform, ACT_1 | ACT_2 | ACT_3 | ACT_4),
 		OBJECT_WITH_ACTS(MODEL_RED_COIN, 9786, -2036, -2273, 0, 0, 0, 0x00000000, bhvRedCoin, ACT_1 | ACT_2 | ACT_3 | ACT_4),
@@ -167,7 +171,7 @@ const LevelScript level_bbh_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 90, 6794, -1249, -885),
+	MARIO_POS(0x01, 90, -5618, -685, 11490),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

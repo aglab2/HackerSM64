@@ -1,4 +1,4 @@
-void scroll_bbh_dl_c5_mesh_layer_1_vtx_7() {
+void scroll_bbh_dl_c5_mesh_layer_1_vtx_8() {
 	int i = 0;
 	int count = 8;
 	int width = 32 * 0x20;
@@ -6,7 +6,7 @@ void scroll_bbh_dl_c5_mesh_layer_1_vtx_7() {
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(bbh_dl_c5_mesh_layer_1_vtx_7);
+	Vtx *vertices = segmented_to_virtual(bbh_dl_c5_mesh_layer_1_vtx_8);
 
 	deltaX = (int)(0.40000003576278687 * 0x20) % width;
 
@@ -92,7 +92,7 @@ void scroll_sts_mat_bbh_dl_laval_layer1() {
 };
 
 void scroll_bbh() {
-	scroll_bbh_dl_c5_mesh_layer_1_vtx_7();
+	scroll_bbh_dl_c5_mesh_layer_1_vtx_8();
 	scroll_bbh_dl_c5_001_mesh_layer_1_vtx_2();
 	scroll_bbh_dl_c5_001_mesh_layer_1_vtx_5();
 	scroll_bbh_dl___mesh_layer_1_vtx_0();

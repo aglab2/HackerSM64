@@ -49,10 +49,11 @@ const LevelScript level_wmotr_entry[] = {
 		WARP_NODE(0xf0, LEVEL_CASTLE, 3, 0x31, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_CASTLE, 3, 0x32, WARP_NO_CHECKPOINT),
 		MARIO_POS(0x01, 0, 3940, 21, -3476),
-		OBJECT(MODEL_NONE, -4489, 21, 8317, 0, 180, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, -4489, 21, 8317, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, 4660, -352, -4338, 0, 0, 0, 0x00000000, bhvLllMovingOctagonalMeshPlatform),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, 3415, -346, -7061, 0, 0, 0, (1 << 16), bhvLllMovingOctagonalMeshPlatform),
-		OBJECT(MODEL_BLUE_COIN, -4854, 18822, 8302, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, -6556, -428, 3002, 0, 0, 0, (2 << 16), bhvLllMovingOctagonalMeshPlatform),
+		OBJECT(MODEL_NONE, -206, 21, 4804, 0, 0, 0, 0x00000000, bhvMusicSwitcher),
 		OBJECT(MODEL_BLUE_COIN, -4053, 107, 8296, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_BLUE_COIN, -4495, 107, 8679, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_BLUE_COIN, -4495, 107, 7870, 0, 0, 0, 0x00000000, bhvRedCoin),
@@ -159,8 +160,12 @@ const LevelScript level_wmotr_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, -6996, 107, -7515, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_NONE, -4497, 424, 8322, 0, 0, 0, 0x00000000, bhvHiddenRedCoinStar),
 		
-		OBJECT(MODEL_NONE, 0, 0, 0, 0, 0, 0, 0x00000000, bhvMusicSwitcher),
-
+		OBJECT(MODEL_BREAKABLE_BOX, -6317, 21, 2586, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -6317, 21, 2762, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -6507, 21, 2586, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -6507, 21, 2762, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_PURPLE_SWITCH, -3560, 21, 2535, 0, 0, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
+		
 		TERRAIN(wmotr_area_1_collision),
 		MACRO_OBJECTS(wmotr_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_100CC),

@@ -1936,14 +1936,19 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     
         print_generic_string(x - 20, y + 120, holdBToWarp);
     } else { // Castle secret stars
+        courseName = segmented_to_virtual(courseNameTbl[COURSE_MAX]);
+        render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, -1, 4);
+        /*
         u8 textStarX[] = { TEXT_STAR_X };
         courseName = segmented_to_virtual(courseNameTbl[COURSE_MAX]);
         print_generic_string(x + 40, y + 13, textStarX);
         int_to_str(save_file_get_total_star_count(gCurrSaveFileNum - 1,
                                                   COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES),
-                                                  COURSE_NUM_TO_INDEX(COURSE_MAX)),
+                                                  COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES)),
                                                   strVal);
+
         print_generic_string(x + 60, y + 13, strVal);
+        */
     }
 
     print_generic_string(x - 9, y + 30, courseName);

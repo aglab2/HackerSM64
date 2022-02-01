@@ -45,6 +45,7 @@ s32 mario_is_far_below_object(f32 min) {
     return min < o->oPosY - gMarioObject->oPosY;
 }
 
+extern s32 gIsKingBuffed;
 void king_bobomb_act_active(void) { // act 2
     cur_obj_become_tangible();
 
@@ -72,13 +73,16 @@ void king_bobomb_act_active(void) { // act 2
         if (o->oKingBobombPlayerGrabEscapeCooldown == 0) {
             if (o->oInteractionSubtype & INT_SUBTYPE_NOT_GRABBABLE)
             {
-                o->oForwardVel = 0.5f;
+                f32 val = gIsKingBuffed ? 1600000.f : 560000.f;
+                o->oForwardVel = val / o->oDistanceToMario / o->oDistanceToMario;
             }
             else
             {
-                o->oForwardVel = o->oHealth == 1 ? (20.f * sins(o->oTimer * 612)) : 3.0f;
+                o->oForwardVel = o->oHealth == 1 
+                              ? ((gIsKingBuffed ? 60.f : 20.f) * sins(o->oTimer * 612))
+                              : (gIsKingBuffed ? 3.0f : 4.f);
             }
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x100);
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, gIsKingBuffed ? 0x200 : 0x100);
         } else {
             o->oForwardVel = 0.0f;
             o->oKingBobombPlayerGrabEscapeCooldown--;

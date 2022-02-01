@@ -97,6 +97,9 @@ ALIGNED8 static const Texture hmc_seg7_texture2_07003800[] = {
 #include "levels/hmc/arrow_platform/collision.inc.c"
 #include "levels/hmc/arrow_platform_button/collision.inc.c"
 
+#include "levels/bob/grate_door/model.inc.c"
+#include "levels/bob/grate_door/collision.inc.c"
+
 #include "levels/bbh/leveldata.inc.c"
 
 // cd

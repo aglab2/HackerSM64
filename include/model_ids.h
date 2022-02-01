@@ -111,7 +111,7 @@
 // bob
 #define MODEL_BOB_CHAIN_CHOMP_GATE             0x36        // bob_geo_000440
 #define MODEL_BOB_SEESAW_PLATFORM              0x37        // bob_geo_000458
-#define MODEL_BOB_BARS_GRILLS                  0x38        // bob_geo_000470
+#define MODEL_BOB_BARS_GRILLS                  0xfe        // bob_geo_000470
 
 // sl
 #define MODEL_SL_SNOW_TRIANGLE                 0x36        // sl_geo_000390
