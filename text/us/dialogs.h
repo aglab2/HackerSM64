@@ -1041,12 +1041,18 @@ were after my star...\n\
 TAKE IT NOW !"))
 
 DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
-Look at all these paintings!\n\
-They bring horror in my\n\
-eyes, I am so afraid!\n\
-I can't even leave this\n\
-place, it is high!\n\
-Look, I found this though!"))
+Mario!\n\
+I was trying to escape\n\
+from the roof but there\n\
+is just no way...\n\
+It is so high up,\n\
+I am scared, Mario!\n\
+Please tell me you\n\
+you got some news...\n\
+Ah, if only I had a\n\
+wing cap, I would fly\n\
+for away, but....\n\
+Here, get this star!"))
 
 DEFINE_DIALOG(DIALOG_084, 1, 6, 30, 200, _("\
 Wow... Mario ?\n\
@@ -1856,13 +1862,11 @@ that mountain at all...\n\
 no... no... please no..."))
 
 DEFINE_DIALOG(DIALOG_156, 1, 5, 30, 200, _("\
-...I don't wan't to get\n\
-back home.\n\
-This forest is so calm\n\
-and relaxing, I could\n\
-stay here for hours...\n\
-Leave me alone, please.\n\
-I'm... meditating."))
+This place creeps me out,\n\
+what is Bowser doing\n\
+here anyways? Seems so\n\
+confusing, ah... \n\
+I will just rest..."))
 
 DEFINE_DIALOG(DIALOG_157, 1, 5, 30, 200, _("\
 Watch out! Don't let\n\

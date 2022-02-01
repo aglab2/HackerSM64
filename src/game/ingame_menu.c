@@ -1954,7 +1954,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     } else { // Castle secret stars
         courseName = segmented_to_virtual(courseNameTbl[COURSE_MAX]);
         render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, -1, 4);
-        bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 27;
+        bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 50;
         if (hackticeAllowed)
         {
             if (!Hacktice_gEnabled)
