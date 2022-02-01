@@ -46,6 +46,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_VCUTM_GRILL, castle_grounds_geo_00070C), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG, castle_grounds_geo_000660), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724), 
+	LOAD_MODEL_FROM_GEO(0xfd, chiaki_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -70,6 +71,21 @@ const LevelScript level_castle_grounds_entry[] = {
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_OW_BAIT),
 		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(2, castle_grounds_area_2),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf0, LEVEL_CASTLE, 2, 0xb1, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf1, LEVEL_CASTLE, 2, 0xb2, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, 4312, 1898, 11211, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_STAR, 4332, 2471, 9585, 0, 0, 0, 0x00000000, bhvStar),
+		OBJECT(0xfd, 4332, 2471, 9172, 0, 0, 0, 0x00000000, bhvChiaki),
+		TERRAIN(castle_grounds_area_2_collision),
+		MACRO_OBJECTS(castle_grounds_area_2_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, 0x3a),
+		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),

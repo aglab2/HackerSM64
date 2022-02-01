@@ -6373,3 +6373,14 @@ const BehaviorScript bhvDoorStop[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+extern void bhv_chiaki_init();
+extern void bhv_chiaki_loop();
+const BehaviorScript bhvChiaki[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_chiaki_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_chiaki_loop),
+    END_LOOP(),
+};

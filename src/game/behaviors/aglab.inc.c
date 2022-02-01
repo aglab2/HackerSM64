@@ -1199,3 +1199,47 @@ void bhv_music_switcher_loop()
         }
     }
 }
+
+void bhv_chiaki_init()
+{
+    o->oFaceAnglePitch = 0x4000;
+    f32 d;
+    o->oChiakiStar = cur_obj_find_nearest_object_with_behavior(bhvStar, &d);
+    o->oChiakiStar->oPosX = o->oPosX;
+    o->oChiakiStar->oPosY = o->oPosY;
+    o->oChiakiStar->oPosZ = o->oPosZ + 500.f;    
+}
+
+static f32 sChiakiStartMove[] = 
+{
+    10000.f, 4778.f, 0.f, -4844.f, -9638.f, -14454.f, -20000.f
+};
+
+static f32 sChiakiStopMove[] = 
+{
+    4004.f, -800.f, -5600.f, -10400.f, -15204.f, -16700.f, -20000.f
+};
+
+void bhv_chiaki_loop()
+{
+    if (0 == o->oSubAction)
+    {
+        if (sChiakiStartMove[o->oAction] > gMarioStates->pos[2])
+        {
+            o->oSubAction = 1;
+        }
+    }
+    else
+    {
+        if (sChiakiStopMove[o->oAction] < o->oPosZ)
+        {
+            o->oPosZ -= 100.f;
+        }
+        else
+        {
+            o->oPosZ = sChiakiStopMove[o->oAction];
+            o->oAction++;
+        }
+    }
+    o->oChiakiStar->oPosZ = o->oPosZ + 500.f;
+}

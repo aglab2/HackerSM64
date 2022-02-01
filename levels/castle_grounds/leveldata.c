@@ -42,3 +42,5 @@ const Trajectory *const inside_castle_seg7_trajectory_mips[] = {
     castle_grounds_area_1_spline_mips_curve_006, castle_grounds_area_1_spline_mips_curve_007,
     castle_grounds_area_1_spline_mips_curve_008, castle_grounds_area_1_spline_mips_curve_009,
 };
+
+#include "levels/castle_grounds/chiaki/model.inc.c"
