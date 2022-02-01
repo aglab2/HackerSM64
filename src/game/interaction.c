@@ -62,7 +62,7 @@ struct InteractionHandler {
     u32 (*handler)(struct MarioState *m, u32 interactType, struct Object *obj);
 };
 
-static struct InteractionHandler sInteractionHandlers[] = {
+struct InteractionHandler sInteractionHandlers[] = {
     { INTERACT_COIN,           interact_coin },
     { INTERACT_WATER_RING,     interact_water_ring },
     { INTERACT_STAR_OR_KEY,    interact_star_or_key },

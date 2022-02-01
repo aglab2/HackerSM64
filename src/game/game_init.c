@@ -30,6 +30,8 @@
 #include "debug_box.h"
 #include "vc_check.h"
 
+#include "hacktice/main.h"
+
 // First 3 controller slots
 struct Controller gControllers[3];
 
@@ -832,6 +834,10 @@ void thread5_game_loop(UNUSED void *arg) {
         audio_game_loop_tick();
         select_gfx_pool();
         read_controller_inputs(THREAD_5_GAME_LOOP);
+        if (Hacktice_gEnabled)
+        {
+            Hacktice_onFrame();
+        }
         addr = level_script_execute(addr);
 #if !PUPPYPRINT_DEBUG && defined(VISUAL_DEBUG)
         debug_box_input();
