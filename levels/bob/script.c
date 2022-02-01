@@ -104,6 +104,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_EXCLAMATION_BOX, -1706, 4033, 219, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, 4692, 2811, -907, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -4403, 3307, -2311, 0, 0, 0, (6 << 16), bhvExclamationBox),
+		OBJECT(MODEL_EXCLAMATION_BOX, -7336, 1417, -7249, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_NONE, -12931, -1423, -3475, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -10830, -466, -2485, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_GOOMBA, -13562, -1007, -1035, 0, 0, 0, (1 << 16), bhvGoomba),

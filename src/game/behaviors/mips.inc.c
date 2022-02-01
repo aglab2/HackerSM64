@@ -59,7 +59,7 @@ void bhv_mips_init(void) {
     // If the player has >= 15 stars and hasn't collected first MIPS star...
     if (!(starFlags & SAVE_FLAG_TO_STAR_FLAG(SAVE_FLAG_COLLECTED_MIPS_STAR_1))) {
         o->oBehParams2ndByte    = MIPS_BP_STAR_1;
-        o->oMipsForwardVelocity = 25.0f;
+        o->oMipsForwardVelocity = 45.0f;
     } else {
         // No MIPS stars are available, hide MIPS.
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;

@@ -1,4 +1,4 @@
-void scroll_cotmc_dl_s1_mesh_layer_1_vtx_16() {
+void scroll_cotmc_dl_s1_mesh_layer_1_vtx_11() {
 	int i = 0;
 	int count = 36;
 	int width = 32 * 0x20;
@@ -6,7 +6,7 @@ void scroll_cotmc_dl_s1_mesh_layer_1_vtx_16() {
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(cotmc_dl_s1_mesh_layer_1_vtx_16);
+	Vtx *vertices = segmented_to_virtual(cotmc_dl_s1_mesh_layer_1_vtx_11);
 
 	deltaY = (int)(0.1899999976158142 * 0x20) % height;
 
@@ -43,6 +43,6 @@ void scroll_cotmc_dl_s1_002_mesh_layer_5_vtx_0() {
 }
 
 void scroll_cotmc() {
-	scroll_cotmc_dl_s1_mesh_layer_1_vtx_16();
+	scroll_cotmc_dl_s1_mesh_layer_1_vtx_11();
 	scroll_cotmc_dl_s1_002_mesh_layer_5_vtx_0();
 }
