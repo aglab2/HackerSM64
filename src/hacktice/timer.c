@@ -10,11 +10,6 @@
 
 bool sGrabTimerSet = false;
 
-void Timer_reset()
-{
-    sGrabTimerSet = false;
-}
-
 void Timer_onFrame()
 {
     if (Config_timerShow())

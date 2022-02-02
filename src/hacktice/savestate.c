@@ -13,7 +13,7 @@
 void set_play_mode(s16 playMode);
 
 // TODO: This is very much a culprit, useless one too
-#define MaxStateSize 0x26B28
+#define MaxStateSize 0x30000
 
 typedef struct State
 {

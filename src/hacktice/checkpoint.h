@@ -1,4 +1,9 @@
 #pragma once
 
+#include "bool.h"
+
 void Checkpoint_onNormal();
-void Checkpoint_registerEvent();
+
+extern bool sShow;
+static inline void Checkpoint_registerEvent()
+{ sShow = true; }

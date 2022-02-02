@@ -1111,6 +1111,11 @@ void mode_8_directions_camera(struct Camera *c) {
 
     radial_camera_input(c);
 
+    /*
+    print_text_fmt_int(20, 20, "Y %d", s8DirModeBaseYaw);
+    print_text_fmt_int(20, 40, "C %d", gCurrCourseNum);
+    */
+
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
         s8DirModeBaseYaw += DEGREES(45);
         play_sound_cbutton_side();
@@ -3171,12 +3176,29 @@ void reset_camera(struct Camera *c) {
     gRecentCutscene = CUTSCENE_NONE;
 }
 
+static s16 gInitCameraAngles[30] = 
+{
+    [COURSE_BOB] = 0x8000,
+    [COURSE_JRB] = 0x2000,
+    [COURSE_BBH] = 0x2000,
+    
+    [24] = 0x8000,
+    [16] = 0x8000,
+    [19] = 0x8000,
+    [21] = 0x4000,
+    [17] = 0x8000,
+    [20] = 0x8000,
+    [18] = 0x8000,
+};
+
 void init_camera(struct Camera *c) {
     struct Surface *floor = NULL;
     Vec3f marioOffset;
     s32 i;
 
-    s8DirModeBaseYaw = (0x9000 + gMarioStates->intendedYaw) & 0xE000;
+    s8DirModeBaseYaw = (gCurrCourseNum && ((gCurrLevelArea / 16) != gCurrLevelNum)) 
+                     ? gInitCameraAngles[gCurrCourseNum] 
+                     : (0x9000 + gMarioStates->intendedYaw) & 0xE000;
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;

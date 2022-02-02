@@ -11,7 +11,7 @@
 #include "text_manager.h"
 #include "sm64.h"
 
-static bool sShow = false;
+bool sShow = false;
 static int wasLastNumCollidedObjects = 0;
 static bool wasLastPlatform = false;
 
@@ -68,9 +68,4 @@ void Checkpoint_onNormal()
     ADD_TIME_ON_EVENT(Groundpound, ACT_GROUND_POUND)
     ADD_TIME_ON_EVENT(Burning, ACT_BURNING_GROUND)
     ADD_TIME_ON_EVENT(Cannon, ACT_IN_CANNON)
-}
-
-void Checkpoint_registerEvent()
-{
-    sShow = true;
 }

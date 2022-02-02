@@ -21,45 +21,10 @@ static int sPage = Pages_GENERAL;
 #define sMaxAllowedPage (Pages_PagesCount - 1)
 static u8* lPageNames[] = { uCHECKPOINTS, uGENERAL, uWARP };
 
-static struct
-{
-    char speed;
-    char stickStyle;
-    char showButtons;
-    char lAction;
-    char lRAction;
-    char cButtonsAction;
-    char dpadDownAction;
-    char warp;
-    char wallkickFrame;
-    char distanceFromClosestRed;
-    char distanceFromClosestSecret;
-    char timerShow;
-    char timerStyle;
-    char timerStopOnCoinStar;
-    char stateSaveStyle;
-    char muteMusic;
-    char musicNumber;
-    char deathAction;
-
-    char checkpointWallkick;
-    char checkpointDoor;
-    char checkpointPole;
-    char checkpointLava;
-    char checkpointGroundpound;
-    char checkpointBurning;
-    char checkpointCannon;
-    char checkpointWarp;
-    char checkpointRed;
-    char checkpointCoin;
-    char checkpointObject;
-    char checkpointPlatform;
-}
-sConfig = {
+Hacktice_Config sConfig = {
     .timerShow = true,
     .timerStyle = Config_TimerStyle_GRAB,
-}
-;
+};
 
 typedef struct ConfigDescriptor
 {
@@ -82,7 +47,7 @@ static u8* lActionNames[]    = { uOFF, uACT_SELECT, uLEVEL_RESET, uLEVEL_RESET_W
 static u8 lMusicNumber[] = { 0x00, 0x00, 0xff };
 static u8* lMusicNumbers[] = { lMusicNumber, NULL };
 
-static u8 sOnDeathAction = 0;
+u8 sOnDeathAction = 0;
 
 #define VALUE_NAMES(x) x, ARRAY_SIZE(x)
 #define INT_NAMES(x, cnt) x, cnt
@@ -297,21 +262,6 @@ void Config_onPause()
     processInputs();
 }
 
-Config_StickStyle Config_showStick()
-{
-    return (Config_StickStyle) sConfig.stickStyle;
-}
-
-bool Config_showButtons()
-{
-    return sConfig.showButtons;
-}
-
-LevelConv_PlainLevels Config_warpId()
-{
-    return (LevelConv_PlainLevels) sConfig.warp;
-}
-
 LevelConv_PlainLevels Config_warpIdAndReset()
 {
     int w = Config_warpId();
@@ -347,124 +297,4 @@ Config_ButtonAction Config_action()
     }
 
     return Config_ButtonAction_OFF;
-}
-
-bool Config_showWallkickFrame()
-{
-    return sConfig.wallkickFrame;
-}
-
-bool Config_showDistanceFromClosestRed()
-{
-    return sConfig.distanceFromClosestRed;
-}
-
-bool Config_showDistanceFromClosestSecret()
-{
-    return sConfig.distanceFromClosestSecret;
-}
-
-bool Config_showSpeed()
-{
-    return sConfig.speed;
-}
-
-bool Config_timerShow()
-{
-    return sConfig.timerShow;
-}
-
-Config_TimerStyle Config_timerStyle()
-{
-    return (Config_TimerStyle) sConfig.timerStyle;
-}
-
-bool Config_timerStopOnCoinStar()
-{
-    return sConfig.timerStopOnCoinStar;
-}
-
-Config_StateSaveStyle Config_saveStateStyle()
-{
-    return (Config_StateSaveStyle) sConfig.stateSaveStyle;
-}
-
-bool Config_muteMusic()
-{
-    return sConfig.muteMusic;
-}
-
-char Config_musicNumber()
-{
-    return sConfig.musicNumber;
-}
-
-Config_DeathAction Config_deathAction()
-{
-    return (Config_DeathAction) sConfig.deathAction;
-}
-
-void Config_setOnDeathAction(Config_ButtonAction act)
-{
-    sOnDeathAction = (u8) act;
-}
-
-bool Config_checkpointWallkick()
-{
-    return sConfig.checkpointWallkick;
-}
-
-bool Config_checkpointDoor()
-{
-    return sConfig.checkpointDoor;
-}
-
-bool Config_checkpointPole()
-{
-    return sConfig.checkpointPole;
-}
-
-bool Config_checkpointLava()
-{
-    return sConfig.checkpointLava;
-}
-
-bool Config_checkpointGroundpound()
-{
-    return sConfig.checkpointGroundpound;
-}
-
-bool Config_checkpointBurning()
-{
-    return sConfig.checkpointBurning;
-}
-
-bool Config_checkpointCannon()
-{
-    return sConfig.checkpointCannon;
-}
-
-bool Config_checkpointWarp()
-{
-    return sConfig.checkpointWarp;
-}
-
-bool Config_checkpointRed()
-{
-    return sConfig.checkpointRed;
-}
-
-bool Config_checkpointCoin()
-{
-    return sConfig.checkpointCoin;
-}
-
-bool Config_checkpointObject()
-{
-    return sConfig.checkpointObject;
-}
-
-bool Config_checkpointPlatform()
-{
-    return sConfig.checkpointPlatform;
 }
