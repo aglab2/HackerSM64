@@ -480,22 +480,22 @@ void bhv_peach_ending_cs_loop()
     }
     else if (o->oTimer < 370)
     {
-        set_text(0, "TOOLS USED", -1, 1, 160, 100);
+        set_text(0, "TOOLS USED", -1, 1, 160, 80);
         fade_in_text(0);
     }
     else if (o->oTimer < 450)
     {
-        set_text(1, "HackerSM64", -1, 0, 80, 120);
+        set_text(1, "HackerSM64", -1, 0, 80, 100);
         fade_in_text(1);
-        set_text(2, "Blender", -1, 0, 80, 140);
+        set_text(2, "Blender", -1, 0, 80, 120);
         fade_in_text(2);
-        set_text(3, "Sketchup", -1, 2, 220, 120);
+        set_text(3, "Sketchup", -1, 2, 220, 100);
         fade_in_text(3);
-        set_text(4, "Fast64", -1, 2, 220, 140);
+        set_text(4, "Fast64", -1, 2, 220, 120);
         fade_in_text(4);
-        set_text(5, "seq64", -1, 0, 80, 160);
+        set_text(5, "seq64", -1, 0, 80, 140);
         fade_in_text(5);
-        set_text(6, "Anvil Studio", -1, 2, 220, 160);
+        set_text(6, "Anvil Studio", -1, 2, 220, 140);
         fade_in_text(6);
     }
     else if (o->oTimer < 500)
@@ -504,22 +504,22 @@ void bhv_peach_ending_cs_loop()
     }
     else if (o->oTimer < 530)
     {
-        set_text(0, "TESTING", -1, 1, 160, 90);
+        set_text(0, "TESTING", -1, 1, 160, 80);
         fade_in_text(0);
     }
     else if (o->oTimer < 600)
     {
-        set_text(1, "ZenonX", -1, 0, 80, 110);
+        set_text(1, "ZenonX", -1, 0, 80, 100);
         fade_in_text(1);
-        set_text(2, "Crash", -1, 2, 220, 110);
+        set_text(2, "Crash", -1, 2, 220, 100);
         fade_in_text(2);
-        set_text(3, "TheReverserOfTime", -1, 0, 80, 130);
+        set_text(3, "TheReverserOfTime", -1, 0, 80, 140);
         fade_in_text(3);
-        set_text(4, "GTM", -1, 2, 220, 130);
+        set_text(4, "GTM", -1, 2, 220, 140);
         fade_in_text(4);
-        set_text(5, "Mushie64", -1, 0, 80, 150);
+        set_text(5, "Mushie64", -1, 0, 80, 120);
         fade_in_text(5);
-        set_text(6, "WSRM2022", -1, 2, 220, 150);
+        set_text(6, "Arthurtilly", -1, 2, 220, 120);
         fade_in_text(6);
     }
     else if (o->oTimer < 650)
@@ -528,22 +528,22 @@ void bhv_peach_ending_cs_loop()
     }
     else if (o->oTimer < 680)
     {
-        set_text(0, "SPECIAL THANKS", -1, 1, 160, 100);
+        set_text(0, "SPECIAL THANKS", -1, 1, 160, 80);
         fade_in_text(0);
     }
     else if (o->oTimer < 750)
     {
-        set_text(1, "scuttlebug raiser", -1, 0, 30, 120);
+        set_text(1, "scuttlebug raiser", -1, 0, 30, 100);
         fade_in_text(1);
-        set_text(2, "ArcticJaguar", -1, 0, 30, 140);
+        set_text(2, "ArcticJaguar", -1, 0, 30, 120);
         fade_in_text(2);
-        set_text(3, "ToasterKetchup", -1, 2, 270, 120);
+        set_text(3, "ToasterKetchup", -1, 2, 270, 100);
         fade_in_text(3);
-        set_text(4, "octaviosidoni", -1, 2, 270, 140);
+        set_text(4, "octaviosidoni", -1, 2, 270, 120);
         fade_in_text(4);
-        set_text(5, "Yoshi Milkman", -1, 0, 30, 160);
+        set_text(5, "Yoshi Milkman", -1, 0, 30, 140);
         fade_in_text(5);
-        set_text(6, "HackerSM64 discord", -1, 2, 270, 160);
+        set_text(6, "HackerSM64 discord", -1, 2, 270, 140);
         fade_in_text(6);
     }
     else if (o->oTimer < 820)
@@ -574,6 +574,10 @@ void bhv_peach_ending_cs_loop()
     }
     else
     {
+        if (o->oTimer == 1060)
+        {
+            seq_player_fade_out(0, 1000);
+        }
         fade_out_all();
     }
 }
