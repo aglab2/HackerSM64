@@ -13,6 +13,7 @@ const GeoLayout wf_area_1_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_b8_mesh_layer_1),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -2049, 0, 4377, 0, 29, 0, wf_dl_bc_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, wf_dl_c2_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, wf_dl_c2_002_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, wf_dl_c2_003_mesh_layer_6),

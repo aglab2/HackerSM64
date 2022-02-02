@@ -1051,7 +1051,7 @@ Please tell me you\n\
 you got some news...\n\
 Ah, if only I had a\n\
 wing cap, I would fly\n\
-for away, but....\n\
+far away, but....\n\
 Here, get this star!"))
 
 DEFINE_DIALOG(DIALOG_084, 1, 6, 30, 200, _("\

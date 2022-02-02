@@ -3179,6 +3179,7 @@ void reset_camera(struct Camera *c) {
 static s16 gInitCameraAngles[30] = 
 {
     [COURSE_BOB] = 0x8000,
+    [COURSE_WF]  = 0x4000,
     [COURSE_JRB] = 0x2000,
     [COURSE_BBH] = 0x2000,
     

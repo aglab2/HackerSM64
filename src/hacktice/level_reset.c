@@ -34,6 +34,7 @@ static void resetTransition()
         sTransitionColorFadeCount[i] = 0;
 }
 
+extern s32 gCurrLevelArea;
 static void miniResetCommon()
 {
     gMarioStates->health = 0x880;
@@ -44,6 +45,7 @@ static void miniResetCommon()
     sTimerRunning = true;
     Timer_reset();
     sWarpDest.type = 2;
+    gCurrLevelArea = 0; // it will be set on init_camera
     resetCamera();
     resetTransition();
 }
