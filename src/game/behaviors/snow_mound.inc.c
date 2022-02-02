@@ -29,7 +29,7 @@ void bhv_sliding_snow_mound_loop(void) {
 }
 
 void bhv_snow_mound_spawn_loop(void) {
-    struct Object *moundObj;
+    struct Object *moundObj = NULL;
 
     if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 10000)
         || o->oPosY + 1000.0f < gMarioObject->header.gfx.pos[1]) {
@@ -41,8 +41,9 @@ void bhv_snow_mound_spawn_loop(void) {
     }
 
     if (moundObj)
+    {
         moundObj->oFaceAngleYaw = o->oFaceAngleYaw;
-
-    moundObj->header.gfx.scale[0] = 2.0f;
-    moundObj->header.gfx.scale[1] = 2.0f;
+        moundObj->header.gfx.scale[0] = 2.0f;
+        moundObj->header.gfx.scale[1] = 2.0f;
+    }
 }

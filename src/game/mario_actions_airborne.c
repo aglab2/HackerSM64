@@ -57,7 +57,7 @@ s32 lava_boost_on_wall(struct MarioState *m) {
         }
         else if (gCurrCourseNum == COURSE_WF)
         {
-            m->hurtCounter += 20;
+            m->hurtCounter += 16;
         }
         else
         {
@@ -1519,7 +1519,7 @@ s32 act_lava_boost(struct MarioState *m) {
                     }
                     else if (gCurrCourseNum == COURSE_WF)
                     {
-                        m->hurtCounter += 20;
+                        m->hurtCounter += 16;
                     }
                     else
                     {

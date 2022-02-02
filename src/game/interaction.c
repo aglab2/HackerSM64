@@ -25,6 +25,8 @@
 #include "rumble_init.h"
 #include "config.h"
 
+#include "hacktice/main.h"
+
 u8  sDelayInvincTimer;
 s16 sInvulnerable;
 u32 interact_coin          (struct MarioState *m, u32 interactType, struct Object *obj);
@@ -896,8 +898,11 @@ u32 interact_warp(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
             mario_stop_riding_object(m);
             sPssSlideStarted = FALSE;
-            level_control_timer(TIMER_CONTROL_HIDE);
-            level_control_timer(TIMER_CONTROL_STOP);
+            if (!Hacktice_gEnabled)
+            {
+                level_control_timer(TIMER_CONTROL_HIDE);
+                level_control_timer(TIMER_CONTROL_STOP);
+            }
             return set_mario_action(m, ACT_DISAPPEARED, (WARP_OP_WARP_OBJECT << 16) + 2);
         }
     }
@@ -1895,7 +1900,7 @@ void check_lava_boost(struct MarioState *m) {
             }
             else if (gCurrCourseNum == COURSE_WF)
             {
-                m->hurtCounter += 20;
+                m->hurtCounter += 16;
             }
             else
             {

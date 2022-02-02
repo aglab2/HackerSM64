@@ -170,6 +170,11 @@ void bhv_bobomb_fight_ctl_loop()
 
 void bhv_fight_ctl_loop()
 {
+    if (0 == o->oTimer)
+    {
+        gMarioStates->numCoins = 0;
+    }
+
     if (0 == o->oAction)
     {
         f32 dx = o->oPosX - gMarioObject->oPosX;

@@ -2873,7 +2873,7 @@ void update_camera(struct Camera *c) {
         if (cam_select_alt_mode(CAM_SELECTION_NONE) == CAM_SELECTION_MARIO) {
             if (gPlayer1Controller->buttonPressed & R_TRIG) {
                 if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
-                    s8DirModeBaseYaw = (0x9000 + gMarioStates->faceAngle[1]) & 0xE000;
+                    s8DirModeBaseYaw = (0x9000 + gMarioStates->intendedYaw) & 0xE000;
                     set_cam_angle(CAM_ANGLE_MARIO);
                 } else {
                     set_cam_angle(CAM_ANGLE_LAKITU);
@@ -3176,7 +3176,7 @@ void init_camera(struct Camera *c) {
     Vec3f marioOffset;
     s32 i;
 
-    s8DirModeBaseYaw = (0x9000 + gMarioStates->faceAngle[1]) & 0xE000;
+    s8DirModeBaseYaw = (0x9000 + gMarioStates->intendedYaw) & 0xE000;
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;
@@ -5200,7 +5200,7 @@ void set_camera_mode_8_directions(struct Camera *c) {
     if (c->mode != CAMERA_MODE_8_DIRECTIONS) {
         c->mode = CAMERA_MODE_8_DIRECTIONS;
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        s8DirModeBaseYaw = (0x9000 + gMarioStates->faceAngle[1]) & 0xE000;
+        s8DirModeBaseYaw = (0x9000 + gMarioStates->intendedYaw) & 0xE000;
     }
 }
 

@@ -81,7 +81,6 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_BLACK_BOBOMB, -9996, 5817, 5215, 0, -21, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_KOOPA_WITHOUT_SHELL, 7827, 3144, -3621, 0, -21, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_NONE, 10867, 57, 3238, 0, -21, 0, 0x00000000, bhvSnowMoundSpawn),
-		OBJECT(MODEL_EXCLAMATION_BOX, 6872, 4689, 4456, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -6944, 9586, -1279, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, -346, 1589, 121, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_CAP_SWITCH, -10557, 5680, 3934, 0, 0, 0, (1 << 16), bhvCapSwitch),
