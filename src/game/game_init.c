@@ -658,7 +658,7 @@ void read_controller_inputs(s32 threadID) {
     {
         kill_z_cam();
     }
-    if (gCurrCourseNum == COURSE_WMOTR || gCurrLevelNum == LEVEL_BOWSER_3)
+    if (gCurrCourseNum == COURSE_WMOTR)
     {
         kill_pause();
     }
