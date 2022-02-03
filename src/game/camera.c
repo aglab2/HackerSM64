@@ -3199,6 +3199,8 @@ void init_camera(struct Camera *c) {
     // when course and fight have different cameras
     if (gCurrCourseNum == 18 && gCurrLevelNum == LEVEL_BOWSER_3)
         s8DirModeBaseYaw = 0x8000;
+    if (gCurrCourseNum == COURSE_JRB && gCurrentArea->index == 3)
+        s8DirModeBaseYaw = 0x8000;
 
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
