@@ -18,7 +18,10 @@ void bhv_collect_star_init(void) {
     u8 currentLevelStarFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(starId / 7));
     if (currentLevelStarFlags & (1 << (starId % 7))) {
 #else
-    u8 currentLevelStarFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(gCurrCourseNum));
+    u8 course = gCurrCourseNum;
+    if (gCurrLevelNum == LEVEL_BOWSER_1) course = COURSE_BITDW; // this probably does nothing lmao
+    if (gCurrLevelNum == LEVEL_BOWSER_3) course = COURSE_CAKE_END;
+    u8 currentLevelStarFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(course));
     if (currentLevelStarFlags & (1 << starId)) {
 #endif
         o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_TRANSPARENT_STAR];
