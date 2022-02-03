@@ -1111,11 +1111,6 @@ void mode_8_directions_camera(struct Camera *c) {
 
     radial_camera_input(c);
 
-    /*
-    print_text_fmt_int(20, 20, "Y %d", s8DirModeBaseYaw);
-    print_text_fmt_int(20, 40, "C %d", gCurrCourseNum);
-    */
-
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
         s8DirModeBaseYaw += DEGREES(45);
         play_sound_cbutton_side();
@@ -3189,7 +3184,7 @@ static s16 gInitCameraAngles[30] =
     [21] = 0x4000,
     [17] = 0x8000,
     [20] = 0x8000,
-    [18] = 0x8000,
+//     [18] = 0x8000,
 };
 
 void init_camera(struct Camera *c) {
@@ -3200,6 +3195,11 @@ void init_camera(struct Camera *c) {
     s8DirModeBaseYaw = (gCurrCourseNum && ((gCurrLevelArea / 16) != gCurrLevelNum)) 
                      ? gInitCameraAngles[gCurrCourseNum] 
                      : (0x9000 + gMarioStates->intendedYaw) & 0xE000;
+
+    // when course and fight have different cameras
+    if (gCurrCourseNum == 18 && gCurrLevelNum == LEVEL_BOWSER_3)
+        s8DirModeBaseYaw = 0x8000;
+
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;
