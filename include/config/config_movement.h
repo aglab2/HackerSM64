@@ -9,7 +9,7 @@
 
 // Fixes Mario's turn ground radius by allowing Mario to turn around at any speed.
 // Basically a simpler version of GROUND_TURN_FIX but smoother & closer to vanilla.
-#define GROUND_TURNING_AROUND_FIX
+// #define GROUND_TURNING_AROUND_FIX
 
 // Improved hanging:
 // - Doesn't require holding down the A button

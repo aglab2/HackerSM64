@@ -42,6 +42,10 @@ const GeoLayout bob_area_1_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_level_3things_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_lvl_1flower_mesh_layer_1),
+		GEO_CULL(10, -10, -20000, 20000, -20000, 20000),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_z_mesh_layer_6),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -63,6 +67,7 @@ const GeoLayout bob_area_1[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bob_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

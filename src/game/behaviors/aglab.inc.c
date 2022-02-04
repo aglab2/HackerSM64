@@ -1149,7 +1149,7 @@ void bhv_gg_loop()
     int type = floor->type;
     if (SURFACE_HARD == type)
     {
-        if (gMarioStates->pos[1] < o->oPosY)
+        if ((gMarioStates->pos[1] < o->oPosY) && !(gMarioStates->flags & MARIO_VANISH_CAP))
         {
             print_text_centered(160, 20, "BAD ENDING CLEAR");
         }

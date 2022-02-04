@@ -15,7 +15,7 @@ const GeoLayout bbh_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_c5_001_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, bbh_dl_c5_002_mesh_layer_4),
-		GEO_CULL(-20000, -2500, -20000, 20000, -20000, 8500),
+		GEO_CULL(-20000, -2500, -20000, 20000, -20000, 8900),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_c5_006_mesh_layer_1),
 		GEO_CLOSE_NODE(),
