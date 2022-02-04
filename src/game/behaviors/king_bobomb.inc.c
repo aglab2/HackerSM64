@@ -73,7 +73,7 @@ void king_bobomb_act_active(void) { // act 2
         if (o->oKingBobombPlayerGrabEscapeCooldown == 0) {
             if (o->oInteractionSubtype & INT_SUBTYPE_NOT_GRABBABLE)
             {
-                f32 val = gIsKingBuffed ? 1600000.f : 560000.f;
+                f32 val = gIsKingBuffed ? 1600000.f : 460000.f;
                 o->oForwardVel = val / o->oDistanceToMario / o->oDistanceToMario;
             }
             else
