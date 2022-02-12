@@ -712,6 +712,9 @@ void bhv_trimo_loop()
         obj_scale(o, 0.04f * o->oTimer);
         if (25 == o->oTimer)
             o->oAction = 1;
+
+        if (0 != o->oTimer)
+            load_object_collision_model();
     }
     else if (1 == o->oAction)
     {
@@ -727,16 +730,25 @@ void bhv_trimo_loop()
 
         o->oPosX += o->oVelX;
         o->oPosZ += o->oVelZ;
+        load_object_collision_model();
     }
     else
     {
         o->oPosX += o->oVelX;
         o->oPosZ += o->oVelZ;
         obj_scale(o, 0.1f * (10 - o->oTimer));
-        if (10 == o->oTimer)
+        if (9 == o->oTimer)
+        {
+            cur_obj_become_intangible();
+        }
+        else if (10 == o->oTimer)
         {
             o->oAction = 0;
             o->oPosY -= 10.f;
+        }
+        else
+        {
+            load_object_collision_model();
         }
     }
 }
