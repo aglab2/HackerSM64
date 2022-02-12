@@ -33,3 +33,10 @@
 
 #include "secret/model.inc.c"
 #include "hollowstar/model.inc.c"
+#include "tree_grass/model.inc.c"
+#include "tree_grass2/model.inc.c"
+#include "tree_winter/model.inc.c"
+#include "tree_winter2/model.inc.c"
+#include "tree_grass3/model.inc.c"
+#include "tree_grass4/model.inc.c"
+#include "tree_tropics/model.inc.c"

@@ -337,4 +337,18 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "hollowstar/geo_header.h"
 
+#include "tree_grass/header.h"
+
+#include "tree_grass2/header.h"
+
+#include "tree_winter/header.h"
+
+#include "tree_winter2/header.h"
+
+#include "tree_grass3/header.h"
+
+#include "tree_grass4/header.h"
+
+#include "tree_tropics/header.h"
+
 #endif

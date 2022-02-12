@@ -1556,6 +1556,19 @@ void render_widescreen_setting(void) {
 }
 #endif
 
+void render_hacktice_setting(int x, int y)
+{
+    bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 50;
+    if (hackticeAllowed)
+    {
+        if (!Hacktice_gEnabled)
+            print_generic_string(x, y, pressBToHacktice);
+
+        if (gPlayer3Controller->buttonPressed & B_BUTTON)
+            Hacktice_gEnabled = !Hacktice_gEnabled;
+    }
+}
+
 #if defined(VERSION_JP) || defined(VERSION_SH)
     #define CRS_NUM_X1 93
 #elif defined(VERSION_US)
@@ -1635,12 +1648,14 @@ void render_pause_my_score_coins(void) {
             print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
         }
 
+        render_hacktice_setting(90, 40);
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     }
     else
     {
         gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
         Hacktice_onPause();
+        render_hacktice_setting(90, 40);
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     }
 }
@@ -1954,15 +1969,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     } else { // Castle secret stars
         courseName = segmented_to_virtual(courseNameTbl[COURSE_MAX]);
         render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, -1, 4);
-        bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 50;
-        if (hackticeAllowed)
-        {
-            if (!Hacktice_gEnabled)
-                print_generic_string(x - 20, y + 120, pressBToHacktice);
-    
-            if (gPlayer3Controller->buttonPressed & B_BUTTON)
-                Hacktice_gEnabled = !Hacktice_gEnabled;
-        }
+        render_hacktice_setting(x - 20, y + 120);
     }
 
     print_generic_string(x - 9, y + 30, courseName);
@@ -2054,7 +2061,8 @@ s32 render_pause_courses_and_castle(void) {
             break;
     }
 #if defined(WIDE) && !defined(PUPPYCAM)
-        render_widescreen_setting();
+        if (!Hacktice_gEnabled)
+            render_widescreen_setting();
 #endif
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;

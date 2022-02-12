@@ -1,0 +1,16 @@
+extern Lights1 tree_grass3_wood_004_lights;
+extern Lights1 tree_grass3_grass_002_lights;
+extern u8 tree_grass3__07_wood04_ci4[];
+extern u8 tree_grass3__07_wood04_ci4_pal_rgba16[];
+extern u8 tree_grass3__31_tt14_019_ci4[];
+extern u8 tree_grass3__31_tt14_019_ci4_pal_rgba16[];
+extern Vtx tree_grass3_Tree_temp_climate_017_mesh_vtx_cull[8];
+extern Vtx tree_grass3_Tree_temp_climate_017_mesh_vtx_0[14];
+extern Gfx tree_grass3_Tree_temp_climate_017_mesh_tri_0[];
+extern Vtx tree_grass3_Tree_temp_climate_017_mesh_vtx_1[210];
+extern Gfx tree_grass3_Tree_temp_climate_017_mesh_tri_1[];
+extern Gfx mat_tree_grass3_wood_004[];
+extern Gfx mat_revert_tree_grass3_wood_004[];
+extern Gfx mat_tree_grass3_grass_002[];
+extern Gfx mat_revert_tree_grass3_grass_002[];
+extern Gfx tree_grass3_Tree_temp_climate_017_mesh[];

@@ -37,7 +37,7 @@ const LevelScript level_cotmc_entry[] = {
 	JUMP_LINK(script_func_global_8), 
 	JUMP_LINK(script_func_global_15), 
 	JUMP_LINK(script_func_global_1), 
-	LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE, spiky_tree2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE, palm_tree_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

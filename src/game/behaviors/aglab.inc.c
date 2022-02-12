@@ -1264,3 +1264,16 @@ void bhv_chiaki_loop()
     }
     o->oChiakiStar->oPosZ = o->oPosZ + 500.f;
 }
+
+void bhv_tree_init(void)
+{
+    if (gIsConsole)
+    {
+        gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+    }
+    else
+    {
+        gCurrentObject->oFaceAngleYaw = random_u16();
+        obj_scale_xyz(gCurrentObject, 0.7f + random_float() * 0.3f, 0.97f + 0.06f * random_float(), 0.7f + random_float() * 0.3f);
+    }
+}
