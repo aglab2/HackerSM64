@@ -75,7 +75,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -2356, 1643, 7, 0, 0, 0, (2 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -972, 571, -3794, 0, 0, 0, (2 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -6138, 525, -3921, 0, 0, 0, (2 << 16), bhvCoinFormation),
-		OBJECT(MODEL_NONE, -1220, 571, -6913, 0, -65, 0, (4 << 16), bhvCoinFormation),
+		OBJECT(MODEL_NONE, -1220, 922, -6913, 0, 161, 0, (20 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -953, 685, -5618, 0, 0, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -5917, 700, -2471, 0, 0, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -7227, 613, -5584, 0, 0, 0, (17 << 16), bhvCoinFormation),
