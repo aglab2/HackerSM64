@@ -44,7 +44,7 @@ void scroll_bbh_dl_c5_001_mesh_layer_1_vtx_2() {
 
 void scroll_bbh_dl_c5_001_mesh_layer_1_vtx_5() {
 	int i = 0;
-	int count = 4;
+	int count = 23;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 

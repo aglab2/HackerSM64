@@ -1902,6 +1902,10 @@ void check_lava_boost(struct MarioState *m) {
             {
                 m->hurtCounter += 16;
             }
+            else if (gCurrCourseNum == COURSE_BITS)
+            {
+                m->hurtCounter += 32;
+            }
             else
             {
                 m->hurtCounter += 12;

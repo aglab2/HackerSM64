@@ -7621,35 +7621,6 @@ Gfx jrb_dl___mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx jrb_dl___001_mesh_layer_1_vtx_cull[8] = {
-	{{{-4233, 1123, 5519},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-4233, 1428, 5519},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-4233, 1428, 4166},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-4233, 1123, 4166},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2739, 1123, 5519},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2739, 1428, 5519},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2739, 1428, 4166},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2739, 1123, 4166},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
-Vtx jrb_dl___001_mesh_layer_1_vtx_0[7] = {
-	{{{-3177, 1123, 4166},0, {2543, 3289},{0x38, 0x4D, 0x38, 0xFF}}},
-	{{{-4030, 1123, 4339},0, {3463, 111},{0x35, 0x4B, 0x35, 0xFF}}},
-	{{{-3553, 1428, 4906},0, {703, 755},{0x3D, 0x5C, 0x52, 0xFF}}},
-	{{{-4233, 1123, 5052},0, {1407, -1835},{0x3C, 0x54, 0x3C, 0xFF}}},
-	{{{-3889, 1123, 5519},0, {-803, -1480},{0x27, 0x33, 0x2A, 0xFF}}},
-	{{{-3171, 1123, 5376},0, {-1652, 1171},{0x27, 0x33, 0x2A, 0xFF}}},
-	{{{-2739, 1151, 4717},0, {-139, 3755},{0x27, 0x33, 0x2A, 0xFF}}},
-};
-
-Gfx jrb_dl___001_mesh_layer_1_tri_0[] = {
-	gsSPVertex(jrb_dl___001_mesh_layer_1_vtx_0 + 0, 7, 0),
-	gsSP2Triangles(0, 1, 2, 0, 2, 1, 3, 0),
-	gsSP2Triangles(3, 4, 2, 0, 4, 5, 2, 0),
-	gsSP2Triangles(6, 2, 5, 0, 0, 2, 6, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx jrb_dl__hflower_mesh_layer_1_vtx_cull[8] = {
 	{{{-5451, -1551, 10781},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-5451, -1469, 10781},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -13358,17 +13329,6 @@ Gfx jrb_dl___mesh_layer_1[] = {
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_jrb_dl_sans),
 	gsSPDisplayList(jrb_dl___mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_jrb_dl_sans),
-	gsSPEndDisplayList(),
-};
-
-Gfx jrb_dl___001_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(jrb_dl___001_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_jrb_dl_sans),
-	gsSPDisplayList(jrb_dl___001_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_jrb_dl_sans),
 	gsSPEndDisplayList(),
 };
