@@ -80,6 +80,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, 14118, 602, 3785, 0, -65, 0, (16 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, 9772, -435, 3294, 0, 0, 0, (0x11 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, 10977, 103, 4191, 0, 0, 0, (0x11 << 16), bhvCoinFormation),
+		OBJECT(MODEL_NONE, 8023, -464, 2729, 0, -132, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -4928, -685, 11014, 0, 0, 0, (2 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -917, -685, 10516, 0, 89, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -8015, -354, 7468, 0, 89, 0, 0x00000000, bhvCoinFormation),
