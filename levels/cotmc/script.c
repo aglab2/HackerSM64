@@ -76,7 +76,7 @@ const LevelScript level_cotmc_entry[] = {
 		OBJECT(MODEL_RED_COIN, 3537, 1604, -243, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 406, 1254, 2853, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 503, 2217, -592, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_NONE, 2679, 2189, 1645, 0, 0, 0, (1 << 24), bhvHiddenRedCoinStar),
+		OBJECT(MODEL_NONE, 2679, 2189, 1645, 0, 0, 0, (1 << 24), bhvBowserCourseRedCoinStar),
 		OBJECT(MODEL_SSL_PALM_TREE, 3040, 1544, 7222, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_SSL_PALM_TREE, 3459, 1544, 6830, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_SSL_PALM_TREE, 3390, 1544, 6317, 0, 0, 0, 0x00000000, bhvTree),
