@@ -161,16 +161,17 @@ Would you like to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_011, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Metal Cap Switch!\n\
-The Metal Cap makes\n\
-Mario invincible.\n\
-Now Metal Caps will\n\
-pop out of all of the\n\
-green blocks you find.\n\
-\n\
+You've stepped on the \n\
+Ice Cap Switch !\n\
+Behold ! With the power\n\
+of the cold, Mario\n\
+can become invicible\n\
+and resist to extreme\n\
+trials. You'll need this\n\
+to finish the game with\n\
+every star. Try this\n\
+out with this block !\n\
 Would you like to Save?\n\
-\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_012, 1, 4, 30, 200, _("\

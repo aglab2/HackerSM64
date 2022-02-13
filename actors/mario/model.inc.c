@@ -5382,7 +5382,9 @@ Gfx mat_mario_blue[] = {
 
 Gfx mat_mario_metal_v4[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
+	// gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetEnvColor(173, 216, 230, 255),
 	gsSPSetGeometryMode(G_TEXTURE_GEN),
 	gsSPTexture(4031, 1983, 0, 0, 1),
 	gsDPTileSync(),
