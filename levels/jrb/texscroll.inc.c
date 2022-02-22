@@ -1,3 +1,8 @@
+void scroll_sts_mat_jrb_dl_f3d_material_005() {
+	Gfx *mat = segmented_to_virtual(mat_jrb_dl_f3d_material_005);
+	shift_t(mat, 18, PACK_TILESIZE(0, 1));
+};
+
 void scroll_jrb_dl_c3_005_mesh_layer_1_vtx_1() {
 	int i = 0;
 	int count = 25;
@@ -241,6 +246,7 @@ void scroll_jrb_dl_c3_a2_004_mesh_layer_6_vtx_0() {
 }
 
 void scroll_jrb() {
+	scroll_sts_mat_jrb_dl_f3d_material_005();
 	scroll_jrb_dl_c3_005_mesh_layer_1_vtx_1();
 	scroll_jrb_dl_c3_005_mesh_layer_5_vtx_0();
 	scroll_jrb_dl_c3_007_mesh_layer_5_vtx_0();

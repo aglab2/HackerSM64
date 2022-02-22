@@ -1,3 +1,4 @@
+extern void scroll_sts_mat_jrb_dl_f3d_material_005();
 extern void scroll_jrb_dl_c3_005_mesh_layer_1_vtx_1();
 extern void scroll_jrb_dl_c3_005_mesh_layer_5_vtx_0();
 extern void scroll_jrb_dl_c3_007_mesh_layer_5_vtx_0();

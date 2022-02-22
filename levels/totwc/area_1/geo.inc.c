@@ -12,6 +12,8 @@ const GeoLayout totwc_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, totwc_dl_s2_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, totwc_dl_s2_006_mesh_layer_3),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, totwc_dl_s2_007_mesh_layer_3),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, totwc_dl_s2_008_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, totwc_dl_s2_009_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

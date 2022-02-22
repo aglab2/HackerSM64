@@ -1,12 +1,12 @@
-void scroll_ccm_dl_c4_mesh_layer_1_vtx_11() {
+void scroll_ccm_dl_c4_mesh_layer_1_vtx_10() {
 	int i = 0;
-	int count = 17;
+	int count = 25;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(ccm_dl_c4_mesh_layer_1_vtx_11);
+	Vtx *vertices = segmented_to_virtual(ccm_dl_c4_mesh_layer_1_vtx_10);
 
 	deltaY = (int)(-0.7099999189376831 * 0x20) % height;
 
@@ -63,7 +63,7 @@ void scroll_ccm_dl_water_thing_mesh_layer_5_vtx_0() {
 }
 
 void scroll_ccm() {
-	scroll_ccm_dl_c4_mesh_layer_1_vtx_11();
+	scroll_ccm_dl_c4_mesh_layer_1_vtx_10();
 	scroll_sts_mat_ccm_dl__auto_8_f3d_layer1();
 	scroll_ccm_dl_water_thing_mesh_layer_5_vtx_0();
 }

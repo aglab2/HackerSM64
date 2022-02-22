@@ -1162,7 +1162,7 @@ u32 interact_whirlpool(struct MarioState *m, UNUSED u32 interactType, struct Obj
 
 u32 interact_strong_wind(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     if (m->action != ACT_GETTING_BLOWN) {
-        mario_stop_riding_and_holding(m);
+        // mario_stop_riding_and_holding(m);
         obj->oInteractStatus = INT_STATUS_INTERACTED;
         m->interactObj = obj;
         m->usedObj     = obj;

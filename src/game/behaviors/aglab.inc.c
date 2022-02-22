@@ -225,11 +225,17 @@ extern Gfx mat_ccm_dl__3_f3d_layer1[];
 extern Gfx mat_ccm_dl__1_f3d_layer1[];
 extern Gfx mat_ccm_dl__10_f3d_layer1[];
 extern Gfx mat_ccm_dl__12_f3d_layer1[];
+extern Gfx mat_ccm_dl_side61_layer1[];
 extern Gfx mat_ccm_dl_f3d_material_005[];
 void bhv_warp_gate_block_loop()
 {
+    if (0 == o->oTimer)
+    {
+        gEnvironmentRegions[6] = -435.f;
+    }
+
     f32 off = (1 + sins(o->oTimer * 0x200));
-    u8 envcolor = off * 40;
+    u8 envcolor = off * 45;
     u8 envcolor2 = off * 30;
     {
         u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl___f3d_layer1) + 21 * 8 + 7;
@@ -253,6 +259,10 @@ void bhv_warp_gate_block_loop()
     }
     {
         u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl__12_f3d_layer1) + 21 * 8 + 7;
+        *envc = envcolor;
+    }
+    {
+        u8* envc = (u8*) segmented_to_virtual(mat_ccm_dl_side61_layer1) + 21 * 8 + 7;
         *envc = envcolor;
     }
     {

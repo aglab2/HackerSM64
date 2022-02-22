@@ -1425,6 +1425,9 @@ s32 act_butt_slide_air(struct MarioState *m) {
         return set_mario_action(m, ACT_FREEFALL, 1);
     }
 
+    if (m->forwardVel > 80.f)
+        m->forwardVel--;
+
     update_air_with_turn(m);
 
     switch (perform_air_step(m, AIR_STEP_CHECK_NONE)) {

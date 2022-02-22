@@ -83,7 +83,7 @@ const Collision dorrie_seg6_collision_0600F644[] = {
     COL_VERTEX(-284, 29, 239),
     COL_VERTEX(-186, -185, 249),
 
-    COL_TRI_INIT(SURFACE_NO_CAM_COLLISION, 67),
+    COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 67),
     COL_TRI(58, 57, 10),
     COL_TRI(22, 20, 47),
     COL_TRI(22, 18, 20),
@@ -152,7 +152,7 @@ const Collision dorrie_seg6_collision_0600F644[] = {
     COL_TRI(56, 37, 76),
     COL_TRI(55, 44, 69),
 
-    COL_TRI_INIT(SURFACE_SWITCH, 85),
+    COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 85),
     COL_TRI(0, 1, 2),
     COL_TRI(2, 3, 0),
     COL_TRI(4, 0, 3),
@@ -320,7 +320,7 @@ const Collision dorrie_seg6_collision_0600FBB8[] = {
     COL_VERTEX(58, 167, 1027),
     COL_VERTEX(105, 247, 914),
 
-    COL_TRI_INIT(SURFACE_SWITCH, 142),
+    COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 142),
     COL_TRI(0, 1, 2),
     COL_TRI(1, 3, 4),
     COL_TRI(1, 5, 3),

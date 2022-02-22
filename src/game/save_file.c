@@ -301,8 +301,8 @@ static void restore_save_file_data(s32 fileIndex, s32 srcSlot) {
 extern s32 gTimerOffset;
 void save_file_do_save(s32 fileIndex) {
     if (gSaveFileModified) {
-        gSaveBuffer.files[fileIndex][0].timer += gGlobalTimer - gTimerOffset;
-        gTimerOffset = gGlobalTimer;
+        gSaveBuffer.files[fileIndex][0].timer += gNumVblanks - gTimerOffset;
+        gTimerOffset = gNumVblanks;
 
         // Compute checksum
         add_save_block_signature(&gSaveBuffer.files[fileIndex][0],
@@ -325,7 +325,7 @@ void save_file_erase(s32 fileIndex) {
     touch_high_score_ages(fileIndex);
     bzero(&gSaveBuffer.files[fileIndex][0], sizeof(gSaveBuffer.files[fileIndex][0]));
 
-    gTimerOffset = gGlobalTimer;
+    gTimerOffset = gNumVblanks;
     gSaveFileModified = TRUE;
     save_file_do_save(fileIndex);
 }
@@ -335,7 +335,7 @@ void save_file_copy(s32 srcFileIndex, s32 destFileIndex) {
     bcopy(&gSaveBuffer.files[srcFileIndex][0], &gSaveBuffer.files[destFileIndex][0],
           sizeof(gSaveBuffer.files[destFileIndex][0]));
 
-    gTimerOffset = gGlobalTimer;
+    gTimerOffset = gNumVblanks;
     gSaveFileModified = TRUE;
     save_file_do_save(destFileIndex);
 }

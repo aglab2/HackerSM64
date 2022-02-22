@@ -26,6 +26,7 @@ const GeoLayout ccm_area_1_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_c4_004_mesh_layer_1),
 		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_c4_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, ccm_dl_Plane_001_mesh_layer_3),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 10154, 3269, -5064, 90, 0, 0, ccm_dl_water_thing_mesh_layer_5),
 	GEO_CLOSE_NODE(),
