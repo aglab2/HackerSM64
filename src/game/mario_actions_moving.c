@@ -418,7 +418,10 @@ s32 update_decelerating_speed(struct MarioState *m) {
 void update_walking_speed(struct MarioState *m) {
     if ((gCurrLevelNum == LEVEL_TOTWC) && m->floor && m->floor->type == SURFACE_TTM_VINES)
     {
-        m->forwardVel = 80.0f;
+        if (m->forwardVel < 80.f)
+            m->forwardVel += 3.f;
+        else
+            m->forwardVel = 80.f;
     }
     else
     {
