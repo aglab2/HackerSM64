@@ -588,11 +588,6 @@ static void kill_z_cam()
     gControllers[0].controllerData->button &= ~(Z_TRIG | L_CBUTTONS | R_CBUTTONS);
 }
 
-static void kill_pause()
-{
-    gControllers[0].controllerData->button &= ~(START_BUTTON);
-}
-
 /**
  * Take the updated controller struct and calculate the new x, y, and distance floats.
  */
@@ -657,10 +652,6 @@ void read_controller_inputs(s32 threadID) {
     if (gCurrCourseNum == COURSE_JRB && gCurrAreaIndex == 3)
     {
         kill_z_cam();
-    }
-    if (gCurrCourseNum == COURSE_WMOTR)
-    {
-        kill_pause();
     }
 
     for (i = 0; i < 2; i++) {

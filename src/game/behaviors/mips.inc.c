@@ -8,6 +8,8 @@
  * hiding him if necessary.
  */
 
+#include "hacktice/main.h"
+
 extern Gfx castle_grounds_dl_flower0_mesh_layer_5[];
 extern Gfx castle_grounds_dl_flower1_mesh_layer_5[];
 extern Gfx castle_grounds_dl_flower2_mesh_layer_5[];
@@ -54,7 +56,7 @@ void bhv_mips_init(void) {
     }
 #ifndef UNLOCK_ALL
     // Retrieve star flags for Castle Secret Stars on current save file.
-    u8 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));
+    u8 starFlags = Hacktice_gEnabled ? 0 : save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));
 
     // If the player has >= 15 stars and hasn't collected first MIPS star...
     if (!(starFlags & SAVE_FLAG_TO_STAR_FLAG(SAVE_FLAG_COLLECTED_MIPS_STAR_1))) {
