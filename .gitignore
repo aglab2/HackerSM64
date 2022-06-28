@@ -96,6 +96,9 @@ lib/libs2d_engine.a
 # .orig files
 *.orig
 
+# :Zone_Identifier files
+*Zone.Identifier
+
 !/sound/samples/streamed_audio/*.aiff
 !/levels/bdf/*.png
 !/levels/ending/*.png
