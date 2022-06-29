@@ -28,7 +28,7 @@
 
 // Include Puppyprint, a display library for text and large images.
 // Automatically included when PUPPYPRINT_DEBUG is enabled
-// #define PUPPYPRINT
+#define PUPPYPRINT
 
 // Disable AA (Improves console performance but causes visible seams between unconnected geometry).
 // #define DISABLE_AA

@@ -31,6 +31,7 @@
 #include "puppyprint.h"
 #include "puppylights.h"
 #include "level_commands.h"
+#include "dnvic_print.h" //debug
 
 #include "config.h"
 
@@ -484,6 +485,11 @@ void warp_credits(void) {
     }
 }
 
+u16 upCounter = 0;
+u16 downCounter = 0;
+u16 chamber = 1;
+
+
 void check_instant_warp(void) {
     s16 cameraAngle;
     struct Surface *floor;
@@ -497,7 +503,7 @@ void check_instant_warp(void) {
  #endif // !UNLOCK_ALL
         return;
     }
-#endif // ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
+#endif // ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS BOOKMARK
 
     if ((floor = gMarioState->floor) != NULL) {
         s32 index = floor->type - SURFACE_INSTANT_WARP_1B;
@@ -506,6 +512,95 @@ void check_instant_warp(void) {
             struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
 
             if (warp->id != 0) {
+                switch(floor->force) {
+                    case 0x69:
+                        upCounter += 1;
+                        break;
+                    case 0x420:
+                        downCounter += 1;
+                        break;
+                    case 0x4:
+                        upCounter = 0;
+                        downCounter = 0;
+                        chamber = 1;
+                        break;
+                }
+                switch(chamber) {
+                    case 1:
+                        if(downCounter == 1) {
+                            chamber = 2;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        if(upCounter == 25) {
+                            chamber = 10;
+                            upCounter = 0;
+                            downCounter = 0;
+                        }
+                        break;
+                    case 2:
+                        if(upCounter == 1) {
+                            chamber = 3;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        break;
+                    case 3:
+                        if(upCounter == 1) {
+                            chamber = 4;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        if(downCounter == 1) {
+                            chamber = 5;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        break;
+                    case 4:
+                        if(upCounter == 1) {
+                            chamber = 1;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        if(downCounter == 1) {
+                            chamber = 2;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        break;
+                    case 5:
+                        if(upCounter == 5) {
+                            chamber = 12;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        if(downCounter == 1) {
+                            chamber = 2;
+                            downCounter = 0;
+                            upCounter = 0;
+                        }
+                        break;
+                }
+                switch(chamber) {// don't want to wait until the next instant warp in order to warp
+                    case 10:
+                        cameraAngle = gMarioState->area->camera->yaw;
+                        change_area(3);
+                        gMarioState->area = gCurrentArea;
+                        warp_camera(0, 0, 0);
+                        gMarioState->area->camera->yaw = cameraAngle;
+                        return;
+                    case 12:
+                        cameraAngle = gMarioState->area->camera->yaw;
+                        change_area(4);
+                        gMarioState->area = gCurrentArea;
+                        warp_camera(0, 0, 0);
+                        gMarioState->area->camera->yaw = cameraAngle;
+                        return;
+                }
+                
+                
+
                 gMarioState->pos[0] += warp->displacement[0];
                 gMarioState->pos[1] += warp->displacement[1];
                 gMarioState->pos[2] += warp->displacement[2];
@@ -972,6 +1067,9 @@ s32 play_mode_normal(void) {
 
     warp_area();
     check_instant_warp();
+    /*char buffer[50]; debug text
+    sprintf(buffer, "up times: %d down times: %d chamber: %d", upCounter, downCounter, chamber); 
+    /dnvic_print_white_text(100, 100, buffer, PRINT_TEXT_ALIGN_CENTRE, PRINT_ALL, 0xFF); */
 
     if (sTimerRunning && gHudDisplay.timer < 17999) {
         gHudDisplay.timer++;

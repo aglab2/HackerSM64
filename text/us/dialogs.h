@@ -1686,17 +1686,18 @@ collect 100 coins in each\n\
 of the 15 courses!"))
 
 DEFINE_DIALOG(DIALOG_138, 1, 3, 30, 200, _("\
-Down: Underground Lake\n\
-Left: Black Hole\n\
-Right: Hazy Maze (Closed)"))
+CAUTION: This may seem\n\
+a very simple grain\n\
+silo, but tis not. \n\
+Strange occurences \n\
+have occured in here\n\
+lately. Enter at your\n\
+own risk."))
 
 DEFINE_DIALOG(DIALOG_139, 1, 6, 30, 200, _("\
-Above: Automatic Elevator\n\
-Elevator begins\n\
-automatically and follows\n\
-pre-set course.\n\
-It disappears\n\
-automatically, too."))
+you're very persistent\n\
+dnvic.com slash map \n\
+slash map.png"))
 
 DEFINE_DIALOG(DIALOG_140, 1, 6, 30, 200, _("\
 Elevator Area\n\

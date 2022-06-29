@@ -285,6 +285,7 @@
 // bowser 1
 
 // wmotr
+#define MODEL_RIFT                                0x36        // rift_geo
 
 // bowser 2
 #define MODEL_BOWSER_2_TILTING_ARENA              0x36        // bowser_2_geo_000170
