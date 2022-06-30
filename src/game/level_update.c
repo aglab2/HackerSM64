@@ -474,7 +474,7 @@ void warp_credits(void) {
 #include "tile_scroll.h"
 
 extern Lights1 wmotr_dl_down_instant_warp_lights;
-extern Vtx wmotr_dl_main_silo_mesh_vtx_1[109];
+extern Vtx wmotr_dl_main_silo_mesh_vtx_2[154];
 extern Gfx mat_wmotr_dl_brick[];
 u16 gDnvicUpCounter   = 0;
 u16 gDnvicDownCounter = 0;
@@ -559,8 +559,8 @@ void check_instant_warp(void) {
                             {
                                 Lights1* l0 = (Lights1*) segmented_to_virtual(&wmotr_dl_down_instant_warp_lights);
                                 shade_lights(l0, 2);
-                                Vtx* v0 = (Vtx*) segmented_to_virtual(wmotr_dl_main_silo_mesh_vtx_1);
-                                shade_vcols(v0, 109, 3);
+                                Vtx* v0 = (Vtx*) segmented_to_virtual(wmotr_dl_main_silo_mesh_vtx_2);
+                                shade_vcols(v0, 154, 3);
                             }
                             break;
                         case 2:
@@ -618,6 +618,7 @@ void check_instant_warp(void) {
                     switch(gDnvicChamber) {// don't want to wait until the next instant warp in order to warp
                         case 10:
                             cameraAngle = gMarioState->area->camera->yaw;
+                            gDnvicUpCounter = 0; // fix being stuck forever
                             change_area(3);
                             gMarioState->area = gCurrentArea;
                             warp_camera(0, 0, 0);
