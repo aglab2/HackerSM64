@@ -14,6 +14,10 @@
 #include "src/game/texscroll/bdf_texscroll.inc.h"
 #include "src/game/texscroll/bowser_2_texscroll.inc.h"
 #include "src/game/texscroll/crash_texscroll.inc.h"
+<<<<<<< Updated upstream
+=======
+#include "src/game/texscroll/wmotr_texscroll.inc.h"
+>>>>>>> Stashed changes
 extern void scroll_textures();
 
 #endif

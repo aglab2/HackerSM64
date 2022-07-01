@@ -3,6 +3,7 @@
 const GeoLayout sa_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+<<<<<<< Updated upstream
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -503, 1345, -1777, sa_dl_Cube_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sa_dl_Cylinder_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, sa_dl_Cylinder_mesh_layer_5),
@@ -14,6 +15,9 @@ const GeoLayout sa_area_1_geo[] = {
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 1205, 2471, 85),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, -794, 4331, 85, sa_dl_Shaft_Horizontal_Collision_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 100, 3443, 85, sa_dl_Shaft_Vertical_Collision_mesh_layer_5),
+=======
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sa_dl_Cube_mesh),
+>>>>>>> Stashed changes
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -24,7 +28,11 @@ const GeoLayout sa_area_1[] = {
 		GEO_OPEN_NODE(),
 			GEO_NODE_ORTHO(100.0000),
 			GEO_OPEN_NODE(),
+<<<<<<< Updated upstream
 				GEO_BACKGROUND_COLOR(0x0001),
+=======
+				GEO_BACKGROUND(BACKGROUND_OCEAN_SKY, geo_skybox_main),
+>>>>>>> Stashed changes
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_ZBUFFER(1),
@@ -40,7 +48,10 @@ const GeoLayout sa_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sa_dl_material_revert_render_settings),
+<<<<<<< Updated upstream
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, sa_dl_material_revert_render_settings),
+=======
+>>>>>>> Stashed changes
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

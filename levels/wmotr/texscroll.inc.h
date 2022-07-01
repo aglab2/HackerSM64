@@ -1,0 +1,16 @@
+extern void scroll_wmotr_dl_Chireiden_Yukari_mesh_layer_1_vtx_0();
+extern void scroll_sts_mat_wmotr_dl__3_f3d();
+extern void scroll_wmotr_dl_Chireiden_Yukari_011_mesh_layer_1_vtx_0();
+extern void scroll_sts_mat_wmotr_dl__8_f3d();
+extern void scroll_wmotr_dl_Chireiden_Yukari_012_mesh_layer_1_vtx_0();
+extern void scroll_wmotr_dl_Chireiden_Patchouli_012_mesh_layer_1_vtx_0();
+extern void scroll_wmotr_dl_Chireiden_Nitori_007_mesh_layer_1_vtx_0();
+extern void scroll_wmotr_dl_Chireiden_Aya_mesh_layer_1_vtx_7();
+extern void scroll_wmotr_dl_Chireiden_Aya_mesh_layer_1_vtx_10();
+extern void scroll_wmotr_dl_Chireiden_Aya_mesh_layer_1_vtx_11();
+extern void scroll_wmotr_dl_Chireiden_Aya_mesh_layer_1_vtx_12();
+extern void scroll_sts_mat_wmotr_dl__16_f3d_002();
+extern void scroll_sts_mat_wmotr_dl__18_f3d_002();
+extern void scroll_sts_mat_wmotr_dl__19_f3d_001();
+extern void scroll_wmotr_dl_chireiden_alice_mesh_layer_1_vtx_7();
+extern void scroll_wmotr();

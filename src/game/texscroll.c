@@ -26,6 +26,10 @@
 #include "src/game/texscroll/bdf_texscroll.inc.c"
 #include "src/game/texscroll/bowser_2_texscroll.inc.c"
 #include "src/game/texscroll/crash_texscroll.inc.c"
+<<<<<<< Updated upstream
+=======
+#include "src/game/texscroll/wmotr_texscroll.inc.c"
+>>>>>>> Stashed changes
 void scroll_textures() {
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_castle_grounds_segment_7SegmentRomStart)) {
 		scroll_textures_castle_grounds();
@@ -78,4 +82,11 @@ void scroll_textures() {
 		scroll_textures_crash();
 	}
 
+<<<<<<< Updated upstream
+=======
+	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_wmotr_segment_7SegmentRomStart)) {
+		scroll_textures_wmotr();
+	}
+
+>>>>>>> Stashed changes
 }

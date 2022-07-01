@@ -2,6 +2,7 @@ extern const GeoLayout sa_area_1_geo[];
 extern const GeoLayout sa_area_1[];
 extern const Collision sa_area_1_collision[];
 extern const MacroObject sa_area_1_macro_objs[];
+<<<<<<< Updated upstream
 extern Lights1 sa_dl_old_metal_2_lights;
 extern Lights1 sa_dl_wall_tiles_lights;
 extern Lights1 sa_dl_tile_lights;
@@ -149,4 +150,11 @@ extern Gfx sa_dl_Cylinder_006_mesh_layer_1[];
 extern Gfx sa_dl_Cylinder_007_mesh_layer_1[];
 extern Gfx sa_dl_Shaft_Horizontal_Collision_mesh_layer_5[];
 extern Gfx sa_dl_Shaft_Vertical_Collision_mesh_layer_5[];
+=======
+extern Lights1 sa_dl_sm64_material_lights;
+extern Vtx sa_dl_Cube_mesh_vtx_0[24];
+extern Gfx sa_dl_Cube_mesh_tri_0[];
+extern Gfx mat_sa_dl_sm64_material[];
+extern Gfx sa_dl_Cube_mesh[];
+>>>>>>> Stashed changes
 extern Gfx sa_dl_material_revert_render_settings[];
