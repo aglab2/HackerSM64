@@ -63,7 +63,8 @@ enum SeqId {
     SEQ_AGT,
     SEQ_ARENA,
     SEQ_TIME,
-    SEQ_COUNT
+    SEQ_COUNT,
+	SEQ_CHIREIDEN,
 };
 
 #endif // SEQ_IDS_H

@@ -1,0 +1,6 @@
+#include "levels/vcutm/area_1/geo.inc.c"
+#include "levels/vcutm/area_2/geo.inc.c"
+#include "levels/vcutm/area_3/geo.inc.c"
+#include "levels/vcutm/area_4/geo.inc.c"
+#include "levels/vcutm/area_5/geo.inc.c"
+#include "levels/vcutm/area_6/geo.inc.c"
