@@ -379,6 +379,10 @@ Gfx *geo_mario_tilt_torso(s32 callContext, struct GraphNode *node, UNUSED Mat4 *
     struct MarioBodyState *bodyState = &gBodyStates[asGenerated->parameter];
     s32 action = bodyState->action;
 
+    if (gCurGraphNodeObjectNode != gMarioObject) {
+        return NULL;
+    }    
+
     if (callContext == GEO_CONTEXT_RENDER) {
         struct GraphNodeRotation *rotNode = (struct GraphNodeRotation *) node->next;
 
@@ -400,6 +404,10 @@ Gfx *geo_mario_head_rotation(s32 callContext, struct GraphNode *node, UNUSED Mat
     struct GraphNodeGenerated *asGenerated = (struct GraphNodeGenerated *) node;
     struct MarioBodyState *bodyState = &gBodyStates[asGenerated->parameter];
     s32 action = bodyState->action;
+
+    if (gCurGraphNodeObjectNode != gMarioObject) {
+        return NULL;
+    }
 
     if (callContext == GEO_CONTEXT_RENDER) {
         struct GraphNodeRotation *rotNode = (struct GraphNodeRotation *) node->next;

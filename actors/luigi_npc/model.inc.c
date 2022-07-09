@@ -50,6 +50,18 @@ Lights1 luigi_npc_gloves_v4_002_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 luigi_npc_luigicapinside_v4_001_lights = gdSPDefLights1(
+	0x0, 0x1A, 0x0,
+	0x0, 0x3F, 0x0, 0x28, 0x28, 0x28);
+
+Lights1 luigi_npc_wing_2_002_v4_001_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
+
+Lights1 luigi_npc_wing_1_002_v4_001_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
+
 Lights1 luigi_npc_soles_v4_002_lights = gdSPDefLights1(
 	0x6A, 0x42, 0x1,
 	0xD6, 0x8A, 0x3, 0x28, 0x28, 0x28);
@@ -57,6 +69,267 @@ Lights1 luigi_npc_soles_v4_002_lights = gdSPDefLights1(
 Lights1 luigi_npc_shoes_v4_002_lights = gdSPDefLights1(
 	0x22, 0xC, 0x1,
 	0x4E, 0x24, 0x5, 0x28, 0x28, 0x28);
+
+Gfx luigi_npc_metal_i8_aligner[] = {gsSPEndDisplayList()};
+u8 luigi_npc_metal_i8[] = {
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x02, 0x06, 0x09, 0x0a, 0x09, 
+	0x09, 0x0a, 0x11, 0x11, 0x0c, 0x06, 0x04, 0x03, 
+	0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x02, 0x04, 0x05, 0x07, 
+	0x08, 0x08, 0x0a, 0x0c, 0x0e, 0x0f, 0x10, 0x0b, 
+	0x0a, 0x09, 0x0e, 0x12, 0x11, 0x1a, 0x23, 0x23, 
+	0x1e, 0x17, 0x11, 0x0b, 0x05, 0x02, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x04, 0x0b, 0x11, 0x17, 0x16, 0x0d, 0x0b, 0x0a, 
+	0x0e, 0x14, 0x12, 0x11, 0x10, 0x10, 0x10, 0x0b, 
+	0x07, 0x06, 0x06, 0x06, 0x06, 0x09, 0x0d, 0x12, 
+	0x17, 0x1a, 0x1b, 0x14, 0x0b, 0x10, 0x0c, 0x0a, 
+	0x07, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x01, 0x08, 0x17, 0x25, 
+	0x2c, 0x25, 0x18, 0x1b, 0x13, 0x0c, 0x08, 0x07, 
+	0x05, 0x04, 0x04, 0x03, 0x06, 0x0e, 0x09, 0x04, 
+	0x04, 0x07, 0x06, 0x05, 0x02, 0x01, 0x02, 0x02, 
+	0x01, 0x00, 0x01, 0x03, 0x06, 0x0a, 0x0c, 0x0b, 
+	0x0a, 0x11, 0x0f, 0x07, 0x01, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x02, 0x10, 0x2b, 0x47, 0x45, 0x35, 
+	0x2c, 0x25, 0x16, 0x0c, 0x08, 0x06, 0x07, 0x06, 
+	0x06, 0x05, 0x06, 0x07, 0x0a, 0x0e, 0x09, 0x04, 
+	0x04, 0x07, 0x0a, 0x09, 0x06, 0x03, 0x02, 0x02, 
+	0x01, 0x00, 0x00, 0x00, 0x01, 0x05, 0x07, 0x08, 
+	0x08, 0x0e, 0x12, 0x1b, 0x18, 0x0c, 0x02, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 
+	0x00, 0x0b, 0x26, 0x43, 0x56, 0x5b, 0x58, 0x4a, 
+	0x33, 0x21, 0x0d, 0x06, 0x04, 0x04, 0x04, 0x06, 
+	0x07, 0x07, 0x08, 0x08, 0x0d, 0x19, 0x0c, 0x04, 
+	0x05, 0x08, 0x0a, 0x09, 0x07, 0x06, 0x05, 0x05, 
+	0x05, 0x04, 0x01, 0x00, 0x01, 0x05, 0x06, 0x06, 
+	0x06, 0x0c, 0x0c, 0x1c, 0x1e, 0x21, 0x17, 0x0a, 
+	0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 
+	0x1c, 0x45, 0x64, 0x6a, 0x6d, 0x7b, 0x81, 0x6a, 
+	0x3f, 0x1d, 0x09, 0x04, 0x04, 0x02, 0x03, 0x04, 
+	0x05, 0x06, 0x07, 0x07, 0x08, 0x0b, 0x06, 0x04, 
+	0x05, 0x07, 0x09, 0x08, 0x06, 0x06, 0x05, 0x05, 
+	0x06, 0x06, 0x06, 0x05, 0x03, 0x0a, 0x12, 0x17, 
+	0x16, 0x12, 0x10, 0x1c, 0x28, 0x2b, 0x29, 0x23, 
+	0x17, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x25, 
+	0x4c, 0x69, 0x6f, 0x78, 0x92, 0xab, 0x98, 0x6e, 
+	0x30, 0x14, 0x0b, 0x05, 0x04, 0x02, 0x03, 0x03, 
+	0x04, 0x04, 0x04, 0x04, 0x04, 0x03, 0x06, 0x04, 
+	0x04, 0x04, 0x04, 0x02, 0x02, 0x01, 0x00, 0x01, 
+	0x02, 0x04, 0x05, 0x08, 0x13, 0x31, 0x34, 0x2c, 
+	0x25, 0x25, 0x28, 0x2c, 0x34, 0x36, 0x2e, 0x29, 
+	0x28, 0x24, 0x0d, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x0b, 0x2d, 0x54, 
+	0x6f, 0x7d, 0x85, 0x94, 0x9e, 0x8e, 0x5f, 0x30, 
+	0x0d, 0x12, 0x21, 0x27, 0x24, 0x17, 0x09, 0x05, 
+	0x06, 0x05, 0x05, 0x05, 0x03, 0x03, 0x06, 0x05, 
+	0x04, 0x04, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 
+	0x01, 0x02, 0x08, 0x10, 0x1b, 0x36, 0x36, 0x3f, 
+	0x49, 0x52, 0x61, 0x54, 0x39, 0x36, 0x2e, 0x20, 
+	0x21, 0x32, 0x2d, 0x10, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x0d, 0x31, 0x5a, 0x7a, 
+	0x90, 0x92, 0x88, 0x8a, 0x66, 0x38, 0x15, 0x20, 
+	0x1d, 0x59, 0x88, 0x87, 0x76, 0x59, 0x37, 0x1e, 
+	0x0f, 0x09, 0x08, 0x08, 0x0f, 0x17, 0x11, 0x0c, 
+	0x06, 0x04, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 
+	0x01, 0x03, 0x0d, 0x16, 0x1e, 0x34, 0x47, 0x59, 
+	0x58, 0x5f, 0x69, 0x6d, 0x5a, 0x38, 0x2b, 0x13, 
+	0x0e, 0x24, 0x3a, 0x34, 0x0f, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x0a, 0x30, 0x5a, 0x78, 0x92, 
+	0x98, 0x8d, 0x8e, 0x88, 0x63, 0x43, 0x2e, 0x30, 
+	0x51, 0x95, 0xa9, 0x91, 0x8c, 0x79, 0x59, 0x3a, 
+	0x23, 0x13, 0x0b, 0x10, 0x16, 0x16, 0x10, 0x0e, 
+	0x07, 0x04, 0x04, 0x03, 0x05, 0x06, 0x04, 0x04, 
+	0x03, 0x07, 0x11, 0x1a, 0x22, 0x31, 0x4d, 0x6c, 
+	0x71, 0x6a, 0x6b, 0x76, 0x76, 0x52, 0x2c, 0x0f, 
+	0x06, 0x0a, 0x2a, 0x3f, 0x2f, 0x08, 0x00, 0x00, 
+	0x00, 0x00, 0x03, 0x22, 0x54, 0x78, 0x8a, 0x8e, 
+	0x85, 0x85, 0x96, 0x9e, 0x97, 0x7e, 0x6a, 0x6b, 
+	0x79, 0xa0, 0xa5, 0x8c, 0x8a, 0x78, 0x5b, 0x4f, 
+	0x3c, 0x39, 0x3d, 0x39, 0x24, 0x14, 0x0e, 0x0f, 
+	0x0d, 0x17, 0x1a, 0x0f, 0x07, 0x05, 0x05, 0x07, 
+	0x0f, 0x18, 0x1f, 0x2a, 0x27, 0x27, 0x30, 0x46, 
+	0x63, 0x73, 0x70, 0x84, 0x88, 0x72, 0x44, 0x18, 
+	0x0b, 0x05, 0x0b, 0x2c, 0x41, 0x21, 0x00, 0x00, 
+	0x00, 0x00, 0x0d, 0x3c, 0x6b, 0x88, 0x89, 0x84, 
+	0x85, 0xa3, 0xbd, 0xc7, 0xc4, 0xab, 0x7f, 0x77, 
+	0x7f, 0x9b, 0xa3, 0x93, 0x8b, 0x6f, 0x5b, 0x5e, 
+	0x73, 0x67, 0x5f, 0x53, 0x33, 0x0f, 0x0e, 0x0e, 
+	0x21, 0x35, 0x2c, 0x19, 0x12, 0x11, 0x11, 0x0e, 
+	0x1f, 0x23, 0x23, 0x1e, 0x19, 0x16, 0x14, 0x17, 
+	0x2f, 0x53, 0x72, 0x8a, 0x93, 0x8d, 0x6a, 0x38, 
+	0x26, 0x16, 0x06, 0x11, 0x33, 0x32, 0x08, 0x00, 
+	0x00, 0x01, 0x1c, 0x4e, 0x68, 0x7e, 0x81, 0x83, 
+	0x8a, 0xb1, 0xc0, 0xc5, 0xc4, 0xb0, 0x82, 0x80, 
+	0x83, 0x91, 0x9c, 0x93, 0x89, 0x67, 0x5b, 0x74, 
+	0x7b, 0x68, 0x5f, 0x4d, 0x28, 0x08, 0x0a, 0x0e, 
+	0x2e, 0x32, 0x33, 0x27, 0x21, 0x1f, 0x17, 0x14, 
+	0x19, 0x1a, 0x13, 0x09, 0x03, 0x08, 0x12, 0x19, 
+	0x29, 0x3a, 0x68, 0x85, 0x90, 0x8c, 0x80, 0x56, 
+	0x3a, 0x26, 0x08, 0x05, 0x16, 0x1d, 0x10, 0x00, 
+	0x00, 0x02, 0x2a, 0x58, 0x58, 0x64, 0x6b, 0x71, 
+	0x7f, 0x9d, 0xad, 0xb0, 0xa8, 0x90, 0x7a, 0x79, 
+	0x7e, 0x84, 0x8d, 0x8c, 0x7e, 0x65, 0x5b, 0x66, 
+	0x5a, 0x46, 0x32, 0x1b, 0x0a, 0x02, 0x06, 0x0d, 
+	0x31, 0x43, 0x53, 0x5f, 0x61, 0x6d, 0x4e, 0x1d, 
+	0x20, 0x17, 0x0d, 0x08, 0x04, 0x07, 0x11, 0x20, 
+	0x2d, 0x44, 0x6e, 0x86, 0x87, 0x88, 0x88, 0x74, 
+	0x57, 0x39, 0x14, 0x07, 0x0a, 0x14, 0x10, 0x00, 
+	0x00, 0x04, 0x31, 0x5c, 0x55, 0x38, 0x24, 0x26, 
+	0x34, 0x41, 0x45, 0x47, 0x44, 0x39, 0x32, 0x36, 
+	0x40, 0x4a, 0x58, 0x6a, 0x6b, 0x68, 0x5c, 0x4f, 
+	0x43, 0x43, 0x2f, 0x17, 0x09, 0x04, 0x04, 0x09, 
+	0x22, 0x3c, 0x45, 0x4c, 0x57, 0x6a, 0x4d, 0x1d, 
+	0x0e, 0x09, 0x0c, 0x0a, 0x0a, 0x0e, 0x1e, 0x39, 
+	0x54, 0x74, 0x8e, 0x9e, 0xa6, 0xa9, 0xa9, 0xa5, 
+	0x94, 0x6e, 0x3c, 0x16, 0x09, 0x0e, 0x0b, 0x00, 
+	0x00, 0x04, 0x2f, 0x53, 0x45, 0x16, 0x08, 0x07, 
+	0x0c, 0x14, 0x16, 0x16, 0x11, 0x0c, 0x0a, 0x09, 
+	0x09, 0x0b, 0x1a, 0x3c, 0x65, 0x66, 0x60, 0x4c, 
+	0x45, 0x43, 0x32, 0x19, 0x0c, 0x07, 0x04, 0x09, 
+	0x18, 0x31, 0x2a, 0x27, 0x22, 0x1c, 0x14, 0x08, 
+	0x05, 0x08, 0x0c, 0x11, 0x19, 0x3e, 0x6c, 0x7e, 
+	0x8c, 0xa5, 0xb4, 0xb6, 0xb7, 0xb8, 0xb6, 0xb5, 
+	0xae, 0x92, 0x69, 0x30, 0x0b, 0x10, 0x08, 0x00, 
+	0x00, 0x03, 0x28, 0x4d, 0x3d, 0x0e, 0x0c, 0x0c, 
+	0x0e, 0x18, 0x1f, 0x21, 0x1d, 0x15, 0x0f, 0x10, 
+	0x0f, 0x0a, 0x09, 0x15, 0x41, 0x5f, 0x5f, 0x4d, 
+	0x42, 0x36, 0x2a, 0x1b, 0x12, 0x0f, 0x10, 0x14, 
+	0x23, 0x31, 0x2c, 0x28, 0x16, 0x0f, 0x0b, 0x07, 
+	0x05, 0x09, 0x17, 0x22, 0x38, 0x7a, 0xab, 0xad, 
+	0xae, 0xbd, 0xc4, 0xca, 0xce, 0xcf, 0xca, 0xc2, 
+	0xba, 0xa3, 0x88, 0x40, 0x0e, 0x0c, 0x07, 0x00, 
+	0x00, 0x01, 0x20, 0x4f, 0x41, 0x10, 0x10, 0x0e, 
+	0x14, 0x28, 0x32, 0x31, 0x30, 0x2c, 0x21, 0x17, 
+	0x11, 0x0d, 0x0b, 0x13, 0x36, 0x46, 0x4b, 0x3a, 
+	0x27, 0x28, 0x2a, 0x20, 0x18, 0x19, 0x18, 0x21, 
+	0x3d, 0x44, 0x38, 0x2c, 0x16, 0x13, 0x10, 0x0a, 
+	0x07, 0x10, 0x1d, 0x31, 0x59, 0x9e, 0xbd, 0xbc, 
+	0xc9, 0xd9, 0xe2, 0xe8, 0xea, 0xe9, 0xe2, 0xd0, 
+	0xbc, 0xaa, 0x95, 0x3c, 0x0d, 0x0a, 0x06, 0x00, 
+	0x00, 0x00, 0x13, 0x4f, 0x51, 0x1e, 0x10, 0x0e, 
+	0x1b, 0x32, 0x35, 0x2f, 0x2f, 0x32, 0x37, 0x33, 
+	0x25, 0x19, 0x16, 0x22, 0x38, 0x45, 0x50, 0x38, 
+	0x28, 0x2b, 0x2c, 0x2d, 0x23, 0x19, 0x19, 0x28, 
+	0x54, 0x5e, 0x48, 0x37, 0x1f, 0x1a, 0x18, 0x16, 
+	0x16, 0x1a, 0x23, 0x47, 0x81, 0xba, 0xd1, 0xdb, 
+	0xe4, 0xe4, 0xe4, 0xe6, 0xe6, 0xe8, 0xe9, 0xdc, 
+	0xba, 0xa7, 0x74, 0x25, 0x08, 0x08, 0x04, 0x00, 
+	0x00, 0x00, 0x06, 0x34, 0x43, 0x32, 0x14, 0x11, 
+	0x1e, 0x31, 0x3a, 0x34, 0x31, 0x33, 0x35, 0x3a, 
+	0x35, 0x2f, 0x2c, 0x32, 0x3c, 0x45, 0x52, 0x3f, 
+	0x29, 0x2c, 0x2b, 0x2b, 0x29, 0x1d, 0x1c, 0x2b, 
+	0x59, 0x5e, 0x51, 0x43, 0x2f, 0x2b, 0x30, 0x2e, 
+	0x27, 0x26, 0x37, 0x72, 0xaf, 0xd2, 0xdb, 0xe4, 
+	0xe3, 0xe1, 0xe2, 0xe5, 0xe6, 0xe7, 0xea, 0xdd, 
+	0xaf, 0x82, 0x3d, 0x10, 0x05, 0x04, 0x01, 0x00, 
+	0x00, 0x00, 0x00, 0x13, 0x31, 0x2c, 0x2a, 0x1b, 
+	0x22, 0x27, 0x38, 0x3a, 0x30, 0x32, 0x2f, 0x30, 
+	0x30, 0x35, 0x3b, 0x41, 0x47, 0x4d, 0x4f, 0x4a, 
+	0x33, 0x23, 0x26, 0x31, 0x38, 0x33, 0x2c, 0x3b, 
+	0x51, 0x58, 0x59, 0x55, 0x49, 0x3d, 0x3d, 0x40, 
+	0x41, 0x48, 0x6b, 0xa1, 0xba, 0xca, 0xd1, 0xd2, 
+	0xd3, 0xd6, 0xd8, 0xdd, 0xe3, 0xe5, 0xe8, 0xca, 
+	0x8b, 0x49, 0x17, 0x0e, 0x04, 0x01, 0x00, 0x00, 
+	0x00, 0x00, 0x01, 0x01, 0x11, 0x23, 0x2f, 0x32, 
+	0x29, 0x27, 0x34, 0x34, 0x33, 0x30, 0x2a, 0x31, 
+	0x42, 0x4f, 0x55, 0x57, 0x5c, 0x65, 0x6f, 0x73, 
+	0x6e, 0x5b, 0x4c, 0x4c, 0x4a, 0x49, 0x48, 0x4c, 
+	0x4f, 0x54, 0x64, 0x7b, 0x8d, 0x85, 0x75, 0x6e, 
+	0x72, 0x7f, 0x98, 0x9f, 0xaf, 0xb4, 0xb4, 0xb4, 
+	0xb8, 0xc2, 0xcb, 0xd3, 0xd9, 0xde, 0xcd, 0x90, 
+	0x47, 0x19, 0x0c, 0x0c, 0x02, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x01, 0x0a, 0x1a, 0x2e, 
+	0x34, 0x3b, 0x36, 0x37, 0x34, 0x38, 0x40, 0x54, 
+	0x92, 0xba, 0xc4, 0xc9, 0xcf, 0xd2, 0xcf, 0xcb, 
+	0xc9, 0xc1, 0xa5, 0x7c, 0x5e, 0x59, 0x68, 0x75, 
+	0x7d, 0x86, 0x92, 0xa0, 0x9e, 0x99, 0x9d, 0x9c, 
+	0x8d, 0x83, 0x90, 0x93, 0x90, 0x8d, 0x8d, 0x95, 
+	0xa6, 0xb5, 0xc4, 0xc6, 0xcc, 0xb3, 0x7b, 0x3b, 
+	0x15, 0x10, 0x0d, 0x08, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x11, 
+	0x24, 0x33, 0x35, 0x33, 0x36, 0x46, 0x4b, 0x5b, 
+	0xad, 0xd0, 0xe1, 0xe6, 0xe7, 0xe8, 0xe7, 0xe4, 
+	0xe2, 0xde, 0xd2, 0xbb, 0xa1, 0x9b, 0xa1, 0xa4, 
+	0xa1, 0x98, 0x93, 0x96, 0x93, 0x8e, 0x8b, 0x86, 
+	0x81, 0x7d, 0x7b, 0x78, 0x77, 0x7f, 0x89, 0x8d, 
+	0xa3, 0xa6, 0xb6, 0xb5, 0x8c, 0x53, 0x25, 0x0e, 
+	0x0c, 0x0a, 0x05, 0x01, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 
+	0x0c, 0x1b, 0x2a, 0x33, 0x38, 0x49, 0x4c, 0x4d, 
+	0x8e, 0xcf, 0xe5, 0xe7, 0xe8, 0xe8, 0xe7, 0xe5, 
+	0xe1, 0xdc, 0xd3, 0xcf, 0xc2, 0xb6, 0xaf, 0xa9, 
+	0xa2, 0x99, 0x93, 0x8f, 0x89, 0x83, 0x80, 0x7b, 
+	0x78, 0x7b, 0x7b, 0x77, 0x78, 0x81, 0x8e, 0x89, 
+	0x99, 0x93, 0x78, 0x54, 0x33, 0x1d, 0x10, 0x09, 
+	0x07, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x04, 0x0e, 0x1d, 0x2d, 0x3b, 0x40, 0x40, 
+	0x59, 0x97, 0xc8, 0xdb, 0xe1, 0xe4, 0xe3, 0xe2, 
+	0xde, 0xd8, 0xd0, 0xca, 0xc0, 0xbb, 0xb7, 0xae, 
+	0xa1, 0x98, 0x94, 0x8f, 0x88, 0x82, 0x81, 0x7c, 
+	0x78, 0x7a, 0x7d, 0x83, 0x8c, 0x8c, 0x8d, 0x7e, 
+	0x67, 0x47, 0x2c, 0x24, 0x22, 0x17, 0x0a, 0x03, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x04, 0x0d, 0x1a, 0x25, 0x2a, 
+	0x2f, 0x44, 0x69, 0x8d, 0xae, 0xcb, 0xdb, 0xde, 
+	0xdb, 0xd5, 0xcc, 0xc3, 0xbb, 0xb9, 0xb4, 0xab, 
+	0xa1, 0x99, 0x95, 0x92, 0x8c, 0x85, 0x84, 0x86, 
+	0x89, 0x90, 0x94, 0x94, 0x84, 0x6c, 0x56, 0x45, 
+	0x38, 0x28, 0x1b, 0x14, 0x0d, 0x05, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x0d, 0x18, 
+	0x1f, 0x24, 0x27, 0x2b, 0x38, 0x57, 0x7d, 0x91, 
+	0x8d, 0x7f, 0x7c, 0x8a, 0x9b, 0xa7, 0xa9, 0xa5, 
+	0x9f, 0x9b, 0x99, 0x98, 0x98, 0x99, 0x9a, 0x9a, 
+	0x9d, 0x99, 0x80, 0x61, 0x45, 0x32, 0x26, 0x1e, 
+	0x1a, 0x12, 0x09, 0x03, 0x01, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 
+	0x08, 0x0e, 0x14, 0x18, 0x1b, 0x21, 0x32, 0x44, 
+	0x46, 0x3e, 0x3c, 0x43, 0x51, 0x5c, 0x63, 0x68, 
+	0x6d, 0x6e, 0x69, 0x64, 0x63, 0x66, 0x6b, 0x6e, 
+	0x69, 0x57, 0x44, 0x38, 0x2d, 0x1f, 0x13, 0x0a, 
+	0x06, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x02, 0x05, 0x09, 0x0c, 0x0f, 
+	0x13, 0x18, 0x1d, 0x20, 0x1f, 0x1f, 0x2a, 0x3b, 
+	0x4a, 0x56, 0x5d, 0x5d, 0x59, 0x53, 0x4b, 0x40, 
+	0x30, 0x20, 0x14, 0x0d, 0x07, 0x04, 0x01, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+	0x03, 0x04, 0x05, 0x07, 0x07, 0x07, 0x0b, 0x10, 
+	0x15, 0x18, 0x19, 0x17, 0x12, 0x0d, 0x08, 0x05, 
+	0x02, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	
+};
 
 Gfx luigi_npc_mario_button_ci4_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 luigi_npc_mario_button_ci4_ci4[] = {
@@ -4422,6 +4695,460 @@ Gfx luigi_npc_000_displaylist_004_right_hand_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx luigi_npc_002_switch_option_left_hand_open_mesh_layer_1_vtx_0[25] = {
+	{{{121, 27, 23},0, {-16, -16},{0x52, 0xDD, 0x5B, 0xFF}}},
+	{{{111, 63, 22},0, {-16, -16},{0x39, 0x44, 0x5B, 0xFF}}},
+	{{{75, 55, 17},0, {-16, -16},{0xFD, 0x21, 0x7B, 0xFF}}},
+	{{{127, 30, -6},0, {-16, -16},{0x73, 0xF1, 0xCB, 0xFF}}},
+	{{{77, -15, -17},0, {-16, -16},{0x3E, 0xB8, 0xAC, 0xFF}}},
+	{{{83, -2, 15},0, {-16, -16},{0x66, 0xE6, 0x47, 0xFF}}},
+	{{{67, 12, 23},0, {-16, -16},{0x3C, 0x23, 0x6A, 0xFF}}},
+	{{{31, 41, 27},0, {-16, -16},{0xFD, 0x4A, 0x67, 0xFF}}},
+	{{{68, 81, 3},0, {-16, -16},{0xF3, 0x7E, 0xFE, 0xFF}}},
+	{{{111, 66, 3},0, {-16, -16},{0x4E, 0x5B, 0xD6, 0xFF}}},
+	{{{72, 36, -30},0, {-16, -16},{0x10, 0x1D, 0x85, 0xFF}}},
+	{{{27, 14, -32},0, {-16, -16},{0xD7, 0x2, 0x88, 0xFF}}},
+	{{{43, -29, -13},0, {-16, -16},{0xF7, 0x98, 0xB7, 0xFF}}},
+	{{{83, -37, 27},0, {-16, -16},{0x4C, 0xA7, 0x31, 0xFF}}},
+	{{{72, -11, 35},0, {-16, -16},{0x34, 0xB, 0x73, 0xFF}}},
+	{{{29, 4, 33},0, {-16, -16},{0xE4, 0xEE, 0x7B, 0xFF}}},
+	{{{18, 32, 37},0, {-16, -16},{0xE0, 0x2B, 0x73, 0xFF}}},
+	{{{11, 50, -1},0, {-16, -16},{0xAE, 0x5E, 0xE7, 0xFF}}},
+	{{{3, 35, 0},0, {-16, -16},{0x8A, 0x29, 0xE9, 0xFF}}},
+	{{{14, 6, -20},0, {-16, -16},{0xA6, 0xE6, 0xAA, 0xFF}}},
+	{{{27, -26, -9},0, {-16, -16},{0xC1, 0x9C, 0xD2, 0xFF}}},
+	{{{41, -29, 28},0, {-16, -16},{0xD8, 0xA4, 0x4E, 0xFF}}},
+	{{{24, -19, 20},0, {-16, -16},{0xAE, 0xB2, 0x3A, 0xFF}}},
+	{{{8, 18, 26},0, {-16, -16},{0x99, 0xF6, 0x4A, 0xFF}}},
+	{{{0, 3, 3},0, {-16, -16},{0x87, 0xD9, 0xFD, 0xFF}}},
+};
+
+Gfx luigi_npc_002_switch_option_left_hand_open_mesh_layer_1_tri_0[] = {
+	gsSPVertex(luigi_npc_002_switch_option_left_hand_open_mesh_layer_1_vtx_0 + 0, 25, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 3, 0, 0, 4, 0, 5, 0),
+	gsSP2Triangles(5, 0, 2, 0, 5, 2, 6, 0),
+	gsSP2Triangles(6, 2, 7, 0, 7, 2, 8, 0),
+	gsSP2Triangles(8, 2, 1, 0, 1, 9, 8, 0),
+	gsSP2Triangles(1, 3, 9, 0, 10, 9, 3, 0),
+	gsSP2Triangles(10, 3, 4, 0, 11, 10, 4, 0),
+	gsSP2Triangles(11, 4, 12, 0, 12, 4, 13, 0),
+	gsSP2Triangles(4, 5, 13, 0, 13, 5, 14, 0),
+	gsSP2Triangles(5, 6, 14, 0, 6, 7, 14, 0),
+	gsSP2Triangles(7, 15, 14, 0, 7, 16, 15, 0),
+	gsSP2Triangles(16, 7, 17, 0, 8, 17, 7, 0),
+	gsSP2Triangles(17, 8, 11, 0, 8, 10, 11, 0),
+	gsSP2Triangles(10, 8, 9, 0, 17, 11, 18, 0),
+	gsSP2Triangles(11, 19, 18, 0, 20, 19, 11, 0),
+	gsSP2Triangles(11, 12, 20, 0, 12, 21, 20, 0),
+	gsSP2Triangles(13, 21, 12, 0, 14, 21, 13, 0),
+	gsSP2Triangles(14, 15, 21, 0, 21, 15, 22, 0),
+	gsSP2Triangles(15, 23, 22, 0, 15, 16, 23, 0),
+	gsSP2Triangles(18, 23, 16, 0, 16, 17, 18, 0),
+	gsSP2Triangles(23, 18, 24, 0, 18, 19, 24, 0),
+	gsSP2Triangles(19, 20, 24, 0, 20, 22, 24, 0),
+	gsSP2Triangles(21, 22, 20, 0, 22, 23, 24, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_vtx_0[57] = {
+	{{{148, -10, -20},0, {-16, -16},{0x7A, 0x8, 0x21, 0xFF}}},
+	{{{145, 15, -15},0, {-16, -16},{0x7B, 0xA, 0x20, 0xFF}}},
+	{{{137, 9, 17},0, {-16, -16},{0x7A, 0x7, 0x22, 0xFF}}},
+	{{{138, -11, 14},0, {-16, -16},{0x7A, 0x6, 0x22, 0xFF}}},
+	{{{79, 18, -36},0, {-16, -16},{0x7, 0x9, 0x82, 0xFF}}},
+	{{{145, 15, -15},0, {-16, -16},{0x27, 0x1E, 0x8B, 0xFF}}},
+	{{{148, -10, -20},0, {-16, -16},{0x1E, 0x5, 0x85, 0xFF}}},
+	{{{84, -17, -21},0, {-16, -16},{0x19, 0xA7, 0xA9, 0xFF}}},
+	{{{30, 9, -38},0, {-16, -16},{0xE0, 0xFA, 0x85, 0xFF}}},
+	{{{50, -39, -10},0, {-16, -16},{0x2, 0x8A, 0xD1, 0xFF}}},
+	{{{90, -23, 8},0, {-16, -16},{0x41, 0x96, 0x18, 0xFF}}},
+	{{{138, -11, 14},0, {-16, -16},{0x14, 0x83, 0xF6, 0xFF}}},
+	{{{148, -10, -20},0, {-16, -16},{0xF, 0x82, 0xFE, 0xFF}}},
+	{{{78, -28, 30},0, {-16, -16},{0x3E, 0xA6, 0x41, 0xFF}}},
+	{{{80, 0, 41},0, {-16, -16},{0x48, 0x2, 0x69, 0xFF}}},
+	{{{87, 11, 21},0, {-16, -16},{0x4F, 0x7, 0x63, 0xFF}}},
+	{{{137, 9, 17},0, {-16, -16},{0xFD, 0xE4, 0x7C, 0xFF}}},
+	{{{138, -11, 14},0, {-16, -16},{0xF5, 0xEF, 0x7D, 0xFF}}},
+	{{{75, 45, 17},0, {-16, -16},{0x2D, 0x40, 0x64, 0xFF}}},
+	{{{124, 50, 17},0, {-16, -16},{0xFD, 0x12, 0x7E, 0xFF}}},
+	{{{110, 67, 14},0, {-16, -16},{0xFC, 0x15, 0x7D, 0xFF}}},
+	{{{41, 46, 35},0, {-16, -16},{0xF7, 0x47, 0x69, 0xFF}}},
+	{{{50, 74, -4},0, {-16, -16},{0x6, 0x7D, 0xED, 0xFF}}},
+	{{{75, 56, -11},0, {-16, -16},{0x19, 0x5D, 0xAD, 0xFF}}},
+	{{{112, 77, -8},0, {-16, -16},{0x6, 0x33, 0x8C, 0xFF}}},
+	{{{131, 55, -12},0, {-16, -16},{0x18, 0x2A, 0x8A, 0xFF}}},
+	{{{7, 54, -7},0, {-16, -16},{0xB1, 0x5E, 0xE0, 0xFF}}},
+	{{{-3, 37, -5},0, {-16, -16},{0x8B, 0x26, 0xDF, 0xFF}}},
+	{{{12, 2, -25},0, {-16, -16},{0xAC, 0xDC, 0xA8, 0xFF}}},
+	{{{29, -36, -5},0, {-16, -16},{0xCA, 0x91, 0xE0, 0xFF}}},
+	{{{40, -23, 41},0, {-16, -16},{0xEB, 0xBB, 0x68, 0xFF}}},
+	{{{0, 21, 28},0, {-16, -16},{0xA2, 0x13, 0x53, 0xFF}}},
+	{{{0, 21, 28},0, {-16, -16},{0xA2, 0x13, 0x53, 0xFF}}},
+	{{{-3, 37, -5},0, {-16, -16},{0x8B, 0x26, 0xDF, 0xFF}}},
+	{{{-3, 0, 4},0, {-16, -16},{0x89, 0xD3, 0xFA, 0xFF}}},
+	{{{12, 2, -25},0, {-16, -16},{0xAC, 0xDC, 0xA8, 0xFF}}},
+	{{{29, -36, -5},0, {-16, -16},{0xCA, 0x91, 0xE0, 0xFF}}},
+	{{{20, -23, 27},0, {-16, -16},{0xB6, 0xAC, 0x3C, 0xFF}}},
+	{{{40, -23, 41},0, {-16, -16},{0xEB, 0xBB, 0x68, 0xFF}}},
+	{{{145, 15, -15},0, {-16, -16},{0xA, 0x7D, 0x12, 0xFF}}},
+	{{{79, 18, -36},0, {-16, -16},{0x6, 0x7F, 0x0, 0xFF}}},
+	{{{93, 17, -3},0, {-16, -16},{0x8, 0x7E, 0x11, 0xFF}}},
+	{{{137, 9, 17},0, {-16, -16},{0xB, 0x7B, 0x1D, 0xFF}}},
+	{{{87, 11, 21},0, {-16, -16},{0x9, 0x7A, 0x22, 0xFF}}},
+	{{{75, 56, -11},0, {-16, -16},{0xC1, 0x67, 0x26, 0xFF}}},
+	{{{75, 45, 17},0, {-16, -16},{0xC1, 0x67, 0x28, 0xFF}}},
+	{{{112, 77, -8},0, {-16, -16},{0xC2, 0x67, 0x28, 0xFF}}},
+	{{{110, 67, 14},0, {-16, -16},{0xC3, 0x67, 0x2A, 0xFF}}},
+	{{{131, 55, -12},0, {-16, -16},{0x59, 0xA5, 0xF8, 0xFF}}},
+	{{{93, 17, -3},0, {-16, -16},{0x58, 0xA6, 0xF1, 0xFF}}},
+	{{{79, 18, -36},0, {-16, -16},{0x51, 0xA5, 0xDC, 0xFF}}},
+	{{{124, 50, 17},0, {-16, -16},{0x5B, 0xA7, 0x4, 0xFF}}},
+	{{{87, 11, 21},0, {-16, -16},{0x5C, 0xA8, 0x1, 0xFF}}},
+	{{{131, 55, -12},0, {-16, -16},{0x5F, 0x4B, 0x28, 0xFF}}},
+	{{{112, 77, -8},0, {-16, -16},{0x61, 0x45, 0x2D, 0xFF}}},
+	{{{110, 67, 14},0, {-16, -16},{0x5E, 0x4B, 0x28, 0xFF}}},
+	{{{124, 50, 17},0, {-16, -16},{0x5B, 0x51, 0x24, 0xFF}}},
+};
+
+Gfx luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_tri_0[] = {
+	gsSPVertex(luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_vtx_0 + 0, 32, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 6, 7, 4, 0),
+	gsSP2Triangles(8, 4, 7, 0, 9, 8, 7, 0),
+	gsSP2Triangles(10, 9, 7, 0, 7, 11, 10, 0),
+	gsSP2Triangles(11, 7, 12, 0, 10, 13, 9, 0),
+	gsSP2Triangles(13, 10, 14, 0, 10, 15, 14, 0),
+	gsSP2Triangles(10, 16, 15, 0, 10, 17, 16, 0),
+	gsSP2Triangles(15, 18, 14, 0, 18, 15, 19, 0),
+	gsSP2Triangles(19, 20, 18, 0, 14, 18, 21, 0),
+	gsSP2Triangles(21, 18, 22, 0, 22, 18, 23, 0),
+	gsSP2Triangles(22, 23, 4, 0, 24, 4, 23, 0),
+	gsSP2Triangles(4, 24, 25, 0, 22, 4, 8, 0),
+	gsSP2Triangles(26, 22, 8, 0, 26, 8, 27, 0),
+	gsSP2Triangles(8, 28, 27, 0, 29, 28, 8, 0),
+	gsSP2Triangles(8, 9, 29, 0, 9, 30, 29, 0),
+	gsSP2Triangles(30, 9, 13, 0, 13, 14, 30, 0),
+	gsSP2Triangles(30, 14, 21, 0, 30, 21, 31, 0),
+	gsSP2Triangles(21, 26, 31, 0, 21, 22, 26, 0),
+	gsSP1Triangle(31, 26, 27, 0),
+	gsSPVertex(luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_vtx_0 + 32, 25, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
+	gsSP2Triangles(3, 4, 2, 0, 4, 5, 2, 0),
+	gsSP2Triangles(6, 5, 4, 0, 5, 6, 0, 0),
+	gsSP2Triangles(5, 0, 2, 0, 7, 8, 9, 0),
+	gsSP2Triangles(9, 10, 7, 0, 9, 11, 10, 0),
+	gsSP2Triangles(12, 13, 14, 0, 13, 15, 14, 0),
+	gsSP2Triangles(16, 17, 18, 0, 19, 17, 16, 0),
+	gsSP2Triangles(19, 20, 17, 0, 21, 22, 23, 0),
+	gsSP1Triangle(23, 24, 21, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_0[16] = {
+	{{{48, 50, 34},0, {-16, -16},{0x3, 0x56, 0x5E, 0x0}}},
+	{{{10, 56, -8},0, {-16, -16},{0xB4, 0x5E, 0xD9, 0x0}}},
+	{{{1, 23, 26},0, {-16, -16},{0x9D, 0x16, 0x4D, 0x0}}},
+	{{{51, 75, -5},0, {-16, -16},{0x10, 0x7C, 0xE8, 0x0}}},
+	{{{85, 37, 17},0, {-16, -16},{0x6B, 0x3C, 0x22, 0x0}}},
+	{{{50, 12, 53},0, {-16, -16},{0xF8, 0x16, 0x7D, 0x0}}},
+	{{{67, -26, 53},0, {-16, -16},{0x1A, 0xB3, 0x62, 0x0}}},
+	{{{20, -20, 26},0, {-16, -16},{0xB6, 0xAE, 0x3F, 0x0}}},
+	{{{-3, 3, 3},0, {-16, -16},{0x88, 0xD6, 0xF9, 0x0}}},
+	{{{-2, 39, -5},0, {-16, -16},{0x8D, 0x2B, 0xDE, 0x0}}},
+	{{{14, 3, -25},0, {-16, -16},{0xC2, 0xE5, 0x94, 0x0}}},
+	{{{76, 30, -34},0, {-16, -16},{0x3F, 0x1A, 0x95, 0x0}}},
+	{{{91, -20, -4},0, {-16, -16},{0x65, 0xBF, 0xD6, 0x0}}},
+	{{{85, -4, 41},0, {-16, -16},{0x67, 0x0, 0x4B, 0x0}}},
+	{{{49, -36, -8},0, {-16, -16},{0x4, 0x8D, 0xC9, 0x0}}},
+	{{{28, -32, -5},0, {-16, -16},{0xCC, 0x91, 0xDE, 0x0}}},
+};
+
+Gfx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_0[] = {
+	gsSPVertex(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_0 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+	gsSP2Triangles(0, 4, 3, 0, 4, 0, 5, 0),
+	gsSP2Triangles(0, 2, 5, 0, 6, 5, 2, 0),
+	gsSP2Triangles(6, 2, 7, 0, 7, 2, 8, 0),
+	gsSP2Triangles(2, 9, 8, 0, 1, 9, 2, 0),
+	gsSP2Triangles(1, 10, 9, 0, 1, 11, 10, 0),
+	gsSP2Triangles(1, 3, 11, 0, 3, 4, 11, 0),
+	gsSP2Triangles(11, 4, 12, 0, 12, 4, 13, 0),
+	gsSP2Triangles(13, 4, 5, 0, 6, 13, 5, 0),
+	gsSP2Triangles(12, 13, 6, 0, 14, 12, 6, 0),
+	gsSP2Triangles(14, 6, 7, 0, 7, 15, 14, 0),
+	gsSP2Triangles(15, 7, 8, 0, 10, 15, 8, 0),
+	gsSP2Triangles(9, 10, 8, 0, 10, 14, 15, 0),
+	gsSP2Triangles(14, 10, 11, 0, 12, 14, 11, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_1[7] = {
+	{{{76, 5, 31},0, {1540, 1554},{0xD3, 0x46, 0xA0, 0x0}}},
+	{{{113, 41, 83},0, {2694, 2335},{0xA6, 0x4C, 0x30, 0x0}}},
+	{{{117, 30, -10},0, {2178, -48},{0xDE, 0x5F, 0xB3, 0x0}}},
+	{{{107, -17, -38},0, {903, -632},{0xD4, 0xE, 0x8A, 0x0}}},
+	{{{71, -39, 29},0, {382, 1585},{0xC4, 0xD7, 0x98, 0x0}}},
+	{{{104, -67, -17},0, {-336, 23},{0xC7, 0xBA, 0xA7, 0x0}}},
+	{{{96, -91, 72},0, {-722, 2433},{0x98, 0xBD, 0x1E, 0x0}}},
+};
+
+Gfx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_1[] = {
+	gsSPVertex(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_1 + 0, 7, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(4, 0, 3, 0, 5, 4, 3, 0),
+	gsSP1Triangle(6, 4, 5, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_2[28] = {
+	{{{117, 30, -10},0, {-16, 1008},{0xDE, 0x5F, 0xB3, 0x0}}},
+	{{{113, 41, 83},0, {-16, 1008},{0xA6, 0x4C, 0x30, 0x0}}},
+	{{{158, 71, 63},0, {-16, 1008},{0x10, 0x7D, 0xED, 0x0}}},
+	{{{139, 41, 116},0, {-16, 1008},{0xAD, 0x43, 0x45, 0x0}}},
+	{{{177, 57, 122},0, {-16, 1008},{0x1C, 0x74, 0x2D, 0x0}}},
+	{{{161, 23, 153},0, {-16, 1008},{0xBD, 0x39, 0x5C, 0x0}}},
+	{{{189, -7, 184},0, {-16, 1008},{0xF9, 0x24, 0x7A, 0x0}}},
+	{{{245, -14, 156},0, {-16, 1008},{0x75, 0x1D, 0x27, 0x0}}},
+	{{{236, -83, 150},0, {-16, 1008},{0x6A, 0xC1, 0x20, 0x0}}},
+	{{{180, -80, 179},0, {-16, 1008},{0xEF, 0xCD, 0x73, 0x0}}},
+	{{{153, -128, 109},0, {-16, 1008},{0xFC, 0x84, 0x1A, 0x0}}},
+	{{{145, -97, 144},0, {-16, 1008},{0xAD, 0xCE, 0x52, 0x0}}},
+	{{{122, -101, 105},0, {-16, 1008},{0x9E, 0xCC, 0x3E, 0x0}}},
+	{{{131, -129, 49},0, {-16, 1008},{0xF1, 0x87, 0xDC, 0x0}}},
+	{{{96, -91, 72},0, {-16, 1008},{0x98, 0xBD, 0x1E, 0x0}}},
+	{{{104, -67, -17},0, {-16, 1008},{0xC7, 0xBA, 0xA7, 0x0}}},
+	{{{163, -55, -17},0, {-16, 1008},{0x49, 0xD3, 0xA2, 0x0}}},
+	{{{107, -17, -38},0, {-16, 1008},{0xD4, 0xE, 0x8A, 0x0}}},
+	{{{170, 3, -12},0, {-16, 1008},{0x54, 0x27, 0xA9, 0x0}}},
+	{{{212, 14, 98},0, {-16, 1008},{0x71, 0x2D, 0xDA, 0x0}}},
+	{{{199, -91, 90},0, {-16, 1008},{0x63, 0xBF, 0xD1, 0x0}}},
+	{{{45, 33, 43},0, {-16, 1008},{0xB7, 0x68, 0x8, 0x0}}},
+	{{{76, 5, 31},0, {-16, 1008},{0xD3, 0x46, 0xA0, 0x0}}},
+	{{{70, 5, 48},0, {-16, 1008},{0xBE, 0xF7, 0x6C, 0x0}}},
+	{{{16, -10, 24},0, {-16, 1008},{0x87, 0x10, 0xDD, 0x0}}},
+	{{{71, -39, 29},0, {-16, 1008},{0xC4, 0xD7, 0x98, 0x0}}},
+	{{{33, -59, 36},0, {-16, 1008},{0x9F, 0xAE, 0xFB, 0x0}}},
+	{{{64, -40, 44},0, {-16, 1008},{0xBF, 0xA, 0x6D, 0x0}}},
+};
+
+Gfx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_2[] = {
+	gsSPVertex(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_2 + 0, 28, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
+	gsSP2Triangles(4, 2, 3, 0, 4, 3, 5, 0),
+	gsSP2Triangles(5, 6, 4, 0, 4, 6, 7, 0),
+	gsSP2Triangles(7, 6, 8, 0, 8, 6, 9, 0),
+	gsSP2Triangles(9, 10, 8, 0, 9, 11, 10, 0),
+	gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
+	gsSP2Triangles(12, 14, 13, 0, 13, 14, 15, 0),
+	gsSP2Triangles(15, 16, 13, 0, 16, 15, 17, 0),
+	gsSP2Triangles(17, 18, 16, 0, 17, 0, 18, 0),
+	gsSP2Triangles(2, 18, 0, 0, 2, 19, 18, 0),
+	gsSP2Triangles(19, 2, 4, 0, 7, 19, 4, 0),
+	gsSP2Triangles(19, 7, 20, 0, 8, 20, 7, 0),
+	gsSP2Triangles(8, 10, 20, 0, 20, 10, 13, 0),
+	gsSP2Triangles(13, 16, 20, 0, 16, 19, 20, 0),
+	gsSP2Triangles(18, 19, 16, 0, 21, 1, 22, 0),
+	gsSP2Triangles(21, 23, 1, 0, 24, 23, 21, 0),
+	gsSP2Triangles(24, 21, 22, 0, 24, 22, 25, 0),
+	gsSP2Triangles(24, 25, 26, 0, 14, 26, 25, 0),
+	gsSP2Triangles(26, 14, 27, 0, 24, 26, 27, 0),
+	gsSP1Triangle(23, 24, 27, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_3[10] = {
+	{{{64, -40, 44},0, {-16, -16},{0xBF, 0xA, 0x6D, 0x0}}},
+	{{{96, -91, 72},0, {-16, -16},{0x98, 0xBD, 0x1E, 0x0}}},
+	{{{122, -101, 105},0, {-16, -16},{0x9E, 0xCC, 0x3E, 0x0}}},
+	{{{70, 5, 48},0, {-16, -16},{0xBE, 0xF7, 0x6C, 0x0}}},
+	{{{113, 41, 83},0, {-16, -16},{0xA6, 0x4C, 0x30, 0x0}}},
+	{{{139, 41, 116},0, {-16, -16},{0xAD, 0x43, 0x45, 0x0}}},
+	{{{161, 23, 153},0, {-16, -16},{0xBD, 0x39, 0x5C, 0x0}}},
+	{{{145, -97, 144},0, {-16, -16},{0xAD, 0xCE, 0x52, 0x0}}},
+	{{{180, -80, 179},0, {-16, -16},{0xEF, 0xCD, 0x73, 0x0}}},
+	{{{189, -7, 184},0, {-16, -16},{0xF9, 0x24, 0x7A, 0x0}}},
+};
+
+Gfx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_3[] = {
+	gsSPVertex(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_vtx_3 + 0, 10, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(4, 3, 2, 0, 5, 4, 2, 0),
+	gsSP2Triangles(6, 5, 2, 0, 6, 2, 7, 0),
+	gsSP2Triangles(6, 7, 8, 0, 8, 9, 6, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_0[16] = {
+	{{{48, 50, 34},0, {-16, -16},{0x3, 0x56, 0x5E, 0x0}}},
+	{{{10, 56, -8},0, {-16, -16},{0xB4, 0x5E, 0xD9, 0x0}}},
+	{{{1, 23, 26},0, {-16, -16},{0x9D, 0x16, 0x4D, 0x0}}},
+	{{{51, 75, -5},0, {-16, -16},{0x10, 0x7C, 0xE8, 0x0}}},
+	{{{85, 37, 17},0, {-16, -16},{0x6B, 0x3C, 0x22, 0x0}}},
+	{{{50, 12, 53},0, {-16, -16},{0xF8, 0x16, 0x7D, 0x0}}},
+	{{{67, -26, 53},0, {-16, -16},{0x1A, 0xB3, 0x62, 0x0}}},
+	{{{20, -20, 26},0, {-16, -16},{0xB6, 0xAE, 0x3F, 0x0}}},
+	{{{-3, 3, 3},0, {-16, -16},{0x88, 0xD6, 0xF9, 0x0}}},
+	{{{-2, 39, -5},0, {-16, -16},{0x8D, 0x2B, 0xDE, 0x0}}},
+	{{{14, 3, -25},0, {-16, -16},{0xC2, 0xE5, 0x94, 0x0}}},
+	{{{76, 30, -34},0, {-16, -16},{0x3F, 0x1A, 0x95, 0x0}}},
+	{{{91, -20, -4},0, {-16, -16},{0x65, 0xBF, 0xD6, 0x0}}},
+	{{{85, -4, 41},0, {-16, -16},{0x67, 0x0, 0x4B, 0x0}}},
+	{{{49, -36, -8},0, {-16, -16},{0x4, 0x8D, 0xC9, 0x0}}},
+	{{{28, -32, -5},0, {-16, -16},{0xCC, 0x91, 0xDE, 0x0}}},
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_0[] = {
+	gsSPVertex(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_0 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+	gsSP2Triangles(0, 4, 3, 0, 4, 0, 5, 0),
+	gsSP2Triangles(0, 2, 5, 0, 6, 5, 2, 0),
+	gsSP2Triangles(6, 2, 7, 0, 7, 2, 8, 0),
+	gsSP2Triangles(2, 9, 8, 0, 1, 9, 2, 0),
+	gsSP2Triangles(1, 10, 9, 0, 1, 11, 10, 0),
+	gsSP2Triangles(1, 3, 11, 0, 3, 4, 11, 0),
+	gsSP2Triangles(11, 4, 12, 0, 12, 4, 13, 0),
+	gsSP2Triangles(13, 4, 5, 0, 6, 13, 5, 0),
+	gsSP2Triangles(12, 13, 6, 0, 14, 12, 6, 0),
+	gsSP2Triangles(14, 6, 7, 0, 7, 15, 14, 0),
+	gsSP2Triangles(15, 7, 8, 0, 10, 15, 8, 0),
+	gsSP2Triangles(9, 10, 8, 0, 10, 14, 15, 0),
+	gsSP2Triangles(14, 10, 11, 0, 12, 14, 11, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_1[7] = {
+	{{{76, 5, 31},0, {1540, 1554},{0xD3, 0x46, 0xA0, 0x0}}},
+	{{{113, 41, 83},0, {2694, 2335},{0xA6, 0x4C, 0x30, 0x0}}},
+	{{{117, 30, -10},0, {2178, -48},{0xDE, 0x5F, 0xB3, 0x0}}},
+	{{{107, -17, -38},0, {903, -632},{0xD4, 0xE, 0x8A, 0x0}}},
+	{{{71, -39, 29},0, {382, 1585},{0xC4, 0xD7, 0x98, 0x0}}},
+	{{{104, -67, -17},0, {-336, 23},{0xC7, 0xBA, 0xA7, 0x0}}},
+	{{{96, -91, 72},0, {-722, 2433},{0x98, 0xBD, 0x1E, 0x0}}},
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_1[] = {
+	gsSPVertex(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_1 + 0, 7, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(4, 0, 3, 0, 5, 4, 3, 0),
+	gsSP1Triangle(6, 4, 5, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_2[28] = {
+	{{{117, 30, -10},0, {-16, 1008},{0xDE, 0x5F, 0xB3, 0x0}}},
+	{{{113, 41, 83},0, {-16, 1008},{0xA6, 0x4C, 0x30, 0x0}}},
+	{{{158, 71, 63},0, {-16, 1008},{0x10, 0x7D, 0xED, 0x0}}},
+	{{{139, 41, 116},0, {-16, 1008},{0xAD, 0x43, 0x45, 0x0}}},
+	{{{177, 57, 122},0, {-16, 1008},{0x1C, 0x74, 0x2D, 0x0}}},
+	{{{161, 23, 153},0, {-16, 1008},{0xBD, 0x39, 0x5C, 0x0}}},
+	{{{189, -7, 184},0, {-16, 1008},{0xF9, 0x24, 0x7A, 0x0}}},
+	{{{245, -14, 156},0, {-16, 1008},{0x75, 0x1D, 0x27, 0x0}}},
+	{{{236, -83, 150},0, {-16, 1008},{0x6A, 0xC1, 0x20, 0x0}}},
+	{{{180, -80, 179},0, {-16, 1008},{0xEF, 0xCD, 0x73, 0x0}}},
+	{{{153, -128, 109},0, {-16, 1008},{0xFC, 0x84, 0x1A, 0x0}}},
+	{{{145, -97, 144},0, {-16, 1008},{0xAD, 0xCE, 0x52, 0x0}}},
+	{{{122, -101, 105},0, {-16, 1008},{0x9E, 0xCC, 0x3E, 0x0}}},
+	{{{131, -129, 49},0, {-16, 1008},{0xF1, 0x87, 0xDC, 0x0}}},
+	{{{96, -91, 72},0, {-16, 1008},{0x98, 0xBD, 0x1E, 0x0}}},
+	{{{104, -67, -17},0, {-16, 1008},{0xC7, 0xBA, 0xA7, 0x0}}},
+	{{{163, -55, -17},0, {-16, 1008},{0x49, 0xD3, 0xA2, 0x0}}},
+	{{{107, -17, -38},0, {-16, 1008},{0xD4, 0xE, 0x8A, 0x0}}},
+	{{{170, 3, -12},0, {-16, 1008},{0x54, 0x27, 0xA9, 0x0}}},
+	{{{212, 14, 98},0, {-16, 1008},{0x71, 0x2D, 0xDA, 0x0}}},
+	{{{199, -91, 90},0, {-16, 1008},{0x63, 0xBF, 0xD1, 0x0}}},
+	{{{45, 33, 43},0, {-16, 1008},{0xB7, 0x68, 0x8, 0x0}}},
+	{{{76, 5, 31},0, {-16, 1008},{0xD3, 0x46, 0xA0, 0x0}}},
+	{{{70, 5, 48},0, {-16, 1008},{0xBE, 0xF7, 0x6C, 0x0}}},
+	{{{16, -10, 24},0, {-16, 1008},{0x87, 0x10, 0xDD, 0x0}}},
+	{{{71, -39, 29},0, {-16, 1008},{0xC4, 0xD7, 0x98, 0x0}}},
+	{{{33, -59, 36},0, {-16, 1008},{0x9F, 0xAE, 0xFB, 0x0}}},
+	{{{64, -40, 44},0, {-16, 1008},{0xBF, 0xA, 0x6D, 0x0}}},
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_2[] = {
+	gsSPVertex(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_2 + 0, 28, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
+	gsSP2Triangles(4, 2, 3, 0, 4, 3, 5, 0),
+	gsSP2Triangles(5, 6, 4, 0, 4, 6, 7, 0),
+	gsSP2Triangles(7, 6, 8, 0, 8, 6, 9, 0),
+	gsSP2Triangles(9, 10, 8, 0, 9, 11, 10, 0),
+	gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
+	gsSP2Triangles(12, 14, 13, 0, 13, 14, 15, 0),
+	gsSP2Triangles(15, 16, 13, 0, 16, 15, 17, 0),
+	gsSP2Triangles(17, 18, 16, 0, 17, 0, 18, 0),
+	gsSP2Triangles(2, 18, 0, 0, 2, 19, 18, 0),
+	gsSP2Triangles(19, 2, 4, 0, 7, 19, 4, 0),
+	gsSP2Triangles(19, 7, 20, 0, 8, 20, 7, 0),
+	gsSP2Triangles(8, 10, 20, 0, 20, 10, 13, 0),
+	gsSP2Triangles(13, 16, 20, 0, 16, 19, 20, 0),
+	gsSP2Triangles(18, 19, 16, 0, 21, 1, 22, 0),
+	gsSP2Triangles(21, 23, 1, 0, 24, 23, 21, 0),
+	gsSP2Triangles(24, 21, 22, 0, 24, 22, 25, 0),
+	gsSP2Triangles(24, 25, 26, 0, 14, 26, 25, 0),
+	gsSP2Triangles(26, 14, 27, 0, 24, 26, 27, 0),
+	gsSP1Triangle(23, 24, 27, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_3[10] = {
+	{{{64, -40, 44},0, {-16, -16},{0xBF, 0xA, 0x6D, 0x0}}},
+	{{{96, -91, 72},0, {-16, -16},{0x98, 0xBD, 0x1E, 0x0}}},
+	{{{122, -101, 105},0, {-16, -16},{0x9E, 0xCC, 0x3E, 0x0}}},
+	{{{70, 5, 48},0, {-16, -16},{0xBE, 0xF7, 0x6C, 0x0}}},
+	{{{113, 41, 83},0, {-16, -16},{0xA6, 0x4C, 0x30, 0x0}}},
+	{{{139, 41, 116},0, {-16, -16},{0xAD, 0x43, 0x45, 0x0}}},
+	{{{161, 23, 153},0, {-16, -16},{0xBD, 0x39, 0x5C, 0x0}}},
+	{{{145, -97, 144},0, {-16, -16},{0xAD, 0xCE, 0x52, 0x0}}},
+	{{{180, -80, 179},0, {-16, -16},{0xEF, 0xCD, 0x73, 0x0}}},
+	{{{189, -7, 184},0, {-16, -16},{0xF9, 0x24, 0x7A, 0x0}}},
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_3[] = {
+	gsSPVertex(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_vtx_3 + 0, 10, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(4, 3, 2, 0, 5, 4, 2, 0),
+	gsSP2Triangles(6, 5, 2, 0, 6, 2, 7, 0),
+	gsSP2Triangles(6, 7, 8, 0, 8, 9, 6, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_vtx_0[8] = {
+	{{{161, -134, 110},0, {-16, 1996},{0xA8, 0xB3, 0xCE, 0x0}}},
+	{{{287, -197, -16},0, {-16, -16},{0xA8, 0xB3, 0xCF, 0x0}}},
+	{{{314, -265, 43},0, {974, -16},{0xA8, 0xB3, 0xCF, 0x0}}},
+	{{{187, -202, 170},0, {974, 1996},{0xA8, 0xB3, 0xCF, 0x0}}},
+	{{{366, 164, 66},0, {974, -16},{0xBD, 0x64, 0xD8, 0x0}}},
+	{{{325, 110, -1},0, {-16, -16},{0xBD, 0x65, 0xD9, 0x0}}},
+	{{{186, 66, 121},0, {-16, 1996},{0xBD, 0x65, 0xD9, 0x0}}},
+	{{{227, 120, 187},0, {974, 1996},{0xBD, 0x64, 0xD8, 0x0}}},
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_tri_0[] = {
+	gsSPVertex(luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_vtx_0 + 0, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_vtx_1[8] = {
+	{{{325, 110, -1},0, {974, -16},{0xBD, 0x65, 0xD9, 0x0}}},
+	{{{145, 14, 54},0, {-16, 1996},{0xBE, 0x66, 0xD9, 0x0}}},
+	{{{186, 66, 121},0, {974, 1996},{0xBD, 0x65, 0xD9, 0x0}}},
+	{{{285, 58, -67},0, {-16, -16},{0xBE, 0x65, 0xD9, 0x0}}},
+	{{{161, -134, 110},0, {974, 1996},{0xA8, 0xB3, 0xCE, 0x0}}},
+	{{{136, -65, 50},0, {-16, 1996},{0xA8, 0xB3, 0xCE, 0x0}}},
+	{{{287, -197, -16},0, {974, -16},{0xA8, 0xB3, 0xCF, 0x0}}},
+	{{{261, -129, -76},0, {-16, -16},{0xA8, 0xB3, 0xCF, 0x0}}},
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_tri_1[] = {
+	gsSPVertex(luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_vtx_1 + 0, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 5, 6, 0, 5, 7, 6, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx luigi_npc_000_offset_009_left_upper_leg_skinned_mesh_layer_1_vtx_0[5] = {
 	{{{7, 38, 55},0, {-16, 1008},{0xA8, 0xA, 0x5B, 0x0}}},
 	{{{10, -34, 65},0, {-16, 1008},{0x9C, 0x12, 0x4D, 0x0}}},
@@ -4719,6 +5446,28 @@ Gfx mat_luigi_npc_overalls_v4_001[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_luigi_npc_metal_v4_001[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(0, G_TEXTURE_GEN),
+	gsSPTexture(4032, 1984, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, luigi_npc_metal_i8),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTileSize(0, 0, 0, 252, 124),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_luigi_npc_metal_v4_001[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(G_TEXTURE_GEN, 0),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_luigi_npc_buttons_v4_001_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT, TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT),
@@ -5001,6 +5750,60 @@ Gfx mat_luigi_npc_gloves_v4_002[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_luigi_npc_luigicapinside_v4_001[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPSetLights1(luigi_npc_luigicapinside_v4_001_lights),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_luigi_npc_wing_2_002_v4_001[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 1, luigi_npc_mario_wing_tip_ia8),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 1023, 512),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 252),
+	gsSPSetLights1(luigi_npc_wing_2_002_v4_001_lights),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_luigi_npc_wing_2_002_v4_001[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_luigi_npc_wing_1_002_v4_001[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 1, luigi_npc_mario_wing_ia8),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 1023, 512),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 252),
+	gsSPSetLights1(luigi_npc_wing_1_002_v4_001_lights),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_luigi_npc_wing_1_002_v4_001[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_luigi_npc_soles_v4_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
@@ -5023,9 +5826,23 @@ Gfx luigi_npc_000_offset_pelvis_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_pelvis_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_pelvis_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_001_chest_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_001_chest_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_001_chest_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_001_chest_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5039,6 +5856,16 @@ Gfx luigi_npc_000_offset_001_chest_mesh_layer_1[] = {
 	gsSPDisplayList(luigi_npc_000_offset_001_chest_mesh_layer_1_tri_2),
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_001_chest_mesh_layer_1_tri_3),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_001_chest_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_001_chest_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_offset_001_chest_mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_000_offset_001_chest_mesh_layer_1_tri_2),
+	gsSPDisplayList(luigi_npc_000_offset_001_chest_mesh_layer_1_tri_3),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5063,7 +5890,20 @@ Gfx luigi_npc_000_displaylist_head_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_1___eye_half_v4_001_0[] = {
+Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_2),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_3),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_4),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_5),
+	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_6),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_1___eye_half_v4_001_1[] = {
 	gsSPDisplayList(mat_luigi_npc_luigilogo_v4_001),
 	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_luigi_npc_luigilogo_v4_001),
@@ -5085,7 +5925,7 @@ Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_1___eye_half_v
 	gsSPEndDisplayList(),
 };
 
-Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_2___eye_closed_v4_001_1[] = {
+Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_2___eye_closed_v4_001_2[] = {
 	gsSPDisplayList(mat_luigi_npc_luigilogo_v4_001),
 	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_luigi_npc_luigilogo_v4_001),
@@ -5107,7 +5947,7 @@ Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_2___eye_closed
 	gsSPEndDisplayList(),
 };
 
-Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_7___eye_X_v4_001_2[] = {
+Gfx luigi_npc_000_displaylist_head_mesh_layer_1_mat_override_face_7___eye_X_v4_001_3[] = {
 	gsSPDisplayList(mat_luigi_npc_luigilogo_v4_001),
 	gsSPDisplayList(luigi_npc_000_displaylist_head_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_luigi_npc_luigilogo_v4_001),
@@ -5143,7 +5983,18 @@ Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_1___eye_half_v4_001_0[] = {
+Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_2),
+	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_3),
+	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_4),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_1___eye_half_v4_001_1[] = {
 	gsSPDisplayList(mat_luigi_npc_hair_v4_002),
 	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_luigi_npc_face_1___eye_half_v4_001),
@@ -5160,7 +6011,7 @@ Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_1__
 	gsSPEndDisplayList(),
 };
 
-Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_2___eye_closed_v4_001_1[] = {
+Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_2___eye_closed_v4_001_2[] = {
 	gsSPDisplayList(mat_luigi_npc_hair_v4_002),
 	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_luigi_npc_face_2___eye_closed_v4_001),
@@ -5177,7 +6028,7 @@ Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_2__
 	gsSPEndDisplayList(),
 };
 
-Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_7___eye_X_v4_001_2[] = {
+Gfx luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_mat_override_face_7___eye_X_v4_001_3[] = {
 	gsSPDisplayList(mat_luigi_npc_hair_v4_002),
 	gsSPDisplayList(luigi_npc_002_switch_option_head__no_cap__mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_luigi_npc_face_7___eye_X_v4_001),
@@ -5202,6 +6053,17 @@ Gfx luigi_npc_000_displaylist_001_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_displaylist_001_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_wing_2_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_001_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_wing_2_v4_001),
+	gsSPDisplayList(mat_luigi_npc_wing_1_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_001_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_wing_1_v4_001),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_displaylist_002_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_wing_2_v4_001),
 	gsSPDisplayList(luigi_npc_000_displaylist_002_mesh_layer_1_tri_0),
@@ -5212,9 +6074,27 @@ Gfx luigi_npc_000_displaylist_002_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_displaylist_002_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_wing_2_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_002_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_wing_2_v4_001),
+	gsSPDisplayList(mat_luigi_npc_wing_1_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_002_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_wing_1_v4_001),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_003_left_upper_arm_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_luigicap_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_003_left_upper_arm_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_003_left_upper_arm_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_003_left_upper_arm_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5225,9 +6105,24 @@ Gfx luigi_npc_000_offset_003_left_upper_arm_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_003_left_upper_arm_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_003_left_upper_arm_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_offset_003_left_upper_arm_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_004_left_lower_arm_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_luigicap_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_004_left_lower_arm_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_004_left_lower_arm_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_004_left_lower_arm_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5239,9 +6134,24 @@ Gfx luigi_npc_000_offset_004_left_lower_arm_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_004_left_lower_arm_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_004_left_lower_arm_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_offset_004_left_lower_arm_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_displaylist_003_left_hand_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_gloves_v4_002),
 	gsSPDisplayList(luigi_npc_000_displaylist_003_left_hand_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_displaylist_003_left_hand_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_003_left_hand_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5251,9 +6161,23 @@ Gfx luigi_npc_002_switch_option_right_hand_open_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_002_switch_option_right_hand_open_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_002_switch_option_right_hand_open_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_006_right_upper_arm_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_luigicap_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_006_right_upper_arm_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_006_right_upper_arm_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_006_right_upper_arm_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5264,9 +6188,24 @@ Gfx luigi_npc_000_offset_006_right_upper_arm_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_006_right_upper_arm_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_006_right_upper_arm_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_offset_006_right_upper_arm_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_007_right_lower_arm_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_luigicap_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_007_right_lower_arm_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_007_right_lower_arm_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_007_right_lower_arm_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5278,9 +6217,115 @@ Gfx luigi_npc_000_offset_007_right_lower_arm_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_007_right_lower_arm_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_007_right_lower_arm_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_offset_007_right_lower_arm_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_displaylist_004_right_hand_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_gloves_v4_002),
 	gsSPDisplayList(luigi_npc_000_displaylist_004_right_hand_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_displaylist_004_right_hand_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_004_right_hand_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_002_switch_option_left_hand_open_mesh_layer_1[] = {
+	gsSPDisplayList(mat_luigi_npc_gloves_v4_002),
+	gsSPDisplayList(luigi_npc_002_switch_option_left_hand_open_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_002_switch_option_left_hand_open_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_002_switch_option_left_hand_open_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1[] = {
+	gsSPDisplayList(mat_luigi_npc_gloves_v4_002),
+	gsSPDisplayList(luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_004_switch_option_left_hand_peace_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1[] = {
+	gsSPDisplayList(mat_luigi_npc_gloves_v4_002),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_luigi_npc_luigilogo_v4_001),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_luigilogo_v4_001),
+	gsSPDisplayList(mat_luigi_npc_luigicap_v4_001),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_2),
+	gsSPDisplayList(mat_luigi_npc_luigicapinside_v4_001),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_3),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_2),
+	gsSPDisplayList(luigi_npc_005_switch_option_left_hand_cap_mesh_layer_1_tri_3),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1[] = {
+	gsSPDisplayList(mat_luigi_npc_gloves_v4_002),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_luigi_npc_luigilogo_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_luigilogo_v4_001),
+	gsSPDisplayList(mat_luigi_npc_luigicap_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_2),
+	gsSPDisplayList(mat_luigi_npc_luigicapinside_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_3),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_2),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_mesh_layer_1_tri_3),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1[] = {
+	gsSPDisplayList(mat_luigi_npc_wing_2_002_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_wing_2_002_v4_001),
+	gsSPDisplayList(mat_luigi_npc_wing_1_002_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_wing_1_002_v4_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_006_switch_option_left_hand_wing_cap_wings_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5290,9 +6335,23 @@ Gfx luigi_npc_000_offset_009_left_upper_leg_skinned_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_009_left_upper_leg_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_009_left_upper_leg_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_009_left_upper_leg_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_009_left_upper_leg_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_009_left_upper_leg_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_009_left_upper_leg_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5302,15 +6361,36 @@ Gfx luigi_npc_000_offset_010_left_lower_leg_skinned_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_010_left_lower_leg_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_010_left_lower_leg_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_010_left_lower_leg_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_010_left_lower_leg_mesh_layer_1_tri_0),
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_010_left_lower_leg_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_010_left_lower_leg_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_011_left_foot_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_011_left_foot_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_011_left_foot_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_011_left_foot_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5324,9 +6404,25 @@ Gfx luigi_npc_000_offset_011_left_foot_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_011_left_foot_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_011_left_foot_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_offset_011_left_foot_mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_000_offset_011_left_foot_mesh_layer_1_tri_2),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_012_right_upper_leg_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_012_right_upper_leg_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_012_right_upper_leg_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_012_right_upper_leg_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5336,9 +6432,23 @@ Gfx luigi_npc_000_offset_012_right_upper_leg_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_012_right_upper_leg_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_012_right_upper_leg_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_offset_013_right_lower_leg_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_offset_013_right_lower_leg_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_offset_013_right_lower_leg_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_013_right_lower_leg_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5348,9 +6458,23 @@ Gfx luigi_npc_000_offset_013_right_lower_leg_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx luigi_npc_000_offset_013_right_lower_leg_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_offset_013_right_lower_leg_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
+	gsSPEndDisplayList(),
+};
+
 Gfx luigi_npc_000_displaylist_005_right_foot_skinned_mesh_layer_1[] = {
 	gsSPDisplayList(mat_luigi_npc_overalls_v4_001),
 	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_skinned_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_displaylist_005_right_foot_skinned_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_skinned_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 
@@ -5361,6 +6485,15 @@ Gfx luigi_npc_000_displaylist_005_right_foot_mesh_layer_1[] = {
 	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_luigi_npc_soles_v4_002),
 	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_mesh_layer_1_tri_2),
+	gsSPEndDisplayList(),
+};
+
+Gfx luigi_npc_000_displaylist_005_right_foot_mesh_layer_1_mat_override_metal_v4_001_0[] = {
+	gsSPDisplayList(mat_luigi_npc_metal_v4_001),
+	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_mesh_layer_1_tri_0),
+	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_mesh_layer_1_tri_1),
+	gsSPDisplayList(luigi_npc_000_displaylist_005_right_foot_mesh_layer_1_tri_2),
+	gsSPDisplayList(mat_revert_luigi_npc_metal_v4_001),
 	gsSPEndDisplayList(),
 };
 

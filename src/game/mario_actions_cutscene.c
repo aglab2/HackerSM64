@@ -27,6 +27,7 @@
 #include "seq_ids.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "game/print.h"
 
 #include "config/config_collision.h"
 
@@ -1129,7 +1130,7 @@ s32 act_exit_land_save_dialog(struct MarioState *m) {
                                                      : MARIO_ANIM_LAND_FROM_SINGLE_JUMP);
             if (is_anim_past_end(m)) {
                 if (gLastCompletedCourseNum != COURSE_BITDW
-                    && gLastCompletedCourseNum != COURSE_BITFS) {
+                    && gLastCompletedCourseNum != COURSE_BITFS && gLastCompletedCourseNum != COURSE_SA) {
                     enable_time_stop();
                 }
 
