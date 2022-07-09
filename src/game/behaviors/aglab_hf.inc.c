@@ -595,7 +595,7 @@ void hf_joel_loop()
 {
     obj_scale(o, 0.5f);
 
-    if (gMarioStates->pos[2] > -4500.f)
+    if (gMarioStates->pos[2] > -4500.f || gMarioStates->pos[1] > 2450.f)
     {
         cur_obj_hide();
     }
