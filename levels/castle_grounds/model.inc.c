@@ -130,6 +130,10 @@ Lights1 castle_grounds_dl__32_f3d_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
+Lights1 castle_grounds_dl_f3d_material_016_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+
 Gfx castle_grounds_dl_bg_4_0_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 castle_grounds_dl_bg_4_0_ci8[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -15735,6 +15739,30 @@ Gfx castle_grounds_dl_Lake_of_the_East_001_mesh_layer_5_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx castle_grounds_dl_Plane_003_mesh_layer_1_vtx_cull[8] = {
+	{{{-172, 0, 172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-172, 0, 172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-172, 0, -172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-172, 0, -172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{172, 0, 172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{172, 0, 172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{172, 0, -172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{172, 0, -172},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx castle_grounds_dl_Plane_003_mesh_layer_1_vtx_0[4] = {
+	{{{-172, 0, 172},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{172, 0, 172},0, {1008, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{172, 0, -172},0, {1008, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-172, 0, -172},0, {-16, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+};
+
+Gfx castle_grounds_dl_Plane_003_mesh_layer_1_tri_0[] = {
+	gsSPVertex(castle_grounds_dl_Plane_003_mesh_layer_1_vtx_0 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_castle_grounds_dl_bg_4_0_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
@@ -17184,6 +17212,14 @@ Gfx mat_revert_castle_grounds_dl__32_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_castle_grounds_dl_f3d_material_016[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPSetLights1(castle_grounds_dl_f3d_material_016_lights),
+	gsSPEndDisplayList(),
+};
+
 Gfx castle_grounds_dl__bg_mesh_layer_5[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPVertex(castle_grounds_dl__bg_mesh_layer_5_vtx_cull + 0, 8, 0),
@@ -17374,6 +17410,16 @@ Gfx castle_grounds_dl_Lake_of_the_East_001_mesh_layer_5[] = {
 	gsSPDisplayList(mat_castle_grounds_dl__32_f3d),
 	gsSPDisplayList(castle_grounds_dl_Lake_of_the_East_001_mesh_layer_5_tri_0),
 	gsSPDisplayList(mat_revert_castle_grounds_dl__32_f3d),
+	gsSPEndDisplayList(),
+};
+
+Gfx castle_grounds_dl_Plane_003_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(castle_grounds_dl_Plane_003_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_castle_grounds_dl_f3d_material_016),
+	gsSPDisplayList(castle_grounds_dl_Plane_003_mesh_layer_1_tri_0),
 	gsSPEndDisplayList(),
 };
 
