@@ -256,18 +256,7 @@ s32 stationary_ground_step(struct MarioState *m) {
 
     mario_set_forward_vel(m, 0.0f);
 
-    u32 takeStep = (mario_update_moving_sand(m) | mario_update_windy_ground(m));
-    if (takeStep) {
-        stepResult = perform_ground_step(m);
-    } else {
-        // Hackersm64: this condition fixes potential downwarps
-        if (m->pos[1] <= m->floorHeight + 160.0f) {
-            m->pos[1] = m->floorHeight;
-        }
-
-        vec3f_copy_with_gravity_switch(marioObj->header.gfx.pos, m->pos);
-        vec3s_set(marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
-    }
+    stepResult = perform_ground_step(m);
 
     return stepResult;
 }
@@ -412,10 +401,11 @@ struct Surface *check_ledge_grab(struct MarioState *m, struct Surface *prevWall,
     ledgePos[2] = nextPos[2] - (wall->normal.z * 60.0f);
     ledgePos[1] = find_floor(ledgePos[0], nextPos[1] + 160.0f, ledgePos[2], ledgeFloor);
 
+    f32 dir = gGravityMode ? -1.0f : 1.0f;
     if (ledgeFloor == NULL
         || (*ledgeFloor) == NULL
-        || ledgePos[1] < nextPos[1] + 100.0f
-        || (*ledgeFloor)->normal.y < COS25 // H64 TODO: check if floor is actually slippery
+        || ledgePos[1] < nextPos[1] + (dir*100.0f)
+        || ABS((*ledgeFloor)->normal.y) < COS25 // H64 TODO: check if floor is actually slippery
         || SURFACE_IS_UNSAFE((*ledgeFloor)->type)) {
         return NULL;
     }

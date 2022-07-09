@@ -106,7 +106,7 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
 
         // Exclude surfaces outside of the radius.
         if (offset < -radius || offset > radius) continue;
-    
+
         vec3_diff(v0, surf->vertex2, surf->vertex1);
         vec3_diff(v1, surf->vertex3, surf->vertex1);
         vec3_diff(v2, pos,           surf->vertex1);
@@ -300,7 +300,7 @@ static s32 check_within_ceil_triangle_bounds(s32 x, s32 z, struct Surface *surf,
 
     // Checking if point is in bounds of the triangle laterally.
     s32 cond = ((vz[0] - z) * (vx[1] - vx[0]) - (vx[0] - x) * (vz[1] - vz[0])) > 0;
-    if (!gGravityMode != !cond) return FALSE;
+    if (cond) return FALSE;
 
     // Slight optimization by checking these later.
     vx[2] = surf->vertex3[0];
@@ -308,9 +308,30 @@ static s32 check_within_ceil_triangle_bounds(s32 x, s32 z, struct Surface *surf,
     if (addMargin) add_ceil_margin(&vx[2], &vz[2], surf->vertex1, surf->vertex2, margin);
 
     cond = ((vz[1] - z) * (vx[2] - vx[1]) - (vx[1] - x) * (vz[2] - vz[1])) > 0;
-    if (!gGravityMode != !cond) return FALSE;
+    if (cond) return FALSE;
     cond = ((vz[2] - z) * (vx[0] - vx[2]) - (vx[2] - x) * (vz[0] - vz[2])) > 0;
-    if (!gGravityMode != !cond) return FALSE;
+    if (cond) return FALSE;
+
+    return TRUE;
+}
+
+static s32 check_within_floor_triangle_bounds(s32 x, s32 z, struct Surface *surf) {
+    Vec3i vx, vz;
+    vx[0] = surf->vertex1[0];
+    vz[0] = surf->vertex1[2];
+    vx[1] = surf->vertex2[0];
+    vz[1] = surf->vertex2[2];
+
+    s32 cond = ((vz[0] - z) * (vx[1] - vx[0]) - (vx[0] - x) * (vz[1] - vz[0])) < 0;
+    if (cond) return FALSE;
+
+    vx[2] = surf->vertex3[0];
+    vz[2] = surf->vertex3[2];
+
+    cond = ((vz[1] - z) * (vx[2] - vx[1]) - (vx[1] - x) * (vz[2] - vz[1])) < 0;
+    if (cond) return FALSE;
+    cond = ((vz[2] - z) * (vx[0] - vx[2]) - (vx[2] - x) * (vz[0] - vz[2])) < 0;
+    if (cond) return FALSE;
 
     return TRUE;
 }
@@ -348,7 +369,11 @@ static struct Surface *find_ceil_from_list(struct SurfaceNode *surfaceNode, s32 
         }
 
         // Check that the point is within the triangle bounds
-        if (!check_within_ceil_triangle_bounds(x, z, surf, 1.5f)) continue;
+        if (gGravityMode) {
+            if (!check_within_floor_triangle_bounds(x, z, surf)) continue;
+        } else {
+            if (!check_within_ceil_triangle_bounds(x, z, surf, 1.5f)) continue;
+        }
 
         // Find the height of the ceil at the given location
         height = get_surface_height_at_location(x, z, surf);
@@ -444,27 +469,6 @@ f32 find_ceil(f32 posX, f32 posY, f32 posZ, struct Surface **pceil) {
  *                     FLOORS                     *
  **************************************************/
 
-static s32 check_within_floor_triangle_bounds(s32 x, s32 z, struct Surface *surf) {
-    Vec3i vx, vz;
-    vx[0] = surf->vertex1[0];
-    vz[0] = surf->vertex1[2];
-    vx[1] = surf->vertex2[0];
-    vz[1] = surf->vertex2[2];
-
-    s32 cond = ((vz[0] - z) * (vx[1] - vx[0]) - (vx[0] - x) * (vz[1] - vz[0])) < 0;
-    if (!gGravityMode != !cond) return FALSE;
-
-    vx[2] = surf->vertex3[0];
-    vz[2] = surf->vertex3[2];
-
-    cond = ((vz[1] - z) * (vx[2] - vx[1]) - (vx[1] - x) * (vz[2] - vz[1])) < 0;
-    if (!gGravityMode != !cond) return FALSE;
-    cond = ((vz[2] - z) * (vx[0] - vx[2]) - (vx[2] - x) * (vz[0] - vz[2])) < 0;
-    if (!gGravityMode != !cond) return FALSE;
-
-    return TRUE;
-}
-
 /**
  * Iterate through the list of floors and find the first floor under a given point.
  */
@@ -473,7 +477,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
     register SurfaceType type = SURFACE_DEFAULT;
     register f32 height;
     register s32 bufferY = y + FIND_FLOOR_BUFFER;
-    
+
     if (gGravityMode) floor = &gCeilingDeathPlane;
 
     // Iterate through the list of floors until there are no more floors.
@@ -507,7 +511,11 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
         }
 
         // Check that the point is within the triangle bounds.
-        if (!check_within_floor_triangle_bounds(x, z, surf)) continue;
+        if (gGravityMode) {
+            if (!check_within_ceil_triangle_bounds(x, z, surf, 0.0f)) continue;
+        } else {
+            if (!check_within_floor_triangle_bounds(x, z, surf)) continue;
+        }
 
         // Get the height of the floor under the current location.
         height = get_surface_height_at_location(x, z, surf);
