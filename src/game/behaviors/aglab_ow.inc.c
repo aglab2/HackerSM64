@@ -354,4 +354,28 @@ void ow_luigi_loop()
     obj_set_hitbox(o, &sLuigiHitbox);
     o->oInteractStatus = INT_STATUS_NONE;
     o->oOpacity = 255;
+
+    if (((gMarioState->action == 0x1327) || (gMarioState->action == 0x192D)) && (gLastCompletedCourseNum == COURSE_SA)) {
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1] + 60;
+        o->oPosZ = gMarioState->pos[2] + 100;
+
+        o->oFaceAngleYaw = DEGREES(-90);
+
+        if (gMarioState->actionState == ACT_STATE_EXIT_LAND_SAVE_DIALOG_WITH_CAP) {
+            cur_obj_init_animation(3);
+            o->oFaceAngleYaw = DEGREES(180);
+            o->oFaceAnglePitch = DEGREES(-90);
+        } else {
+            cur_obj_init_animation(0);
+        }  
+    } else {
+        cur_obj_init_animation(0);
+        o->oFaceAngleYaw = DEGREES(90);
+        o->oFaceAnglePitch = DEGREES(0);
+        o->oPosX = o->oHomeX;
+        o->oPosY = o->oHomeY;
+        o->oPosZ = o->oHomeZ;        
+    }
+    
 }
