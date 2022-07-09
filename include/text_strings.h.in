@@ -106,6 +106,8 @@
 #define TEXT_CREATOR_SCUTTLE _("SCUTTLEBUG RAISER")
 #define TEXT_CREATOR_PIE _("SM64PIE")
 
+#define REONU_ACT _("TWO SECRET STARS!")
+
 #if defined(VERSION_JP) || defined(VERSION_SH)
 
 /**
