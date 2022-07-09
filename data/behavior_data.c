@@ -7134,6 +7134,19 @@ const BehaviorScript bhvOWPart[] = {
     END_LOOP(),
 };
 
+extern void ow_dnvic_close_init();
+extern void ow_dnvic_close_loop();
+const BehaviorScript bhvOWDnvicClose[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    CALL_NATIVE(ow_dnvic_close_init),
+    LOAD_COLLISION_DATA(ow_dnvic_close_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(ow_dnvic_close_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 extern void ow_luigi_init();
 extern void ow_luigi_loop();
 const BehaviorScript bhvOWLuigi[] = {

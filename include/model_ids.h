@@ -300,6 +300,7 @@
 #define MODEL_OW_SIDE        0x3C
 #define MODEL_OW_SCUT        0x3D
 #define MODEL_OW_BOWSER      0x3E
+#define MODEL_OW_DNVIC_CLOSE 0x3F
 
 // pss
 

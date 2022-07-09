@@ -236,12 +236,13 @@ void ow_part_init()
 
         struct Object** objsOut = (struct Object**) aglabScratch;
         cur_obj_hide();
-        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvDoorWarp, o->oBehParams2ndByte, &objsOut);
-        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvWarp    , o->oBehParams2ndByte, &objsOut);
-        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvWarpPipe, o->oBehParams2ndByte, &objsOut);
-        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvBooCage , o->oBehParams2ndByte, &objsOut);
-        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvSparkler, o->oBehParams2ndByte, &objsOut);
-        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvOWLuigi , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvDoorWarp    , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvWarp        , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvWarpPipe    , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvBooCage     , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvSparkler    , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvOWLuigi     , o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvOWDnvicClose, o->oBehParams2ndByte, &objsOut);
         if (5 == o->oBehParams2ndByte)
             cur_obj_write_all_objects_with_behavior(bhvStickyPlat, &objsOut);
 
@@ -255,12 +256,13 @@ void ow_part_init()
     
     if (!active)
     {
-        cur_obj_unload_object_with_behavior_and_bparam3(bhvDoorWarp, o->oBehParams2ndByte);
-        cur_obj_unload_object_with_behavior_and_bparam3(bhvWarp    , o->oBehParams2ndByte);
-        cur_obj_unload_object_with_behavior_and_bparam3(bhvWarpPipe, o->oBehParams2ndByte);
-        cur_obj_unload_object_with_behavior_and_bparam3(bhvBooCage , o->oBehParams2ndByte);
-        cur_obj_unload_object_with_behavior_and_bparam3(bhvSparkler, o->oBehParams2ndByte);
-        cur_obj_unload_object_with_behavior_and_bparam3(bhvOWLuigi , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvDoorWarp    , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvWarp        , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvWarpPipe    , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvBooCage     , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvSparkler    , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvOWLuigi     , o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvOWDnvicClose, o->oBehParams2ndByte);
         if (5 == o->oBehParams2ndByte)
             cur_obj_unload_object_with_behavior(bhvStickyPlat);
 
@@ -354,4 +356,20 @@ void ow_luigi_loop()
     obj_set_hitbox(o, &sLuigiHitbox);
     o->oInteractStatus = INT_STATUS_NONE;
     o->oOpacity = 255;
+}
+
+void ow_dnvic_close_init()
+{
+    // -
+}
+
+void ow_dnvic_close_loop()
+{
+    int cnt = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    if (cnt >= 40)
+    {
+        o->activeFlags = 0;
+    }
+
+    load_object_collision_model();
 }

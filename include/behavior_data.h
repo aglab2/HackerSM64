@@ -630,6 +630,7 @@ extern const BehaviorScript bhvBlinkingPlatform[];
 extern const BehaviorScript bhvMeteor[];   
 extern const BehaviorScript bhvCastleGate[];
 extern const BehaviorScript bhvOWPart[];
+extern const BehaviorScript bhvOWDnvicClose[];
 extern const BehaviorScript bhvOWLuigi[];
 extern const BehaviorScript bhvDnvicColorReset[];
 extern const BehaviorScript bhvPieCoiner[];

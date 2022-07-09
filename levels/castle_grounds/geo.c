@@ -27,3 +27,4 @@
 #include "levels/castle_grounds/ow_part_side/geo.inc.c"
 #include "levels/castle_grounds/ow_part_scut/geo.inc.c"
 #include "levels/castle_grounds/ow_part_bowser/geo.inc.c"
+#include "levels/castle_grounds/ow_dnvic_close/geo.inc.c"

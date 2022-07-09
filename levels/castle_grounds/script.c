@@ -55,6 +55,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_OW_SIDE, ow_part_side), 
 	LOAD_MODEL_FROM_GEO(MODEL_OW_SCUT, ow_part_scut), 
 	LOAD_MODEL_FROM_GEO(MODEL_OW_BOWSER, ow_part_bowser), 
+	LOAD_MODEL_FROM_GEO(MODEL_OW_DNVIC_CLOSE, ow_dnvic_close), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -102,12 +103,12 @@ const LevelScript level_castle_grounds_entry[] = {
 		WARP_NODE(0x54, LEVEL_VCUTM, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x64, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x74, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		WARP_NODE(0x55, LEVEL_CRASH, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x65, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x75, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x56, LEVEL_SA, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x66, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x76, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x57, LEVEL_CRASH, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 168, 872, -5037, 0, 180, 0, (0x41 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 166, 872, -5026, 0, 179, 0, (0x31 << 16), bhvAirborneStarCollectWarp),
 		OBJECT(MODEL_NONE, 74, 399, -6458, 0, 0, 0, (20 << 24) | (0x21 << 16), bhvWarp),
@@ -160,7 +161,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, -24, -185, -37, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, -3195, -893, 3805, 0, 0, 0, (0x51 << 16) | (4 << 8), bhvBooCage),
 		OBJECT(MODEL_NONE, -3288, -915, 1547, 0, 0, 0, (0x52 << 16) | (4 << 8), bhvBooCage),
-		OBJECT(MODEL_NONE, -4889, -915, 2814, 0, 0, 0, (0x55 << 16) | (4 << 8), bhvBooCage),
+		OBJECT(MODEL_NONE, -4889, -915, 2814, 0, 0, 0, (0x57 << 16) | (4 << 8), bhvBooCage),
 		OBJECT(MODEL_NONE, -3695, -1074, 2801, 0, 0, 0, (0x56 << 16) | (4 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -3697, -1074, 2803, 0, 0, 0, (4 << 8), bhvSparkler),
 		OBJECT(MODEL_LUIGI_NPC, -3698, -1015, 2605, 0, 89, 0, (4 << 8), bhvOWLuigi),
@@ -169,17 +170,19 @@ const LevelScript level_castle_grounds_entry[] = {
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
 		TERRAIN_TYPE(TERRAIN_SPOOKY),
 		/* Fast64 begin persistent block [area commands] */
+		/*-1474, -1260, 4233*/
 		OBJECT(MODEL_OW_ARTHUR , -2181, -477, -2762, 0, 0, 0, (2 << 16), bhvOWPart),
 		OBJECT(MODEL_OW_BRODUTE, 3571, -229, 147, 0, 0, 0, (1 << 16), bhvOWPart),
 		OBJECT(MODEL_OW_GAEL,    169, -1321, 3826, 0, 0, 0, (3 << 16), bhvOWPart),
 		OBJECT(MODEL_OW_SIDE, -3702, -1194, 2710, 0, 0, 0, (4 << 16), bhvOWPart),
 		OBJECT(MODEL_OW_SCUT, 4123, -102, 4749, 0, 0, 0, (5 << 16), bhvOWPart),
 		OBJECT(MODEL_OW_BOWSER, -3754, 817, 1752, 0, 0, 0, (6 << 16), bhvOWPart),
+		OBJECT(MODEL_OW_DNVIC_CLOSE, -1474, -1260, 4233, 0, 0, 0, (3 << 8), bhvOWDnvicClose),
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, 180, 0, 0, 0),
+	MARIO_POS(1, 0, 0, 0, 0),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

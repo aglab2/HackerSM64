@@ -46,3 +46,5 @@
 #include "levels/castle_grounds/ow_part_scut/model.inc.c"
 #include "levels/castle_grounds/ow_part_bowser/collision.inc.c"
 #include "levels/castle_grounds/ow_part_bowser/model.inc.c"
+#include "levels/castle_grounds/ow_dnvic_close/model.inc.c"
+#include "levels/castle_grounds/ow_dnvic_close/collision.inc.c"
