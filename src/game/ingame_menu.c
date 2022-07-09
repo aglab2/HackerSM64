@@ -2039,6 +2039,7 @@ void render_course_complete_lvl_info_and_hud_str(void) {
     u8 textCourse[] = { TEXT_COURSE };
     u8 textClear[] = { TEXT_CLEAR };
     u8 textSymStar[] = { GLYPH_STAR, GLYPH_SPACE };
+    u8 reonuAct[] = { REONU_ACT };
 
     u8 *name;
 
@@ -2108,10 +2109,20 @@ void render_course_complete_lvl_info_and_hud_str(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gDialogTextAlpha);
-    print_generic_string(76, 145, name);
+    if (gLastCompletedCourseNum == COURSE_SA) {
+        print_generic_string(76, 145, reonuAct);
+    } else {
+        print_generic_string(76, 145, name);
+    }
+    
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-    print_generic_string(74, 147, name);
+    if (gLastCompletedCourseNum == COURSE_SA) {
+        print_generic_string(74, 147, reonuAct);
+    } else {
+        print_generic_string(74, 147, name);
+    }
+    
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
