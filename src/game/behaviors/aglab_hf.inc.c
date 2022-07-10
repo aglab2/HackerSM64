@@ -731,10 +731,18 @@ void hf_scary_boo_loop()
 
 void hf_death_loop_ctl()
 {
+    if (gMarioStates->action == ACT_FALL_AFTER_STAR_GRAB)
+    {
+        o->activeFlags = 0;
+        return;
+    }
+
     if (0 == o->oAction)
     {
         int type = gMarioStates->floor ? gMarioStates->floor->type : 0;
-        if (type == SURFACE_DEEP_QUICKSAND && gMarioStates->floorHeight == gMarioStates->pos[1])
+        if (type == SURFACE_DEEP_QUICKSAND 
+        && gMarioStates->floorHeight == gMarioStates->pos[1] 
+        && !gMarioStates->riddenObj)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
             o->oAction = 1;
@@ -751,12 +759,29 @@ void hf_death_loop_ctl()
                 gMarioStates->pos[2] = 1884.f;
                 gMarioStates->faceAngle[1] = 0xc000;
             }
-            else
+            else if (gMarioStates->pos[1] > 1500.f)
             {
                 gMarioStates->pos[0] = 695.f;
                 gMarioStates->pos[1] = 2512.f;
                 gMarioStates->pos[2] = 5681.f;
                 gMarioStates->faceAngle[1] = 0x4000;
+            }
+            else 
+            {
+                if (gMarioStates->pos[2] < -6000.f)
+                {
+                    gMarioStates->pos[0] = -2658.f;
+                    gMarioStates->pos[1] = -96.f;
+                    gMarioStates->pos[2] = -7162.f;
+                    gMarioStates->faceAngle[1] = 0xc000;
+                }
+                else
+                {
+                    gMarioStates->pos[0] = 953.f;
+                    gMarioStates->pos[1] = 1408.f;
+                    gMarioStates->pos[2] = 2744.f;
+                    gMarioStates->faceAngle[1] = 0xa000;
+                }
             }
 
             gMarioStates->vel[0] = 0;
@@ -830,6 +855,41 @@ struct QuadPos
     f32 cy, cz;
     f32 m;
 };
+
+/*
+Vtx hf_dl_noticeme_mesh_layer_1_vtx_0[8] = {
+	{{{3972, 1959, -2929},0, {-114, -1184},{0x6D, 0xCB, 0xBA, 0xFF}}},
+	{{{3972, 1521, -2842},0, {-1795, 1202},{0x71, 0xAD, 0xBB, 0xFF}}},
+	{{{3972, 1567, -2311},0, {709, 2844},{0x6D, 0xBA, 0xCC, 0xFF}}},
+	{{{4020, 1959, -2929},0, {-116, -1121},{0x6E, 0xC8, 0xB7, 0xFF}}},
+	{{{4020, 1998, -2219},0, {2457, 1220},{0x6C, 0xBA, 0xCC, 0xFF}}},
+	{{{3972, 1998, -2218},0, {2588, 1284},{0x6C, 0xBA, 0xCC, 0xFF}}},
+	{{{4020, 1567, -2312},0, {664, 2692},{0x86, 0x86, 0x86, 0xFF}}},
+	{{{4020, 1521, -2843},0, {-1697, 1126},{0x7B, 0xBC, 0xCB, 0xFF}}},
+};
+
+Vtx hf_dl_noticeme_mesh_layer_6_vtx_0[8] = {
+	{{{3972, 1903, -2802},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{3972, 1590, -2802},0, {-16, 2032},{0xF6, 0xF6, 0xF6, 0xFF}}},
+	{{{3972, 1590, -2646},0, {1008, 2032},{0xC5, 0xD0, 0xC2, 0xFF}}},
+	{{{3972, 1903, -2646},0, {1008, -16},{0xD3, 0xD4, 0xD3, 0xFF}}},
+	{{{3972, 1902, -2512},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{3972, 1589, -2512},0, {-16, 2032},{0xF6, 0xF6, 0xF6, 0xFF}}},
+	{{{3972, 1589, -2355},0, {1008, 2032},{0xC5, 0xD0, 0xC2, 0xFF}}},
+	{{{3972, 1902, -2355},0, {1008, -16},{0xD3, 0xD4, 0xD3, 0xFF}}},
+};
+
+Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8] = {
+	{{{3972, 1768, -2892},0, {-16, 2032},{0xD4, 0x88, 0x5D, 0xFF}}},
+	{{{3972, 1703, -2892},0, {2032, 2032},{0xF2, 0x57, 0x62, 0xFF}}},
+	{{{3972, 1703, -2803},0, {2032, -16},{0xD3, 0x88, 0x6B, 0xFF}}},
+	{{{3972, 1768, -2803},0, {-16, -16},{0xD4, 0x88, 0x5D, 0xFF}}},
+	{{{3972, 1785, -2349},0, {2032, -16},{0xD4, 0x88, 0x5D, 0xFF}}},
+	{{{3972, 1720, -2349},0, {-16, -16},{0xF2, 0x57, 0x62, 0xFF}}},
+	{{{3972, 1720, -2260},0, {-16, 2032},{0xD3, 0x88, 0x6B, 0xFF}}},
+	{{{3972, 1785, -2260},0, {2032, 2032},{0xD4, 0x88, 0x5D, 0xFF}}},
+};
+*/
 
 extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_0[8];
 extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8];
