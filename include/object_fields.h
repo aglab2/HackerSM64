@@ -1358,7 +1358,9 @@ os16112*/
 #define oMfWoodenPostAnchorDistance OBJECT_FIELD_F32(0x1E)
 
 #define oMfWoodenPostMainPosts OBJECT_FIELD_OBJ(0x1B)
+// and a bunch of fields afterwards...
 #define oMfWoodenPostMainRope OBJECT_FIELD_OBJ(0x49)
+#define oMfWoodenPostMainTarget OBJECT_FIELD_F32(0x4A)
 
 #define oDfLastCheckpoint OBJECT_FIELD_S32(0x1B)
 

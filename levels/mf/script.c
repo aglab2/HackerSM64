@@ -119,7 +119,7 @@ const LevelScript level_mf_entry[] = {
 		OBJECT(MODEL_MF_KQ, 5157, 1340, -5635, 0, 178, 0, 0x00000000, bhvMfKQ),
 		OBJECT(MODEL_EXCLAMATION_BOX, -5708, 815, -6044, 0, 0, 0, (6 << 16), bhvExclamationBox),
 		OBJECT(MODEL_NONE, 655, -1920, -5032, 0, 92, 0, 0x00000000, bhvMfLavaCtl),
-		OBJECT(MODEL_NONE, -5077, -4071, 1718, 0, 0, 0, (0xa << 16), bhvSpinAirborneWarp),
+		OBJECT(MODEL_NONE, -5077, -4071, 1718, 0, 166, 0, (0xa << 16), bhvSpinAirborneWarp),
 		OBJECT(MODEL_MF_MILL, -3572, 2761, -5709, 0, 170, 0, (4 << 24), bhvMfMill),
 		OBJECT(MODEL_WOODEN_POST, 4212, 1605, -6833, 0, 79, 0, 0x00000000, bhvWoodenPost),
 		OBJECT(MODEL_WOODEN_POST, -4868, 766, 2733, 0, 79, 0, 0x00000000, bhvWoodenPost),

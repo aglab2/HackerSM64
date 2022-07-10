@@ -48,43 +48,43 @@ const u8 *const puppyprint_kerning_lut[2][80] = {
 
 #endif
 
-ALIGNED8 static const Texture texture_hud_char_0[] = {
+ALIGNED8 const Texture texture_hud_char_0[] = {
 #include "textures/segment2/segment2.00000.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_1[] = {
+ALIGNED8 const Texture texture_hud_char_1[] = {
 #include "textures/segment2/segment2.00200.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_2[] = {
+ALIGNED8 const Texture texture_hud_char_2[] = {
 #include "textures/segment2/segment2.00400.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_3[] = {
+ALIGNED8 const Texture texture_hud_char_3[] = {
 #include "textures/segment2/segment2.00600.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_4[] = {
+ALIGNED8 const Texture texture_hud_char_4[] = {
 #include "textures/segment2/segment2.00800.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_5[] = {
+ALIGNED8 const Texture texture_hud_char_5[] = {
 #include "textures/segment2/segment2.00A00.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_6[] = {
+ALIGNED8 const Texture texture_hud_char_6[] = {
 #include "textures/segment2/segment2.00C00.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_7[] = {
+ALIGNED8 const Texture texture_hud_char_7[] = {
 #include "textures/segment2/segment2.00E00.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_8[] = {
+ALIGNED8 const Texture texture_hud_char_8[] = {
 #include "textures/segment2/segment2.01000.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_9[] = {
+ALIGNED8 const Texture texture_hud_char_9[] = {
 #include "textures/segment2/segment2.01200.rgba16.inc.c"
 };
 
@@ -2524,7 +2524,7 @@ const Gfx dl_billboard_num_E[] = {
 
 const Gfx dl_billboard_num_F[] = {
     gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_F),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_Z),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(dl_billboard_num_end),

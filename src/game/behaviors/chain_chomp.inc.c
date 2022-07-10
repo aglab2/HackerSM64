@@ -433,6 +433,11 @@ void bhv_chain_chomp_update(void) {
  * Update function for wooden post.
  */
 void bhv_wooden_post_update(void) {
+    if (o->oWoodenPostOffsetY > -180.f)
+    {
+        spawn_object_relative(ORANGE_NUMBER_F, 0, 260.f + 20.f * sins(gGlobalTimer * 0x243), 0, o, MODEL_NUMBER, bhvOrangeNumber);
+    }
+
     // When ground pounded by mario, drop by -45 + -20
     if (!o->oWoodenPostMarioPounding) {
         if ((o->oWoodenPostMarioPounding = cur_obj_is_mario_ground_pounding_platform())) {

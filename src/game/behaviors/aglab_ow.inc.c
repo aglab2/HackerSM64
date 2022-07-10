@@ -60,8 +60,6 @@ static void cur_obj_unload_object_with_behavior_and_bparam3(const BehaviorScript
 
         obj = (struct Object *) obj->header.next;
     }
-
-    return NULL;
 }
 
 static void cur_obj_unload_object_with_behavior(const BehaviorScript *behavior) {

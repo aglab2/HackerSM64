@@ -45,7 +45,7 @@ void bhv_mf_butterfly_loop()
 
     s32 bp1 = (o->oBehParams >> 24) & 0xFF;
     s32 bp3 = (o->oBehParams >> 8)  & 0xFF;
-    f32 length = 4543.f - 2178.f;
+    // f32 length = 4543.f - 2178.f;
     f32* objpos = &o->oPosX;
 
     if (0 == o->oAction)
@@ -200,6 +200,11 @@ void bhv_mf_wooden_post_anchor_init()
 f32 gAglabThrowSpeed = 0;
 void bhv_mf_wooden_post_anchor_loop()
 {
+    if (o->oDistanceToMario < 300.f && o->oHeldState == HELD_FREE)
+    {
+        spawn_object_relative(ORANGE_NUMBER_B, 0, 160,  0, o, MODEL_NUMBER, bhvOrangeNumber);
+    }
+
     switch (o->oHeldState) {
         case HELD_FREE:
         {
@@ -275,8 +280,51 @@ void bhv_mf_wooden_post_main_init()
     o->oMfWoodenPostMainRope->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     obj_scale_xyz(o->oMfWoodenPostMainRope, 1.2f, 1.2f, 1.2f);
     struct Object** objs = &o->oMfWoodenPostMainPosts;
-    o->oPosY = -2000.f;
     cur_obj_find_all_objects_with_behavior_and_bparam(bhvWoodenPost, objs, 0);
+    o->oMfWoodenPostMainTarget = 300;
+    o->oPosY = 300.f;
+}
+
+extern const Texture texture_hud_char_0[];
+extern const Texture texture_hud_char_1[];
+extern const Texture texture_hud_char_2[];
+extern const Texture texture_hud_char_3[];
+extern const Texture texture_hud_char_4[];
+extern const Texture texture_hud_char_5[];
+extern const Texture texture_hud_char_6[];
+extern const Texture texture_hud_char_7[];
+extern const Texture texture_hud_char_8[];
+extern const Texture texture_hud_char_9[];
+
+static const Texture* sNumberTextures[] = {
+    texture_hud_char_0,
+    texture_hud_char_1,
+    texture_hud_char_2,
+    texture_hud_char_3,
+    texture_hud_char_4,
+    texture_hud_char_5,
+    texture_hud_char_6,
+    texture_hud_char_7,
+    texture_hud_char_8,
+    texture_hud_char_9,
+};
+
+extern Gfx mat_mf_dl_num1[]; // +5
+extern Gfx mat_mf_dl_num2[];
+extern Gfx mat_mf_dl_num3[];
+
+static void mf_set_num_texture(int num)
+{
+    int d0 =  num        % 10;
+    int d1 = (num / 10 ) % 10;
+    int d2 = (num / 100) % 10;
+    
+    u32* t0 = ((u32*) segmented_to_virtual(mat_mf_dl_num3)) + 5 * 2 + 1;
+    *t0 = (u32) sNumberTextures[d0];
+    u32* t1 = ((u32*) segmented_to_virtual(mat_mf_dl_num2)) + 5 * 2 + 1;
+    *t1 = (u32) sNumberTextures[d1];
+    u32* t2 = ((u32*) segmented_to_virtual(mat_mf_dl_num1)) + 5 * 2 + 1;
+    *t2 = (u32) sNumberTextures[d2];
 }
 
 void bhv_mf_wooden_post_main_loop()
@@ -303,14 +351,25 @@ void bhv_mf_wooden_post_main_loop()
         o->oIntangibleTimer = 0;
     }
 
-    o->oPosY = 300.f;
     int i = 0;
+    f32 targetY = 300.f;
     for (struct Object** posts = &o->oMfWoodenPostMainPosts; *posts; posts++)
     {
         i++;
         struct Object* post = *posts;
-        o->oPosY -= 1.6f * (post->oWoodenPostOffsetY);
+        targetY -= 1.6f * (post->oWoodenPostOffsetY);
     }
+
+    if (o->oPosY < targetY)
+    {
+        o->oPosY += 10.f;
+    }
+    else
+    {
+        o->oPosY = targetY;
+    }
+
+    mf_set_num_texture(o->oPosY / 4.f);
 }
 
 void mf_kq_init()

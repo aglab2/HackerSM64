@@ -1,4 +1,4 @@
-static void set_gravity(s32 grav)
+static void set_gravity(u32 grav)
 {
     if (grav == gIsGravityFlipped)
         return;

@@ -51,10 +51,10 @@
 // Makes signs and NPCs easier to talk to.
 // NOTE: Currently has issues with talking to Bowser post-fight,
 // https://github.com/Reonu/HackerSM64/issues/273
-// #define EASIER_DIALOG_TRIGGER
+#define EASIER_DIALOG_TRIGGER
 
 // Show an "A" when Mario is able to talk [requires EASIER_DIALOG_TRIGGER]
-// #define DIALOG_INDICATOR
+#define DIALOG_INDICATOR
 
 // Include the English characters that were missing from US segment2
 // J, Q, V, X, Z, ¨, !, !!, ?, &, %, ., and the beta key.
