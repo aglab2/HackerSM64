@@ -9,6 +9,8 @@ const GeoLayout hf_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hf_dl_c5_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hf_dl_c5_002_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hf_dl_c5_003_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hf_dl_noticeme_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hf_dl_noticeme_mesh_layer_6),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

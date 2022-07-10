@@ -6508,6 +6508,16 @@ const BehaviorScript bhvHfDeathCtl[] = {
     END_LOOP(),
 };
 
+extern void hf_crystal_image_init();
+extern void hf_crystal_image_loop();
+const BehaviorScript bhvHfCrystalImageCtl[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    CALL_NATIVE(hf_crystal_image_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(hf_crystal_image_loop),
+    END_LOOP(),
+};
+
 extern void hf_boo_init();
 extern void hf_boo_loop();
 const BehaviorScript bhvHfBoo[] = {

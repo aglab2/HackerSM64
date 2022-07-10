@@ -120,6 +120,15 @@ static void hf_spawn_phase0()
     for (int i = 0; i < 4; i++)
     for (int j = 0; j < 3; j++)
     {
+        if (j == 1 && i == 0)
+            continue;
+
+        if (j == 0 && i == 2)
+            continue;
+
+        if (j == 2 && i == 2)
+            continue;
+
         struct Object* block = spawn_object(o, MODEL_HF_CRYSTAL_PLAT, bhvHfCrystalBlock);
         block->oFaceAngleYaw = 0;
         block->oMoveAngleYaw = 0;
@@ -331,7 +340,7 @@ struct IceQuad
     int bp;
 };
 
-static struct IceQuad sIceQuads[] = 
+static const struct IceQuad sIceQuads[] = 
 {
     { 18, 17, 19, 16 }, // -2
     { 21, 13, 20, 12 }, // -1
@@ -766,4 +775,161 @@ void hf_death_loop_ctl()
             o->oAction = 0;
         }
     }
+}
+
+/*
+ -       +
+tA - - - B
+ |       |
+bC - - - D
+*/
+/*
+1590:1903
+-2802:-2646 ~ -2512:-2355
+
+Vtx hf_dl_noticeme_mesh_layer_6_vtx_0[8] = {
+t ll 	{{{3972, 1903, -2802},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+b ll	{{{3972, 1590, -2802},0, {-16, 2032},{0xF6, 0xF6, 0xF6, 0xFF}}},
+b lr	{{{3972, 1590, -2646},0, {1008, 2032},{0xC5, 0xD0, 0xC2, 0xFF}}},
+t lr	{{{3972, 1903, -2646},0, {1008, -16},{0xD3, 0xD4, 0xD3, 0xFF}}},
+t rr 	{{{3972, 1902, -2512},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+b rr	{{{3972, 1589, -2512},0, {-16, 2032},{0xF6, 0xF6, 0xF6, 0xFF}}},
+b rl	{{{3972, 1589, -2355},0, {1008, 2032},{0xC5, 0xD0, 0xC2, 0xFF}}},
+t rl	{{{3972, 1902, -2355},0, {1008, -16},{0xD3, 0xD4, 0xD3, 0xFF}}},
+};
+
+1703:1768   ~  1720:1785
+-2892:-2803 ~ -2349:-2260
+Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8] = {
+	{{{3972, 1768, -2892},0, {-16, 2032},{0xD4, 0x88, 0x5D, 0xFF}}},
+	{{{3972, 1703, -2892},0, {2032, 2032},{0xF2, 0x57, 0x62, 0xFF}}},
+	{{{3972, 1703, -2803},0, {2032, -16},{0xD3, 0x88, 0x6B, 0xFF}}},
+	{{{3972, 1768, -2803},0, {-16, -16},{0xD4, 0x88, 0x5D, 0xFF}}},
+	{{{3972, 1785, -2349},0, {2032, -16},{0xD4, 0x88, 0x5D, 0xFF}}},
+	{{{3972, 1720, -2349},0, {-16, -16},{0xF2, 0x57, 0x62, 0xFF}}},
+	{{{3972, 1720, -2260},0, {-16, 2032},{0xD3, 0x88, 0x6B, 0xFF}}},
+	{{{3972, 1785, -2260},0, {2032, 2032},{0xD4, 0x88, 0x5D, 0xFF}}},
+};
+*/
+
+static const struct IceQuad sCrystalQuads[] = 
+{
+    { 0, 3, 1, 2 },
+    { 4, 7, 5, 6 },
+};
+
+static const struct IceQuad sArrowsQuads[] = 
+{
+    { 0, 3, 1, 2 },
+    { 4, 7, 5, 6 },
+};
+
+struct QuadPos
+{
+    f32 ry, rz;
+    f32 cy, cz;
+    f32 m;
+};
+
+extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_0[8];
+extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8];
+
+static void serialize_quad_pos_to_ice_quad(Vtx* vtx, const struct IceQuad* iq, const struct QuadPos* qp)
+{
+    vtx[iq->tm].v.ob[1] = qp->cy + qp->ry * qp->m;
+    vtx[iq->tm].v.ob[2] = qp->cz - qp->rz * qp->m;
+    vtx[iq->bm].v.ob[1] = qp->cy - qp->ry * qp->m;
+    vtx[iq->bm].v.ob[2] = qp->cz - qp->rz * qp->m;
+    vtx[iq->tp].v.ob[1] = qp->cy + qp->ry * qp->m;
+    vtx[iq->tp].v.ob[2] = qp->cz + qp->rz * qp->m;
+    vtx[iq->bp].v.ob[1] = qp->cy - qp->ry * qp->m;
+    vtx[iq->bp].v.ob[2] = qp->cz + qp->rz * qp->m;
+}
+
+static void write_crystal_image()
+{
+    struct QuadPos* quads = (struct QuadPos*) aglabScratch;
+    {
+        Vtx* vtx = (Vtx*) segmented_to_virtual(hf_dl_noticeme_mesh_layer_6_vtx_0);
+        serialize_quad_pos_to_ice_quad(vtx, &sCrystalQuads[0], &quads[0]);
+        serialize_quad_pos_to_ice_quad(vtx, &sCrystalQuads[1], &quads[1]);
+    }
+    {
+        Vtx* vtx = (Vtx*) segmented_to_virtual(hf_dl_noticeme_mesh_layer_6_vtx_1);
+        serialize_quad_pos_to_ice_quad(vtx, &sArrowsQuads [0], &quads[2]);
+        serialize_quad_pos_to_ice_quad(vtx, &sArrowsQuads [1], &quads[3]);
+    }
+}
+
+static void reset_crystal_image()
+{
+    struct QuadPos* quads = (struct QuadPos*) aglabScratch;
+    // crystals
+    quads[0].cy = (1590+1903)  / 2.f;
+    quads[0].cz = (-2802-2646) / 2.f;
+    quads[0].ry = (1903-1590)  / 2.f;
+    quads[0].rz = (2802-2646)  / 2.f;
+    quads[0].m = 1.f;
+
+    quads[1].cy = (1590+1903)  / 2.f;
+    quads[1].cz = (-2512-2355) / 2.f;
+    quads[1].ry = (1903-1590)  / 2.f;
+    quads[1].rz = (2512-2355)  / 2.f;
+    quads[1].m = 1.f;
+
+    // arrows
+    quads[2].cy = (1703+1768)  / 2.f;
+    quads[2].cz = (-2892-2803) / 2.f;
+    quads[2].ry = (1768-1703)  / 2.f;
+    quads[2].rz = (2892-2803)  / 2.f;
+    quads[2].m = 1.f;
+
+    quads[3].cy = (1720+1785)  / 2.f;
+    quads[3].cz = (-2349-2260) / 2.f;
+    quads[3].ry = (1785-1720)  / 2.f;
+    quads[3].rz = (2349-2260)  / 2.f;
+    quads[3].m = 1.f;
+}
+
+void hf_crystal_image_init()
+{
+    reset_crystal_image();
+}
+
+void hf_crystal_image_loop()
+{
+    struct QuadPos* quads = (struct QuadPos*) aglabScratch;
+    if (0 == o->oTimer)
+    {
+        quads[2].cz -= 80.f;
+        quads[3].cz += 80.f;
+    }
+    else if (o->oTimer < 20)
+    {
+        quads[2].cz += 5.f;
+        quads[3].cz -= 5.f;
+    }
+    else if (o->oTimer < 45)
+    {
+        quads[0].cz += 3.f;
+        quads[1].cz -= 3.f;
+    }
+    else if (o->oTimer < 60)
+    {
+        quads[0].cz += 3.f;
+        quads[1].cz -= 3.f;
+        quads[0].m = (61 - o->oTimer) / 16.f;
+        quads[1].m = (61 - o->oTimer) / 16.f;
+    }
+    else if (o->oTimer < 90)
+    {
+        // -
+    }
+    else
+    {
+        reset_crystal_image();
+        o->oAction = !o->oAction; // to reset timer
+    }
+
+    write_crystal_image();
 }
