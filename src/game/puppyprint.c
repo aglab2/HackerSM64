@@ -812,7 +812,13 @@ void puppyprint_profiler_process(void) {
 #endif
 
 void print_set_envcolour(s32 r, s32 g, s32 b, s32 a) {
-    gDPSetEnvColor(gDisplayListHead++, (Color)r, (Color)g, (Color)b, (Color)a);
+    if ((r != currEnv[0])
+        || (g != currEnv[1])
+        || (b != currEnv[2])
+        || (a != currEnv[3])) {
+        gDPSetEnvColor(gDisplayListHead++, (Color)r, (Color)g, (Color)b, (Color)a);
+        vec4_set(currEnv, r, g, b, a);
+    }
 }
 
 #define BLANK 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT

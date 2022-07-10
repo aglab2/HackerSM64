@@ -42,7 +42,7 @@ static void fight_calm_bowser()
     }
 }
 
-// #define FIGHT_DEBUG
+#define FIGHT_DEBUG
 extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62];
 static void fight_animate_bg()
 {
@@ -405,7 +405,11 @@ void fight_platform_ctl_loop()
 
         if (0 == o->oAngleVelYaw)
         {
+#ifdef FIGHT_DEBUG
+            o->parentObj->oHealth = 1;
+#else
             o->parentObj->oHealth = 3;
+#endif
             o->oAction = 4;
             o->parentObj->oAction = BOWSER_ACT_DANCE;
             seq_player_play_sequence(0, SEQ_FIGHT2, 0);
@@ -438,8 +442,7 @@ void fight_platform_ctl_loop()
             struct Object* wave = spawn_object(o, MODEL_BOWSER_WAVE, bhvBowserShockWave);
             wave->oPosY += 100.f;
             o->oAction = 10;
-
-            struct Object* coiner = spawn_object(o, MODEL_NONE, bhvTenCoinsSpawn);
+            spawn_object(o, MODEL_NONE, bhvTenCoinsSpawn);
         }
     }
     else if (6 == o->oAction)

@@ -39,85 +39,42 @@
 #include "config.h"
 
 // TODO: Make these ifdefs better
-const char *credits01[] = { "1GAME DIRECTOR", "SHIGERU MIYAMOTO" };
-const char *credits02[] = { "2ASSISTANT DIRECTORS", "YOSHIAKI KOIZUMI", "TAKASHI TEZUKA" };
-const char *credits03[] = { "2SYSTEM PROGRAMMERS", "YASUNARI NISHIDA", "YOSHINORI TANIMOTO" };
-const char *credits04[] = { "3PROGRAMMERS", "HAJIME YAJIMA", "DAIKI IWAMOTO", "TOSHIO IWAWAKI" };
-
-#if defined(VERSION_JP) || defined(VERSION_SH)
-
-const char *credits05[] = { "1CAMERA PROGRAMMER", "TAKUMI KAWAGOE" };
-const char *credits06[] = { "1MARIO FACE PROGRAMMER", "GILES GODDARD" };
-const char *credits07[] = { "2COURSE DIRECTORS", "YOICHI YAMADA", "YASUHISA YAMAMURA" };
-const char *credits08[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
-const char *credits09[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIYANAGA", "KATSUHIKO KANNO" };
-const char *credits10[] = { "1SOUND COMPOSER", "KOJI KONDO" };
-
-// Shindou combines sound effects and sound programmer in order to make room for Mario voice and Peach voice
-const char *credits11[] = { "4SOUND EFFECTS", "SOUND PROGRAMMER", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
-const char *credits12[] = { "23D ANIMATORS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA" };
-const char *credits13[] = { "1CG DESIGNER", "MASANAO ARIMOTO" };
-const char *credits14[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
-const char *credits15[] = { "1TECHNICAL SUPPORT", "SGI. 64PROJECT STAFF" };
-const char *credits16[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
-
-#else // VERSION_US || VERSION_EU
-
-// US and EU combine camera programmer and Mario face programmer...
-const char *credits05[] = { "4CAMERA PROGRAMMER", "MARIO FACE PROGRAMMER", "TAKUMI KAWAGOE", "GILES GODDARD" };
-const char *credits06[] = { "2COURSE DIRECTORS", "YOICHI YAMADA", "YASUHISA YAMAMURA" };
-const char *credits07[] = { "2COURSE DESIGNERS", "KENTA USUI", "NAOKI MORI" };
-const char *credits08[] = { "3COURSE DESIGNERS", "YOSHIKI HARUHANA", "MAKOTO MIYANAGA", "KATSUHIKO KANNO" };
-
-// ...as well as sound composer, sound effects, and sound programmer, and...
-const char *credits09[] = { "7SOUND COMPOSER", "SOUND EFFECTS", "SOUND PROGRAMMER", "KOJI KONDO", "YOJI INAGAKI", "HIDEAKI SHIMIZU" };
-// ...3D animators and additional graphics in order to make room for screen text writer(s), Mario voice, and Peach voice
-const char *credits10[] = { "63-D ANIMATORS", "ADDITIONAL GRAPHICS", "YOSHIAKI KOIZUMI", "SATORU TAKIZAWA", "MASANAO ARIMOTO" };
-const char *credits11[] = { "3TECHNICAL SUPPORT", "TAKAO SAWANO", "HIROHITO YOSHIMOTO", "HIROTO YADA" };
-const char *credits12[] = { "1TECHNICAL SUPPORT", "SGI N64 PROJECT STAFF" };
-const char *credits13[] = { "2PROGRESS MANAGEMENT", "KIMIYOSHI FUKUI", "KEIZO KATO" };
-const char *credits14[] = { "5SCREEN TEXT WRITER", "ENGLISH TRANSLATION", "LESLIE SWAN", "MINA AKINO", "HIRO YAMADA" };
-const char *credits15[] = { "4SCREEN TEXT WRITER", "FRENCH TRANSLATION", "JULIEN BARDAKOFF", "KENJI HARAGUCHI" };
-const char *credits16[] = { "4SCREEN TEXT WRITER", "GERMAN TRANSLATION", "THOMAS GOERG", "THOMAS SPINDLER" };
-
-#endif
-
-const char *credits17[] = { "4MARIO VOICE", "PEACH VOICE", "CHARLES MARTINET", "LESLIE SWAN" };
-
-#if defined(VERSION_JP) || defined(VERSION_SH)
-const char *credits18[] = { "3SPECIAL THANKS TO", "JYOHO KAIHATUBU", "ALL NINTENDO", "MARIO CLUB STAFF" };
-#else // VERSION_US | VERSION_EU
-const char *credits18[] = { "3SPECIAL THANKS TO", "EAD STAFF", "ALL NINTENDO PERSONNEL", "SUPER MARIO CLUB STAFF" };
-#endif
-
-const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
-const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
-
+const char *creditsFM[] = { "1MADE FOR", "FANGAME MARATHON 2022" };
+const char *creditsArthur[] = { "1MODELLING", "ARTHURTILLY" };
+const char *creditsMushie[] = { "1MODELLING", "MUSHIE" };
+const char *creditsBroDute[] = { "1MODELLING", "BRODUTE" };
+const char *creditsGael[] = { "1MODELLING", "THEGAEL95" };
+const char *creditsDesigners[] = { "2DESIGNERS", "LINCRASH", "DNVIC" };
+const char *creditsCoding[] = { "2GENERAL CODING", "AGLAB", "THECOZIES" };
+const char *creditsReonu[] = { "1DEVELOPER", "REONU" };
+const char *creditsZenon[] = { "1DEVELOPER", "ZENONX" };
+const char *creditsAxo[] = { "1DEVELOPER", "AXOLLYION" };
+const char *creditsPie[] = { "1DEVELOPER", "SM64PIE" };
+const char *creditsScut[] = { "1DEVELOPER", "SCUTTLEBUG RAISER" };
+const char *creditsTesting[] = { "3TESTING", "LINCRASH", "MUSHIE", "GMD" };
+const char *creditsOrganizer[] = { "1ORGANIZED BY", "AGLAB" };
+const char *creditsPJ74[] = { "2PJ74 TEAM", "ARTHURTILLY", "GALAXTIC" };
+const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "THEGAEL95" };
+const char *creditsDone[] = { "2IT", "IS", "DONE" };
 
 struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
-    { LEVEL_BOB, 1, 1, 117, { 713, 3918, -3889 }, credits01 },
-    { LEVEL_WF, 1, 50, 46, { 347, 5376, 326 }, credits02 },
-    { LEVEL_JRB, 1, 18, 22, { 3800, -4840, 2727 }, credits03 },
-    { LEVEL_CCM, 2, 34, 25, { -5464, 6656, -6575 }, credits04 },
-    { LEVEL_BBH, 1, 1, 60, { 257, 1922, 2580 }, credits05 },
-    { LEVEL_HMC, 1, -15, 123, { -6469, 1616, -6054 }, credits06 },
-    { LEVEL_THI, 3, 17, -32, { 508, 1024, 1942 }, credits07 },
-    { LEVEL_LLL, 2, 33, 124, { -73, 82, -1467 }, credits08 },
-    { LEVEL_SSL, 1, 65, 98, { -5906, 1024, -2576 }, credits09 },
-    { LEVEL_DDD, 1, 50, 47, { -4884, -4607, -272 }, credits10 },
-    { LEVEL_SL, 1, 17, -34, { 1925, 3328, 563 }, credits11 },
-    { LEVEL_WDW, 1, 33, 105, { -537, 1850, 1818 }, credits12 },
-    { LEVEL_TTM, 1, 2, -33, { 2613, 313, 1074 }, credits13 },
-    { LEVEL_THI, 1, 51, 54, { -2609, 512, 856 }, credits14 },
-    { LEVEL_TTC, 1, 17, -72, { -1304, -71, -967 }, credits15 },
-    { LEVEL_RR, 1, 33, 64, { 1565, 1024, -148 }, credits16 },
-    { LEVEL_SA, 1, 1, 24, { -1050, -1330, -1559 }, credits17 },
-    { LEVEL_COTMC, 1, 49, -16, { -254, 415, -6045 }, credits18 },
-    { LEVEL_DDD, 2, -111, -64, { 3948, 1185, -104 }, credits19 },
-    { LEVEL_CCM, 1, 33, 31, { 3169, -4607, 5240 }, credits20 },
-    { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 906, -1200 }, NULL },
-    { LEVEL_NONE, 0, 1, 0, { 0, 0, 0 }, NULL },
+    { LEVEL_AB,             1, 1, 117,   { -3028, 93, -8781 }  , creditsFM },
+    { LEVEL_DF,             1, 18, 22,   { -3268, 2133, -2823 } , creditsOrganizer },
+    { LEVEL_MF,             1, -15, 123, { -1115, 0, -1581 }, creditsArthur },
+    { LEVEL_MTC,            1, 34, 25,   { 1071, 2046, 223 }, creditsBroDute },
+    { LEVEL_SA,             1, 33, 105,  { 13376, 100, 15 }  , creditsReonu },
+    { LEVEL_VCUTM,          1, 17, -32,  { 367, 573, 267 }   , creditsPie },
+    { LEVEL_BOB,            1, 2, -33,   { 130, -1379, -8261 }   , creditsScut },
+    { LEVEL_COTMC,          1, 65, 98,   { 70, 2118, 1109 }, creditsZenon },
+    { LEVEL_TOTWC,          1, 17, -34,  { 0, 1000, 0 }   , creditsAxo },
+    { LEVEL_VCM,            1, 50, 46,   { -4, 261, 109 }    , creditsMushie },
+    { LEVEL_HF,             1, 33, 124,  { -3657, 1358, -90 }    , creditsGael },
+    { LEVEL_PSS,            1, 1, 60,    { 11234, 2319, 1765 }   , creditsMusic },
+    { LEVEL_CASTLE_GROUNDS, 1, 1, 60,    { -36, -621, -25 }   , creditsCoding },
+    { LEVEL_CRASH,          1, 50, 47,   { -1433, -2165, -7954 }, creditsDesigners },
+    { LEVEL_BDF,            1, 51, 54,   { -53, 4536, -109 }   , creditsPJ74 },
+    { LEVEL_NONE,  0, 1, 0, { 0, 0, 0 }, NULL },
 };
 
 struct MarioState gMarioStates[1];

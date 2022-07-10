@@ -21,7 +21,7 @@ void bhv_bowser_shock_wave_loop(void) {
     }
     // Reduce opacity faster after 70 frames have passed
     if (o->oTimer > fadeFrames) {
-        o->oOpacity -= 5;
+        o->oOpacity -= 3;
     }
     // Delete object when it's fully transparent
     if (o->oOpacity <= 0) {

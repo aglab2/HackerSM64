@@ -54,6 +54,8 @@ static s8 sPeachBlinkTimes[7] = { 2, 3, 2, 1, 2, 3, 2 };
 
 static u8 sStarsNeededForDialog[] = { 1, 3, 8, 30, 50, 70 };
 
+extern struct CreditsEntry sCreditsSequence[];
+
 /**
  * Data for the jumbo star cutscene. It specifies the flight path after triple
  * jumping. Each entry is one keyframe.
@@ -1885,13 +1887,17 @@ static void jumbo_star_cutscene_taking_off(struct MarioState *m) {
             play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
             m->actionState = ACT_STATE_JUMBO_STAR_CUTSCENE_TAKING_OFF_JUMPING;
         }
+        if (m->actionTimer++ == 1) {
+            gCurrCreditsEntry = &sCreditsSequence[0];
+            level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
+        }
     } else {
         s32 animFrame = set_mario_animation(m, MARIO_ANIM_FINAL_BOWSER_WING_CAP_TAKE_OFF);
         if (animFrame == 3 || animFrame == 28 || animFrame == 60) {
             play_sound_and_spawn_particles(m, SOUND_ACTION_TERRAIN_JUMP, 1);
         }
         if (animFrame >= 3) {
-            marioObj->oMarioJumboStarCutscenePosZ -= 32.0f;
+            marioObj->oMarioJumboStarCutscenePosZ -= 10.0f;
         }
 
         switch (animFrame) {
@@ -1915,7 +1921,7 @@ static void jumbo_star_cutscene_taking_off(struct MarioState *m) {
         }
     }
 
-    vec3f_set(m->pos, 0.0f, 307.0, marioObj->oMarioJumboStarCutscenePosZ);
+    vec3f_set(m->pos, 0.0f, 0.0f, marioObj->oMarioJumboStarCutscenePosZ);
     update_mario_pos_for_anim(m);
     vec3f_copy_with_gravity_switch(marioObj->header.gfx.pos, m->pos);
     vec3s_set(marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
@@ -1944,6 +1950,7 @@ static void jumbo_star_cutscene_flying(struct MarioState *m) {
                 targetAngle = atan2s(targetD[2], targetD[0]);
 
                 vec3f_copy(m->pos, targetPos);
+                m->pos[1] -= 307.f;
                 m->marioObj->header.gfx.angle[0] = -atan2s(targetHyp, targetD[1]);
                 m->marioObj->header.gfx.angle[1] = targetAngle;
                 m->marioObj->header.gfx.angle[2] = ((((m->faceAngle[1] - targetAngle) << 16) >> 16) * 20);
@@ -1958,10 +1965,6 @@ static void jumbo_star_cutscene_flying(struct MarioState *m) {
     m->marioBodyState->handState = MARIO_HAND_RIGHT_OPEN;
     vec3f_copy_with_gravity_switch(m->marioObj->header.gfx.pos, m->pos);
     m->particleFlags |= PARTICLE_SPARKLES;
-
-    if (m->actionTimer++ == 500) {
-        level_trigger_warp(m, WARP_OP_CREDITS_START);
-    }
 }
 
 enum { JUMBO_STAR_CUTSCENE_FALLING, JUMBO_STAR_CUTSCENE_TAKING_OFF, JUMBO_STAR_CUTSCENE_FLYING };
@@ -2482,11 +2485,11 @@ static void end_peach_cutscene_run_to_castle(struct MarioState *m) {
 }
 
 static void end_peach_cutscene_fade_out(struct MarioState *m) {
-    if (m->actionState == ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_WARP) {
+    //if (m->actionState == ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_WARP) {
         level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
         gPaintingMarioYEntry = 1500.0f; // ensure medium water level in WDW credits cutscene
         m->actionState = ACT_STATE_END_PEACH_CUTSCENE_FADE_OUT_END;
-    }
+    //}
 }
 
 enum {
@@ -2506,6 +2509,11 @@ enum {
 };
 
 static s32 act_end_peach_cutscene(struct MarioState *m) {
+    if (0 == m->actionTimer)
+    {
+        level_trigger_warp(m, WARP_OP_CREDITS_NEXT);
+    }
+
     switch (m->actionArg) {
         case END_PEACH_CUTSCENE_MARIO_FALLING:
             end_peach_cutscene_mario_falling(m);

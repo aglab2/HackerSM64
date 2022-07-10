@@ -7367,7 +7367,7 @@ void cutscene_grand_star_move_cvar2(struct Camera *c) {
 void cutscene_grand_star_focus_mario(struct Camera *c) {
     Vec3f foc;
 
-    vec3f_set(foc, sMarioCamState->pos[0], (sMarioCamState->pos[1] - 307.f) * 0.5f + 407.f, sMarioCamState->pos[2]);
+    vec3f_set(foc, sMarioCamState->pos[0], (sMarioCamState->pos[1] - 607.f) * 0.5f + 407.f, sMarioCamState->pos[2]);
     approach_vec3f_asymptotic(c->focus, foc, 0.5f, 0.8f, 0.5f);
 }
 
@@ -9544,46 +9544,206 @@ void cutscene_credits_reset_spline(UNUSED struct Camera *c) {
     cutscene_reset_spline();
 }
 
-extern struct CutsceneSplinePoint sBobCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sBobCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sWfCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sWfCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sJrbCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sJrbCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sCcmSlideCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sCcmSlideCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sBbhCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sBbhCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sHmcCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sHmcCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sThiWigglerCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sThiWigglerCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sVolcanoCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sVolcanoCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sSslCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sSslCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sDddCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sDddCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sSlCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sSlCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sWdwCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sWdwCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sTtmCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sTtmCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sThiHugeCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sThiHugeCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sTtcCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sTtcCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sRrCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sRrCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sSaCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sSaCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sCotmcCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sCotmcCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sDddSubCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sDddSubCreditsSplineFocus[];
-extern struct CutsceneSplinePoint sCcmOutsideCreditsSplinePositions[];
-extern struct CutsceneSplinePoint sCcmOutsideCreditsSplineFocus[];
+/*
+ * credits spline paths.
+ * TODO: Separate these into their own file(s)
+ */
+
+struct CutsceneSplinePoint sDefaultCreditsSplinePositions[] = {
+    { 1, 0, { 5984, 3255, 4975 } },
+    { 2, 0, { 4423, 3315, 1888 } },
+    { 3, 0, { 776, 2740, -1825 } },
+    { -1, 0, { 741, 4387, -5474 } }
+};
+
+struct CutsceneSplinePoint sDefaultCreditsSplineFocus[] = {
+    { 0, 50, { 5817, 3306, 4507 } },
+    { 0, 50, { 4025, 3378, 1593 } },
+    { 0, 50, { 1088, 2652, -2205 } },
+    { -1, 50, { 205, 3959, -3517 } },
+};
+
+struct CutsceneSplinePoint sAbCreditsSplinePositions[] = {
+    { 1, 0, { 8895, 1640, -9132 } },
+    { 2, 0, { 3668, 1640, -10515 } },
+    { 3, 0, { -2049, 1368, -9451 } },
+    { -1, 0, { -6501, 1368, -3370 } }
+};
+
+struct CutsceneSplinePoint sAbCreditsSplineFocus[] = {
+    { 0, 50, { 6211, 184, -8385 } },
+    { 0, 50, { 952, 184, -8368 } },
+    { 0, 50, { -3547, 184, -7610 } },
+    { -1, 50, { -5155, 278, -3355 } },
+};
+
+struct CutsceneSplinePoint sDfCreditsSplinePositions[] = {
+    { 1, 0, { -5960, 2926, 340 } },
+    { 2, 0, { -3990, 2734, -1876 } },
+    { 3, 0, { -1652, 2694, -1224 } },
+    { -1, 0, { -862, 2958, -617 } }
+};
+
+struct CutsceneSplinePoint sDfCreditsSplineFocus[] = {
+    { 0, 50, { -5897, 1982, -3514 } },
+    { 0, 50, { -3609, 2462, -2411 } },
+    { 0, 50, { -1885, 2094, -2584 } },
+    { -1, 50, { -520, 2014, -4670 } },
+};
+
+struct CutsceneSplinePoint sVcmCreditsSplinePositions[] = {
+    { 1, 0, { -2247, 1157, 3832 } },
+    { 2, 0, { -1748, 1029, 1157 } },
+    { 3, 0, { 54, 1029, -276 } },
+    { -1, 0, { 1170, 1877, 1909 } }
+};
+
+struct CutsceneSplinePoint sVcmCreditsSplineFocus[] = {
+    { 0, 50, { -3994, 1317, 2013 } },
+    { 0, 50, { -3381, 341, -642 } },
+    { 0, 50, { 107, 1349, -1698 } },
+    { -1, 50, { 2663, 853, 853 } },
+};
+
+struct CutsceneSplinePoint sPssCreditsSplinePositions[] = {
+    { 1, 0, { 4068, 3879, 2943 } },
+    { 2, 0, { 9012, 2791, 2846 } },
+    { 3, 0, { 13463, 1975, 1824 } },
+    { -1, 0, { 15022, 871, -4895 } }
+};
+
+struct CutsceneSplinePoint sPssCreditsSplineFocus[] = {
+    { 0, 50, { 9712, 2215, 2445 } },
+    { 0, 50, { 14901, 1543, -545 } },
+    { 0, 50, { 15843, -153, -5523 } },
+    { -1, 50, { 17791, -441, -7481 } },
+};
+
+struct CutsceneSplinePoint sMtcCreditsSplinePositions[] = {
+    { 1, 0, { 15800, 5001, 5572 } },
+    { 2, 0, { 9483, 3497, 5891 } },
+    { 3, 0, { 2659, 2825, 4915 } },
+    { -1, 0, { -2059, 2825, 808 } }
+};
+
+struct CutsceneSplinePoint sMtcCreditsSplineFocus[] = {
+    { 0, 50, { 13896, 3625, 4777 } },
+    { 0, 50, { 10581, 2041, 3940 } },
+    { 0, 50, { 3350, 1241, 2353 } },
+    { -1, 50, { 1028, 2073, 183 } },
+};
+
+struct CutsceneSplinePoint sMfCreditsSplinePositions[] = {
+    { 1, 0, { -8081, 4241, -1209 } },
+    { 2, 0, { -2762, 2993, 1315 } },
+    { 3, 0, { 2298, 3207, -97 } },
+    { -1, 0, { 291, 3543, -4140 } }
+};
+
+struct CutsceneSplinePoint sMfCreditsSplineFocus[] = {
+    { 0, 50, { -4867, 3639, -359 } },
+    { 0, 50, { -355, 2663, -1031 } },
+    { 0, 50, { -766, 2471, -4824 } },
+    { -1, 50, { -3386, 2804, -5688 } },
+};
+
+struct CutsceneSplinePoint sPieCreditsSplinePositions[] = {
+    { 1, 0, { 1136, 1551, -4323 } },
+    { 2, 0, { -1593, 1119, -2084 } },
+    { 3, 0, { -1765, 1119, -95 } },
+    { -1, 0, { -435, 975, 948 } }
+};
+
+struct CutsceneSplinePoint sPieCreditsSplineFocus[] = {
+    { 0, 50, { 388, 655, -2868 } },
+    { 0, 50, { -805, 575, -1298 } },
+    { 0, 50, { -259, 575, 110 } },
+    { -1, 50, { 395, 573, 310 } },
+};
+
+struct CutsceneSplinePoint sHfCreditsSplinePositions[] = {
+    { 1, 0, { -481, 1576, 6961 } },
+    { 2, 0, { 1208, 1630, 4473 } },
+    { 3, 0, { 928, 2900, 1253 } },
+    { -1, 0, { -1843, 2900, -1096 } }
+};
+
+struct CutsceneSplinePoint sHfCreditsSplineFocus[] = {
+    { 0, 50, { -384, 1444, 6073 } },
+    { 0, 50, { 1192, 1540, 2367 } },
+    { 0, 50, { -416, 1652, 1082 } },
+    { -1, 50, { -3655, 1380, -75 } },
+};
+
+struct CutsceneSplinePoint sScutCreditsSplinePositions[] = {
+    { 1, 0, { 239, 1176, 4778 } },
+    { 2, 0, { 243, 152, 1859 } },
+    { 3, 0, { 186, -738, -2315 } },
+    { -1, 0, { 38, -236, -4237 } }
+};
+
+struct CutsceneSplinePoint sScutCreditsSplineFocus[] = {
+    { 0, 50, { 69, 322, 2851 } },
+    { 0, 50, { 192, -1310, 451 } },
+    { 0, 50, { 127, -1278, -2553 } },
+    { -1, 50, { 114, -458, -5165 } },
+};
+
+struct CutsceneSplinePoint sZenonCreditsSplinePositions[] = {
+    { 1, 0, { -1880, 5218, -751 } },
+    { 2, 0, { 93, 4834, -1806 } },
+    { 3, 0, { 1734, 3794, -734 } },
+    { -1, 0, { 1035, 2898, 1537 } }
+};
+
+struct CutsceneSplinePoint sZenonCreditsSplineFocus[] = {
+    { 0, 50, { -716, 4959, -528 } },
+    { 0, 50, { 585, 4207, -1011 } },
+    { 0, 50, { 915, 3151, 433 } },
+    { -1, 50, { 111, 2118, 1146 } },
+};
+
+struct CutsceneSplinePoint sCrashCreditsSplinePositions[] = {
+    { 1, 0, { -11807, 8453, -16809 } },
+    { 2, 0, { -6828, 6837, -12573 } },
+    { 3, 0, { 3529, 4773, -14281 } },
+    { -1, 0, { 4167, 2005, -6459 } }
+};
+
+struct CutsceneSplinePoint sCrashCreditsSplineFocus[] = {
+    { 0, 50, { -8374, 6261, -13424 } },
+    { 0, 50, { -5794, 5733, -13850 } },
+    { 0, 50, { 3842, 3109, -13635 } },
+    { -1, 50, { 3648, 293, -4274 } },
+};
+
+struct CutsceneSplinePoint sReonuCreditsSplinePositions[] = {
+    { 1, 0, { 14212, 1256, -1004 } },
+    { 2, 0, { 13212, 1356, -1004 } },
+    { 3, 0, { 12212, 1356, -1004 } },
+    { -1, 0, { 10212, 1356, -1004 } }
+};
+
+struct CutsceneSplinePoint sReonuCreditsSplineFocus[] = {
+    { 0, 50, { 14313, 520, 6 } },
+    { 0, 50, { 12079, 1201, -31 } },
+    { 0, 50, { 10679, 1201, -31 } },
+    { -1, 50, { 9079, 1201, -31 } },
+};
+
+struct CutsceneSplinePoint sOWCreditsSplinePositions[] = {
+    { 1, 0, { 807, 355, 1188 } },
+    { 2, 0, { 1605, 1171, 3026 } },
+    { 3, 0, { -1292, 2115, 5256 } },
+    { -1, 0, { -4120, 3027, 5119 } }
+};
+
+struct CutsceneSplinePoint sOWCreditsSplineFocus[] = {
+    { 0, 50, { 0, 0, 0 } },
+    { 0, 50, { 0, 150, 0 } },
+    { 0, 50, { 0, 300, 0 } },
+    { -1, 50, { 0, 450, 0 } },
+};
 
 /**
  * Follow splines through the courses of the game.
@@ -9593,98 +9753,63 @@ void cutscene_credits(struct Camera *c) {
 
     cutscene_event(cutscene_credits_reset_spline, c, 0, 0);
 
+    // TODO AGLAB
     switch (gCurrLevelArea) {
-        case AREA_BOB:
-            pos = sBobCreditsSplinePositions;
-            focus = sBobCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_AB, 1):
+            pos = sAbCreditsSplinePositions;
+            focus = sAbCreditsSplineFocus;
             break;
-        case AREA_WF:
-            pos = sWfCreditsSplinePositions;
-            focus = sWfCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_DF, 1):
+            pos = sDfCreditsSplinePositions;
+            focus = sDfCreditsSplineFocus;
             break;
-        case AREA_JRB_MAIN:
-            pos = sJrbCreditsSplinePositions;
-            focus = sJrbCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_VCM, 1):
+            pos = sVcmCreditsSplinePositions;
+            focus = sVcmCreditsSplineFocus;
             break;
-        case AREA_CCM_SLIDE:
-            pos = sCcmSlideCreditsSplinePositions;
-            focus = sCcmSlideCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_PSS, 1):
+            pos = sPssCreditsSplinePositions;
+            focus = sPssCreditsSplineFocus;
             break;
-        case AREA_BBH:
-            pos = sBbhCreditsSplinePositions;
-            focus = sBbhCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_MTC, 1):
+            pos = sMtcCreditsSplinePositions;
+            focus = sMtcCreditsSplineFocus;
             break;
-        case AREA_HMC:
-            pos = sHmcCreditsSplinePositions;
-            focus = sHmcCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_MF, 1):
+            pos = sMfCreditsSplinePositions;
+            focus = sMfCreditsSplineFocus;
             break;
-        case AREA_THI_WIGGLER:
-            pos = sThiWigglerCreditsSplinePositions;
-            focus = sThiWigglerCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_VCUTM, 1):
+            pos = sPieCreditsSplinePositions;
+            focus = sPieCreditsSplineFocus;
             break;
-        case AREA_LLL_VOLCANO:
-            pos = sVolcanoCreditsSplinePositions;
-            focus = sVolcanoCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_HF, 1):
+            pos = sHfCreditsSplinePositions;
+            focus = sHfCreditsSplineFocus;
             break;
-        case AREA_SSL_OUTSIDE:
-            pos = sSslCreditsSplinePositions;
-            focus = sSslCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_BOB, 1):
+            pos = sScutCreditsSplinePositions;
+            focus = sScutCreditsSplineFocus;
             break;
-        case AREA_DDD_WHIRLPOOL:
-            pos = sDddCreditsSplinePositions;
-            focus = sDddCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_COTMC, 1):
+            pos = sZenonCreditsSplinePositions;
+            focus = sZenonCreditsSplineFocus;
             break;
-        case AREA_SL_OUTSIDE:
-            pos = sSlCreditsSplinePositions;
-            focus = sSlCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_CRASH, 1):
+            pos = sCrashCreditsSplinePositions;
+            focus = sCrashCreditsSplineFocus;
             break;
-        case AREA_WDW_MAIN:
-            pos = sWdwCreditsSplinePositions;
-            focus = sWdwCreditsSplineFocus;
+        case LEVEL_AREA_INDEX(LEVEL_SA, 1):
+            pos = sReonuCreditsSplinePositions;
+            focus = sReonuCreditsSplineFocus;
             break;
-        case AREA_TTM_OUTSIDE:
-            pos = sTtmCreditsSplinePositions;
-            focus = sTtmCreditsSplineFocus;
-            break;
-        case AREA_THI_HUGE:
-            pos = sThiHugeCreditsSplinePositions;
-            focus = sThiHugeCreditsSplineFocus;
-            break;
-        case AREA_TTC:
-            pos = sTtcCreditsSplinePositions;
-            focus = sTtcCreditsSplineFocus;
-            break;
-        case AREA_RR:
-            pos = sRrCreditsSplinePositions;
-            focus = sRrCreditsSplineFocus;
-            break;
-        case AREA_SA:
-            pos = sSaCreditsSplinePositions;
-            focus = sSaCreditsSplineFocus;
-            break;
-        case AREA_COTMC:
-            pos = sCotmcCreditsSplinePositions;
-            focus = sCotmcCreditsSplineFocus;
-            break;
-        case AREA_DDD_SUB:
-            pos = sDddSubCreditsSplinePositions;
-            focus = sDddSubCreditsSplineFocus;
-            break;
-        case AREA_CCM_OUTSIDE:
-            //! Checks if the "Snowman's Lost His Head" star was collected. The credits likely would
-            //! have avoided the snowman if the player didn't collect that star, but in the end the
-            //! developers decided against it.
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) & (1 << 4)) {
-                pos = sCcmOutsideCreditsSplinePositions;
-                focus = sCcmOutsideCreditsSplineFocus;
-            } else {
-                pos = sCcmOutsideCreditsSplinePositions;
-                focus = sCcmOutsideCreditsSplineFocus;
-            }
+        case LEVEL_AREA_INDEX(LEVEL_CASTLE_GROUNDS, 1):
+            pos = sOWCreditsSplinePositions;
+            focus = sOWCreditsSplineFocus;
             break;
         default:
-            pos = sCcmOutsideCreditsSplinePositions;
-            focus = sCcmOutsideCreditsSplineFocus;
+            pos = sDefaultCreditsSplinePositions;
+            focus = sDefaultCreditsSplineFocus;
     }
 
     copy_spline_segment(sCurCreditsSplinePos, pos);
@@ -10648,329 +10773,6 @@ u8 sZoomOutAreaMasks[] = {
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");
-
-/*
- * credits spline paths.
- * TODO: Separate these into their own file(s)
- */
-
-struct CutsceneSplinePoint sBobCreditsSplinePositions[] = {
-    { 1, 0, { 5984, 3255, 4975 } },
-    { 2, 0, { 4423, 3315, 1888 } },
-    { 3, 0, { 776, 2740, -1825 } },
-    { 4, 0, { -146, 3894, -3167 } },
-    { -1, 0, { 741, 4387, -5474 } }
-};
-
-struct CutsceneSplinePoint sBobCreditsSplineFocus[] = {
-    { 0, 30, { 5817, 3306, 4507 } },
-    { 0, 40, { 4025, 3378, 1593 } },
-    { 0, 50, { 1088, 2652, -2205 } },
-    { 0, 60, { 205, 3959, -3517 } },
-    { -1, 60, { 1231, 4400, -5649 } }
-};
-
-struct CutsceneSplinePoint sWfCreditsSplinePositions[] = {
-    { 0, 0, { -301, 1399, 2643 } },
-    { 0, 0, { -182, 2374, 4572 } },
-    { 0, 0, { 4696, 3864, 413 } },
-    { 0, 0, { 1738, 4891, -1516 } },
-    { -1, 0, { 1783, 4891, -1516 } }
-};
-
-struct CutsceneSplinePoint sWfCreditsSplineFocus[] = {
-    { 1, 30, { -249, 1484, 2153 } },
-    { 2, 40, { -200, 2470, 4082 } },
-    { 3, 40, { 4200, 3916, 370 } },
-    { 4, 40, { 1523, 4976, -1072 } },
-    { -1, 40, { 1523, 4976, -1072 } }
-};
-
-struct CutsceneSplinePoint sJrbCreditsSplinePositions[] = {
-    { 0, 0, { 5538, -4272, 2376 } },
-    { 0, 0, { 5997, -3303, 2261 } },
-    { 0, 0, { 6345, -3255, 2179 } },
-    { 0, 0, { 6345, -3255, 2179 } },
-    { -1, 0, { 6694, -3203, 2116 } }
-};
-
-struct CutsceneSplinePoint sJrbCreditsSplineFocus[] = {
-    { 0, 50, { 5261, -4683, 2443 } },
-    { 0, 50, { 5726, -3675, 2456 } },
-    { 0, 50, { 6268, -2817, 2409 } },
-    { 0, 50, { 6596, -2866, 2369 } },
-    { -1, 50, { 7186, -3153, 2041 } }
-};
-
-struct CutsceneSplinePoint sCcmSlideCreditsSplinePositions[] = {
-    { 0, 0, { -6324, 6745, -5626 } },
-    { 1, 0, { -6324, 6745, -5626 } },
-    { 2, 0, { -6108, 6762, -5770 } },
-    { 3, 0, { -5771, 6787, -5962 } },
-    { -1, 0, { -5672, 6790, -5979 } }
-};
-
-struct CutsceneSplinePoint sCcmSlideCreditsSplineFocus[] = {
-    { 0, 50, { -5911, 6758, -5908 } },
-    { 1, 50, { -5911, 6758, -5908 } },
-    { 2, 50, { -5652, 6814, -5968 } },
-    { 3, 50, { -5277, 6801, -6043 } },
-    { -1, 50, { -5179, 6804, -6060 } }
-};
-
-struct CutsceneSplinePoint sBbhCreditsSplinePositions[] = {
-    { 1, 0, { 1088, 341, 2447 } },
-    { 2, 0, { 1338, 610, 2808 } },
-    { 3, 0, { 2267, 1612, 2966 } },
-    { -1, 0, { 2296, 1913, 2990 } }
-};
-
-struct CutsceneSplinePoint sBbhCreditsSplineFocus[] = {
-    { 1, 50, { 1160, 263, 1958 } },
-    { 2, 50, { 1034, 472, 2436 } },
-    { 3, 50, { 1915, 1833, 2688 } },
-    { -1, 50, { 2134, 2316, 2742 } }
-};
-
-struct CutsceneSplinePoint sHmcCreditsSplinePositions[] = {
-    { 1, 0, { -5952, 1807, -5882 } },
-    { 2, 0, { -5623, 1749, -4863 } },
-    { 3, 0, { -5472, 1955, -2520 } },
-    { 4, 0, { -5544, 1187, -1085 } },
-    { -1, 0, { -5547, 391, -721 } }
-};
-
-struct CutsceneSplinePoint sHmcCreditsSplineFocus[] = {
-    { 1, 210, { -5952, 1884, -6376 } },
-    { 2, 58, { -5891, 1711, -5283 } },
-    { 3, 30, { -5595, 1699, -2108 } },
-    { 4, 31, { -5546, 794, -777 } },
-    { -1, 31, { -5548, -85, -572 } }
-};
-
-struct CutsceneSplinePoint sThiWigglerCreditsSplinePositions[] = {
-    { 1, 0, { -1411, 2474, -1276 } },
-    { 2, 0, { -1606, 2479, -434 } },
-    { -1, 0, { -1170, 2122, 1337 } }
-};
-
-struct CutsceneSplinePoint sThiWigglerCreditsSplineFocus[] = {
-    { 1, 50, { -1053, 2512, -928 } },
-    { 2, 50, { -1234, 2377, -114 } },
-    { -1, 50, { -758, 2147, 1054 } }
-};
-
-struct CutsceneSplinePoint sVolcanoCreditsSplinePositions[] = {
-    { 0, 0, { -1445, 1094, 1617 } },
-    { 0, 0, { -1509, 649, 871 } },
-    { 0, 0, { -1133, 420, -248 } },
-    { 0, 0, { -778, 359, -1052 } },
-    { 0, 0, { -565, 260, -1730 } },
-    { -1, 0, { 1274, 473, -275 } }
-};
-
-struct CutsceneSplinePoint sVolcanoCreditsSplineFocus[] = {
-    { 0, 50, { -1500, 757, 1251 } },
-    { 0, 50, { -1401, 439, 431 } },
-    { 0, 50, { -749, 270, -532 } },
-    { 0, 50, { -396, 270, -1363 } },
-    { 0, 50, { -321, 143, -2151 } },
-    { -1, 50, { 1002, 460, -694 } }
-};
-
-struct CutsceneSplinePoint sSslCreditsSplinePositions[] = {
-    { 0, 0, { -4262, 4658, -5015 } },
-    { 0, 0, { -3274, 2963, -4661 } },
-    { 0, 0, { -2568, 812, -6528 } },
-    { 0, 0, { -414, 660, -7232 } },
-    { 0, 0, { 1466, 660, -6898 } },
-    { -1, 0, { 2724, 660, -6298 } }
-};
-
-struct CutsceneSplinePoint sSslCreditsSplineFocus[] = {
-    { 0, 50, { -4083, 4277, -4745 } },
-    { 0, 50, { -2975, 2574, -4759 } },
-    { 0, 50, { -2343, 736, -6088 } },
-    { 0, 50, { -535, 572, -6755 } },
-    { 0, 50, { 1311, 597, -6427 } },
-    { -1, 50, { 2448, 612, -5884 } }
-};
-
-struct CutsceneSplinePoint sDddCreditsSplinePositions[] = {
-    { 0, 0, { -874, -4933, 366 } },
-    { 0, 0, { -1463, -4782, 963 } },
-    { 0, 0, { -1893, -4684, 1303 } },
-    { 0, 0, { -2818, -4503, 1583 } },
-    { 0, 0, { -4095, -2924, 730 } },
-    { 0, 0, { -4737, -1594, -63 } },
-    { -1, 0, { -4681, -1084, -623 } }
-};
-
-struct CutsceneSplinePoint sDddCreditsSplineFocus[] = {
-    { 0, 50, { -1276, -4683, 622 } },
-    { 0, 50, { -1858, -4407, 1097 } },
-    { 0, 50, { -2324, -4332, 1318 } },
-    { 0, 50, { -3138, -4048, 1434 } },
-    { 0, 50, { -4353, -2444, 533 } },
-    { 0, 50, { -4807, -1169, -436 } },
-    { -1, 50, { -4665, -664, -1007 } }
-};
-
-struct CutsceneSplinePoint sSlCreditsSplinePositions[] = {
-    { 0, 0, { 939, 6654, 6196 } },
-    { 0, 0, { 1873, 5160, 3714 } },
-    { 0, 0, { 3120, 3564, 1314 } },
-    { -1, 0, { 2881, 4231, 573 } }
-};
-
-struct CutsceneSplinePoint sSlCreditsSplineFocus[] = {
-    { 0, 50, { 875, 6411, 5763 } },
-    { 0, 50, { 1659, 4951, 3313 } },
-    { 0, 50, { 2630, 3565, 1215 } },
-    { -1, 50, { 2417, 4056, 639 } }
-};
-
-struct CutsceneSplinePoint sWdwCreditsSplinePositions[] = {
-    { 0, 0, { 3927, 2573, 3685 } },
-    { 0, 0, { 2389, 2054, 1210 } },
-    { 0, 0, { 2309, 2069, 22 } },
-    { -1, 0, { 2122, 2271, -979 } }
-};
-
-struct CutsceneSplinePoint sWdwCreditsSplineFocus[] = {
-    { 0, 50, { 3637, 2460, 3294 } },
-    { 0, 50, { 1984, 2067, 918 } },
-    { 0, 50, { 1941, 2255, -261 } },
-    { -1, 50, { 1779, 2587, -1158 } }
-};
-
-struct CutsceneSplinePoint sTtmCreditsSplinePositions[] = {
-    { 0, 0, { 386, 2535, 644 } },
-    { 0, 0, { 1105, 2576, 918 } },
-    { 0, 0, { 3565, 2261, 2098 } },
-    { 0, 0, { 6715, -2791, 4554 } },
-    { 0, 0, { 3917, -3130, 3656 } },
-    { -1, 0, { 3917, -3130, 3656 } }
-};
-
-struct CutsceneSplinePoint sTtmCreditsSplineFocus[] = {
-    { 1, 50, { 751, 2434, 318 } },
-    { 2, 50, { 768, 2382, 603 } },
-    { 3, 60, { 3115, 2086, 1969 } },
-    { 4, 30, { 6370, -3108, 4727 } },
-    { 5, 50, { 4172, -3385, 4001 } },
-    { -1, 50, { 4172, -3385, 4001 } }
-};
-
-struct CutsceneSplinePoint sThiHugeCreditsSplinePositions[] = {
-    { 0, 0, { 6990, -1000, -4858 } },
-    { 0, 0, { 7886, -1055, 2878 } },
-    { 0, 0, { 1952, -1481, 10920 } },
-    { 0, 0, { -1684, -219, 2819 } },
-    { 0, 0, { -2427, -131, 2755 } },
-    { 0, 0, { -3246, 416, 3286 } },
-    { -1, 0, { -3246, 416, 3286 } }
-};
-
-struct CutsceneSplinePoint sThiHugeCreditsSplineFocus[] = {
-    { 1, 70, { 7022, -965, -5356 } },
-    { 2, 40, { 7799, -915, 2405 } },
-    { 3, 60, { 1878, -1137, 10568 } },
-    { 4, 50, { -1931, -308, 2394 } },
-    { 5, 50, { -2066, -386, 2521 } },
-    { 6, 50, { -2875, 182, 3045 } },
-    { -1, 50, { -2875, 182, 3045 } }
-};
-
-struct CutsceneSplinePoint sTtcCreditsSplinePositions[] = {
-    { 1, 0, { -1724, 277, -994 } },
-    { 2, 0, { -1720, 456, -995 } },
-    { 3, 0, { -1655, 810, -1014 } },
-    { -1, 0, { -1753, 883, -1009 } }
-};
-
-struct CutsceneSplinePoint sTtcCreditsSplineFocus[] = {
-    { 1, 50, { -1554, 742, -1063 } },
-    { 2, 50, { -1245, 571, -1102 } },
-    { 3, 50, { -1220, 603, -1151 } },
-    { -1, 50, { -1412, 520, -1053 } }
-};
-
-struct CutsceneSplinePoint sRrCreditsSplinePositions[] = {
-    { 0, 0, { -1818, 4036, 97 } },
-    { 0, 0, { -575, 3460, -505 } },
-    { 0, 0, { 1191, 3611, -1134 } },
-    { -1, 0, { 2701, 3777, -3686 } }
-};
-
-struct CutsceneSplinePoint sRrCreditsSplineFocus[] = {
-    { 0, 50, { -1376, 3885, -81 } },
-    { 0, 50, { -146, 3343, -734 } },
-    { 0, 50, { 1570, 3446, -1415 } },
-    { -1, 50, { 2794, 3627, -3218 } }
-};
-
-struct CutsceneSplinePoint sSaCreditsSplinePositions[] = {
-    { 0, 0, { -295, -396, -585 } },
-    { 1, 0, { -295, -396, -585 } },
-    { 2, 0, { -292, -856, -573 } },
-    { 3, 0, { -312, -856, -541 } },
-    { -1, 0, { 175, -856, -654 } }
-};
-
-struct CutsceneSplinePoint sSaCreditsSplineFocus[] = {
-    { 0, 50, { -175, -594, -142 } },
-    { 1, 50, { -175, -594, -142 } },
-    { 2, 50, { -195, -956, -92 } },
-    { 3, 50, { -572, -956, -150 } },
-    { -1, 50, { -307, -956, -537 } }
-};
-
-struct CutsceneSplinePoint sCotmcCreditsSplinePositions[] = {
-    { 0, 0, { -296, 495, 1607 } },
-    { 0, 0, { -430, 541, 654 } },
-    { 0, 0, { -466, 601, -359 } },
-    { 0, 0, { -217, 433, -1549 } },
-    { -1, 0, { -95, 366, -2922 } }
-};
-
-struct CutsceneSplinePoint sCotmcCreditsSplineFocus[] = {
-    { 0, 50, { -176, 483, 2092 } },
-    { 0, 50, { -122, 392, 1019 } },
-    { 0, 50, { -268, 450, -792 } },
-    { 0, 50, { -172, 399, -2046 } },
-    { -1, 50, { -51, 355, -3420 } }
-};
-
-struct CutsceneSplinePoint sDddSubCreditsSplinePositions[] = {
-    { 0, 0, { 4656, 2171, 5028 } },
-    { 0, 0, { 4548, 1182, 4596 } },
-    { 0, 0, { 5007, 813, 3257 } },
-    { 0, 0, { 5681, 648, 1060 } },
-    { -1, 0, { 4644, 774, 113 } }
-};
-
-struct CutsceneSplinePoint sDddSubCreditsSplineFocus[] = {
-    { 0, 50, { 4512, 2183, 4549 } },
-    { 0, 50, { 4327, 838, 4308 } },
-    { 0, 50, { 4774, 749, 2819 } },
-    { 0, 50, { 5279, 660, 763 } },
-    { -1, 50, { 4194, 885, -75 } }
-};
-
-struct CutsceneSplinePoint sCcmOutsideCreditsSplinePositions[] = {
-    { 1, 0, { 1427, -1387, 5409 } },
-    { 2, 0, { -1646, -1536, 4526 } },
-    { 3, 0, { -3852, -1448, 3913 } },
-    { -1, 0, { -5199, -1366, 1886 } }
-};
-
-struct CutsceneSplinePoint sCcmOutsideCreditsSplineFocus[] = {
-    { 1, 50, { 958, -1481, 5262 } },
-    { 2, 50, { -2123, -1600, 4391 } },
-    { 3, 50, { -3957, -1401, 3426 } },
-    { -1, 50, { -4730, -1215, 1795 } }
-};
 
 /**
  * Play the current cutscene until either gCutsceneTimer reaches the max time, or c->cutscene is set to 0

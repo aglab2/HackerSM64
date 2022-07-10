@@ -1109,6 +1109,8 @@ void bowser_spawn_collectable(void) {
         gSecondCameraFocus = spawn_object(o, MODEL_BOWSER_KEY, bhvBowserKey);
         cur_obj_play_sound_2(SOUND_GENERAL2_BOWSER_KEY);
     }
+    gSecondCameraFocus->oBehParams2ndByte = 0xF8;
+    gSecondCameraFocus->oBehParams = 0xF8 << 16;
     gSecondCameraFocus->oAngleVelYaw = o->oAngleVelYaw;
 }
 

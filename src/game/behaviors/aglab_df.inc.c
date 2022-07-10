@@ -1,7 +1,11 @@
 
+extern struct CreditsEntry *gCurrCreditsEntry;
 void mf_df_level_reset_init()
 {
-    // -
+    if (gCurrCreditsEntry)
+    {
+        o->activeFlags = 0;
+    }
 }
 
 static f32 sDfPositions[][3] = {
