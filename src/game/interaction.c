@@ -1574,6 +1574,7 @@ u32 interact_hoot(struct MarioState *m, UNUSED u32 interactType, struct Object *
     return FALSE;
 }
 
+extern s32 gTatums;
 u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 capFlag = get_mario_cap_flag(obj);
     u16 capMusic = 0;
@@ -1587,7 +1588,7 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
         m->flags |= capFlag;
 
         switch (capFlag) {
-            case MARIO_VANISH_CAP: capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
+            case MARIO_VANISH_CAP: capTime = 1000; capMusic = SEQUENCE_ARGS(4, SEQ_VC_HF          ); break;
             case MARIO_METAL_CAP:  capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP); break;
             case MARIO_WING_CAP:   capTime = 1800; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
         }
@@ -1607,6 +1608,7 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
         play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
 
         if (gCurrCourseNum != COURSE_DF && gCurrCourseNum != COURSE_VCM && capMusic != 0) {
+            gTatums = 0;
             play_cap_music(capMusic);
         }
 

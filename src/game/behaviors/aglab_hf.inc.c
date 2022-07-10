@@ -729,8 +729,62 @@ void hf_scary_boo_loop()
     }
 }
 
+extern u16 sCurrentCapMusic;
+static u8 sMusicFlags = 0;
+void hf_vc_ctl_music()
+{
+    if (sCurrentCapMusic != 0xffff)
+    {
+        if (gTatums < 1000)
+        {
+            sMusicFlags = 0;
+        }
+
+        int played = 0;
+        if (gTatums > 2848 && !(sMusicFlags & 1))
+        {
+            sMusicFlags |= 1;
+            if (!played)
+            {
+                f32 snd[] = { 0.f, 10.f, 0.f };
+                play_sound(SOUND_OBJ_BOO_LAUGH_SHORT, snd);
+                played = 1;
+            }
+        }
+        if (gTatums > 5392 && !(sMusicFlags & 2))
+        {
+            sMusicFlags |= 2;
+            if (!played)
+            {
+                f32 snd[] = { 0.f, 30.f, 0.f };
+                play_sound(SOUND_OBJ_MAD_PIANO_CHOMPING, snd);
+                played = 1;
+            }
+        }
+        if (gTatums > 8016 && !(sMusicFlags & 4))
+        {
+            sMusicFlags |= 4;
+            if (!played)
+            {
+                play_sound(SOUND_OBJ_MIPS_RABBIT_WATER, gGlobalSoundSource);
+                played = 1;
+            }
+        }
+        if (gTatums > 12080 && !(sMusicFlags & 8))
+        {
+            sMusicFlags |= 8;
+            if (!played)
+            {
+                play_sound(SOUND_OBJ_BUBBA_CHOMP, gGlobalSoundSource);
+                played = 1;
+            }
+        }
+    }
+}
+
 void hf_death_loop_ctl()
 {
+    hf_vc_ctl_music();
     if (gMarioStates->action == ACT_FALL_AFTER_STAR_GRAB)
     {
         o->activeFlags = 0;
