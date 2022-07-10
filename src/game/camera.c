@@ -668,7 +668,7 @@ void focus_on_mario(Vec3f focus, Vec3f pos, f32 posYOff, f32 focYOff, f32 dist, 
     Vec3f marioPos;
 
     marioPos[0] = sMarioCamState->pos[0];
-    marioPos[1] = sMarioCamState->pos[1] + (gIsGravityFlipped ? posYOff : -posYOff);
+    marioPos[1] = sMarioCamState->pos[1] + (gIsGravityFlipped ? -posYOff : posYOff);
     marioPos[2] = sMarioCamState->pos[2];
 
     vec3f_set_dist_and_angle(marioPos, pos, dist, (gIsGravityFlipped ? -pitch-sLakituPitch : pitch + sLakituPitch), yaw);
@@ -5988,9 +5988,7 @@ struct CameraTrigger sCamSL[] = {
  * tunnel. Both sides achieve their effect by editing the camera yaw.
  */
 struct CameraTrigger sCamTHI[] = {
-    { 1, cam_thi_move_cam_through_tunnel, -4609, -2969, 6448, 100, 300, 300, 0 },
-    { 1, cam_thi_look_through_tunnel,     -4809, -2969, 6448, 100, 300, 300, 0 },
-    NULL_TRIGGER
+	NULL_TRIGGER
 };
 
 /**
@@ -9745,6 +9743,20 @@ struct CutsceneSplinePoint sOWCreditsSplineFocus[] = {
     { -1, 50, { 0, 450, 0 } },
 };
 
+struct CutsceneSplinePoint sBDFCreditsSplinePositions[] = {
+    { 1, 0, { 6219, 5624, 5261 } },
+    { 2, 0, { 4680, 5928, -1727 } },
+    { 3, 0, { 453, 5688, -1695 } },
+    { -1, 0, { -1044, 5320, -341 } }
+};
+
+struct CutsceneSplinePoint sBDFCreditsSplineFocus[] = {
+    { 0, 50, { -170, 6472, -89 } },
+    { 1, 50, { -170, 6072, -89 } },
+    { 3, 50, { -170, 5372, -89 } },
+    { -1, 50, { -170, 4536, -89 } },
+};
+
 /**
  * Follow splines through the courses of the game.
  */
@@ -9806,6 +9818,10 @@ void cutscene_credits(struct Camera *c) {
         case LEVEL_AREA_INDEX(LEVEL_CASTLE_GROUNDS, 1):
             pos = sOWCreditsSplinePositions;
             focus = sOWCreditsSplineFocus;
+            break;
+        case LEVEL_AREA_INDEX(LEVEL_THI, 1):
+            pos = sBDFCreditsSplinePositions;
+            focus = sBDFCreditsSplineFocus;
             break;
         default:
             pos = sDefaultCreditsSplinePositions;
@@ -10752,7 +10768,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
 	ZOOMOUT_AREA_MASK(0, 1, 1, 1, 1, 0, 0, 0), // VCUTM          | BITFS
@@ -10766,10 +10782,10 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // BOWSER_3       | Unused
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // TTM            | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // Unused         | Unused
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 0, 0),
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0),
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0),
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0),
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 0, 0), 
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), 
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");

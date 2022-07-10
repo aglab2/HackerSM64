@@ -38,12 +38,10 @@
 
 #include "config.h"
 
-// TODO: Make these ifdefs better
 const char *creditsFM[] = { "1MADE FOR", "FANGAME MARATHON 2022" };
-const char *creditsArthur[] = { "1MODELLING", "ARTHURTILLY" };
+const char *creditsArthur[] = { "2MODELLING", "ARTHURTILLY", "GAEL" };
 const char *creditsMushie[] = { "1MODELLING", "MUSHIE" };
 const char *creditsBroDute[] = { "1MODELLING", "BRODUTE" };
-const char *creditsGael[] = { "1MODELLING", "THEGAEL95" };
 const char *creditsDesigners[] = { "2DESIGNERS", "LINCRASH", "DNVIC" };
 const char *creditsCoding[] = { "2GENERAL CODING", "AGLAB", "THECOZIES" };
 const char *creditsReonu[] = { "1DEVELOPER", "REONU" };
@@ -54,8 +52,7 @@ const char *creditsScut[] = { "1DEVELOPER", "SCUTTLEBUG RAISER" };
 const char *creditsTesting[] = { "3TESTING", "LINCRASH", "MUSHIE", "GMD" };
 const char *creditsOrganizer[] = { "1ORGANIZED BY", "AGLAB" };
 const char *creditsPJ74[] = { "2PJ74 TEAM", "ARTHURTILLY", "GALAXTIC" };
-const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "THEGAEL95" };
-const char *creditsDone[] = { "2IT", "IS", "DONE" };
+const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "GAEL" };
 
 struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
@@ -69,11 +66,11 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_COTMC,          1, 65, 98,   { 70, 2118, 1109 }, creditsZenon },
     { LEVEL_TOTWC,          1, 17, -34,  { 0, 1000, 0 }   , creditsAxo },
     { LEVEL_VCM,            1, 50, 46,   { -4, 261, 109 }    , creditsMushie },
-    { LEVEL_HF,             1, 33, 124,  { -3657, 1358, -90 }    , creditsGael },
+    { LEVEL_CASTLE_GROUNDS, 1, 51, 54,   { -53, 4536, -109 }   , creditsCoding },
+    { LEVEL_HF,             1, 33, 124,  { -3657, 1358, -90 }    , creditsTesting },
     { LEVEL_PSS,            1, 1, 60,    { 11234, 2319, 1765 }   , creditsMusic },
-    { LEVEL_CASTLE_GROUNDS, 1, 1, 60,    { -36, -621, -25 }   , creditsCoding },
     { LEVEL_CRASH,          1, 50, 47,   { -1433, -2165, -7954 }, creditsDesigners },
-    { LEVEL_BDF,            1, 51, 54,   { -53, 4536, -109 }   , creditsPJ74 },
+    { LEVEL_THI,          1, 50, 47,   { -1433, -2165, -7954 }, creditsDesigners },
     { LEVEL_NONE,  0, 1, 0, { 0, 0, 0 }, NULL },
 };
 
@@ -1019,11 +1016,11 @@ void initiate_delayed_warp(void) {
                     gCurrActNum = gCurrCreditsEntry->actNum & 0x07;
                     if ((gCurrCreditsEntry + 1)->levelNum == LEVEL_NONE) {
                         destWarpNode = WARP_NODE_CREDITS_END;
+                        initiate_warp(LEVEL_ENDING, 1, 0, WARP_FLAGS_NONE);
                     } else {
                         destWarpNode = WARP_NODE_CREDITS_NEXT;
+                        initiate_warp(gCurrCreditsEntry->levelNum, gCurrCreditsEntry->areaIndex, destWarpNode, WARP_FLAGS_NONE);
                     }
-
-                    initiate_warp(gCurrCreditsEntry->levelNum, gCurrCreditsEntry->areaIndex, destWarpNode, WARP_FLAGS_NONE);
                     break;
 
                 default:
