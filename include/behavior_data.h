@@ -583,6 +583,7 @@ extern const BehaviorScript bhvMtcRedGround[];
 extern const BehaviorScript bhvMtcBrickCtl[];
 extern const BehaviorScript bhvHfBoo[];
 extern const BehaviorScript bhvHfBooCtl[];
+extern const BehaviorScript bhvHfDeathCtl[];
 extern const BehaviorScript bhvHfGoo[];
 extern const BehaviorScript bhvHfCrystal[];
 extern const BehaviorScript bhvHfCrystalBlock[];

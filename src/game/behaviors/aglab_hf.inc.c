@@ -719,3 +719,51 @@ void hf_scary_boo_loop()
         o->oTimer = -1;
     }
 }
+
+void hf_death_loop_ctl()
+{
+    if (0 == o->oAction)
+    {
+        int type = gMarioStates->floor ? gMarioStates->floor->type : 0;
+        if (type == SURFACE_DEEP_QUICKSAND && gMarioStates->floorHeight == gMarioStates->pos[1])
+        {
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            o->oAction = 1;
+        }
+    }
+    else
+    {
+        if (o->oTimer == 12)
+        {
+            if (gMarioStates->pos[1] > 5500.f)
+            {
+                gMarioStates->pos[0] = -4722.f;
+                gMarioStates->pos[1] = 6333.f;
+                gMarioStates->pos[2] = 1884.f;
+                gMarioStates->faceAngle[1] = 0xc000;
+            }
+            else
+            {
+                gMarioStates->pos[0] = 695.f;
+                gMarioStates->pos[1] = 2512.f;
+                gMarioStates->pos[2] = 5681.f;
+                gMarioStates->faceAngle[1] = 0x4000;
+            }
+
+            gMarioStates->vel[0] = 0;
+            gMarioStates->vel[1] = 0;
+            gMarioStates->vel[2] = 0;
+            gMarioStates->forwardVel = 0;
+            drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
+        }
+        if (o->oTimer == 13)
+        {
+            reset_camera(gCamera);
+        }
+        if (o->oTimer == 14)
+        {
+            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            o->oAction = 0;
+        }
+    }
+}

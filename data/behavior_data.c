@@ -6500,6 +6500,14 @@ const BehaviorScript bhvHfBooCtl[] = {
     END_LOOP(),
 };
 
+extern void hf_death_loop_ctl();
+const BehaviorScript bhvHfDeathCtl[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(hf_death_loop_ctl),
+    END_LOOP(),
+};
+
 extern void hf_boo_init();
 extern void hf_boo_loop();
 const BehaviorScript bhvHfBoo[] = {
