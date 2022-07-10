@@ -668,10 +668,10 @@ void focus_on_mario(Vec3f focus, Vec3f pos, f32 posYOff, f32 focYOff, f32 dist, 
     Vec3f marioPos;
 
     marioPos[0] = sMarioCamState->pos[0];
-    marioPos[1] = sMarioCamState->pos[1] + posYOff;
+    marioPos[1] = sMarioCamState->pos[1] + (gIsGravityFlipped ? posYOff : -posYOff);
     marioPos[2] = sMarioCamState->pos[2];
 
-    vec3f_set_dist_and_angle(marioPos, pos, dist, (gGravityMode ? -pitch-sLakituPitch : pitch + sLakituPitch), yaw);
+    vec3f_set_dist_and_angle(marioPos, pos, dist, (gIsGravityFlipped ? -pitch-sLakituPitch : pitch + sLakituPitch), yaw);
 
     focus[0] = sMarioCamState->pos[0];
     focus[1] = sMarioCamState->pos[1] + focYOff;
@@ -880,7 +880,7 @@ s16 determine_degrees(s16 angle) {
     // End of reonu stuff
 
 /**
- * Update the camera during 8 directional modesolike    
+ * Update the camera during 8 directional modesolike
  */
 s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     s16 camYaw = s8DirModeYawOffset;
@@ -10641,10 +10641,10 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // BOWSER_3       | Unused
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // TTM            | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // Unused         | Unused
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 0, 0), 
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), 
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 1, 0, 0),
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0),
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0),
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0),
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");
