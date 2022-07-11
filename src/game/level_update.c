@@ -46,7 +46,7 @@ const char *creditsDesigners[] = { "3DESIGNERS", "LINCRASH", "DNVIC", "ASHLEY" }
 const char *creditsCoding[] = { "2GENERAL CODING", "AGLAB", "THECOZIES" };
 const char *creditsReonu[] = { "1DEVELOPER", "REONU" };
 const char *creditsZenon[] = { "1DEVELOPER", "ZENONX" };
-const char *creditsAxo[] = { "1DEVELOPER", "AXOLLYION" };
+const char *creditsAxo[] = { "1DEVELOPER", "AXOLLYON" };
 const char *creditsPie[] = { "1DEVELOPER", "SM64PIE" };
 const char *creditsScut[] = { "1DEVELOPER", "SCUTTLEBUG RAISER" };
 const char *creditsTesting[] = { "3TESTING", "LINCRASH", "MUSHIE", "GMD" };
@@ -1512,6 +1512,7 @@ s32 lvl_set_current_level(UNUSED s16 initOrUpdate, s32 levelNum) {
  * Play the "thank you so much for to playing my game" sound.
  */
 s32 lvl_play_the_end_screen_sound(UNUSED s16 initOrUpdate, UNUSED s32 levelNum) {
+    seq_player_fade_out(0, 1000);
     play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
     return TRUE;
 }
