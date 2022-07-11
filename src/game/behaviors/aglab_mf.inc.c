@@ -124,9 +124,10 @@ void bhv_mf_butterfly_loop()
     obj_scale_xyz(o->oMfButterflyVine, s[0], s[1], s[2]);
 }
 
+extern int gMFCurrentScrollY;
 void bhv_mf_lava_init()
 {
-    // -
+    gMFCurrentScrollY = 0;
 }
 
 

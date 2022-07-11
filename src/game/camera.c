@@ -2605,10 +2605,10 @@ void exit_c_up(struct Camera *c) {
  * The mode used when C-Up is pressed.
  */
 s32 update_c_up(UNUSED struct Camera *c, Vec3f focus, Vec3f pos) {
-    s16 pitch = sCUpCameraPitch;
-    s16 yaw = sMarioCamState->faceAngle[1] + sModeOffsetYaw + DEGREES(180);
+    s16 pitch = sCUpCameraPitch + (!gIsGravityFlipped ? 0 : DEGREES(180));
+    s16 yaw = sMarioCamState->faceAngle[1] + sModeOffsetYaw + (!gIsGravityFlipped ? DEGREES(180) : 0) ;
 
-    focus_on_mario(focus, pos, 125.f, 125.f, 250.f, pitch, yaw);
+    focus_on_mario(focus, pos, 125.f, gIsGravityFlipped ? 15.f : 125.f, 250.f, pitch, yaw);
     return sMarioCamState->faceAngle[1];
 }
 

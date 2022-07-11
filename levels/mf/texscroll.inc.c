@@ -18,26 +18,26 @@ void scroll_sts_mat_mf_dl_f3d_material_001() {
 	shift_t(mat, 18, PACK_TILESIZE(0, 1));
 };
 
+int gMFCurrentScrollY = 0;
 void scroll_mf_dl_mlavaline_mesh_layer_6_vtx_0() {
 	int i = 0;
 	int count = 424;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
-	static int currentY = 0;
 	int deltaY;
 	Vtx *vertices = segmented_to_virtual(mf_dl_mlavaline_mesh_layer_6_vtx_0);
 
 	deltaY = (int)(0.1599999964237213 * 0x20) % height;
 
-	if (absi(currentY) > height) {
-		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	if (absi(gMFCurrentScrollY) > height) {
+		deltaY -= (int)(absi(gMFCurrentScrollY) / height) * height * signum_positive(deltaY);
 	}
 
 	for (i = 0; i < count; i++) {
 		vertices[i].n.tc[1] += deltaY;
 	}
-	currentY += deltaY;
+	gMFCurrentScrollY += deltaY;
 }
 
 void scroll_mf() {

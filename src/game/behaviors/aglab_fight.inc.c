@@ -339,8 +339,8 @@ void fight_platform_ctl_loop()
         s32 clampZ = -ArenaSize > o->oPosZ || o->oPosZ > ArenaSize;
         if (clampX || clampZ)
         {
-            struct Object* wave = spawn_object(o, MODEL_BOWSER_WAVE, bhvBowserShockWave);
-            wave->oPosY += 100.f;
+            //struct Object* wave = spawn_object(o, MODEL_BOWSER_WAVE, bhvBowserShockWave);
+            //wave->oPosY += 100.f;
             o->oAction = 10;
             spawn_object(o, MODEL_NONE, bhvTenCoinsSpawn);
         }
