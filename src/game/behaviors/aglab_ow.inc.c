@@ -241,6 +241,7 @@ void ow_part_init()
         cur_obj_write_all_objects_with_behavior_and_bparam3(bhvSparkler    , o->oBehParams2ndByte, &objsOut);
         cur_obj_write_all_objects_with_behavior_and_bparam3(bhvOWLuigi     , o->oBehParams2ndByte, &objsOut);
         cur_obj_write_all_objects_with_behavior_and_bparam3(bhvOWDnvicClose, o->oBehParams2ndByte, &objsOut);
+        cur_obj_write_all_objects_with_behavior_and_bparam3(bhvMessagePanel, o->oBehParams2ndByte, &objsOut);
         if (5 == o->oBehParams2ndByte)
             cur_obj_write_all_objects_with_behavior(bhvStickyPlat, &objsOut);
 
@@ -261,6 +262,7 @@ void ow_part_init()
         cur_obj_unload_object_with_behavior_and_bparam3(bhvSparkler    , o->oBehParams2ndByte);
         cur_obj_unload_object_with_behavior_and_bparam3(bhvOWLuigi     , o->oBehParams2ndByte);
         cur_obj_unload_object_with_behavior_and_bparam3(bhvOWDnvicClose, o->oBehParams2ndByte);
+        cur_obj_unload_object_with_behavior_and_bparam3(bhvMessagePanel, o->oBehParams2ndByte);
         if (5 == o->oBehParams2ndByte)
             cur_obj_unload_object_with_behavior(bhvStickyPlat);
 

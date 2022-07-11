@@ -91,7 +91,8 @@ static struct Object *cur_obj_find_nearest_object_with_behavior_y_biased(const B
 
 void sparkler_loop()
 {
-    if (gCamera->cutscene != CUTSCENE_AGLAB_MTC_CS)
+    s32 isOWCS = gCurrLevelNum == LEVEL_CASTLE_GROUNDS && (o->header.gfx.node.flags & GRAPH_RENDER_INVISIBLE);
+    if (gCamera->cutscene != CUTSCENE_AGLAB_MTC_CS && !isOWCS)
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
 }
 
