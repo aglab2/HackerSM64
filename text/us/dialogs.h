@@ -93,13 +93,10 @@ secret near the rock?\n\
 You probably want it."))
 
 DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
-Hey, Mario! Here we met\n\
-again! Wanna race to\n\
-the top you plumber?\n\
-There is no chance\n\
-you will win this time!\n\
-Whaddya say? When I say\n\
-『Go,』 let the race begin!\n\
+Hey, Mario! Want to race\n\
+to the top of the\n\
+field? No way I will\n\
+lose this time!\n\
 \n\
 Ready....\n\
 \n\
@@ -115,10 +112,10 @@ real."))
 
 DEFINE_DIALOG(DIALOG_007, 1, 5, 30, 200, _("\
 Hufff...fff...pufff...\n\
-Whoa! You...really...are...\n\
-fast! A human blur!\n\
-Here you go--you've won\n\
-it, fair and square!"))
+You are so quick,\n\
+I could not even snap\n\
+you one during race!\n\
+Here is your star!"))
 
 DEFINE_DIALOG(DIALOG_008, 1, 5, 30, 200, _("\
 You may step outside of\n\
@@ -464,13 +461,12 @@ Cold, Cold Crevasse\n\
 Below!"))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
-I win! You lose!\n\
-Ha ha ha!\n\
-\n\
-That's what you get for\n\
-messin' with Koopa the\n\
-Quick.\n\
-Better luck next time!"))
+Heh! I won!\n\
+Why do you look\n\
+so confused?\n\
+Alright, loser reward\n\
+it is, here's your\n\
+star you want so much."))
 
 DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
 Caution! Narrow Bridge!\n\

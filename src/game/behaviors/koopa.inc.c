@@ -737,12 +737,12 @@ static void koopa_the_quick_act_after_race(void) {
             o->parentObj->oKoopaRaceEndpointDialog = DIALOG_NONE;
             o->oTimer = 0;
         }
-    } else if (o->parentObj->oKoopaRaceEndpointRaceStatus != KOOPA_RACE_ENDPOINT_STATUS_KOOPA_WON) {
+    } else if (o->parentObj->oKoopaRaceEndpointRaceStatus == KOOPA_RACE_ENDPOINT_STATUS_KOOPA_WON || o->parentObj->oKoopaRaceEndpointRaceStatus == KOOPA_RACE_ENDPOINT_STATUS_MARIO_WON) {
         spawn_default_star(sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[0],
                            sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[1],
                            sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].starPos[2]);
 
-        o->parentObj->oKoopaRaceEndpointRaceStatus = KOOPA_RACE_ENDPOINT_STATUS_KOOPA_WON;
+        o->parentObj->oKoopaRaceEndpointRaceStatus = KOOPA_RACE_ENDPOINT_STATUS_MARIO_CHEATED;
     }
 }
 

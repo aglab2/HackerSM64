@@ -35,7 +35,7 @@ void scroll_sts_mat_vcm_dl_scrollwaves_f3d() {
 
 void scroll_sts_mat_vcm_dl__3_f3d() {
 	Gfx *mat = segmented_to_virtual(mat_vcm_dl__3_f3d);
-	shift_t(mat, 11, PACK_TILESIZE(0, 1));
+	shift_t(mat, 11, PACK_TILESIZE(0, 2));
 };
 
 void scroll_sts_mat_vcm_dl_arrow1() {

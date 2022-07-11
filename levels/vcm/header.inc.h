@@ -143,7 +143,7 @@ extern Vtx vcm_dl_pj74_vc_mesh_layer_1_vtx_20[96];
 extern Gfx vcm_dl_pj74_vc_mesh_layer_1_tri_20[];
 extern Vtx vcm_dl_pj74_vc_mesh_layer_1_vtx_21[79];
 extern Gfx vcm_dl_pj74_vc_mesh_layer_1_tri_21[];
-extern Vtx vcm_dl_pj74_vc_mesh_layer_1_vtx_22[88];
+extern Vtx vcm_dl_pj74_vc_mesh_layer_1_vtx_22[58];
 extern Gfx vcm_dl_pj74_vc_mesh_layer_1_tri_22[];
 extern Vtx vcm_dl_pj74_vc_mesh_layer_1_vtx_23[31];
 extern Gfx vcm_dl_pj74_vc_mesh_layer_1_tri_23[];

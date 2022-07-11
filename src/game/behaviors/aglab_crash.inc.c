@@ -152,21 +152,30 @@ void crash_ctl_loop()
         struct Waypoint *startWaypoint = o->oPathedStartWaypoint;
         struct Waypoint *lastWaypoint = o->oPathedPrevWaypoint;
         struct Waypoint *targetWaypoint;
-        Vec3s prevToNext, objToNext;
+        struct Waypoint *nextWaypoint = NULL;
+        Vec3s prevToNext, objToNext, prevToNew, nextToNew;
 
         if ((lastWaypoint + 1)->flags != WAYPOINT_FLAGS_END) {
             targetWaypoint = lastWaypoint + 1;
+            if ((lastWaypoint + 2)->flags != WAYPOINT_FLAGS_END)
+            {
+                nextWaypoint = lastWaypoint + 2;
+            }
         } else {
             targetWaypoint = startWaypoint;
         }
 
         o->oPathedPrevWaypointFlags = lastWaypoint->flags | WAYPOINT_FLAGS_INITIALIZED;
 
+        if (nextWaypoint)
+            vec3_diff(nextToNew, nextWaypoint->pos, targetWaypoint->pos);
+    
         vec3_diff(prevToNext, targetWaypoint->pos, lastWaypoint->pos);
         vec3_diff(objToNext, targetWaypoint->pos, &o->oPosVec);
 
         f32 spd = (50 + o->oTimer) * 0.2f;
-        f32 len = sqrtf(objToNext[0] * objToNext[0] + objToNext[1] * objToNext[1] + objToNext[2] * objToNext[2]) / spd;
+        f32 curLen = sqrtf(objToNext[0] * objToNext[0] + objToNext[1] * objToNext[1] + objToNext[2] * objToNext[2]);
+        f32 len = curLen / spd;
         if (len > 0.001f)
         {
             objToNext[0] /= len;
@@ -197,8 +206,27 @@ void crash_ctl_loop()
         o->oPosY += objToNext[1];
         o->oPosZ += objToNext[2];
 
+        vec3_diff(prevToNew, targetWaypoint->pos, &o->oPosVec);
+        f32 newlen = sqrtf(prevToNew[0] * prevToNew[0] + prevToNew[1] * prevToNew[1] + prevToNew[2] * prevToNew[2]);
+        f32 abslen = sqrtf(prevToNext[0] * prevToNext[0] + prevToNext[1] * prevToNext[1] + prevToNext[2] * prevToNext[2]);
+
+        f32 pathratio = newlen / abslen;
+
         f32 antiLen = sqrtf(objToNext[0]*objToNext[0] + objToNext[2]*objToNext[2]);
         Vec3f anti = { -objToNext[2] / antiLen, 0, objToNext[0] / antiLen };
+
+        if (nextWaypoint)
+        {
+            f32 antiNextLen = sqrtf(nextToNew[0]*nextToNew[0] + nextToNew[2]*nextToNew[2]);
+            Vec3f antiNext = { -nextToNew[2] / antiNextLen, 0, nextToNew[0] / antiNextLen };
+
+            anti[0] = anti[0] * pathratio + antiNext[0] * (1 - pathratio);
+            anti[2] = anti[2] * pathratio + antiNext[2] * (1 - pathratio);
+
+            f32 antiLen = sqrtf(anti[0]*anti[0] + anti[2]*anti[2]);
+            anti[0] /= antiLen;
+            anti[2] /= antiLen;
+        }
 
         s16 controlStickAngle = 0;
         if (gPlayer1Controller->stickMag > 30.f)
@@ -212,7 +240,9 @@ void crash_ctl_loop()
 
         gMarioObject->header.gfx.angle[2] = o->oCrashLineAngle;
         if (gMarioStates->action != ACT_DIVE && gMarioStates->action != ACT_BURNING_FALL)
+        {
             set_mario_action(gMarioStates, ACT_DIVE, 0);
+        }
 
         f32 d = 500.f * (o->oTimer > 30 ? 30 : o->oTimer) / 30.f;
         gMarioStates->pos[0] = o->oPosX + sins(o->oCrashLineAngle) * anti[0] * d;
