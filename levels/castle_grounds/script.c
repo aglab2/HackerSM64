@@ -168,7 +168,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
-		TERRAIN_TYPE(TERRAIN_SPOOKY),
+		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/*-1474, -1260, 4233*/
 		OBJECT(MODEL_OW_ARTHUR , -2181, -477, -2762, 0, 0, 0, (2 << 16), bhvOWPart),
@@ -182,7 +182,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, 180, 0, 0, 0),
+	MARIO_POS(1, 0, 0, 0, 0),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

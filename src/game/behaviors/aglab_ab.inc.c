@@ -8,6 +8,9 @@ static void manta_reset()
     o->oPosX = path->pos[0];
     o->oPosY = path->pos[1];
     o->oPosZ = path->pos[2];
+    o->oMoveAngleRoll = 0;
+    o->oMoveAngleYaw = 0;
+    o->oMoveAnglePitch = 0;
 }
 
 void bhv_ab_manta_ray_init()
@@ -239,4 +242,76 @@ void bhv_ab_music_loop()
     set_instrument(gSequencePlayers[0].channels[5], 0x19);
     set_instrument(gSequencePlayers[0].channels[6], 0x2a);
     set_instrument(gSequencePlayers[0].channels[7], 0x2a);
+}
+
+void ab_purple_switch_init()
+{
+    o->parentObj = NULL;
+}
+
+void ab_purple_switch_loop()
+{
+    switch (o->oAction) {
+        case PURPLE_SWITCH_ACT_IDLE:
+            if (o->parentObj)
+            {
+                o->parentObj->oPosY = -8000.f;
+            }
+
+            cur_obj_set_model(MODEL_PURPLE_SWITCH);
+            cur_obj_scale(1.5f);
+            if (
+                gMarioObject->platform == o
+                && !(gMarioStates[0].action & MARIO_NO_PURPLE_SWITCH)
+                && lateral_dist_between_objects(o, gMarioObject) < 127.5f
+            ) 
+            {
+                if (!o->parentObj)
+                {
+                    o->parentObj = spawn_star(o, -844.f, -1183.f, -9370.f);
+                    o->parentObj->oBehParams = 4 << 24;
+                }
+                else
+                {
+                    o->parentObj->oPosY = -1183.f;
+                }
+
+                o->oAction = PURPLE_SWITCH_ACT_PRESSED;
+            }
+            break;
+
+        case PURPLE_SWITCH_ACT_PRESSED:
+            cur_obj_scale_over_time(SCALE_AXIS_Y, 3, 1.5f, 0.2f);
+            if (o->oTimer == 3) {
+                cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = PURPLE_SWITCH_ACT_TICKING;
+                cur_obj_shake_screen(SHAKE_POS_SMALL);
+            }
+            break;
+
+        case PURPLE_SWITCH_ACT_TICKING:
+            if (gMarioStates->action & ACT_FLAG_SWIMMING) {
+                o->oTimer += 2;
+                play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+            } else {
+                play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+            }
+            if (o->oTimer > 200) {
+                o->oAction = PURPLE_SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF;
+            }
+            break;
+
+        case PURPLE_SWITCH_ACT_UNPRESSED:
+            cur_obj_scale_over_time(SCALE_AXIS_Y, 3, 0.2f, 1.5f);
+            if (o->oTimer == 3) {
+                o->oAction = PURPLE_SWITCH_ACT_IDLE;
+            }
+            break;
+
+        case PURPLE_SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF:
+            if (!cur_obj_is_mario_on_platform()) {
+                o->oAction = PURPLE_SWITCH_ACT_UNPRESSED;
+            }
+            break;
+    }
 }

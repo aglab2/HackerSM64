@@ -1,25 +1,3 @@
-void scroll_ab_dl_aa_mesh_layer_5_vtx_0() {
-	int i = 0;
-	int count = 27;
-	int width = 32 * 0x20;
-	int height = 32 * 0x20;
-
-	static int currentX = 0;
-	int deltaX;
-	Vtx *vertices = segmented_to_virtual(ab_dl_aa_mesh_layer_5_vtx_0);
-
-	deltaX = (int)(0.1300000250339508 * 0x20) % width;
-
-	if (absi(currentX) > width) {
-		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
-	}
-
-	for (i = 0; i < count; i++) {
-		vertices[i].n.tc[0] += deltaX;
-	}
-	currentX += deltaX;
-}
-
 void scroll_sts_mat_ab_dl_water_layer5() {
 	Gfx *mat = segmented_to_virtual(mat_ab_dl_water_layer5);
 	shift_t_down(mat, 13, PACK_TILESIZE(0, 1));
@@ -147,6 +125,50 @@ void scroll_ab_dl_Plane_007_mesh_layer_6_vtx_0() {
 	currentY += deltaY;
 }
 
+void scroll_ab_dl_zw_mesh_layer_5_vtx_0() {
+	int i = 0;
+	int count = 177;
+	int width = 32 * 0x20;
+	int height = 32 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	Vtx *vertices = segmented_to_virtual(ab_dl_zw_mesh_layer_5_vtx_0);
+
+	deltaX = (int)(0.12999999523162842 * 0x20) % width;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+	}
+	currentX += deltaX;
+}
+
+void scroll_ab_dl_zw_mesh_layer_5_vtx_1() {
+	int i = 0;
+	int count = 12;
+	int width = 64 * 0x20;
+	int height = 64 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	Vtx *vertices = segmented_to_virtual(ab_dl_zw_mesh_layer_5_vtx_1);
+
+	deltaX = (int)(0.12999999523162842 * 0x20) % width;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+	}
+	currentX += deltaX;
+}
+
 void scroll_ab_dl_Azure_Abyss2_010_mesh_layer_1_vtx_6() {
 	int i = 0;
 	int count = 783;
@@ -192,7 +214,6 @@ void scroll_ab_dl_Plane_005_mesh_layer_1_vtx_0() {
 }
 
 void scroll_ab() {
-	scroll_ab_dl_aa_mesh_layer_5_vtx_0();
 	scroll_sts_mat_ab_dl_water_layer5();
 	scroll_sts_mat_ab_dl__16_f3d_layer5();
 	scroll_ab_dl_Plane_001_mesh_layer_1_vtx_20();
@@ -201,6 +222,8 @@ void scroll_ab() {
 	scroll_ab_dl_Plane_003_mesh_layer_1_vtx_1();
 	scroll_ab_dl_Plane_004_mesh_layer_1_vtx_0();
 	scroll_ab_dl_Plane_007_mesh_layer_6_vtx_0();
+	scroll_ab_dl_zw_mesh_layer_5_vtx_0();
+	scroll_ab_dl_zw_mesh_layer_5_vtx_1();
 	scroll_ab_dl_Azure_Abyss2_010_mesh_layer_1_vtx_6();
 	scroll_ab_dl_Plane_005_mesh_layer_1_vtx_0();
 }

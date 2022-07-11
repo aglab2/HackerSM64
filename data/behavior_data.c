@@ -6239,6 +6239,20 @@ const BehaviorScript bhvAbMusic[] = {
     END_LOOP(),
 };
 
+extern void ab_purple_switch_init();
+extern void ab_purple_switch_loop();
+const BehaviorScript bhvAbPurpleSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 20000),
+    CALL_NATIVE(ab_purple_switch_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(ab_purple_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 extern void bhv_mf_butterfly_init();
 extern void bhv_mf_butterfly_loop();
 const BehaviorScript bhvMfButterfly[] = {
