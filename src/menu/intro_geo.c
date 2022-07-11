@@ -10,6 +10,7 @@
 #include "textures.h"
 #include "types.h"
 #include "buffers/framebuffers.h"
+#include "game/color.h"
 #include "game/game_init.h"
 #include "audio/external.h"
 
@@ -40,10 +41,24 @@ static s32 sTmCopyrightAlpha;
  * Geo callback to render the "Super Mario 64" logo on the title screen
  */
 extern Gfx intro_logo_serene_mesh[];
+extern Vtx intro_logo_serene_mesh_vtx_0[151];
 Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     struct GraphNode *graphNode = node;
     Gfx *dl = NULL;
     Gfx *dlIter = NULL;
+
+    Vtx* vtx = segmented_to_virtual(intro_logo_serene_mesh_vtx_0);
+    for(int i = 0; i < sizeof(intro_logo_serene_mesh_vtx_0) / sizeof(*intro_logo_serene_mesh_vtx_0); i++)
+    {
+        Vtx* v = &vtx[i];
+
+        hsv color;
+        color.h = (v->n.ob[0] + v->n.ob[1] + v->n.ob[2]) * 20 + sIntroFrameCounter * 0x256;
+        color.s = 1.f;
+        color.v = 255;
+
+        hsv2rgb(&color, (rgb*) v->v.cn);
+    }
 
     if (callContext != GEO_CONTEXT_RENDER) {
         sIntroFrameCounter = 0;
