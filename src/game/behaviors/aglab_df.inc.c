@@ -34,7 +34,7 @@ void mf_df_level_reset_loop()
 
         struct Surface* floor = gMarioStates->floor;
         int type = floor ? floor->type : 0;
-        int isOnCheckpoint = type == SURFACE_HARD || type == SURFACE_HARD_NOT_SLIPPERY || type == SURFACE_NOISE_DEFAULT;
+        int isOnCheckpoint = type == SURFACE_HARD || type == SURFACE_HARD_NOT_SLIPPERY || type == SURFACE_NOISE_DEFAULT || type == SURFACE_0018;
         if (isOnCheckpoint)
         {
             if (floor->type == SURFACE_HARD)

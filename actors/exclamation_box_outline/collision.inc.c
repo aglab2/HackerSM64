@@ -13,7 +13,7 @@ const Collision exclamation_box_outline_seg8_collision_08025F78[] = {
     COL_VERTEX(26, 52, -26),
     COL_VERTEX(-26, 52, -26),
 
-    COL_TRI_INIT(SURFACE_DEFAULT, 12),
+    COL_TRI_INIT(SURFACE_0018, 12),
     COL_TRI(0, 1, 2),
     COL_TRI(1, 3, 4),
     COL_TRI(1, 4, 2),
