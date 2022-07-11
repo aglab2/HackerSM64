@@ -26,4 +26,8 @@ extern const LevelScript script_intro_splash_screen[];
 
 #include "levels/intro/intro_logo/header.h"
 
+#include "levels/intro/intro_cherry/header.h"
+
+#include "levels/intro/intro_cherry/geo_header.h"
+
 #endif

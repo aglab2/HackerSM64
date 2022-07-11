@@ -1,0 +1,9 @@
+extern Lights1 intro_cherry_M_60406_f3d_lights;
+extern u8 intro_cherry_M_60406_ci8[];
+extern u8 intro_cherry_M_60406_ci8_pal_rgba16[];
+extern Vtx intro_cherry_cherry_mesh_vtx_cull[8];
+extern Vtx intro_cherry_cherry_mesh_vtx_0[122];
+extern Gfx intro_cherry_cherry_mesh_tri_0[];
+extern Gfx mat_intro_cherry_M_60406_f3d[];
+extern Gfx mat_revert_intro_cherry_M_60406_f3d[];
+extern Gfx intro_cherry_cherry_mesh[];

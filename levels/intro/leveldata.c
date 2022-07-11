@@ -164,3 +164,4 @@ const f32 intro_seg7_table_scale_2[] = {
 };
 
 #include "levels/intro/intro_logo/model.inc.c"
+#include "levels/intro/intro_cherry/model.inc.c"
