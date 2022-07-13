@@ -193,6 +193,9 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, 316, 2235, 6678, 0, 0, 0, (0x21 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, -4221, 2062, 317, 0, 0, 0, (0x22 << 16), bhvDeathWarp),
 
+		OBJECT(MODEL_NONE, 6087, 3300, 821, 0, 0, 0, ((COIN_FORMATION_FLAG_FLYING) << 16) | (0), bhvCoinFormation),
+		OBJECT(MODEL_NONE, 3517, 3788, 1169, 0, 0, 0, 0, bhvCheckpoint),
+
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0, 0x23),
