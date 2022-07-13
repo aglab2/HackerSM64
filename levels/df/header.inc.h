@@ -85,7 +85,7 @@ extern u8 df_dl_tex1_32x32_4467A369CD8D72F6_13_ci8[];
 extern u8 df_dl_tex1_32x32_4467A369CD8D72F6_13_ci8_pal_rgba16[];
 extern u8 df_dl_save_ia8[];
 extern Vtx df_dl_Dice_Fortress_mesh_layer_4_vtx_cull[8];
-extern Vtx df_dl_Dice_Fortress_mesh_layer_4_vtx_0[187];
+extern Vtx df_dl_Dice_Fortress_mesh_layer_4_vtx_0[191];
 extern Gfx df_dl_Dice_Fortress_mesh_layer_4_tri_0[];
 extern Vtx df_dl_Dice_Fortress_mesh_layer_4_vtx_1[462];
 extern Gfx df_dl_Dice_Fortress_mesh_layer_4_tri_1[];

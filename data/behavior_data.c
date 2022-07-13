@@ -6855,6 +6855,7 @@ const BehaviorScript bhvCastleGate[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(castle_gate_collision),
     SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 20000), 
     CALL_NATIVE(bhv_init_room),
     SET_HOME(),
     CALL_NATIVE(bhv_castle_gate_init),
