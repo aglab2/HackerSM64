@@ -544,10 +544,10 @@ u32 mario_floor_is_slippery(struct MarioState *m) {
     }
 
     switch (mario_get_floor_class(m)) {
-        case SURFACE_VERY_SLIPPERY: normY = COS10; break;
-        case SURFACE_SLIPPERY:      normY = COS20; break;
-        default:                    normY = COS38; break;
-        case SURFACE_NOT_SLIPPERY:  normY = 0.0f;  break;
+        case SURFACE_CLASS_VERY_SLIPPERY: normY = COS10; break;
+        case SURFACE_CLASS_SLIPPERY:      normY = COS20; break;
+        default:                          normY = COS38; break;
+        case SURFACE_CLASS_NOT_SLIPPERY:  normY = 0.0f;  break;
     }
 
     return ABS(m->floor->normal.y) <= normY;
@@ -567,10 +567,10 @@ s32 mario_floor_is_slope(struct MarioState *m) {
     }
 
     switch (mario_get_floor_class(m)) {
-        case SURFACE_VERY_SLIPPERY: normY = COS5;  break;
-        case SURFACE_SLIPPERY:      normY = COS10; break;
-        default:                    normY = COS15; break;
-        case SURFACE_NOT_SLIPPERY:  normY = COS20; break;
+        case SURFACE_CLASS_VERY_SLIPPERY: normY = COS5;  break;
+        case SURFACE_CLASS_SLIPPERY:      normY = COS10; break;
+        default:                          normY = COS15; break;
+        case SURFACE_CLASS_NOT_SLIPPERY:  normY = COS20; break;
     }
 
     return ABS(m->floor->normal.y) <= normY;
@@ -596,10 +596,10 @@ s32 mario_floor_is_steep(struct MarioState *m) {
     // This does not matter in vanilla game practice.
     if (!mario_facing_downhill(m, FALSE)) {
         switch (mario_get_floor_class(m)) {
-            case SURFACE_VERY_SLIPPERY: normY = COS15; break;
-            case SURFACE_SLIPPERY:      normY = COS20; break;
-            default:                    normY = COS30; break;
-            case SURFACE_NOT_SLIPPERY:  normY = COS30; break;
+            case SURFACE_CLASS_VERY_SLIPPERY: normY = COS15; break;
+            case SURFACE_CLASS_SLIPPERY:      normY = COS20; break;
+            default:                          normY = COS30; break;
+            case SURFACE_CLASS_NOT_SLIPPERY:  normY = COS30; break;
         }
 
         return ABS(m->floor->normal.y) <= normY;
