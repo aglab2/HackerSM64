@@ -68,6 +68,7 @@ const LevelScript level_vcm_entry[] = {
 		OBJECT(MODEL_NONE, -290, 261, 32, 0, 0, 0, 0x00000000, bhvVcmCtl),
 		OBJECT(MODEL_WOODEN_SIGNPOST, 7, 261, -297, 0, 0, 0, (35 << 24) | (35 << 16), bhvMessagePanel),
 		OBJECT(MODEL_VCM_ARROW, -143, 261, 125, 0, 0, 0, 0x00000000, bhvVcmArrow),
+		OBJECT(MODEL_YELLOW_COIN_NO_SHADOW, 6503, 469, 4737, 0, 0, 0, 0x00000000, bhvYellowCoin),
 		TERRAIN(vcm_area_1_collision),
 		MACRO_OBJECTS(vcm_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_V6),

@@ -1,4 +1,4 @@
-static void set_gravity(u32 grav)
+static void set_gravity(s32 grav)
 {
     if (grav == gIsGravityFlipped)
         return;
@@ -18,6 +18,7 @@ static void set_gravity(u32 grav)
 
     gMarioState->vel[1] = -gMarioState->vel[1]; // Flip velocity
     gMarioState->peakHeight = 9000.f - gMarioState->peakHeight; // For fall damage
+    gMarioObject->hitboxDownOffset = (gIsGravityFlipped ? 160.f : 0.f); // Adjust hitbox when upside down
 }
 
 void vcm_ctl_loop()

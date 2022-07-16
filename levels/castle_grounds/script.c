@@ -159,7 +159,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, -2693, -1194 + 100, 2559, 0, 96, 0, (0x66 << 16), bhvAirborneStarCollectWarp),
 		OBJECT(MODEL_NONE, -1224, -445, -2648, 0, -115, 0, (0x43 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, -1217, -445, -2658, 0, -119, 0, (0x33 << 16), bhvAirborneStarCollectWarp),
-		OBJECT(MODEL_NONE, -24, -185, -37, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
+		OBJECT(MODEL_NONE, -24, -185, -37, 0, 180, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, -3195, -893, 3805, 0, 0, 0, (0x51 << 16) | (4 << 8), bhvBooCage),
 		OBJECT(MODEL_NONE, -3288, -915, 1547, 0, 0, 0, (0x52 << 16) | (4 << 8), bhvBooCage),
 		OBJECT(MODEL_NONE, -4889, -915, 2814, 0, 0, 0, (0x57 << 16) | (4 << 8), bhvBooCage),
