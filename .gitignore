@@ -98,6 +98,7 @@ lib/libs2d_engine.a
 
 !/sound/samples/streamed_audio/*.aiff
 !/levels/bdf/*.png
+!/levels/ending/*.png
 !/levels/vcutm/*.png
 
 !/levels/menu/main_menu_seg7.0D1A8.rgba16.png
