@@ -4,9 +4,6 @@
  * AUDIO SETTINGS *
  ******************/
 
-// Fixes the castle music sometimes triggering after getting a dialog
-#define CASTLE_MUSIC_FIX
-
 // Increase audio heap size to allow for more concurrent notes to be played and for more custom sequences/banks to be imported (not supported for SH)
 #define EXPAND_AUDIO_HEAP
 
