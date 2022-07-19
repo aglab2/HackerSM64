@@ -1,6 +1,3 @@
-Lights1 blinking_platform_gray_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
 Vtx blinking_platform_Cube_mesh_layer_5_vtx_cull[8] = {
 	{{{-150, -300, 150},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -284,7 +281,8 @@ Gfx mat_blinking_platform_gray[] = {
 	gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, 0, 0, 0, 0, PRIMITIVE, 0, SHADE, 0, 0, 0, 0, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetPrimColor(0, 0, 113, 113, 113, 255),
-	gsSPSetLights1(blinking_platform_gray_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

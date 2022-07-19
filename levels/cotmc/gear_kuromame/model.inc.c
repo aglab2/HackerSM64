@@ -1,6 +1,3 @@
-Lights1 gear_kuromame_f3d_material_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx gear_kuromame_gear_kuromame_32_rgba32_aligner[] = {gsSPEndDisplayList()};
 u8 gear_kuromame_gear_kuromame_32_rgba32[] = {
@@ -548,7 +545,8 @@ Gfx mat_gear_kuromame_f3d_material[] = {
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_32b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
 	gsDPSetPrimColor(0, 0, 254, 254, 254, 255),
-	gsSPSetLights1(gear_kuromame_f3d_material_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

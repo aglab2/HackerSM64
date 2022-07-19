@@ -1,6 +1,3 @@
-Lights1 ab_lavawall__16_f3d_layer5_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx ab_lavawall_lava2_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 ab_lavawall_lava2_rgba16[] = {
@@ -596,7 +593,8 @@ Gfx mat_ab_lavawall__16_f3d_layer5[] = {
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(1, 0, 0, 124, 252),
 	gsDPSetEnvColor(95, 2, 0, 255),
-	gsSPSetLights1(ab_lavawall__16_f3d_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

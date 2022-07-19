@@ -1,6 +1,3 @@
-Lights1 triarc_rock_f3d_material_001_layer5_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx triarc_rock__0E000010_i8_aligner[] = {gsSPEndDisplayList()};
 u8 triarc_rock__0E000010_i8[] = {
@@ -350,7 +347,8 @@ Gfx mat_triarc_rock_f3d_material_001_layer5[] = {
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
 	gsDPSetEnvColor(254, 254, 254, 0),
-	gsSPSetLights1(triarc_rock_f3d_material_001_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

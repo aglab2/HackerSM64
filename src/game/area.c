@@ -515,6 +515,7 @@ void render_game(void) {
     
     profiler_update(PROFILER_TIME_GFX);
     profiler_print_times();
+
 #if PUPPYPRINT_DEBUG
     puppyprint_render_profiler();
 #endif

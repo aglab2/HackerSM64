@@ -1,6 +1,3 @@
-Lights1 hf_scary_jerma_boom_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx hf_scary_jerma_jerma_ia8_aligner[] = {gsSPEndDisplayList()};
 u8 hf_scary_jerma_jerma_ia8[] = {
@@ -557,7 +554,8 @@ Gfx mat_hf_scary_jerma_boom[] = {
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
 	gsDPSetPrimColor(0, 0, 254, 254, 254, 255),
-	gsSPSetLights1(hf_scary_jerma_boom_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

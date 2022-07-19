@@ -1,6 +1,3 @@
-Lights1 spring_spring_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
 Vtx spring_spring_model_mesh_layer_1_vtx_cull[8] = {
 	{{{-55, 4, 63},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -156,7 +153,8 @@ Gfx mat_spring_spring_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, 0, 0, 0, 0, PRIMITIVE, 0, SHADE, 0, 0, 0, 0, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(spring_spring_002_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

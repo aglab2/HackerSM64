@@ -235,10 +235,12 @@ enum
     AIRLOCK_WAIT_FOR_LEAVE,
 };
 
+#define RED1 0xc90000ff
+#define RED2 0x5c0023ff
+#define BLUE1 0x6effff
+#define BLUE2 0xd0643ff
 extern Gfx mat_mario_red[];
 extern Gfx mat_mario_logo[];
-extern Lights1 mario_blue_lights;
-extern Lights1 mario_red_lights;
 
 extern u8 gLowGravityEnabled;
 static void airlock_switch_airlock(u8 value)
@@ -249,14 +251,14 @@ static void airlock_switch_airlock(u8 value)
 
     gLowGravityEnabled = newGravity;
     {
-        void** ptr = segmented_to_virtual(mat_mario_red);
-        ptr[9] = gLowGravityEnabled ? &mario_blue_lights.l[0] : &mario_red_lights.l[0];
-        ptr[11] = gLowGravityEnabled ? &mario_blue_lights.a : &mario_red_lights.a;
+        uintptr_t* ptr = (uintptr_t*) segmented_to_virtual(mat_mario_red);
+        //ptr[2*3+1] = gLowGravityEnabled ? BLUE1 : RED1;
+        //ptr[2*4+1] = gLowGravityEnabled ? BLUE2 : RED2;
     }
     {
-        void** ptr = segmented_to_virtual(mat_mario_logo);
-        ptr[39] = gLowGravityEnabled ? &mario_blue_lights.l[0] : &mario_red_lights.l[0];
-        ptr[41] = gLowGravityEnabled ? &mario_blue_lights.a : &mario_red_lights.a;
+        uintptr_t* ptr = (uintptr_t*) segmented_to_virtual(mat_mario_logo);
+        //ptr[2*18+1] = gLowGravityEnabled ? BLUE1 : RED1;
+        //ptr[2*19+1] = gLowGravityEnabled ? BLUE2 : RED2;
     }
     
     for (int i = 0; i < 10; i++)

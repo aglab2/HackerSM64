@@ -1,6 +1,3 @@
-Lights1 spiders_arrow_f3d_material_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx spiders_arrow_omm_texture_hud_arrow_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 spiders_arrow_omm_texture_hud_arrow_ci8[] = {
@@ -201,7 +198,8 @@ Gfx mat_spiders_arrow_f3d_material[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(spiders_arrow_f3d_material_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

@@ -1,6 +1,3 @@
-Lights1 dan_bp_bp_f3d_lights = gdSPDefLights1(
-	0x14, 0xC, 0x0,
-	0x33, 0x24, 0x0, 0x28, 0x28, 0x28);
 
 Gfx dan_bp_bp_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 dan_bp_bp_rgba16[] = {
@@ -459,7 +456,8 @@ Gfx mat_dan_bp_bp_f3d[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(dan_bp_bp_f3d_lights),
+    gsSPLightColor(LIGHT_1, 0x332400ff),
+    gsSPLightColor(LIGHT_2, 0x140c00ff),
 	gsSPEndDisplayList(),
 };
 

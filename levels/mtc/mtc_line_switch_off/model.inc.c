@@ -1,6 +1,3 @@
-Lights1 mtc_line_switch_off_f3d_material_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx mtc_line_switch_off__0E012050_ia16_aligner[] = {gsSPEndDisplayList()};
 u8 mtc_line_switch_off__0E012050_ia16[] = {
@@ -580,7 +577,8 @@ Gfx mat_mtc_line_switch_off_f3d_material_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(mtc_line_switch_off_f3d_material_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

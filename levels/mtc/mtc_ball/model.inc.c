@@ -1,6 +1,3 @@
-Lights1 mtc_ball_visual_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx mtc_ball_tex1_64x64_D9977DE0771CE688_13_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 mtc_ball_tex1_64x64_D9977DE0771CE688_13_ci4[] = {
@@ -364,7 +361,8 @@ Gfx mat_mtc_ball_visual_001[] = {
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
 	gsDPSetPrimColor(0, 0, 254, 254, 254, 178),
-	gsSPSetLights1(mtc_ball_visual_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

@@ -1,6 +1,3 @@
-Lights1 fight_bomb_f3d_material_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx fight_bomb_tex1_64x64_844AC5811E03316F_12_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 fight_bomb_tex1_64x64_844AC5811E03316F_12_ci4[] = {
@@ -497,7 +494,8 @@ Gfx mat_fight_bomb_f3d_material_002[] = {
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
 	gsDPSetPrimColor(0, 0, 254, 254, 254, 255),
-	gsSPSetLights1(fight_bomb_f3d_material_002_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

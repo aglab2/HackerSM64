@@ -1,6 +1,3 @@
-Lights1 hf_bridge1__Color_A01_1_f3d_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx hf_bridge1__Color_A01_1_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 hf_bridge1__Color_A01_1_rgba16[] = {
@@ -604,7 +601,8 @@ Gfx mat_hf_bridge1__Color_A01_1_f3d[] = {
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
 	gsDPSetPrimColor(0, 0, 254, 254, 254, 255),
-	gsSPSetLights1(hf_bridge1__Color_A01_1_f3d_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

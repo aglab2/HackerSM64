@@ -1,14 +1,5 @@
-Lights1 dan_bird_f_f3d_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-Lights1 dan_bird_b_f3d_lights = gdSPDefLights1(
-	0x3C, 0x3C, 0x3C,
-	0x7F, 0x7F, 0x7F, 0x28, 0x28, 0x28);
 
-Lights1 dan_bird_f2_f3d_layer4_lights = gdSPDefLights1(
-	0x2D, 0x2D, 0x2D,
-	0x7F, 0x7F, 0x7F, 0x28, 0x28, 0x28);
 
 Gfx dan_bird_CommonBirdF_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 dan_bird_CommonBirdF_ci8[] = {
@@ -1357,7 +1348,8 @@ Gfx mat_dan_bird_f_f3d[] = {
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
 	gsDPSetPrimColor(0, 0, 36, 31, 27, 255),
-	gsSPSetLights1(dan_bird_f_f3d_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -1381,7 +1373,8 @@ Gfx mat_dan_bird_b_f3d[] = {
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
 	gsDPSetPrimColor(0, 0, 0, 90, 127, 255),
-	gsSPSetLights1(dan_bird_b_f3d_lights),
+    gsSPLightColor(LIGHT_1, 0x7f7f7fff),
+    gsSPLightColor(LIGHT_2, 0x3c3c3cff),
 	gsSPEndDisplayList(),
 };
 
@@ -1408,7 +1401,8 @@ Gfx mat_dan_bird_f2_f3d_layer4[] = {
 	gsDPSetTileSize(0, 0, 0, 252, 508),
 	gsDPSetPrimColor(0, 0, 0, 90, 127, 255),
 	gsDPSetEnvColor(65, 65, 65, 255),
-	gsSPSetLights1(dan_bird_f2_f3d_layer4_lights),
+    gsSPLightColor(LIGHT_1, 0x7f7f7fff),
+    gsSPLightColor(LIGHT_2, 0x2d2d2dff),
 	gsSPEndDisplayList(),
 };
 

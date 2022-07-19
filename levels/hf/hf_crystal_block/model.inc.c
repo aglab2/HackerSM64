@@ -1,6 +1,3 @@
-Lights1 hf_crystal_block_tile_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx hf_crystal_block_tex1_64x64_69914EB596611B6E_12_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 hf_crystal_block_tex1_64x64_69914EB596611B6E_12_ci4[] = {
@@ -342,7 +339,8 @@ Gfx mat_hf_crystal_block_tile[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(hf_crystal_block_tile_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

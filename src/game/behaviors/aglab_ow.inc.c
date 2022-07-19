@@ -618,6 +618,11 @@ static void ow_ctl2_pipe_init(int enabled, int bparam)
     }
 }
 
+#define RED1 0xc90000ff
+#define RED2 0x5c0023ff
+#define BLUE1 0x6effff
+#define BLUE2 0xd0643ff
+
 void ow_ctl2_init()
 {
     struct Surface* floor = gMarioStates->floor;
@@ -638,16 +643,15 @@ void ow_ctl2_init()
     rovert_init();
     gLowGravityEnabled = 0;
     {
-        void** ptr = segmented_to_virtual(mat_mario_red);
-        ptr[9] = &mario_red_lights.l[0];
-        ptr[11] = &mario_red_lights.a;
+        uintptr_t* ptr = (uintptr_t*) segmented_to_virtual(mat_mario_red);
+        //ptr[2*3+1] = RED1;
+        //ptr[2*4+1] = RED2;
     }
     {
-        void** ptr = segmented_to_virtual(mat_mario_logo);
-        ptr[39] = &mario_red_lights.l[0];
-        ptr[41] = &mario_red_lights.a;
+        uintptr_t* ptr = (uintptr_t*) segmented_to_virtual(mat_mario_logo);
+        //ptr[2*18+1] = RED1;
+        //ptr[2*19+1] = RED2;
     }
-
     s32* colors = &o->oOW2CtlRNGColor1;
     for (int i = 0; i < 3; i++)
     {
