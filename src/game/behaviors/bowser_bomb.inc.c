@@ -4,15 +4,10 @@ extern void fight_set_lines_alpha(u8 a);
 void bhv_bowser_bomb_loop(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         o->oInteractStatus &= ~INT_STATUS_INTERACTED;
-        if (1 == o->oBehParams2ndByte)
-        {
-            f32 velX = gMarioStates->vel[0];
-            f32 velZ = gMarioStates->vel[2];
-            f32 vel = sqrtf(velX * velX + velZ * velZ);
-            o->oVelX = velX + 20.f * velX / vel;
-            o->oVelZ = velZ + 20.f * velZ / vel;
-            o->parentObj->oSubAction = 1;
-        }
+        o->parentObj->oFightCtlBomb = NULL;
+        o->parentObj->oFightCtlBombCooldown = 100;
+        spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 
     if (2 == o->oBehParams2ndByte)
@@ -24,17 +19,10 @@ void bhv_bowser_bomb_loop(void) {
 
         if (60 == o->oTimer)
         {
+            o->parentObj->oFightCtlBomb = NULL;
+            o->parentObj->oFightCtlBombCooldown = 100;
             o->activeFlags = 0;
         }
-    }
-
-    if (ABS(o->oPosX) > 1400.f || ABS(o->oPosZ) > 1400.f)
-    {
-        spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-        o->parentObj->oFightCtlBomb = NULL;
-        o->parentObj->oFightCtlBombCooldown = 100;
-        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-        return;
     }
 
     o->oVelX = 0.96f * o->oVelX;

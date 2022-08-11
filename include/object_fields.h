@@ -1402,7 +1402,7 @@ os16112*/
 
 #define oFightCtlBomb OBJECT_FIELD_OBJ(0x1B)
 #define oFightCtlBombCooldown OBJECT_FIELD_S32(0x1C)
-#define oFightCtlBombArrows OBJECT_FIELD_OBJ(0x1D)
+#define oFightCtlBombIndicator OBJECT_FIELD_OBJ(0x1D)
 
 #define oFightFlameColor OBJECT_FIELD_S32(0x1F)
 #define oFightFlameAlphaSpeed OBJECT_FIELD_S32(0x20)

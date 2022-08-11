@@ -143,6 +143,27 @@ void fight_set_empty(int i, int j)
     o->oFightCtlEmptiesMap |= 1 << (i*5 + j); 
 }
 
+static void fight_draw_rope()
+{
+    if (!o->oFightCtlRoped)
+    {
+        o->oFightCtlRoped = spawn_object(o, MODEL_FIGHT_ROPED, bhvStaticObjectEx);
+        o->oFightCtlRoped->oPosX = 0.0f;
+        o->oFightCtlRoped->oPosY = 70.0f;
+        o->oFightCtlRoped->oPosZ = 0.0f;
+    }
+
+    {
+        // minus (0, 0)
+        f32 dx = gMarioStates->pos[0];
+        f32 dz = gMarioStates->pos[2];
+        f32 d = sqrtf(dx*dx + dz*dz);
+        o->oFightCtlRoped->oFaceAngleYaw = atan2s(dz, dx);
+        obj_scale_xyz(o->oFightCtlRoped, 1.5f, 1.f, d / 300.f);
+    }
+}
+
+static const f32 ArenaSize = 1150.f;
 void fight_platform_ctl_loop()
 {
     fight_animate_bg();
@@ -152,8 +173,6 @@ void fight_platform_ctl_loop()
     // intro
     if (gCamera->cutscene)
         return;
-
-    static const f32 ArenaSize = 1150.f;
 
     // print_text_fmt_int(20, 20, "%d", o->oTimer);
     // print_text_fmt_int(20, 40, "%d", o->oAction);
@@ -193,6 +212,8 @@ void fight_platform_ctl_loop()
     }
     else if (2 == o->oAction)
     {
+        fight_magnet_bowser_to_opposite_side();
+        fight_draw_rope();
         fight_decay_lines_alpha();
         if (o->parentObj->oAction == BOWSER_ACT_DEAD && o->parentObj->oTimer > 10)
         {
@@ -200,108 +221,12 @@ void fight_platform_ctl_loop()
             o->oAction = 3;
             seq_player_fade_out(0, 100);
         }
-
-        // Bowser must bounce around in the circles.
-        // One of the velocities is constant, other one is gravitated towards the side bowser is moving along/
-        // Initially it is X axis that is Bowser graviated to, Z speed is kept constant.
-        s32 gravTowardsX = 0 == (o->oSubAction & 1);
-        f32 accel        =      (o->oSubAction & 2) ? -8.f : 8.f;
-        if (gravTowardsX)
-        {
-            // towards X
-            o->oVelX -= accel;
-        }
-        else
-        {
-            // towards Z
-            o->oVelZ -= accel;
-        }
-        
-        // apply speed and check for clamping
-        o->oPosX += o->oVelX;
-        o->oPosZ += o->oVelZ;
-
-        s32 clampX = -ArenaSize > o->oPosX || o->oPosX > ArenaSize;
-        s32 clampZ = -ArenaSize > o->oPosZ || o->oPosZ > ArenaSize;
-
-        // condition for bouncing moment
-        if ((gravTowardsX && clampZ) || (!gravTowardsX && clampX))
-        {
-            cur_obj_play_sound_2(SOUND_GENERAL_POUND_ROCK);
-            for (int i = 0; i < 3; i++)
-            {
-                if (o->parentObj->oHealth == 3 && i != 1)
-                {
-                    continue;
-                }
-
-                struct Object* flame = spawn_object(o, MODEL_FIGHT_FLAME, bhvFightFlame);
-                flame->oForwardVel = 50.f;
-                flame->oMoveAngleYaw = -0x1000 + 0x1000 * i - 0x4000 * o->oSubAction; 
-                rgb* c = (rgb*) &flame->oFightFlameColor;
-                c->r = 255;
-                c->g = 100;
-                c->b = 100;
-                c->a = 0;
-                flame->oFightFlameAlphaSpeed = 30;
-            }
-            // we need to switch directions
-            // clamp both coordinates first, it will be fixed next frame if stuff goes raw
-            o->oSubAction++;
-            o->oPosX = CLAMP(o->oPosX, -ArenaSize, ArenaSize);
-            o->oPosZ = CLAMP(o->oPosZ, -ArenaSize, ArenaSize);
-
-            f32 newGravTowardsX = 0 == (o->oSubAction & 1);
-            f32 newVelForAccel = (o->oSubAction & 2) ? 80.f : -80.f;
-            s32 mask = o->oSubAction & 3;
-            if (newGravTowardsX)
-            {
-                o->oVelX = newVelForAccel;
-                o->oVelZ = (mask == 0 || mask == 3) ? -40.f : 40.f;
-            }
-            else
-            {
-                o->oVelZ = newVelForAccel;
-                o->oVelX = (mask == 0 || mask == 3) ? -40.f : 40.f;
-            }
-        }
-        else
-        {
-            // check for regular bouncing
-            if (clampX)
-            {
-                o->oVelX = -o->oVelX;
-                o->oPosX = CLAMP(o->oPosX, -ArenaSize, ArenaSize);
-            }
-
-            if (clampZ)
-            {
-                o->oVelZ = -o->oVelZ;
-                o->oPosZ = CLAMP(o->oPosZ, -ArenaSize, ArenaSize);
-            }
-
-            if (clampX || clampZ)
-            {
-                cur_obj_play_sound_2(SOUND_ACTION_METAL_BONK);
-                if (o->parentObj->oHealth <= 1)
-                {
-                    struct Object* flame = spawn_object(o, MODEL_FIGHT_FLAME, bhvFightFlame);
-                    flame->oForwardVel = 50.f;
-                    flame->oMoveAngleYaw = 0x4000 - 0x4000 * o->oSubAction; //  + 0x1000 * i
-                    rgb* c = (rgb*) &flame->oFightFlameColor;
-                    c->r = 100;
-                    c->g = 100;
-                    c->b = 255;
-                    c->a = 0;
-                    flame->oFightFlameAlphaSpeed = 30;
-                }
-            }
-        }
     }
     else if (3 == o->oAction)
     {
         // troll death, decelerate, when hit zero kill the lad
         o->oAngleVelYaw *= 0.97f;
+        o->oFightCtlRoped->activeFlags = 0;
 
         if (0 == o->oAngleVelYaw)
         {
@@ -588,23 +513,7 @@ void fight_platform_ctl_loop()
     }
     else if (8 == o->oAction)
     {
-        if (!o->oFightCtlRoped)
-        {
-            o->oFightCtlRoped = spawn_object(o, MODEL_FIGHT_ROPED, bhvStaticObjectEx);
-            o->oFightCtlRoped->oPosX = 0.0f;
-            o->oFightCtlRoped->oPosY = 70.0f;
-            o->oFightCtlRoped->oPosZ = 0.0f;
-        }
-
-        {
-            // minus (0, 0)
-            f32 dx = gMarioStates->pos[0];
-            f32 dz = gMarioStates->pos[2];
-            f32 d = sqrtf(dx*dx + dz*dz);
-            o->oFightCtlRoped->oFaceAngleYaw = atan2s(dz, dx);
-            obj_scale_xyz(o->oFightCtlRoped, 1.5f, 1.f, d / 300.f);
-        }
-
+        fight_draw_rope();
         if (o->parentObj->oHealth == 0)
         {
             cur_obj_become_intangible();
@@ -703,7 +612,7 @@ void fight_platform_ctl_loop()
             fight_shadow_set_color(&color);
             fight_shadow_set_alpha(o->oTimer * 1.5f);
         }
-        else if (o->oTimer == 200)
+        else if (o->oTimer == 170)
         {
             for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
@@ -783,7 +692,7 @@ void fight_shadow_loop()
         o->oPosZ = o->oHomeZ + 10.f * coss(0x156 * o->oTimer);
     }
 
-    if (201 == o->oTimer)
+    if (171 == o->oTimer)
     {
         o->activeFlags = 0;
     }
@@ -1053,7 +962,10 @@ void fight_bomb_ctl_loop()
         {
             o->oAction = 1;
             o->oSubAction = 0;
-            o->oFightCtlBombCooldown = 100;
+            o->oFightCtlBombCooldown = 20;
+            o->oPosX = -963.f;
+            o->oVelX = -30.f;
+            o->oVelZ = -40.f;
         }
     }
     else
@@ -1063,35 +975,112 @@ void fight_bomb_ctl_loop()
             o->activeFlags = 0;
         }
 
-        if (o->oFightCtlBombArrows)
+        int bowserHp = o->parentObj->parentObj->oHealth; // yes
+
+        // Bouncing around in the circles.
+        // One of the velocities is constant, other one is gravitated towards the side bowser is moving along/
+        // Initially it is X axis that is Bowser graviated to, Z speed is kept constant.
+        s32 gravTowardsX = 0 == (o->oSubAction & 1);
+        f32 accel        =      (o->oSubAction & 2) ? -8.f : 8.f;
+        if (gravTowardsX)
         {
-            o->oFightCtlBombArrows->oFaceAngleYaw += 0x169;
-            if (0 == o->oSubAction)
+            // towards X
+            o->oVelX -= accel;
+        }
+        else
+        {
+            // towards Z
+            o->oVelZ -= accel;
+        }
+        
+        // apply speed and check for clamping
+        o->oPosX += o->oVelX;
+        o->oPosZ += o->oVelZ;
+
+        s32 clampX = -ArenaSize > o->oPosX || o->oPosX > ArenaSize;
+        s32 clampZ = -ArenaSize > o->oPosZ || o->oPosZ > ArenaSize;
+
+        // condition for bouncing moment
+        if ((gravTowardsX && clampZ) || (!gravTowardsX && clampX))
+        {
+            // we need to switch directions
+            // clamp both coordinates first, it will be fixed next frame if stuff goes raw
+            o->oSubAction++;
+            o->oPosX = CLAMP(o->oPosX, -ArenaSize, ArenaSize);
+            o->oPosZ = CLAMP(o->oPosZ, -ArenaSize, ArenaSize);
+
+            f32 newGravTowardsX = 0 == (o->oSubAction & 1);
+            f32 newVelForAccel = (o->oSubAction & 2) ? 80.f : -80.f;
+            s32 mask = o->oSubAction & 3;
+            if (newGravTowardsX)
             {
-                if (*a < 250)
-                {
-                    *a += 2;
-                }
-                else
-                {
-                    *a = 255;
-                }
+                o->oVelX = newVelForAccel;
+                o->oVelZ = (mask == 0 || mask == 3) ? -40.f : 40.f;
             }
             else
             {
-                if (*a > 10)
-                {
-                    *a -= 5;
-                }
-                else
-                {
-                    o->oFightCtlBombArrows->activeFlags = 0;
-                    o->oFightCtlBombArrows = NULL;
-                }
+                o->oVelZ = newVelForAccel;
+                o->oVelX = (mask == 0 || mask == 3) ? -40.f : 40.f;
+            }
+        }
+        else
+        {
+            // check for regular bouncing
+            if (clampX)
+            {
+                o->oVelX = -o->oVelX;
+                o->oPosX = CLAMP(o->oPosX, -ArenaSize, ArenaSize);
+            }
+
+            if (clampZ)
+            {
+                o->oVelZ = -o->oVelZ;
+                o->oPosZ = CLAMP(o->oPosZ, -ArenaSize, ArenaSize);
+            }
+
+            if (bowserHp == 1 && o->oFightCtlBombIndicator && (o->oFightCtlBombIndicator->oTimer > 30) && (clampX || clampZ))
+            {
+                cur_obj_play_sound_2(SOUND_ACTION_METAL_BONK);
+                struct Object* flame = spawn_object(o, MODEL_FIGHT_FLAME, bhvFightFlame);
+                flame->oForwardVel = 50.f;
+                flame->oPosY = 10.f;
+                flame->oMoveAngleYaw = 0x4000 - 0x4000 * o->oSubAction; //  + 0x1000 * i
+                rgb* c = (rgb*) &flame->oFightFlameColor;
+                c->r = 100;
+                c->g = 100;
+                c->b = 255;
+                c->a = 0;
+                flame->oFightFlameAlphaSpeed = 30;
             }
         }
 
-        if (!o->oFightCtlBomb)
+        if (o->oFightCtlBombIndicator)
+        {
+            if (bowserHp == 2)
+            {
+                o->oFightCtlBombIndicator->oPosX = sins(0x136 * o->oTimer) * 800.f;
+                o->oFightCtlBombIndicator->oPosZ = coss(0x136 * o->oTimer) * 800.f;
+            }
+            if (bowserHp == 1)
+            {
+                o->oFightCtlBombIndicator->oPosX = o->oPosX;
+                o->oFightCtlBombIndicator->oPosZ = o->oPosZ;
+            }
+
+            if (o->oFightCtlBombIndicator->oTimer < 150)
+                fight_shadow_set_alpha(o->oFightCtlBombIndicator->oTimer * 1.5f);
+
+            if (170 == o->oFightCtlBombIndicator->oTimer)
+            {
+                o->oFightCtlBomb = spawn_object(o, MODEL_BOWSER_BOMB, bhvBowserBomb);
+                o->oFightCtlBomb->oPosX = o->oFightCtlBombIndicator->oPosX;
+                o->oFightCtlBomb->oPosZ = o->oFightCtlBombIndicator->oPosZ;
+                o->oFightCtlBomb->oBehParams2ndByte = 2;
+                o->oFightCtlBomb->parentObj = o; // just in case lol
+                o->oFightCtlBombIndicator = NULL;
+            }
+        }
+        else if (!o->oFightCtlBomb)
         {
             if (o->oFightCtlBombCooldown)
             {
@@ -1099,20 +1088,28 @@ void fight_bomb_ctl_loop()
             }
             else
             {
-                if (o->oDistanceToMario > 300.f)
+                struct Object* plat;
+                plat = spawn_object(o, MODEL_FIGHT_BOMB_SHADOW, bhvFightShadow);
+                plat->oFaceAngleYaw = 0;
+                plat->oBehParams2ndByte = 1;
+                plat->oPosY = 10.f;
+                if (bowserHp == 3)
                 {
-                    o->oFightCtlBomb = spawn_object(o, MODEL_BOWSER_BOMB, bhvBowserBomb);
-                    o->oFightCtlBomb->oBehParams2ndByte = 1;
-                    o->oFightCtlBomb->parentObj = o; // just in case lol
-                    if (0 == o->oSubAction)
-                    {
-                        o->oFightCtlBombArrows = spawn_object(o, MODEL_FIGHT_ARROWS, bhvStaticObjectEx);
-                    }
+                    plat->oPosX = gMarioStates->pos[0] > 0 ? 800.f : -800.f;
+                    plat->oPosZ = gMarioStates->pos[2] > 0 ? 800.f : -800.f;
                 }
-                else
+                else if (bowserHp == 2)
                 {
-                    o->oFightCtlBombCooldown = 30;
+                    plat->oPosX = sins(0x136 * o->oTimer) * 800.f;
+                    plat->oPosZ = coss(0x136 * o->oTimer) * 800.f;
                 }
+                else if (bowserHp == 1)
+                {
+                    plat->oPosX = o->oPosX;
+                    plat->oPosZ = o->oPosZ;
+                }
+                o->oFightCtlBombIndicator = plat;
+                fight_shadow_set_alpha(0);
             }
         }
     }
