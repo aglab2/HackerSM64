@@ -14,8 +14,14 @@
 #include "actors/common1.h"
 #include "actors/group0.h"
 
+/* Fast64 begin persistent block [includes] */
+/* Fast64 end persistent block [includes] */
+
 #include "make_const_nonconst.h"
 #include "levels/wmotr/header.h"
+
+/* Fast64 begin persistent block [scripts] */
+/* Fast64 end persistent block [scripts] */
 
 const LevelScript level_wmotr_entry[] = {
 	INIT_LEVEL(),
@@ -39,6 +45,9 @@ const LevelScript level_wmotr_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BITDW_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RIFT, rift_geo), 
 
+	/* Fast64 begin persistent block [level commands] */
+	/* Fast64 end persistent block [level commands] */
+
 	AREA(1, wmotr_area_1),
 		INSTANT_WARP(0x00, 0x02, 0, 0, 0),
 		WARP_NODE(0x0a, LEVEL_WMOTR, 0x05, 0x0A, WARP_NO_CHECKPOINT),
@@ -46,41 +55,50 @@ const LevelScript level_wmotr_entry[] = {
 		WARP_NODE(WARP_NODE_DEFAULT, LEVEL_CASTLE_GROUNDS, 0x01, 0x63, WARP_NO_CHECKPOINT),
 		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 0x01, 0x73, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 100, 0, 0, -90, 0, (0xa << 16), bhvAirborneWarp),
+		OBJECT(MODEL_NONE, -2133, 3920, -230, 0, 0, 0, 0x00000000, bhvDnvicColorReset),
 		OBJECT(MODEL_CASTLE_WOODEN_DOOR, -1492, -253, -13, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_WOODEN_SIGNPOST, -1447, -253, 362, 0, 90, 0, 0x008A0000, bhvMessagePanel),
 		TERRAIN(wmotr_area_1_collision),
 		MACRO_OBJECTS(wmotr_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_ARENA),
 		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(2, wmotr_area_2),
-		WARP_NODE(WARP_NODE_DEFAULT, LEVEL_CASTLE_GROUNDS, 0x01, 0x63, WARP_NO_CHECKPOINT),
-		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 0x01, 0x73, WARP_NO_CHECKPOINT),
 		INSTANT_WARP(0x00, 0x02, 0, -678, 0),
 		INSTANT_WARP(0x01, 0x02, 0, 682, 0),
+		WARP_NODE(WARP_NODE_DEFAULT, LEVEL_CASTLE_GROUNDS, 0x01, 0x63, WARP_NO_CHECKPOINT),
+		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 0x01, 0x73, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, -2133, 3920, -230, 0, 0, 0, 0x00000000, bhvDnvicColorReset),
 		TERRAIN(wmotr_area_2_collision),
 		MACRO_OBJECTS(wmotr_area_2_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_ARENA),
 		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(3, wmotr_area_3),
+		INSTANT_WARP(0x00, 0x02, 0, 0, 0),
 		WARP_NODE(WARP_NODE_DEFAULT, LEVEL_CASTLE_GROUNDS, 0x01, 0x63, WARP_NO_CHECKPOINT),
 		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 0x01, 0x73, WARP_NO_CHECKPOINT),
-		INSTANT_WARP(0x00, 0x02, 0, 0, 0),
 		OBJECT(MODEL_NONE, -2133, 3920, -230, 0, 0, 0, 0x00000000, bhvDnvicColorReset),
-		OBJECT(MODEL_WOODEN_SIGNPOST, -1964, 3602, 257, 0, -90, 0, 0x008B0000, bhvMessagePanel),
+		OBJECT(MODEL_WOODEN_SIGNPOST, -2128, 3832, -343, 0, 0, 0, (139 << 24) | (139 << 16), bhvMessagePanel),
 		TERRAIN(wmotr_area_3_collision),
 		MACRO_OBJECTS(wmotr_area_3_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_ARENA),
 		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(4, wmotr_area_4),
+		WARP_NODE(0x01, LEVEL_WMOTR, 0x05, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(WARP_NODE_DEFAULT, LEVEL_CASTLE_GROUNDS, 0x01, 0x63, WARP_NO_CHECKPOINT),
 		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 0x01, 0x73, WARP_NO_CHECKPOINT),
-		WARP_NODE(0x01, LEVEL_WMOTR, 0x05, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, -2133, 3920, -230, 0, 0, 0, 0x00000000, bhvDnvicColorReset),
 		OBJECT(MODEL_NONE, -4003, 3891, -7, 0, 90, 0, 0x00010000, bhvWarp),
 		OBJECT(MODEL_NONE, -4003, 4529, -7, 0, 90, 0, 0x00010000, bhvWarp),
 		OBJECT(MODEL_NONE, -4003, 4742, -7, 0, 90, 0, 0x00010000, bhvWarp),
@@ -90,18 +108,22 @@ const LevelScript level_wmotr_entry[] = {
 		MACRO_OBJECTS(wmotr_area_4_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_ARENA),
 		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(5, wmotr_area_5),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x00, WARP_NO_CHECKPOINT),
 		WARP_NODE(WARP_NODE_DEFAULT, LEVEL_CASTLE_GROUNDS, 0x01, 0x63, WARP_NO_CHECKPOINT),
 		WARP_NODE(WARP_NODE_DEATH, LEVEL_CASTLE_GROUNDS, 0x01, 0x73, WARP_NO_CHECKPOINT),
-		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x00, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -2133, 30, -1001, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		OBJECT(MODEL_STAR, -2133, 206, -13, 0, 0, 0, 0x00000000, bhvStar),
 		TERRAIN(wmotr_area_5_collision),
 		MACRO_OBJECTS(wmotr_area_5_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_TIME),
 		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),

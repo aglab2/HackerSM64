@@ -3,6 +3,7 @@
 const GeoLayout wmotr_area_3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2133, -253, -13, wmotr_dl_a3wall_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2133, -253, -13, wmotr_dl_chamber_10_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2133, -253, -13, wmotr_dl_chamber_10_001_mesh),
 	GEO_CLOSE_NODE(),

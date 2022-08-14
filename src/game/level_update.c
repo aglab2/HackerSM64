@@ -38,6 +38,8 @@
 
 #include "config.h"
 
+#include "color.h"
+
 const char *creditsFM[] = { "1MADE FOR", "FANGAME MARATHON 2022" };
 const char *creditsArthur[] = { "2MODELLING", "ARTHURTILLY", "GAEL" };
 const char *creditsMushie[] = { "1MODELLING", "MUSHIE" };
@@ -429,38 +431,14 @@ void warp_credits(void) {
 
 #include "tile_scroll.h"
 
-extern Lights1 wmotr_dl_down_instant_warp_lights;
-extern Vtx wmotr_dl_main_silo_mesh_vtx_2[154];
-extern Vtx wmotr_dl_chamber_10_001_mesh_vtx_0[134];
-u16 gDnvicUpCounter   = 0;
-u16 gDnvicDownCounter = 0;
-u16 gDnvicChamber     = 1;
-
-static void shade_lights(Lights1* light, int amt)
-{
-    light->a.l.col[0]   -= amt;
-    light->a.l.col[1]   -= amt;
-    light->a.l.col[2]   -= amt;
-    light->a.l.colc[0]  -= amt;
-    light->a.l.colc[1]  -= amt;
-    light->a.l.colc[2]  -= amt;
-    light->l->l.col[0]  -= 2*amt;
-    light->l->l.col[1]  -= 2*amt;
-    light->l->l.col[2]  -= 2*amt;
-    light->l->l.colc[0] -= 2*amt;
-    light->l->l.colc[1] -= 2*amt;
-    light->l->l.colc[2] -= 2*amt;
-}
-
-static void shade_vcols(Vtx* vtx, int cnt, int amt)
-{
-    for (int i = 0; i < cnt; i++)
-    {
-        vtx[i].v.cn[0] -= amt;
-        vtx[i].v.cn[1] -= amt;
-        vtx[i].v.cn[2] -= amt;
-    }
-}
+u16 gDnvicCounter = 0;
+u16 gDnvicChamber = 1;
+hsv gDnvicColor =
+{    
+    .h = 0.052028f * 0x10000,
+    .v = 250,
+    .s = 0.826638f,
+};
 
 static void stretch_vcols(Vtx* vtx, int cnt)
 {
@@ -497,92 +475,121 @@ void check_instant_warp(void) {
                 {
                     switch(floor->force) {
                         case 0x69:
-                            gDnvicUpCounter += 1;
+                            gDnvicCounter++;
                             break;
                         case 0x420:
-                            gDnvicDownCounter += 1;
+                            if (gDnvicCounter)
+                                gDnvicCounter--;
+
                             break;
                         case 0x4:
-                            gDnvicUpCounter = 0;
-                            gDnvicDownCounter = 0;
+                            gDnvicCounter = 0;
                             gDnvicChamber = 1;
                             break;
                     }
                     switch(gDnvicChamber) {
                         case 1:
-                            if(gDnvicDownCounter == 1 && gDnvicUpCounter < 2) {
+                            if((floor->force == 0x420) && gDnvicCounter < 2) {
                                 gDnvicChamber = 2;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0x3000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
                             }
-                            if(gDnvicUpCounter == 20) { // changed 25 to 20 to make it less of a slogfest
+                            if(gDnvicCounter == 10) {
                                 gDnvicChamber = 10;
-                                gDnvicUpCounter = 0;
-                                gDnvicDownCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
                             }
-                            if (gDnvicUpCounter > 5 && floor->force == 0x69)
+                            else if (gDnvicCounter >= 2)
                             {
-                                Lights1* l0 = (Lights1*) segmented_to_virtual(&wmotr_dl_down_instant_warp_lights);
-                                shade_lights(l0, 2);
-                                Vtx* v0 = (Vtx*) segmented_to_virtual(wmotr_dl_main_silo_mesh_vtx_2);
-                                Vtx* v1 = (Vtx*) segmented_to_virtual(wmotr_dl_chamber_10_001_mesh_vtx_0); // chamber 10
-                                shade_vcols(v0, sizeof(wmotr_dl_main_silo_mesh_vtx_2) / sizeof(*wmotr_dl_main_silo_mesh_vtx_2), 3);
-                                shade_vcols(v1, sizeof(wmotr_dl_chamber_10_001_mesh_vtx_0) / sizeof(*wmotr_dl_chamber_10_001_mesh_vtx_0), 3);
+                                gDnvicColor.h = 0.052028f * 0x10000;
+                                gDnvicColor.v = 0.814847f * 255 - 15 * (gDnvicCounter - 2);
+                                gDnvicColor.s = 0.826638f;
                             }
                             break;
                         case 2:
-                            if(gDnvicUpCounter == 1) {
+                            if(gDnvicCounter == 1) {
                                 gDnvicChamber = 3;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0x6000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
                             }
                             break;
                         case 3:
-                            if(gDnvicUpCounter == 1) {
+                            if(gDnvicCounter == 1) {
                                 gDnvicChamber = 4;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0x9000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
                             }
-                            if(gDnvicDownCounter == 1) {
+                            else if(gDnvicCounter == 0)
+                            {
                                 gDnvicChamber = 5;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0xB000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
                             }
                             break;
                         case 4:
-                            if(gDnvicUpCounter == 1) {
+                            if(gDnvicCounter == 1) {
                                 gDnvicChamber = 1;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
                             }
-                            if(gDnvicDownCounter == 1) {
+                            else if(gDnvicCounter == 0)
+                            {
                                 gDnvicChamber = 2;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0x3000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
                             }
                             break;
                         case 5:
-                            if(gDnvicUpCounter == 5) {
+                            if(gDnvicCounter == 5) {
                                 gDnvicChamber = 12;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0xB000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                // gDnvicCounter = 0;
                             }
                             if (floor->force == 0x69)
                             {
-                                Vtx* v0 = (Vtx*) segmented_to_virtual(wmotr_dl_main_silo_mesh_vtx_2);
-                                stretch_vcols(v0, sizeof(wmotr_dl_main_silo_mesh_vtx_2) / sizeof(*wmotr_dl_main_silo_mesh_vtx_2));
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0xB000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f - 0.15f * gDnvicCounter;
                             }
-                            if(gDnvicDownCounter == 1) {
+                            if(gDnvicCounter == 0) {
                                 gDnvicChamber = 2;
-                                gDnvicDownCounter = 0;
-                                gDnvicUpCounter = 0;
+                                gDnvicColor.h = 0.052028f * 0x10000 + 0x3000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
+                            }
+                            break;
+                        case 10:
+                            {
+                                // it is only possible to go downwards from here, reset stuff
+                                gDnvicChamber = 1;
+                                gDnvicColor.h = 0.052028f * 0x10000;
+                                gDnvicColor.v = 250;
+                                gDnvicColor.s = 0.826638f;
+                                gDnvicCounter = 0;
                             }
                             break;
                     }
                     switch(gDnvicChamber) {// don't want to wait until the next instant warp in order to warp
                         case 10:
                             cameraAngle = gMarioState->area->camera->yaw;
-                            gDnvicUpCounter = 0; // fix being stuck forever
+                            gDnvicCounter = 0; // fix being stuck forever
                             change_area(3);
                             gMarioState->area = gCurrentArea;
                             warp_camera(0, 0, 0);

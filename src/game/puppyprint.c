@@ -1263,6 +1263,11 @@ void render_multi_image(Texture *image, s32 x, s32 y, s32 width, s32 height, UNU
                 G_TX_RENDERTILE, 0, 0, modeSC << 10, 1 << 10);
         }
     }
+
+    gDPPipeSync(gDisplayListHead++);
+    gDPSetTexturePersp(gDisplayListHead++,  G_TP_PERSP);
+    gDPSetCombineMode(gDisplayListHead++,   G_CC_SHADE, G_CC_SHADE);
+    gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
 }
 
 #endif

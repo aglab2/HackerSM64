@@ -27,3 +27,8 @@ ALIGNED8 static const Texture wmotr_seg7_texture_07001600[] = {
 ALIGNED8 const Texture dnvic_map_texture_07001600[] = {
 #include "levels/wmotr/map.rgba16.inc.c"
 };
+
+// 0x07001600 - 0x07001800
+ALIGNED8 const Texture dnvic_mario_texture_07001600[] = {
+#include "levels/wmotr/mario.rgba16.inc.c"
+};

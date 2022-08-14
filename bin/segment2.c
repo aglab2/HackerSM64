@@ -303,7 +303,7 @@ ALIGNED8 static const Texture texture_hud_char_silver_coin[] = {
 #include "textures/segment2/segment2.silver_coin.rgba16.inc.c"
 };
 
-ALIGNED8 static const Texture texture_hud_char_mario_head[] = {
+ALIGNED8 const Texture texture_hud_char_mario_head[] = {
 #include "textures/segment2/segment2.05A00.rgba16.inc.c"
 };
 

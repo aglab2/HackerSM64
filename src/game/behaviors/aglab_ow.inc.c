@@ -1,18 +1,26 @@
-extern u16 gDnvicUpCounter;
-extern u16 gDnvicDownCounter;
+#include "game/color.h"
+
+extern u16 gDnvicCounter;
 extern u16 gDnvicChamber;
 extern u8  gDnvicMapAlpha;
 extern s8  gDnvicMapAlphaVelocity;
+extern hsv gDnvicColor;
+extern hsv gDnvicCurrentColor;
 
 void ow_ctl_init()
 {
     gDoInertia = 1;
     gDoPlatformDisplacement = 1;
-    gDnvicUpCounter   = 0;
-    gDnvicDownCounter = 0;
+    gDnvicCounter     = 0;
     gDnvicChamber     = 1;
     gDnvicMapAlpha    = 0;
     gDnvicMapAlphaVelocity = 0;
+    gDnvicColor.h = 0.052028f * 0x10000;
+    gDnvicColor.v = 0.814847f * 255;
+    gDnvicColor.s = 0.826638f;
+    gDnvicCurrentColor.h = gDnvicColor.h;
+    gDnvicCurrentColor.v = gDnvicColor.v;
+    gDnvicCurrentColor.s = gDnvicColor.s;
 }
 
 void ow_ctl_loop()

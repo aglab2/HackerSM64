@@ -1,7 +1,9 @@
 #include "src/game/memory.h"
 #include "src/game/dnvic_print.h"
+#include "area.h"
+#include "game_init.h"
+#include "level_update.h"
 #include "string.h"
-
 
 struct DnvicLabel {
     s32 x;
@@ -86,8 +88,88 @@ void render_dnvic_labels() {
 }
 
 extern Texture dnvic_map_texture_07001600[];
+extern Texture dnvic_mario_texture_07001600[];
+
+extern u16 gDnvicCounter;
+extern u16 gDnvicChamber;
+
 void render_dnvic_map(u8 a)
 {
+    /*
+    static int x = 0, y = 0;
+    if (gPlayer1Controller->buttonDown & U_JPAD)
+        y--;
+    if (gPlayer1Controller->buttonDown & D_JPAD)
+        y++;
+    if (gPlayer1Controller->buttonDown & R_JPAD)
+        x++;
+    if (gPlayer1Controller->buttonDown & L_JPAD)
+        x--;
+    */
+
+    int x, y;
+    switch (gDnvicChamber)
+    {
+        case 1:
+        {
+            if (gCurrAreaIndex != 1)
+            {
+                if (gDnvicCounter > 1)
+                {
+                    x = 83 - gDnvicCounter; y = 78;
+                }
+                else
+                {
+                    x = 91; y = 103;
+                }
+            }
+            else
+            {
+                x = 142; y = 111;
+            }
+        }
+        break;
+        case 2:
+        {
+            x = 142; y = 188;
+        }
+        break;
+        case 3:
+        {
+            x = 93; y = 188;
+        }
+        break;
+        case 4:
+        {
+            x = 45; y = 188;
+        }
+        break;
+        case 5:
+        {
+            if (gDnvicCounter > 0)
+            {
+                x = 110 - 2 * gDnvicCounter; y = 225;
+            }
+            else
+            {
+                x = 120; y = 270;
+            }
+        }
+        break;
+        case 10:
+        {
+            x = 37; y = 92;
+        }
+        break;
+        case 12:
+        {
+            x = 52; y = 277;
+        }
+        break;
+    }
+
     print_set_envcolour(255, 255, 255, a);
     render_multi_image(dnvic_map_texture_07001600, 0, 0, 320, 240, 1, 1, G_CYC_1CYCLE);
+    print_set_envcolour(255, 255, 255, 2*a);
+    render_multi_image(dnvic_mario_texture_07001600, y, x, 32, 64, 0, 0, G_CYC_1CYCLE);
 }
