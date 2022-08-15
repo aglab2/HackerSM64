@@ -433,6 +433,8 @@ void warp_credits(void) {
 
 u16 gDnvicCounter = 0;
 u16 gDnvicChamber = 1;
+u8 gDnvicPlayEffect = 0;
+extern u8 gDnvicWasMapShown;
 hsv gDnvicColor =
 {    
     .h = 0.052028f * 0x10000,
@@ -473,6 +475,7 @@ void check_instant_warp(void) {
             if (warp->id != 0) {
                 if (gCurrCourseNum == COURSE_WMOTR)
                 {
+                    gDnvicPlayEffect = 1;
                     switch(floor->force) {
                         case 0x69:
                             gDnvicCounter++;
@@ -489,14 +492,19 @@ void check_instant_warp(void) {
                     }
                     switch(gDnvicChamber) {
                         case 1:
-                            if((floor->force == 0x420) && gDnvicCounter < 2) {
+                            if(gDnvicWasMapShown && (floor->force == 0x420) && gDnvicCounter < 2) {
                                 gDnvicChamber = 2;
                                 gDnvicColor.h = 0.052028f * 0x10000 + 0x3000;
                                 gDnvicColor.v = 250;
                                 gDnvicColor.s = 0.826638f;
                                 gDnvicCounter = 0;
                             }
+                            else if (!gDnvicWasMapShown && floor->force == 0x420)
+                            {
+                                gDnvicPlayEffect = 2;
+                            }
                             if(gDnvicCounter == 10) {
+                                gDnvicWasMapShown = 1;
                                 gDnvicChamber = 10;
                                 gDnvicColor.h = 0.052028f * 0x10000;
                                 gDnvicColor.v = 250;

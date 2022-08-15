@@ -1547,7 +1547,7 @@ DEFINE_DIALOG(DIALOG_138, 1, 3, 30, 200, _("\
 CAUTION: DO NOT ENTER\n\
 This abandoned grain \n\
 silo has been placed \n\
-under a stict no-entry\n\
+under a strict no-entry\n\
 policy. Persons who  \n\
 enter may be putting \n\
 themselves at danger \n\

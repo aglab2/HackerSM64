@@ -14,6 +14,7 @@ extern Gfx mat_wmotr_dl_wood_003_layer1[]; //+13
 extern Gfx mat_wmotr_dl_brick_003_layer1[];
 
 extern hsv gDnvicColor;
+extern u8 gDnvicPlayEffect;
 
 hsv gDnvicCurrentColor = 
 {    
@@ -69,4 +70,17 @@ void bhv_dnvic_color_reset_loop(void)
     dnvic_write_rgb(mat_wmotr_dl_brick_002_layer1, 14, &color);
     dnvic_write_rgb(mat_wmotr_dl_wood_003_layer1, 13, &color);
     dnvic_write_rgb(mat_wmotr_dl_brick_003_layer1, 14, &color);
+
+    if (gDnvicPlayEffect)
+    {
+        if (1 == gDnvicPlayEffect)
+        {
+            play_sound(SOUND_MENU_YOSHI_GAIN_LIVES, gGlobalSoundSource);
+        }
+        else
+        {
+            play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+        }
+        gDnvicPlayEffect = 0;
+    }
 }

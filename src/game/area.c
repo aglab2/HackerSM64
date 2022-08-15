@@ -384,6 +384,7 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 
 u8 gDnvicMapAlpha = 0;
 s8 gDnvicMapAlphaVelocity = 0;
+u8 gDnvicWasMapShown = 0;
 
 #define DNVIC_TARGET_ALPHA 100
 
@@ -443,6 +444,7 @@ void render_game(void) {
             if (gDnvicMapAlpha)
             {
                 render_dnvic_map(gDnvicMapAlpha);
+                gDnvicWasMapShown = 1;
             }
         }
 
