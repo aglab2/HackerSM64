@@ -1,0 +1,18 @@
+extern const GeoLayout spiders_waterfally_pb_geo[];
+extern Lights1 spiders_waterfally_pb__2_007_f3d_lights;
+extern Lights1 spiders_waterfally_pb__1_007_f3d_lights;
+extern u8 spiders_waterfally_pb__2_ci8[];
+extern u8 spiders_waterfally_pb__2_ci8_pal_rgba16[];
+extern u8 spiders_waterfally_pb__1_ci8[];
+extern u8 spiders_waterfally_pb__1_ci8_pal_rgba16[];
+extern Vtx spiders_waterfally_pb_waterfally_pb_mesh_layer_1_vtx_cull[8];
+extern Vtx spiders_waterfally_pb_waterfally_pb_mesh_layer_1_vtx_0[72];
+extern Gfx spiders_waterfally_pb_waterfally_pb_mesh_layer_1_tri_0[];
+extern Vtx spiders_waterfally_pb_waterfally_pb_mesh_layer_1_vtx_1[72];
+extern Gfx spiders_waterfally_pb_waterfally_pb_mesh_layer_1_tri_1[];
+extern Gfx mat_spiders_waterfally_pb__2_007_f3d[];
+extern Gfx mat_revert_spiders_waterfally_pb__2_007_f3d[];
+extern Gfx mat_spiders_waterfally_pb__1_007_f3d[];
+extern Gfx mat_revert_spiders_waterfally_pb__1_007_f3d[];
+extern Gfx spiders_waterfally_pb_waterfally_pb_mesh_layer_1[];
+extern Gfx spiders_waterfally_pb_material_revert_render_settings[];

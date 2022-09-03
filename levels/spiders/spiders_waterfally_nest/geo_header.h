@@ -1,0 +1,16 @@
+extern const GeoLayout spiders_waterfally_nest_geo[];
+extern Lights1 spiders_waterfally_nest__1_004_f3d_lights;
+extern Lights1 spiders_waterfally_nest__2_004_f3d_lights;
+extern u8 spiders_waterfally_nest__1_ci8[];
+extern u8 spiders_waterfally_nest__1_ci8_pal_rgba16[];
+extern u8 spiders_waterfally_nest__2_ia8[];
+extern Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_cull[8];
+extern Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_0[32];
+extern Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_0[];
+extern Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_1[4];
+extern Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_1[];
+extern Gfx mat_spiders_waterfally_nest__1_004_f3d[];
+extern Gfx mat_revert_spiders_waterfally_nest__1_004_f3d[];
+extern Gfx mat_spiders_waterfally_nest__2_004_f3d[];
+extern Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1[];
+extern Gfx spiders_waterfally_nest_material_revert_render_settings[];

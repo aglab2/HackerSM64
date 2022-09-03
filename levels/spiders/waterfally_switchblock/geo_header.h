@@ -1,0 +1,18 @@
+extern const GeoLayout waterfally_switchblock_geo[];
+extern Lights1 waterfally_switchblock__1_010_f3d_lights;
+extern Lights1 waterfally_switchblock__2_010_f3d_lights;
+extern u8 waterfally_switchblock__1_ci4[];
+extern u8 waterfally_switchblock__1_ci4_pal_rgba16[];
+extern u8 waterfally_switchblock__2_ci4[];
+extern u8 waterfally_switchblock__2_ci4_pal_rgba16[];
+extern Vtx waterfally_switchblock_waterfally_switchblock_mesh_layer_1_vtx_cull[8];
+extern Vtx waterfally_switchblock_waterfally_switchblock_mesh_layer_1_vtx_0[20];
+extern Gfx waterfally_switchblock_waterfally_switchblock_mesh_layer_1_tri_0[];
+extern Vtx waterfally_switchblock_waterfally_switchblock_mesh_layer_1_vtx_1[4];
+extern Gfx waterfally_switchblock_waterfally_switchblock_mesh_layer_1_tri_1[];
+extern Gfx mat_waterfally_switchblock__1_010_f3d[];
+extern Gfx mat_revert_waterfally_switchblock__1_010_f3d[];
+extern Gfx mat_waterfally_switchblock__2_010_f3d[];
+extern Gfx mat_revert_waterfally_switchblock__2_010_f3d[];
+extern Gfx waterfally_switchblock_waterfally_switchblock_mesh_layer_1[];
+extern Gfx waterfally_switchblock_material_revert_render_settings[];

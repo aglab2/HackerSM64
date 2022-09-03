@@ -67,6 +67,7 @@ enum SeqId {
 	SEQ_FADE_HILL,
 	SEQ_AGT_V2,
     SEQ_VC_HF,
+    SEQ_HONEY,
     SEQ_COUNT,
 };
 

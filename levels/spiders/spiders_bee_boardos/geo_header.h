@@ -1,0 +1,18 @@
+extern const GeoLayout spiders_bee_boardos_geo[];
+extern Lights1 spiders_bee_boardos__2_003_f3d_lights;
+extern Lights1 spiders_bee_boardos__1_003_f3d_lights;
+extern u8 spiders_bee_boardos__2_ci8[];
+extern u8 spiders_bee_boardos__2_ci8_pal_rgba16[];
+extern u8 spiders_bee_boardos__1_ci4[];
+extern u8 spiders_bee_boardos__1_ci4_pal_rgba16[];
+extern Vtx spiders_bee_boardos_waterfally_boardos_mesh_layer_1_vtx_cull[8];
+extern Vtx spiders_bee_boardos_waterfally_boardos_mesh_layer_1_vtx_0[8];
+extern Gfx spiders_bee_boardos_waterfally_boardos_mesh_layer_1_tri_0[];
+extern Vtx spiders_bee_boardos_waterfally_boardos_mesh_layer_1_vtx_1[16];
+extern Gfx spiders_bee_boardos_waterfally_boardos_mesh_layer_1_tri_1[];
+extern Gfx mat_spiders_bee_boardos__2_003_f3d[];
+extern Gfx mat_revert_spiders_bee_boardos__2_003_f3d[];
+extern Gfx mat_spiders_bee_boardos__1_003_f3d[];
+extern Gfx mat_revert_spiders_bee_boardos__1_003_f3d[];
+extern Gfx spiders_bee_boardos_waterfally_boardos_mesh_layer_1[];
+extern Gfx spiders_bee_boardos_material_revert_render_settings[];
