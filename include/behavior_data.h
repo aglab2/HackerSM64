@@ -639,5 +639,10 @@ extern const BehaviorScript bhvDnvicColorReset[];
 extern const BehaviorScript bhvPieCoiner[];
 extern const BehaviorScript bhvPieCoinerPreArea[];
 extern const BehaviorScript bhvLuigiNpc[];
+extern const BehaviorScript bhvSpidersBoardos[];
+extern const BehaviorScript bhvSpidersCage[];
+extern const BehaviorScript bhvSpidersGateSwitch[];
+extern const BehaviorScript bhvSpidersPA[];
+extern const BehaviorScript bhvSpidersPB[];
 
 #endif // BEHAVIOR_DATA_H

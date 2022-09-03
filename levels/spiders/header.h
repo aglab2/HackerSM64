@@ -37,4 +37,8 @@ extern const LevelScript level_spiders_entry[];
 
 #include "levels/spiders/waterfally_switch/collision_header.h"
 
+#include "levels/spiders/spiders_cage/collision_header.h"
+
+#include "levels/spiders/spiders_cage/geo_header.h"
+
 #endif

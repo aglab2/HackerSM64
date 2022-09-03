@@ -7226,3 +7226,54 @@ const BehaviorScript bhvPieCoinerPreArea[] = {
         CALL_NATIVE(pie_coiner_pre_area_loop),
     END_LOOP(),
 };
+
+extern const Collision spiders_bee_boardos_collision[];
+const BehaviorScript bhvSpidersBoardos[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(spiders_bee_boardos_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wf_rotating_wooden_platform_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision spiders_cage_collision[];
+const BehaviorScript bhvSpidersCage[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(spiders_cage_collision),
+    BEGIN_LOOP(),
+        // TODO: 
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision waterfally_switch_collision[];
+const BehaviorScript bhvSpidersGateSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(waterfally_switch_collision),
+    BEGIN_LOOP(),
+        // TODO: 
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision spiders_waterfally_pa_collision[];
+const BehaviorScript bhvSpidersPA[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(spiders_waterfally_pa_collision),
+    BEGIN_LOOP(),
+        // TODO: 
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision spiders_waterfally_pb_collision[];
+const BehaviorScript bhvSpidersPB[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(spiders_waterfally_pb_collision),
+    BEGIN_LOOP(),
+        // TODO: 
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
