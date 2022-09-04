@@ -25,7 +25,7 @@ const Collision spiders_waterfally_pa_collision[] = {
 	COL_VERTEX(-20, -384, -1537),
 	COL_VERTEX(-13, 0, -978),
 	COL_VERTEX(-13, -384, -978),
-	COL_TRI_INIT(SURFACE_DEFAULT, 30),
+	COL_TRI_INIT(SURFACE_DEFAULT, 34),
 	COL_TRI(0, 1, 2),
 	COL_TRI(0, 2, 3),
 	COL_TRI(4, 5, 1),
@@ -56,6 +56,10 @@ const Collision spiders_waterfally_pa_collision[] = {
 	COL_TRI(19, 23, 22),
 	COL_TRI(20, 16, 19),
 	COL_TRI(20, 19, 22),
+	COL_TRI(10, 9, 13),
+	COL_TRI(10, 13, 15),
+	COL_TRI(18, 17, 21),
+	COL_TRI(18, 21, 23),
 	COL_TRI_STOP(),
 	COL_END()
 };

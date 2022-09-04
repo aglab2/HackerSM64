@@ -1556,7 +1556,7 @@ u32 interact_hoot(struct MarioState *m, UNUSED u32 interactType, struct Object *
     if (
         actionId >= (ACT_JUMP & ACT_ID_MASK)
         && actionId <  (ACT_SHOT_FROM_CANNON & ACT_ID_MASK)
-        && gGlobalTimer - m->usedObj->oHootMarioReleaseTime > 30
+        && gGlobalTimer - obj->oHootMarioReleaseTime > 30
     ) {
         mario_stop_riding_and_holding(m);
 

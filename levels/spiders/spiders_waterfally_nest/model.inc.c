@@ -414,49 +414,49 @@ u8 spiders_waterfally_nest__2_ia8[] = {
 };
 
 Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_cull[8] = {
-	{{{-63, -54, 136},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-63, 55, 136},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-63, 55, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-63, -54, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{63, -54, 136},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{63, 55, 136},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{63, 55, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{63, -54, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, -71, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, 65, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, 65, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, -71, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, -71, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, 65, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, 65, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, -71, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
 Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_0[32] = {
-	{{{31, 54, 62},0, {857, 184},{0x3F, 0x6E, 0x0, 0xFF}}},
-	{{{24, 42, 99},0, {947, -938},{0x39, 0x62, 0x39, 0xFF}}},
-	{{{49, 0, 99},0, {-389, -1296},{0x72, 0x0, 0x39, 0xFF}}},
-	{{{-31, 54, 62},0, {-872, -279},{0xC1, 0x6E, 0x0, 0xFF}}},
-	{{{-24, 42, 25},0, {-963, 844},{0xC7, 0x62, 0xC7, 0xFF}}},
-	{{{24, 42, 25},0, {374, 1202},{0x39, 0x62, 0xC7, 0xFF}}},
-	{{{63, 0, 62},0, {-872, -279},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{24, -42, 99},0, {947, -938},{0x39, 0x9E, 0x39, 0xFF}}},
-	{{{36, 0, 120},0, {-38, -1890},{0x52, 0x0, 0x61, 0xFF}}},
-	{{{18, 31, 120},0, {940, -1628},{0x29, 0x47, 0x61, 0xFF}}},
-	{{{-18, 31, 120},0, {-38, -1890},{0xD7, 0x47, 0x61, 0xFF}}},
-	{{{-24, 42, 99},0, {-389, -1296},{0xC7, 0x62, 0x39, 0xFF}}},
-	{{{-63, 0, 62},0, {857, 184},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-49, 0, 25},0, {374, 1202},{0x8E, 0x0, 0xC7, 0xFF}}},
-	{{{-18, 31, 5},0, {-956, 1533},{0xDF, 0x39, 0x93, 0xFF}}},
-	{{{18, 31, 5},0, {23, 1795},{0x21, 0x39, 0x93, 0xFF}}},
-	{{{36, 0, 5},0, {-956, 1533},{0x42, 0x0, 0x93, 0xFF}}},
-	{{{49, 0, 25},0, {-963, 844},{0x72, 0x0, 0xC7, 0xFF}}},
-	{{{31, -54, 62},0, {857, 184},{0x3F, 0x92, 0x0, 0xFF}}},
-	{{{-24, -42, 99},0, {-389, -1296},{0xC7, 0x9E, 0x39, 0xFF}}},
-	{{{18, -31, 120},0, {940, -1628},{0x29, 0xB9, 0x61, 0xFF}}},
-	{{{0, 0, 136},0, {707, -2713},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-36, 0, 120},0, {940, -1628},{0xAE, 0x0, 0x61, 0xFF}}},
-	{{{-49, 0, 99},0, {947, -938},{0x8E, 0x0, 0x39, 0xFF}}},
-	{{{-31, -54, 62},0, {-872, -279},{0xC1, 0x92, 0x0, 0xFF}}},
-	{{{-24, -42, 25},0, {-963, 844},{0xC7, 0x9E, 0xC7, 0xFF}}},
-	{{{-36, 0, 5},0, {23, 1795},{0xBE, 0x0, 0x93, 0xFF}}},
-	{{{0, 0, 0},0, {-696, 2522},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{18, -31, 5},0, {23, 1795},{0x21, 0xC7, 0x93, 0xFF}}},
-	{{{24, -42, 25},0, {374, 1202},{0x39, 0x9E, 0xC7, 0xFF}}},
-	{{{-18, -31, 120},0, {-38, -1890},{0xD7, 0xB9, 0x61, 0xFF}}},
-	{{{-18, -31, 5},0, {-956, 1533},{0xDF, 0xC7, 0x93, 0xFF}}},
+	{{{31, 2, 49},0, {857, 184},{0x3F, 0x0, 0x6E, 0xFF}}},
+	{{{24, -34, 36},0, {947, -938},{0x39, 0xC7, 0x62, 0xFF}}},
+	{{{48, -34, -6},0, {-389, -1296},{0x72, 0xC7, 0x0, 0xFF}}},
+	{{{-32, 2, 49},0, {-872, -279},{0xC1, 0x0, 0x6E, 0xFF}}},
+	{{{-24, 39, 36},0, {-963, 844},{0xC7, 0x39, 0x62, 0xFF}}},
+	{{{24, 39, 36},0, {374, 1202},{0x39, 0x39, 0x62, 0xFF}}},
+	{{{63, 2, -6},0, {-872, -279},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{24, -34, -48},0, {947, -938},{0x39, 0xC7, 0x9E, 0xFF}}},
+	{{{35, -55, -6},0, {-38, -1890},{0x52, 0x9F, 0x0, 0xFF}}},
+	{{{18, -55, 25},0, {940, -1628},{0x29, 0x9F, 0x47, 0xFF}}},
+	{{{-18, -55, 25},0, {-38, -1890},{0xD7, 0x9F, 0x47, 0xFF}}},
+	{{{-24, -34, 36},0, {-389, -1296},{0xC7, 0xC7, 0x62, 0xFF}}},
+	{{{-63, 2, -6},0, {857, 184},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{-49, 39, -6},0, {374, 1202},{0x8E, 0x39, 0x0, 0xFF}}},
+	{{{-18, 60, 25},0, {-956, 1533},{0xDF, 0x6D, 0x39, 0xFF}}},
+	{{{18, 60, 25},0, {23, 1795},{0x21, 0x6D, 0x39, 0xFF}}},
+	{{{35, 60, -6},0, {-956, 1533},{0x42, 0x6D, 0x0, 0xFF}}},
+	{{{48, 39, -6},0, {-963, 844},{0x72, 0x39, 0x0, 0xFF}}},
+	{{{31, 2, -60},0, {857, 184},{0x3F, 0x0, 0x92, 0xFF}}},
+	{{{-24, -34, -48},0, {-389, -1296},{0xC7, 0xC7, 0x9E, 0xFF}}},
+	{{{18, -55, -36},0, {940, -1628},{0x29, 0x9F, 0xB9, 0xFF}}},
+	{{{0, -71, -6},0, {707, -2713},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{-36, -55, -6},0, {940, -1628},{0xAE, 0x9F, 0x0, 0xFF}}},
+	{{{-49, -34, -6},0, {947, -938},{0x8E, 0xC7, 0x0, 0xFF}}},
+	{{{-32, 2, -60},0, {-872, -279},{0xC1, 0x0, 0x92, 0xFF}}},
+	{{{-24, 39, -48},0, {-963, 844},{0xC7, 0x39, 0x9E, 0xFF}}},
+	{{{-36, 60, -6},0, {23, 1795},{0xBE, 0x6D, 0x0, 0xFF}}},
+	{{{0, 65, -6},0, {-696, 2522},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{18, 60, -36},0, {23, 1795},{0x21, 0x6D, 0xC7, 0xFF}}},
+	{{{24, 39, -48},0, {374, 1202},{0x39, 0x39, 0x9E, 0xFF}}},
+	{{{-18, -55, -36},0, {-38, -1890},{0xD7, 0x9F, 0xB9, 0xFF}}},
+	{{{-18, 60, -36},0, {-956, 1533},{0xDF, 0x6D, 0xC7, 0xFF}}},
 };
 
 Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_0[] = {
@@ -494,15 +494,26 @@ Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_1[4] = {
-	{{{16, 55, 68},0, {1008, -16},{0x0, 0x79, 0x28, 0xFF}}},
-	{{{-13, 55, 68},0, {-16, -16},{0x0, 0x79, 0x28, 0xFF}}},
-	{{{-13, 46, 95},0, {-16, -2061},{0x0, 0x79, 0x28, 0xFF}}},
-	{{{16, 46, 95},0, {1008, -2061},{0x0, 0x79, 0x28, 0xFF}}},
+Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_4_vtx_cull[8] = {
+	{{{-63, -71, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, 65, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, 65, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-63, -71, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, -71, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, 65, 50},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, 65, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{63, -71, -60},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
-Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_1[] = {
-	gsSPVertex(spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_1 + 0, 4, 0),
+Vtx spiders_waterfally_nest_waterfally_nest_mesh_layer_4_vtx_0[4] = {
+	{{{16, -4, 50},0, {1008, -16},{0x0, 0xD8, 0x79, 0xFF}}},
+	{{{-13, -4, 50},0, {-16, -16},{0x0, 0xD8, 0x79, 0xFF}}},
+	{{{-13, -31, 41},0, {-16, -2061},{0x0, 0xD8, 0x79, 0xFF}}},
+	{{{16, -31, 41},0, {1008, -2061},{0x0, 0xD8, 0x79, 0xFF}}},
+};
+
+Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_4_tri_0[] = {
+	gsSPVertex(spiders_waterfally_nest_waterfally_nest_mesh_layer_4_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
@@ -539,7 +550,8 @@ Gfx mat_revert_spiders_waterfally_nest__1_004_f3d[] = {
 
 Gfx mat_spiders_waterfally_nest__2_004_f3d[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 1, spiders_waterfally_nest__2_ia8),
@@ -553,6 +565,12 @@ Gfx mat_spiders_waterfally_nest__2_004_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_revert_spiders_waterfally_nest__2_004_f3d[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
+	gsSPEndDisplayList(),
+};
+
 Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPVertex(spiders_waterfally_nest_waterfally_nest_mesh_layer_1_vtx_cull + 0, 8, 0),
@@ -561,8 +579,17 @@ Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_1[] = {
 	gsSPDisplayList(mat_spiders_waterfally_nest__1_004_f3d),
 	gsSPDisplayList(spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_spiders_waterfally_nest__1_004_f3d),
+	gsSPEndDisplayList(),
+};
+
+Gfx spiders_waterfally_nest_waterfally_nest_mesh_layer_4[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(spiders_waterfally_nest_waterfally_nest_mesh_layer_4_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_spiders_waterfally_nest__2_004_f3d),
-	gsSPDisplayList(spiders_waterfally_nest_waterfally_nest_mesh_layer_1_tri_1),
+	gsSPDisplayList(spiders_waterfally_nest_waterfally_nest_mesh_layer_4_tri_0),
+	gsSPDisplayList(mat_revert_spiders_waterfally_nest__2_004_f3d),
 	gsSPEndDisplayList(),
 };
 

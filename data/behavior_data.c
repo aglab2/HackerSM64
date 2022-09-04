@@ -7261,9 +7261,11 @@ const BehaviorScript bhvSpidersGateSwitch[] = {
 extern const Collision spiders_waterfally_pa_collision[];
 const BehaviorScript bhvSpidersPA[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 20000),
     LOAD_COLLISION_DATA(spiders_waterfally_pa_collision),
     BEGIN_LOOP(),
-        // TODO: 
+        ADD_INT(oFaceAngleYaw,   -0x40),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -7271,9 +7273,49 @@ const BehaviorScript bhvSpidersPA[] = {
 extern const Collision spiders_waterfally_pb_collision[];
 const BehaviorScript bhvSpidersPB[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 20000),
     LOAD_COLLISION_DATA(spiders_waterfally_pb_collision),
     BEGIN_LOOP(),
-        // TODO: 
+        ADD_INT(oFaceAngleYaw,   0x40),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_spiders_hawk_init();
+extern void bhv_spiders_hawk_loop();
+const BehaviorScript bhvSpidersHawk[] = {
+    BEGIN(OBJ_LIST_POLELIKE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oInteractType, INTERACT_HOOT),
+    SET_HITBOX(/*Radius*/ 75, /*Height*/ 75),
+    CALL_NATIVE(bhv_spiders_hawk_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spiders_hawk_loop),
+    END_LOOP(),
+};
+
+extern void bhv_spiders_death_trigger_loop();
+const BehaviorScript bhvSpidersDeathTrigger[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spiders_death_trigger_loop),
+    END_LOOP(),
+};
+
+extern void bhv_spiders_buddy_loop();
+const BehaviorScript bhvSpidersBuddy[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oBobombBuddyRole, 0),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    DROP_TO_FLOOR(),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 60),
+    SET_HOME(),
+    CALL_NATIVE(bhv_bobomb_buddy_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_spiders_buddy_loop),
     END_LOOP(),
 };

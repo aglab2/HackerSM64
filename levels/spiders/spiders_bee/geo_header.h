@@ -16,7 +16,7 @@ extern u8 spiders_bee__1_ia8[];
 extern Vtx spiders_bee_waterfally_bee_mesh_layer_1_vtx_cull[8];
 extern Vtx spiders_bee_waterfally_bee_mesh_layer_1_vtx_0[275];
 extern Gfx spiders_bee_waterfally_bee_mesh_layer_1_tri_0[];
-extern Vtx spiders_bee_waterfally_bee_mesh_layer_1_vtx_1[88];
+extern Vtx spiders_bee_waterfally_bee_mesh_layer_1_vtx_1[87];
 extern Gfx spiders_bee_waterfally_bee_mesh_layer_1_tri_1[];
 extern Vtx spiders_bee_waterfally_bee_mesh_layer_1_vtx_2[8];
 extern Gfx spiders_bee_waterfally_bee_mesh_layer_1_tri_2[];

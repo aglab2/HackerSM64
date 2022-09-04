@@ -37,38 +37,38 @@ You are losing time\n\
 reading this!"))
 
 DEFINE_DIALOG(DIALOG_002, 1, 4, 95, 200, _("\
-Hey, you! It's dangerous\n\
-ahead, so listen up! Take\n\
-my advice.\n\
-\n\
-Cross the two\n\
-bridges ahead, then\n\
-watch for falling\n\
-water bombs.\n\
-The Big Bob-omb at the\n\
-top of the mountain is\n\
-very powerful--don't let\n\
-him grab you!\n\
-We're Bob-omb Buddies,\n\
-and we're on your side.\n\
-You can talk to us\n\
-whenever you'd like to!"))
+Hello stranger, sir!\n\
+This is our beautiful\n\
+honey plains!\n\
+Be aware of the rules!\n\
+Don't touch the nests!\n\
+Never mess with an angry\n\
+red hornet!\n\n\
+The tarantula hawks are\n\
+your friends and will\n\
+guide you to where you\n\
+need to go."))
 
-DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
-Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
-big dud now! But the\n\
-battle for the castle has\n\
-just begun.\n\
-Other enemies are holding\n\
-the other Power Stars. If\n\
-you recover more Stars,\n\
-you can open new doors\n\
-that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
-waiting for you. Be sure\n\
-to talk to them--they'll\n\
-set up cannons for you."))
+DEFINE_DIALOG(DIALOG_003, 1, 4, 95, 200, _("\
+Ehm, sorry about him.\n\
+He's weird. For the\n\
+record, us yellow bees\n\
+are simply workers.\n\
+We have a job and we\n\
+do it. They also do that,\n\
+but don't tell anyone that\n\
+because we live in a\n\
+bureaucracy.\n\
+We aren't supposed to\n\
+know that. Also, be aware\n\
+that honey is sticky.\n\
+That's obvious? Not a lot of\n\
+people know that.\n\
+Few folks have tried to\n\
+sell me honey as a\n\
+'web extension.'\n\
+As if I'm some dirty\n\
+spider needing a web."))
 
 DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
 Did you get that\n\
@@ -183,15 +183,17 @@ Do you want to Save?\n\
 \n\
 //You Bet//Not Now"))
 
-DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
-You can punch enemies to\n\
-knock them down. Press [A]\n\
-to jump, [B] to punch.\n\
-Press [A] then [B] to Kick.\n\
-To pick something up,\n\
-press [B], too. To throw\n\
-something you're holding,\n\
-press [B] again."))
+DEFINE_DIALOG(DIALOG_015, 1, 5, 30, 200, _("\
+Don't mind me. I heard\n\
+some arachnid freak came\n\
+to see our nursery and\n\
+the hornets left to\n\
+investigate.\n\
+I'm just watching.\n\
+Don't touch the nests\n\
+or they'll sting you. And\n\
+please alert authorities\n\
+of any spider acitvity."))
 
 DEFINE_DIALOG(DIALOG_016, 1, 2, 30, 200, _("\
 You can press L button\n\
@@ -296,29 +298,16 @@ Stars.\n\
 Bwa ha ha!"))
 
 DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
-\n\
-\n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+Despite the claims of\n\
+'the media,' many species\n\
+of arthropod can polinate\n\
+flowers including hornets,\n\
+wasps, beetles, and some\n\
+birds.\n\
+Without us, you wouldn't\n\
+have any allergies to\n\
+complain about.\n\
+Think about that."))
 
 DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
 No way! You beat me...\n\
@@ -331,34 +320,35 @@ hand over this Star to\n\
 the winner of the race.\n\
 Congrats, Mario!"))
 
-DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
-\n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+DEFINE_DIALOG(DIALOG_032, 1, 7, 30, 200, _("\
+Don't tell anyone! I'm\n\
+not working right now!\n\
+I'm on strike until\n\
+somebody deals with\n\
+this spider problem we're\n\
+having! With all those\n\
+legs and eyes - ew! ew!"))
 
 DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+The hornets and hawks\n\
+don't talk much to\n\
+strangers.\n\
+We honeybees do because\n\
+we communicate the most.\n\
+Since we have to alert\n\
+each other where humans\n\
+plant your PESTICIDES\n\
+in your GRAPES.\n\
+Speaking of which, did\n\
+you know tarantula hawks\n\
+use tarantulas to feed\n\
+their young? They paralyze\n\
+them and bring them to\n\
+their den, lay their eggs\n\
+inside, and the pupa eat\n\
+the tarantulas slowly one\n\
+by one.\n\
+Nature is beautiful."))
 
 DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
 Good afternoon. The\n\
@@ -402,20 +392,11 @@ on the ground, no air\n\
 shenanigans allowed!"))
 
 DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
-OBSERVATION PLATFORM\n\
-Press [C]^ to take a look\n\
-around. Don't miss\n\
-anything!\n\
-\n\
-Press [R] to switch to\n\
-Mario's camera. It\n\
-always follows Mario.\n\
-Press [R] again to switch\n\
-to Lakitu's camera.\n\
-Pause the game and\n\
-switch the mode to 『fix』\n\
-the camera in place while\n\
-holding [R]. Give it a try!"))
+HALT!\n\
+You may not enter this tunnel!\n\
+We have all security systems\n\
+enabled after we were breached!\n\
+You will be burnt to a crisp!"))
 
 DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
 I win! You lose!\n\

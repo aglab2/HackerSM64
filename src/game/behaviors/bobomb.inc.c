@@ -309,6 +309,17 @@ void bobomb_buddy_act_idle(void) {
     }
 }
 
+void spiders_buddy_act_idle(void) {
+    object_step();
+    if ((o->oDistanceToMario < 1000.0f) && !(cur_obj_has_model(MODEL_LUIGI_NPC))) {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
+    }
+
+    if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+        o->oAction = BOBOMB_BUDDY_ACT_TURN_TO_TALK;
+    }
+}
+
 /**
  * Function for the Bob-omb Buddy cannon guy.
  * dialogFirstText is the first dialogID called when Bob-omb Buddy
@@ -406,6 +417,16 @@ void bobomb_buddy_act_turn_to_talk(void) {
     cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
 }
 
+void spiders_buddy_act_turn_to_talk(void) {
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+
+    if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+        o->oAction = BOBOMB_BUDDY_ACT_TALK;
+    }
+
+    cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+}
+
 void bobomb_buddy_actions(void) {
     switch (o->oAction) {
         case BOBOMB_BUDDY_ACT_IDLE:
@@ -424,7 +445,33 @@ void bobomb_buddy_actions(void) {
     set_object_visibility(o, 3000);
 }
 
+void spiders_buddy_actions(void) {
+    switch (o->oAction) {
+        case BOBOMB_BUDDY_ACT_IDLE:
+            spiders_buddy_act_idle();
+            break;
+
+        case BOBOMB_BUDDY_ACT_TURN_TO_TALK:
+            spiders_buddy_act_turn_to_talk();
+            break;
+
+        case BOBOMB_BUDDY_ACT_TALK:
+            bobomb_buddy_act_talk();
+            break;
+    }
+
+    set_object_visibility(o, 3000);
+}
+
 void bhv_bobomb_buddy_loop(void) {
+    bobomb_buddy_actions();
+
+    curr_obj_random_blink(&o->oBobombBuddyBlinkTimer);
+
+    o->oInteractStatus = INT_STATUS_NONE;
+}
+
+void bhv_spiders_buddy_loop(void) {
     bobomb_buddy_actions();
 
     curr_obj_random_blink(&o->oBobombBuddyBlinkTimer);

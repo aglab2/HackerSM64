@@ -6,7 +6,9 @@ const GeoLayout spiders_area_1_geo[] = {
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, spiders_dl_waterfally_uv_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, spiders_dl_waterfally_uv_mesh_layer_4),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, spiders_dl_waterfally_uv_mesh_layer_5),
 		GEO_CLOSE_NODE(),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, spiders_dl_waterfally_uv_001_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, spiders_dl_waterfally_uv_002_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, spiders_dl_waterfally_uv_004_mesh_layer_4),
 	GEO_CLOSE_NODE(),
@@ -36,6 +38,7 @@ const GeoLayout spiders_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, spiders_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, spiders_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, spiders_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

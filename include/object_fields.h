@@ -1418,4 +1418,6 @@ os16112*/
 
 #define oCrashFlameRotation OBJECT_FIELD_S32(0x1B)
 
+#define oSpidersHawkAct OBJECT_FIELD_S32(0x49)
+
 #endif // OBJECT_FIELDS_H

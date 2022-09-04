@@ -644,5 +644,8 @@ extern const BehaviorScript bhvSpidersCage[];
 extern const BehaviorScript bhvSpidersGateSwitch[];
 extern const BehaviorScript bhvSpidersPA[];
 extern const BehaviorScript bhvSpidersPB[];
+extern const BehaviorScript bhvSpidersHawk[];
+extern const BehaviorScript bhvSpidersBuddy[];
+extern const BehaviorScript bhvSpidersDeathTrigger[];
 
 #endif // BEHAVIOR_DATA_H
