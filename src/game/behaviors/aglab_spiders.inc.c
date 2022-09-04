@@ -1,9 +1,3 @@
-void bhv_spiders_hawk_init()
-{
-    cur_obj_become_tangible();
-    o->oSpidersHawkAct = 0;
-}
-
 static f32 sSpiderHawk0Start[] = { 3215.f, 213.f, 523.f };
 static f32 sSpiderHawk0End[]   = { 4818.f, 213.f, 3394.f };
 static f32 sSpiderHawk1Start[] = { -3771.f, 149.f, -3177.f };
@@ -12,12 +6,15 @@ static f32 sSpiderHawk2Start[] = { -6808.8, 59.f, -8710.f };
 static f32 sSpiderHawk2End[]   = { -6418.f, 1383.f, -6442.f };
 static f32 sSpiderHawk3Start[] = { -5143.f, 1383.f, -5056.f };
 static f32 sSpiderHawk3End[]   = { -2933.f, 167.f, -3631.f };
+static f32 sSpiderHawk4Start[] = { -1910.f, -471.f, -5175.f };
+static f32 sSpiderHawk4End[]   = { -1490.f, 2344.f, -2564.f };
 
 static f32* sSpiderHawkStarts[] = {
     sSpiderHawk0Start,
     sSpiderHawk1Start,
     sSpiderHawk2Start,
     sSpiderHawk3Start,
+    sSpiderHawk4Start,
 };
 
 static f32* sSpiderHawkEnds[] = {
@@ -25,6 +22,7 @@ static f32* sSpiderHawkEnds[] = {
     sSpiderHawk1End,
     sSpiderHawk2End,
     sSpiderHawk3End,
+    sSpiderHawk4End,
 };
 
 #define RING_BUFFER_SIZE 8
@@ -41,12 +39,24 @@ struct SpiderSafePositionsRingBuffer
     struct SpiderSafePositionsPos positions[RING_BUFFER_SIZE];
 };
 
-STATIC_ASSERT(sizeof(struct SpiderSafePositionsRingBuffer) < sizeof(aglabScratch), "Yes");
+STATIC_ASSERT(sizeof(struct SpiderSafePositionsRingBuffer) <= sizeof(aglabScratch), "Yes");
+
+void bhv_spiders_hawk_init()
+{
+    cur_obj_become_tangible();
+    o->oSpidersHawkAct = 0;
+    f32* start = sSpiderHawkStarts[o->oBehParams2ndByte];
+    o->oPosX = start[0];
+    o->oPosY = start[1];
+    o->oPosZ = start[2];
+}
 
 void bhv_spiders_hawk_loop()
 {
     if (0 == o->oAction)
     {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
+        spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
         if (o->oInteractStatus)
         {
             o->oAction = 1;
@@ -55,6 +65,15 @@ void bhv_spiders_hawk_loop()
         else
         {
             o->oTimer = 0;
+        }
+
+        if (o->oBehParams2ndByte == 4 && gMarioStates->pos[1] < 1315.f)
+        {
+            f32* start = sSpiderHawkStarts[o->oBehParams2ndByte];
+            o->oPosX = start[0];
+            o->oPosY = start[1];
+            o->oPosZ = start[2];
+            o->oSubAction = 0;
         }
     }
     else
@@ -80,6 +99,7 @@ void bhv_spiders_hawk_loop()
         o->oPosX = frac * end[0] + (1 - frac) * start[0];
         o->oPosY = frac * end[1] + (1 - frac) * start[1];
         o->oPosZ = frac * end[2] + (1 - frac) * start[2];
+        o->oMoveAngleYaw = atan2s(end[2] - start[2], end[0] - start[0]);
 
         if (o->oTimer > 60) 
         {
@@ -144,5 +164,32 @@ void bhv_spiders_death_trigger_loop()
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
             o->oAction = 0;
         }
+    }
+}
+
+void bhv_spiders_gate_switch_loop()
+{
+    if (0 == o->oAction)
+    {
+        if (gMarioObject->platform == o)
+        {
+            o->oAction = 1;
+            play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            obj_scale_xyz(o, 1.f, 0.1f, 1.f);
+        }
+    }
+}
+
+void bhv_spiders_cage_init()
+{
+    f32 d;
+    o->parentObj = cur_obj_find_nearest_object_with_behavior(bhvSpidersGateSwitch, &d);
+}
+
+void bhv_spiders_cage_loop()
+{
+    if (1 == o->parentObj->oAction)
+    {
+        o->activeFlags = 0;
     }
 }

@@ -391,12 +391,13 @@ Works only when standing\n\
 on the ground, no air\n\
 shenanigans allowed!"))
 
-DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
-HALT!\n\
-You may not enter this tunnel!\n\
-We have all security systems\n\
-enabled after we were breached!\n\
-You will be burnt to a crisp!"))
+DEFINE_DIALOG(DIALOG_036, 1, 6, 30, 200, _("\
+HALT! You may not\n\
+enter this tunnel!\n\
+We have all security\n\
+systems enabled after we\n\
+were breached! You\n\
+will be burnt to a crisp!"))
 
 DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
 I win! You lose!\n\
@@ -419,10 +420,23 @@ Make sure to hold the A\n\
 button to keep the jump\n\
 momentum."))
 
-DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
-Warning!\n\
-Cold, Cold Crevasse\n\
-Below!"))
+DEFINE_DIALOG(DIALOG_040, 1, 6, 30, 200, _("\
+I am the secret bee!\n\
+I am here to tell you a\n\
+secret I was told to keep\n\
+quiet. I was so nervous\n\
+about it I hid in here.\n\
+I saw that spider come\n\
+here off a carpet. He went\n\
+up to the nest and seemed\n\
+like he was going to kill\n\
+the hawk nests. Luckily,\n\
+the hornets stopped him.\n\
+In exchange for his\n\
+freedom, he offered me\n\
+money. I did not get the\n\
+money and now I feel\n\
+shame."))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
 Heh! I won!\n\

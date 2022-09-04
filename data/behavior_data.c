@@ -7239,21 +7239,25 @@ const BehaviorScript bhvSpidersBoardos[] = {
 };
 
 extern const Collision spiders_cage_collision[];
+extern void bhv_spiders_cage_init();
+extern void bhv_spiders_cage_loop();
 const BehaviorScript bhvSpidersCage[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(spiders_cage_collision),
+    CALL_NATIVE(bhv_spiders_cage_init),
     BEGIN_LOOP(),
-        // TODO: 
+        CALL_NATIVE(bhv_spiders_cage_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
 extern const Collision waterfally_switch_collision[];
+extern void bhv_spiders_gate_switch_loop();
 const BehaviorScript bhvSpidersGateSwitch[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(waterfally_switch_collision),
     BEGIN_LOOP(),
-        // TODO: 
+        CALL_NATIVE(bhv_spiders_gate_switch_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -7286,7 +7290,7 @@ extern void bhv_spiders_hawk_init();
 extern void bhv_spiders_hawk_loop();
 const BehaviorScript bhvSpidersHawk[] = {
     BEGIN(OBJ_LIST_POLELIKE),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
     SET_INT(oInteractType, INTERACT_HOOT),
     SET_HITBOX(/*Radius*/ 75, /*Height*/ 75),
     CALL_NATIVE(bhv_spiders_hawk_init),
