@@ -8,6 +8,8 @@ static f32 sSpiderHawk3Start[] = { -5143.f, 1383.f, -5056.f };
 static f32 sSpiderHawk3End[]   = { -2933.f, 167.f, -3631.f };
 static f32 sSpiderHawk4Start[] = { -1910.f, -471.f, -5175.f };
 static f32 sSpiderHawk4End[]   = { -1490.f, 2344.f, -2564.f };
+static f32 sSpiderHawk5Start[] = { -9939.f, 1366.f, 4669.f };
+static f32 sSpiderHawk5End[]   = { -10134.f, 811.f, 5362.f };
 
 static f32* sSpiderHawkStarts[] = {
     sSpiderHawk0Start,
@@ -15,6 +17,7 @@ static f32* sSpiderHawkStarts[] = {
     sSpiderHawk2Start,
     sSpiderHawk3Start,
     sSpiderHawk4Start,
+    sSpiderHawk5Start,
 };
 
 static f32* sSpiderHawkEnds[] = {
@@ -23,6 +26,7 @@ static f32* sSpiderHawkEnds[] = {
     sSpiderHawk2End,
     sSpiderHawk3End,
     sSpiderHawk4End,
+    sSpiderHawk5End,
 };
 
 #define RING_BUFFER_SIZE 8
@@ -43,7 +47,14 @@ STATIC_ASSERT(sizeof(struct SpiderSafePositionsRingBuffer) <= sizeof(aglabScratc
 
 void bhv_spiders_hawk_init()
 {
-    cur_obj_become_tangible();
+    if (5 == o->oBehParams2ndByte)
+    {
+        cur_obj_become_intangible();
+    }
+    else
+    {
+        cur_obj_become_tangible();
+    }
     o->oSpidersHawkAct = 0;
     f32* start = sSpiderHawkStarts[o->oBehParams2ndByte];
     o->oPosX = start[0];
@@ -53,6 +64,15 @@ void bhv_spiders_hawk_init()
 
 void bhv_spiders_hawk_loop()
 {
+    if (5 == o->oBehParams2ndByte && o->oDistanceToMario < 200.f && (-1 == o->oIntangibleTimer))
+    {
+        if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_SPEAK 
+            && cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_044)) {
+            set_mario_npc_dialog(MARIO_DIALOG_STOP);
+            cur_obj_become_tangible();
+        }
+    }
+
     if (0 == o->oAction)
     {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
@@ -73,7 +93,15 @@ void bhv_spiders_hawk_loop()
             o->oPosX = start[0];
             o->oPosY = start[1];
             o->oPosZ = start[2];
-            o->oSubAction = 0;
+            o->oSpidersHawkAct = 0;
+        }
+        if (o->oBehParams2ndByte == 0 && gMarioStates->pos[0] > 4200.f && gMarioStates->pos[2] > 0.f)
+        {
+            f32* end = sSpiderHawkEnds[o->oBehParams2ndByte];
+            o->oPosX = end[0];
+            o->oPosY = end[1];
+            o->oPosZ = end[2];
+            o->oSpidersHawkAct = 1;
         }
     }
     else

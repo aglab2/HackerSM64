@@ -155,7 +155,7 @@ extern Vtx spiders_dl_waterfally_uv_mesh_layer_5_vtx_cull[8];
 extern Vtx spiders_dl_waterfally_uv_mesh_layer_5_vtx_0[8];
 extern Gfx spiders_dl_waterfally_uv_mesh_layer_5_tri_0[];
 extern Vtx spiders_dl_waterfally_uv_001_mesh_layer_1_vtx_cull[8];
-extern Vtx spiders_dl_waterfally_uv_001_mesh_layer_1_vtx_0[2293];
+extern Vtx spiders_dl_waterfally_uv_001_mesh_layer_1_vtx_0[2249];
 extern Gfx spiders_dl_waterfally_uv_001_mesh_layer_1_tri_0[];
 extern Vtx spiders_dl_waterfally_uv_001_mesh_layer_1_vtx_1[615];
 extern Gfx spiders_dl_waterfally_uv_001_mesh_layer_1_tri_1[];
