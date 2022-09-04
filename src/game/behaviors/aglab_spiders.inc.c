@@ -4,8 +4,8 @@ static f32 sSpiderHawk1Start[] = { -3771.f, 149.f, -3177.f };
 static f32 sSpiderHawk1End[]   = { -3839.f, 117.f, -5505.f };
 static f32 sSpiderHawk2Start[] = { -6808.8, 59.f, -8710.f };
 static f32 sSpiderHawk2End[]   = { -6418.f, 1383.f, -6442.f };
-static f32 sSpiderHawk3Start[] = { -5143.f, 1383.f, -5056.f };
-static f32 sSpiderHawk3End[]   = { -2933.f, 167.f, -3631.f };
+static f32 sSpiderHawk3Start[] = { -5143.f, 1483.f, -5056.f };
+static f32 sSpiderHawk3End[]   = { -4992.f, 3450.f, -5477.f };
 static f32 sSpiderHawk4Start[] = { -1910.f, -471.f, -5175.f };
 static f32 sSpiderHawk4End[]   = { -1490.f, 2344.f, -2564.f };
 static f32 sSpiderHawk5Start[] = { -9939.f, 1366.f, 4669.f };
@@ -102,6 +102,14 @@ void bhv_spiders_hawk_loop()
             o->oPosY = end[1];
             o->oPosZ = end[2];
             o->oSpidersHawkAct = 1;
+        }
+        if (o->oBehParams2ndByte == 3 && gMarioStates->pos[1] < 2500.f)
+        {
+            f32* end = sSpiderHawkStarts[o->oBehParams2ndByte];
+            o->oPosX = end[0];
+            o->oPosY = end[1];
+            o->oPosZ = end[2];
+            o->oSpidersHawkAct = 0;
         }
     }
     else

@@ -1393,24 +1393,6 @@ Gfx spiders_bee_waterfally_bee_mesh_layer_1_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx spiders_bee_waterfally_bee_mesh_layer_1_vtx_2[8] = {
-	{{{-57, 387, 35},0, {496, -6290},{0x98, 0x2A, 0x3C, 0xFF}}},
-	{{{-43, 387, 60},0, {1008, -6290},{0x98, 0x2A, 0x3C, 0xFF}}},
-	{{{-30, 428, 53},0, {1008, -7063},{0x98, 0x2A, 0x3C, 0xFF}}},
-	{{{-44, 428, 28},0, {496, -7063},{0x98, 0x2A, 0x3C, 0xFF}}},
-	{{{46, 387, 53},0, {-528, -6283},{0x68, 0x2A, 0x3C, 0xFF}}},
-	{{{60, 387, 28},0, {-16, -6283},{0x68, 0x2A, 0x3C, 0xFF}}},
-	{{{47, 428, 21},0, {-16, -7052},{0x68, 0x2A, 0x3C, 0xFF}}},
-	{{{33, 428, 46},0, {-528, -7052},{0x68, 0x2A, 0x3C, 0xFF}}},
-};
-
-Gfx spiders_bee_waterfally_bee_mesh_layer_1_tri_2[] = {
-	gsSPVertex(spiders_bee_waterfally_bee_mesh_layer_1_vtx_2 + 0, 8, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx spiders_bee_waterfally_bee_mesh_layer_4_vtx_cull[8] = {
 	{{{-211, 6, 107},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-211, 457, 107},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -1466,6 +1448,24 @@ Gfx spiders_bee_waterfally_bee_mesh_layer_4_tri_1[] = {
 	gsSP2Triangles(7, 9, 10, 0, 10, 11, 7, 0),
 	gsSP2Triangles(2, 11, 10, 0, 2, 10, 12, 0),
 	gsSP2Triangles(2, 12, 13, 0, 2, 13, 0, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx spiders_bee_waterfally_bee_mesh_layer_4_vtx_2[8] = {
+	{{{-57, 387, 35},0, {496, -6290},{0x98, 0x2A, 0x3C, 0xFF}}},
+	{{{-43, 387, 60},0, {1008, -6290},{0x98, 0x2A, 0x3C, 0xFF}}},
+	{{{-30, 428, 53},0, {1008, -7063},{0x98, 0x2A, 0x3C, 0xFF}}},
+	{{{-44, 428, 28},0, {496, -7063},{0x98, 0x2A, 0x3C, 0xFF}}},
+	{{{46, 387, 53},0, {-528, -6283},{0x68, 0x2A, 0x3C, 0xFF}}},
+	{{{60, 387, 28},0, {-16, -6283},{0x68, 0x2A, 0x3C, 0xFF}}},
+	{{{47, 428, 21},0, {-16, -7052},{0x68, 0x2A, 0x3C, 0xFF}}},
+	{{{33, 428, 46},0, {-528, -7052},{0x68, 0x2A, 0x3C, 0xFF}}},
+};
+
+Gfx spiders_bee_waterfally_bee_mesh_layer_4_tri_2[] = {
+	gsSPVertex(spiders_bee_waterfally_bee_mesh_layer_4_vtx_2 + 0, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1592,7 +1592,8 @@ Gfx mat_revert_spiders_bee__5_f3d[] = {
 
 Gfx mat_spiders_bee__1_f3d[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 1, spiders_bee__1_ia8),
@@ -1603,6 +1604,12 @@ Gfx mat_spiders_bee__1_f3d[] = {
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
 	gsSPSetLights1(spiders_bee__1_f3d_lights),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_spiders_bee__1_f3d[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
 	gsSPEndDisplayList(),
 };
 
@@ -1617,8 +1624,6 @@ Gfx spiders_bee_waterfally_bee_mesh_layer_1[] = {
 	gsSPDisplayList(mat_spiders_bee__2_f3d),
 	gsSPDisplayList(spiders_bee_waterfally_bee_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_spiders_bee__2_f3d),
-	gsSPDisplayList(mat_spiders_bee__1_f3d),
-	gsSPDisplayList(spiders_bee_waterfally_bee_mesh_layer_1_tri_2),
 	gsSPEndDisplayList(),
 };
 
@@ -1633,6 +1638,9 @@ Gfx spiders_bee_waterfally_bee_mesh_layer_4[] = {
 	gsSPDisplayList(mat_spiders_bee__5_f3d),
 	gsSPDisplayList(spiders_bee_waterfally_bee_mesh_layer_4_tri_1),
 	gsSPDisplayList(mat_revert_spiders_bee__5_f3d),
+	gsSPDisplayList(mat_spiders_bee__1_f3d),
+	gsSPDisplayList(spiders_bee_waterfally_bee_mesh_layer_4_tri_2),
+	gsSPDisplayList(mat_revert_spiders_bee__1_f3d),
 	gsSPEndDisplayList(),
 };
 

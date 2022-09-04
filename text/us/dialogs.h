@@ -193,7 +193,7 @@ I'm just watching.\n\
 Don't touch the nests\n\
 or they'll sting you. And\n\
 please alert authorities\n\
-of any spider acitvity."))
+of any spider activity."))
 
 DEFINE_DIALOG(DIALOG_016, 1, 2, 30, 200, _("\
 You can press L button\n\
