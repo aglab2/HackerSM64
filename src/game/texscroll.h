@@ -18,6 +18,7 @@
 #include "src/game/texscroll/vcutm_texscroll.inc.h"
 #include "src/game/texscroll/thi_texscroll.inc.h"
 #include "src/game/texscroll/spiders_texscroll.inc.h"
+#include "src/game/texscroll/luigiman_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif
