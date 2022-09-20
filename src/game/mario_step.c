@@ -605,6 +605,12 @@ u32 should_strengthen_gravity_for_jump_ascent(struct MarioState *m) {
     return FALSE;
 }
 
+u8 gLowGravityEnabled = 0;
+static f32 get_gravity()
+{
+    return gLowGravityEnabled ? 0.8f : 2.0f;
+}
+
 void apply_gravity(struct MarioState *m) {
     if (m->action == ACT_TWIRLING && m->vel[1] < 0.0f) {
         apply_twirl_gravity(m);
@@ -615,7 +621,7 @@ void apply_gravity(struct MarioState *m) {
         }
     } else if (m->action == ACT_LONG_JUMP || m->action == ACT_SLIDE_KICK
                || m->action == ACT_BBH_ENTER_SPIN) {
-        m->vel[1] -= 2.0f;
+        m->vel[1] -= get_gravity();
         if (m->vel[1] < -75.0f) {
             m->vel[1] = -75.0f;
         }
@@ -646,7 +652,7 @@ void apply_gravity(struct MarioState *m) {
             }
         }
     } else {
-        m->vel[1] -= 4.0f;
+        m->vel[1] -= get_gravity() * 2.f;
         if (m->vel[1] < -75.0f) {
             m->vel[1] = -75.0f;
         }
