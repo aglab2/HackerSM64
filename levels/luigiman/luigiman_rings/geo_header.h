@@ -1,0 +1,10 @@
+extern const GeoLayout luigiman_rings_geo[];
+extern Lights1 luigiman_rings_Rings_lights;
+extern u8 luigiman_rings_Stone_7_ci4[];
+extern u8 luigiman_rings_Stone_7_ci4_pal_rgba16[];
+extern Vtx luigiman_rings_Rings_mesh_layer_1_vtx_0[230];
+extern Gfx luigiman_rings_Rings_mesh_layer_1_tri_0[];
+extern Gfx mat_luigiman_rings_Rings[];
+extern Gfx mat_revert_luigiman_rings_Rings[];
+extern Gfx luigiman_rings_Rings_mesh_layer_1[];
+extern Gfx luigiman_rings_material_revert_render_settings[];

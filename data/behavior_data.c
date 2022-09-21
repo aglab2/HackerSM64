@@ -7323,3 +7323,18 @@ const BehaviorScript bhvSpidersBuddy[] = {
         CALL_NATIVE(bhv_spiders_buddy_loop),
     END_LOOP(),
 };
+
+extern void luigiman_rings_init();
+extern void luigiman_rings_loop();
+extern const Collision luigiman_rings_collision[];
+const BehaviorScript bhvLuigimanRing[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(luigiman_rings_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    CALL_NATIVE(luigiman_rings_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(luigiman_rings_loop),
+    END_LOOP(),
+};

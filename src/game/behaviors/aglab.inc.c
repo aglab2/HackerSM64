@@ -89,6 +89,7 @@ static struct Object *cur_obj_find_nearest_object_with_behavior_y_biased(const B
 #include "aglab_crash.inc.c"
 #include "aglab_pie.inc.c"
 #include "aglab_spiders.inc.c"
+#include "luigiman.inc.c"
 
 void sparkler_loop()
 {

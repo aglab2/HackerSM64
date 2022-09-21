@@ -15,3 +15,5 @@
 
 
 #include "levels/luigiman/geo.inc.c"
+
+#include "levels/luigiman/luigiman_rings/geo.inc.c"
