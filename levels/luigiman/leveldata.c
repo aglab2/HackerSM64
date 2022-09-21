@@ -12,3 +12,6 @@
 
 
 #include "levels/luigiman/leveldata.inc.c"
+
+#include "levels/luigiman/luigiman_rings/model.inc.c"
+#include "levels/luigiman/luigiman_rings/collision.inc.c"

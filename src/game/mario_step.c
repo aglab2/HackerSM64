@@ -608,7 +608,7 @@ u32 should_strengthen_gravity_for_jump_ascent(struct MarioState *m) {
 u8 gLowGravityEnabled = 0;
 static f32 get_gravity()
 {
-    return gLowGravityEnabled ? 0.8f : 2.0f;
+    return gLowGravityEnabled ? 1.2f : 2.0f;
 }
 
 void apply_gravity(struct MarioState *m) {
