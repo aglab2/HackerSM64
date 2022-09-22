@@ -313,7 +313,7 @@ void stop_rcp_hang_timer(void) {
 }
 
 void alert_rcp_hung_up(void) {
-    error("RCP is HUNG UP!! Oh! MY GOD!!");
+    assert(0, "RCP is HUNG UP!! Oh! MY GOD!!");
 }
 
 extern void crash_screen_init(void);
