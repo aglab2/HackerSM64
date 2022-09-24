@@ -7323,3 +7323,14 @@ const BehaviorScript bhvSpidersBuddy[] = {
         CALL_NATIVE(bhv_spiders_buddy_loop),
     END_LOOP(),
 };
+
+extern void bhv_aglab_rng_init();
+extern void bhv_aglab_rng_loop();
+const BehaviorScript bhvAglabRng[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    SET_HOME(),
+    CALL_NATIVE(bhv_aglab_rng_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_aglab_rng_loop),
+    END_LOOP(),
+};
