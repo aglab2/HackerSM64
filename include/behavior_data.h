@@ -656,6 +656,9 @@ extern const BehaviorScript bhvRovertBigBall[];
 extern const BehaviorScript bhvAglabRng[];
 extern const BehaviorScript bhvAglabRngSurfaceCheck[];
 extern const BehaviorScript bhvLuigimanRing[];
+extern const BehaviorScript bhvLuigimanSpinningHoles1[];
+extern const BehaviorScript bhvLuigimanMovingPlat1[];
+extern const BehaviorScript bhvLuigimanPurpleSwitch[];
 
 
 #endif // BEHAVIOR_DATA_H

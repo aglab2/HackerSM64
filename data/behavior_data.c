@@ -7533,3 +7533,47 @@ const BehaviorScript bhvLuigimanRing[] = {
         CALL_NATIVE(luigiman_rings_loop),
     END_LOOP(),
 };
+
+extern void luigiman_spinning_holes1_init();
+extern void luigiman_spinning_holes1_loop();
+extern const Collision luigiman_spinning_holes1_collision[];
+const BehaviorScript bhvLuigimanSpinningHoles1[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(luigiman_spinning_holes1_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    CALL_NATIVE(luigiman_spinning_holes1_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(luigiman_spinning_holes1_loop),
+    END_LOOP(),
+};
+
+extern void luigiman_moving_plat_init();
+extern void luigiman_moving_plat_loop();
+extern const Collision luigiman_moving_platform_collision[];
+const BehaviorScript bhvLuigimanMovingPlat1[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    CALL_NATIVE(luigiman_moving_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(luigiman_moving_plat_loop),
+    END_LOOP(),
+};
+
+extern void luigiman_purple_switch_init();
+extern void luigiman_purple_switch_loop();
+const BehaviorScript bhvLuigimanPurpleSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 20000),
+    CALL_NATIVE(luigiman_purple_switch_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(luigiman_purple_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

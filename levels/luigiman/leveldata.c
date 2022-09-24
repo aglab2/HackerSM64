@@ -15,3 +15,7 @@
 
 #include "levels/luigiman/luigiman_rings/model.inc.c"
 #include "levels/luigiman/luigiman_rings/collision.inc.c"
+#include "levels/luigiman/luigiman_spinning_holes1/model.inc.c"
+#include "levels/luigiman/luigiman_spinning_holes1/collision.inc.c"
+#include "levels/luigiman/luigiman_moving_platform/collision.inc.c"
+#include "levels/luigiman/luigiman_moving_platform/model.inc.c"
