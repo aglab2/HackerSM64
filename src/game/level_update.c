@@ -987,6 +987,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 /**
  * If a delayed warp is ready, initiate it.
  */
+extern u8 gWarpTrigger;
 void initiate_delayed_warp(void) {
     struct ObjectWarpNode *warpNode;
     s32 destWarpNode;
@@ -1039,6 +1040,7 @@ void initiate_delayed_warp(void) {
                     break;
 
                 default:
+                    gWarpTrigger = 1;
                     warpNode = area_get_warp_node(sSourceWarpNodeId);
 
                     initiate_warp(warpNode->node.destLevel & 0x7F, warpNode->node.destArea,

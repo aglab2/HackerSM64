@@ -12,3 +12,6 @@
 
 
 #include "levels/rng/leveldata.inc.c"
+
+#include "levels/rng/rng_mushroom/model.inc.c"
+#include "levels/rng/rng_mushroom/collision.inc.c"

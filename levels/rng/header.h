@@ -9,4 +9,8 @@ extern const LevelScript level_rng_entry[];
 
 #include "levels/rng/header.inc.h"
 
+#include "levels/rng/rng_mushroom/geo_header.h"
+
+#include "levels/rng/rng_mushroom/collision_header.h"
+
 #endif

@@ -15,3 +15,5 @@
 
 
 #include "levels/rng/geo.inc.c"
+
+#include "levels/rng/rng_mushroom/geo.inc.c"

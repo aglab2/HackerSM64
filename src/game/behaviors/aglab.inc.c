@@ -76,6 +76,49 @@ static struct Object *cur_obj_find_nearest_object_with_behavior_y_biased(const B
     return closestObj;
 }
 
+static void cur_obj_unload_object_with_behavior_and_bparam3(const BehaviorScript *behavior, int param) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    struct Object *obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr
+            && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+            && obj != o
+            && GET_BPARAM3(obj->oBehParams) == param
+        ) {
+            obj->activeFlags = 0;
+        }
+
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
+static void cur_obj_unload_object_with_behavior(const BehaviorScript *behavior) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    struct Object *obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr
+            && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+            && obj != o
+        ) {
+            obj->activeFlags = 0;
+        }
+
+        obj = (struct Object *) obj->header.next;
+    }
+
+    return NULL;
+}
+
+static f32 random_float_ft(f32 from, f32 to)
+{
+    f32 d = to - from;
+    return from + random_float() * d;
+}
+
 #include "aglab_ab.inc.c"
 #include "aglab_mf.inc.c"
 #include "aglab_df.inc.c"

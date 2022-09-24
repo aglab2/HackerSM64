@@ -32,6 +32,7 @@ const LevelScript level_rng_entry[] = {
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
 	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_MUSHROOM, rng_mushroom_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -60,7 +61,7 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_NONE, 4266, 2779, -1109, 0, -180, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 4256, 2833, -1154, 0, -180, 0, (0xa << 16), bhvAirborneWarp),
 		OBJECT(MODEL_THI_WARP_PIPE, 4249, 2550, -9041, 0, 0, 0, (0xb << 16), bhvWarpPipe),
-		OBJECT(MODEL_NONE, 4479, 2561, -9065, 0, 0, 0, 0x00000000, bhvAglabRng),
+		OBJECT(MODEL_NONE, 4287, 2752, -1140, 0, -180, 0, 0x00000000, bhvAglabRng),
 		OBJECT(MODEL_STAR, 3932, 2835, -9049, 0, 0, 0, 0x00000000, bhvStar),
 		TERRAIN(rng_area_2_collision),
 		MACRO_OBJECTS(rng_area_2_macro_objs),

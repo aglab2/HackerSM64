@@ -895,7 +895,7 @@ void thread5_game_loop(UNUSED void *arg) {
             osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
         }
 #endif
-#if 1
+#if 0
         if (gPlayer1Controller->buttonPressed & L_TRIG)
         {
             gLowGravityEnabled = !gLowGravityEnabled;

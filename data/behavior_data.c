@@ -7328,9 +7328,21 @@ extern void bhv_aglab_rng_init();
 extern void bhv_aglab_rng_loop();
 const BehaviorScript bhvAglabRng[] = {
     BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
     SET_HOME(),
     CALL_NATIVE(bhv_aglab_rng_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_aglab_rng_loop),
+    END_LOOP(),
+};
+
+extern void bhv_aglab_rng_collision_init();
+const BehaviorScript bhvAglabRngCollision[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 20000),
+    CALL_NATIVE(bhv_aglab_rng_collision_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
