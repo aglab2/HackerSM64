@@ -34,6 +34,12 @@ const LevelScript level_rng_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_MUSHROOM, rng_mushroom_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_PYRAMID, rng_pyramid_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SHAPE1, rng_shape1_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SHAPE2, rng_shape2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SHAPE3, rng_shape3_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SHAPE4, rng_shape4_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_CACTUS, rng_cactus_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_CACTUS2, rng_cactus2_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -59,9 +65,10 @@ const LevelScript level_rng_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_RNG, 3, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_RNG, 2, 0xf1, WARP_NO_CHECKPOINT),
-		MARIO_POS(0x02, -180, 4264, 2786, -1147),
+		MARIO_POS(4, -180, 4222, 2550, -1125),
 		OBJECT(MODEL_NONE, 4266, 2779, -1109, 0, -180, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 4256, 2833, -1154, 0, -180, 0, (0xa << 16), bhvAirborneWarp),
+		OBJECT(MODEL_WOODEN_SIGNPOST, 4252, 2550, -1381, 0, 0, 0, (60 << 24) | (60 << 16), bhvMessagePanel),
 		OBJECT(MODEL_THI_WARP_PIPE, 4249, 2550, -9041, 0, 0, 0, (0xb << 16), bhvWarpPipe),
 		OBJECT(MODEL_NONE, 4287, 2752, -1140, 0, -180, 0, 0x00000000, bhvAglabRng),
 		OBJECT(MODEL_STAR, 3932, 2835, -9049, 0, 0, 0, 0x00000000, bhvStar),
@@ -158,7 +165,7 @@ const LevelScript level_rng_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x02, -180, 4264, 2786, -1147),
+	MARIO_POS(4, -180, 4222, 2550, -1125),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

@@ -18,3 +18,9 @@
 
 #include "levels/rng/rng_mushroom/geo.inc.c"
 #include "levels/rng/rng_pyramid/geo.inc.c"
+#include "levels/rng/rng_shape1/geo.inc.c"
+#include "levels/rng/rng_shape2/geo.inc.c"
+#include "levels/rng/rng_shape3/geo.inc.c"
+#include "levels/rng/rng_shape4/geo.inc.c"
+#include "levels/rng/rng_cactus/geo.inc.c"
+#include "levels/rng/rng_cactus2/geo.inc.c"
