@@ -648,6 +648,9 @@ extern const BehaviorScript bhvSpidersHawk[];
 extern const BehaviorScript bhvSpidersBuddy[];
 extern const BehaviorScript bhvSpidersDeathTrigger[];
 extern const BehaviorScript bhvLuigimanRing[];
+extern const BehaviorScript bhvLuigimanSpinningHoles1[];
+extern const BehaviorScript bhvLuigimanMovingPlat1[];
+extern const BehaviorScript bhvLuigimanPurpleSwitch[];
 
 
 #endif // BEHAVIOR_DATA_H
