@@ -1,6 +1,7 @@
 extern const BehaviorScript bhvAglabRngCollision[];
 
 extern const Collision rng_mushroom_collision[];
+extern const Collision rng_pyramid_collision[];
 
 static void rng_reroll()
 {
@@ -12,7 +13,6 @@ static void rng_reroll()
         // mushrooms
         case 2:
         {
-            // (3031, 2550, -1692) - (5475, 2550, -8671)
             for (int i = 0; i < 15; i++)
             {
                 struct Object* mush = spawn_object(o, MODEL_AGLAB_RNG_MUSHROOM, bhvAglabRngCollision);
@@ -23,6 +23,20 @@ static void rng_reroll()
             }
         }
         break;
+        // pyramid
+        case 3:
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_PYRAMID, bhvAglabRngCollision);
+                pyr->oPosX = random_float_ft(-927.f, 1389.f);
+                pyr->oPosY = 3250.f - random_float() * 1300.f;
+                pyr->oPosZ = random_float_ft(-1900.f, 5070.f);
+                pyr->oBehParams2ndByte = 1;
+                pyr->oFaceAngleYaw = random_u16() & 0xe000;
+            }
+        }
+        break;
     }
 }
 
@@ -30,7 +44,13 @@ static f32 rng_z_attempt_threshold()
 {
     switch(gCurrentArea->index)
     {
+        case 1: return  2806.f;
         case 2: return -1500.f;
+        case 3: return  5270.f;
+        case 4: return  2049.f;
+        case 5: return  2193.f;
+        case 6: return  4477.f;
+        case 7: return  2177.f;
     }
 }
 
@@ -50,7 +70,7 @@ void bhv_aglab_rng_loop()
     gWarpTrigger = 0;
     if (0 == o->oAction)
     {
-        int attempt = (o->oDistanceToMario > 300.f) || (gMarioStates->pos[2] < rng_z_attempt_threshold());
+        int attempt = (o->oDistanceToMario > 500.f) || (gMarioStates->pos[2] < rng_z_attempt_threshold());
         if (attempt)
         {
             if (L_TRIG & gPlayer1Controller->buttonPressed)
@@ -101,6 +121,12 @@ void bhv_aglab_rng_collision_init()
         case 0:
         {
             obj_set_collision_data(o, rng_mushroom_collision);
+            break;
+        }
+        case 1:
+        {
+            obj_set_collision_data(o, rng_pyramid_collision);
+            obj_scale_xyz(o, 1.1f, 1.1f, 1.1f);
             break;
         }
     }

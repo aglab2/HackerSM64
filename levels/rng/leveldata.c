@@ -15,3 +15,5 @@
 
 #include "levels/rng/rng_mushroom/model.inc.c"
 #include "levels/rng/rng_mushroom/collision.inc.c"
+#include "levels/rng/rng_pyramid/model.inc.c"
+#include "levels/rng/rng_pyramid/collision.inc.c"

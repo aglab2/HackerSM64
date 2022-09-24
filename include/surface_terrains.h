@@ -14,7 +14,7 @@ enum SurfaceTypes {
     SURFACE_HANGABLE,                   // 0x0005 // Ceiling that Mario can climb on
     SURFACE_STICKY,                     // 0x0006 // Scut Use
     SURFACE_SUPER_SLIPPERY,             // 0x0007 // Unused
-    SURFACE_0008,                       // 0x0008 // Unused
+    SURFACE_NO_WALLKICKS,                       // 0x0008 // Unused
     SURFACE_SLOW,                       // 0x0009 // Slow down Mario, unused
     SURFACE_DEATH_PLANE,                // 0x000A // Death floor
     SURFACE_CLOSE_CAMERA,               // 0x000B // Close camera
