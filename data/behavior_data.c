@@ -7336,6 +7336,7 @@ const BehaviorScript bhvAglabRng[] = {
     END_LOOP(),
 };
 
+extern void bhv_aglab_rng_collision_loop();
 extern void bhv_aglab_rng_collision_init();
 const BehaviorScript bhvAglabRngCollision[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -7344,5 +7345,6 @@ const BehaviorScript bhvAglabRngCollision[] = {
     CALL_NATIVE(bhv_aglab_rng_collision_init),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_aglab_rng_collision_loop),
     END_LOOP(),
 };

@@ -8,6 +8,7 @@ extern const Collision rng_shape3_collision[];
 extern const Collision rng_shape4_collision[];
 extern const Collision rng_cactus_collision[];
 extern const Collision rng_cactus2_collision[];
+extern const Collision rng_lamp_collision[];
 
 static void rng_reroll()
 {
@@ -16,6 +17,18 @@ static void rng_reroll()
 
     switch(gCurrentArea->index)
     {
+        case 1:
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                struct Object* mush = spawn_object(o, MODEL_EXCLAMATION_BOX, bhvExclamationBox);
+                mush->oPosX = random_float_ft(-748.f, 1702.f);
+                mush->oPosY = 2687.f + random_float() * 800.f;
+                mush->oPosZ = random_float_ft(-2842.f,  4200.f);
+                mush->oBehParams2ndByte = random_u16() % 3; // all caps
+            }
+        }
+        break;
         // mushrooms
         case 2:
         {
@@ -66,10 +79,27 @@ static void rng_reroll()
             }
         }
         break;
+        // lamps
+        case 5:
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_LAMP, bhvAglabRngCollision);
+                pyr->oPosX = random_float_ft(-1112.f, 1338.f);
+                pyr->oPosZ = random_float_ft(-2700.f, 4000.f);
+                pyr->oPosY = 2400.f;
+                pyr->oBehParams2ndByte = 8;
+                pyr->oKleptoStartPosX = random_f32_around_zero(60.f);
+                pyr->oKleptoStartPosY = 0x280 + (random_u16() & 0x1ff);
+                pyr->oTimer = random_u16();
+                pyr->oFaceAngleYaw = random_u16();
+            }
+        }
+        break;
         // shapes
         case 6:
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 12; i++)
             {
                 int model = random_u16() & 3;
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_SHAPE1 + model, bhvAglabRngCollision);
@@ -122,6 +152,10 @@ void bhv_aglab_rng_loop()
     {
         gMarioStates->flags |= MARIO_METAL_CAP;
     }
+    if (5 == gCurrentArea->index)
+    {
+        gMarioStates->flags &= ~MARIO_METAL_CAP;
+    }
     
     if (0 == o->oAction)
     {
@@ -150,6 +184,18 @@ void bhv_aglab_rng_loop()
             {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
                 o->oAction = 1;
+                return;
+            }
+        }
+        if (5 == gCurrentArea->index)
+        {
+            struct Surface* surf = NULL;
+            find_floor(gMarioStates->pos[0], 10000.f, gMarioStates->pos[2], &surf);
+            if (surf && surf->type == SURFACE_SHALLOW_QUICKSAND)
+            {
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                o->oAction = 1;
+                return;
             }
         }
     }
@@ -229,5 +275,20 @@ void bhv_aglab_rng_collision_init()
             obj_set_collision_data(o, rng_cactus2_collision);
         }
         break;
+        case 8:
+        {
+            obj_set_collision_data(o, rng_lamp_collision);
+            obj_scale_xyz(o, 1.1f, 1.1f, 1.1f);
+        }
+        break;
+    }
+}
+
+void bhv_aglab_rng_collision_loop()
+{
+    if (o->oKleptoStartPosX)
+    {
+        o->oVelX = o->oKleptoStartPosX * sins(o->oTimer * o->oKleptoStartPosY);
+        o->oPosX += o->oVelX;
     }
 }

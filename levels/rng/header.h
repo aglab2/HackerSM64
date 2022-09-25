@@ -41,4 +41,8 @@ extern const LevelScript level_rng_entry[];
 
 #include "levels/rng/rng_cactus2/collision_header.h"
 
+#include "levels/rng/rng_lamp/geo_header.h"
+
+#include "levels/rng/rng_lamp/collision_header.h"
+
 #endif

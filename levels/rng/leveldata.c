@@ -29,3 +29,5 @@
 #include "levels/rng/rng_cactus2/model.inc.c"
 #include "levels/rng/rng_cactus/collision.inc.c"
 #include "levels/rng/rng_cactus2/collision.inc.c"
+#include "levels/rng/rng_lamp/model.inc.c"
+#include "levels/rng/rng_lamp/collision.inc.c"

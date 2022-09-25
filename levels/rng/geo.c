@@ -24,3 +24,4 @@
 #include "levels/rng/rng_shape4/geo.inc.c"
 #include "levels/rng/rng_cactus/geo.inc.c"
 #include "levels/rng/rng_cactus2/geo.inc.c"
+#include "levels/rng/rng_lamp/geo.inc.c"
