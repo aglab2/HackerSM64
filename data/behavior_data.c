@@ -7327,7 +7327,7 @@ const BehaviorScript bhvSpidersBuddy[] = {
 extern void bhv_aglab_rng_init();
 extern void bhv_aglab_rng_loop();
 const BehaviorScript bhvAglabRng[] = {
-    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN(OBJ_LIST_SPAWNER),
     OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
     SET_HOME(),
     CALL_NATIVE(bhv_aglab_rng_init),
@@ -7346,5 +7346,87 @@ const BehaviorScript bhvAglabRngCollision[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_aglab_rng_collision_loop),
+    END_LOOP(),
+};
+
+extern void bhv_noteblock_loop();
+extern const Collision col_Noteblock_MOP_0xaa6444[];
+const BehaviorScript bhvNoteblock_MOP[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(col_Noteblock_MOP_0xaa6444),
+    SCALE(0,64),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_noteblock_loop),
+    CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_Spring_loop();
+const BehaviorScript bhvSpring_MOP[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE ),
+    SET_HITBOX(160,160),
+    SET_INTERACT_TYPE(INTERACT_COIN),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_Spring_loop),
+    END_LOOP(),
+};
+
+extern void bhv_shrinkplatform_loop();
+extern const Collision col_Shrink_Platform_MOP_0xad3720[];
+const BehaviorScript bhvShrink_Platform_MOP[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE ),
+    SET_FLOAT(oDrawingDistance, 20000),
+    LOAD_COLLISION_DATA(col_Shrink_Platform_MOP_0xad3720),
+    // SPAWN_CHILD(MODEL_AGLAB_RNG_SHRINK_PLATFORM_BORDER, bhvStaticObject),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_shrinkplatform_loop),
+    CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_checkpoint_flag_loop();
+const BehaviorScript bhvCheckpoint_Flag_MOP[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags,OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    SET_INT(oInteractType,INTERACT_POLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HITBOX(64,650),
+    SET_INT(oIntangibleTimer, -1),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_checkpoint_flag_loop),
+    END_LOOP(),
+};
+
+extern const Collision col_Moving_Rotating_Block_MOP_0x7e3ea0[];
+extern void bhv_move_rotate_init();
+extern void bhv_move_rotate_loop();
+const BehaviorScript bhvMoving_Rotating_Block_MOP[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(col_Moving_Rotating_Block_MOP_0x7e3ea0),
+    SET_FLOAT(oDrawingDistance,19455),
+    CALL_NATIVE(bhv_move_rotate_init),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_move_rotate_loop),
+    CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision col_Sandblock_MOP_0xaa6444[];
+extern void bhv_sandblock_loop();
+const BehaviorScript bhvSandBlock_MOP[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE ),
+    SET_FLOAT(oDrawingDistance,19455),
+    LOAD_COLLISION_DATA(col_Sandblock_MOP_0xaa6444),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_sandblock_loop),
     END_LOOP(),
 };

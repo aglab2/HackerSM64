@@ -782,6 +782,6 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/yoshi.inc.c"
 
 #include "behaviors/aglab.inc.c"
-
+#include "behaviors/mop.inc.c"
 #include "behaviors/reonu.inc.c"
 #include "behaviors/omm.inc.c"

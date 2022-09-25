@@ -45,4 +45,16 @@ extern const LevelScript level_rng_entry[];
 
 #include "levels/rng/rng_lamp/collision_header.h"
 
+#include "levels/rng/Checkpoint_Flag_MOP/model.inc.h"
+#include "levels/rng/Moving_Rotating_Block_MOP/model.inc.h"
+#include "levels/rng/Noteblock_MOP/model.inc.h"
+#include "levels/rng/Shrink_Platform_Border_MOP/model.inc.h"
+#include "levels/rng/Shrink_Platform_MOP/model.inc.h"
+#include "levels/rng/Spring_MOP/model.inc.h"
+#include "levels/rng/SandBlock_MOP/model.inc.h"
+extern const GeoLayout Moving_Rotating_Block_MOP[];
+extern const GeoLayout Noteblock_MOP[];
+extern const GeoLayout Shrink_Platform_MOP[];
+extern const GeoLayout SandBlock_MOP[];
+
 #endif

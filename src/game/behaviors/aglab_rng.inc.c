@@ -10,10 +10,36 @@ extern const Collision rng_cactus_collision[];
 extern const Collision rng_cactus2_collision[];
 extern const Collision rng_lamp_collision[];
 
+extern const BehaviorScript bhvNoteblock_MOP[];
+extern const BehaviorScript bhvSpring_MOP[];
+extern const BehaviorScript bhvShrink_Platform_MOP[];
+extern const BehaviorScript bhvCheckpoint_Flag_MOP[];
+extern const BehaviorScript bhvMoving_Rotating_Block_MOP[];
+extern const BehaviorScript bhvSandBlock_MOP[];
+
+struct Object* spawn_for_mop(const BehaviorScript* bs, int model)
+{
+    if (0 == (random_u16() & 0x7))
+    {
+        return spawn_object(o, MODEL_AGLAB_RNG_SPRING, bhvSpring_MOP);
+    }
+    else
+    {
+        return spawn_object(o, model, bs);
+    }
+}
+
 static void rng_reroll()
 {
     cur_obj_unload_object_with_behavior(bhvAglabRngCollision);
     cur_obj_unload_object_with_behavior(bhvExclamationBox);
+    cur_obj_unload_object_with_behavior(bhvNoteblock_MOP);
+    cur_obj_unload_object_with_behavior(bhvSpring_MOP);
+    cur_obj_unload_object_with_behavior(bhvShrink_Platform_MOP);
+    cur_obj_unload_object_with_behavior(bhvCheckpoint_Flag_MOP);
+    cur_obj_unload_object_with_behavior(bhvMoving_Rotating_Block_MOP);
+    cur_obj_unload_object_with_behavior(bhvStaticObject);
+    cur_obj_unload_object_with_behavior(bhvSandBlock_MOP);
 
     switch(gCurrentArea->index)
     {
@@ -112,6 +138,55 @@ static void rng_reroll()
             }
         }
         break;
+        // MOP
+        case 7:
+        {
+            for (int i = 0; i < 35; i++)
+            {
+                // (-300, 3400)
+                struct Object* pyr = spawn_for_mop(bhvCheckpoint_Flag_MOP, MODEL_AGLAB_RNG_CHECKPOINT);
+                pyr->oPosX = random_float_ft(-5800.f, -100.f);
+                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosZ = random_float_ft(-2000.f, 3600.f);
+                pyr->oFaceAngleYaw = random_u16();
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                // (-300, 4500)
+                struct Object* pyr = spawn_for_mop(bhvMoving_Rotating_Block_MOP, MODEL_AGLAB_RNG_MOVING_ROTATING);
+                pyr->oPosX = random_float_ft(-5800.f, -100.f);
+                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosZ = random_float_ft(4300.f, 10000.f);
+                pyr->oBehParams2ndByte = i & 1;
+                pyr->oFaceAngleYaw = random_u16();
+            }
+            for (int i = 0; i < 40; i++)
+            {
+                // (800, 3500)
+                struct Object* pyr;
+                if (i % 4)
+                {
+                    pyr = spawn_for_mop(bhvNoteblock_MOP, MODEL_AGLAB_RNG_NOTEBLOCK);
+                }
+                else
+                {
+                    pyr = spawn_for_mop(bhvSandBlock_MOP, MODEL_AGLAB_RNG_SANDBLOCK);
+                }
+                pyr->oPosX = random_float_ft(600.f, 6100.f);
+                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosZ = random_float_ft(-2000.f, 3600.f);
+                pyr->oFaceAngleYaw = random_u16();
+            }
+            for (int i = 0; i < 35; i++)
+            {
+                // (750, 4500)
+                struct Object* pyr = spawn_for_mop(bhvShrink_Platform_MOP, MODEL_AGLAB_RNG_SHRINK_PLATFORM);
+                pyr->oPosX = random_float_ft(600.f, 6100.f);
+                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosZ = random_float_ft(4300.f, 10000.f);
+            }
+        }
+        break;
     }
 }
 
@@ -160,7 +235,7 @@ void bhv_aglab_rng_loop()
     
     if (0 == o->oAction)
     {
-        int attempt = (o->oDistanceToMario > 500.f) || (gMarioStates->pos[2] < rng_z_attempt_threshold());
+        int attempt = (o->oDistanceToMario > 500.f) || (gCurrentArea->index != 7 && gMarioStates->pos[2] < rng_z_attempt_threshold());
         if (attempt)
         {
             if (L_TRIG & gPlayer1Controller->buttonPressed)

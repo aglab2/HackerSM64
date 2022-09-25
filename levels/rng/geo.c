@@ -25,3 +25,11 @@
 #include "levels/rng/rng_cactus/geo.inc.c"
 #include "levels/rng/rng_cactus2/geo.inc.c"
 #include "levels/rng/rng_lamp/geo.inc.c"
+
+#include "levels/rng/Checkpoint_Flag_MOP/geo.inc.c"
+#include "levels/rng/Moving_Rotating_Block_MOP/geo.inc.c"
+#include "levels/rng/Noteblock_MOP/geo.inc.c"
+#include "levels/rng/Shrink_Platform_Border_MOP/geo.inc.c"
+#include "levels/rng/Shrink_Platform_MOP/geo.inc.c"
+#include "levels/rng/Spring_MOP/geo.inc.c"
+#include "levels/rng/SandBlock_MOP/geo.inc.c"
