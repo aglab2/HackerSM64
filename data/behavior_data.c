@@ -7336,6 +7336,14 @@ const BehaviorScript bhvAglabRng[] = {
     END_LOOP(),
 };
 
+extern void bhv_aglab_rng_surface_check_loop();
+const BehaviorScript bhvAglabRngSurfaceCheck[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_aglab_rng_surface_check_loop),
+    END_LOOP(),
+};
+
 extern void bhv_aglab_rng_collision_loop();
 extern void bhv_aglab_rng_collision_init();
 const BehaviorScript bhvAglabRngCollision[] = {
@@ -7378,12 +7386,12 @@ const BehaviorScript bhvSpring_MOP[] = {
 };
 
 extern void bhv_shrinkplatform_loop();
-extern const Collision col_Shrink_Platform_MOP_0xad3720[];
+extern const Collision Shrink_Platform_MOP_collision[];
 const BehaviorScript bhvShrink_Platform_MOP[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE ),
     SET_FLOAT(oDrawingDistance, 20000),
-    LOAD_COLLISION_DATA(col_Shrink_Platform_MOP_0xad3720),
+    LOAD_COLLISION_DATA(Shrink_Platform_MOP_collision),
     // SPAWN_CHILD(MODEL_AGLAB_RNG_SHRINK_PLATFORM_BORDER, bhvStaticObject),
     BEGIN_LOOP(),
     CALL_NATIVE(bhv_shrinkplatform_loop),

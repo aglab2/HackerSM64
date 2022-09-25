@@ -30,7 +30,6 @@ void bhv_checkpoint_flag_loop(void)
         if (o->oAction == 0)
         {
             o->oAction = 1;
-            cur_obj_play_sound_1(SOUND_GENERAL_OPEN_CHEST);
         }
     }
     else

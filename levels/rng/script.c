@@ -45,7 +45,7 @@ const LevelScript level_rng_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_MOVING_ROTATING, Moving_Rotating_Block_MOP), 
 	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_NOTEBLOCK, Noteblock_MOP), 
 	LOAD_MODEL_FROM_DL(MODEL_AGLAB_RNG_SHRINK_PLATFORM_BORDER, DL_Shrink_Platform_Border_MOP_0x3020860, LAYER_OPAQUE), 
-	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SHRINK_PLATFORM, Shrink_Platform_MOP), 
+	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SHRINK_PLATFORM, Shrink_Platform_MOP_geo), 
 	LOAD_MODEL_FROM_DL(MODEL_AGLAB_RNG_SPRING, DL_Spring_MOP_0x301fc98, LAYER_OPAQUE), 
 	LOAD_MODEL_FROM_GEO(MODEL_AGLAB_RNG_SANDBLOCK, SandBlock_MOP), 
 
@@ -63,7 +63,7 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_STAR, 207, 2844, -3240, 0, 0, 0, (4 << 24), bhvStar),
 		TERRAIN(rng_area_1_collision),
 		MACRO_OBJECTS(rng_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG5),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -73,7 +73,7 @@ const LevelScript level_rng_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_RNG, 3, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_RNG, 2, 0xf1, WARP_NO_CHECKPOINT),
-		MARIO_POS(1, -180, 4222, 2550, -1125),
+		MARIO_POS(2, -180, 4222, 2550, -1125),
 		OBJECT(MODEL_NONE, 4266, 2779, -1109, 0, -180, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 4256, 2833, -1154, 0, -180, 0, (0xa << 16), bhvAirborneWarp),
 		OBJECT(MODEL_WOODEN_SIGNPOST, 4252, 2550, -1381, 0, 0, 0, (60 << 24) | (60 << 16), bhvMessagePanel),
@@ -82,7 +82,7 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_STAR, 3932, 2835, -9049, 0, 0, 0, 0x00000000, bhvStar),
 		TERRAIN(rng_area_2_collision),
 		MACRO_OBJECTS(rng_area_2_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG1),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -99,7 +99,7 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_STAR, -162, 2809, -2311, 0, 0, 0, (1 << 24), bhvStar),
 		TERRAIN(rng_area_3_collision),
 		MACRO_OBJECTS(rng_area_3_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG2),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -116,7 +116,7 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_STAR, 1187, 5016, -5698, 0, 0, 0, (2 << 24), bhvStar),
 		TERRAIN(rng_area_4_collision),
 		MACRO_OBJECTS(rng_area_4_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG3),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -131,9 +131,10 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_THI_WARP_PIPE, 217, 1969, -3392, 0, 0, 0, (0xb << 16), bhvWarpPipe),
 		OBJECT(MODEL_NONE, 169, 2301, 4497, 0, -180, 0, 0x00000000, bhvAglabRng),
 		OBJECT(MODEL_STAR, -142, 2191, -3410, 0, 0, 0, (3 << 24), bhvStar),
+		OBJECT(MODEL_NONE, -408, 1884, 1159, 0, -180, 0, 0x00000000, bhvAglabRngSurfaceCheck),
 		TERRAIN(rng_area_5_collision),
 		MACRO_OBJECTS(rng_area_5_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG6),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -150,7 +151,7 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_STAR, 1915, 2323, -3088, 0, 0, 0, (5 << 24), bhvStar),
 		TERRAIN(rng_area_6_collision),
 		MACRO_OBJECTS(rng_area_6_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG0),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -160,6 +161,7 @@ const LevelScript level_rng_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf0, LEVEL_CASTLE_COURTYARD, 0x01, 0x30, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_RNG, 7, 0xf1, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf0, LEVEL_CASTLE, 0x01, 0x21, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 225, 2325, 4021, 0, -180, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 225, 2323, 4019, 0, -180, 0, (0xa << 16), bhvAirborneWarp),
 		OBJECT(MODEL_RED_COIN, -6057, 2081, 4043, 0, 0, 0, 0x00000000, bhvRedCoin),
@@ -174,14 +176,14 @@ const LevelScript level_rng_entry[] = {
 		OBJECT(MODEL_NONE, 225, 2311, 3971, 0, -180, 0, 0x00000000, bhvAglabRng),
 		TERRAIN(rng_area_7_collision),
 		MACRO_OBJECTS(rng_area_7_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_RNG8),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, -180, 4222, 2550, -1125),
+	MARIO_POS(2, -180, 4222, 2550, -1125),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

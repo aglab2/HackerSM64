@@ -64,7 +64,7 @@ static void rng_reroll()
             sign->oPosZ = random_float_ft(-1339.f, -949.f);
             sign->oFaceAngleYaw = random_u16();
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 20; i++)
             {
                 struct Object* mush = spawn_object(o, MODEL_AGLAB_RNG_MUSHROOM, bhvAglabRngCollision);
                 mush->oPosX = random_float_ft(3031.f, 5475.f);
@@ -77,11 +77,11 @@ static void rng_reroll()
         // pyramid
         case 3:
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 11; i++)
             {
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_PYRAMID, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(-927.f, 1389.f);
-                pyr->oPosY = 3250.f - random_float() * 1300.f;
+                pyr->oPosY = 3150.f - random_float() * 1200.f;
                 pyr->oPosZ = random_float_ft(-1900.f, 5070.f);
                 pyr->oBehParams2ndByte = 1;
                 pyr->oFaceAngleYaw = random_u16() & 0xe000;
@@ -141,12 +141,12 @@ static void rng_reroll()
         // MOP
         case 7:
         {
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 32; i++)
             {
                 // (-300, 3400)
                 struct Object* pyr = spawn_for_mop(bhvCheckpoint_Flag_MOP, MODEL_AGLAB_RNG_CHECKPOINT);
                 pyr->oPosX = random_float_ft(-5800.f, -100.f);
-                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosY = 1950.f - random_float() * 500.f;
                 pyr->oPosZ = random_float_ft(-2000.f, 3600.f);
                 pyr->oFaceAngleYaw = random_u16();
             }
@@ -155,7 +155,7 @@ static void rng_reroll()
                 // (-300, 4500)
                 struct Object* pyr = spawn_for_mop(bhvMoving_Rotating_Block_MOP, MODEL_AGLAB_RNG_MOVING_ROTATING);
                 pyr->oPosX = random_float_ft(-5800.f, -100.f);
-                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosY = 1950.f - random_float() * 500.f;
                 pyr->oPosZ = random_float_ft(4300.f, 10000.f);
                 pyr->oBehParams2ndByte = i & 1;
                 pyr->oFaceAngleYaw = random_u16();
@@ -164,25 +164,27 @@ static void rng_reroll()
             {
                 // (800, 3500)
                 struct Object* pyr;
-                if (i % 4)
+                int v = i % 9;
+                if (v > 1)
                 {
                     pyr = spawn_for_mop(bhvNoteblock_MOP, MODEL_AGLAB_RNG_NOTEBLOCK);
                 }
                 else
                 {
-                    pyr = spawn_for_mop(bhvSandBlock_MOP, MODEL_AGLAB_RNG_SANDBLOCK);
+                    // dont allow overriding sandblocks with springs
+                    pyr = spawn_object(o, MODEL_AGLAB_RNG_SANDBLOCK, bhvSandBlock_MOP);
                 }
                 pyr->oPosX = random_float_ft(600.f, 6100.f);
-                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosY = 1950.f - random_float() * 500.f;
                 pyr->oPosZ = random_float_ft(-2000.f, 3600.f);
                 pyr->oFaceAngleYaw = random_u16();
             }
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 38; i++)
             {
                 // (750, 4500)
                 struct Object* pyr = spawn_for_mop(bhvShrink_Platform_MOP, MODEL_AGLAB_RNG_SHRINK_PLATFORM);
                 pyr->oPosX = random_float_ft(600.f, 6100.f);
-                pyr->oPosY = 1900.f - random_float() * 500.f;
+                pyr->oPosY = 1950.f - random_float() * 500.f;
                 pyr->oPosZ = random_float_ft(4300.f, 10000.f);
             }
         }
@@ -205,6 +207,7 @@ static f32 rng_z_attempt_threshold()
     }
 }
 
+static u8 sWasDetectedReset = 0;
 u8 gWarpTrigger = 0;
 void bhv_aglab_rng_init()
 {
@@ -212,15 +215,32 @@ void bhv_aglab_rng_init()
     {
         rng_reroll();
     }
+    else
+    {
+        o->oSubAction = 1;
+    }
 
     gWarpTrigger = 0;
+    sWasDetectedReset = 0;
+}
+
+void bhv_aglab_rng_surface_check_loop()
+{
+    struct Surface* surf = NULL;
+    find_floor(gMarioStates->pos[0], 4000.f, gMarioStates->pos[2], &surf);
+    if (surf && surf->type == SURFACE_SHALLOW_QUICKSAND)
+    {
+        sWasDetectedReset = 1;
+    }
 }
 
 void bhv_aglab_rng_loop()
 {
     if (gWarpTrigger)
     {
-        rng_reroll();
+        if (0 == o->oSubAction)
+            rng_reroll();
+
         gWarpTrigger = 0;
     }
 
@@ -249,6 +269,7 @@ void bhv_aglab_rng_loop()
         {
             if (L_TRIG & gPlayer1Controller->buttonPressed)
             {
+                o->oSubAction = 0;
                 rng_reroll();
             }
         }
@@ -263,16 +284,11 @@ void bhv_aglab_rng_loop()
                 return;
             }
         }
-        if (5 == gCurrentArea->index)
+        if (sWasDetectedReset)
         {
-            struct Surface* surf = NULL;
-            find_floor(gMarioStates->pos[0], 10000.f, gMarioStates->pos[2], &surf);
-            if (surf && surf->type == SURFACE_SHALLOW_QUICKSAND)
-            {
-                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
-                o->oAction = 1;
-                return;
-            }
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            o->oAction = 1;
+            return;
         }
     }
     else if (1 == o->oAction)
@@ -298,6 +314,7 @@ void bhv_aglab_rng_loop()
         {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
             o->oAction = 0;
+            sWasDetectedReset = 0;
         }
     }
 }
@@ -314,7 +331,7 @@ void bhv_aglab_rng_collision_init()
         case 1:
         {
             obj_set_collision_data(o, rng_pyramid_collision);
-            obj_scale_xyz(o, 1.1f, 1.1f, 1.1f);
+            obj_scale_xyz(o, 1.2f, 1.2f, 1.2f);
         }
         break;
         case 2:

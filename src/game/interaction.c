@@ -785,6 +785,11 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     u32 noExit = TRUE;
 #else
     u32 noExit = (obj->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
+    if (gCurrCourseNum == COURSE_RNG)
+    {
+        s32 starIndex = (obj->oBehParams >> 24) & 0x1F;
+        noExit = starIndex != 6;
+    }
 #endif
     u32 grandStar = (obj->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
 
@@ -1607,7 +1612,7 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
         play_sound(SOUND_MENU_STAR_SOUND, m->marioObj->header.gfx.cameraToObject);
         play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
 
-        if (gCurrCourseNum != COURSE_DF && gCurrCourseNum != COURSE_VCM && capMusic != 0) {
+        if (gCurrCourseNum != COURSE_DF && gCurrCourseNum != COURSE_VCM && gCurrCourseNum != COURSE_RNG && capMusic != 0) {
             gTatums = 0;
             play_cap_music(capMusic);
         }

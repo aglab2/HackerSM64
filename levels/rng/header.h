@@ -57,4 +57,8 @@ extern const GeoLayout Noteblock_MOP[];
 extern const GeoLayout Shrink_Platform_MOP[];
 extern const GeoLayout SandBlock_MOP[];
 
+#include "levels/rng/Shrink_Platform_MOP/collision_header.h"
+
+#include "levels/rng/Shrink_Platform_MOP/geo_header.h"
+
 #endif
