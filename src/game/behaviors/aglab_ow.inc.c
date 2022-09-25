@@ -70,7 +70,7 @@ static void cur_obj_write_all_objects_with_behavior_and_bparam3(const BehaviorSc
         obj = (struct Object *) obj->header.next;
     }
 
-    return NULL;
+    **objsOut = NULL;
 }
 
 static void cur_obj_write_all_objects_with_behavior(const BehaviorScript *behavior, struct Object*** objsOut) {
@@ -90,7 +90,7 @@ static void cur_obj_write_all_objects_with_behavior(const BehaviorScript *behavi
         obj = (struct Object *) obj->header.next;
     }
 
-    return NULL;
+    **objsOut = NULL;
 }
 
 extern const Collision ow_part_brodute_collision[];

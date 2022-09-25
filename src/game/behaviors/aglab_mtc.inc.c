@@ -495,7 +495,6 @@ void mtc_red_ground_loop()
 
 void mtc_brick_ctl_init()
 {
-    f32 d;
     o->parentObj = spawn_object(o, MODEL_STAR, bhvStar);
     o->parentObj->oBehParams = o->oBehParams;
 }

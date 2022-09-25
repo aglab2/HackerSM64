@@ -93,7 +93,7 @@ static void rng_reroll()
                 pyr->oKleptoStartPosY = 0x280 + (random_u16() & 0x1ff);
                 pyr->oTimer = random_u16();
                 pyr->oFaceAngleYaw = random_u16();
-            }
+            } 
         }
         break;
         // shapes
@@ -126,6 +126,7 @@ static f32 rng_z_attempt_threshold()
         case 5: return  2193.f;
         case 6: return  4477.f;
         case 7: return  2177.f;
+        default: return 0.f;
     }
 }
 

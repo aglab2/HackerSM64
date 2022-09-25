@@ -1,4 +1,6 @@
 #include "audio/external.h"
+#include "game/print.h"
+#include "engine/surface_load.h"
 #include "seq_ids.h"
 
 extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
@@ -109,8 +111,6 @@ static void cur_obj_unload_object_with_behavior(const BehaviorScript *behavior) 
 
         obj = (struct Object *) obj->header.next;
     }
-
-    return NULL;
 }
 
 static f32 random_float_ft(f32 from, f32 to)
