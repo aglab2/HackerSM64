@@ -66,6 +66,14 @@ void bhv_hidden_blue_coin_loop(void) {
     o->oInteractStatus = INT_STATUS_NONE;
 }
 
+void bhv_rovert_bcs_init(void) {
+    if (gCurrLevelNum == LEVEL_ROVERT) {
+        //This code is so that the blue coin switch is consistent across timelines.
+        o->oAction = gRovertBC_Action;
+    }
+}
+
+
 /**
  * Update function for bhvBlueCoinSwitch.
  */
@@ -170,4 +178,11 @@ void bhv_blue_coin_switch_loop(void) {
 #endif
             break;
     }
+
+    if (gCurrLevelNum == LEVEL_ROVERT) {
+        //This code is so that the blue coin switch is consistent across timelines.
+        gRovertBC_Action = o->oAction;
+        gRovertBC_Timer = o->oTimer;
+    }
+
 }

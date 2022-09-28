@@ -1890,3 +1890,23 @@ Arrgghh!\n\
 Anyone entering this cave\n\
 without permission will\n\
 meet certain disaster."))
+
+DEFINE_DIALOG(DIALOG_ROVERT_1, 1, 4, 30, 200, _("\
+When the purple switch is\n\
+pressed, the gate will\n\
+open in exactly 40 years\n\
+of time."))
+
+DEFINE_DIALOG(DIALOG_ROVERT_2, 1, 4, 30, 200, _("\
+It's very important to\n\
+understand the concept of\n\
+cause and effect.\n\
+\n\
+If you kill a goomba in\n\
+the present, it will never\n\
+grow up to be huge in the\n\
+future.\n\
+However, if you kill a\n\
+grown-up goomba in the\n\
+future, it's past self\n\
+will be unaffected."))

@@ -26,6 +26,8 @@
 #include "config.h"
 #include "puppycam2.h"
 #include "main.h"
+#include "rovert.h"
+
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION

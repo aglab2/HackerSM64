@@ -30,6 +30,7 @@
 #include "src/game/texscroll/vcutm_texscroll.inc.c"
 #include "src/game/texscroll/thi_texscroll.inc.c"
 #include "src/game/texscroll/spiders_texscroll.inc.c"
+#include "src/game/texscroll/rovert_texscroll.inc.c"
 void scroll_textures() {
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_castle_grounds_segment_7SegmentRomStart)) {
 		scroll_textures_castle_grounds();
@@ -95,6 +96,10 @@ void scroll_textures() {
 
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_spiders_segment_7SegmentRomStart)) {
 		scroll_textures_spiders();
+	}
+
+	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_rovert_segment_7SegmentRomStart)) {
+		scroll_textures_rovert();
 	}
 
 }

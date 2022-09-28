@@ -53,6 +53,9 @@
 #include "levels/wf/header.h"
 #include "levels/bowser_2/header.h"
 #include "levels/ttm/header.h"
+#include "levels/rovert/header.h"
+#include "src/game/rovert.h"
+
 
 #include "make_const_nonconst.h"
 #include "behavior_data.h"
@@ -1808,11 +1811,13 @@ const BehaviorScript bhvFloorSwitchGrills[] = {
     GOTO(bhvFloorSwitchHardcodedModel + 1),
 };
 
+extern void bhv_purple_switch_init_rovert(void);
 const BehaviorScript bhvFloorSwitchHardcodedModel[] = {
     BEGIN(OBJ_LIST_SURFACE),
     // Floor switch - common:
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    CALL_NATIVE(bhv_purple_switch_init_rovert),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -2875,10 +2880,12 @@ const BehaviorScript bhvPurpleSwitchHiddenBoxes[] = {
     GOTO(bhvFloorSwitchHardcodedModel + 1),
 };
 
+extern void bhv_rovert_bcs_init(void);
 const BehaviorScript bhvBlueCoinSwitch[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(blue_coin_switch_seg8_collision_08000E98),
+    CALL_NATIVE(bhv_rovert_bcs_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blue_coin_switch_loop),
     END_LOOP(),
@@ -5287,6 +5294,7 @@ const BehaviorScript bhvWigglerHead[] = {
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 60, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     HIDE(),
     SCALE(/*Unused*/ 0, /*Field*/ 400),
+    SET_FLOAT(oDrawingDistance, 6000),
     SET_FLOAT(oWigglerFallThroughFloorsHeight, 5000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wiggler_update),
@@ -5299,6 +5307,7 @@ const BehaviorScript bhvWigglerBody[] = {
     LOAD_ANIMATIONS(oAnimations, wiggler_seg5_anims_0500C874),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SCALE(/*Unused*/ 0, /*Field*/ 400),
+    SET_FLOAT(oDrawingDistance, 6000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wiggler_body_part_update),
     END_LOOP(),
@@ -7321,5 +7330,76 @@ const BehaviorScript bhvSpidersBuddy[] = {
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_spiders_buddy_loop),
+    END_LOOP(),
+};
+
+extern void init_rovert_pushable(void);
+extern void rovert_pushable(void);
+const BehaviorScript bhvRovertPushable[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(rovert_pushable_collision),
+    SET_FLOAT(oCollisionDistance, 6000),
+    SET_FLOAT(oDrawingDistance, 10000),
+    SET_HOME(),
+    CALL_NATIVE(init_rovert_pushable),
+    BEGIN_LOOP(),
+        CALL_NATIVE(rovert_pushable),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+#include "src/game/rovert.h"
+const BehaviorScript bhvRovertFluxiumPool[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO|OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(rovert_fluxium_pool),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvRovertGear[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oCollisionDistance, 3500),
+    SET_FLOAT(oDrawingDistance, 20000),
+    LOAD_COLLISION_DATA(rovert_gear_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(rovert_gear),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void rovert_exclamation(void);
+const BehaviorScript bhvRovertHyperblock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oCollisionDistance, 4000),
+    SET_FLOAT(oDrawingDistance, 4000),
+    LOAD_COLLISION_DATA(rovert_hyperblock_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(rovert_exclamation),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvRovertGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oCollisionDistance, 8000),
+    SET_FLOAT(oDrawingDistance, 8000),
+    LOAD_COLLISION_DATA(rovert_gate_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void rovert_bigball(void);
+const BehaviorScript bhvRovertBigBall[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    SET_FLOAT(oDrawingDistance, 32000),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(rovert_bigball),
     END_LOOP(),
 };

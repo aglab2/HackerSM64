@@ -47,7 +47,7 @@
 #include "puppylights.h"
 
 #include "behaviors/scut_objs.inc.c"
-
+#include "rovert.h"
 
 
 #include "behaviors/star_door.inc.c"
@@ -130,6 +130,7 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
 #include "behaviors/purple_switch.inc.c"
 #include "behaviors/metal_box.inc.c"
 #include "behaviors/breakable_box.inc.c"
+#include "behaviors/rovert_behavior.inc.c"
 
 // not sure what this is doing here. not in a behavior file.
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx) {

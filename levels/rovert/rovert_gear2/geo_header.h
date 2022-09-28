@@ -1,0 +1,10 @@
+extern const GeoLayout rovert_gear2_geo[];
+extern Lights1 rovert_gear2_gearf_lights;
+extern u8 rovert_gear2_Rusty_rgba16[];
+extern Vtx rovert_gear2_gear2_mesh_layer_1_vtx_cull[8];
+extern Vtx rovert_gear2_gear2_mesh_layer_1_vtx_0[214];
+extern Gfx rovert_gear2_gear2_mesh_layer_1_tri_0[];
+extern Gfx mat_rovert_gear2_gearf[];
+extern Gfx mat_revert_rovert_gear2_gearf[];
+extern Gfx rovert_gear2_gear2_mesh_layer_1[];
+extern Gfx rovert_gear2_material_revert_render_settings[];

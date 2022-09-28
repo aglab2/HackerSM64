@@ -647,5 +647,11 @@ extern const BehaviorScript bhvSpidersPB[];
 extern const BehaviorScript bhvSpidersHawk[];
 extern const BehaviorScript bhvSpidersBuddy[];
 extern const BehaviorScript bhvSpidersDeathTrigger[];
+extern const BehaviorScript bhvRovertPushable[];
+extern const BehaviorScript bhvRovertFluxiumPool[];
+extern const BehaviorScript bhvRovertGear[];
+extern const BehaviorScript bhvRovertHyperblock[];
+extern const BehaviorScript bhvRovertGate[];
+extern const BehaviorScript bhvRovertBigBall[];
 
 #endif // BEHAVIOR_DATA_H

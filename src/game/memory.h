@@ -82,6 +82,7 @@ void *alloc_display_list(u32 size);
 void setup_dma_table_list(struct DmaHandlerList *list, void *srcAddr, void *buffer);
 s32 load_patchable_table(struct DmaHandlerList *list, s32 index);
 
+void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
 extern uintptr_t sSegmentROMTable[32];
 #endif // MEMORY_H

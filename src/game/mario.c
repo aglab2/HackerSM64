@@ -32,6 +32,7 @@
 #include "save_file.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "rovert.h"
 
 
 /**************************************************
@@ -1779,6 +1780,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         if (gMarioState->floor == NULL) {
             return ACTIVE_PARTICLE_NONE;
         }
+
+        //Rovert Stuff
+        rovert_loop();
+
 
         // Reonu stuff
 

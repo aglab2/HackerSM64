@@ -46,6 +46,7 @@
 #include "seq_ids.h"
 #include "spawn_sound.h"
 #include "puppylights.h"
+#include "rovert.h"
 
 //! TODO: remove static
 

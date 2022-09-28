@@ -68,7 +68,7 @@ enum SeqId {
 	SEQ_AGT_V2,
     SEQ_VC_HF,
     SEQ_HONEY,
-    SEQ_COUNT,
+    SEQ_COUNT
 };
 
 #endif // SEQ_IDS_H

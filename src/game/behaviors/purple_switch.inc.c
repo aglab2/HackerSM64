@@ -1,4 +1,34 @@
 
+void bhv_purple_switch_init_rovert(void) {
+    struct Object *gate;
+
+        if (gCurrLevelNum==LEVEL_ROVERT) {//rovert purpleswitch init
+        if (gCurrAreaIndex == 1) {
+            //present
+            if (gRovertPurpleSwitchState == 1) {
+                o->header.gfx.scale[1] = 0.2f;
+                o->header.gfx.scale[0] = 1.5f;
+                o->header.gfx.scale[2] = 1.5f;
+                o->oAction = 0xFF;
+            }
+        } else {
+            //future
+            gate = cur_obj_nearest_object_with_behavior(bhvRovertGate);
+            if (gRovertPurpleSwitchState > 0) {
+                o->header.gfx.scale[1] = 0.2f;
+                o->header.gfx.scale[0] = 1.5f;
+                o->header.gfx.scale[2] = 1.5f;
+                o->oAction = 0xFF;
+            }
+            if (gRovertPurpleSwitchState == 1) {
+                if (gate) {
+                    obj_mark_for_deletion(gate);
+                }
+            }
+        }
+    }
+}
+
 /**
  * Behavior for bhvFloorSwitchHardcodedModel, bhvFloorSwitchGrills, and
  * bhvFloorSwitchAnimatesObject.
@@ -21,6 +51,16 @@ void bhv_purple_switch_loop(void) {
                 && !(gMarioStates[0].action & MARIO_NO_PURPLE_SWITCH)
                 && lateral_dist_between_objects(o, gMarioObject) < 127.5f
             ) {
+                //no level check because this variable does not affect anything outside rovert level
+                if (gCurrAreaIndex == 1) {
+                    //present
+                    gRovertPurpleSwitchState = 1;
+                } else {
+                    //future
+                    if (gRovertPurpleSwitchState == 0) {
+                        gRovertPurpleSwitchState = 2;
+                    }
+                }
                 o->oAction = PURPLE_SWITCH_ACT_PRESSED;
             }
             break;
@@ -33,10 +73,14 @@ void bhv_purple_switch_loop(void) {
             cur_obj_scale_over_time(SCALE_AXIS_Y, 3, 1.5f, 0.2f);
             if (o->oTimer == 3) {
                 cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
-                if (gCurrLevelNum == LEVEL_SA) {
-                    o->oAction = 0xFF;
-                } else {
-                    o->oAction = PURPLE_SWITCH_ACT_TICKING;
+                switch(gCurrLevelNum) {
+                    case LEVEL_SA:
+                    case LEVEL_ROVERT:
+                        o->oAction = 0xFF;
+                        break;
+                    default:
+                        o->oAction = PURPLE_SWITCH_ACT_TICKING;
+                        break;
                 }
                 
                 cur_obj_shake_screen(SHAKE_POS_SMALL);
