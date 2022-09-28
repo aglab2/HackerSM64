@@ -10759,11 +10759,8 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
-<<<<<<< HEAD
 	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 0, 0, 0, 0), 
-=======
 	ZOOMOUT_AREA_MASK(1, 1, 1, 1, 0, 0, 0, 0), 
->>>>>>> b7269ef3b4347ac96cdad2fab8a2b16eb67b76ce
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");
