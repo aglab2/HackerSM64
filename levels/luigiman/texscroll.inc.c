@@ -1,6 +1,6 @@
 void scroll_luigiman_dl_Koopa_Interior_mesh_layer_1_vtx_4() {
 	int i = 0;
-	int count = 48;
+	int count = 232;
 	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
@@ -8,7 +8,7 @@ void scroll_luigiman_dl_Koopa_Interior_mesh_layer_1_vtx_4() {
 	int deltaY;
 	Vtx *vertices = segmented_to_virtual(luigiman_dl_Koopa_Interior_mesh_layer_1_vtx_4);
 
-	deltaY = (int)(-1.0 * 0x20) % height;
+	deltaY = (int)(-0.75 * 0x20) % height;
 
 	if (absi(currentY) > height) {
 		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
@@ -20,17 +20,17 @@ void scroll_luigiman_dl_Koopa_Interior_mesh_layer_1_vtx_4() {
 	currentY += deltaY;
 }
 
-void scroll_luigiman_dl_Toad_Interior_mesh_layer_1_vtx_0() {
+void scroll_luigiman_dl_Toad_Interior_mesh_layer_1_vtx_2() {
 	int i = 0;
-	int count = 39;
+	int count = 104;
 	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(luigiman_dl_Toad_Interior_mesh_layer_1_vtx_0);
+	Vtx *vertices = segmented_to_virtual(luigiman_dl_Toad_Interior_mesh_layer_1_vtx_2);
 
-	deltaY = (int)(-1.0 * 0x20) % height;
+	deltaY = (int)(-0.75 * 0x20) % height;
 
 	if (absi(currentY) > height) {
 		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
@@ -44,5 +44,5 @@ void scroll_luigiman_dl_Toad_Interior_mesh_layer_1_vtx_0() {
 
 void scroll_luigiman() {
 	scroll_luigiman_dl_Koopa_Interior_mesh_layer_1_vtx_4();
-	scroll_luigiman_dl_Toad_Interior_mesh_layer_1_vtx_0();
+	scroll_luigiman_dl_Toad_Interior_mesh_layer_1_vtx_2();
 }
