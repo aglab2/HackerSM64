@@ -1,4 +1,5 @@
 extern Gfx mat_bowser_2_dl_f3d_material_001_layer5[];
+#if 0
 static void fight_set_lines_color(u8 r, u8 g, u8 b)
 {
     u8* color = (u8*)segmented_to_virtual(mat_bowser_2_dl_f3d_material_001_layer5) + 14 * 8 + 4;
@@ -6,6 +7,7 @@ static void fight_set_lines_color(u8 r, u8 g, u8 b)
     color[1] = g;
     color[2] = b;
 }
+#endif
 
 void fight_set_lines_alpha(u8 a)
 {
@@ -276,10 +278,8 @@ void fight_platform_ctl_loop()
         fight_magnet_bowser_to_opposite_side();
         
         u8* objAttacks = (u8*) &o->oFightCtlAttacksOrder;
-        s32 firstShuffle = 0;
         if (o->oFightCtlAttacksOrder == 0)
         {
-            firstShuffle = 1;
             // this is the starting position - create an array of attacks and shuffle it
             char attacks[5] = { 0,1,2,3,4 };
             for (int i = 0; i < 5-1; i++)
@@ -954,8 +954,6 @@ void fight_bomb_ctl_init()
 
 void fight_bomb_ctl_loop()
 {
-    u8* a = (u8*) segmented_to_virtual(mat_fight_arrow_f3d_material_004) + 8*19 + 7;
-
     if (0 == o->oAction)
     {
         if (2 == o->parentObj->oAction)

@@ -42,7 +42,7 @@ void pie_coiner_loop()
         cur_obj_unload_object_with_behavior(bhvYellowCoin);
         cur_obj_unload_object_with_behavior(bhvRedCoin);
 
-        for (int i = 0; i < sizeof(sPieCoins) / sizeof(*sPieCoins); i++)
+        for (unsigned int i = 0; i < sizeof(sPieCoins) / sizeof(*sPieCoins); i++)
         {
             struct PieObjectDesc* desc = &sPieCoins[i];
             struct Object* coin = spawn_object(o, desc->model, desc->bhv);

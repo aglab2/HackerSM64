@@ -169,10 +169,11 @@ void bhv_hidden_red_coin_star_init(void) {
 
 void bhv_hidden_red_coin_star_loop(void) {
     gRedCoinsCollected = o->oHiddenStarTriggerCounter;
+    int coinsToSpawnStar = gCurrCourseNum == COURSE_RNG ? 1 : 8;
 
     switch (o->oAction) {
         case HIDDEN_STAR_ACT_INACTIVE:
-            if (o->oHiddenStarTriggerCounter == 8) {
+            if (o->oHiddenStarTriggerCounter == coinsToSpawnStar) {
                 o->oAction = HIDDEN_STAR_ACT_ACTIVE;
             }
             break;

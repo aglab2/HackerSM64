@@ -1,0 +1,15 @@
+extern const GeoLayout rng_shape4_geo[];
+extern Lights1 rng_shape4__55_f3d_005_lights;
+extern Lights1 rng_shape4_FrontColor_f3d_005_lights;
+extern u8 rng_shape4__55_ci8[];
+extern u8 rng_shape4__55_ci8_pal_rgba16[];
+extern Vtx rng_shape4_shape4_mesh_layer_1_vtx_cull[8];
+extern Vtx rng_shape4_shape4_mesh_layer_1_vtx_0[118];
+extern Gfx rng_shape4_shape4_mesh_layer_1_tri_0[];
+extern Vtx rng_shape4_shape4_mesh_layer_1_vtx_1[16];
+extern Gfx rng_shape4_shape4_mesh_layer_1_tri_1[];
+extern Gfx mat_rng_shape4__55_f3d_005[];
+extern Gfx mat_revert_rng_shape4__55_f3d_005[];
+extern Gfx mat_rng_shape4_FrontColor_f3d_005[];
+extern Gfx rng_shape4_shape4_mesh_layer_1[];
+extern Gfx rng_shape4_material_revert_render_settings[];

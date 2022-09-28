@@ -115,3 +115,5 @@ lib/libs2d_engine.a
 !/levels/wmotr/mario.rgba16.png
 
 !/textures/skyboxes/bidw.png
+
+!/levels/rng/*.png

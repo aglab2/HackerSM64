@@ -797,6 +797,7 @@ void setup_game_memory(void) {
 /**
  * Main game loop thread. Runs forever as long as the game continues.
  */
+extern u8 gLowGravityEnabled;
 void thread5_game_loop(UNUSED void *arg) {
 #if PUPPYPRINT_DEBUG
     OSTime lastTime = 0;
@@ -893,6 +894,13 @@ void thread5_game_loop(UNUSED void *arg) {
             osStartThread(&hvqmThread);
             osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
         }
+#endif
+#if 0
+        if (gPlayer1Controller->buttonPressed & L_TRIG)
+        {
+            gLowGravityEnabled = !gLowGravityEnabled;
+        }
+        print_text_fmt_int(20, 20, "%d", gLowGravityEnabled);
 #endif
     }
 }

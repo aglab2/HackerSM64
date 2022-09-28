@@ -653,5 +653,7 @@ extern const BehaviorScript bhvRovertGear[];
 extern const BehaviorScript bhvRovertHyperblock[];
 extern const BehaviorScript bhvRovertGate[];
 extern const BehaviorScript bhvRovertBigBall[];
+extern const BehaviorScript bhvAglabRng[];
+extern const BehaviorScript bhvAglabRngSurfaceCheck[];
 
 #endif // BEHAVIOR_DATA_H

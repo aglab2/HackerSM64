@@ -19,6 +19,7 @@
 #include "src/game/texscroll/thi_texscroll.inc.h"
 #include "src/game/texscroll/spiders_texscroll.inc.h"
 #include "src/game/texscroll/rovert_texscroll.inc.h"
+#include "src/game/texscroll/rng_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif

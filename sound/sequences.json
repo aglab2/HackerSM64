@@ -57,5 +57,13 @@
 	"36_custom_fade_hill": ["0C"],
     "37_custom_agt_v2": ["0C"],
     "38_custom_vc_hf": ["0C"],
-    "39_custom_honey": ["0C"]
+    "39_custom_honey": ["0C"],
+    "3A_custom_rng1": ["0C"],
+    "3B_custom_rng2": ["1A"],
+    "3C_custom_rng3": ["25"],
+    "3D_custom_rng0": ["0C"],
+    "3E_custom_rng5": ["19"],
+    "3F_custom_rng6": ["11"],
+    "40_custom_rng8": ["25"],
+    "41_custom_psync": ["0C"]
 }

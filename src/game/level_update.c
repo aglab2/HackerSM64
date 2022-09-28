@@ -988,6 +988,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 /**
  * If a delayed warp is ready, initiate it.
  */
+extern u8 gWarpTrigger;
 void initiate_delayed_warp(void) {
     struct ObjectWarpNode *warpNode;
     s32 destWarpNode;
@@ -1040,6 +1041,7 @@ void initiate_delayed_warp(void) {
                     break;
 
                 default:
+                    gWarpTrigger = 1;
                     warpNode = area_get_warp_node(sSourceWarpNodeId);
 
                     initiate_warp(warpNode->node.destLevel & 0x7F, warpNode->node.destArea,
@@ -1208,9 +1210,17 @@ s32 play_mode_paused(void) {
         } else {
             if (gCurrCourseNum == COURSE_DF
              || gCurrCourseNum == COURSE_SA
-             || gCurrCourseNum == COURSE_VCUTM)
+             || gCurrCourseNum == COURSE_VCUTM
+             || gCurrCourseNum == COURSE_RNG)
             {
-                initiate_warp(EXIT_COURSE_LEVEL, EXIT_COURSE_AREA, EXIT_COURSE_NODE, WARP_FLAGS_NONE);
+                if (gCurrCourseNum == COURSE_RNG)
+                {
+                    initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x31, WARP_FLAGS_NONE);
+                }
+                else
+                {
+                    initiate_warp(EXIT_COURSE_LEVEL, EXIT_COURSE_AREA, EXIT_COURSE_NODE, WARP_FLAGS_NONE);
+                }
                 fade_into_special_warp(WARP_SPECIAL_NONE, 0);
             }
             else

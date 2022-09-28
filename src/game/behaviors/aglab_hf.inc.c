@@ -371,8 +371,8 @@ static void lerp_quads(const s16* cb, s16* cv, const Vtx* vb, Vtx* vv, f32 t, in
 {
     for (int i = 0; i < 4; i++)
     {
-        int* q0 = &sIceQuads[idx0].tm;
-        int* q1 = &sIceQuads[idx1].tm;
+        const int* q0 = &sIceQuads[idx0].tm;
+        const int* q1 = &sIceQuads[idx1].tm;
 
         // alter all quads of -0 to be correct as lerp from -1 to -0
         int q0idx = q0[i];
@@ -391,8 +391,8 @@ static void eq_quad(const s16* cb, s16* cv, const Vtx* vb, Vtx* vv, int idx0, in
 {
     for (int i = 0; i < 4; i++)
     {
-        int* q0 = &sIceQuads[idx0].tm;
-        int* q1 = &sIceQuads[idx1].tm;
+        const int* q0 = &sIceQuads[idx0].tm;
+        const int* q1 = &sIceQuads[idx1].tm;
         int q0idx = q0[i];
         int q1idx = q1[i];
         const s16* q1b = &cb[3 * q1idx];

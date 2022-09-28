@@ -1,4 +1,4 @@
-static void set_gravity(s32 grav)
+static void set_gravity(u32 grav)
 {
     if (grav == gIsGravityFlipped)
         return;
@@ -132,7 +132,6 @@ void vcm_ctl_loop()
 
 void vcm_arrow_loop()
 {
-    f32 d;
     obj_scale(o, 0.3f);
     struct Object* red = cur_obj_find_nearest_object_with_behavior_y_biased(bhvRedCoin);
     if (!red)

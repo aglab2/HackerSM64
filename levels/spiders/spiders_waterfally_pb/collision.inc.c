@@ -43,7 +43,7 @@ const Collision spiders_waterfally_pb_collision[] = {
 	COL_VERTEX(-1373, 0, 776),
 	COL_VERTEX(-828, 0, 489),
 	COL_VERTEX(-828, -49, 489),
-	COL_TRI_INIT(SURFACE_DEFAULT, 72),
+	COL_TRI_INIT(SURFACE_VANISH_CAP_WALLS, 72),
 	COL_TRI(0, 1, 2),
 	COL_TRI(0, 2, 3),
 	COL_TRI(4, 2, 1),

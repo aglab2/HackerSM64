@@ -1,0 +1,18 @@
+extern const GeoLayout Shrink_Platform_MOP_geo[];
+extern Lights1 Shrink_Platform_MOP_f3d_material_005_lights;
+extern Lights1 Shrink_Platform_MOP_f3d_material_004_lights;
+extern u8 Shrink_Platform_MOP__030347A0_ci4[];
+extern u8 Shrink_Platform_MOP__030347A0_ci4_pal_rgba16[];
+extern u8 Shrink_Platform_MOP__03034FA8_ci4[];
+extern u8 Shrink_Platform_MOP__03034FA8_ci4_pal_rgba16[];
+extern Vtx Shrink_Platform_MOP_shrunk_mesh_layer_1_vtx_cull[8];
+extern Vtx Shrink_Platform_MOP_shrunk_mesh_layer_1_vtx_0[28];
+extern Gfx Shrink_Platform_MOP_shrunk_mesh_layer_1_tri_0[];
+extern Vtx Shrink_Platform_MOP_shrunk_mesh_layer_1_vtx_1[4];
+extern Gfx Shrink_Platform_MOP_shrunk_mesh_layer_1_tri_1[];
+extern Gfx mat_Shrink_Platform_MOP_f3d_material_005[];
+extern Gfx mat_revert_Shrink_Platform_MOP_f3d_material_005[];
+extern Gfx mat_Shrink_Platform_MOP_f3d_material_004[];
+extern Gfx mat_revert_Shrink_Platform_MOP_f3d_material_004[];
+extern Gfx Shrink_Platform_MOP_shrunk_mesh_layer_1[];
+extern Gfx Shrink_Platform_MOP_material_revert_render_settings[];
