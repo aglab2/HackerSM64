@@ -120,7 +120,6 @@ void bhv_luigiman_bullet_bill_init(void) {
 void luigiman_bullet_bill_act_0(void) {
     cur_obj_become_tangible();
     o->oForwardVel = 0.0f;
-    o->oMoveAngleYaw = o->oBulletBillInitialMoveYaw;
     o->oFaceAnglePitch = 0;
     o->oFaceAngleRoll = 0;
     o->oMoveFlags = OBJ_MOVE_NONE;
