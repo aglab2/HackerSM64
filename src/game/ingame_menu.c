@@ -2065,7 +2065,38 @@ void print_hud_course_complete_coins(s16 x, s16 y) {
         print_generic_string(x - 43 - 2, y + 12 + 2, textCreatedBy);
         print_generic_string(x + 5 - 2, y + 12 + 2, line);
 
+<<<<<<< HEAD
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+=======
+    int_to_str(gCourseCompleteCoins, courseCompleteCoinsStr);
+    print_hud_lut_string(HUD_LUT_GLOBAL, x + 32, y, courseCompleteCoinsStr);
+
+    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+
+    if (gCourseCompleteCoins >= gHudDisplay.coins) {
+        gCourseCompleteCoinsEqual = TRUE;
+        gCourseCompleteCoins = gHudDisplay.coins;
+
+        if (gGotFileCoinHiScore) {
+            print_hud_course_complete_string(HUD_PRINT_HISCORE);
+        }
+    } else {
+        if ((gCourseDoneMenuTimer & 1) || gHudDisplay.coins > 70) {
+            gCourseCompleteCoins++;
+            play_sound(SOUND_MENU_YOSHI_GAIN_LIVES, gGlobalSoundSource);
+
+#ifdef ENABLE_LIVES
+            if (gCourseCompleteCoins && ((gCourseCompleteCoins % 50) == 0)) {
+                play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
+                gMarioState->numLives++;
+            }
+#endif
+        }
+
+        if ((gHudDisplay.coins == gCourseCompleteCoins) && gGotFileCoinHiScore) {
+            play_sound(SOUND_MENU_HIGH_SCORE, gGlobalSoundSource);
+        }
+>>>>>>> 74730e78 (Simplified lives defines (#439))
     }
     
     gCourseCompleteCoinsEqual = TRUE;
@@ -2213,9 +2244,6 @@ s32 render_course_complete_screen(void) {
         case DIALOG_STATE_OPENING:
             render_course_complete_lvl_info_and_hud_str();
             if (gCourseDoneMenuTimer > 100 && gCourseCompleteCoinsEqual) {
-#ifdef SAVE_NUM_LIVES
-                save_file_set_num_lives(gMarioState->numLives);
-#endif
                 gDialogBoxState = DIALOG_STATE_VERTICAL;
                 level_set_transition(-1, NULL);
                 gDialogTextAlpha = 0;
