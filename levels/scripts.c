@@ -11,6 +11,7 @@
 #include "levels/mtc/header.h"
 #include "levels/vcm/header.h"
 #include "levels/bdf/header.h"
+#include "levels/rovert/header.h"
 
 #include "make_const_nonconst.h"
 
