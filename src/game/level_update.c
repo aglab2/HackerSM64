@@ -33,6 +33,7 @@
 #include "puppylights.h"
 #include "level_commands.h"
 #include "dnvic_print.h" //debug
+#include "rovert.h"
 
 #include "print.h"
 
@@ -1424,6 +1425,7 @@ s32 init_level(void) {
         if (gCurrDemoInput == NULL) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
         }
+        rovert_init();
     }
 #if ENABLE_RUMBLE
     if (gCurrDemoInput == NULL) {

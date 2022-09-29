@@ -6197,6 +6197,9 @@ struct CameraTrigger sCamVCUtM[] = {
 struct CameraTrigger sCamSpiders[] = {
 	NULL_TRIGGER
 };
+struct CameraTrigger sCamRovert[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger sCamRng[] = {
 	NULL_TRIGGER
 };
@@ -10756,6 +10759,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
+	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 0, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 1, 1, 1, 0, 0, 0, 0), 
 };
 

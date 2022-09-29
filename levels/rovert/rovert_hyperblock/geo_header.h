@@ -1,0 +1,17 @@
+extern const GeoLayout rovert_hyperblock_geo[];
+extern Lights1 rovert_hyperblock_HyperBlock_lights;
+extern u8 rovert_hyperblock_HyperBlock_ci4[];
+extern u8 rovert_hyperblock_HyperBlock_ci4_pal_rgba16[];
+extern u8 rovert_hyperblock_HyperShadow_ia8[];
+extern Vtx rovert_hyperblock_Cube_002_mesh_layer_4_vtx_cull[8];
+extern Vtx rovert_hyperblock_Cube_002_mesh_layer_4_vtx_0[96];
+extern Gfx rovert_hyperblock_Cube_002_mesh_layer_4_tri_0[];
+extern Vtx rovert_hyperblock_Cube_002_mesh_layer_6_vtx_cull[8];
+extern Vtx rovert_hyperblock_Cube_002_mesh_layer_6_vtx_0[4];
+extern Gfx rovert_hyperblock_Cube_002_mesh_layer_6_tri_0[];
+extern Gfx mat_rovert_hyperblock_HyperBlock[];
+extern Gfx mat_revert_rovert_hyperblock_HyperBlock[];
+extern Gfx mat_rovert_hyperblock_Shadow[];
+extern Gfx rovert_hyperblock_Cube_002_mesh_layer_4[];
+extern Gfx rovert_hyperblock_Cube_002_mesh_layer_6[];
+extern Gfx rovert_hyperblock_material_revert_render_settings[];

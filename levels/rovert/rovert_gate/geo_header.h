@@ -1,0 +1,10 @@
+extern const GeoLayout rovert_gate_geo[];
+extern Lights1 rovert_gate_Fence_lights;
+extern u8 rovert_gate_Fencey_ia8[];
+extern Vtx rovert_gate_Cylinder_002_mesh_layer_4_vtx_cull[8];
+extern Vtx rovert_gate_Cylinder_002_mesh_layer_4_vtx_0[12];
+extern Gfx rovert_gate_Cylinder_002_mesh_layer_4_tri_0[];
+extern Gfx mat_rovert_gate_Fence[];
+extern Gfx mat_revert_rovert_gate_Fence[];
+extern Gfx rovert_gate_Cylinder_002_mesh_layer_4[];
+extern Gfx rovert_gate_material_revert_render_settings[];

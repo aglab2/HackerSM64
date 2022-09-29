@@ -67,6 +67,11 @@ void bhv_wiggler_body_part_update(void) {
 
     cur_obj_scale(o->parentObj->header.gfx.scale[0]);
 
+    if (o->parentObj->oAction == WIGGLER_ACT_SHRINK) {
+        spawn_mist_particles_variable(0, 0, 100.0f);
+        mark_obj_for_deletion(o);
+    }
+
     o->oFaceAnglePitch = segment->angle[0];
     o->oFaceAngleYaw = segment->angle[1];
 
@@ -143,7 +148,7 @@ void wiggler_init_segments(void) {
         cur_obj_unhide();
     }
 
-    o->oHealth = 4; // This fixes Wiggler reading UB on his first frame of his acceleration, as his health is not set.
+    o->oHealth = gWigglerHealth; // This fixes Wiggler reading UB on his first frame of his acceleration, as his health is not set.
 }
 
 /**
@@ -207,10 +212,10 @@ static void wiggler_act_walk(void) {
 
         // If Mario is positioned below the wiggler, assume he entered through the
         // lower cave entrance, so don't display text.
-        if (gMarioObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
-            MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
+        //if (gMarioObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
+            //MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
             o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_COMPLETED_DIALOG;
-        }
+        //}
     } else {
         obj_forward_vel_approach(sWigglerSpeeds[o->oHealth - 1], 1.0f);
 
@@ -280,14 +285,18 @@ static void wiggler_act_jumped_on(void) {
     // defeated) or go back to walking
     if (o->header.gfx.scale[1] >= 4.0f) {
         if (o->oTimer > 30) {
-            if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, 
-                DIALOG_FLAG_NONE, CUTSCENE_DIALOG, attackText[o->oHealth - 2])) {
+            //if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, 
+            //    DIALOG_FLAG_NONE, CUTSCENE_DIALOG, attackText[o->oHealth - 2])) {
                 // Because we don't want the wiggler to disappear after being
                 // defeated, we leave its health at 1
-                if (--o->oHealth == 1) {
+                gWigglerHealth --;
+                o->oHealth = gWigglerHealth;
+                if (o->oHealth == 1) {
                     o->oAction = WIGGLER_ACT_SHRINK;
                     cur_obj_become_intangible();
                 } else {
+                    spawn_object(o,MODEL_ROVERT_BIGBALL,bhvRovertBigBall);
+                    cur_obj_play_sound_2(SOUND_GENERAL2_PYRAMID_TOP_EXPLOSION);
                     o->oAction = WIGGLER_ACT_WALK;
                     o->oMoveAngleYaw = o->oFaceAngleYaw;
 
@@ -297,7 +306,7 @@ static void wiggler_act_jumped_on(void) {
                         o->oVelY = 70.0f;
                     }
                 }
-            }
+            //}
         }
     } else {
         o->oTimer = 0;
@@ -335,8 +344,11 @@ static void wiggler_act_shrink(void) {
 
         // 4 is the default scale, so shrink to 1/4 of regular size
         if (approach_f32_ptr(&o->header.gfx.scale[0], 1.0f, 0.1f)) {
-            spawn_default_star(0.0f, 2048.0f, 0.0f);
-            o->oAction = WIGGLER_ACT_FALL_THROUGH_FLOOR;
+            //spawn_default_star(0.0f, 2048.0f, 0.0f);
+            spawn_default_star(gMarioState->pos[0],gMarioState->pos[1]+50.0f,gMarioState->pos[2]);
+            spawn_mist_particles_variable(0, 0, 100.0f);
+            mark_obj_for_deletion(o);
+            //o->oAction = WIGGLER_ACT_FALL_THROUGH_FLOOR;
         }
 
         cur_obj_scale(o->header.gfx.scale[0]);
@@ -378,8 +390,18 @@ void wiggler_jumped_on_attack_handler(void) {
 void bhv_wiggler_update(void) {
     // PARTIAL_UPDATE
 
+    if (o->oDistanceToMario > 4000.0f) {
+        vec3f_copy(&o->oPosVec,&o->oHomeVec);
+    }
+
     if (o->oAction == WIGGLER_ACT_UNINITIALIZED) {
-        wiggler_init_segments();
+        vec3f_copy(&o->oPosVec,&gWigglerPosition);
+
+        if (gWigglerHealth <= 1) {
+            mark_obj_for_deletion(o);
+        } else {
+            wiggler_init_segments();
+            }
     } else {
         if (o->oAction == WIGGLER_ACT_FALL_THROUGH_FLOOR) {
             wiggler_act_fall_through_floor();
@@ -422,6 +444,7 @@ void bhv_wiggler_update(void) {
         o->oWigglerSegments[0].angle[0] = o->oFaceAnglePitch;
         o->oWigglerSegments[0].angle[1] = o->oFaceAngleYaw;
 
+        vec3f_copy(&gWigglerPosition,&o->oPosVec);
         // Update the rest of the segments to follow segment 0
         wiggler_update_segments();
     }

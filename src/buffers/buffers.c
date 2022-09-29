@@ -32,3 +32,4 @@ ALIGNED8 u8 gGfxSPTaskYieldBuffer[OS_YIELD_DATA_SIZE];
 struct SaveBuffer __attribute__ ((aligned (8))) gSaveBuffer;
 // 0x190a0 bytes
 struct GfxPool gGfxPools[2];
+ALIGNED8 u8 gSkyboxBuffer[0x20140];

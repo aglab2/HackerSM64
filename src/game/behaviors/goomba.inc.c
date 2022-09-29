@@ -108,6 +108,14 @@ void bhv_goomba_triplet_spawner_update(void) {
  * Initialization function for goomba.
  */
 void bhv_goomba_init(void) {
+    if (gCurrLevelNum == LEVEL_ROVERT) {
+        if (gCurrAreaIndex == 2) {
+            o->oBehParams2ndByte = 1;
+            if (gFutureGoombasKilled & (1 << GET_BPARAM1(o->oBehParams))) {
+                obj_mark_for_deletion(o);
+            }
+        }
+    }
     o->oGoombaSize = o->oBehParams2ndByte & GOOMBA_BP_SIZE_MASK;
 
     o->oGoombaScale = sGoombaProperties[o->oGoombaSize].scale;
@@ -151,6 +159,8 @@ static void goomba_begin_jump(void) {
  * comes back.
  */
 static void mark_goomba_as_dead(void) {
+    gFutureGoombasKilled |= (1 << GET_BPARAM1(o->oBehParams));
+
     if (o->parentObj != o) {
         set_object_respawn_info_bits(
             o->parentObj, (o->oBehParams2ndByte & GOOMBA_BP_TRIPLET_FLAG_MASK) >> 2);
