@@ -133,6 +133,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_LUIGI,                   luigi_geo),
     LOAD_MODEL_FROM_GEO(MODEL_LUIGI_NPC,               luigi_npc_geo),
     FREE_LEVEL_POOL(),
+    POP_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
     LOOP_BEGIN(),
         EXECUTE(/*seg*/ SEGMENT_MENU_INTRO, _menuSegmentRomStart, _menuSegmentRomEnd, level_main_menu_entry_act_select),
