@@ -47,6 +47,8 @@ const LevelScript level_rovert_entry[] = {
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(2, rovert_area_2),
+		WARP_NODE(0xf1, LEVEL_CASTLE, 1, 0x32, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf0, LEVEL_CASTLE, 1, 0x22, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_PURPLE_SWITCH, 5781, 6607, -381, 0, 0, 0, 0x00000000, bhvFloorSwitchGrills),
 		OBJECT(MODEL_ROVERT_GATE, 3581, 7956, 1572, 0, 0, 0, 0x00000000, bhvRovertGate),
 		OBJECT(MODEL_ROVERT_GEAR2, 4318, 2458, 6324, 0, 0, 0, 0x00000000, bhvRovertGear),
@@ -96,14 +98,18 @@ const LevelScript level_rovert_entry[] = {
 		OBJECT(MODEL_WIGGLER_HEAD, -4736, 2448, 10207, 0, -180, 0, (5 << 24), bhvWigglerHead),
 		TERRAIN(rovert_area_2_collision),
 		MACRO_OBJECTS(rovert_area_2_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_TT1),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(1, rovert_area_1),
+		WARP_NODE(0xf1, LEVEL_CASTLE, 1, 0x32, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xf0, LEVEL_CASTLE, 1, 0x22, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xa, LEVEL_CASTLE, 1, 0x22, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 7885, 2910, -7609, 0, 0, 0, 0x00000000, bhvBlueCoinSwitch),
+		OBJECT(MODEL_NONE, 57, 1391, 2007, 0, -180, 0, (0xa << 16), bhvAirborneWarp),
 		OBJECT(MODEL_BLUE_COIN, 6648, 3277, -7650, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 5830, 3420, -7586, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 5064, 3420, -7586, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
@@ -172,7 +178,7 @@ const LevelScript level_rovert_entry[] = {
 		OBJECT(MODEL_WIGGLER_HEAD, -4736, 2448, 10207, 0, -180, 0, (5 << 24), bhvWigglerHead),
 		TERRAIN(rovert_area_1_collision),
 		MACRO_OBJECTS(rovert_area_1_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_TT1),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

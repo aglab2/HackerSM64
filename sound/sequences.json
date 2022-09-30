@@ -65,5 +65,6 @@
     "3E_custom_rng5": ["19"],
     "3F_custom_rng6": ["11"],
     "40_custom_rng8": ["25"],
-    "41_custom_psync": ["0C"]
+    "41_custom_psync": ["0C"],
+    "42_custom_tt1": ["0C"]
 }
