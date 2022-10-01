@@ -1420,4 +1420,11 @@ os16112*/
 
 #define oSpidersHawkAct OBJECT_FIELD_S32(0x49)
 
+// 2 of them
+#define oLuigimanDoors OBJECT_FIELD_OBJ(0x1B)
+#define oLuigimanDoorToAlter OBJECT_FIELD_S32(0x1D)
+// shared the same value as 'oLuigimanDoorsToAlter'
+#define oLuigimanDoorToEventuallyOpen OBJECT_FIELD_S32(0x1D)
+#define oLuigimanDoorLastClosed OBJECT_FIELD_S32(0x1E)
+
 #endif // OBJECT_FIELDS_H

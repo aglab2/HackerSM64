@@ -207,3 +207,240 @@ void bhv_luigiman_bullet_bill_loop(void) {
         o->oAction = 4;
     }
 }
+
+extern const BehaviorScript bhvLuigimanAirlockDoor[];
+extern void bhv_luigiman_airlock_init()
+{
+    struct Object** doors = &o->oLuigimanDoors;
+    doors[0] = spawn_object(o, MODEL_LUIGIMAN_AIRLOCK_DOOR, bhvLuigimanAirlockDoor);
+    doors[1] = spawn_object(o, MODEL_LUIGIMAN_AIRLOCK_DOOR, bhvLuigimanAirlockDoor);
+
+    doors[0]->oPosX -= 45.f;
+    doors[0]->oPosY -= 90.f;
+    doors[0]->oPosZ -= 545.f;
+
+    doors[1]->oPosX -= 45.f;
+    doors[1]->oPosY -= 90.f;
+    doors[1]->oPosZ += 620.f;
+}
+
+#define AIRLOCK_DOOR_CHANGE_SPEED 25.f
+
+enum
+{
+    AIRLOCK_INIT,
+    AIRLOCK_CHANGE_DOORS,
+    AIRLOCK_PERFORM_LOCK,
+    AIRLOCK_PERFORM_UNLOCK,
+    AIRLOCK_WAIT_FOR_LEAVE,
+};
+
+extern Gfx mat_mario_red[];
+extern Gfx mat_mario_logo[];
+extern Lights1 mario_blue_lights;
+extern Lights1 mario_red_lights;
+
+extern u8 gLowGravityEnabled;
+static void airlock_switch_airlock(u8 value)
+{
+    u8 newGravity = o->oBehParams2ndByte ^ value;
+    if (gLowGravityEnabled == newGravity)
+        return;
+
+    gLowGravityEnabled = newGravity;
+    {
+        void** ptr = segmented_to_virtual(mat_mario_red);
+        ptr[9] = gLowGravityEnabled ? &mario_blue_lights.l[0] : &mario_red_lights.l[0];
+        ptr[11] = gLowGravityEnabled ? &mario_blue_lights.a : &mario_red_lights.a;
+    }
+    {
+        void** ptr = segmented_to_virtual(mat_mario_logo);
+        ptr[39] = gLowGravityEnabled ? &mario_blue_lights.l[0] : &mario_red_lights.l[0];
+        ptr[41] = gLowGravityEnabled ? &mario_blue_lights.a : &mario_red_lights.a;
+    }
+    
+    for (int i = 0; i < 10; i++)
+    {
+        struct Object* particle = spawn_object(o, MODEL_MIST, bhvWhitePuffExplosion);
+        if (!particle)
+            continue;
+
+        particle->oPosX = gMarioStates->pos[0];
+        particle->oPosY = gMarioStates->pos[1];
+        particle->oPosZ = gMarioStates->pos[2];
+        particle->oBehParams2ndByte = 2;
+        particle->oMoveAngleYaw = random_u16();
+        particle->oGravity = 0;
+        particle->oDragStrength = 0;
+        particle->oForwardVel = random_float() * 5.f + 30.f;
+        particle->oVelY = random_float() * 5.f + 20.f;
+        obj_scale(particle, random_float() * 1.f + 3.f);
+    }
+}
+
+static void airlock_door_play_switch_sound(struct Object* door)
+{
+    if (0 != o->oTimer)
+    {
+        return;
+    }
+
+    s32 magic = door->oAction ? SOUND_GENERAL_CLOSE_IRON_DOOR : SOUND_GENERAL_OPEN_IRON_DOOR;
+    play_sound(magic, door->header.gfx.cameraToObject);
+}
+
+extern void bhv_luigiman_airlock_loop()
+{
+    struct Object** doors = &o->oLuigimanDoors;
+    if (AIRLOCK_INIT == o->oAction)
+    {
+        // scanning for lads nearby
+        // for Y & X coordinates for both doors are equal
+        f32 yMid = o->oPosY - 90.f;
+        s8 nearLockCylinder = absf(yMid - gMarioStates->pos[1]) < 500.f && absf(doors[0]->oPosX - gMarioStates->pos[0]) < 500.f;
+
+        // there is a leaveaway between nearDoor* and inside to allow nearDoor to be triggered first
+        s8 nearDoor[2];
+        nearDoor[0] = nearLockCylinder && (doors[0]->oPosZ - 1000.f < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[0]->oPosZ + 150.f);
+        s8 inside   = nearLockCylinder && (doors[0]->oPosZ + 100.f  < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[1]->oPosZ - 100.f);
+        nearDoor[1] = nearLockCylinder && (doors[1]->oPosZ - 150.f  < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[1]->oPosZ + 1000.f);
+
+        // XOR tells us if state mismatch happens hence it wants to either be opened or closed
+        s8 wantsToChange[2];
+        for (int i = 0; i < 2; i++)
+            wantsToChange[i] = nearDoor[i] ^ doors[i]->oAction;
+
+        // first find if any door wants to close, if it does, alter its state
+        // it should not happen that both wants to close at the same time as such condition is invalid.
+        // we can handle it somewhat gracefully though by just doing 1 by 1
+        for (int i = 0; i < 2; i++)
+        {
+            s8 wantsToClose = wantsToChange[i] & !nearDoor[i];
+            if (wantsToClose)
+            {
+                o->oLuigimanDoorToAlter = i;
+                o->oAction = AIRLOCK_CHANGE_DOORS;
+                return;
+            }
+        }
+
+        // no one feels like closing the doors, but maybe they want to open them?
+        // just check it and let them do the job
+        // notice that nearDoor[0] & nearDoor[1] cannot be 'true' at the same time so let's bug on it
+        if (nearDoor[0] && nearDoor[1])
+        {
+            print_text_fmt_int(20, 20, "OOPS %d", 0);
+            return;
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (wantsToChange[i])
+            {
+                o->oLuigimanDoorToAlter = i;
+                o->oAction = AIRLOCK_CHANGE_DOORS;
+                return;
+            }
+        }
+
+        // no one wants to do anything, start checks for the airlock switching
+
+        // if mario is inside the airlock, start the transition
+        if (inside)
+        {
+            // hopefully here one of the doors is opened :)
+            int cnt = doors[0]->oAction + doors[1]->oAction;
+            if (0 == cnt)
+            {
+                // this might happen when someone jumped while the door was closing.
+                // the oLuigimanDoorLastClosed is considered to be closed as in AIRLOCK_PERFORM_LOCK
+                // this means the other door needs to be opened, do it
+                o->oLuigimanDoorToEventuallyOpen = !o->oLuigimanDoorLastClosed;
+                struct Object* doorToClose = doors[o->oLuigimanDoorLastClosed];
+                airlock_switch_airlock(doorToClose->oPosZ > gMarioStates->pos[2]);
+                o->oAction = AIRLOCK_PERFORM_UNLOCK;
+                return;
+            }
+            else if (1 == cnt)
+            {
+                // to eventually open the door that is closed -> oAction==0 for it
+                o->oLuigimanDoorToEventuallyOpen = (0 == doors[1]->oAction);
+                o->oAction = AIRLOCK_PERFORM_LOCK;
+                return;
+            }
+            else
+            {
+                // both doors are opened, this is a bug. bail
+                print_text_fmt_int(20, 20, "OOPS %d", 1);
+                return;
+            }
+        }
+    }
+    else if (AIRLOCK_CHANGE_DOORS == o->oAction)
+    {
+        // switch state of door for 'oLuigimanDoorToAlter'   
+        struct Object* door = doors[o->oLuigimanDoorToAlter];
+        airlock_door_play_switch_sound(door);
+
+        if (30 == o->oTimer)
+        {
+            door->oAction = !door->oAction;
+            if (0 == door->oAction)
+            {
+                // the door was just closed, keep it for the future
+                o->oLuigimanDoorLastClosed = o->oLuigimanDoorToAlter;
+            }
+            o->oAction = AIRLOCK_INIT;
+            return;
+        }
+
+        door->oPosY += door->oAction ? AIRLOCK_DOOR_CHANGE_SPEED : -AIRLOCK_DOOR_CHANGE_SPEED;
+    }
+    else if (AIRLOCK_PERFORM_LOCK == o->oAction)
+    {
+        // do the door locking as mario is inside
+        struct Object* doorToClose = doors[!o->oLuigimanDoorToEventuallyOpen];
+        airlock_door_play_switch_sound(doorToClose);
+        if (o->oTimer < 30)
+        {
+            // lower the door, both will be closed
+            doorToClose->oPosY += AIRLOCK_DOOR_CHANGE_SPEED;
+        }
+        else
+        {
+            // perform the next step
+            // it is also the time when we should decide if mario actually crossed the airlock
+            airlock_switch_airlock(doorToClose->oPosZ > gMarioStates->pos[2]);
+            doorToClose->oAction = 0;
+            o->oAction = AIRLOCK_PERFORM_UNLOCK;
+            return;
+        }
+    }
+    else if (AIRLOCK_PERFORM_UNLOCK == o->oAction)
+    {
+        // do the door opening and switch gravity
+        struct Object* doorToOpen = doors[o->oLuigimanDoorToEventuallyOpen];
+        airlock_door_play_switch_sound(doorToOpen);
+        if (o->oTimer < 30)
+        {
+            // raised the other door
+            doorToOpen->oPosY -= AIRLOCK_DOOR_CHANGE_SPEED;
+        }
+        else
+        {
+            // swap the current states and wait for mario to leave
+            doorToOpen ->oAction = 1;
+            o->oAction = AIRLOCK_WAIT_FOR_LEAVE;
+        }
+    }
+    else if (AIRLOCK_WAIT_FOR_LEAVE == o->oAction)
+    {
+        // wait while mario gets out of the lock
+        // door will be closed automatically as xor condition will decide
+        s8 stillInside = (doors[0]->oPosZ + 50.f < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[1]->oPosZ - 50.f);
+        if (!stillInside)
+        {
+            o->oAction = AIRLOCK_INIT;
+        }
+    }
+}

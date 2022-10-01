@@ -7610,3 +7610,29 @@ const BehaviorScript bhvLuigimanBulletBill[] = {
         CALL_NATIVE(bhv_luigiman_bullet_bill_loop),
     END_LOOP(),
 };
+
+extern void bhv_luigiman_airlock_init();
+extern void bhv_luigiman_airlock_loop();
+extern const Collision luigiman_airlock_main_collision[];
+const BehaviorScript bhvLuigimanAirlockMain[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(luigiman_airlock_main_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    CALL_NATIVE(bhv_luigiman_airlock_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_luigiman_airlock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision luigiman_airlock_door_collision[];
+const BehaviorScript bhvLuigimanAirlockDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(luigiman_airlock_door_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
