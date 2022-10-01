@@ -19,3 +19,7 @@
 #include "levels/luigiman/luigiman_spinning_holes1/collision.inc.c"
 #include "levels/luigiman/luigiman_moving_platform/collision.inc.c"
 #include "levels/luigiman/luigiman_moving_platform/model.inc.c"
+#include "levels/luigiman/luigiman_airlock_main/model.inc.c"
+#include "levels/luigiman/luigiman_airlock_main/collision.inc.c"
+#include "levels/luigiman/luigiman_airlock_door/collision.inc.c"
+#include "levels/luigiman/luigiman_airlock_door/model.inc.c"

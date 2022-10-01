@@ -34,7 +34,8 @@ const LevelScript level_luigiman_entry[] = {
 	JUMP_LINK(script_func_global_2), 
 	LOAD_MODEL_FROM_GEO(MODEL_LUIGIMAN_RINGS, luigiman_rings_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LUIGIMAN_SPINNING_HOLES1, luigiman_spinning_holes1_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_LUIGIMAN_MOVING_PLATFORM, luigiman_moving_platform_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LUIGIMAN_AIRLOCK, luigiman_airlock_main_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LUIGIMAN_AIRLOCK_DOOR, luigiman_airlock_door_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -132,6 +133,7 @@ const LevelScript level_luigiman_entry[] = {
 		OBJECT(MODEL_STAR, -9666, 860, 3909, 0, 0, 0, (5 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 1208, 1012, -55, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 0, 102, 10852, 0, -180, 0, 0x000A0000, bhvSpinAirborneWarp),
+		OBJECT(MODEL_LUIGIMAN_AIRLOCK, 1078, 1145, 6439, 0, 0, 0, 0, bhvStaticObject),
 		MARIO_POS(0x01, -180, 0, 102, 10852),
 		TERRAIN(luigiman_area_1_collision),
 		MACRO_OBJECTS(luigiman_area_1_macro_objs),

@@ -21,4 +21,12 @@ extern const LevelScript level_luigiman_entry[];
 
 #include "levels/luigiman/luigiman_moving_platform/geo_header.h"
 
+#include "levels/luigiman/luigiman_airlock_main/geo_header.h"
+
+#include "levels/luigiman/luigiman_airlock_main/collision_header.h"
+
+#include "levels/luigiman/luigiman_airlock_door/collision_header.h"
+
+#include "levels/luigiman/luigiman_airlock_door/geo_header.h"
+
 #endif

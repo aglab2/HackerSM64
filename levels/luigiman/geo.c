@@ -19,3 +19,5 @@
 #include "levels/luigiman/luigiman_rings/geo.inc.c"
 #include "levels/luigiman/luigiman_spinning_holes1/geo.inc.c"
 #include "levels/luigiman/luigiman_moving_platform/geo.inc.c"
+#include "levels/luigiman/luigiman_airlock_main/geo.inc.c"
+#include "levels/luigiman/luigiman_airlock_door/geo.inc.c"
