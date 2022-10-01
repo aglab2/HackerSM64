@@ -7371,7 +7371,6 @@ const BehaviorScript bhvRovertFluxiumPool[] = {
 const BehaviorScript bhvRovertGear[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_FLOAT(oCollisionDistance, 3500),
     SET_FLOAT(oDrawingDistance, 20000),
     LOAD_COLLISION_DATA(rovert_gear_collision),
     BEGIN_LOOP(),
@@ -7380,11 +7379,18 @@ const BehaviorScript bhvRovertGear[] = {
     END_LOOP(),
 };
 
+extern void rovert_l_warp();
+const BehaviorScript bhvRovertLWarp[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(rovert_l_warp),
+    END_LOOP(),
+};
+
 extern void rovert_exclamation(void);
 const BehaviorScript bhvRovertHyperblock[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_FLOAT(oCollisionDistance, 4000),
     SET_FLOAT(oDrawingDistance, 4000),
     LOAD_COLLISION_DATA(rovert_hyperblock_collision),
     BEGIN_LOOP(),
@@ -7396,7 +7402,6 @@ const BehaviorScript bhvRovertHyperblock[] = {
 const BehaviorScript bhvRovertGate[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_FLOAT(oCollisionDistance, 8000),
     SET_FLOAT(oDrawingDistance, 8000),
     LOAD_COLLISION_DATA(rovert_gate_collision),
     BEGIN_LOOP(),

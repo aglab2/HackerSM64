@@ -1927,7 +1927,7 @@ void mario_process_interactions(struct MarioState *m) {
 u8 gDeathFloorBarrier;
 void check_death_barrier(struct MarioState *m) {
     if (m->pos[1] < m->floorHeight + 2048.0f) {
-        if (gCurrCourseNum != COURSE_RNG)
+        if (gCurrCourseNum != COURSE_RNG && gCurrCourseNum != COURSE_ROVERT)
         {
             if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_FALL_SOUND_PLAYED)) {
                 mario_stop_riding_and_holding(m);

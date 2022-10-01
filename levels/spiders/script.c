@@ -105,7 +105,7 @@ const LevelScript level_spiders_entry[] = {
 		OBJECT(MODEL_NONE, 10039, 1015, 2595, 0, -114, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_NONE, 10051, 626, 2598, 0, -114, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_NONE, 9860, 1742, 3369, 0, -114, 0, 0x00000000, bhvFireSpitter),
-		OBJECT(MODEL_NONE, 9845, 2333, 2791, 0, -114, 0, 0x00000000, bhvFireSpitter),
+		OBJECT(MODEL_NONE, 9845, 2333, 2791, 0, -114, 0, (1 << 24) | (1 << 16), bhvFireSpitter),
 		OBJECT(MODEL_NONE, 9941, 2012, 3031, 0, -114, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_NONE, 9648, 2630, 1864, 0, -114, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_SPIDERS_SWITCH, 9569, 1347, 1610, 0, -32, 0, 0x00000000, bhvSpidersGateSwitch),

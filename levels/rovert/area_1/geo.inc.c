@@ -16,6 +16,7 @@ const GeoLayout rovert_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, rovert_dl_Cylinder_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, rovert_dl_Cylinder_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, rovert_dl_Cylinder_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, rovert_dl_Cylinder_003_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, rovert_dl_nonsolid_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, rovert_dl_nonsolid_mesh_layer_6),
 	GEO_CLOSE_NODE(),

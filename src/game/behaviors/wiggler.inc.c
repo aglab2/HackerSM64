@@ -52,7 +52,7 @@ static u8 sWigglerAttackHandlers[] = {
 /**
  * Target speed while walking when wiggler has health 1, 2, 3, and 4.
  */
-static f32 sWigglerSpeeds[] = { 2.0f, 40.0f, 30.0f, 16.0f };
+static f32 sWigglerSpeeds[] = { 2.0f, 70.0f, 56.0f, 36.0f };
 
 /**
  * Update function for bhvWigglerBody.
@@ -70,6 +70,20 @@ void bhv_wiggler_body_part_update(void) {
     if (o->parentObj->oAction == WIGGLER_ACT_SHRINK) {
         spawn_mist_particles_variable(0, 0, 100.0f);
         mark_obj_for_deletion(o);
+    }
+
+    int puffDiv = 0;
+    if (gWigglerHealth == 3)
+    {
+        puffDiv = 13;
+    }
+    if (gWigglerHealth == 2)
+    {
+        puffDiv = 3;
+    }
+    if (puffDiv && 0 == (o->oTimer % puffDiv))
+    {
+        spawn_mist_particles_variable(0, 50.f, 10.0f);
     }
 
     o->oFaceAnglePitch = segment->angle[0];
@@ -273,43 +287,47 @@ static void wiggler_act_jumped_on(void) {
     // Text to show on first, second, and third attack.
     s32 attackText[3] = { DIALOG_NONE, DIALOG_168, DIALOG_NONE };
 
-    // Shrink until the squish speed becomes 0, then unisquish
-    if (approach_f32_ptr(&o->oWigglerSquishSpeed, 0.0f, 0.05f)) {
-        // Note that 4 is the default scale
-        approach_f32_ptr(&o->header.gfx.scale[1], 4.0f, 0.2f);
-    } else {
-        o->header.gfx.scale[1] -= o->oWigglerSquishSpeed;
+    if (0 == o->oTimer)
+    {
+        gWigglerHealth--;
+        o->oHealth = gWigglerHealth;
     }
 
-    // Wait for a second after unsquishing, then show text and either shrink (if
-    // defeated) or go back to walking
-    if (o->header.gfx.scale[1] >= 4.0f) {
-        if (o->oTimer > 30) {
-            //if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, 
-            //    DIALOG_FLAG_NONE, CUTSCENE_DIALOG, attackText[o->oHealth - 2])) {
-                // Because we don't want the wiggler to disappear after being
-                // defeated, we leave its health at 1
-                gWigglerHealth --;
-                o->oHealth = gWigglerHealth;
-                if (o->oHealth == 1) {
-                    o->oAction = WIGGLER_ACT_SHRINK;
-                    cur_obj_become_intangible();
-                } else {
-                    spawn_object(o,MODEL_ROVERT_BIGBALL,bhvRovertBigBall);
-                    cur_obj_play_sound_2(SOUND_GENERAL2_PYRAMID_TOP_EXPLOSION);
-                    o->oAction = WIGGLER_ACT_WALK;
-                    o->oMoveAngleYaw = o->oFaceAngleYaw;
-
-                    if (o->oHealth == 2) {
-                        cur_obj_play_sound_2(SOUND_OBJ_WIGGLER_JUMP);
-                        o->oForwardVel = 10.0f;
-                        o->oVelY = 70.0f;
-                    }
-                }
-            //}
+    if (1 == o->oHealth)
+    {
+        // Because we don't want the wiggler to disappear after being
+        // defeated, we leave its health at 1
+        o->oAction = WIGGLER_ACT_SHRINK;
+        cur_obj_become_intangible();
+    }
+    else
+    {
+        // Shrink until the squish speed becomes 0, then unisquish
+        if (approach_f32_ptr(&o->oWigglerSquishSpeed, 0.0f, 0.05f)) {
+            // Note that 4 is the default scale
+            approach_f32_ptr(&o->header.gfx.scale[1], 4.0f, 0.2f);
+        } else {
+            o->header.gfx.scale[1] -= o->oWigglerSquishSpeed;
         }
-    } else {
-        o->oTimer = 0;
+
+        // Wait for a second after unsquishing, then show text and either shrink (if
+        // defeated) or go back to walking
+        if (o->header.gfx.scale[1] >= 4.0f) {
+            if (o->oTimer > 30) {
+                spawn_object(o,MODEL_ROVERT_BIGBALL,bhvRovertBigBall);
+                cur_obj_play_sound_2(SOUND_GENERAL2_PYRAMID_TOP_EXPLOSION);
+                o->oAction = WIGGLER_ACT_WALK;
+                o->oMoveAngleYaw = o->oFaceAngleYaw;
+
+                if (o->oHealth == 2) {
+                    cur_obj_play_sound_2(SOUND_OBJ_WIGGLER_JUMP);
+                    o->oForwardVel = 10.0f;
+                    o->oVelY = 70.0f;
+                }
+            }
+        } else {
+            o->oTimer = 0;
+        }
     }
 
     obj_check_attacks(&sWigglerHitbox, o->oAction);
