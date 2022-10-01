@@ -345,7 +345,7 @@ use tarantulas to feed\n\
 their young? They paralyze\n\
 them and bring them to\n\
 their den, lay their eggs\n\
-inside, and the pupa eat\n\
+inside, and the pups eat\n\
 the tarantulas slowly one\n\
 by one.\n\
 Nature is beautiful."))

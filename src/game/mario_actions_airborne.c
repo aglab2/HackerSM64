@@ -1210,10 +1210,10 @@ u32 common_air_knockback_step(struct MarioState *m, u32 landAction, u32 hardFall
 }
 
 s32 check_wall_kick(struct MarioState *m) {
-    if (m->wallLastType == SURFACE_NO_WALLKICKS)
-    {
-        return FALSE;
-    }
+    //if (m->wallLastType == SURFACE_NO_WALLKICKS)
+    //{
+    //    return FALSE;
+    //}
 
     if ((m->input & INPUT_A_PRESSED) && m->wallKickTimer != 0 && m->prevAction == ACT_AIR_HIT_WALL) {
 
