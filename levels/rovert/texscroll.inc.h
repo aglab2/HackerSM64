@@ -1,0 +1,11 @@
+extern void scroll_rovert_dl_cloudpuff_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_001_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_002_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_003_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_004_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_005_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_006_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_007_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_008_mesh_layer_5_vtx_0();
+extern void scroll_rovert_dl_cloudpuff_009_mesh_layer_5_vtx_0();
+extern void scroll_rovert();

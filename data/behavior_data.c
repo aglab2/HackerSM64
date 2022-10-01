@@ -6797,6 +6797,16 @@ const BehaviorScript bhvOWCtl[] = {
     END_LOOP(),
 };
 
+extern void ow_ctl2_init();
+extern void ow_ctl2_loop();
+const BehaviorScript bhvOWCtl2[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    CALL_NATIVE(ow_ctl2_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(ow_ctl2_loop),
+    END_LOOP(),
+};
+
 extern void slide_checkpoint_init();
 extern void slide_checkpoint_loop();
 const BehaviorScript bhvSlideCheckpoint[] = {

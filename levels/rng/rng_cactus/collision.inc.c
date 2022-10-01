@@ -84,7 +84,7 @@ const Collision rng_cactus_collision[] = {
 	COL_TRI(18, 23, 28),
 	COL_TRI(23, 22, 24),
 	COL_TRI(23, 24, 28),
-	COL_TRI_INIT(SURFACE_DEFAULT, 12),
+	COL_TRI_INIT(SURFACE_BURNING, 12),
 	COL_TRI(7, 29, 6),
 	COL_TRI(9, 30, 29),
 	COL_TRI(29, 7, 31),

@@ -103,7 +103,7 @@ void rovert_loop(void) {
     //osRTCInit();
 
     if (gCurrLevelNum == LEVEL_ROVERT) {
-        gSequencePlayers[0].tempo = gCurrAreaIndex == 1 ? 7968 : 5968; 
+        gSequencePlayers[0].tempo = gCurrAreaIndex == 1 ? 7668 : 5968; 
         if ((gPlayer1Controller->buttonPressed & L_TRIG)&&(gMarioState->action & ACT_GROUP_AIRBORNE)&&(sWatchAmount > 0)) {
             u8 goarea = (gCurrAreaIndex==1) ? 2 : 1;
             u16 cameraAngle = gMarioState->area->camera->yaw;

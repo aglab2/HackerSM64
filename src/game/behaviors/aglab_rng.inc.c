@@ -91,7 +91,7 @@ static void rng_reroll()
         // cacti
         case 4:
         {
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 30; i++)
             {
                 // (Y=4148, Z=-4143) - (Y=2164, Z=2450)
                 int model = random_u16() & 1;
@@ -209,6 +209,7 @@ static f32 rng_z_attempt_threshold()
 
 static u8 sWasDetectedReset = 0;
 u8 gWarpTrigger = 0;
+extern u8 gDeathFloorBarrier;
 void bhv_aglab_rng_init()
 {
     if (2 != gCurrentArea->index)
@@ -221,6 +222,7 @@ void bhv_aglab_rng_init()
     }
 
     gWarpTrigger = 0;
+    gDeathFloorBarrier = 0;
     sWasDetectedReset = 0;
 }
 
@@ -274,6 +276,13 @@ void bhv_aglab_rng_loop()
             }
         }
 
+        if (gDeathFloorBarrier)
+        {
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            o->oAction = 1;
+            gDeathFloorBarrier = 0;
+        }
+
         if (gMarioStates->floorHeight == gMarioStates->pos[1] && (gMarioStates->action != ACT_LAVA_BOOST_LAND) && (gMarioStates->action != ACT_LAVA_BOOST))
         {
             struct Surface* floor = gMarioStates->floor;
@@ -315,6 +324,7 @@ void bhv_aglab_rng_loop()
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
             o->oAction = 0;
             sWasDetectedReset = 0;
+            gDeathFloorBarrier = 0;
         }
     }
 }
@@ -361,11 +371,13 @@ void bhv_aglab_rng_collision_init()
         case 6:
         {
             obj_set_collision_data(o, rng_cactus_collision);
+            obj_scale_xyz(o, 1.15f, 1.15f, 1.15f);
         }
         break;
         case 7:
         {
             obj_set_collision_data(o, rng_cactus2_collision);
+            obj_scale_xyz(o, 1.25f, 1.25f, 1.25f);
         }
         break;
         case 8:

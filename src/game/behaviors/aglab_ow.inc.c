@@ -368,3 +368,14 @@ void ow_dnvic_close_loop()
 
     load_object_collision_model();
 }
+
+extern void rovert_init(void);
+void ow_ctl2_init()
+{
+    rovert_init();
+}
+
+void ow_ctl2_loop()
+{
+
+}
