@@ -369,13 +369,28 @@ void ow_dnvic_close_loop()
     load_object_collision_model();
 }
 
+extern u8 gLowGravityEnabled;
+extern Gfx mat_mario_red[];
+extern Gfx mat_mario_logo[];
+extern Lights1 mario_red_lights;
 extern void rovert_init(void);
 void ow_ctl2_init()
 {
     rovert_init();
+    gLowGravityEnabled = 0;
+    {
+        void** ptr = segmented_to_virtual(mat_mario_red);
+        ptr[9] = &mario_red_lights.l[0];
+        ptr[11] = &mario_red_lights.a;
+    }
+    {
+        void** ptr = segmented_to_virtual(mat_mario_logo);
+        ptr[39] = &mario_red_lights.l[0];
+        ptr[41] = &mario_red_lights.a;
+    }
 }
 
 void ow_ctl2_loop()
 {
-
+    // -
 }

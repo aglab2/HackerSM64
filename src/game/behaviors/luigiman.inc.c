@@ -221,7 +221,7 @@ extern void bhv_luigiman_airlock_init()
 
     doors[1]->oPosX -= 45.f;
     doors[1]->oPosY -= 90.f;
-    doors[1]->oPosZ += 620.f;
+    doors[1]->oPosZ += 615.f;
 }
 
 #define AIRLOCK_DOOR_CHANGE_SPEED 25.f
@@ -243,7 +243,7 @@ extern Lights1 mario_red_lights;
 extern u8 gLowGravityEnabled;
 static void airlock_switch_airlock(u8 value)
 {
-    u8 newGravity = o->oBehParams2ndByte ^ value;
+    u8 newGravity = (!!o->oBehParams2ndByte) ^ value;
     if (gLowGravityEnabled == newGravity)
         return;
 
@@ -291,19 +291,20 @@ static void airlock_door_play_switch_sound(struct Object* door)
 
 extern void bhv_luigiman_airlock_loop()
 {
+    // print_text_fmt_int(20, 20, "%d", gLowGravityEnabled);
+
     struct Object** doors = &o->oLuigimanDoors;
     if (AIRLOCK_INIT == o->oAction)
     {
         // scanning for lads nearby
         // for Y & X coordinates for both doors are equal
         f32 yMid = o->oPosY - 90.f;
-        s8 nearLockCylinder = absf(yMid - gMarioStates->pos[1]) < 500.f && absf(doors[0]->oPosX - gMarioStates->pos[0]) < 500.f;
+        s8 nearLockCylinder = absf(yMid - gMarioStates->pos[1]) < 800.f && absf(doors[0]->oPosX - gMarioStates->pos[0]) < 800.f;
 
         // there is a leaveaway between nearDoor* and inside to allow nearDoor to be triggered first
         s8 nearDoor[2];
-        nearDoor[0] = nearLockCylinder && (doors[0]->oPosZ - 1000.f < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[0]->oPosZ + 150.f);
-        s8 inside   = nearLockCylinder && (doors[0]->oPosZ + 100.f  < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[1]->oPosZ - 100.f);
-        nearDoor[1] = nearLockCylinder && (doors[1]->oPosZ - 150.f  < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[1]->oPosZ + 1000.f);
+        nearDoor[0] = nearLockCylinder && (doors[0]->oPosZ - 1000.f < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[0]->oPosZ);
+        nearDoor[1] = nearLockCylinder && (doors[1]->oPosZ          < gMarioStates->pos[2] && gMarioStates->pos[2] < doors[1]->oPosZ + 1000.f);
 
         // XOR tells us if state mismatch happens hence it wants to either be opened or closed
         s8 wantsToChange[2];
@@ -346,6 +347,17 @@ extern void bhv_luigiman_airlock_loop()
         // no one wants to do anything, start checks for the airlock switching
 
         // if mario is inside the airlock, start the transition
+        // adjust lo and hi limits for inside, when door is opened we need to make sure mario is in
+        // otherwise just use raw values.
+        f32 lo = doors[0]->oPosZ;
+        if (doors[0]->oAction)
+            lo += 100.f;
+
+        f32 hi = doors[1]->oPosZ;
+        if (doors[1]->oAction)
+            hi -= 100.f;
+    
+        s8 inside = nearLockCylinder && (lo < gMarioStates->pos[2] && gMarioStates->pos[2] < hi);
         if (inside)
         {
             // hopefully here one of the doors is opened :)
