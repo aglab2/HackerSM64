@@ -141,7 +141,7 @@ const LevelScript level_luigiman_entry[] = {
 		OBJECT(MODEL_LUIGIMAN_AIRLOCK, -5179, 6682, 7902, 0, 0, 0, 0, bhvLuigimanAirlockMain),
 		OBJECT(MODEL_LUIGIMAN_AIRLOCK, -9623, 991, 6875, 0, 0, 0, 0, bhvLuigimanAirlockMain),
 		OBJECT(MODEL_LUIGIMAN_AIRLOCK, 699, 1877, -4901, 0, 0, 0, 0x00010000, bhvLuigimanAirlockMain),
-		OBJECT(MODEL_NONE, -6707, 1191, 8779, 0, -30, 0, 0x00040000, bhvCoinFormation),
+		// OBJECT(MODEL_NONE, -6707, 1191, 8779, 0, -30, 0, 0x00040000, bhvCoinFormation),
 		OBJECT(MODEL_EXCLAMATION_BOX, -4022, 368, 8443, 0, 0, 0, 0x00060000, bhvExclamationBox),
 		OBJECT(MODEL_NONE, 2824, 1346, 3118, 0, 0, 0, 0x00110000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -1073, 1362, 991, 0, 0, 0, 0x00110000, bhvCoinFormation),
