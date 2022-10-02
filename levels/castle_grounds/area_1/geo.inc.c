@@ -12,6 +12,7 @@ const GeoLayout castle_grounds_area_1_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, castle_grounds_dl_Lake_of_the_East_001_mesh_layer_5),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -927, -444, 1060),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, -4546, 144, -5472, castle_grounds_dl_Sphere_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

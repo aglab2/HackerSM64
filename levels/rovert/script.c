@@ -86,7 +86,7 @@ const LevelScript level_rovert_entry[] = {
 		OBJECT(MODEL_ROVERT_HYPERBLOCK, -2642, 2316, -5495, 0, 0, 0, (2 << 16), bhvRovertHyperblock),
 		OBJECT(MODEL_ROVERT_HYPERBLOCK, -4006, 6944, -2602, 0, 0, 0, (3 << 16), bhvRovertHyperblock),
 		OBJECT(MODEL_ROVERT_HYPERBLOCK, -1366, 7930, -6158, 0, 0, 0, (4 << 16), bhvRovertHyperblock),
-		OBJECT(MODEL_ROVERT_HYPERBLOCK, 656, 8350, -12424, 0, 0, 0, (5 << 16), bhvRovertHyperblock),
+		OBJECT(MODEL_ROVERT_HYPERBLOCK, -272, 8462, -11285, 0, 0, 0, (5 << 16), bhvRovertHyperblock),
 		OBJECT(MODEL_ROVERT_HYPERBLOCK, -4937, 916, 3293, 0, 0, 0, (6 << 16), bhvRovertHyperblock),
 		OBJECT(MODEL_ROVERT_HYPERBLOCK, -1888, 3456, -7119, 0, 0, 0, (7 << 16), bhvRovertHyperblock),
 		OBJECT(MODEL_NONE, -1868, 584, -1834, 0, 0, 0, (150 << 16), bhvPoleGrabbing),

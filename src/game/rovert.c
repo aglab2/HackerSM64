@@ -211,14 +211,14 @@ void rovert_hud(void) {
 
 void rovert_fluxium_pool(void) {
     if ((gCurrentObject->oDistanceToMario < 400.0f)&&(gCurrentObject->oPosY>gMarioState->pos[1])) {
+        if (sWatchAmount != 4 || !sCanLWarp) {
+            sWatchAmount = 4;
+            play_sound(SOUND_MENU_EXIT_PIPE,gMarioState->marioObj->header.gfx.cameraToObject);
+        }
         sCanLWarp = 1;
         sLastVisitedPool[0] = o->oPosX;
         sLastVisitedPool[1] = o->oPosY;
         sLastVisitedPool[2] = o->oPosZ;
-        if (sWatchAmount != 4) {
-            sWatchAmount = 4;
-            play_sound(SOUND_MENU_EXIT_PIPE,gMarioState->marioObj->header.gfx.cameraToObject);
-        }
     }
 }
 
