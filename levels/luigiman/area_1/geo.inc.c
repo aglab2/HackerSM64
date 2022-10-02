@@ -15,7 +15,7 @@ const GeoLayout luigiman_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, luigiman_dl_Outside_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 5454, luigiman_dl_Skybox_mesh_layer_1),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 564, 774, -5740, 0, -180, 0, luigiman_dl_Toad_Interior_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 564, 774, -5740, luigiman_dl_Toad_Interior_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, luigiman_dl_Toad_Interior_mesh_layer_5),
 		GEO_CLOSE_NODE(),
