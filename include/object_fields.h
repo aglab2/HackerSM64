@@ -1427,4 +1427,10 @@ os16112*/
 #define oLuigimanDoorToEventuallyOpen OBJECT_FIELD_S32(0x1D)
 #define oLuigimanDoorLastClosed OBJECT_FIELD_S32(0x1E)
 
+#define oOW2CtlLastGoodFloorType OBJECT_FIELD_S32(0x1B)
+#define oOW2CtlEndingStart OBJECT_FIELD_OBJ(0x1C)
+#define oOW2CtlRNGColor1 OBJECT_FIELD_S32(0x1D)
+#define oOW2CtlRNGColor2 OBJECT_FIELD_S32(0x1E)
+#define oOW2CtlRNGColor3 OBJECT_FIELD_S32(0x1F)
+
 #endif // OBJECT_FIELDS_H

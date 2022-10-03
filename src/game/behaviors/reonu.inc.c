@@ -106,7 +106,6 @@ void bhv_blinking_platform_init(void) {
 void blinking_platformact_idle(void) {
     PRIM_ALPHA = 180;
 
-    cur_obj_become_tangible;
     load_object_collision_model();
 
     if ((gMarioObject->platform == o) || ((gMarioState->wall) && (gMarioState->wall->object == o))) {
@@ -139,8 +138,6 @@ void blinking_platformact_blinking(void) {
 }
 
 void blinking_platformact_intangible(void) {
-    cur_obj_become_intangible;
-
     PRIM_ALPHA = 0;
     BLINKING_COUNTER = 0;
 

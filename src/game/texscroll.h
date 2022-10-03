@@ -21,6 +21,7 @@
 #include "src/game/texscroll/rovert_texscroll.inc.h"
 #include "src/game/texscroll/rng_texscroll.inc.h"
 #include "src/game/texscroll/luigiman_texscroll.inc.h"
+#include "src/game/texscroll/castle_inside_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif

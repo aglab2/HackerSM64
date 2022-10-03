@@ -3,10 +3,18 @@
 const GeoLayout castle_inside_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 90, 0, 0, castle_inside_dl_sphgeres_mesh_layer_6),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_sphgeres_mesh_layer_1),
+			GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_sphgeres_mesh_layer_4),
+		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_inside_dl_Triarc_Bridge_mesh_layer_1),
 		GEO_OPEN_NODE(),
-			GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_Triarc_Bridge_mesh_layer_4),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_inside_dl_Triarc_Bridge_mesh_layer_6),
 		GEO_CLOSE_NODE(),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_inside_dl_Triarc_Bridge_001_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, castle_inside_dl_Triarc_Bridge_002_mesh_layer_4),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_inside_dl_Triarc_Bridge_003_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -34,6 +42,7 @@ const GeoLayout castle_inside_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_inside_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

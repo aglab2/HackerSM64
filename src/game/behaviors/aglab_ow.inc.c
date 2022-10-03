@@ -369,6 +369,202 @@ void ow_dnvic_close_loop()
     load_object_collision_model();
 }
 
+extern Gfx mat_castle_inside_dl_mat2[]; // +12
+extern Gfx mat_castle_inside_dl_YellowCobble_f3d_layer1[]; // +14 / 254, 201, 57
+extern Gfx mat_castle_inside_dl_BlueFlowers_f3d_layer4[]; // +14 / 127, 254, 235
+extern Gfx mat_castle_inside_dl_TreeBark_f3d_layer1[]; // +14 / 217, 118, 65
+extern Gfx mat_castle_inside_dl_DarkBeigeCobble_f3d_layer1[]; // +14 / 254, 190, 157
+extern Gfx mat_castle_inside_dl_BeigeCobble_f3d_layer1[]; // +14 / 254, 197, 124
+extern Gfx mat_castle_inside_dl_TowerRoof_f3d_layer1[]; // +14 / 192, 63, 75
+extern Gfx mat_castle_inside_dl_YellowWood_f3d_layer1[]; // +14 / 254, 243, 98
+extern Gfx mat_castle_inside_dl_OrangeWood_f3d_layer1[]; // +14 / 254, 151, 94
+extern Gfx mat_castle_inside_dl_RedWood_f3d_layer1[]; // +14 / 254, 92, 69
+extern Gfx mat_castle_inside_dl_Grass_f3d_layer1[]; // +14 / 37, 188, 46
+extern Gfx mat_castle_inside_dl_Dirt_f3d_layer1[]; // +14 / 254, 195, 108
+extern Gfx mat_castle_inside_dl_Path_f3d_layer1[]; // +14 / 210, 217, 111
+extern Gfx mat_castle_inside_dl_PathOutside_f3d_layer1[]; // +14 / 195, 185, 77
+extern Gfx mat_castle_inside_dl_Leaves_f3d_layer1[]; // +14 / 60, 161, 34
+extern Gfx mat_castle_inside_dl_mat_layer1[]; // +14 / 0,0,0
+
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_15[27];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_15_backup[27];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16[16];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16_backup[16];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17[21];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17_backup[21];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18_backup[14];
+
+struct OW2Texture
+{
+    void* ptr;
+    rgb color;
+};
+
+enum
+{
+    OW2_MAT_NOISE = 0,
+    OW2_MAT_COBBLE_YELLOW,
+    OW2_MAT_FLOWERS,
+    OW2_MAT_TREE_BARK,
+    OW2_MAT_BEIGE_DARK,
+    OW2_MAT_COBBLE_BEIGE,
+    OW2_MAT_ROOF,
+    OW2_MAT_WOOD_YELLOW,
+    OW2_MAT_WOOD_ORANGE,
+    OW2_MAT_WOOD_RED,
+    OW2_MAT_GRASS,
+    OW2_MAT_DIRT,
+    OW2_MAT_PATH,
+    OW2_MAT_PATH_OUTSIDE,
+    OW2_MAT_LEAVES,
+    OW2_MAT_BACK,
+};
+
+static struct OW2Texture sOW2Textures[] = 
+{
+    { mat_castle_inside_dl_mat2, { 0,0,0,60 } },
+    { mat_castle_inside_dl_YellowCobble_f3d_layer1, { 254, 201, 57, 0 } },
+    { mat_castle_inside_dl_BlueFlowers_f3d_layer4, { 127, 254, 235, 0 } },
+    { mat_castle_inside_dl_TreeBark_f3d_layer1, { 217, 118, 65, 0 } },
+    { mat_castle_inside_dl_DarkBeigeCobble_f3d_layer1, { 254, 190, 157, 0 } },
+    { mat_castle_inside_dl_BeigeCobble_f3d_layer1, { 254, 197, 124, 0 } },
+    { mat_castle_inside_dl_TowerRoof_f3d_layer1, { 192, 63, 75, 0 } },
+    { mat_castle_inside_dl_YellowWood_f3d_layer1, { 254, 243, 98, 0 } },
+    { mat_castle_inside_dl_OrangeWood_f3d_layer1, { 254, 151, 94, 0 } },
+    { mat_castle_inside_dl_RedWood_f3d_layer1, { 254, 151, 94, 0 } },
+    { mat_castle_inside_dl_Grass_f3d_layer1, { 37, 188, 46, 0 } },
+    { mat_castle_inside_dl_Dirt_f3d_layer1, { 254, 195, 108, 0 } },
+    { mat_castle_inside_dl_Path_f3d_layer1, { 210, 217, 111, 0 } },
+    { mat_castle_inside_dl_PathOutside_f3d_layer1, { 195, 185, 77, 0 } },
+    { mat_castle_inside_dl_Leaves_f3d_layer1, { 60, 161, 34, 0 } },
+    { mat_castle_inside_dl_mat_layer1, { 23, 23, 102, 0 } },
+};
+
+static rgb sOW2OriginalColors[] = 
+{
+    { 254, 201, 57, 0 },
+    { 127, 254, 235, 0 },
+    { 217, 118, 65, 0 },
+    { 254, 190, 157, 0 },
+    { 254, 197, 124, 0 },
+    { 192, 63, 75, 0 },
+    { 254, 243, 98, 0 },
+    { 254, 151, 94, 0 },
+    { 254, 151, 94, 0 },
+    { 37, 188, 46, 0 },
+    { 254, 195, 108, 0 },
+    { 210, 217, 111, 0 },
+    { 195, 185, 77, 0 },
+    { 60, 161, 34, 0 },
+    { 23, 23, 102, 0 },
+};
+
+struct OW2Vertices
+{
+    Vtx* ptr;
+    Vtx* ptrb;
+    s32 sz;
+    u8 enabled;
+    rgb color;
+};
+
+#define OW2_VERTICES_ENTRY(name) name, name##_##backup, sizeof(name) / sizeof(*name), 1
+
+enum
+{
+    OW2_VTX_HONEY,
+    OW2_VTX_SPACE,
+    OW2_VTX_GRASS,
+    OW2_VTX_RNG,
+};
+
+static struct OW2Vertices sOW2Vertices[] = 
+{
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_15), { 0, 0, 0, 0 } },
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16), { 0, 0, 0, 0 } },
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17), { 0, 0, 0, 0 } },
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18), { 0, 0, 0, 0 } },
+};
+
+static void ow2_reset_colors(void)
+{
+    for (unsigned int i = 1; i < sizeof(sOW2Textures) / sizeof(*sOW2Textures); i++)
+    {
+        struct OW2Texture* mat = &sOW2Textures[i];
+        mat->color.r = 255;
+        mat->color.g = 255;
+        mat->color.b = 255;
+        mat->color.a = 255;
+    }
+    for (unsigned int i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
+    {
+        struct OW2Vertices* vts = &sOW2Vertices[i];
+        vts->color.r = 255;
+        vts->color.g = 255;
+        vts->color.b = 255;
+        vts->color.a = 255;
+    }
+}
+
+static void ow2_write_colors(void)
+{
+    for (unsigned int i = 0; i < sizeof(sOW2Textures) / sizeof(*sOW2Textures); i++)
+    {
+        struct OW2Texture* mat = &sOW2Textures[i];
+        rgb* ptr = (rgb*) segmented_to_virtual(mat->ptr);
+        if (i != 0)
+        {
+            ptr[14*2 + 1].r = mat->color.r;
+            ptr[14*2 + 1].g = mat->color.g;
+            ptr[14*2 + 1].b = mat->color.b;
+        }
+        else
+        {
+            ptr[12*2 + 1].a = mat->color.a;
+        }
+    }
+    for (unsigned int i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
+    {
+        struct OW2Vertices* vts = &sOW2Vertices[i];
+        Vtx* ptr  = (Vtx*) segmented_to_virtual(vts->ptr);
+        Vtx* ptrb = (Vtx*) segmented_to_virtual(vts->ptrb);
+        for (int j = 0; j < vts->sz; j++)
+        {
+            Vtx* vtx  = &ptr[j];
+            Vtx* vtxb = &ptrb[j];
+            if (vts->enabled)
+            {
+                if (vtx->v.cn[3] > 0x80)
+                {
+                    vtx->v.cn[3] = 0xff;
+                }
+                else
+                {
+                    vtx->v.cn[0] = (vtxb->v.cn[0] / 255.f) * vts->color.r;
+                    vtx->v.cn[1] = (vtxb->v.cn[1] / 255.f) * vts->color.g;
+                    vtx->v.cn[2] = (vtxb->v.cn[2] / 255.f) * vts->color.b;
+                    vtx->v.cn[3] = 0;
+                }
+            }
+            else
+            {
+                if (vtx->v.cn[3] > 0x80)
+                {
+                    vtx->v.cn[0] = 200;
+                    vtx->v.cn[1] = 200;
+                    vtx->v.cn[2] = 200;
+                    vtx->v.cn[3] = 0xff;
+                }
+                else
+                {
+                    vtx->v.cn[3] = 0;
+                }
+            }
+        }
+    }
+}
+
 extern u8 gLowGravityEnabled;
 extern Gfx mat_mario_red[];
 extern Gfx mat_mario_logo[];
@@ -376,6 +572,8 @@ extern Lights1 mario_red_lights;
 extern void rovert_init(void);
 void ow_ctl2_init()
 {
+    ow2_reset_colors();
+    ow2_write_colors();
     rovert_init();
     gLowGravityEnabled = 0;
     {
@@ -388,9 +586,206 @@ void ow_ctl2_init()
         ptr[39] = &mario_red_lights.l[0];
         ptr[41] = &mario_red_lights.a;
     }
+
+    s32* colors = &o->oOW2CtlRNGColor1;
+    for (int i = 0; i < 3; i++)
+    {
+        colors[i] = random_u16();
+        colors[i] |= ((s32) random_u16()) << 16;
+    }
+}
+
+static void ow_ctl2_approach_colors(rgb* color, hsv* target)
+{
+    hsv hsv;
+    rgb2hsv(color, &hsv);
+    // we do not have a target to approach as we are grayscale
+    if (color->r == color->g && color->g == color->b)
+    {
+        hsv.h = target->h;
+    }
+
+    // exact comparison because just a certain case I want to handle when target is passed
+    if (0.f == target->s)
+    {
+        target->h = hsv.h;
+    }
+
+    hsv.h = approach_angle(hsv.h, target->h, 1000);
+    approach_f32_asymptotic_bool(&hsv.s, target->s, 0.1f);
+    hsv.v = approach_s16(hsv.v, target->v, 1, 1);
+    hsv2rgb(&hsv, color);
+}
+
+static void ow_ctl2_approach_color0(rgb* color)
+{
+    hsv target;
+    rgb2hsv(color, &target);
+
+    for (unsigned i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
+        ow_ctl2_approach_colors(&sOW2Vertices[i].color, &target);
+
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_GRASS].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_COBBLE_YELLOW].color, &target);
+    target.v /= 2;
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_LEAVES].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_BACK].color, &target);
+}
+
+static void ow_ctl2_approach_color1(rgb* color)
+{
+    hsv target;
+    rgb2hsv(color, &target);
+
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_FLOWERS].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_TREE_BARK].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_WOOD_YELLOW].color, &target);
+}
+
+static void ow_ctl2_approach_color2(rgb* color)
+{
+    hsv target;
+    rgb2hsv(color, &target);
+
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_BEIGE_DARK].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_COBBLE_BEIGE].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_ROOF].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_WOOD_ORANGE].color, &target);
+}
+
+static void ow_ctl2_approach_color3(rgb* color)
+{
+    hsv target;
+    rgb2hsv(color, &target);
+
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_DIRT].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_PATH].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_PATH_OUTSIDE].color, &target);
+    ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_WOOD_RED].color, &target);
 }
 
 void ow_ctl2_loop()
 {
-    // -
+    struct Surface* floor = gMarioStates->floor;
+    int type = floor ? floor->type : 0;
+    if (type == SURFACE_WALL_MISC)
+    {
+        type = o->oOW2CtlLastGoodFloorType;
+    }
+    else
+    {
+        o->oOW2CtlLastGoodFloorType = type;
+    }
+
+    s32 ending = 0;
+    if (sOW2Vertices[OW2_VTX_HONEY].enabled && SURFACE_NOISE_DEFAULT == type)
+    {
+        {
+            rgb color = { 0xCC, 0x8E, 0x3D, 0x00 };
+            ow_ctl2_approach_color0(&color);
+        }
+        {
+            rgb color = { 148, 92, 198, 0x00 };
+            ow_ctl2_approach_color1(&color);
+        }
+        {
+            rgb color = { 92, 198, 187, 0x00 };
+            ow_ctl2_approach_color2(&color);
+        }
+        {
+            rgb color = { 229, 52, 82, 0x00 };
+            ow_ctl2_approach_color3(&color);
+        }
+    }
+    else if (sOW2Vertices[OW2_VTX_SPACE].enabled && SURFACE_VANISH_CAP_WALLS == type)
+    {
+        {
+            rgb color = { 0xB6, 0x56, 0xD4, 0x00 };
+            ow_ctl2_approach_color0(&color);
+        }
+        {
+            rgb color = { 83, 94, 74, 0x00 };
+            ow_ctl2_approach_color1(&color);
+        }
+        {
+            rgb color = { 131, 172, 178, 0x00 };
+            ow_ctl2_approach_color2(&color);
+        }
+        {
+            rgb color = { 24, 236, 94, 0x00 };
+            ow_ctl2_approach_color3(&color);
+        }
+    }
+    else if (sOW2Vertices[OW2_VTX_GRASS].enabled && SURFACE_TTM_VINES == type)
+    {
+        {
+            rgb color = { 0x7D, 0xC2, 0x9D, 0x00 };
+            ow_ctl2_approach_color0(&color);
+        }
+        {
+            rgb color = { 100, 142, 97, 0x00 };
+            ow_ctl2_approach_color1(&color);
+        }
+        {
+            rgb color = { 203, 12, 89, 0x00 };
+            ow_ctl2_approach_color2(&color);
+        }
+        {
+            rgb color = { 210, 124, 58, 0x00 };
+            ow_ctl2_approach_color3(&color);
+        }
+    }
+    else if (sOW2Vertices[OW2_VTX_RNG].enabled && SURFACE_SWITCH == type)
+    {
+        {
+            rgb color = { 0x35, 0x4C, 0xBD, 0x0 };
+            ow_ctl2_approach_color0(&color);
+        }
+        ow_ctl2_approach_color1((rgb*)&o->oOW2CtlRNGColor1);
+        ow_ctl2_approach_color2((rgb*)&o->oOW2CtlRNGColor2);
+        ow_ctl2_approach_color3((rgb*)&o->oOW2CtlRNGColor3);
+    }
+    else if (sOW2Vertices[OW2_VTX_RNG].enabled && SURFACE_SWITCH == type)
+    {
+        {
+            rgb color = { 0x35, 0x4C, 0xBD, 0x0 };
+            ow_ctl2_approach_color0(&color);
+        }
+        ow_ctl2_approach_color1((rgb*)&o->oOW2CtlRNGColor1);
+        ow_ctl2_approach_color2((rgb*)&o->oOW2CtlRNGColor2);
+        ow_ctl2_approach_color3((rgb*)&o->oOW2CtlRNGColor3);
+    }
+    else if (!o->oOW2CtlEndingStart && SURFACE_HARD == type)
+    {
+        ending = 1;
+        for (unsigned i = 0; i < sizeof(sOW2OriginalColors) / sizeof(*sOW2OriginalColors); i++)
+        {
+            hsv target;
+            rgb2hsv(&sOW2OriginalColors[i], &target);
+            ow_ctl2_approach_colors(&sOW2Textures[i + 1].color, &target);
+        }
+            
+        for (unsigned i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
+        {
+            hsv target;
+            rgb2hsv(&sOW2OriginalColors[OW2_MAT_GRASS - 1], &target);
+            ow_ctl2_approach_colors(&sOW2Vertices[i].color, &target); 
+        }
+    }
+    else
+    {
+        // gray color
+        hsv target = { 0, 255, 0.f };
+        for (unsigned i = 0; i < sizeof(sOW2Textures) / sizeof(*sOW2Textures); i++)
+        {
+            ow_ctl2_approach_colors(&sOW2Textures[i].color, &target);
+        }
+        for (unsigned i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
+        {
+            ow_ctl2_approach_colors(&sOW2Vertices[i].color, &target);
+        }
+    }
+
+    sOW2Textures[0].color.a = approach_s32(sOW2Textures[0].color.a, ending ? 0 : 60, 2, 2);
+    ow2_write_colors();
 }

@@ -1,0 +1,4 @@
+extern void scroll_castle_inside_dl_sphgeres_mesh_layer_6_vtx_0();
+extern void scroll_castle_inside_dl_sphgeres_mesh_layer_1_vtx_2();
+extern void scroll_castle_inside_dl_Triarc_Bridge_mesh_layer_6_vtx_0();
+extern void scroll_castle_inside();
