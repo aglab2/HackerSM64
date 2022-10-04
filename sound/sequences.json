@@ -67,5 +67,8 @@
     "40_custom_rng8": ["25"],
     "41_custom_psync": ["0C"],
     "42_custom_tt1": ["0C"],
-    "43_custom_space": ["0C"]
+    "43_custom_space": ["0C"],
+    "44_custom_alone": ["0C"],
+    "45_custom_lament": ["0C"],
+    "46_custom_grief": ["0C"]
 }

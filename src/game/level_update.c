@@ -56,6 +56,9 @@ const char *creditsTesting[] = { "3TESTING", "LINCRASH", "MUSHIE", "GMD" };
 const char *creditsOrganizer[] = { "1ORGANIZED BY", "AGLAB" };
 const char *creditsPJ74[] = { "2PJ74 TEAM", "ARTHURTILLY", "GALAXTIC" };
 const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "GAEL" };
+const char *creditsRovert[] = { "1DEVELOPER", "ROVERT" };
+const char *creditsLuigiman[] = { "1DEVELOPER", "LUIGIMAN" };
+const char *creditsSpiders[] = { "1DEVELOPER", "USERNAMES ARE SPIDERS" };
 
 struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
@@ -69,6 +72,9 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_COTMC,          1, 65, 98,   { 70, 2118, 1109 }, creditsZenon },
     { LEVEL_TOTWC,          1, 17, -34,  { 0, 1000, 0 }   , creditsAxo },
     { LEVEL_VCM,            1, 50, 46,   { -4, 261, 109 }    , creditsMushie },
+    { LEVEL_SPIDERS,        1, 50, 47,   { -1433, -2165, -7954 }, creditsSpiders },
+    { LEVEL_LUIGIMAN,        1, 50, 47,   { -1433, -2165, -7954 }, creditsLuigiman },
+    { LEVEL_ROVERT,        1, 50, 47,   { -1433, -2165, -7954 }, creditsRovert },
     { LEVEL_CASTLE_GROUNDS, 1, 51, 54,   { -53, 4536, -109 }   , creditsCoding },
     { LEVEL_HF,             1, 33, 124,  { -3657, 1358, -90 }    , creditsTesting },
     { LEVEL_PSS,            1, 1, 60,    { 11234, 2319, 1765 }   , creditsMusic },

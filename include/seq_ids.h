@@ -78,6 +78,9 @@ enum SeqId {
     SEQ_PSYNC,
     SEQ_ROVERT,
     SEQ_SPACE,
+    SEQ_ALONE,
+    SEQ_PROMISE_R,
+    SEQ_GRIEF,
     SEQ_COUNT,
 };
 

@@ -572,6 +572,21 @@ extern Lights1 mario_red_lights;
 extern void rovert_init(void);
 void ow_ctl2_init()
 {
+    struct Surface* floor = gMarioStates->floor;
+    int type = floor ? floor->type : 0;
+    if (type == SURFACE_VANISH_CAP_WALLS)
+    {
+        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_ALONE, 0);
+    }
+    if (type == SURFACE_TTM_VINES)
+    {
+        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_PROMISE_R, 0);
+    }
+    if (type == SURFACE_SWITCH)
+    {
+        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_GRIEF, 0);
+    }
+
     rovert_init();
     gLowGravityEnabled = 0;
     {
@@ -770,16 +785,6 @@ void ow_ctl2_loop()
             rgb color = { 210, 124, 58, 0x00 };
             ow_ctl2_approach_color3(&color);
         }
-    }
-    else if (sOW2Vertices[OW2_VTX_RNG].enabled && SURFACE_SWITCH == type)
-    {
-        {
-            rgb color = { 0x35, 0x4C, 0xBD, 0x0 };
-            ow_ctl2_approach_color0(&color);
-        }
-        ow_ctl2_approach_color1((rgb*)&o->oOW2CtlRNGColor1);
-        ow_ctl2_approach_color2((rgb*)&o->oOW2CtlRNGColor2);
-        ow_ctl2_approach_color3((rgb*)&o->oOW2CtlRNGColor3);
     }
     else if (sOW2Vertices[OW2_VTX_RNG].enabled && SURFACE_SWITCH == type)
     {
