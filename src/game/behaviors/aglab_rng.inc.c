@@ -77,7 +77,7 @@ static void rng_reroll()
         // pyramid
         case 3:
         {
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 12; i++)
             {
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_PYRAMID, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(-927.f, 1389.f);
