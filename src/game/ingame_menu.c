@@ -149,6 +149,10 @@ static u8 textDnvic[]       = { TEXT_CREATOR_DNVIC };
 static u8 textZenonX[]      = { TEXT_CREATOR_ZENONX };
 static u8 textScuttle[]     = { TEXT_CREATOR_SCUTTLE };
 static u8 textPie[]         = { TEXT_CREATOR_PIE };
+static u8 textSpiders[]     = { TEXT_CREATOR_SPIDERS };
+static u8 textLuigiman[]    = { TEXT_CREATOR_LUIGIMAN };
+static u8 textRovert[]      = { TEXT_CREATOR_ROVERT };
+static u8 textAglab[]       = { TEXT_CREATOR_AGLAB };
 
 void create_dl_identity_matrix(void) {
     Mtx *matrix = (Mtx *) alloc_display_list(sizeof(Mtx));
@@ -1999,6 +2003,11 @@ static u8* sCourseToCreators[] = {
 
     [ COURSE_BITFS ] = textScuttle,
     [ COURSE_BITS ]  = textScuttle,
+
+    [ COURSE_LUIGIMAN ] = textLuigiman,
+    [ COURSE_ROVERT ]   = textRovert,
+    [ COURSE_RNG ]      = textAglab,
+    [ COURSE_SPIDERS ]  = textSpiders,
 };
 
 void print_hud_course_complete_coins(s16 x, s16 y) {

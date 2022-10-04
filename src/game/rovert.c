@@ -76,7 +76,7 @@ static u8 sCanLWarp = FALSE;
 static f32 sLastVisitedPool[3];
 static u8 sLWarpAction = 0;
 
-static u8 *sWatchDL_List[] = {
+static void* sWatchDL_List[] = {
     &watch5_watch_mesh,
     &watch4_watch_mesh,
     &watch3_watch_mesh,
