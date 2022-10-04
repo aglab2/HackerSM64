@@ -51,6 +51,7 @@ static void rng_reroll()
                 mush->oPosX = random_float_ft(-748.f, 1702.f);
                 mush->oPosY = 2687.f + random_float() * 800.f;
                 mush->oPosZ = random_float_ft(-2842.f,  4200.f);
+                mush->oBehParams = (1 << 24); // enable cap always
                 mush->oBehParams2ndByte = random_u16() % 3; // all caps
             }
         }
