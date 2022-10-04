@@ -572,8 +572,6 @@ extern Lights1 mario_red_lights;
 extern void rovert_init(void);
 void ow_ctl2_init()
 {
-    ow2_reset_colors();
-    ow2_write_colors();
     rovert_init();
     gLowGravityEnabled = 0;
     {
@@ -593,6 +591,44 @@ void ow_ctl2_init()
         colors[i] = random_u16();
         colors[i] |= ((s32) random_u16()) << 16;
     }
+
+    sOW2Vertices[OW2_VTX_HONEY].enabled = 1;
+    {
+        u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_SPIDERS));
+        sOW2Vertices[OW2_VTX_SPACE].enabled = 0 != starFlags;
+        if (!sOW2Vertices[OW2_VTX_SPACE].enabled)
+        {
+            struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvWarpPipe, 0x13);
+            pipe->activeFlags = 0;
+        }
+    }
+    {
+        u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_LUIGIMAN));
+        sOW2Vertices[OW2_VTX_GRASS].enabled = 0 != starFlags;
+        if (!sOW2Vertices[OW2_VTX_GRASS].enabled)
+        {
+            struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvWarpPipe, 0x12);
+            pipe->activeFlags = 0;
+        }
+    }
+    {
+        u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_ROVERT));
+        sOW2Vertices[OW2_VTX_RNG].enabled = 0 != starFlags;
+        if (!sOW2Vertices[OW2_VTX_RNG].enabled)
+        {
+            struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvWarpPipe, 0x11);
+            pipe->activeFlags = 0;
+        }
+    }
+    if (save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_RNG)))
+    {
+        o->oOW2CtlEndingStart = spawn_object(o, MODEL_BOWSER_KEY, bhvBowserKey);
+        o->oOW2CtlEndingStart->oPosX = 5656.f;
+        o->oOW2CtlEndingStart->oPosY = 357.f;
+        o->oOW2CtlEndingStart->oPosZ = 6727.f;
+    }
+    ow2_reset_colors();
+    ow2_write_colors();
 }
 
 static void ow_ctl2_approach_colors(rgb* color, hsv* target)
@@ -755,7 +791,7 @@ void ow_ctl2_loop()
         ow_ctl2_approach_color2((rgb*)&o->oOW2CtlRNGColor2);
         ow_ctl2_approach_color3((rgb*)&o->oOW2CtlRNGColor3);
     }
-    else if (!o->oOW2CtlEndingStart && SURFACE_HARD == type)
+    else if (o->oOW2CtlEndingStart && SURFACE_HARD == type)
     {
         ending = 1;
         for (unsigned i = 0; i < sizeof(sOW2OriginalColors) / sizeof(*sOW2OriginalColors); i++)
@@ -786,6 +822,6 @@ void ow_ctl2_loop()
         }
     }
 
-    sOW2Textures[0].color.a = approach_s32(sOW2Textures[0].color.a, ending ? 0 : 60, 2, 2);
+    sOW2Textures[0].color.a = approach_s32(sOW2Textures[0].color.a, ending ? 0 : 90, 2, 2);
     ow2_write_colors();
 }

@@ -171,6 +171,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, -3695, -1074, 2801, 0, 0, 0, (0x56 << 16) | (4 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -3697, -1074, 2803, 0, 0, 0, (4 << 8), bhvSparkler),
 		OBJECT(MODEL_LUIGI_NPC, -3698, -1015, 2605, 0, 89, 0, (4 << 8), bhvOWLuigi),
+		OBJECT(MODEL_NONE, -14, -146, -16, 0, -180, 0, (0xf0 << 16), bhvAirborneStarCollectWarp),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
