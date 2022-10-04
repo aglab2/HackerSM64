@@ -1,6 +1,6 @@
 
 extern Gfx omm_star_glow_gfx[];
-Gfx *omm_geo_star_enable_effects(s32 callContext, struct GraphNode *, int) {
+Gfx *omm_geo_star_enable_effects(s32 callContext, struct GraphNode *node, int context) {
     if (callContext == GEO_CONTEXT_RENDER) {
         u8* envc = (u8*) segmented_to_virtual(omm_star_glow_gfx);
         envc[7 + 8] = 255 * !cur_obj_nearest_object_with_behavior(bhvActSelector);
@@ -9,7 +9,7 @@ Gfx *omm_geo_star_enable_effects(s32 callContext, struct GraphNode *, int) {
 }
 
 typedef struct {
-    u32 prevTimer;
+    s32 prevTimer;
     s32 counter;
     struct {
         f32 scale;
@@ -30,7 +30,7 @@ static struct GraphNode *omm_geo_star_get_child(struct GraphNode *node, s16 type
     return node;
 }
 
-Gfx *omm_geo_star_update_glow(s32 callContext, struct GraphNode *node, void*) {
+Gfx *omm_geo_star_update_glow(s32 callContext, struct GraphNode *node, void* context) {
     if (gCurGraphNodeObject && callContext == GEO_CONTEXT_RENDER) {
         struct GraphNodeTranslation *translationNode = (struct GraphNodeTranslation *) node->next;
         f32 dx = gCurGraphNodeObject->cameraToObject[0];
@@ -70,11 +70,9 @@ static u8* getRayEnvColor(int p)
     case 5:
     return (u8*) segmented_to_virtual(omm_star_ray_5_gfx) + 8;
     }
-
-    return NULL;
 }
 
-Gfx *omm_geo_star_update_ray(s32 callContext, struct GraphNode *node, void*) {
+Gfx *omm_geo_star_update_ray(s32 callContext, struct GraphNode *node, void* context) {
     if (gCurGraphNodeObject && callContext == GEO_CONTEXT_RENDER) {
         OmmStarGeoData *data = &sData;
         data->counter += (data->prevTimer != gGlobalTimer);
