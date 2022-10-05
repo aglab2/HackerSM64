@@ -6800,10 +6800,19 @@ const BehaviorScript bhvOWCtl[] = {
 extern void ow_ctl2_init();
 extern void ow_ctl2_loop();
 const BehaviorScript bhvOWCtl2[] = {
-    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN(OBJ_LIST_SPAWNER),
     CALL_NATIVE(ow_ctl2_init),
     BEGIN_LOOP(),
         CALL_NATIVE(ow_ctl2_loop),
+    END_LOOP(),
+};
+
+extern void ow_decor_loop();
+const BehaviorScript bhvOWDecor[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    BEGIN_LOOP(),
+        CALL_NATIVE(ow_decor_loop),
     END_LOOP(),
 };
 

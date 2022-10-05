@@ -7,6 +7,8 @@ extern s8  gDnvicMapAlphaVelocity;
 extern hsv gDnvicColor;
 extern hsv gDnvicCurrentColor;
 
+extern const BehaviorScript bhvOWDecor[];
+
 void ow_ctl_init()
 {
     gDoInertia = 1;
@@ -715,6 +717,7 @@ static void ow_ctl2_approach_color3(rgb* color)
     ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_WOOD_RED].color, &target);
 }
 
+extern Gfx mat_triarc_rock_f3d_material_001[];
 void ow_ctl2_loop()
 {
     struct Surface* floor = gMarioStates->floor;
@@ -726,6 +729,18 @@ void ow_ctl2_loop()
     else
     {
         o->oOW2CtlLastGoodFloorType = type;
+    }
+    
+    {
+        u8* ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001) + 12*8 + 7;
+        if (*ptr > 3)
+        {
+            (*ptr) -= 3;
+        }
+        else
+        {
+            *ptr = 0;
+        }
     }
 
     s32 ending = 0;
@@ -765,6 +780,30 @@ void ow_ctl2_loop()
         {
             rgb color = { 24, 236, 94, 0x00 };
             ow_ctl2_approach_color3(&color);
+        }
+
+        u8* ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001) + 12*8 + 7;
+        if (!cur_obj_find_object_with_behavior_and_bparam(bhvOWDecor, 2))
+        {
+            for (int i = 1; i < 10; i++)
+            {
+                struct Object* decor = spawn_object(o, MODEL_TRIARC_ROCK, bhvOWDecor);
+                decor->oPosX = sins(0x8000 + i * (0x10000 / 10)) * 1000.f * (1.f + random_f32_around_zero(0.05f)) + -4315.f;
+                decor->oPosY = 300.f + random_f32_around_zero(400.f);
+                decor->oPosZ = coss(0x8000 + i * (0x10000 / 10)) * 1000.f * (1.f + random_f32_around_zero(0.05f)) + 2345.f;
+                decor->oBehParams2ndByte = 2;
+                decor->oFaceAngleYaw = random_u16();
+                decor->oFaceAngleRoll = random_u16();
+                obj_scale_xyz(decor, 0.2f, 0.2f, 0.2f);
+            }
+            *ptr = 4;
+        }
+        else
+        {
+            if (*ptr < 240)
+            {
+                *ptr += 15;
+            }
         }
     }
     else if (sOW2Vertices[OW2_VTX_GRASS].enabled && SURFACE_TTM_VINES == type)
@@ -829,4 +868,24 @@ void ow_ctl2_loop()
 
     sOW2Textures[0].color.a = approach_s32(sOW2Textures[0].color.a, ending ? 0 : 90, 2, 2);
     ow2_write_colors();
+}
+
+void ow_decor_loop()
+{
+    u8* ptr = NULL;
+    switch(o->oBehParams2ndByte)
+    {
+        case 2:
+        {
+            ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001) + 12*8 + 7;
+            o->oFaceAngleYaw += 0x39;
+            o->oFaceAngleRoll += 023;
+        }
+        break;
+    }
+
+    if (0 == *ptr)
+    {
+        o->activeFlags = 0;
+    }
 }

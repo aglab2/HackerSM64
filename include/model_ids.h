@@ -99,6 +99,7 @@
 #define MODEL_CCM_SNOWMAN_HEAD                 0x37        // ccm_geo_00040C
 
 // castle
+#define MODEL_TRIARC_ROCK 0x35
 #define MODEL_CASTLE_BOWSER_TRAP               0x35        // castle_geo_000F18
 #define MODEL_CASTLE_WATER_LEVEL_PILLAR        0x36        // castle_geo_001940
 #define MODEL_CASTLE_CLOCK_MINUTE_HAND         0x37        // castle_geo_001530
