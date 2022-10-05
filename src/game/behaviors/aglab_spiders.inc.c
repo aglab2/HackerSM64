@@ -62,6 +62,27 @@ void bhv_spiders_hawk_init()
     o->oPosZ = start[2];
 }
 
+static void spiders_calculate_traj_xyz(f32* start, f32* end, f32 frac, struct Object* obj)
+{       
+    f32 reverseY = end[1] > start[1];
+    f32 fracSmoothed    = 0.f;
+    f32 fracSmoothedNeg = 0.f;
+    if (reverseY)
+    {
+        fracSmoothed = sins(0x4000 * frac);
+        fracSmoothedNeg = 1 - fracSmoothed;
+    }
+    else
+    {
+        fracSmoothedNeg = sins(0x4000 * (1.f - frac));
+        fracSmoothed = 1 - fracSmoothedNeg;
+    }
+
+    obj->oPosX = frac * end[0] + (1.f - frac) * start[0];
+    obj->oPosY = fracSmoothed * end[1] + fracSmoothedNeg * start[1];
+    obj->oPosZ = frac * end[2] + (1.f - frac) * start[2];
+}
+
 void bhv_spiders_hawk_loop()
 {
     if (5 == o->oBehParams2ndByte && o->oDistanceToMario < 200.f && (-1 == o->oIntangibleTimer))
@@ -77,6 +98,7 @@ void bhv_spiders_hawk_loop()
     {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+
         if (o->oInteractStatus)
         {
             o->oAction = 1;
@@ -111,6 +133,19 @@ void bhv_spiders_hawk_loop()
             o->oPosZ = end[2];
             o->oSpidersHawkAct = 0;
         }
+
+        f32* start = sSpiderHawkStarts[o->oBehParams2ndByte];
+        f32* end = sSpiderHawkEnds  [o->oBehParams2ndByte];
+        for (int i = 0; i < 1; i++)
+        {
+            f32 frac = random_float();
+            struct Object* sparkle = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+            if (sparkle)
+            {
+                obj_scale(sparkle, 2.f);
+                spiders_calculate_traj_xyz(start, end, frac, sparkle);
+            }
+        }
     }
     else
     {
@@ -132,11 +167,8 @@ void bhv_spiders_hawk_loop()
             start = sSpiderHawkEnds  [o->oBehParams2ndByte];
             end   = sSpiderHawkStarts[o->oBehParams2ndByte];
         }
-        o->oPosX = frac * end[0] + (1 - frac) * start[0];
-        o->oPosY = frac * end[1] + (1 - frac) * start[1];
-        o->oPosZ = frac * end[2] + (1 - frac) * start[2];
+        spiders_calculate_traj_xyz(start, end, frac, o);
         o->oMoveAngleYaw = atan2s(end[2] - start[2], end[0] - start[0]);
-
         if (o->oTimer > 60) 
         {
             o->oSpidersHawkAct = !o->oSpidersHawkAct;

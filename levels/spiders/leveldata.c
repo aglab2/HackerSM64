@@ -29,3 +29,4 @@
 #include "levels/spiders/waterfally_switch/collision.inc.c"
 #include "levels/spiders/spiders_cage/collision.inc.c"
 #include "levels/spiders/spiders_cage/model.inc.c"
+#include "levels/spiders/spiders_comb/model.inc.c"

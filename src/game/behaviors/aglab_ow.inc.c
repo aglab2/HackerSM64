@@ -717,7 +717,111 @@ static void ow_ctl2_approach_color3(rgb* color)
     ow_ctl2_approach_colors(&sOW2Textures[OW2_MAT_WOOD_RED].color, &target);
 }
 
-extern Gfx mat_triarc_rock_f3d_material_001[];
+extern Gfx mat_triarc_rock_f3d_material_001_layer5[];
+extern Gfx mat_triarc_comb__23_f3d[];
+extern Gfx mat_triarc_plat0_Stoney[];
+extern Gfx mat_triarc_plat0_Grass[];
+extern Gfx mat_triarc_plat1_Stoney[];
+extern Gfx mat_triarc_plat1_Leaves_001[];
+
+static Gfx sOpaSurf[] = {
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+};
+static Gfx sXluSurf[] = {
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
+};
+
+static void ow_ctl2_degrade_color(void* vptr, int off)
+{
+    u8* val = (u8*) segmented_to_virtual(vptr);
+    u8* ptr = val + off*8 + 7;
+    u32* rmCmd = (u32*) (val + 4*8);
+    u32* xluCmd = (u32*) sXluSurf;
+    rmCmd[0] = xluCmd[0];
+    rmCmd[1] = xluCmd[1];
+    if (*ptr > 3)
+    {
+        (*ptr) -= 3;
+    }
+    else
+    {
+        *ptr = 0;
+    }
+}
+
+__attribute__ ((noinline))
+static void ow_ctl2_spawn_and_undegrade(void* vptr, int off, int num, int model, f32 x, f32 z)
+{
+    u8* val = (u8*) segmented_to_virtual(vptr);
+    u8* ptr = val + off*8 + 7;
+    if (!cur_obj_find_object_with_behavior_and_bparam(bhvOWDecor, num))
+    {
+        for (int i = 1; i < 10; i++)
+        {
+            struct Object* decor = spawn_object(o, model + (num == 3 ? (i % 2) : 0), bhvOWDecor);
+            decor->oPosX = sins(0x8000 + i * 6553) * 1000.f * (1.f + random_f32_around_zero(0.1f)) + x;
+            decor->oPosY = 400.f + random_f32_around_zero(500.f);
+            decor->oPosZ = coss(0x8000 + i * 6553) * 1000.f * (1.f + random_f32_around_zero(0.1f)) + z;
+            decor->oBehParams2ndByte = num;
+            
+            decor->oFaceAngleYaw = random_u16();
+            decor->oFaceAngleRoll = random_u16();
+
+            if (1 == num)
+            {
+                obj_scale_xyz(decor, 1.2f, 1.2f, 1.2f);
+            }
+            if (2 == num)
+            {
+                obj_scale_xyz(decor, .2f, .2f, .2f);
+            }
+            if (3 == num)
+            {
+                obj_scale_xyz(decor, .4f, .4f, .4f);
+            }
+        }
+        *ptr = 4;
+    }
+    else
+    {
+        if (*ptr < 240)
+        {
+            *ptr += 15;
+        }
+        else
+        {
+            u32* rmCmd = (u32*) (val + 4*8);
+            u32* opaCmd = (u32*) sOpaSurf;
+            rmCmd[0] = opaCmd[0];
+            rmCmd[1] = opaCmd[1];
+            *ptr = 255;
+        }
+    }
+}
+
+__attribute__ ((noinline))
+static void ow_ctl2_copy_alpha(void* from, int fromOff, void* to, int toOff)
+{
+    u8* vf = (u8*) segmented_to_virtual(from);
+    u8* vt = (u8*) segmented_to_virtual(to);
+    u8 v = vf[8*fromOff + 7];
+    if (v == 255)
+    {
+        u32* rmCmd = (u32*) (vt + 4*8);
+        u32* opaCmd = (u32*) sOpaSurf;
+        rmCmd[0] = opaCmd[0];
+        rmCmd[1] = opaCmd[1];
+    }
+    else
+    {
+        u32* rmCmd = (u32*) (vt + 4*8);
+        u32* xluCmd = (u32*) sXluSurf;
+        rmCmd[0] = xluCmd[0];
+        rmCmd[1] = xluCmd[1];
+    }
+    vt[8*toOff + 7] = vf[8*fromOff + 7];
+}
+
 void ow_ctl2_loop()
 {
     struct Surface* floor = gMarioStates->floor;
@@ -730,19 +834,14 @@ void ow_ctl2_loop()
     {
         o->oOW2CtlLastGoodFloorType = type;
     }
-    
-    {
-        u8* ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001) + 12*8 + 7;
-        if (*ptr > 3)
-        {
-            (*ptr) -= 3;
-        }
-        else
-        {
-            *ptr = 0;
-        }
-    }
 
+    ow_ctl2_degrade_color(mat_triarc_rock_f3d_material_001_layer5, 13);
+    ow_ctl2_degrade_color(mat_triarc_comb__23_f3d, 20);
+    ow_ctl2_degrade_color(mat_triarc_comb__23_f3d, 20);
+    ow_ctl2_degrade_color(mat_triarc_plat0_Stoney, 20);
+    ow_ctl2_degrade_color(mat_triarc_plat0_Grass, 20);
+    ow_ctl2_degrade_color(mat_triarc_plat1_Stoney, 20);
+    ow_ctl2_degrade_color(mat_triarc_plat1_Leaves_001, 13);
     s32 ending = 0;
     if (sOW2Vertices[OW2_VTX_HONEY].enabled && SURFACE_NOISE_DEFAULT == type)
     {
@@ -762,6 +861,8 @@ void ow_ctl2_loop()
             rgb color = { 229, 52, 82, 0x00 };
             ow_ctl2_approach_color3(&color);
         }
+
+        ow_ctl2_spawn_and_undegrade(mat_triarc_comb__23_f3d, 20, 1, MODEL_TRIARC_COMB, -5459.f, -3347.f);
     }
     else if (sOW2Vertices[OW2_VTX_SPACE].enabled && SURFACE_VANISH_CAP_WALLS == type)
     {
@@ -782,29 +883,7 @@ void ow_ctl2_loop()
             ow_ctl2_approach_color3(&color);
         }
 
-        u8* ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001) + 12*8 + 7;
-        if (!cur_obj_find_object_with_behavior_and_bparam(bhvOWDecor, 2))
-        {
-            for (int i = 1; i < 10; i++)
-            {
-                struct Object* decor = spawn_object(o, MODEL_TRIARC_ROCK, bhvOWDecor);
-                decor->oPosX = sins(0x8000 + i * (0x10000 / 10)) * 1000.f * (1.f + random_f32_around_zero(0.05f)) + -4315.f;
-                decor->oPosY = 300.f + random_f32_around_zero(400.f);
-                decor->oPosZ = coss(0x8000 + i * (0x10000 / 10)) * 1000.f * (1.f + random_f32_around_zero(0.05f)) + 2345.f;
-                decor->oBehParams2ndByte = 2;
-                decor->oFaceAngleYaw = random_u16();
-                decor->oFaceAngleRoll = random_u16();
-                obj_scale_xyz(decor, 0.2f, 0.2f, 0.2f);
-            }
-            *ptr = 4;
-        }
-        else
-        {
-            if (*ptr < 240)
-            {
-                *ptr += 15;
-            }
-        }
+        ow_ctl2_spawn_and_undegrade(mat_triarc_rock_f3d_material_001_layer5, 13, 2, MODEL_TRIARC_ROCK, -4315.f, 2345.f);
     }
     else if (sOW2Vertices[OW2_VTX_GRASS].enabled && SURFACE_TTM_VINES == type)
     {
@@ -824,6 +903,11 @@ void ow_ctl2_loop()
             rgb color = { 210, 124, 58, 0x00 };
             ow_ctl2_approach_color3(&color);
         }
+
+        ow_ctl2_spawn_and_undegrade(mat_triarc_plat0_Stoney, 20, 3, MODEL_TRIARC_GRASS1, 5266.f, -2540.f);
+        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat0_Grass, 20);
+        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat1_Stoney, 20);
+        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat1_Leaves_001, 13);
     }
     else if (sOW2Vertices[OW2_VTX_RNG].enabled && SURFACE_SWITCH == type)
     {
@@ -875,9 +959,23 @@ void ow_decor_loop()
     u8* ptr = NULL;
     switch(o->oBehParams2ndByte)
     {
+        case 1:
+        {
+            ptr = (u8*) segmented_to_virtual(mat_triarc_comb__23_f3d) + 20*8 + 7;
+            o->oFaceAngleYaw += 0x39;
+            o->oFaceAngleRoll += 023;
+        }
+        break;
         case 2:
         {
-            ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001) + 12*8 + 7;
+            ptr = (u8*) segmented_to_virtual(mat_triarc_rock_f3d_material_001_layer5) + 13*8 + 7;
+            o->oFaceAngleYaw += 0x39;
+            o->oFaceAngleRoll += 023;
+        }
+        break;
+        case 3:
+        {
+            ptr = (u8*) segmented_to_virtual(mat_triarc_plat0_Stoney) + 20*8 + 7;
             o->oFaceAngleYaw += 0x39;
             o->oFaceAngleRoll += 023;
         }

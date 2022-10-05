@@ -26,3 +26,6 @@
 #include "levels/castle_inside/geo.inc.c"
 
 #include "levels/castle_inside/triarc_rock/geo.inc.c"
+#include "levels/castle_inside/triarc_comb/geo.inc.c"
+#include "levels/castle_inside/triarc_plat1/geo.inc.c"
+#include "levels/castle_inside/triarc_plat0/geo.inc.c"

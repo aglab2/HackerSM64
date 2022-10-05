@@ -100,6 +100,9 @@
 
 // castle
 #define MODEL_TRIARC_ROCK 0x35
+#define MODEL_TRIARC_COMB 0x36
+#define MODEL_TRIARC_GRASS1 0x37
+#define MODEL_TRIARC_GRASS2 0x38
 #define MODEL_CASTLE_BOWSER_TRAP               0x35        // castle_geo_000F18
 #define MODEL_CASTLE_WATER_LEVEL_PILLAR        0x36        // castle_geo_001940
 #define MODEL_CASTLE_CLOCK_MINUTE_HAND         0x37        // castle_geo_001530
@@ -670,6 +673,7 @@
 #define MODEL_SPIDERS_SWITCHBLOCK 0x3D
 #define MODEL_SPIDERS_GATE 0x3E
 #define MODEL_SPIDERS_PA 0x3F
+#define MODEL_SPIDERS_COMB 0x35
 
 //model
 #define MODEL_ROVERT_FLUXPOOL 0x36

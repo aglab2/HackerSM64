@@ -159,4 +159,10 @@ extern const LevelScript level_castle_inside_entry[];
 
 #include "levels/castle_inside/triarc_rock/geo_header.h"
 
+#include "levels/castle_inside/triarc_comb/geo_header.h"
+
+#include "levels/castle_inside/triarc_plat1/geo_header.h"
+
+#include "levels/castle_inside/triarc_plat0/geo_header.h"
+
 #endif

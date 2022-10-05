@@ -41,4 +41,6 @@ extern const LevelScript level_spiders_entry[];
 
 #include "levels/spiders/spiders_cage/geo_header.h"
 
+#include "levels/spiders/spiders_comb/geo_header.h"
+
 #endif

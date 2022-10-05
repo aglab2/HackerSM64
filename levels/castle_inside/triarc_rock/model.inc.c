@@ -1,4 +1,4 @@
-Lights1 triarc_rock_f3d_material_001_lights = gdSPDefLights1(
+Lights1 triarc_rock_f3d_material_001_layer5_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
@@ -335,11 +335,11 @@ Gfx triarc_rock_rock_mesh_layer_5_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-
-Gfx mat_triarc_rock_f3d_material_001[] = {
+Gfx mat_triarc_rock_f3d_material_001_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, triarc_rock__0E000010_i8),
@@ -350,13 +350,14 @@ Gfx mat_triarc_rock_f3d_material_001[] = {
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
 	gsDPSetEnvColor(254, 254, 254, 0),
-	gsSPSetLights1(triarc_rock_f3d_material_001_lights),
+	gsSPSetLights1(triarc_rock_f3d_material_001_layer5_lights),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_triarc_rock_f3d_material_001[] = {
+Gfx mat_revert_triarc_rock_f3d_material_001_layer5[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
 	gsSPEndDisplayList(),
 };
 
@@ -365,9 +366,9 @@ Gfx triarc_rock_rock_mesh_layer_5[] = {
 	gsSPVertex(triarc_rock_rock_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_triarc_rock_f3d_material_001),
+	gsSPDisplayList(mat_triarc_rock_f3d_material_001_layer5),
 	gsSPDisplayList(triarc_rock_rock_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_triarc_rock_f3d_material_001),
+	gsSPDisplayList(mat_revert_triarc_rock_f3d_material_001_layer5),
 	gsSPEndDisplayList(),
 };
 

@@ -48,7 +48,11 @@ void bhv_hidden_star_trigger_loop(void) {
 
     if (gCurrCourseNum == COURSE_SPIDERS)
     {
-        spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        if (0 == (o->oTimer % 5))
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+
+        o->oFaceAngleYaw += 0x139;
+        o->oFaceAngleRoll += 0x38;
     }
 }
 

@@ -89,3 +89,6 @@
 #include "levels/castle_inside/leveldata.inc.c"
 
 #include "levels/castle_inside/triarc_rock/model.inc.c"
+#include "levels/castle_inside/triarc_comb/model.inc.c"
+#include "levels/castle_inside/triarc_plat1/model.inc.c"
+#include "levels/castle_inside/triarc_plat0/model.inc.c"
