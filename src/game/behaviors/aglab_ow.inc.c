@@ -825,7 +825,6 @@ static void ow_ctl2_copy_alpha(void* from, int fromOff, void* to, int toOff)
 
 void ow_ctl2_loop()
 {
-    gMarioStates->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
     struct Surface* floor = gMarioStates->floor;
     int type = floor ? floor->type : 0;
     if (type == SURFACE_WALL_MISC)

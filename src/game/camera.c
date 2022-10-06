@@ -9727,10 +9727,10 @@ struct CutsceneSplinePoint sBDFCreditsSplinePositions[] = {
 };
 
 struct CutsceneSplinePoint sBDFCreditsSplineFocus[] = {
-    { 0, 50, { -170, 6472, -89 } },
-    { 1, 50, { -170, 6072, -89 } },
-    { 3, 50, { -170, 5372, -89 } },
-    { -1, 50, { -170, 4536, -89 } },
+    { 0, 50, { -170, 6072, -89 } },
+    { 1, 50, { -170, 5672, -89 } },
+    { 3, 50, { -170, 4972, -89 } },
+    { -1, 50, { -170, 4136, -89 } },
 };
 
 struct CutsceneSplinePoint sSpidersCreditsSplinePositions[] = {
@@ -9848,6 +9848,8 @@ void cutscene_credits(struct Camera *c) {
             focus = sReonuCreditsSplineFocus;
             break;
         case LEVEL_AREA_INDEX(LEVEL_CASTLE_GROUNDS, 1):
+            if (1 == gCutsceneTimer)
+                seq_player_fade_out(SEQ_PLAYER_LEVEL, 2000);
             pos = sOWCreditsSplinePositions;
             focus = sOWCreditsSplineFocus;
             break;
@@ -9868,6 +9870,8 @@ void cutscene_credits(struct Camera *c) {
             focus = sRovertCreditsSplineFocus;
             break;
         case LEVEL_AREA_INDEX(LEVEL_CASTLE, 1):
+            if (1 == gCutsceneTimer)
+               seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_EHD, 0);
             pos = sCastleInsideCreditsSplinePositions;
             focus = sCastleInsideCreditsSplineFocus;
             break;
