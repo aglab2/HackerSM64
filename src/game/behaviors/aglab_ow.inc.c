@@ -613,28 +613,40 @@ void ow_ctl2_init()
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_SPIDERS));
         sOW2Vertices[OW2_VTX_SPACE].enabled = 0 != starFlags;
+        struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, 0x13);
         if (!sOW2Vertices[OW2_VTX_SPACE].enabled)
         {
-            struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvWarpPipe, 0x13);
             pipe->activeFlags = 0;
+        }
+        else
+        {
+            spawn_object(pipe, 0, bhvSparkler);
         }
     }
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_LUIGIMAN));
         sOW2Vertices[OW2_VTX_GRASS].enabled = 0 != starFlags;
+        struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, 0x12);
         if (!sOW2Vertices[OW2_VTX_GRASS].enabled)
         {
-            struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvWarpPipe, 0x12);
             pipe->activeFlags = 0;
+        }
+        else
+        {
+            spawn_object(pipe, 0, bhvSparkler);
         }
     }
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_ROVERT));
         sOW2Vertices[OW2_VTX_RNG].enabled = 0 != starFlags;
+        struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, 0x11);
         if (!sOW2Vertices[OW2_VTX_RNG].enabled)
         {
-            struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvWarpPipe, 0x11);
             pipe->activeFlags = 0;
+        }
+        else
+        {
+            spawn_object(pipe, 0, bhvSparkler);
         }
     }
     if (save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_RNG)))
