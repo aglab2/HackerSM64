@@ -229,7 +229,10 @@ void fight_platform_ctl_loop()
         // troll death, decelerate, when hit zero kill the lad
         o->oAngleVelYaw *= 0.97f;
         if (o->oFightCtlRoped)
+        {
             o->oFightCtlRoped->activeFlags = 0;
+            o->oFightCtlRoped = NULL;
+        }
 
         if (0 == o->oAngleVelYaw)
         {
@@ -407,6 +410,10 @@ void fight_platform_ctl_loop()
                     c->b = 0x9f;
                     c->a = 0;
                     flame->oFightFlameAlphaSpeed = o->oTimer < 30 ? 5 : 20;
+                    if (o->oTimer > 30)
+                    {
+                        flame->oFightFlameFlags = 1;
+                    }
                 }
                 {
                     struct Object* flame = spawn_object(o, MODEL_FIGHT_FLAME, bhvFightFlame);
@@ -421,6 +428,10 @@ void fight_platform_ctl_loop()
                     c->b = 0xff;
                     c->a = 0;
                     flame->oFightFlameAlphaSpeed = o->oTimer < 30 ? 5 : 20;
+                    if (o->oTimer > 30)
+                    {
+                        flame->oFightFlameFlags = 1;
+                    }
                 }
                 {
                     struct Object* flame = spawn_object(o, MODEL_FIGHT_FLAME, bhvFightFlame);
@@ -435,6 +446,10 @@ void fight_platform_ctl_loop()
                     c->b = 0x2c;
                     c->a = 0;
                     flame->oFightFlameAlphaSpeed = o->oTimer < 30 ? 5 : 20;
+                    if (o->oTimer > 30)
+                    {
+                        flame->oFightFlameFlags = 1;
+                    }
                 }
                 // head parts
                 {
@@ -450,6 +465,10 @@ void fight_platform_ctl_loop()
                     c->b = 0x2b;
                     c->a = 0;
                     flame->oFightFlameAlphaSpeed = o->oTimer < 30 ? 5 : 20;
+                    if (o->oTimer > 30)
+                    {
+                        flame->oFightFlameFlags = 1;
+                    }
                 }
                 {
                     struct Object* flame = spawn_object(o, MODEL_FIGHT_FLAME, bhvFightFlame);
@@ -464,6 +483,10 @@ void fight_platform_ctl_loop()
                     c->b = 0x2b;
                     c->a = 0;
                     flame->oFightFlameAlphaSpeed = o->oTimer < 30 ? 5 : 20;
+                    if (o->oTimer > 30)
+                    {
+                        flame->oFightFlameFlags = 1;
+                    }
                 }
             }
         }
@@ -520,6 +543,7 @@ void fight_platform_ctl_loop()
             cur_obj_become_intangible();
             o->oAction = 9;
             o->oFightCtlRoped->activeFlags = 0;
+            o->oFightCtlRoped = NULL;
             return;
         }
         // o->oFaceAngleRoll = 0x600 * (3 - o->parentObj->oHealth);
@@ -729,6 +753,10 @@ void fight_flame_loop()
     else
     {
         c->a += o->oFightFlameAlphaSpeed;
+    }
+    if (o->oFightFlameFlags)
+    {
+        obj_set_hitbox(o, &sFightBowserFlameHitbox);
     }
     obj_scale(o, o->oFlameScale);
     o->oBounciness = -1.f;
