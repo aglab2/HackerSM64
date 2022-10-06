@@ -640,6 +640,7 @@ void ow_ctl2_init()
     if (save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_RNG)))
     {
         o->oOW2CtlEndingStart = spawn_object(o, MODEL_BOWSER_KEY, bhvBowserKey);
+        o->oOW2CtlEndingStart->oBehParams = 20 << 24;
         o->oOW2CtlEndingStart->oPosX = 5656.f;
         o->oOW2CtlEndingStart->oPosY = 357.f;
         o->oOW2CtlEndingStart->oPosZ = 6727.f;

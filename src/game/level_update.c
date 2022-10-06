@@ -57,7 +57,7 @@ const char *creditsOrganizer[] = { "1ORGANIZED BY", "AGLAB" };
 const char *creditsPJ74[] = { "2PJ74 TEAM", "ARTHURTILLY", "GALAXTIC" };
 const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "GAEL" };
 const char *creditsRovert[] = { "1DEVELOPER", "ROVERT" };
-const char *creditsLuigiman[] = { "1DEVELOPER", "LUIGIMAN" };
+const char *creditsLuigiman[] = { "1DEVELOPER", "LUIGIMAN04" };
 const char *creditsSpiders[] = { "1DEVELOPER", "USERNAMES ARE SPIDERS" };
 
 struct CreditsEntry sCreditsSequence[] = {

@@ -113,6 +113,8 @@ const LevelScript level_castle_grounds_entry[] = {
 		WARP_NODE(0x80, LEVEL_CASTLE, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 168, 872, -5037, 0, 180, 0, (0x41 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 166, 872, -5026, 0, 179, 0, (0x31 << 16), bhvAirborneStarCollectWarp),
+		OBJECT(MODEL_CASTLE_KEY_DOOR, -2311, 3226, 1474, 0, 0, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_CASTLE_KEY_DOOR, -2157, 3226, 1474, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_NONE, 74, 399, -6458, 0, 0, 0, (20 << 24) | (0x21 << 16), bhvWarp),
 		OBJECT(MODEL_THI_WARP_PIPE, 2497, -1057, -2695, 0, 0, 0, (0x29 << 16), bhvWarpPipe),
 		OBJECT(MODEL_THI_WARP_PIPE, 3755, 440, 188, 0, 0, 0, (0x28 << 16) | (1 << 8), bhvWarpPipe),

@@ -1012,13 +1012,12 @@ u32 get_door_save_file_flag(struct Object *door) {
 }
 
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
-    s16 requiredNumStars = (obj->oBehParams >> 24);
 #ifndef UNLOCK_ALL
-    s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    u32 saveFlags = save_file_get_flags();
 #endif
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
 #ifndef UNLOCK_ALL
-        if (numStars >= requiredNumStars) {
+        if (saveFlags & SAVE_FLAG_HAVE_KEY_1) {
 #endif
             u32 actionArg = should_push_or_pull_door(m, obj);
             u32 enterDoorAction;
@@ -1048,26 +1047,10 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
 #ifndef UNLOCK_ALL
         } else if (!sDisplayingDoorText) {
             u32 text = DIALOG_022 << 16;
-
-            switch (requiredNumStars) {
-                case  1: text = DIALOG_024 << 16; break;
-                case  3: text = DIALOG_025 << 16; break;
-                case  8: text = DIALOG_026 << 16; break;
-                case 30: text = DIALOG_027 << 16; break;
-                case 50: text = DIALOG_028 << 16; break;
-                case 70: text = DIALOG_029 << 16; break;
-            }
-
-            text += requiredNumStars - numStars;
-
             sDisplayingDoorText = TRUE;
             return set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, text);
         }
 #endif
-    } else if (m->action == ACT_IDLE && sDisplayingDoorText == TRUE && requiredNumStars == 70) {
-        m->interactObj = obj;
-        m->usedObj     = obj;
-        return set_mario_action(m, ACT_ENTERING_STAR_DOOR, should_push_or_pull_door(m, obj));
     }
 
     return FALSE;
@@ -1612,7 +1595,7 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
         play_sound(SOUND_MENU_STAR_SOUND, m->marioObj->header.gfx.cameraToObject);
         play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
 
-        if (gCurrCourseNum != COURSE_DF && gCurrCourseNum != COURSE_VCM && gCurrCourseNum != COURSE_RNG && capMusic != 0) {
+        if (gCurrCourseNum != COURSE_NONE && gCurrCourseNum != COURSE_DF && gCurrCourseNum != COURSE_VCM && gCurrCourseNum != COURSE_RNG && capMusic != 0) {
             gTatums = 0;
             play_cap_music(capMusic);
         }

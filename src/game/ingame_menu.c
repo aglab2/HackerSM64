@@ -2059,7 +2059,7 @@ void render_course_complete_lvl_info_and_hud_str(void) {
     void **actNameTbl    = segmented_to_virtual(languageTable[gInGameLanguage][2]);
     void **courseNameTbl = segmented_to_virtual(languageTable[gInGameLanguage][1]);
 
-    if (gLastCompletedCourseNum <= COURSE_STAGES_MAX) { // Main courses
+    if (0 != gLastCompletedCourseNum && gLastCompletedCourseNum <= COURSE_STAGES_MAX) { // Main courses
         print_hud_course_complete_coins(118, 103);
         play_star_fanfare_and_flash_hud(HUD_FLASH_STARS, (1 << (gLastCompletedStarNum - 1)));
 
@@ -2102,7 +2102,7 @@ void render_course_complete_lvl_info_and_hud_str(void) {
         play_star_fanfare_and_flash_hud(HUD_FLASH_KEYS, 0);
         return;
     } else { // Castle secret stars
-        name = segmented_to_virtual(actNameTbl[COURSE_STAGES_MAX * 6]);
+        name = gLastCompletedCourseNum == 0 ? segmented_to_virtual(actNameTbl[COURSE_STAGES_MAX * 6 + 1]) : segmented_to_virtual(actNameTbl[COURSE_STAGES_MAX * 6]);
 
         print_hud_course_complete_coins(118, 103);
         play_star_fanfare_and_flash_hud(HUD_FLASH_STARS, 1 << (gLastCompletedStarNum - 1));

@@ -90,7 +90,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_RED_COIN, -2706, 1799, 3240, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -2959, 1761, 82, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1469, 226, 3219, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_NONE, 41, 452, 92, 0, 0, 0, (1 << 24), bhvHiddenRedCoinStar),
+		OBJECT(MODEL_NONE, 41, 452, 92, 0, 0, 0, (1 << 24), bhvBowserCourseRedCoinStar),
 		OBJECT(MODEL_NONE, 41, 454, 86, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
 		MARIO_POS(0x01, 0, 5673, 455, 6728),
 		OBJECT(MODEL_NONE, -5676, 383, -6365, 0, -28, 0, (0xa << 16), bhvSpinAirborneWarp),
