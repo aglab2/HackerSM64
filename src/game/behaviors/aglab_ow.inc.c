@@ -453,7 +453,7 @@ static rgb sOW2OriginalColors[] =
     { 192, 63, 75, 0 },
     { 254, 243, 98, 0 },
     { 254, 151, 94, 0 },
-    { 254, 151, 94, 0 },
+    { 180, 20, 20, 0 },
     { 37, 188, 46, 0 },
     { 254, 195, 108, 0 },
     { 210, 217, 111, 0 },
@@ -825,6 +825,7 @@ static void ow_ctl2_copy_alpha(void* from, int fromOff, void* to, int toOff)
 
 void ow_ctl2_loop()
 {
+    gMarioStates->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
     struct Surface* floor = gMarioStates->floor;
     int type = floor ? floor->type : 0;
     if (type == SURFACE_WALL_MISC)
@@ -843,7 +844,26 @@ void ow_ctl2_loop()
     ow_ctl2_degrade_color(mat_triarc_plat0_Grass, 20);
     ow_ctl2_degrade_color(mat_triarc_plat1_Stoney, 20);
     ow_ctl2_degrade_color(mat_triarc_plat1_Leaves_001, 13);
-    s32 ending = 0;
+    if (o->sOW2CtlEndingTriggered)
+    {
+        sOW2Textures[0].color.a = approach_s32(sOW2Textures[0].color.a, 0, 2, 2);
+        for (unsigned i = 0; i < sizeof(sOW2OriginalColors) / sizeof(*sOW2OriginalColors); i++)
+        {
+            hsv target;
+            rgb2hsv(&sOW2OriginalColors[i], &target);
+            ow_ctl2_approach_colors(&sOW2Textures[i + 1].color, &target);
+        }
+            
+        for (unsigned i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
+        {
+            hsv target;
+            rgb2hsv(&sOW2OriginalColors[OW2_MAT_GRASS - 1], &target);
+            ow_ctl2_approach_colors(&sOW2Vertices[i].color, &target); 
+        }
+        ow2_write_colors();
+        return;
+    }
+
     if (sOW2Vertices[OW2_VTX_HONEY].enabled && SURFACE_NOISE_DEFAULT == type)
     {
         {
@@ -922,20 +942,7 @@ void ow_ctl2_loop()
     }
     else if (o->oOW2CtlEndingStart && SURFACE_HARD == type)
     {
-        ending = 1;
-        for (unsigned i = 0; i < sizeof(sOW2OriginalColors) / sizeof(*sOW2OriginalColors); i++)
-        {
-            hsv target;
-            rgb2hsv(&sOW2OriginalColors[i], &target);
-            ow_ctl2_approach_colors(&sOW2Textures[i + 1].color, &target);
-        }
-            
-        for (unsigned i = 0; i < sizeof(sOW2Vertices) / sizeof(*sOW2Vertices); i++)
-        {
-            hsv target;
-            rgb2hsv(&sOW2OriginalColors[OW2_MAT_GRASS - 1], &target);
-            ow_ctl2_approach_colors(&sOW2Vertices[i].color, &target); 
-        }
+        o->sOW2CtlEndingTriggered = 1;
     }
     else
     {
@@ -951,7 +958,6 @@ void ow_ctl2_loop()
         }
     }
 
-    sOW2Textures[0].color.a = approach_s32(sOW2Textures[0].color.a, ending ? 0 : 90, 2, 2);
     ow2_write_colors();
 }
 

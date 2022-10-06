@@ -44,7 +44,7 @@ static void fight_calm_bowser()
     }
 }
 
-// #define FIGHT_DEBUG
+ #define FIGHT_DEBUG
 extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62];
 static void fight_animate_bg()
 {
@@ -228,7 +228,8 @@ void fight_platform_ctl_loop()
     {
         // troll death, decelerate, when hit zero kill the lad
         o->oAngleVelYaw *= 0.97f;
-        o->oFightCtlRoped->activeFlags = 0;
+        if (o->oFightCtlRoped)
+            o->oFightCtlRoped->activeFlags = 0;
 
         if (0 == o->oAngleVelYaw)
         {

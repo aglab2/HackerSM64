@@ -117,7 +117,9 @@ void rovert_loop(void) {
     //osRTCInit();
 
     if (gCurrLevelNum == LEVEL_ROVERT) {
-        gSequencePlayers[0].tempo = gCurrAreaIndex == 1 ? 7668 : 5968; 
+        if (!gCurrCreditsEntry)
+            gSequencePlayers[0].tempo = gCurrAreaIndex == 1 ? 7668 : 5968; 
+
         if ((gPlayer1Controller->buttonPressed & L_TRIG) 
          && (gMarioState->action != ACT_HOLDING_POLE)
          && (gMarioState->action != ACT_GRAB_POLE_FAST)

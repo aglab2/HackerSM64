@@ -45,7 +45,9 @@ const char *creditsFM[] = { "1MADE FOR", "FANGAME MARATHON 2022" };
 const char *creditsArthur[] = { "2MODELLING", "ARTHURTILLY", "GAEL" };
 const char *creditsMushie[] = { "1MODELLING", "MUSHIE" };
 const char *creditsBroDute[] = { "1MODELLING", "BRODUTE" };
-const char *creditsDesigners[] = { "3DESIGNERS", "LINCRASH", "DNVIC", "ASHLEY" };
+const char *creditsDesigners[] = { "2DESIGNERS", "LINCRASH", "DNVIC", "ASHLEY", "MIDITECHX" };
+const char *creditsRunners1[] = { "2FM RACE CREW", "MUIMANIA", "PHANTON" };
+const char *creditsRunners2[] = { "2FM RACE CREW", "THE REVERSER OF TIME", "SIRSIRSIRSIRSIRSIRSIRSIR" };
 const char *creditsCoding[] = { "2GENERAL CODING", "AGLAB", "THECOZIES" };
 const char *creditsReonu[] = { "1DEVELOPER", "REONU" };
 const char *creditsZenon[] = { "1DEVELOPER", "ZENONX" };
@@ -57,7 +59,7 @@ const char *creditsOrganizer[] = { "1ORGANIZED BY", "AGLAB" };
 const char *creditsPJ74[] = { "2PJ74 TEAM", "ARTHURTILLY", "GALAXTIC" };
 const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "GAEL" };
 const char *creditsRovert[] = { "1DEVELOPER", "ROVERT" };
-const char *creditsLuigiman[] = { "1DEVELOPER", "LUIGIMAN04" };
+const char *creditsLuigiman[] = { "1DEVELOPER", "LUIGIMAN" };
 const char *creditsSpiders[] = { "1DEVELOPER", "USERNAMES ARE SPIDERS" };
 
 struct CreditsEntry sCreditsSequence[] = {
@@ -72,10 +74,12 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_COTMC,          1, 65, 98,   { 70, 2118, 1109 }, creditsZenon },
     { LEVEL_TOTWC,          1, 17, -34,  { 0, 1000, 0 }   , creditsAxo },
     { LEVEL_VCM,            1, 50, 46,   { -4, 261, 109 }    , creditsMushie },
-    { LEVEL_SPIDERS,        1, 50, 47,   { -1433, -2165, -7954 }, creditsSpiders },
-    { LEVEL_LUIGIMAN,        1, 50, 47,   { -1433, -2165, -7954 }, creditsLuigiman },
-    { LEVEL_ROVERT,        1, 50, 47,   { -1433, -2165, -7954 }, creditsRovert },
+    { LEVEL_SPIDERS,        1, 50, 47,   { -5395, 2969, -6125 }, creditsSpiders },
+    { LEVEL_LUIGIMAN,        1, 50, 47,   { 914, 960, 416 }, creditsLuigiman },
+    { LEVEL_ROVERT,        1, 50, 47,   { -4790, 2448, 7315 }, creditsRovert },
     { LEVEL_CASTLE_GROUNDS, 1, 51, 54,   { -53, 4536, -109 }   , creditsCoding },
+    { LEVEL_CASTLE,          1, 50, 47,   { -2657, 2579, 52 }, creditsRunners1 },
+    { LEVEL_THI,          1, 50, 47,   { -1433, -2165, -7954 }, creditsRunners2 },
     { LEVEL_HF,             1, 33, 124,  { -3657, 1358, -90 }    , creditsTesting },
     { LEVEL_PSS,            1, 1, 60,    { 11234, 2319, 1765 }   , creditsMusic },
     { LEVEL_CRASH,          1, 50, 47,   { -1433, -2165, -7954 }, creditsDesigners },

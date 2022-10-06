@@ -1432,5 +1432,6 @@ os16112*/
 #define oOW2CtlRNGColor1 OBJECT_FIELD_S32(0x1D)
 #define oOW2CtlRNGColor2 OBJECT_FIELD_S32(0x1E)
 #define oOW2CtlRNGColor3 OBJECT_FIELD_S32(0x1F)
+#define sOW2CtlEndingTriggered OBJECT_FIELD_S32(0x49)
 
 #endif // OBJECT_FIELDS_H

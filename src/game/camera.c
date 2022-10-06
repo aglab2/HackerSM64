@@ -9733,6 +9733,62 @@ struct CutsceneSplinePoint sBDFCreditsSplineFocus[] = {
     { -1, 50, { -170, 4536, -89 } },
 };
 
+struct CutsceneSplinePoint sSpidersCreditsSplinePositions[] = {
+    { 1, 0, { 6032, 1548, -4069 } },
+    { 2, 0, { 1812, 1276, -9524 } },
+    { 3, 0, { -4354, 2300, -8999 } },
+    { -1, 0, { -5632, 3612, -7926 } }
+};
+
+struct CutsceneSplinePoint sSpidersCreditsSplineFocus[] = {
+    { 0, 50, { 4288, 428, -3444 } },
+    { 1, 50, { 1166, 284, -7777 } },
+    { 3, 50, { -3150, 1596, -6556 } },
+    { -1, 50, { -4914, 3452, -6037 } },
+};
+
+struct CutsceneSplinePoint sLuigimanCreditsSplinePositions[] = {
+    { 1, 0, { 12655, 2841, 3114 } },
+    { 2, 0, { 9450, 3235, -876 } },
+    { 3, 0, { 4084, 3235, -601 } },
+    { -1, 0, { -5822, 4831, 55 } }
+};
+
+struct CutsceneSplinePoint sLuigimanCreditsSplineFocus[] = {
+    { 0, 50, { 10645, 2627, 1725 } },
+    { 1, 50, { 7648, 2547, 364 } },
+    { 3, 50, { 2488, 2259, -456 } },
+    { -1, 50, { -2557, 3987, 1756 } },
+};
+
+struct CutsceneSplinePoint sRovertCreditsSplinePositions[] = {
+    { 1, 0, { 3716, 4842, -14625 } },
+    { 2, 0, { 1474, 3083, -5924 } },
+    { 3, 0, { -863, 1771, -1300 } },
+    { -1, 0, { -4808, 3467, 5791 } }
+};
+
+struct CutsceneSplinePoint sRovertCreditsSplineFocus[] = {
+    { 0, 50, { 5008, 4252, -12304 } },
+    { 1, 50, { 605, 2620, -5722 } },
+    { 3, 50, { -2019, 1580, -113 } },
+    { -1, 50, { -4725, 2864, 10097 } },
+};
+
+struct CutsceneSplinePoint sCastleInsideCreditsSplinePositions[] = {
+    { 1, 0, { 4682, 2630, 5154 } },
+    { 2, 0, { 5161, 3318, -19 } },
+    { 3, 0, { -1410, 3318, -4189 } },
+    { -1, 0, { -4345, 3478, 1033 } }
+};
+
+struct CutsceneSplinePoint sCastleInsideCreditsSplineFocus[] = {
+    { 0, 50, { 3296, 2038, 4096 } },
+    { 1, 50, { 3606, 2486, 146 } },
+    { 3, 50, { -578, 2630, -1885 } },
+    { -1, 50, { -2572, 2630, 68 } },
+};
+
 /**
  * Follow splines through the courses of the game.
  */
@@ -9799,6 +9855,22 @@ void cutscene_credits(struct Camera *c) {
             pos = sBDFCreditsSplinePositions;
             focus = sBDFCreditsSplineFocus;
             break;
+        case LEVEL_AREA_INDEX(LEVEL_SPIDERS, 1):
+            pos = sSpidersCreditsSplinePositions;
+            focus = sSpidersCreditsSplineFocus;
+            break;
+        case LEVEL_AREA_INDEX(LEVEL_LUIGIMAN, 1):
+            pos = sLuigimanCreditsSplinePositions;
+            focus = sLuigimanCreditsSplineFocus;
+            break;
+        case LEVEL_AREA_INDEX(LEVEL_ROVERT, 1):
+            pos = sRovertCreditsSplinePositions;
+            focus = sRovertCreditsSplineFocus;
+            break;
+        case LEVEL_AREA_INDEX(LEVEL_CASTLE, 1):
+            pos = sCastleInsideCreditsSplinePositions;
+            focus = sCastleInsideCreditsSplineFocus;
+            break;
         default:
             pos = sDefaultCreditsSplinePositions;
             focus = sDefaultCreditsSplineFocus;
@@ -9808,7 +9880,7 @@ void cutscene_credits(struct Camera *c) {
     copy_spline_segment(sCurCreditsSplineFocus, focus);
     move_point_along_spline(c->pos, sCurCreditsSplinePos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
     move_point_along_spline(c->focus, sCurCreditsSplineFocus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-    player2_rotate_cam(c, -0x2000, 0x2000, -0x4000, 0x4000);
+    // player2_rotate_cam(c, -0x2000, 0x2000, -0x4000, 0x4000);
 }
 
 /**

@@ -81,6 +81,7 @@ enum SeqId {
     SEQ_ALONE,
     SEQ_PROMISE_R,
     SEQ_GRIEF,
+    SEQ_EHD,
     SEQ_COUNT,
 };
 
