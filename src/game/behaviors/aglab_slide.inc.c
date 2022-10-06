@@ -156,7 +156,7 @@ extern void slide_checkpoint_ctl_loop()
     {
         struct Surface* floor = gMarioStates->floor;
         int type = floor ? floor->type : 0;
-        if (gMarioStates->floorHeight == gMarioStates->pos[1] && type == SURFACE_DEEP_QUICKSAND)
+        if (gMarioStates->floorHeight == gMarioStates->pos[1] && type == SURFACE_DEEP_QUICKSAND && gMarioStates->action != ACT_LEDGE_GRAB)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0, 0, 0);
             o->oAction = 1;
