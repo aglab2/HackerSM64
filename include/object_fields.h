@@ -1434,4 +1434,6 @@ os16112*/
 #define oOW2CtlRNGColor3 OBJECT_FIELD_S32(0x1F)
 #define sOW2CtlEndingTriggered OBJECT_FIELD_S32(0x49)
 
+#define oGolfSphereStar OBJECT_FIELD_OBJ(0x1B)
+
 #endif // OBJECT_FIELDS_H

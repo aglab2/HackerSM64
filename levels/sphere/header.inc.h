@@ -1,0 +1,14 @@
+extern const GeoLayout sphere_area_1_geo[];
+extern const GeoLayout sphere_area_1[];
+extern const Collision sphere_area_1_collision[];
+extern const MacroObject sphere_area_1_macro_objs[];
+extern Lights1 sphere_dl__5_f3d_lights;
+extern u8 sphere_dl__5_ci8[];
+extern u8 sphere_dl__5_ci8_pal_rgba16[];
+extern Vtx sphere_dl_sphere_002_mesh_layer_5_vtx_cull[8];
+extern Vtx sphere_dl_sphere_002_mesh_layer_5_vtx_0[18];
+extern Gfx sphere_dl_sphere_002_mesh_layer_5_tri_0[];
+extern Gfx mat_sphere_dl__5_f3d[];
+extern Gfx mat_revert_sphere_dl__5_f3d[];
+extern Gfx sphere_dl_sphere_002_mesh_layer_5[];
+extern Gfx sphere_dl_material_revert_render_settings[];

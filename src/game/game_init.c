@@ -628,6 +628,7 @@ void adjust_analog_stick(struct Controller *controller) {
 }
 
 extern struct MarioState gMarioStates[1];
+extern u8 gNoInputs;
 static void kill_inputs()
 {
     if (gCurrCourseNum == COURSE_VCM)
@@ -636,6 +637,20 @@ static void kill_inputs()
         {
             gControllers[0].buttonDown    &= ~A_BUTTON;
             gControllers[0].buttonPressed &= ~A_BUTTON;
+        }
+    }
+
+    if (gCurrCourseNum == COURSE_SPHERE)
+    {
+        if (gNoInputs)
+        {
+            gControllers[0].buttonDown    &= (L_TRIG | C_BUTTONS | JPAD_BUTTONS);
+            gControllers[0].buttonPressed &= (L_TRIG | C_BUTTONS | JPAD_BUTTONS);
+            gControllers[0].rawStickX = 0;
+            gControllers[0].rawStickY = 0;
+            gControllers[0].stickX = 0;
+            gControllers[0].stickY = 0;
+            gControllers[0].stickMag = 0;
         }
     }
 }

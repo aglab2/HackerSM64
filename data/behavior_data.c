@@ -7665,3 +7665,19 @@ const BehaviorScript Dan_BhvBird[] = {
     BEGIN_LOOP(),
     END_LOOP(),
 };
+
+extern void bhv_sphere_init();
+extern void bhv_sphere_loop();
+extern const Collision sphere_sphere_collision[];
+const BehaviorScript bhvAglabSphere[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(sphere_sphere_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_FLOAT(oCollisionDistance, 20000),
+    CALL_NATIVE(bhv_sphere_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_sphere_loop),
+    END_LOOP(),
+};

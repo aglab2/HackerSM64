@@ -644,8 +644,8 @@ static void get_optimal_coll_dist(struct Object *obj) {
 /**
  * Transform an object's vertices, reload them, and render the object.
  */
+static TerrainData vertexData[0x2000];
 void load_object_collision_model(void) {
-    TerrainData vertexData[700];
 #if PUPPYPRINT_DEBUG
     OSTime first = osGetTime();
 #endif

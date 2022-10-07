@@ -133,6 +133,7 @@ static f32 random_float_ft(f32 from, f32 to)
 #include "aglab_pie.inc.c"
 #include "aglab_spiders.inc.c"
 #include "aglab_rng.inc.c"
+#include "aglab_sphere.inc.c"
 #include "luigiman.inc.c"
 
 void sparkler_loop()

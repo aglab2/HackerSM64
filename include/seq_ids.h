@@ -83,6 +83,7 @@ enum SeqId {
     SEQ_GRIEF,
     SEQ_EHD,
     SEQ_DAN,
+    SEQ_STT,
     SEQ_COUNT,
 };
 
