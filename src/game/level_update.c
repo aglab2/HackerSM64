@@ -1224,9 +1224,14 @@ s32 play_mode_paused(void) {
             if (gCurrCourseNum == COURSE_DF
              || gCurrCourseNum == COURSE_SA
              || gCurrCourseNum == COURSE_VCUTM
-             || gCurrCourseNum == COURSE_RNG)
+             || gCurrCourseNum == COURSE_RNG
+             || gCurrCourseNum == COURSE_DAN)
             {
                 if (gCurrCourseNum == COURSE_RNG)
+                {
+                    initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x31, WARP_FLAGS_NONE);
+                }
+                if (gCurrCourseNum == COURSE_DAN)
                 {
                     initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x31, WARP_FLAGS_NONE);
                 }

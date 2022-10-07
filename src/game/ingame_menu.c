@@ -153,6 +153,7 @@ static u8 textSpiders[]     = { TEXT_CREATOR_SPIDERS };
 static u8 textLuigiman[]    = { TEXT_CREATOR_LUIGIMAN };
 static u8 textRovert[]      = { TEXT_CREATOR_ROVERT };
 static u8 textAglab[]       = { TEXT_CREATOR_AGLAB };
+static u8 textDan[]         = { TEXT_CREATOR_DAN };
 
 void create_dl_identity_matrix(void) {
     Mtx *matrix = (Mtx *) alloc_display_list(sizeof(Mtx));
@@ -2008,6 +2009,8 @@ static u8* sCourseToCreators[] = {
     [ COURSE_ROVERT ]   = textRovert,
     [ COURSE_RNG ]      = textAglab,
     [ COURSE_SPIDERS ]  = textSpiders,
+
+    [ COURSE_DAN ]  = textDan,
 };
 
 void print_hud_course_complete_coins(s16 x, s16 y) {
