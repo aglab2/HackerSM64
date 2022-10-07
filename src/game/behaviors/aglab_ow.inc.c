@@ -398,6 +398,8 @@ extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18[21];
 extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18_backup[21];
 extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_19[14];
 extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_19_backup[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_20[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_20_backup[14];
 
 struct OW2Texture
 {
@@ -482,6 +484,7 @@ enum
     OW2_VTX_GRASS,
     OW2_VTX_RNG,
     OW2_VTX_DAN,
+    OW2_VTX_SPHERE
 };
 
 static struct OW2Vertices sOW2Vertices[] = 
@@ -491,6 +494,7 @@ static struct OW2Vertices sOW2Vertices[] =
     { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18), { 0, 0, 0, 0 } },
     { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_19), { 0, 0, 0, 0 } },
     { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_1 ), { 0, 0, 0, 0 } },
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_20 ), { 0, 0, 0, 0 } },
 };
 
 static void ow2_reset_colors(void)
@@ -594,7 +598,7 @@ void ow_ctl2_init()
 {
     struct Surface* floor = gMarioStates->floor;
     int type = floor ? floor->type : 0;
-    if (type == SURFACE_VANISH_CAP_WALLS)
+    if (type == SURFACE_VANISH_CAP_WALLS|| type == SURFACE_THI3_WALLKICK)
     {
         seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_ALONE, 0);
     }
@@ -631,7 +635,9 @@ void ow_ctl2_init()
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_SPIDERS));
         sOW2Vertices[OW2_VTX_SPACE].enabled = 0 != starFlags;
+        sOW2Vertices[OW2_VTX_SPHERE].enabled = 0 != starFlags;
         ow_ctl2_pipe_init(sOW2Vertices[OW2_VTX_SPACE].enabled, 0x13);
+        ow_ctl2_pipe_init(sOW2Vertices[OW2_VTX_SPHERE].enabled, 0x15);
     }
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_LUIGIMAN));
@@ -953,6 +959,25 @@ void ow_ctl2_loop()
         }
         {
             rgb color = { 192, 177, 46, 0x00 };
+            ow_ctl2_approach_color3(&color);
+        }
+    }
+    else if (sOW2Vertices[OW2_VTX_SPHERE].enabled && SURFACE_THI3_WALLKICK == type)
+    {
+        {
+            rgb color = { 0xB3, 0x3B, 0x4E, 0x00 };
+            ow_ctl2_approach_color0(&color);
+        }
+        {
+            rgb color = { 106, 195, 124, 0x00 };
+            ow_ctl2_approach_color1(&color);
+        }
+        {
+            rgb color = { 106, 159, 195, 0x00 };
+            ow_ctl2_approach_color2(&color);
+        }
+        {
+            rgb color = { 129, 145, 27, 0x00 };
             ow_ctl2_approach_color3(&color);
         }
     }
