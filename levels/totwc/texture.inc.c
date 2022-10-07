@@ -17,3 +17,8 @@ ALIGNED8 static const Texture totwc_seg7_texture_07001800[] = {
 ALIGNED8 static const Texture totwc_seg7_texture_07002000[] = {
 #include "levels/totwc/3.ia16.inc.c"
 };
+
+// 0x07001600 - 0x07001800
+ALIGNED8 const Texture axo_texture[] = {
+#include "levels/totwc/axo.rgba16.inc.c"
+};

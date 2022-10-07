@@ -388,7 +388,8 @@ u8 gDnvicWasMapShown = 0;
 
 #define DNVIC_TARGET_ALPHA 100
 
-extern void render_dnvic_map();
+extern void render_dnvic_map(u8 a);
+extern void render_axo_frog(u8 a);
 void render_game(void) {
 #if PUPPYPRINT_DEBUG
     OSTime first   = osGetTime();
@@ -445,6 +446,30 @@ void render_game(void) {
             {
                 render_dnvic_map(gDnvicMapAlpha);
                 gDnvicWasMapShown = 1;
+            }
+        }
+        if (gCurrCourseNum == COURSE_TOTWC)
+        {
+            // axo frog
+            if (gDnvicMapAlphaVelocity > 0)
+            {
+                if (gDnvicMapAlpha < 200)
+                    gDnvicMapAlpha += gDnvicMapAlphaVelocity;
+                else
+                    gDnvicMapAlpha = 200;
+            }
+
+            if (gDnvicMapAlphaVelocity < 0)
+            {
+                if (gDnvicMapAlpha > 6)
+                    gDnvicMapAlpha += gDnvicMapAlphaVelocity;
+                else
+                    gDnvicMapAlpha = 0;
+            }
+
+            if (gDnvicMapAlpha)
+            {
+                render_axo_frog(gDnvicMapAlpha);
             }
         }
 

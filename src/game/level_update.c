@@ -1231,7 +1231,7 @@ s32 play_mode_paused(void) {
                 {
                     initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x31, WARP_FLAGS_NONE);
                 }
-                if (gCurrCourseNum == COURSE_DAN)
+                else if (gCurrCourseNum == COURSE_DAN)
                 {
                     initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x34, WARP_FLAGS_NONE);
                 }

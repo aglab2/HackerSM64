@@ -173,3 +173,10 @@ void render_dnvic_map(u8 a)
     print_set_envcolour(255, 255, 255, 2*a);
     render_multi_image(dnvic_mario_texture_07001600, y, x, 32, 64, 0, 0, G_CYC_1CYCLE);
 }
+
+ALIGNED8 const Texture axo_texture[];
+void render_axo_frog(u8 a)
+{
+    print_set_envcolour(255, 255, 255, a);
+    render_multi_image(axo_texture, 13, 80, 96, 128, 1, 1, G_CYC_1CYCLE);
+}

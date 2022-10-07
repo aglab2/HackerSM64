@@ -1410,6 +1410,7 @@ os16112*/
 #define oFightFlameSquareAngle OBJECT_FIELD_S32(0x4A)
 
 #define oOWPartShowCutscene OBJECT_FIELD_S32(0x1F)
+#define oOWPartPressCount OBJECT_FIELD_S32(0x49)
 
 #define oCrashLineAngle OBJECT_FIELD_S32(0x1B)
 // specified by 100 units

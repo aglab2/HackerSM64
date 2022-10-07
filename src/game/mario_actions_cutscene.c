@@ -581,12 +581,16 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
     if (m->actionState == ACT_STATE_STAR_DANCE_CUTSCENE) {
         switch (++m->actionTimer) {
             case 1:
-                spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
+                int model = MODEL_STAR;
+                if (m->action == ACT_STAR_DANCE_EXIT && gCurrLevelNum == LEVEL_CASTLE)
+                    model = MODEL_BOWSER_KEY;
+
+                spawn_object(m->marioObj, model, bhvCelebrationStar);
                 disable_background_sound();
                 if (m->actionArg & 1) {
                     play_course_clear();
                 } else {
-                    if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2) {
+                    if (model == MODEL_BOWSER_KEY) {
                         play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_KEY), 0);
                     } else {
                         play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_STAR), 0);

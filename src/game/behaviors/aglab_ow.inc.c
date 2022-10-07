@@ -269,6 +269,23 @@ void ow_part_loop()
                     obj_translate_xyz_random(sparkle, 1500.0f);
                     obj_scale_random(sparkle, 10.0f, 5.0f);
                 }
+
+                if (gPlayer1Controller->buttonPressed)
+                {
+                    o->oOWPartPressCount++;
+                }
+                if (o->oOWPartPressCount > 2)
+                {
+                    cur_obj_unhide();
+                    for (struct Object** objsIt = (struct Object**) aglabScratch; *objsIt; objsIt++)
+                    {
+                        (*objsIt)->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                    }
+                    gCamera->cutscene = 0;
+                    reset_camera(gCamera);
+                    o->oAction = 1;
+                    return;
+                }
             }
             
             if (o->oTimer == 60)

@@ -118,3 +118,4 @@ lib/libs2d_engine.a
 
 !/levels/rng/*.png
 !/levels/ending/*.png
+!/levels/totwc/axo*.png

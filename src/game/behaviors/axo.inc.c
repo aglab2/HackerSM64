@@ -81,6 +81,7 @@ void bhv_axo_controller_loop(void) {
     }
 }
 
+extern s8 gDnvicMapAlphaVelocity;
 f32 calculate_flipnote_accuracy(void) {
     s16 i, j;
     
@@ -90,6 +91,7 @@ f32 calculate_flipnote_accuracy(void) {
 
     s16 numWrong = 0;
     s16 numRight = 0;
+    s32 numWeird = 0;
 
     for (i = 0; i < 2752; i++) {
         for (j = 0; j < 2; j++) {
@@ -102,6 +104,7 @@ f32 calculate_flipnote_accuracy(void) {
                     u8 safezonePixel = (safezone[i] & selectedNibble) >> shift;
                     if (safezonePixel == 0xF) {
                         numWrong++;
+                        numWeird++;
                     }
                 }
                 else {
@@ -112,6 +115,15 @@ f32 calculate_flipnote_accuracy(void) {
                 numRight++;
             }
         }
+    }
+
+    if (numWeird > 300)
+    {
+        gDnvicMapAlphaVelocity = 5;
+    }
+    else
+    {
+        gDnvicMapAlphaVelocity = -5;
     }
 
     f32 baseAccuracy = 1.0f - (numWrong / 1190.0f);
