@@ -2410,7 +2410,7 @@ void play_course_clear(void) {
  */
 void play_peachs_jingle(void) {
     //--
-    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_LEVEL_GRASS, 0);
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_DAN, 0);
 }
 
 /**
