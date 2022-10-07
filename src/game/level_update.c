@@ -135,7 +135,9 @@ u32 pressed_pause(void) {
     u32 intangible = (gMarioState->action & ACT_FLAG_INTANGIBLE) != 0;
 
     if (!intangible && !dialogActive && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE
-        && (gPlayer1Controller->buttonPressed & START_BUTTON)) {
+        && (gPlayer1Controller->buttonPressed & START_BUTTON)
+        //--
+        && (gCamera->cutscene != CUTSCENE_SSL_PYRAMID_EXPLODE)) {
         return TRUE;
     }
 
@@ -1074,7 +1076,8 @@ void update_hud_values(void) {
 #ifdef BREATH_METER
         s16 numBreathWedges = gMarioState->breath > 0 ? gMarioState->breath >> 8 : 0;
 #endif
-        COND_BIT((gCurrCourseNum >= COURSE_MIN), gHudDisplay.flags, HUD_DISPLAY_FLAG_COIN_COUNT);
+        COND_BIT((//--
+            (gCurrCourseNum >= COURSE_MIN) && (gCurrCourseNum != COURSE_DAN)), gHudDisplay.flags, HUD_DISPLAY_FLAG_COIN_COUNT);
 
         if (gHudDisplay.coins < gMarioState->numCoins) {
             if (gGlobalTimer & 1) {
@@ -1521,6 +1524,7 @@ s32 lvl_set_current_level(UNUSED s16 initOrUpdate, s32 levelNum) {
 		
 	if (gCurrLevelNum == LEVEL_VCUTM) return 0;
 	if (gCurrLevelNum == LEVEL_COTMC) return 0;
+	if (gCurrLevelNum == LEVEL_DAN) return 0;
 
     if (gCurrDemoInput != NULL || gCurrCreditsEntry != NULL || gCurrCourseNum == COURSE_NONE) {
         return FALSE;

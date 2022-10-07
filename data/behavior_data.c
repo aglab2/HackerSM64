@@ -7646,3 +7646,22 @@ const BehaviorScript bhvLuigimanAirlockDoor[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+//--Dan
+const BehaviorScript Dan_BhvBP[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(Dan_bhv_bp_loop),
+    END_LOOP(),
+};
+
+extern const struct Animation *const dan_bird_anims[];
+const BehaviorScript Dan_BhvBird[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MOVE_XZ_USING_FVEL)),
+    LOAD_ANIMATIONS(oAnimations, dan_bird_anims),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+    END_LOOP(),
+};

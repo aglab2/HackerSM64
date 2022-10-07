@@ -569,6 +569,8 @@ Gfx *geo_switch_flipnote_frog_exclamation_mark(s32 callContext, struct GraphNode
 void bhv_dnvic_color_reset_init(void);
 void bhv_dnvic_color_reset_loop(void);
 
+void Dan_bhv_bp_loop(void);
+
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser

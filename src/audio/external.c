@@ -2409,12 +2409,8 @@ void play_course_clear(void) {
  * Called from threads: thread5_game_loop
  */
 void play_peachs_jingle(void) {
-    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_PEACH_MESSAGE, 0);
-    sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 0;
-#if defined(VERSION_EU) || defined(VERSION_SH)
-    D_EU_80300558 = 2;
-#endif
-    begin_background_music_fade(50);
+    //--
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_LEVEL_GRASS, 0);
 }
 
 /**

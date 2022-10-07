@@ -1241,8 +1241,21 @@ static s32 manage_sticky_wall(struct MarioState *m){
 	return FALSE;
 }
 
+extern f32 find_floor(f32 xPos, f32 yPos, f32 zPos, struct Surface **pfloor);
 extern f32 gAglabThrowSpeed;
 s32 act_backward_air_kb(struct MarioState *m) {
+        //--
+    if (gCamera->cutscene == CUTSCENE_SSL_PYRAMID_EXPLODE) {
+        gAglabThrowSpeed = 0;
+        if (m->actionTimer++ > ((8 * 30) + 10)) {
+            struct Surface *floor;
+            f32 y = find_floor(m->marioObj->header.gfx.pos[0], m->marioObj->header.gfx.pos[1], m->marioObj->header.gfx.pos[2], &floor);
+            m->floor = floor;
+            m->floorHeight = y;
+        }
+        return FALSE;
+    }
+
     if (check_wall_kick(m)) {
         return TRUE;
     }else if(m->prevAction == ACT_AIR_HIT_WALL && m->actionArg == 3){

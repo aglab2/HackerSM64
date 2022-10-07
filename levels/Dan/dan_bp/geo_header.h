@@ -1,0 +1,16 @@
+extern const GeoLayout dan_bp_geo[];
+extern Lights1 dan_bp_bp_f3d_lights;
+extern u8 dan_bp_bp_rgba16[];
+extern Vtx dan_bp_MainBP_001_mesh_layer_1_vtx_cull[8];
+extern Vtx dan_bp_MainBP_001_mesh_layer_1_vtx_0[60];
+extern Gfx dan_bp_MainBP_001_mesh_layer_1_tri_0[];
+extern Vtx dan_bp_MainBP_001_mesh_layer_5_vtx_cull[8];
+extern Vtx dan_bp_MainBP_001_mesh_layer_5_vtx_0[47];
+extern Gfx dan_bp_MainBP_001_mesh_layer_5_tri_0[];
+extern Gfx mat_dan_bp_bp_f3d[];
+extern Gfx mat_revert_dan_bp_bp_f3d[];
+extern Gfx mat_dan_bp_shadow_f3d[];
+extern Gfx mat_revert_dan_bp_shadow_f3d[];
+extern Gfx dan_bp_MainBP_001_mesh_layer_1[];
+extern Gfx dan_bp_MainBP_001_mesh_layer_5[];
+extern Gfx dan_bp_material_revert_render_settings[];

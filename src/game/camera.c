@@ -2950,6 +2950,13 @@ void update_lakitu(struct Camera *c) {
     clamp_pitch(gLakituState.pos, gLakituState.focus, 0x3E00, -0x3E00);
     gLakituState.mode = c->mode;
     gLakituState.defMode = c->defMode;
+
+    //--
+    if ((gCurrLevelNum == LEVEL_DAN) && (c->cutscene == 0)) {
+        gMarioObject->collidedObjs[1]->oPosX = gCamera->pos[0];
+        gMarioObject->collidedObjs[1]->oPosY = gCamera->pos[1];
+        gMarioObject->collidedObjs[1]->oPosZ = gCamera->pos[2];
+    }
 }
 
 
@@ -6206,6 +6213,9 @@ struct CameraTrigger sCamRng[] = {
 struct CameraTrigger sCamLuigiman[] = {
 	NULL_TRIGGER
 };
+struct CameraTrigger sCamDan[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"
@@ -6832,7 +6842,361 @@ static UNUSED void unused_cutscene_mario_dialog_looking_down(UNUSED struct Camer
  * Cause Mario to enter the normal dialog state.
  */
 static void cutscene_mario_dialog(UNUSED struct Camera *c) {
-    gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_FRONT);
+    //--**Notes: birds, Mario's blinking, 
+    //--
+    static Vec3f sDMPos;
+    static Vec3s sDMAng;
+    static s8 action = 0;
+    static s16 timer = 0;
+    static u8 sAnim = MARIO_ANIM_CREDITS_START_WALK_LOOK_UP;
+    static struct Object *slip = NULL;
+
+    switch (action) {
+    case 0:
+        sDMPos[0] = gMarioState->pos[0];
+        sDMPos[1] = gMarioState->pos[1];
+        sDMPos[2] = gMarioState->pos[2];
+        sDMAng[0] = gMarioState->faceAngle[0];
+        sDMAng[1] = gMarioState->faceAngle[1];
+        sDMAng[2] = gMarioState->faceAngle[2];
+        set_mario_action(gMarioState, ACT_BACKWARD_AIR_KB, 0);
+        set_mario_animation(gMarioState, MARIO_ANIM_CREDITS_START_WALK_LOOK_UP);
+        action++;
+
+
+    case 1://Beginning
+        //O
+        //-sDMPos[1] += 0.3f;
+        sDMPos[0] -= 1.f;
+        //C
+        if (timer == 0) {
+            Vec3f pos = { 0, 0, 0 };
+            vec3f_copy(pos, sDMPos);
+            //-pos[0] -= 50.f;
+            pos[1] += 50.f;
+            pos[2] += 300.f;
+
+            //-approach_vec3f_asymptotic(c->pos, pos, 0.1f, 0.1f, 0.1f);
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, sDMPos);
+            //-c->focus[0] -= 100.f;
+            c->focus[1] += 50.f;
+
+            slip = spawn_object(gMarioObject, MODEL_LEVEL_GEOMETRY_04, bhvStaticObject);
+            slip->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+            slip->header.gfx.scale[0] = 0.0f;
+            slip->header.gfx.scale[1] = 0.0f;
+            slip->header.gfx.scale[2] = 0.0f;
+            vec3f_copy(&slip->oPosX, sDMPos);
+            slip->oPosX -= 20.f;
+            slip->oFaceAngleRoll = DEGREES(25);
+            //-slip->oFaceAngleYaw += DEGREES(180);
+        }
+        slip->oPosX -= 1.f;
+        slip->oPosY += 0.23f;
+        slip->header.gfx.scale[0] += 0.0014f;
+        slip->header.gfx.scale[1] += 0.0017f;
+
+        c->pos[0] -= 1.f;
+        c->focus[0] -= 1.f;
+        if (timer > ((5 * 30) - 1)) {
+            set_mario_animation(gMarioState, MARIO_ANIM_CREDITS_START_WALK_LOOK_UP); }
+        if (timer > (5 * 30)) {
+            slip->activeFlags = 0;
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 2://shot 2
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        sDMAng[0] -= DEGREES(1);
+        sDMPos[1] += 1.f;
+        sDMPos[0] -= 2.f;
+        //C
+        if (timer == 0) {
+            sAnim = MARIO_ANIM_CREDITS_LOOK_BACK_THEN_RUN;
+
+            sDMPos[1] += 50.f;
+            Vec3f pos = { 0, 0, 0 };
+            vec3f_copy(pos, sDMPos);
+            pos[0] -= 300.f;
+            pos[1] += 500.f;
+            pos[2] -= 500.f;
+
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, sDMPos);
+        }
+        if (timer > (3 * 30)) {
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 3://shot 3
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        sDMAng[0] -= DEGREES(1);
+        sDMPos[1] += 1.5f;
+        sDMPos[0] -= 3.f;
+        //C
+        if (timer == 0) {
+            Vec3f pos = { 0, 0, 0 };
+            vec3f_copy(pos, sDMPos);
+            pos[0] -= 300.f;
+            pos[1] += 500.f;
+            pos[2] += 500.f;
+
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, sDMPos);
+        }
+        if (timer > (2 * 30)) {
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 4://shot 4 (under)
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        sDMAng[0] -= DEGREES(1);
+        sDMPos[1] += 4.f;
+        sDMPos[0] -= 5.f;
+        //C
+        if (timer == 0) {
+            Vec3f pos = { 0, 0, 0 };
+            vec3f_copy(pos, sDMPos);
+            pos[0] -= 400.f;
+            pos[1] -= 600.f;
+
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, sDMPos);
+            c->focus[0] -= 300.f;
+        }
+        if (timer > (4 * 30)) {
+            timer = -1;
+            Vec3f v = { 0, 0, 0 };
+            vec3f_copy(v, sDMPos);
+            v[0] -= 1800.f;
+            v[1] += 1800.f;
+
+            struct Object *bird = spawn_object_abs_with_rot(gMarioObject, 0, MODEL_LEVEL_GEOMETRY_06, Dan_BhvBird, v[0], v[1] - 1000.f, v[2], 0, 0, 0);
+            bird->oFaceAngleYaw = -DEGREES(60);
+            bird->oForwardVel = 5.f;
+            //
+            bird = spawn_object_abs_with_rot(gMarioObject, 0, MODEL_LEVEL_GEOMETRY_06, Dan_BhvBird, v[0] - 2000.f, v[1] + 2000.f, v[2] - 5000.f, 0, 0, 0);
+            //-bird->header.gfx.animInfo.animFrame = 80;
+            bird->oFaceAngleYaw = -DEGREES(60);
+            bird->oForwardVel = 5.f;
+
+            action++;
+        }
+        break;
+
+
+    case 5://shot 5 (birds)
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        sDMAng[0] -= 260;
+        sDMPos[1] += 6.f;
+        sDMPos[0] -= 6.f;
+        //C
+        if (timer == 0) {
+            Vec3f pos = { 0, 0, 0 };
+            vec3f_copy(pos, sDMPos);
+            pos[1] += 600.f;
+            pos[2] += 1700.f;
+
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, sDMPos);
+            c->focus[0] -= 1800.f;
+            c->focus[1] += 1800.f;
+        }
+        if (timer > (11 * 30)) {
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 6://spinning
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        if (timer == 0) {
+            sDMAng[0] = -0x3FFF; }
+        sDMAng[0] -= DEGREES(1);
+        sDMPos[1] += 10.f;
+        sDMPos[0] -= 10.f;
+        //C
+        Vec3f pos = { 0, 0, 0 };
+        vec3f_copy(pos, sDMPos);
+        s16 angle = (sDMAng[0] + 0x8000);
+        pos[1] += (sins(angle) * 1500.f);
+        pos[0] += (coss(angle) * 1500.f);
+
+        vec3f_copy(c->pos, pos);
+        vec3f_copy(c->focus, sDMPos);
+        if (timer > ((4 * 30) + 15)) {
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 7://grand
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        sDMAng[0] -= 120;
+        sDMPos[1] += 3.f;
+        sDMPos[0] -= 25.5f;
+        //C
+        if (timer == 0) {
+            vec3f_copy(c->pos, sDMPos);
+            vec3f_copy(c->focus, sDMPos);
+            c->pos[0] += 1900.f;
+            c->pos[2] += 1200.f;
+            c->focus[0] -= 700.f;
+        }
+        c->pos[0] -= 8.f;
+        c->pos[1] += 8.f;
+        c->focus[0] -= 34.5f;
+        c->focus[1] += 8.f;
+        if (timer > (6 * 30)) {
+            timer = -1;
+
+            Vec3f v = { 0, 0, 0 };
+            vec3f_copy(v, sDMPos);
+            v[0] -= 120;
+            v[1] += 3.f;
+            v[0] -= 25.5f;
+            v[0] -= 2000.f;
+            v[1] -= 500.f;
+            v[2] -= 800.f;
+            gMarioObject->collidedObjs[1]->oPosX = v[0];
+            gMarioObject->collidedObjs[1]->oPosY = v[1];
+            gMarioObject->collidedObjs[1]->oPosZ = v[2];
+
+            action++;
+        }
+        break;
+
+
+    case 8://front pan
+        //O
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        sDMAng[0] -= 180;
+        sDMPos[1] += 3.f;
+        sDMPos[0] -= 25.5f;
+        //C
+        if (timer == 0) {
+            sDMAng[1] -= DEGREES(30);
+
+            vec3f_copy(c->pos, sDMPos);
+            vec3f_copy(c->focus, sDMPos);
+            c->pos[0] -= 900.f;
+            c->pos[1] += 400.f;
+            c->pos[2] -= 440.f;
+        }
+        c->pos[0] -= 25.5f;
+        c->pos[1] += 8.f;
+        c->pos[2] += 6.f;
+        c->focus[0] -= 25.5f;
+        c->focus[1] += 8.f;
+        if (timer > 65) {
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 9://closer pan
+        //O
+        sDMAng[0] -= 120;
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        //C
+        if (timer == 0) {
+            sDMAng[1] += DEGREES(30);
+
+            vec3f_copy(c->pos, sDMPos);
+            vec3f_copy(c->focus, sDMPos);
+            c->focus[0] += 80.f;
+            c->pos[0] += 30.f;
+            c->pos[1] += 180.f;
+            c->pos[2] += 40.f;
+        }
+        c->pos[2] -= 1.f;
+        if (timer > 75) {
+            timer = -1;
+            gMarioObject->collidedObjs[1]->oPosX -= 5000.f;
+            action++;
+        }
+        break;
+
+
+    case 10://far shot
+        //O
+        sDMAng[0] -= 180;
+        sDMPos[0] -= 20.f;
+        sDMPos[1] -= 2.f;
+        gMarioState->marioBodyState->handState = MARIO_HAND_OPEN;
+        //C
+        if (timer == 0) {
+            sDMPos[0] -= 5000.f;
+            sDMPos[2] -= 5000.f;
+            vec3f_copy(c->pos, sDMPos);
+            vec3f_copy(c->focus, sDMPos);
+            c->focus[0] -= 2000.f;
+            c->pos[0]   -= 2000.f;
+            c->focus[1] += 200.f;
+            c->pos[1]   += 200.f;
+            c->pos[2]   += 12000.f;
+        }
+        c->pos[0] -= 2.f;
+        c->focus[0] -= 2.f;
+        if (timer > (10 * 30)) {
+            timer = -1;
+            action++;
+        }
+        break;
+
+
+    case 11://first person
+        //C
+        if (timer == 0) {
+            Vec3f v = { -21400, 1200, -1300 };
+
+            vec3f_copy(c->pos, v);
+            c->pos[0] += 3600.f;
+            c->pos[1] += 1850.f;
+            vec3f_copy(c->focus, c->pos);
+            c->focus[0] -= 1000.f;
+        }
+        c->pos[0] -= 50.f;
+        c->pos[1] -= 25.f;
+        c->focus[0] -= 50.f;
+        c->focus[1] -= 30.f;
+        if (timer > 60) {
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 1, 0xFF, 0xFF, 0xFF);
+            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0xFF, 0xFF, 0xFF);
+            gCutsceneTimer = CUTSCENE_STOP;
+            c->cutscene = 0;
+            gMarioState->pos[0] = -21400;
+            gMarioState->pos[1] = 1200;
+            gMarioState->pos[2] = -1300;
+        }
+        break;
+    }
+
+    set_mario_animation(gMarioState, sAnim);
+    gMarioState->marioBodyState->eyeState = MARIO_EYES_OPEN;
+    timer++;
+
+    vec3f_copy(gMarioObject->header.gfx.pos, sDMPos);
+    vec3s_copy(gMarioObject->header.gfx.angle, sDMAng);
 }
 
 /// Unused SSL cutscene?
@@ -10582,8 +10946,6 @@ struct Cutscene sCutsceneEnterPyramidTop[] = {
  */
 struct Cutscene sCutscenePyramidTopExplode[] = {
     { cutscene_mario_dialog, CUTSCENE_LOOP },
-    { cutscene_pyramid_top_explode, 150 },
-    { cutscene_pyramid_top_explode_end, 0 }
 };
 
 /**

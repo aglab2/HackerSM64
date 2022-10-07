@@ -663,6 +663,7 @@ extern const BehaviorScript bhvLuigimanMovingPlat1[];
 extern const BehaviorScript bhvLuigimanPurpleSwitch[];
 extern const BehaviorScript bhvLuigimanBulletBill[];
 extern const BehaviorScript bhvLuigimanAirlockMain[];
-
+extern const BehaviorScript Dan_BhvBP[];
+extern const BehaviorScript Dan_BhvBird[];
 
 #endif // BEHAVIOR_DATA_H
