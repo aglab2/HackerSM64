@@ -388,14 +388,16 @@ extern Gfx mat_castle_inside_dl_PathOutside_f3d_layer1[]; // +14 / 195, 185, 77
 extern Gfx mat_castle_inside_dl_Leaves_f3d_layer1[]; // +14 / 60, 161, 34
 extern Gfx mat_castle_inside_dl_mat_layer1[]; // +14 / 0,0,0
 
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_15[27];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_15_backup[27];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16[16];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16_backup[16];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17[21];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17_backup[21];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18[14];
-extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18_backup[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_1[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_1_backup[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16[27];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16_backup[27];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17[16];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17_backup[16];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18[21];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18_backup[21];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_19[14];
+extern Vtx castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_19_backup[14];
 
 struct OW2Texture
 {
@@ -479,14 +481,16 @@ enum
     OW2_VTX_SPACE,
     OW2_VTX_GRASS,
     OW2_VTX_RNG,
+    OW2_VTX_DAN,
 };
 
 static struct OW2Vertices sOW2Vertices[] = 
 {
-    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_15), { 0, 0, 0, 0 } },
     { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_16), { 0, 0, 0, 0 } },
     { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_17), { 0, 0, 0, 0 } },
     { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_18), { 0, 0, 0, 0 } },
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_19), { 0, 0, 0, 0 } },
+    { OW2_VERTICES_ENTRY(castle_inside_dl_Triarc_Bridge_mesh_layer_1_vtx_1 ), { 0, 0, 0, 0 } },
 };
 
 static void ow2_reset_colors(void)
@@ -572,6 +576,20 @@ extern Gfx mat_mario_red[];
 extern Gfx mat_mario_logo[];
 extern Lights1 mario_red_lights;
 extern void rovert_init(void);
+
+static void ow_ctl2_pipe_init(int enabled, int bparam)
+{
+    struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, bparam);
+    if (!enabled)
+    {
+        pipe->activeFlags = 0;
+    }
+    else
+    {
+        spawn_object(pipe, 0, bhvSparkler);
+    }
+}
+
 void ow_ctl2_init()
 {
     struct Surface* floor = gMarioStates->floor;
@@ -580,7 +598,7 @@ void ow_ctl2_init()
     {
         seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_ALONE, 0);
     }
-    if (type == SURFACE_TTM_VINES)
+    if (type == SURFACE_TTM_VINES || type == SURFACE_HARD_NOT_SLIPPERY)
     {
         seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_PROMISE_R, 0);
     }
@@ -613,41 +631,19 @@ void ow_ctl2_init()
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_SPIDERS));
         sOW2Vertices[OW2_VTX_SPACE].enabled = 0 != starFlags;
-        struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, 0x13);
-        if (!sOW2Vertices[OW2_VTX_SPACE].enabled)
-        {
-            pipe->activeFlags = 0;
-        }
-        else
-        {
-            spawn_object(pipe, 0, bhvSparkler);
-        }
+        ow_ctl2_pipe_init(sOW2Vertices[OW2_VTX_SPACE].enabled, 0x13);
     }
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_LUIGIMAN));
         sOW2Vertices[OW2_VTX_GRASS].enabled = 0 != starFlags;
-        struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, 0x12);
-        if (!sOW2Vertices[OW2_VTX_GRASS].enabled)
-        {
-            pipe->activeFlags = 0;
-        }
-        else
-        {
-            spawn_object(pipe, 0, bhvSparkler);
-        }
+        sOW2Vertices[OW2_VTX_DAN]  .enabled = 0 != starFlags;
+        ow_ctl2_pipe_init(sOW2Vertices[OW2_VTX_GRASS].enabled, 0x12);
+        ow_ctl2_pipe_init(sOW2Vertices[OW2_VTX_DAN  ].enabled, 0x14);
     }
     {
         u8 starFlags = save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_ROVERT));
         sOW2Vertices[OW2_VTX_RNG].enabled = 0 != starFlags;
-        struct Object* pipe = cur_obj_find_object_with_behavior_and_bparam(bhvFadingWarp, 0x11);
-        if (!sOW2Vertices[OW2_VTX_RNG].enabled)
-        {
-            pipe->activeFlags = 0;
-        }
-        else
-        {
-            spawn_object(pipe, 0, bhvSparkler);
-        }
+        ow_ctl2_pipe_init(sOW2Vertices[OW2_VTX_RNG].enabled, 0x11);
     }
     if (save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_RNG)))
     {
@@ -933,6 +929,30 @@ void ow_ctl2_loop()
         }
         {
             rgb color = { 210, 124, 58, 0x00 };
+            ow_ctl2_approach_color3(&color);
+        }
+
+        ow_ctl2_spawn_and_undegrade(mat_triarc_plat0_Stoney, 20, 3, MODEL_TRIARC_GRASS1, 5266.f, -2540.f);
+        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat0_Grass, 20);
+        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat1_Stoney, 20);
+        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat1_Leaves_001, 13);
+    }
+    else if (sOW2Vertices[OW2_VTX_DAN].enabled && SURFACE_HARD_NOT_SLIPPERY == type)
+    {
+        {
+            rgb color = { 0xFF, 0xFC, 0x8A, 0x00 };
+            ow_ctl2_approach_color0(&color);
+        }
+        {
+            rgb color = { 100, 201, 134, 0x00 };
+            ow_ctl2_approach_color1(&color);
+        }
+        {
+            rgb color = { 46, 75, 192, 0x00 };
+            ow_ctl2_approach_color2(&color);
+        }
+        {
+            rgb color = { 192, 177, 46, 0x00 };
             ow_ctl2_approach_color3(&color);
         }
 

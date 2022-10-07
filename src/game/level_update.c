@@ -1233,7 +1233,7 @@ s32 play_mode_paused(void) {
                 }
                 if (gCurrCourseNum == COURSE_DAN)
                 {
-                    initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x31, WARP_FLAGS_NONE);
+                    initiate_warp(LEVEL_CASTLE, EXIT_COURSE_AREA, 0x34, WARP_FLAGS_NONE);
                 }
                 else
                 {

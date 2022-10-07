@@ -9,7 +9,7 @@ const Collision spiders_bee_boardos_collision[] = {
 	COL_VERTEX(-121, 86, 961),
 	COL_VERTEX(121, 86, -848),
 	COL_VERTEX(-121, 86, -848),
-	COL_TRI_INIT(SURFACE_DEFAULT, 12),
+	COL_TRI_INIT(SURFACE_VANISH_CAP_WALLS, 12),
 	COL_TRI(0, 1, 2),
 	COL_TRI(0, 2, 3),
 	COL_TRI(1, 0, 4),
