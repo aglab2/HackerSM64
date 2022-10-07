@@ -955,11 +955,6 @@ void ow_ctl2_loop()
             rgb color = { 192, 177, 46, 0x00 };
             ow_ctl2_approach_color3(&color);
         }
-
-        ow_ctl2_spawn_and_undegrade(mat_triarc_plat0_Stoney, 20, 3, MODEL_TRIARC_GRASS1, 5266.f, -2540.f);
-        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat0_Grass, 20);
-        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat1_Stoney, 20);
-        ow_ctl2_copy_alpha(mat_triarc_plat0_Stoney, 20, mat_triarc_plat1_Leaves_001, 13);
     }
     else if (sOW2Vertices[OW2_VTX_RNG].enabled && SURFACE_SWITCH == type)
     {
