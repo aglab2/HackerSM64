@@ -10823,7 +10823,7 @@ Gfx mat_totwc_dl_Desk_layer1[] = {
 	gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, 1, COMBINED, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPSetCycleType(G_CYC_2CYCLE),
-	// gsDPSetRenderMode(G_RM_FOG_PRIM_A, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, totwc_dl_desk_i8),
