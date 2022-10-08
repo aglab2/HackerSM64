@@ -91,7 +91,8 @@ void bhv_sphere_loop()
             gMarioStates->pos[2] = 0.f;
             gMarioStates->faceAngle[1] = 0.f;
         }
-        print_text_centered(160, 20, "L TO TRY");
+        if (!gCurrCreditsEntry)
+            print_text_centered(160, 20, "L TO TRY");
     }
     else if (2 == o->oAction)
     {

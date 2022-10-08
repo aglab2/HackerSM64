@@ -41,7 +41,7 @@
 
 #include "color.h"
 
-const char *creditsFM[] = { "1MADE FOR", "FANGAME MARATHON 2022" };
+const char *creditsFM[] = { "1MADE FOR", "FANGAME MARATHON" };
 const char *creditsArthur[] = { "2MODELLING", "ARTHURTILLY", "GAEL" };
 const char *creditsMushie[] = { "1MODELLING", "MUSHIE" };
 const char *creditsBroDute[] = { "1MODELLING", "BRODUTE" };
@@ -59,7 +59,9 @@ const char *creditsOrganizer[] = { "1ORGANIZED BY", "AGLAB" };
 const char *creditsPJ74[] = { "2PJ74 TEAM", "ARTHURTILLY", "GALAXTIC" };
 const char *creditsMusic[] = { "3MUSIC", "AGLAB", "SCUTTLEBUG RAISER", "GAEL" };
 const char *creditsRovert[] = { "1DEVELOPER", "ROVERT" };
+const char *creditsDan[] = { "1DEVELOPER", "DAN GPTV" };
 const char *creditsLuigiman[] = { "1DEVELOPER", "LUIGIMAN" };
+const char *creditsSpec[] = { "2SPECIAL THANKS", "WOLSK", "ANDREWSM64" };
 const char *creditsSpiders[] = { "1DEVELOPER", "USERNAMES ARE SPIDERS" };
 
 struct CreditsEntry sCreditsSequence[] = {
@@ -80,6 +82,8 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 1, 51, 54,   { -53, 4536, -109 }   , creditsCoding },
     { LEVEL_CASTLE,          1, 50, 47,   { -2657, 2579, 52 }, creditsRunners1 },
     { LEVEL_THI,          1, 50, 47,   { -1433, -2165, -7954 }, creditsRunners2 },
+    { LEVEL_DAN,         1, 1, 60,    { 4685, 201, -1457 }   , creditsDan },
+    { LEVEL_SPHERE,         1, 1, 60,    { 0, 506, 5160 }   , creditsSpec },
     { LEVEL_HF,             1, 33, 124,  { -3657, 1358, -90 }    , creditsTesting },
     { LEVEL_PSS,            1, 1, 60,    { 11234, 2319, 1765 }   , creditsMusic },
     { LEVEL_CRASH,          1, 50, 47,   { -1433, -2165, -7954 }, creditsDesigners },

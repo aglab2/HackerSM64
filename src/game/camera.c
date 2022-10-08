@@ -10156,6 +10156,34 @@ struct CutsceneSplinePoint sCastleInsideCreditsSplineFocus[] = {
     { -1, 50, { -2572, 2630, 68 } },
 };
 
+struct CutsceneSplinePoint sSphereCreditsSplinePositions[] = {
+    { 1, 0, { 5000, 2000, 0 } },
+    { 2, 0, { 0, 2000, -5000 } },
+    { 3, 0, { -5000, 2000, 0 } },
+    { -1, 0, { 0, 2000, 5000 } }
+};
+
+struct CutsceneSplinePoint sSphereCreditsSplineFocus[] = {
+    { 0, 50, { 0, 0, 0 } },
+    { 1, 50, { 0, 0, 0 } },
+    { 3, 50, { 0, 0, 0 } },
+    { -1, 50, { 0, 0, 0 } },
+};
+
+struct CutsceneSplinePoint sDanCreditsSplinePositions[] = {
+    { 1, 0, { -5861, 3209, -1180 } },
+    { 2, 0, { -3019, 3209, -677 } },
+    { 3, 0, { 2429, 2265, -147 } },
+    { -1, 0, { 3937, 953, -180 } }
+};
+
+struct CutsceneSplinePoint sDanCreditsSplineFocus[] = {
+    { 0, 50, { -6328, 1880, -5816 } },
+    { 1, 50, { -711, 1432, -4067 } },
+    { 3, 50, { 3345, 728, -2229 } },
+    { -1, 50, { 4685, 201, -1557 } },
+};
+
 /**
  * Follow splines through the courses of the game.
  */
@@ -10235,6 +10263,14 @@ void cutscene_credits(struct Camera *c) {
         case LEVEL_AREA_INDEX(LEVEL_ROVERT, 1):
             pos = sRovertCreditsSplinePositions;
             focus = sRovertCreditsSplineFocus;
+            break;
+        case LEVEL_AREA_INDEX(LEVEL_SPHERE, 1):
+            pos = sSphereCreditsSplinePositions;
+            focus = sSphereCreditsSplineFocus;
+            break;
+        case LEVEL_AREA_INDEX(LEVEL_DAN, 1):
+            pos = sDanCreditsSplinePositions;
+            focus = sDanCreditsSplineFocus;
             break;
         case LEVEL_AREA_INDEX(LEVEL_CASTLE, 1):
             if (1 == gCutsceneTimer)

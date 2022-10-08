@@ -669,6 +669,10 @@ void fight_platform_ctl_loop()
             o->oFightCtlRoped->activeFlags = 0;
             o->oFightCtlRoped = NULL;
             o->oAction = 6;
+            struct Object* coins = spawn_object(o, MODEL_NONE, bhvThreeCoinsSpawn);
+            coins->oPosX = o->oPosX;
+            coins->oPosY = o->oPosY;
+            coins->oPosZ = o->oPosZ;
         }
     }
     else if (9 == o->oAction)

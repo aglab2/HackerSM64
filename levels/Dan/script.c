@@ -55,7 +55,7 @@ const LevelScript level_Dan_entry[] = {
 		OBJECT(MODEL_NONE, 6933, 268, 0, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(Dan_area_1_collision),
 		MACRO_OBJECTS(Dan_area_1_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, 0),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
