@@ -596,6 +596,9 @@ void process_notes(void) {
                 reverbVol = note->parentLayer->seqChannel->reverbVol;
             }
 
+            if (*(u32*) &frequency == 0x7FFF7FFC)
+                frequency = 1.0f;
+
             scale = note->adsrVolScale;
             frequency *= note->vibratoFreqScale * note->portamentoFreqScale;
             cap = 3.99992f;
