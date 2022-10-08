@@ -785,9 +785,8 @@ void hf_vc_ctl_music()
 void hf_death_loop_ctl()
 {
     hf_vc_ctl_music();
-    if (gMarioStates->action == ACT_FALL_AFTER_STAR_GRAB)
+    if (gMarioStates->action == ACT_FALL_AFTER_STAR_GRAB || gMarioStates->action == ACT_STAR_DANCE_WATER || gMarioStates->action == ACT_STAR_DANCE_EXIT || gMarioStates->action == ACT_STAR_DANCE_NO_EXIT)
     {
-        o->activeFlags = 0;
         return;
     }
 

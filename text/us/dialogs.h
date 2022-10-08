@@ -170,7 +170,7 @@ Would you like to Save?\n\
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
 You've collected 100\n\
 coins! Mario gains more\n\
-power from the castle.\n\
+power from the money.\n\
 Do you want to Save?\n\
 //Yes////No"))
 
