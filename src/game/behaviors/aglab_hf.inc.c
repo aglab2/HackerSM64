@@ -464,10 +464,30 @@ void hf_ice_bridge_mover_loop()
     }
 
     o->oPosX = o->oHomeX;
-    o->oPosY = find_floor_height(o->oHomeX, o->oPosY + 100.f, o->oHomeZ);
-    if (o->oPosY < 3500.f)
+    if (0 == o->oSubAction)
     {
-        o->oPosY = 5378.f;
+        f32 yprobe = find_floor_height(o->oHomeX, o->oPosY + 100.f, o->oHomeZ);
+        if (yprobe > 3500.f)
+        {
+            o->oPosY = yprobe;
+        }
+        else
+        {
+            o->oSubAction = o->oTimer;
+        }
+    }
+    else
+    {
+        if (o->oTimer < 370)
+        {
+            o->oVelY = 1.5f * (o->oTimer - o->oSubAction);
+            if (o->oPosY < 3000.f)
+            {
+                o->oTimer = 370;
+            }
+        }
+
+        o->oPosY -= o->oVelY;
     }
 
     f32 scale = 0.8f;
