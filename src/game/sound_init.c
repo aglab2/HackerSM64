@@ -293,7 +293,14 @@ void stop_shell_music(void) {
 /**
  * Called from threads: thread5_game_loop
  */
+static s8 sDoResetMusic = FALSE;
+extern void stop_cap_music(void);
 void play_cap_music(u16 seqArgs) {
+    if (sDoResetMusic || gCurrCourseNum == COURSE_HF)
+    {
+        sDoResetMusic = FALSE;
+        stop_cap_music();
+    }
     play_music(SEQ_PLAYER_LEVEL, seqArgs, 0);
     if (sCurrentCapMusic != MUSIC_NONE && sCurrentCapMusic != seqArgs) {
         stop_background_music(sCurrentCapMusic);
@@ -307,6 +314,7 @@ void play_cap_music(u16 seqArgs) {
 void fadeout_cap_music(void) {
     if (sCurrentCapMusic != MUSIC_NONE) {
         fadeout_background_music(sCurrentCapMusic, 600);
+        sDoResetMusic = TRUE;
     }
 }
 

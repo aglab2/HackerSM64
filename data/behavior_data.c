@@ -2677,6 +2677,7 @@ const BehaviorScript bhvExclamationBox[] = {
     LOAD_COLLISION_DATA(exclamation_box_outline_seg8_collision_08025F78),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_FLOAT(oCollisionDistance, 300),
+    SET_FLOAT(oDrawingDistance, 30000),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_exclamation_box_loop),

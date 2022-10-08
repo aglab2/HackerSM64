@@ -1581,6 +1581,11 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
             case MARIO_WING_CAP:   capTime = 1800; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
         }
 
+        if (gCurrCourseNum == COURSE_MTC)
+        {
+            capTime = 3600;
+        }
+
         if (capTime > m->capTimer) {
             m->capTimer = capTime;
         }
