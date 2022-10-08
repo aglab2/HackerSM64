@@ -3,6 +3,9 @@
 const GeoLayout vcutm_area_4_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_OPEN_NODE(),
+			GEO_ASM(  0, geo_render_mirror_mario),
+		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 7168, 336, 16670),
 		GEO_OPEN_NODE(),
 			GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -5080, -254, -3359, 0, -90, 0, vcutm_dl_Chireiden_Nitori_mesh_layer_1),
