@@ -46,6 +46,11 @@ extern void bowser_course_warp_ctl_init()
 
 void bowser_course_warp_ctl_loop()
 {
+    if (-1700.f < gMarioStates->pos[0] && gMarioStates->pos[0] < 1400.f && -1500.f < gMarioStates->pos[2] && gMarioStates->pos[2] < 1500.f)
+    {
+        bowser_course_warp_ctl_init();
+    }
+
     if (0 == o->oAction)
     {
         struct Surface* floor = gMarioStates->floor;

@@ -467,9 +467,9 @@ void render_game(void) {
                     gDnvicMapAlpha = 0;
             }
 
-            if (gDnvicMapAlpha || gCurrCreditsEntry)
+            if (gDnvicMapAlpha)
             {
-                render_axo_frog(gCurrCreditsEntry ? 200 : gDnvicMapAlpha);
+                render_axo_frog(gDnvicMapAlpha);
             }
         }
 

@@ -127,7 +127,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, -1756, -732, -2769, 0, -17, 0, (0x23 << 16) | (2 << 8), bhvWarp),
 		OBJECT(MODEL_NONE, -1647, -732, -3060, 0, -17, 0, (0x23 << 16) | (2 << 8), bhvWarp),
 		OBJECT(MODEL_NONE, -1710, -732, -2905, 0, -17, 0, (0x23 << 16) | (2 << 8), bhvWarp),
-		OBJECT(MODEL_NONE, -1466, -1649, 4256, 0, -17, 0, (10 << 24) | (0x53 << 16) | (3 << 8), bhvWarp),
+		OBJECT(MODEL_NONE, -1466, -1649, 4256, 0, -17, 0, (20 << 24) | (0x53 << 16) | (3 << 8), bhvWarp),
 		OBJECT(MODEL_STICKY_PLAT, 3450, -588, 4372, 0, -180, 0, (1 << 16) | (12), bhvStickyPlat),
 		OBJECT(MODEL_WOODEN_SIGNPOST, 3529, -1104, 5019, 0, -90, 0, (46 << 24) | (46 << 16) | (5 << 8), bhvMessagePanel),
 		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 3718, -1104, 4659, 0, -90, 0, (0x25 << 16) | (5 << 8), bhvDoorWarp),

@@ -75,7 +75,7 @@ void bhv_dnvic_color_reset_loop(void)
     {
         if (1 == gDnvicPlayEffect)
         {
-            play_sound(SOUND_MENU_YOSHI_GAIN_LIVES, gGlobalSoundSource);
+            play_sound(SOUND_MENU_POWER_METER, gGlobalSoundSource);
         }
         else
         {
