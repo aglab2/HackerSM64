@@ -75,6 +75,10 @@ void bhv_sphere_loop()
         gNoInputs = 0;
         o->oFaceAngleYaw += 5 * gPlayer1Controller->stickX;
         o->oFaceAnglePitch += 5 * gPlayer1Controller->stickY;
+        if (gPlayer1Controller->stickMag > 10.f)
+        {
+            cur_obj_play_sound_2(SOUND_ENV_SLIDING);
+        }
 
         o->oGolfSphereStar->oPosX = 2250.f * sins(o->oFaceAngleYaw) * coss(-o->oFaceAnglePitch);
         o->oGolfSphereStar->oPosY = 2250.f                          * sins(-o->oFaceAnglePitch);

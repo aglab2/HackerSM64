@@ -1,6 +1,6 @@
 const Collision sphere_sphere_collision[] = {
 	COL_INIT(),
-	COL_VERTEX_INIT(274),
+	COL_VERTEX_INIT(273),
 	COL_VERTEX(384, -436, 1320),
 	COL_VERTEX(1219, -436, 985),
 	COL_VERTEX(1539, -436, 144),
@@ -274,8 +274,7 @@ const Collision sphere_sphere_collision[] = {
 	COL_VERTEX(915, 181, 1034),
 	COL_VERTEX(1042, 181, 698),
 	COL_VERTEX(-2, -286, 1532),
-	COL_VERTEX(-2, 314, 1532),
-	COL_TRI_INIT(SURFACE_DEFAULT, 460),
+	COL_TRI_INIT(SURFACE_DEFAULT, 456),
 	COL_TRI(0, 1, 2),
 	COL_TRI(2, 3, 4),
 	COL_TRI(4, 5, 6),
@@ -732,10 +731,6 @@ const Collision sphere_sphere_collision[] = {
 	COL_TRI(43, 272, 39),
 	COL_TRI(218, 52, 48),
 	COL_TRI(218, 48, 272),
-	COL_TRI(46, 42, 273),
-	COL_TRI(46, 273, 216),
-	COL_TRI(216, 273, 49),
-	COL_TRI(216, 49, 53),
 	COL_TRI_STOP(),
 	COL_END()
 };

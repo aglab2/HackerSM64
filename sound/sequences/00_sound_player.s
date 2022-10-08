@@ -7204,7 +7204,7 @@ layer_end
 chan_setmutebhv 0x0
 chan_setnotepriority 14
 chan_setbank 9
-chan_setinstr 3
+chan_setinstr 7
 chan_setenvelope .envelope_3428
 chan_setlayer 0, .layer_2D99
 chan_end

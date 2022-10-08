@@ -3064,27 +3064,19 @@ Vtx sphere_sphere_sphere_mesh_layer_4_vtx_cull[8] = {
 	{{{2098, -1518, -1792},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
-Vtx sphere_sphere_sphere_mesh_layer_4_vtx_0[12] = {
+Vtx sphere_sphere_sphere_mesh_layer_4_vtx_0[6] = {
 	{{{-262, -136, 1685},0, {1911, 132},{0x40, 0x6E, 0x0, 0xFF}}},
 	{{{-2, -286, 1532},0, {496, 855},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-262, -136, 1532},0, {1911, 855},{0x40, 0x6E, 0x0, 0xFF}}},
 	{{{-2, -286, 1685},0, {496, 132},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{258, -136, 1532},0, {-919, 855},{0xC0, 0x6E, 0x0, 0xFF}}},
 	{{{258, -136, 1685},0, {-919, 132},{0xC0, 0x6E, 0x0, 0xFF}}},
-	{{{-262, 164, 1685},0, {107, 2160},{0x40, 0x92, 0x0, 0xFF}}},
-	{{{-262, 164, 1532},0, {891, 2160},{0x40, 0x92, 0x0, 0xFF}}},
-	{{{-2, 314, 1532},0, {891, 624},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-2, 314, 1685},0, {107, 624},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{258, 164, 1532},0, {891, -912},{0xC0, 0x92, 0x0, 0xFF}}},
-	{{{258, 164, 1685},0, {107, -912},{0xC0, 0x92, 0x0, 0xFF}}},
 };
 
 Gfx sphere_sphere_sphere_mesh_layer_4_tri_0[] = {
-	gsSPVertex(sphere_sphere_sphere_mesh_layer_4_vtx_0 + 0, 12, 0),
+	gsSPVertex(sphere_sphere_sphere_mesh_layer_4_vtx_0 + 0, 6, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(3, 4, 1, 0, 3, 5, 4, 0),
-	gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
-	gsSP2Triangles(9, 8, 10, 0, 9, 10, 11, 0),
 	gsSPEndDisplayList(),
 };
 

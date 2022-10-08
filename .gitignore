@@ -119,3 +119,7 @@ lib/libs2d_engine.a
 !/levels/rng/*.png
 !/levels/ending/*.png
 !/levels/totwc/axo*.png
+
+!sound/samples/sfx_9/07.aiff
+!sound/samples/sfx_9/07.aiff
+!sound/samples/sfx_mario_peach/10_peach_power_of_the_stars.aiff

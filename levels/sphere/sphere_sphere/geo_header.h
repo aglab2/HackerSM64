@@ -56,7 +56,7 @@ extern Vtx sphere_sphere_sphere_mesh_layer_5_vtx_cull[8];
 extern Vtx sphere_sphere_sphere_mesh_layer_5_vtx_0[36];
 extern Gfx sphere_sphere_sphere_mesh_layer_5_tri_0[];
 extern Vtx sphere_sphere_sphere_mesh_layer_4_vtx_cull[8];
-extern Vtx sphere_sphere_sphere_mesh_layer_4_vtx_0[12];
+extern Vtx sphere_sphere_sphere_mesh_layer_4_vtx_0[6];
 extern Gfx sphere_sphere_sphere_mesh_layer_4_tri_0[];
 extern Gfx mat_sphere_sphere__8_f3d_layer1[];
 extern Gfx mat_revert_sphere_sphere__8_f3d_layer1[];
