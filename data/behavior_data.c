@@ -7621,6 +7621,14 @@ const BehaviorScript bhvLuigimanBulletBill[] = {
     END_LOOP(),
 };
 
+extern void bhv_luigiman_respawn_loop();
+const BehaviorScript bhvLuigmanRespawn[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_luigiman_respawn_loop),
+    END_LOOP(),
+};
+
 extern void bhv_luigiman_airlock_init();
 extern void bhv_luigiman_airlock_loop();
 extern const Collision luigiman_airlock_main_collision[];

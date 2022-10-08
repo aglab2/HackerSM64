@@ -36,9 +36,9 @@ void luigiman_moving_plat_loop(void) {
         if (o->oTimer == 0) {
             o->oPosX -= 300.0f;
         }
-        o->oPosX += sins(o->oTimer) * 35.0f;
+        o->oPosX += sins(o->oTimer / 1.2f) * 35.0f / 1.2f;
     } else {
-        o->oPosX -= sins(o->oTimer) * 33.0f;
+        o->oPosX -= sins(o->oTimer / 1.2f) * 33.0f / 1.2f;
     }
 
     if ((o->oHiddenObjectSwitchObj != NULL) && (o->oHiddenObjectSwitchObj->oAction == PURPLE_SWITCH_ACT_TICKING)) {
@@ -93,7 +93,7 @@ void luigiman_purple_switch_loop()
             } else {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
             }
-            if (o->oTimer > 200) {
+            if (o->oTimer > 400) {
                 o->oAction = PURPLE_SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF;
             }
             break;
@@ -453,6 +453,47 @@ extern void bhv_luigiman_airlock_loop()
         if (!stillInside)
         {
             o->oAction = AIRLOCK_INIT;
+        }
+    }
+}
+
+void bhv_luigiman_respawn_loop()
+{
+    if (0 == o->oAction)
+    {
+        struct Surface* floor = gMarioStates->floor;
+        int type = floor ? floor->type : 0;
+        if (gMarioStates->floorHeight == gMarioStates->pos[1] && type == SURFACE_QUICKSAND && gMarioStates->action != ACT_LEDGE_GRAB && gMarioStates->health > 0x100)
+        {
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0, 0, 0);
+            o->oAction = 1;
+        }
+    }
+    else 
+    {
+        if (o->oTimer == 12)
+        {
+            set_gravity(0);
+            gMarioStates->pos[0] = o->oPosX;
+            gMarioStates->pos[1] = o->oPosY;
+            gMarioStates->pos[2] = o->oPosZ;
+            gMarioStates->vel[0] = 0;
+            gMarioStates->vel[1] = 0;
+            gMarioStates->vel[2] = 0;
+            gMarioStates->forwardVel = 0;
+            gMarioStates->faceAngle[1] = o->oFaceAngleYaw;
+            drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
+            reset_camera(gCamera);
+        }
+        if (o->oTimer == 13)
+        {
+            reset_camera(gCamera);
+        }
+        if (o->oTimer == 14)
+        {
+            reset_camera(gCamera);
+            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            o->oAction = 0;
         }
     }
 }

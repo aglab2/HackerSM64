@@ -17,6 +17,7 @@ extern Gfx mat_sphere_sphere__10_f3d_layer1[];
 extern Gfx mat_sphere_sphere__11_f3d_layer1[];
 extern Gfx mat_sphere_sphere___f3d_layer1[];
 extern Gfx mat_sphere_sphere__1_f3d_layer1[];
+extern Gfx mat_sphere_sphere__2_f3d_layer1[];
 
 static void sphere_set_color(void* vptr, rgb* color)
 {
@@ -38,6 +39,7 @@ static void sphere_set_all_colors(rgb* color)
     sphere_set_color(mat_sphere_sphere__11_f3d_layer1, color);
     sphere_set_color(mat_sphere_sphere___f3d_layer1, color);
     sphere_set_color(mat_sphere_sphere__1_f3d_layer1, color);
+    sphere_set_color(mat_sphere_sphere__2_f3d_layer1, color);
 }
 
 extern s16 s8DirModeYawOffset;

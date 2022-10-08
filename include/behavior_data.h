@@ -666,5 +666,6 @@ extern const BehaviorScript bhvLuigimanAirlockMain[];
 extern const BehaviorScript Dan_BhvBP[];
 extern const BehaviorScript Dan_BhvBird[];
 extern const BehaviorScript bhvAglabSphere[];
+extern const BehaviorScript bhvLuigmanRespawn[];
 
 #endif // BEHAVIOR_DATA_H
