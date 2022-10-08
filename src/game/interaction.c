@@ -785,6 +785,10 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     u32 noExit = TRUE;
 #else
     u32 noExit = (obj->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
+    if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS)
+    {
+        noExit = 1;
+    }
     if (gCurrCourseNum == COURSE_RNG)
     {
         s32 starIndex = (obj->oBehParams >> 24) & 0x1F;

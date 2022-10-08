@@ -44,7 +44,7 @@ static void fight_calm_bowser()
     }
 }
 
-// #define FIGHT_DEBUG
+#define FIGHT_DEBUG
 extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62];
 static void fight_animate_bg()
 {
@@ -671,7 +671,7 @@ void fight_platform_ctl_loop()
             o->oAction = 6;
             struct Object* coins = spawn_object(o, MODEL_NONE, bhvThreeCoinsSpawn);
             coins->oPosX = o->oPosX;
-            coins->oPosY = o->oPosY;
+            coins->oPosY = o->oPosY + 20.f;
             coins->oPosZ = o->oPosZ;
         }
     }

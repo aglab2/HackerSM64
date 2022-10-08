@@ -2035,11 +2035,13 @@ void print_save_file_scores(s8 fileIndex) {
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
 
+#if 0
     for ((i = 0); (i < COURSE_STAGES_MAX); (i++)) {
         print_menu_generic_string((LEVEL_NAME_X + ((i < 9) * LEVEL_NUM_PAD)), (23 + (12 * (i + 1))), segmented_to_virtual(levelNameTable[i]));
         print_score_file_star_score(              fileIndex, i, STAR_SCORE_X, (23 + (12 * (i + 1))));
         print_score_file_course_coin_score(       fileIndex, i,          213, (23 + (12 * (i + 1))));
     }
+#endif
 
     // Print castle secret stars text
     print_menu_generic_string(LEVEL_NAME_X + SECRET_STARS_PAD, 23 + 12 * 16,
