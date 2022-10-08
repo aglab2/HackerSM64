@@ -6407,7 +6407,7 @@ const BehaviorScript bhvMtcYellowBall[] = {
     OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(mtc_ball_collision),
     SET_FLOAT(oDrawingDistance, 20000),
-    SET_FLOAT(oCollisionDistance, 300),
+    SET_FLOAT(oCollisionDistance, 350),
     CALL_NATIVE(mtc_yellow_ball_init),
     BEGIN_LOOP(),
         CALL_NATIVE(mtc_yellow_ball_loop),

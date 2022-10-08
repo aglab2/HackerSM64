@@ -1017,7 +1017,7 @@ u32 get_door_save_file_flag(struct Object *door) {
 
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
 #ifndef UNLOCK_ALL
-    u32 saveFlags = save_file_get_flags();
+    u32 saveFlags = gCurrLevelNum == LEVEL_CASTLE_GROUNDS ? save_file_get_flags() : ~0;
 #endif
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
 #ifndef UNLOCK_ALL

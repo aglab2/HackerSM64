@@ -153,6 +153,7 @@ const LevelScript level_luigiman_entry[] = {
 		OBJECT(MODEL_NONE, 925, 1350, 424, 0, 0, 0, 0x00020000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, 4696, 4230, -249, 0, 0, 0, 0x00110000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -643, 5334, 1086, 0, 0, 0, 0x00020000, bhvCoinFormation),
+		OBJECT(MODEL_NONE, 1066, 810, 7482, 0, 0, 0, 0x00000000, bhvCoinFormation),
 		MARIO_POS(0x01, -180, 0, 102, 10852),
 		TERRAIN(luigiman_area_1_collision),
 		MACRO_OBJECTS(luigiman_area_1_macro_objs),
