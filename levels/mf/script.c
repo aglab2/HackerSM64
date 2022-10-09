@@ -84,7 +84,7 @@ const LevelScript level_mf_entry[] = {
 		OBJECT(MODEL_BULLY, 4024, 2589, 5120, 0, 81, 0, (0xC << 16), bhvSmallBully),
 		OBJECT(MODEL_BULLY, 1497, 0, -5066, 0, 81, 0, (0xC << 16), bhvSmallBully),
 		OBJECT(MODEL_BULLY, 5972, 1731, 5169, 0, 81, 0, (0xC << 16), bhvSmallBully),
-		OBJECT(MODEL_NONE, -3561, 981, -5666, 0, 81, 0, (0x43 << 16), bhvDeathWarp),
+		OBJECT(MODEL_NONE, -3561, 981, -5666, 0, 180+81, 0, (0x43 << 16), bhvDeathWarp),
 		OBJECT(MODEL_CHUCKYA, -6813, -4543, -951, 0, 81, 0, (0xC << 16), bhvChuckya),
 		OBJECT(MODEL_CHUCKYA, -3334, 0, -4111, 0, 81, 0, (0xC << 16), bhvChuckya),
 		OBJECT(MODEL_NONE, -3706, -4480, 1816, 0, 81, 0, (2 << 16), bhvCoinFormation),
