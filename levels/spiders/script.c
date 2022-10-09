@@ -157,7 +157,7 @@ const LevelScript level_spiders_entry[] = {
 		OBJECT(MODEL_SPIDERS_NEST, 9262, 4348, 2205, 0, 31, 0, (15 << 16), bhvExclamationBox),
 		OBJECT(MODEL_SPIDERS_NEST, 9313, 4757, 3340, 0, 31, 0, (15 << 16), bhvExclamationBox),
 		OBJECT(MODEL_SPIDERS_NEST, 8575, 4839, 3141, 0, 31, 0, (15 << 16), bhvExclamationBox),
-		OBJECT(MODEL_STAR, 4355, 2917, -4081, 0, 31, 0, (1 << 24), bhvStar),
+		OBJECT(MODEL_STAR, 4355, 2517, -3581, 0, 31, 0, (1 << 24), bhvStar),
 		OBJECT(MODEL_STAR, -1261, 3662, 9473, 0, -59, 0, 0x00000000, bhvStar),
 		OBJECT(MODEL_STAR, 8661, 284, 3738, 0, 31, 0, (2 << 24), bhvStar),
 		OBJECT(MODEL_NONE, -5364, 3403, -6078, 0, 31, 0, (3 << 24), bhvHiddenStar),
