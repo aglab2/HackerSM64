@@ -7193,6 +7193,17 @@ static void cutscene_mario_dialog(UNUSED struct Camera *c) {
             gMarioState->pos[0] = -21400;
             gMarioState->pos[1] = 1200;
             gMarioState->pos[2] = -1300;
+
+
+            sDMPos[0] = 0.f;
+            sDMPos[1] = 0.f;
+            sDMPos[2] = 0.f;
+            sDMAng[0] = 0.f;
+            sDMAng[1] = 0.f;
+            sDMAng[2] = 0.f;
+            action = 0;
+            timer = -1;
+            sAnim = MARIO_ANIM_CREDITS_START_WALK_LOOK_UP;
         }
         break;
     }
@@ -11242,7 +11253,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), 
-	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 0, 0, 0, 0), 
+	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 1, 1, 1, 1), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), 
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), 
 };

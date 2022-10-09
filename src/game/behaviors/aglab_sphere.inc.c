@@ -89,16 +89,18 @@ void bhv_sphere_loop()
         rgb color = { 200 - yawc, 200 - pitchc, yawc + pitchc, 0 };
         sphere_set_all_colors(&color);
 
-        if (gPlayer1Controller->buttonPressed & L_TRIG)
-        {
-            o->oAction = 2;
-            gMarioStates->pos[0] = 0.f;
-            gMarioStates->pos[1] = 400.f + find_floor_height(0.f, 9000.f, 0.f); 
-            gMarioStates->pos[2] = 0.f;
-            gMarioStates->faceAngle[1] = 0.f;
-        }
         if (!gCurrCreditsEntry)
+        {
+            if (gPlayer1Controller->buttonPressed & L_TRIG)
+            {
+                o->oAction = 2;
+                gMarioStates->pos[0] = 0.f;
+                gMarioStates->pos[1] = 400.f + find_floor_height(0.f, 9000.f, 0.f); 
+                gMarioStates->pos[2] = 0.f;
+                gMarioStates->faceAngle[1] = 0.f;
+            }
             print_text_centered(160, 20, "L TO TRY");
+        }
     }
     else if (2 == o->oAction)
     {
