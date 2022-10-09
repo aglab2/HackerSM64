@@ -145,34 +145,37 @@ void rovert_loop(void) {
             }
         }
 
-        if (sHeldLButtonFrames >= 0)
+        if (!gCurrCreditsEntry)
         {
-            if (gPlayer1Controller->buttonDown & L_TRIG)
+            if (sHeldLButtonFrames >= 0)
             {
-                sHeldLButtonFrames++;
-
-                if (sCanLWarp)
+                if (gPlayer1Controller->buttonDown & L_TRIG)
                 {
-                    if (0 == sWatchAmount || sHeldLButtonFrames > 30)
-                    {
-                        print_text_centered(160, 20, "HOLD L TO WARP TO POOL");
-                    }
+                    sHeldLButtonFrames++;
 
-                    s32 whenToWarp = 0 == sWatchAmount ? 50 : 80;
-                    if (sHeldLButtonFrames > whenToWarp)
+                    if (sCanLWarp)
                     {
-                        sHeldLButtonFrames = -1;
+                        if (0 == sWatchAmount || sHeldLButtonFrames > 30)
+                        {
+                            print_text_centered(160, 20, "HOLD L TO WARP TO POOL");
+                        }
+
+                        s32 whenToWarp = 0 == sWatchAmount ? 50 : 80;
+                        if (sHeldLButtonFrames > whenToWarp)
+                        {
+                            sHeldLButtonFrames = -1;
+                        }
                     }
+                }
+                else
+                {
+                    sHeldLButtonFrames = 0;
                 }
             }
             else
             {
-                sHeldLButtonFrames = 0;
+                // zapped till frames are reset because warp condition occured
             }
-        }
-        else
-        {
-            // zapped till frames are reset because warp condition occured
         }
 
         if (gCurrAreaIndex == 1) {//present
