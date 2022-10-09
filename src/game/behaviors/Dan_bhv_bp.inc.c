@@ -62,7 +62,7 @@ void Dan_bhv_bp_loop(void) {
 				o->oAction++;
 			}
 		} else {
-			if ((gPlayer1Controller->buttonDown & A_BUTTON) && (gPlayer1Controller->buttonDown & B_BUTTON) && (gPlayer1Controller->buttonDown & Z_TRIG)) {
+			if (!gCurrCreditsEntry && (gPlayer1Controller->buttonDown & A_BUTTON) && (gPlayer1Controller->buttonDown & B_BUTTON) && (gPlayer1Controller->buttonDown & Z_TRIG)) {
 				if (o->oTimer > 90) {
 					gMarioState->pos[0] = -21400;
 					gMarioState->pos[1] = 1200;

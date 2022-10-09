@@ -95,7 +95,7 @@ const LevelScript level_bdf_entry[] = {
 		OBJECT(MODEL_YELLOW_COIN, 5679, 454, 6349, 0, 0, 0, 0x00000000, bhvYellowCoin),
 		OBJECT(MODEL_YELLOW_COIN, 6581, 454, 9608, 0, 0, 0, 0x00000000, bhvYellowCoin),
 		OBJECT(MODEL_YELLOW_COIN, 4780, 454, 10499, 0, 0, 0, 0x00000000, bhvYellowCoin),
-		OBJECT(MODEL_YELLOW_COIN, -318, 4622, -80, 0, 0, 0, 0x00000000, bhvSparkler),
+		OBJECT(MODEL_NONE, -318, 4622, -80, 0, 0, 0, 0x00000000, bhvSparkler),
 		TERRAIN(bdf_area_1_collision),
 		MACRO_OBJECTS(bdf_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_BOWSER),
