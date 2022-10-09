@@ -652,6 +652,9 @@ static void kill_inputs()
             gControllers[0].stickY = 0;
             gControllers[0].stickMag = 0;
         }
+
+        gControllers[0].buttonDown    &= ~(U_CBUTTONS | D_CBUTTONS);
+        gControllers[0].buttonPressed &= ~(U_CBUTTONS | D_CBUTTONS);
     }
 }
 
