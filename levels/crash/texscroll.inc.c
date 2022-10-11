@@ -15,7 +15,7 @@ void scroll_sts_mat_crash_dl_water() {
 
 void scroll_crash_dl_Tubaloopa_004_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 446;
+	int count = 460;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
@@ -35,7 +35,7 @@ void scroll_crash_dl_Tubaloopa_004_mesh_layer_5_vtx_0() {
 	currentX += deltaX;
 }
 
-void scroll_crash_dl_tube_001_mesh_layer_1_vtx_0() {
+void scroll_crash_dl_Tubaloopa_006_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 464;
 	int width = 64 * 0x20;
@@ -43,7 +43,7 @@ void scroll_crash_dl_tube_001_mesh_layer_1_vtx_0() {
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(crash_dl_tube_001_mesh_layer_1_vtx_0);
+	Vtx *vertices = segmented_to_virtual(crash_dl_Tubaloopa_006_mesh_layer_1_vtx_0);
 
 	deltaX = (int)(0.07000002264976501 * 0x20) % width;
 
@@ -62,5 +62,5 @@ void scroll_crash() {
 	scroll_sts_mat_crash_dl_f3d_material();
 	scroll_sts_mat_crash_dl_water();
 	scroll_crash_dl_Tubaloopa_004_mesh_layer_5_vtx_0();
-	scroll_crash_dl_tube_001_mesh_layer_1_vtx_0();
+	scroll_crash_dl_Tubaloopa_006_mesh_layer_1_vtx_0();
 }

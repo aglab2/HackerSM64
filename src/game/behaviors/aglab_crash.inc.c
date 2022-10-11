@@ -79,6 +79,16 @@ static s32 is_disallow_swim_state()
 void crash_ctl_loop()
 {
     s32 floorType = gMarioStates->floor ? gMarioStates->floor->type : 0;
+    if (!o->oCrashCheckpointActive)
+    {
+        if ((gMarioStates->pos[1] < 0.f)
+         && (floorType == SURFACE_VERY_SLIPPERY)
+         && (gMarioStates->floorHeight == gMarioStates->pos[1]))
+        {
+            o->oCrashCheckpointActive = 1;
+        }
+    }
+
     if (o->oAction != 3 && (is_disallow_swim_state() 
      || gMarioStates->action == ACT_BURNING_FALL
      || gMarioStates->action == ACT_BURNING_GROUND
@@ -259,12 +269,13 @@ void crash_ctl_loop()
     }
     else if (2 == o->oAction)
     {
-        if (0 == o->oTimer)
+        if (0 == o->oTimer && !o->oCrashCheckpointActive)
         {
             crash_shellline_reset();
             gMarioStates->forwardVel = 50.f;
             gMarioStates->vel[1] = 0;
             gMarioStates->faceAngle[1] = 0;
+            // -
         }
         
         f32 dx = -1550.f - gMarioStates->pos[0];
@@ -289,14 +300,25 @@ void crash_ctl_loop()
     {
         if (o->oTimer == 12)
         {
-            crash_zipline_reset();
-            gMarioStates->pos[0] = -19608.f;
-            gMarioStates->pos[1] = 12213.f;
-            gMarioStates->pos[2] = -24734;
+            if (!o->oCrashCheckpointActive)
+            {
+                crash_zipline_reset();
+                gMarioStates->pos[0] = -19608.f;
+                gMarioStates->pos[1] = 12213.f;
+                gMarioStates->pos[2] = -24734.f;
+                gMarioStates->faceAngle[1] = 0x2000;
+            }
+            else
+            {
+                crash_shellline_reset();
+                gMarioStates->pos[0] = -1608.f;
+                gMarioStates->pos[1] = -1533.f;
+                gMarioStates->pos[2] = -3137.f;
+                gMarioStates->faceAngle[1] = 0x8000;
+            }
             gMarioStates->vel[0] = 0;
             gMarioStates->vel[1] = 0;
             gMarioStates->vel[2] = 0;
-            gMarioStates->faceAngle[1] = 0x2000;
             gMarioStates->forwardVel = 0;
             drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
             set_camera_mode(gCamera, gCamera->defMode, 1);
@@ -310,7 +332,7 @@ void crash_ctl_loop()
         {
             reset_camera(gCamera);
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
-            o->oAction = 0;
+            o->oAction = 2 * o->oCrashCheckpointActive;
         }
     }
     else if (4 == o->oAction)
