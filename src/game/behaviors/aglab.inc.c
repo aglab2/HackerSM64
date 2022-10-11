@@ -142,29 +142,32 @@ void sparkler_loop()
     if (gCamera->cutscene != CUTSCENE_AGLAB_MTC_CS && !isOWCS)
     {
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-        if (0 == (o->oTimer % 9))
+        if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS)
         {
-            s32 div = (o->oTimer / 9) % 3;
-            if (0 == div)
+            if (0 == (o->oTimer % 9))
             {
-                struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-                spark->oPosX = -3201.f + random_f32_around_zero(500.f);
-                spark->oPosY = -916.f + random_f32_around_zero(500.f);
-                spark->oPosZ = 3804.f + random_f32_around_zero(500.f);
-            }
-            if (1 == div)
-            {
-                struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-                spark->oPosX = -4885.f + random_f32_around_zero(500.f);
-                spark->oPosY = -915.f + random_f32_around_zero(500.f);
-                spark->oPosZ = 2784.f + random_f32_around_zero(500.f);
-            }
-            if (2 == div)
-            {
-                struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-                spark->oPosX = -3254.f + random_f32_around_zero(500.f);
-                spark->oPosY = -915.f + random_f32_around_zero(500.f);
-                spark->oPosZ = 1510.f + random_f32_around_zero(500.f);
+                s32 div = (o->oTimer / 9) % 3;
+                if (0 == div)
+                {
+                    struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+                    spark->oPosX = -3201.f + random_f32_around_zero(500.f);
+                    spark->oPosY = -916.f + random_f32_around_zero(500.f);
+                    spark->oPosZ = 3804.f + random_f32_around_zero(500.f);
+                }
+                if (1 == div)
+                {
+                    struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+                    spark->oPosX = -4885.f + random_f32_around_zero(500.f);
+                    spark->oPosY = -915.f + random_f32_around_zero(500.f);
+                    spark->oPosZ = 2784.f + random_f32_around_zero(500.f);
+                }
+                if (2 == div)
+                {
+                    struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+                    spark->oPosX = -3254.f + random_f32_around_zero(500.f);
+                    spark->oPosY = -915.f + random_f32_around_zero(500.f);
+                    spark->oPosZ = 1510.f + random_f32_around_zero(500.f);
+                }
             }
         }
     }
