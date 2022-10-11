@@ -6,6 +6,7 @@ extern u8  gDnvicMapAlpha;
 extern s8  gDnvicMapAlphaVelocity;
 extern hsv gDnvicColor;
 extern hsv gDnvicCurrentColor;
+extern u8 sPieClearCoins;
 
 extern const BehaviorScript bhvOWDecor[];
 
@@ -23,6 +24,7 @@ void ow_ctl_init()
     gDnvicCurrentColor.h = gDnvicColor.h;
     gDnvicCurrentColor.v = gDnvicColor.v;
     gDnvicCurrentColor.s = gDnvicColor.s;
+    sPieClearCoins = 0;
 }
 
 void ow_ctl_loop()

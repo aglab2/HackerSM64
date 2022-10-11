@@ -33,7 +33,7 @@ struct PieObjectDesc sPieCoins[] =
 #undef OBJECT
 };
 
-static u8 sPieClearCoins = 0;
+u8 sPieClearCoins = 0;
 
 void pie_coiner_loop()
 {
@@ -56,5 +56,33 @@ void pie_coiner_loop()
 
 void pie_coiner_pre_area_loop()
 {
-    sPieClearCoins = 1;
+    if (0 == sPieClearCoins)
+    {
+        cur_obj_unload_object_with_behavior(bhvCoinFormation);
+        cur_obj_unload_object_with_behavior(bhvOneCoin);
+        {
+            {
+                struct Object* arrow = spawn_object(o, MODEL_NONE, bhvCoinFormation);
+                arrow->oPosX = 10303.f;
+                arrow->oPosY = 146.f;
+                arrow->oPosZ = 13795.f;
+                arrow->oBehParams2ndByte = 4;
+                arrow->oFaceAngleYaw = 0x4000;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                struct Object* coin = spawn_object(o, MODEL_YELLOW_COIN, bhvOneCoin);
+                coin->oPosX = 10788.f;
+                coin->oPosY = 146.f;
+                coin->oPosZ = 13795.f;
+            }
+            {
+                struct Object* coin = spawn_object(o, MODEL_YELLOW_COIN, bhvOneCoin);
+                coin->oPosX = 10788.f;
+                coin->oPosY = 146.f;
+                coin->oPosZ = 15045.f;
+            }
+        }
+        sPieClearCoins = 1;
+    }
 }
