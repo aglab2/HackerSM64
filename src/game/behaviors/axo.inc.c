@@ -187,10 +187,16 @@ void flipnote_frog_act_talk(void) {
                 text = DIALOG_151;
             }
             else {
+                int targetAccuracy = 80 - 5 * (o->o100 / (30*60));
+                if (targetAccuracy < 55)
+                {
+                    targetAccuracy = 55;
+                }
+
                 if (accuracy < 50) {
                     text = DIALOG_150 << 16;
                 }
-                else if (accuracy < 80) {
+                else if (accuracy < targetAccuracy) {
                     text = DIALOG_152 << 16;
                 }
                 else {
@@ -228,6 +234,7 @@ void flipnote_frog_act_talk(void) {
 }
 
 void bhv_flipnote_frog_loop(void) {
+    o->o100++;
     if (o->oF8 < 2) { // The frog object's o->oF8 refers to the state of the exclamation mark
         u16 newButtonState = gPlayer1Controller->buttonDown;
         if (
@@ -235,7 +242,8 @@ void bhv_flipnote_frog_loop(void) {
             (gPlayer1Controller->buttonReleased & R_TRIG)
         ) {
             f32 accuracy = calculate_flipnote_accuracy();
-            if (accuracy >= 0.8f) {
+            f32 targetAccuracy = 0.8f - 0.05f * (o->o100 / (30*60));
+            if (accuracy >= targetAccuracy) {
                 o->oF8 = 1;
             }
             else {
