@@ -34,15 +34,18 @@ void bhv_hidden_blue_coin_loop(void) {
                 o->oAction = HIDDEN_BLUE_COIN_ACT_ACTIVE;
             }
 
+            if (blueCoinSwitch->oAction == BLUE_COIN_SWITCH_ACT_PREVIEWING) {
+                cur_obj_enable_rendering();
+            } else {
+                cur_obj_disable_rendering();
+            }
+
             break;
 
         case HIDDEN_BLUE_COIN_ACT_ACTIVE:
             // Become tangible
             cur_obj_enable_rendering();
             cur_obj_become_tangible();
-#ifdef BLUE_COIN_SWITCH_RETRY
-            o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-#endif
 
             // Delete the coin once collected
             if (o->oInteractStatus & INT_STATUS_INTERACTED) {
@@ -55,6 +58,7 @@ void bhv_hidden_blue_coin_loop(void) {
             if (cur_obj_wait_then_blink(200, 20)) {
 #ifdef BLUE_COIN_SWITCH_RETRY
                 o->oAction = HIDDEN_BLUE_COIN_ACT_INACTIVE;
+                o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
 #else
                 obj_mark_for_deletion(o);
 #endif
@@ -83,6 +87,7 @@ void bhv_blue_coin_switch_loop(void) {
 
     switch (o->oAction) {
         case BLUE_COIN_SWITCH_ACT_IDLE:
+        case BLUE_COIN_SWITCH_ACT_PREVIEWING:
             // If Mario is on the switch and has ground-pounded,
             // recede and get ready to start ticking.
             if (gMarioObject->platform == o) {
@@ -100,7 +105,15 @@ void bhv_blue_coin_switch_loop(void) {
                     o->oGravity = 0.0f;
 
                     cur_obj_play_sound_2(SOUND_GENERAL_SWITCH_DOOR_OPEN);
+                } else {
+                    // If Mario is just on the switch and not ground pounding,
+                    // then have the preview coins appear
+                    o->oAction = BLUE_COIN_SWITCH_ACT_PREVIEWING;
                 }
+            } else {
+                // If Mario is not on the switch,
+                // go back to being idle
+                o->oAction = BLUE_COIN_SWITCH_ACT_IDLE;
             }
 
             // Have collision
