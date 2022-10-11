@@ -159,6 +159,7 @@ const LevelScript level_vcutm_entry[] = {
 		OBJECT(MODEL_NONE, 1757, -346, 1425, 0, -180, 0, 0x0C250000, bhvWarp),
 		OBJECT(MODEL_NONE, 2157, -346, 1425, 0, -180, 0, 0x0C250000, bhvWarp),
 		OBJECT(MODEL_NONE, 1957, -222, 1117, 0, -180, 0, 0, bhvSparklerSlow),
+		OBJECT(MODEL_NONE, -7836, -86, -332, 0, -180, 0, 0, bhvSparklerSlow),
 		OBJECT(MODEL_NONE, 1956, -346, -2112, 0, 0, -180, 0x0C060000, bhvWarp),
 		OBJECT(MODEL_NONE, 1756, -346, -2112, 0, 0, -180, 0x0C260000, bhvWarp),
 		OBJECT(MODEL_NONE, 2156, -346, -2112, 0, 0, -180, 0x0C260000, bhvWarp),
