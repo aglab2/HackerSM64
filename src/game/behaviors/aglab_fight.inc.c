@@ -1106,7 +1106,7 @@ void fight_bomb_ctl_loop()
                 o->oFightCtlBomb = spawn_object(o, MODEL_BOWSER_BOMB, bhvBowserBomb);
                 o->oFightCtlBomb->oPosX = o->oFightCtlBombIndicator->oPosX;
                 o->oFightCtlBomb->oPosZ = o->oFightCtlBombIndicator->oPosZ;
-                o->oFightCtlBomb->oBehParams2ndByte = 2;
+                o->oFightCtlBomb->oBehParams2ndByte = 1;
                 o->oFightCtlBomb->parentObj = o; // just in case lol
                 o->oFightCtlBombIndicator = NULL;
             }

@@ -10,14 +10,15 @@ void bhv_bowser_bomb_loop(void) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 
-    if (2 == o->oBehParams2ndByte)
+    if (2 == o->oBehParams2ndByte || 1 == o->oBehParams2ndByte)
     {
-        if (o->oTimer > 30)
+        int timeEx = 2 == o->oBehParams2ndByte ? 0 : 20;
+        if (o->oTimer > 30 + timeEx)
         {
-            o->oPosY -= (30 - o->oTimer);
+            o->oPosY -= (30 + timeEx - o->oTimer);
         }
 
-        if (60 == o->oTimer)
+        if (60 + timeEx == o->oTimer)
         {
             o->parentObj->oFightCtlBomb = NULL;
             o->parentObj->oFightCtlBombCooldown = 100;
