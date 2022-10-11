@@ -429,7 +429,9 @@ void render_init(void) {
         osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
         osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
         gViHackEnabled = TRUE;
-        check_cache_emulation();
+        if (!gIsVC) {
+            check_cache_emulation();
+        }
     } else {
         gIsConsole = TRUE;
         gBorderHeight = BORDER_HEIGHT_CONSOLE;
