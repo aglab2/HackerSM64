@@ -1413,6 +1413,7 @@ os16112*/
 #define oOWPartPressCount OBJECT_FIELD_S32(0x49)
 
 #define oCrashLineAngle OBJECT_FIELD_S32(0x1B)
+#define oCrashCheckpointActive OBJECT_FIELD_S32(0x1C)
 // specified by 100 units
 #define oCrashLinePosition OBJECT_FIELD_S32(0x49)
 #define oCrashLineDirection OBJECT_FIELD_S32(0x4A)
