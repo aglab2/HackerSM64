@@ -124,7 +124,7 @@ extern const Collision bdf_p3_collision[];
 
 static struct Pos gBowserPiecesPositions[] = 
 {
-    { 1467.f, 847.f, 752.f }, 
+    { 1367.f, 847.f, 752.f }, 
     { 1467.f, 1567.f, -93.f }, 
     { 1467.f, 2319.f, -846.f }, 
 };
