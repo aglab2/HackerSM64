@@ -815,7 +815,8 @@ void hf_death_loop_ctl()
         int type = gMarioStates->floor ? gMarioStates->floor->type : 0;
         if (type == SURFACE_DEEP_QUICKSAND 
         && gMarioStates->floorHeight == gMarioStates->pos[1] 
-        && !gMarioStates->riddenObj)
+        && !gMarioStates->riddenObj
+        && gMarioStates->action != ACT_LEDGE_GRAB)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
             o->oAction = 1;
