@@ -733,7 +733,7 @@ s32 act_in_cannon(struct MarioState *m) {
             m->faceAngle[1] = (marioObj->oMarioCannonObjectYaw + marioObj->oMarioCannonInputYaw);
             if (m->input & INPUT_A_PRESSED) {
                 f32 cosPitch = coss(m->faceAngle[0]);
-                f32 vel = gCurrCourseNum == COURSE_MTC ? 120.f : 100.f;
+                f32 vel = gCurrCourseNum == COURSE_MTC ? 115.f : 100.f;
                 m->forwardVel = vel * cosPitch;
 
                 f32 sinPitch = sins(m->faceAngle[0]);
