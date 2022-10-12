@@ -855,7 +855,13 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         m->numStars =
             save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
 
-        if (!noExit) {
+        s32 musicFade = !noExit;
+        if (gCurrCourseNum == COURSE_ROVERT && gPlayer1Controller->buttonDown & L_TRIG)
+        {
+            musicFade = FALSE;
+        }
+
+        if (musicFade) {
             drop_queued_background_music();
             fadeout_level_music(126);
         }
