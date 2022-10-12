@@ -136,6 +136,17 @@ static f32 random_float_ft(f32 from, f32 to)
 #include "aglab_sphere.inc.c"
 #include "luigiman.inc.c"
 
+static void sparkler_make_unvisited_course_sparkle(int course, f32 x, f32 y, f32 z)
+{
+   if (0 == save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(course)))
+    {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX = x + random_f32_around_zero(500.f);
+        spark->oPosY = y + random_f32_around_zero(500.f);
+        spark->oPosZ = z + random_f32_around_zero(500.f);
+    }
+}
+
 void sparkler_loop()
 {
     s32 isOWCS = gCurrLevelNum == LEVEL_CASTLE_GROUNDS && (o->header.gfx.node.flags & GRAPH_RENDER_INVISIBLE);
@@ -144,29 +155,31 @@ void sparkler_loop()
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
         if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS)
         {
-            if (0 == (o->oTimer % 9))
             {
-                s32 div = (o->oTimer / 9) % 3;
-                if (0 == div)
-                {
-                    struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-                    spark->oPosX = -3201.f + random_f32_around_zero(500.f);
-                    spark->oPosY = -916.f + random_f32_around_zero(500.f);
-                    spark->oPosZ = 3804.f + random_f32_around_zero(500.f);
-                }
+                s32 div = o->oTimer % 8;
+                if (0 == div) 
+                    sparkler_make_unvisited_course_sparkle(COURSE_TOTWC, -3201.f, -916.f, 3804.f);
                 if (1 == div)
-                {
-                    struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-                    spark->oPosX = -4885.f + random_f32_around_zero(500.f);
-                    spark->oPosY = -915.f + random_f32_around_zero(500.f);
-                    spark->oPosZ = 2784.f + random_f32_around_zero(500.f);
-                }
+                    sparkler_make_unvisited_course_sparkle(COURSE_CRASH, -4885.f, -915.f, 2784.f);
                 if (2 == div)
+                    sparkler_make_unvisited_course_sparkle(COURSE_COTMC, -3254.f, -915.f, 1510.f);
+                if (3 == div)
+                    sparkler_make_unvisited_course_sparkle(COURSE_PSS  ,  3802.f, 645.f, 199.f);
+                if (4 == div)
+                    sparkler_make_unvisited_course_sparkle(COURSE_VCM  ,  2572.f, 1218.f, -2741.f);
+                if (5 == div)
+                    sparkler_make_unvisited_course_sparkle(COURSE_DF   ,  2504.f, -830.f, -2651.f);
+                if (6 == div)
+                    sparkler_make_unvisited_course_sparkle(COURSE_WMOTR, -1344.f, -1243.f, 4343.f);
+                if (7 == div)
                 {
-                    struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-                    spark->oPosX = -3254.f + random_f32_around_zero(500.f);
-                    spark->oPosY = -915.f + random_f32_around_zero(500.f);
-                    spark->oPosZ = 1510.f + random_f32_around_zero(500.f);
+                    if (0x3 != save_file_get_star_flags((gCurrSaveFileNum - 1), COURSE_NUM_TO_INDEX(COURSE_VCUTM)))
+                    {
+                        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+                        spark->oPosX = -2211.f + random_f32_around_zero(500.f);
+                        spark->oPosY = -731.f  + random_f32_around_zero(500.f);
+                        spark->oPosZ = -1213.f + random_f32_around_zero(500.f);
+                    }
                 }
             }
         }
