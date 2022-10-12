@@ -239,6 +239,17 @@ void bhv_aglab_rng_surface_check_loop()
 
 void bhv_aglab_rng_loop()
 {
+    if (3 == gCurrentArea->index)
+    {
+        f32 dx = gMarioStates->pos[0] - -3402.f;
+        f32 dy = gMarioStates->pos[1] - 4309.f;
+        f32 dz = gMarioStates->pos[2] - -614.f;
+        if (dx*dx + dy*dy + dz*dz < 100000.f)
+        {
+            print_text_centered(160, 20, "NICE");
+        }
+    }
+
     if (gWarpTrigger)
     {
         if (0 == o->oSubAction)
