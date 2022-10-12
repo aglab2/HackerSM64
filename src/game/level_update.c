@@ -899,19 +899,19 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 
                 if (gCurrCourseNum == COURSE_HF)
                 {
-                    if (gMarioStates->pos[2] > 5100.f)
+                    if (gMarioStates->pos[2] > 4850.f && gMarioStates->pos[0] > 0.f)
                     {
                         sSourceWarpNodeId = 0x20;
                     }
-                    else if (gMarioStates->pos[0] > 3100.f)
+                    else if (gMarioStates->pos[0] > 2900.f)
                     {
                         sSourceWarpNodeId = 0x21;
                     }
-                    else if (gMarioStates->pos[2] < -5400.f)
+                    else if (gMarioStates->pos[2] < -4900.f)
                     {
                         sSourceWarpNodeId = 0x22;
                     }
-                    else if (gMarioStates->pos[2] > 0.f && gMarioStates->pos[0] < -6000.f)
+                    else if (gMarioStates->pos[2] > 0.f && gMarioStates->pos[0] < -5700.f)
                     {
                         sSourceWarpNodeId = 0x23;
                     }
