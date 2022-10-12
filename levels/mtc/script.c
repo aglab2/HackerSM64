@@ -77,7 +77,6 @@ const LevelScript level_mtc_entry[] = {
 		OBJECT(MODEL_MTC_ICE_ROTAT, -4586, 2562, -5291, 0, 0, 0, (2 << 16), bhvMtcBlueRotat),
 		OBJECT(MODEL_MTC_ICE_ROTAT, -5349, 2727, -5260, 0, 0, 0, (3 << 16), bhvMtcBlueRotat),
 		OBJECT(MODEL_NONE, 7440, 758, 5290, 0, 144, 0, (17 << 16), bhvCoinFormation),
-		OBJECT(MODEL_BULLY, 6036, -410, 7477, 0, 144, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_BULLY, 6356, 300, -372, 0, 144, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_BULLY, -5555, 1258, -6081, 0, 144, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_BULLY, 9779, 1672, -9725, 0, 144, 0, 0x00000000, bhvSmallBully),
