@@ -1943,7 +1943,14 @@ void check_death_barrier(struct MarioState *m) {
 void check_lava_boost(struct MarioState *m) {
     if (!(m->action & ACT_FLAG_RIDING_SHELL) && m->pos[1] < m->floorHeight + 10.0f) {
         if (!(m->flags & MARIO_METAL_CAP)) {
-            m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+            if (gCurrCourseNum == COURSE_MF && gCurrAreaIndex == 2)
+            {
+                m->hurtCounter += 6;
+            }
+            else
+            {
+                m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+            }
         }
 
         update_mario_sound_and_camera(m);
