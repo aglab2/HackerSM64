@@ -1367,6 +1367,9 @@ os16112*/
 #define oMtcGreenLineActiveStatus OBJECT_FIELD_S32(0x1B)
 
 #define oMtcRedStatus OBJECT_FIELD_S32(0x1B)
+#define oMtcLastSafeX OBJECT_FIELD_F32(0x1C)
+#define oMtcLastSafeY OBJECT_FIELD_F32(0x1D)
+#define oMtcLastSafeZ OBJECT_FIELD_F32(0x1E)
 
 #define oMtcBricksStatus OBJECT_FIELD_S32(0x1B)
 #define oMtcBricksCount OBJECT_FIELD_S32(0x1C)

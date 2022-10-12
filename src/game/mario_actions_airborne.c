@@ -1605,6 +1605,7 @@ s32 act_hold_butt_slide_air(struct MarioState *m) {
     return FALSE;
 }
 
+extern s32 gLavaBurn;
 s32 act_lava_boost(struct MarioState *m) {
 #if ENABLE_RUMBLE
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
@@ -1632,6 +1633,7 @@ s32 act_lava_boost(struct MarioState *m) {
                     }
                     else
                     {
+                        gLavaBurn = 1;
                         m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
                     }
                 }

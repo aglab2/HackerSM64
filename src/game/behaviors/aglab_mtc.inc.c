@@ -1,3 +1,4 @@
+s32 gLavaBurn = 0;
 
 void mtc_yellow_spawner_init()
 {
@@ -180,6 +181,7 @@ void mtc_green_spinner_init()
     }
 }
 
+static s32 sMtcInWarp = 0;
 void mtc_green_spinner_loop()
 {
     if (o->oAction == 0)
@@ -276,7 +278,7 @@ void mtc_green_spinner_loop()
     else if (o->oAction == 3)
     {
         print_text_centered(160, 20, "PRESS L TO RETRY");
-        if (gPlayer1Controller->buttonPressed & L_TRIG)
+        if (!sMtcInWarp && (gPlayer1Controller->buttonPressed & L_TRIG))
         {
             cur_obj_become_intangible();
             o->oAction = 5;
@@ -313,6 +315,7 @@ void mtc_green_spinner_loop()
 
 void mtc_green_line_switch_init()
 {
+    sMtcInWarp = 0;
     f32 d;
     o->parentObj = cur_obj_find_nearest_object_with_behavior(bhvMtcGreenPlatspin, &d);
 }
@@ -425,11 +428,34 @@ static void mtc_switch_all_vcol_alpha(u8 alpha)
     switch_vcol_alpha(ARGUMENT_WITH_SIZE(mtc_dl_Course_13_007_mesh_layer_1_vtx_3), alpha);
 }
 
+extern s16 sDelayedWarpOp;
+
 extern const Collision mtc_ground_collision[];
 extern const Collision mtc_ground2_collision[];
 extern const Collision mtc_ground_safe_collision[];
+
+static s32 mtc_on_golden_bar()
+{
+    return (-3500.f < o->oMtcLastSafeZ && o->oMtcLastSafeZ < 1849.f && o->oMtcLastSafeX > 13900.f);
+}
+
+static s32 mtc_on_pedestal()
+{
+    return (-1104.f < o->oMtcLastSafeZ && o->oMtcLastSafeZ < -392.f && 5889.f < o->oMtcLastSafeX && o->oMtcLastSafeX < 6622.f);
+}
+
 void mtc_red_ground_loop()
 {
+    s32 wasBurnt = gLavaBurn;
+    gLavaBurn = 0;
+    int type = gMarioStates->floor ? gMarioStates->floor->type : -1;
+    if ((type == 0 || type == SURFACE_NOT_SLIPPERY) && (gMarioStates->pos[1] == gMarioStates->floorHeight))
+    {
+        o->oMtcLastSafeX = gMarioStates->pos[0];
+        o->oMtcLastSafeY = gMarioStates->pos[1];
+        o->oMtcLastSafeZ = gMarioStates->pos[2];
+    }
+
     if (gMarioStates->pos[2] < 1600.f || gMarioStates->pos[0] > 1500.f || gMarioStates->pos[1] > 1128.f)
     {
         if (0 != o->oAction)
@@ -439,7 +465,109 @@ void mtc_red_ground_loop()
             mtc_switch_all_vcol_alpha(0xff);
             o->oAction = 0;
         }
+
+        // quick respawn points
+        if (6 != gCurrActNum)
+        {
+            if (0 == o->oSubAction)
+            {
+                sMtcInWarp = 0;
+                if (gMarioStates->health > 0x380
+                && 0 == sDelayedWarpOp
+                && o->oMtcLastSafeY > 500.f
+                && gMarioStates->pos[1] < -500.f
+                && wasBurnt
+                && !mtc_on_golden_bar()
+                && !mtc_on_pedestal())
+                {
+                    o->oTimer = 0;
+                    if (o->oMtcLastSafeZ > 500.f)
+                    {
+                        if (o->oMtcLastSafeX > 5000.f)
+                        {
+                            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                            o->oSubAction = 1;
+                            sMtcInWarp = 1;
+                        }
+                        else
+                        {
+                            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                            o->oSubAction = 2;
+                            sMtcInWarp = 1;
+                        }
+                    }
+                    else
+                    {
+                        if (o->oMtcLastSafeX < 3000.f)
+                        {
+                            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                            o->oSubAction = 3;
+                            sMtcInWarp = 1;
+                        }
+                        else
+                        {
+                            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                            o->oSubAction = 4;
+                            sMtcInWarp = 1;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (o->oTimer == 12)
+                {
+                    if (1 == o->oSubAction)
+                    {
+                        gMarioStates->pos[0] = 5495.f;
+                        gMarioStates->pos[1] = -204.f;
+                        gMarioStates->pos[2] = 7612.f;
+                        gMarioStates->faceAngle[1] = 0x6000;
+                    }
+                    else if (2 == o->oSubAction)
+                    {
+                        gMarioStates->pos[0] = 3065.f;
+                        gMarioStates->pos[1] = -44.f;
+                        gMarioStates->pos[2] = 1875.f;
+                        gMarioStates->faceAngle[1] = 0;
+                    }
+                    else if (3 == o->oSubAction)
+                    {
+                        gMarioStates->pos[0] = 1846.f;
+                        gMarioStates->pos[1] = -38.f;
+                        gMarioStates->pos[2] = -2463.f;
+                        gMarioStates->faceAngle[1] = 0xa000;
+                    }
+                    else if (4 == o->oSubAction)
+                    {
+                        gMarioStates->pos[0] = 2022.f;
+                        gMarioStates->pos[1] = 602.f;
+                        gMarioStates->pos[2] = -7693.f;
+                        gMarioStates->faceAngle[1] = 0x4000;
+                    }
+                    gMarioStates->vel[0] = 0;
+                    gMarioStates->vel[1] = 0;
+                    gMarioStates->vel[2] = 0;
+                    gMarioStates->forwardVel = 0;
+                    drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
+                }
+                if (o->oTimer == 13)
+                {
+                    reset_camera(gCamera);
+                }
+                if (o->oTimer == 14)
+                {
+                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+                    o->oSubAction = 0;
+                }
+            }
+        }
+
         return;
+    }
+    else
+    {
+        o->oSubAction = 0;
     }
 
     if (o->oAction == 0)
