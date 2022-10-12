@@ -117,6 +117,14 @@ void bhv_spiders_hawk_loop()
             o->oPosZ = start[2];
             o->oSpidersHawkAct = 0;
         }
+        if (o->oBehParams2ndByte == 2 && gMarioStates->pos[1] < 540.f)
+        {
+            f32* start = sSpiderHawkStarts[o->oBehParams2ndByte];
+            o->oPosX = start[0];
+            o->oPosY = start[1];
+            o->oPosZ = start[2];
+            o->oSpidersHawkAct = 0;
+        }
         if (o->oBehParams2ndByte == 0 && gMarioStates->pos[0] > 4200.f && gMarioStates->pos[2] > 0.f)
         {
             f32* end = sSpiderHawkEnds[o->oBehParams2ndByte];
@@ -136,14 +144,17 @@ void bhv_spiders_hawk_loop()
 
         f32* start = sSpiderHawkStarts[o->oBehParams2ndByte];
         f32* end = sSpiderHawkEnds  [o->oBehParams2ndByte];
-        for (int i = 0; i < 1; i++)
+        if (5 != o->oBehParams2ndByte)
         {
-            f32 frac = random_float();
-            struct Object* sparkle = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-            if (sparkle)
+            for (int i = 0; i < 1; i++)
             {
-                obj_scale(sparkle, 2.f);
-                spiders_calculate_traj_xyz(start, end, frac, sparkle);
+                f32 frac = random_float();
+                struct Object* sparkle = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+                if (sparkle)
+                {
+                    obj_scale(sparkle, 2.f);
+                    spiders_calculate_traj_xyz(start, end, frac, sparkle);
+                }
             }
         }
     }
