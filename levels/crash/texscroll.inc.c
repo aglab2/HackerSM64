@@ -15,7 +15,7 @@ void scroll_sts_mat_crash_dl_water() {
 
 void scroll_crash_dl_Tubaloopa_004_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 460;
+	int count = 288;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
