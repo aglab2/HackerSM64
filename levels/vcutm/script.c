@@ -88,7 +88,7 @@ const LevelScript level_vcutm_entry[] = {
 		OBJECT(MODEL_BOWLING_BALL, -2750, 9, -4154, 0, 0, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_AMP, -2101, 9, 538, 0, 0, 0, 0x00000000, bhvHomingAmp),
 		OBJECT(MODEL_AMP, -1853, 9, -4684, 0, 0, 0, 0x00000000, bhvHomingAmp),
-		OBJECT(MODEL_BITDW_WARP_PIPE, -2905, -151, 2734, 0, 90, 0, 0x000A0000, bhvWarpPipe),
+		OBJECT(MODEL_BITDW_WARP_PIPE, -2905, -201, 2734, 0, 90, 0, 0x000A0000, bhvWarpPipe),
 		OBJECT(MODEL_NONE, -2330, -208, -6811, 0, 0, 0, 0x0A000000, bhvWarp),
 		OBJECT(MODEL_NONE, -2130, -208, -6811, 0, 0, 0, 0x0A010000, bhvWarp),
 		OBJECT(MODEL_NONE, -2530, -208, -6811, 0, 0, 0, 0x0A010000, bhvWarp),
