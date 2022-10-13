@@ -28,6 +28,7 @@
 #include "main.h"
 #include "rovert.h"
 
+#include "hacktice/main.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -44,8 +45,9 @@ s8 gRedCoinsCollected;
 #if defined(WIDE) && !defined(PUPPYCAM)
 u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
-u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
+u8 textPressL[] = { TEXT_HUD_PRESS_L };
+u8 pressBToHacktice[] = { TEXT_HUD_PRESS_B_TO_HACKTICE };
 
 #if MULTILANG
 #define seg2_course_name_table course_name_table_eu_en
@@ -604,11 +606,11 @@ void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8
     u8 index = 0;
 
     if (scrollDirection == MENU_SCROLL_VERTICAL) {
-        if ((gPlayer3Controller->rawStickY >  60) || (gPlayer3Controller->buttonDown & (U_CBUTTONS | U_JPAD))) index++;
-        if ((gPlayer3Controller->rawStickY < -60) || (gPlayer3Controller->buttonDown & (D_CBUTTONS | D_JPAD))) index += 2;
+        if ((gPlayer3Controller->rawStickY >  60) || (gPlayer3Controller->buttonDown & (U_JPAD))) index++;
+        if ((gPlayer3Controller->rawStickY < -60) || (gPlayer3Controller->buttonDown & (D_JPAD))) index += 2;
     } else if (scrollDirection == MENU_SCROLL_HORIZONTAL) {
-        if ((gPlayer3Controller->rawStickX >  60) || (gPlayer3Controller->buttonDown & (R_CBUTTONS | R_JPAD))) index += 2;
-        if ((gPlayer3Controller->rawStickX < -60) || (gPlayer3Controller->buttonDown & (L_CBUTTONS | L_JPAD))) index++;
+        if ((gPlayer3Controller->rawStickX >  60) || (gPlayer3Controller->buttonDown & (R_JPAD))) index += 2;
+        if ((gPlayer3Controller->rawStickX < -60) || (gPlayer3Controller->buttonDown & (L_JPAD))) index++;
     }
 
     if (((index ^ gMenuHoldKeyIndex) & index) == 2) {
@@ -1561,6 +1563,19 @@ void render_widescreen_setting(void) {
 }
 #endif
 
+void render_hacktice_setting(int x, int y)
+{
+    bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 80;
+    if (hackticeAllowed)
+    {
+        if (!Hacktice_gEnabled)
+            print_generic_string(x, y, pressBToHacktice);
+
+        if (gPlayer3Controller->buttonPressed & B_BUTTON)
+            Hacktice_gEnabled = !Hacktice_gEnabled;
+    }
+}
+
 #if defined(VERSION_JP) || defined(VERSION_SH)
     #define CRS_NUM_X1 93
 #elif defined(VERSION_US)
@@ -1599,46 +1614,57 @@ void render_pause_my_score_coins(void) {
     u8 courseIndex = COURSE_NUM_TO_INDEX(gCurrCourseNum);
     u8 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
 
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    if (!Hacktice_gEnabled)
+    {
+        gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
-        print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
-    }
-
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-
-    if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)
-        && (save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0)) {
-        print_generic_string(MYSCORE_X, 121, LANGUAGE_ARRAY(textMyScore));
-    }
-
-    u8 *courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
-
-    if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_generic_string(TXT_COURSE_X, 157, LANGUAGE_ARRAY(textCourse));
-        int_to_str(gCurrCourseNum, strCourseNum);
-        print_generic_string(CRS_NUM_X1, 157, strCourseNum);
-
-        u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + gDialogCourseActNum - 1]);
-
-        if (starFlags & (1 << (gDialogCourseActNum - 1))) {
-            print_generic_string(TXT_STAR_X, 140, textStar);
-        } else {
-            print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
+        if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
+            print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
+            print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
         }
 
-        print_generic_string(ACT_NAME_X, 140, actName);
-        print_generic_string(LVL_NAME_X, 157, &courseName[3]);
-    } else {
-        print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
-    }
+        gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+        if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)
+            && (save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0)) {
+            print_generic_string(MYSCORE_X, 121, LANGUAGE_ARRAY(textMyScore));
+        }
+
+        u8 *courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
+
+        if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
+            print_generic_string(TXT_COURSE_X, 157, LANGUAGE_ARRAY(textCourse));
+            int_to_str(gCurrCourseNum, strCourseNum);
+            print_generic_string(CRS_NUM_X1, 157, strCourseNum);
+
+            u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + gDialogCourseActNum - 1]);
+
+            if (starFlags & (1 << (gDialogCourseActNum - 1))) {
+                print_generic_string(TXT_STAR_X, 140, textStar);
+            } else {
+                print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
+            }
+
+            print_generic_string(ACT_NAME_X, 140, actName);
+            print_generic_string(LVL_NAME_X, 157, &courseName[3]);
+        } else {
+            print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
+        }
+
+        render_hacktice_setting(90, 40);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    }
+    else
+    {
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        Hacktice_onPause();
+        render_hacktice_setting(90, 40);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    }
 }
 
 #define TXT1_X 3
@@ -1838,6 +1864,9 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
+    if (Hacktice_gEnabled)
+        Hacktice_onPause();
+
     if (gDialogLineNum <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) { // Main courses
         courseName = segmented_to_virtual(courseNameTbl[gDialogLineNum]);
         render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, gDialogLineNum);
@@ -1854,6 +1883,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
                                                   strVal);
         print_generic_string(x + 60, y + 13, strVal);
     }
+    render_hacktice_setting(x - 20, y + 120);
 
     print_generic_string(x - 9, y + 30, courseName);
 
@@ -1926,7 +1956,7 @@ s32 render_pause_courses_and_castle(void) {
             render_pause_castle_menu_box(160, 143);
             render_pause_castle_main_strings(104, 60);
 
-            if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | Z_TRIG)) {
+            if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
                 gMenuMode = MENU_MODE_NONE;
@@ -1937,7 +1967,8 @@ s32 render_pause_courses_and_castle(void) {
             break;
     }
 #if defined(WIDE) && !defined(PUPPYCAM)
-        render_widescreen_setting();
+        if (!Hacktice_gEnabled)
+            render_widescreen_setting();
 #endif
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
