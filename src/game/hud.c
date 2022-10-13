@@ -457,8 +457,16 @@ void render_hud_timer(void) {
     Texture *(*hudLUT)[58] = segmented_to_virtual(&main_hud_lut);
     u16 timerValFrames = gHudDisplay.timer;
     u16 timerMins = timerValFrames / (30 * 60);
-    u16 timerSecs = (timerValFrames - (timerMins * 1800)) / 30;
-    u16 timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) * 3.3f;
+    u16 timerSecs = (timerValFrames - (timerMins * 1800)) / 30;\
+    u16 timerFracSecs;
+    if (Hacktice_gEnabled)
+    {
+        timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) * 3.3f;
+    }
+    else
+    {
+        timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) / 3;
+    }
 
     if (!Hacktice_gEnabled)
     {
@@ -475,7 +483,14 @@ void render_hud_timer(void) {
 
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 165, "%0d", timerMins);
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 165, "%02d", timerSecs);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 165, "%02d", timerFracSecs);
+    if (Hacktice_gEnabled)
+    {
+        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 165, "%02d", timerFracSecs);
+    }
+    else
+    {
+        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 165, "%d", timerFracSecs);
+    }
 
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
     render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 56, (*hudLUT)[GLYPH_APOSTROPHE]);
