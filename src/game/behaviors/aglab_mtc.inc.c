@@ -445,6 +445,16 @@ static s32 mtc_on_golden_bar()
     return (-3500.f < o->oMtcLastSafeZ && o->oMtcLastSafeZ < 1849.f && o->oMtcLastSafeX > 13900.f);
 }
 
+static s32 mtc_on_golden_bar_v2()
+{
+    return (-4000.f < gMarioStates->pos[2] && gMarioStates->pos[2] < 2200.f && gMarioStates->pos[0] > 13700.f);
+}
+
+static s32 mtc_near_crystals_v2()
+{
+    return (9600.f < gMarioStates->pos[0] && gMarioStates->pos[0] < 12900.f && 6500.f < gMarioStates->pos[2] && gMarioStates->pos[2] < 9300.f);
+}
+
 static s32 mtc_on_pedestal()
 {
     return (-1104.f < o->oMtcLastSafeZ && o->oMtcLastSafeZ < -392.f && 5889.f < o->oMtcLastSafeX && o->oMtcLastSafeX < 6622.f);
@@ -484,6 +494,8 @@ void mtc_red_ground_loop()
                 && gMarioStates->pos[1] < -500.f
                 && wasBurnt
                 && !mtc_on_golden_bar()
+                && !mtc_on_golden_bar_v2()
+                && !mtc_near_crystals_v2()
                 && !mtc_on_pedestal())
                 {
                     o->oTimer = 0;

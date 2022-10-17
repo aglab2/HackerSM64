@@ -272,7 +272,7 @@ void bhv_aglab_rng_loop()
         int attempt = (o->oDistanceToMario > 500.f) || (gCurrentArea->index != 7 && gMarioStates->pos[2] < rng_z_attempt_threshold());
         if (attempt)
         {
-            if ((L_TRIG & gPlayer1Controller->buttonPressed) && (gMarioStates->action != ACT_FALL_AFTER_STAR_GRAB && gMarioStates->action != ACT_STAR_DANCE_WATER && gMarioStates->action != ACT_STAR_DANCE_EXIT && gMarioStates->action != ACT_STAR_DANCE_NO_EXIT))
+            if ((L_TRIG & gPlayer1Controller->buttonPressed) && (gMarioStates->action != ACT_LEDGE_GRAB && gMarioStates->action != ACT_FALL_AFTER_STAR_GRAB && gMarioStates->action != ACT_STAR_DANCE_WATER && gMarioStates->action != ACT_STAR_DANCE_EXIT && gMarioStates->action != ACT_STAR_DANCE_NO_EXIT))
             {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
                 o->oAction = 1;
