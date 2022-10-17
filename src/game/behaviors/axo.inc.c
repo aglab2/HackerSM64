@@ -243,6 +243,10 @@ void bhv_flipnote_frog_loop(void) {
         ) {
             f32 accuracy = calculate_flipnote_accuracy();
             f32 targetAccuracy = 0.8f - 0.05f * (o->o100 / (30*60));
+            if (targetAccuracy < 0.55f)
+            {
+                targetAccuracy = 0.55f;
+            }
             if (accuracy >= targetAccuracy) {
                 o->oF8 = 1;
             }
