@@ -206,6 +206,7 @@ void bhv_spiders_death_trigger_loop()
         if (gMarioStates->pos[1] < o->oPosY)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            gAllowPausing = 0;
             o->oAction = 1;
         }
         else
@@ -242,6 +243,7 @@ void bhv_spiders_death_trigger_loop()
         if (o->oTimer == 14)
         {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            gAllowPausing = 1;
             o->oAction = 0;
         }
     }

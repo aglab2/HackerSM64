@@ -820,6 +820,7 @@ void hf_death_loop_ctl()
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
             o->oAction = 1;
+            gAllowPausing = 0;
         }
     }
     else
@@ -873,6 +874,7 @@ void hf_death_loop_ctl()
         {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
             o->oAction = 0;
+            gAllowPausing = 1;
         }
     }
 }

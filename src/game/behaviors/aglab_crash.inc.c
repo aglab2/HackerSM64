@@ -96,6 +96,7 @@ void crash_ctl_loop()
      || (floorType == SURFACE_SHALLOW_QUICKSAND && gMarioStates->floorHeight == gMarioStates->pos[1])))
     {
         play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+        gAllowPausing = 0;
         if (1 == o->oAction)
         {
             struct Object** bullets = (struct Object**) aglabScratch;
@@ -333,6 +334,7 @@ void crash_ctl_loop()
         {
             reset_camera(gCamera);
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            gAllowPausing = 1;
             o->oAction = 2 * o->oCrashCheckpointActive;
         }
     }

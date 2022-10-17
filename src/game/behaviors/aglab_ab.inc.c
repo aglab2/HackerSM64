@@ -160,6 +160,7 @@ void bhv_ab_sand_loop()
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0xc2 / 2, 0xb2 / 2, 0x30 / 2);
             o->oAction = 2;
+            gAllowPausing = 0;
         }
     }
     else if (2 == o->oAction)
@@ -184,6 +185,7 @@ void bhv_ab_sand_loop()
         {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0xc2 / 2, 0xb2 / 2, 0x30 / 2);
             o->oAction = 1;
+            gAllowPausing = 1;
         }
     }
 }

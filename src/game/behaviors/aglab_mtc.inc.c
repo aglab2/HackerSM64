@@ -506,12 +506,14 @@ void mtc_red_ground_loop()
                             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
                             o->oSubAction = 1;
                             sMtcInWarp = 1;
+                            gAllowPausing = 0;
                         }
                         else
                         {
                             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
                             o->oSubAction = 2;
                             sMtcInWarp = 1;
+                            gAllowPausing = 0;
                         }
                     }
                     else
@@ -521,12 +523,14 @@ void mtc_red_ground_loop()
                             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
                             o->oSubAction = 3;
                             sMtcInWarp = 1;
+                            gAllowPausing = 0;
                         }
                         else
                         {
                             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
                             o->oSubAction = 4;
                             sMtcInWarp = 1;
+                            gAllowPausing = 0;
                         }
                     }
                 }
@@ -578,6 +582,7 @@ void mtc_red_ground_loop()
                 {
                     play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
                     o->oSubAction = 0;
+                    gAllowPausing = 1;
                 }
             }
         }

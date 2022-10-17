@@ -45,12 +45,14 @@ void vcm_ctl_loop()
         if (!gIsGravityFlipped && gMarioStates->pos[1] < -1329.f)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            gAllowPausing = 0;
             o->oAction = 1;
             return;
         }
         if (gIsGravityFlipped && gMarioStates->pos[1] < 4784.f)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            gAllowPausing = 0;
             o->oAction = 1;
             return;
         }
@@ -126,6 +128,7 @@ void vcm_ctl_loop()
         {
             reset_camera(gCamera);
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            gAllowPausing = 1;
             o->oAction = 0;
         }
     }

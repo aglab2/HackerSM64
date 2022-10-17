@@ -466,6 +466,7 @@ void bhv_luigiman_respawn_loop()
         if (gMarioStates->floorHeight == gMarioStates->pos[1] && type == SURFACE_QUICKSAND && gMarioStates->action != ACT_LEDGE_GRAB && gMarioStates->health > 0x100)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0, 0, 0);
+            gAllowPausing = 0;
             o->oAction = 1;
         }
     }
@@ -494,6 +495,7 @@ void bhv_luigiman_respawn_loop()
         {
             reset_camera(gCamera);
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            gAllowPausing = 1;
             o->oAction = 0;
         }
     }

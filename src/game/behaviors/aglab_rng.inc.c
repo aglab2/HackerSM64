@@ -275,6 +275,7 @@ void bhv_aglab_rng_loop()
             if ((L_TRIG & gPlayer1Controller->buttonPressed) && (gMarioStates->action != ACT_LEDGE_GRAB && gMarioStates->action != ACT_FALL_AFTER_STAR_GRAB && gMarioStates->action != ACT_STAR_DANCE_WATER && gMarioStates->action != ACT_STAR_DANCE_EXIT && gMarioStates->action != ACT_STAR_DANCE_NO_EXIT))
             {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                gAllowPausing = 0;
                 o->oAction = 1;
                 return;
             }
@@ -291,6 +292,7 @@ void bhv_aglab_rng_loop()
         if (gDeathFloorBarrier)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            gAllowPausing = 0;
             o->oAction = 1;
             gDeathFloorBarrier = 0;
         }
@@ -301,6 +303,7 @@ void bhv_aglab_rng_loop()
             if (floor && (floor->type == SURFACE_SHALLOW_QUICKSAND))
             {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+                gAllowPausing = 0;
                 o->oAction = 1;
                 return;
             }
@@ -308,6 +311,7 @@ void bhv_aglab_rng_loop()
         if (sWasDetectedReset)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            gAllowPausing = 0;
             o->oAction = 1;
             return;
         }
@@ -335,6 +339,7 @@ void bhv_aglab_rng_loop()
         if (o->oTimer == 14)
         {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            gAllowPausing = 1;
             o->oAction = 0;
             sWasDetectedReset = 0;
             gDeathFloorBarrier = 0;

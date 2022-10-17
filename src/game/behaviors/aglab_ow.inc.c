@@ -7,6 +7,7 @@ extern s8  gDnvicMapAlphaVelocity;
 extern hsv gDnvicColor;
 extern hsv gDnvicCurrentColor;
 extern u8 sPieClearCoins;
+extern u8 gAllowPausing;
 
 extern const BehaviorScript bhvOWDecor[];
 
@@ -25,6 +26,7 @@ void ow_ctl_init()
     gDnvicCurrentColor.v = gDnvicColor.v;
     gDnvicCurrentColor.s = gDnvicColor.s;
     sPieClearCoins = 0;
+    gAllowPausing = 1;
 }
 
 void ow_ctl_loop()
@@ -294,6 +296,7 @@ void ow_part_loop()
             {
                 cur_obj_play_sound_2(SOUND_GENERAL2_STAR_APPEARS);
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 40, 0, 0, 0);
+                gAllowPausing = 0;
             }
             else if (o->oTimer == 101)
             {
@@ -306,6 +309,7 @@ void ow_part_loop()
             else if (o->oTimer == 102)
             {
                 play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 30, 0, 0, 0);
+                gAllowPausing = 1;
             }
             else if (200 == o->oTimer)
             {
@@ -680,6 +684,7 @@ void ow_ctl2_init()
     }
     ow2_reset_colors();
     ow2_write_colors();
+    gAllowPausing = 1;
 }
 
 static void ow_ctl2_approach_colors(rgb* color, hsv* target)
