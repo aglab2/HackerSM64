@@ -163,6 +163,7 @@ Gfx vcm_arrow_Plane_mesh_layer_4_tri_0[] = {
 Gfx mat_vcm_arrow_arrow[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
@@ -180,6 +181,7 @@ Gfx mat_vcm_arrow_arrow[] = {
 
 Gfx mat_revert_vcm_arrow_arrow[] = {
 	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
