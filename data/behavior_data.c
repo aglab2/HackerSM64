@@ -413,11 +413,12 @@ const BehaviorScript bhvStickyPlat[] = {
     END_LOOP(),
 };
 
+extern void bhv_hanging_plat_init2();
 const BehaviorScript bhvHangingPlat[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(Hanging_Plat_collision),
     OR_INT(oFlags, (OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL)),
-	// CALL_NATIVE(bhv_hanging_plat_init),
+	CALL_NATIVE(bhv_hanging_plat_init2),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hanging_plat_loop),
         CALL_NATIVE(load_object_collision_model),

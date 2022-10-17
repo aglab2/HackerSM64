@@ -33,6 +33,46 @@ void bhv_hanging_plat_init(void){
 	o->oMoveAngleYaw = o->oFaceAngleYaw;
 }
 
+void bhv_hanging_plat_init2(void)
+{
+	if (1 == o->oBehParams2ndByte)
+	{
+		{
+			struct Object* other = spawn_object(o, MODEL_HANGING_PLAT, bhvHangingPlat);
+			other->oBehParams2ndByte = o->oBehParams2ndByte;
+			other->oBehParams = o->oBehParams;
+			other->oAction = 2;
+			f32 spd = (f32) ((o->oBehParams) & 0xFF) * 2.0f;
+			other->oPosX = o->oPosX + spd * 48;
+			other->oPosY = o->oPosY;
+			other->oPosZ = o->oPosZ + spd * 48;
+			other->oBehParams2ndByte = 3;
+		}
+		{
+			struct Object* other = spawn_object(o, MODEL_HANGING_PLAT, bhvHangingPlat);
+			other->oBehParams2ndByte = o->oBehParams2ndByte;
+			other->oBehParams = o->oBehParams;
+			other->oAction = 1;
+			f32 spd = (f32) ((o->oBehParams) & 0xFF) * 2.0f;
+			other->oPosX = o->oPosX;
+			other->oPosY = o->oPosY;
+			other->oPosZ = o->oPosZ + spd * 48;
+			other->oBehParams2ndByte = 3;
+		}
+		{
+			struct Object* other = spawn_object(o, MODEL_HANGING_PLAT, bhvHangingPlat);
+			other->oBehParams2ndByte = o->oBehParams2ndByte;
+			other->oBehParams = o->oBehParams;
+			other->oAction = 3;
+			f32 spd = (f32) ((o->oBehParams) & 0xFF) * 2.0f;
+			other->oPosX = o->oPosX + spd * 48;
+			other->oPosY = o->oPosY;
+			other->oPosZ = o->oPosZ;
+			other->oBehParams2ndByte = 3;
+		}
+	}
+}
+
 void bhv_hanging_plat_loop(void){
 	f32 spd = (f32) ((o->oBehParams) & 0xFF) * 2.0f;
 	u8 time = ((o->oBehParams>>24) & 0xFF) / 2.0f;
@@ -54,6 +94,7 @@ void bhv_hanging_plat_loop(void){
 			}
 			break;
 		case 1:
+		case 3:
 			if(o->oTimer<12){
 				o->oForwardVel = 0.0f;
 			}else{
