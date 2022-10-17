@@ -103,6 +103,13 @@ void bhv_spawned_star_loop(void) {
     }
 
     cur_obj_move_using_fvel_and_gravity();
+    if (COURSE_ROVERT == gCurrCourseNum && 6 == BPARAM1)
+    {
+        o->oPosX = gMarioStates->pos[0];
+        o->oPosY = gMarioStates->pos[1];
+        o->oPosZ = gMarioStates->pos[2];
+    }
+
     o->oFaceAngleYaw += o->oAngleVelYaw;
     o->oInteractStatus = INT_STATUS_NONE;
 }
