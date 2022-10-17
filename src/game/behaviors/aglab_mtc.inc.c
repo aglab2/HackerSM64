@@ -189,7 +189,9 @@ void mtc_green_spinner_loop()
         o->oPosY = o->oHomeY + 50.f * sins(142 * o->oTimer);
         if (gMarioObject->platform == o)
         {
-            o->oAction = 1;
+            o->oMtcGreenLineActiveStatus = 1;
+            spinner_line_reset();
+            o->oAction = 6;
         }
     }
     else if (o->oAction == 1)
@@ -306,6 +308,10 @@ void mtc_green_spinner_loop()
             o->oAction = 0;
         }
     }
+    else if (o->oAction == 6)
+    {
+        o->oAction = 1;
+    }
     
     o->parentObj->oFaceAngleYaw += 369;
     o->parentObj->oPosX = o->oPosX;
@@ -328,7 +334,7 @@ void scroll_mtc_level_geo_mtc_line_switch_off_set(struct SetTileSize* ts);
 
 void mtc_green_line_switch_loop()
 {
-    if (o->parentObj->oAction == 5)
+    if (o->parentObj->oAction == 5 || o->parentObj->oAction == 6)
     {
         obj_set_model(o, MODEL_MTC_LINE_SWITCH);
         o->oAction = 0;
