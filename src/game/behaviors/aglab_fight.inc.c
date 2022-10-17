@@ -544,6 +544,8 @@ void fight_platform_ctl_loop()
             o->oAction = 9;
             o->oFightCtlRoped->activeFlags = 0;
             o->oFightCtlRoped = NULL;
+            save_file_set_flags(SAVE_FLAG_MOAT_DRAINED);
+            save_file_do_save(gCurrSaveFileNum - 1);
             return;
         }
         // o->oFaceAngleRoll = 0x600 * (3 - o->parentObj->oHealth);

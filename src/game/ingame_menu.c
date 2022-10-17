@@ -1565,7 +1565,7 @@ void render_widescreen_setting(void) {
 
 void render_hacktice_setting(int x, int y)
 {
-    bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 80;
+    bool hackticeAllowed = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 80 && (save_file_get_flags() & SAVE_FLAG_MOAT_DRAINED);
     if (hackticeAllowed)
     {
         if (!Hacktice_gEnabled)

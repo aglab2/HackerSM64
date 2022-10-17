@@ -862,6 +862,7 @@ void hf_death_loop_ctl()
             gMarioStates->vel[1] = 0;
             gMarioStates->vel[2] = 0;
             gMarioStates->forwardVel = 0;
+            gMarioStates->squishTimer = 0;
             drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
         }
         if (o->oTimer == 13)

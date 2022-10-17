@@ -53,7 +53,9 @@ void bhv_shrinkplatform_loop(void)
 		case 1:
 			if (o->oTimer == SHRINK_TIME)
             {
+				o->activeFlags = 0;
 				o->oAction = 2;
+				return;
 			}
 			o->header.gfx.scale[0] = ((f32)(SHRINK_TIME-o->oTimer)) / SHRINK_TIMEF;
 			o->header.gfx.scale[2] = ((f32)(SHRINK_TIME-o->oTimer)) / SHRINK_TIMEF;
@@ -153,7 +155,9 @@ void bhv_sandblock_loop(void) {
 		case 1:
 			if (o->oTimer == 300)
             {
+				o->activeFlags = 0;
 				o->oAction = 2;
+				return;
 			}
 			o->header.gfx.scale[1] = ((f32)(300-o->oTimer))/300.0f;
 			spawn_object_relative(0, 0, 0, 0, o, 0, bhvDirtParticleSpawner);

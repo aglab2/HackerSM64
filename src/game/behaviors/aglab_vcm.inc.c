@@ -114,6 +114,7 @@ void vcm_ctl_loop()
             gMarioStates->vel[1] = 0;
             gMarioStates->vel[2] = 0;
             gMarioStates->forwardVel = 0;
+            gMarioStates->squishTimer = 0;
             drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
             reset_camera(gCamera);
         }

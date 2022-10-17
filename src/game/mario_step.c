@@ -440,7 +440,7 @@ s32 bonk_or_hit_lava_wall(struct MarioState *m, struct WallCollisionData *wallDa
                 oldWallDYaw = wallDYaw;
                 set_mario_wall(m, wallData->walls[i]);
 
-                s32 wkAngles = (gCurrLevelNum == LEVEL_BOB || gCurrLevelNum == LEVEL_VCM) ? 50 : 45;
+                s32 wkAngles = (gCurrLevelNum == LEVEL_ROVERT || gCurrLevelNum == LEVEL_BOB || gCurrLevelNum == LEVEL_VCM) ? 50 : 45;
                 if (wallDYaw > DEGREES(180 - wkAngles)) {
                     m->flags |= MARIO_AIR_HIT_WALL;
                     result = AIR_STEP_HIT_WALL;

@@ -12,7 +12,7 @@ void bhv_bowser_bomb_loop(void) {
 
     if (2 == o->oBehParams2ndByte || 1 == o->oBehParams2ndByte)
     {
-        int timeEx = 2 == o->oBehParams2ndByte ? 0 : 20;
+        int timeEx = 2 == o->oBehParams2ndByte ? 0 : 10;
         if (o->oTimer > 30 + timeEx)
         {
             o->oPosY -= (30 + timeEx - o->oTimer);

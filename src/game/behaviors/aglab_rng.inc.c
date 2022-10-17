@@ -324,6 +324,7 @@ void bhv_aglab_rng_loop()
             gMarioStates->vel[2] = 0;
             gMarioStates->forwardVel = 0;
             gMarioStates->faceAngle[1] = 0x8000;
+            gMarioStates->squishTimer = 0;
             rng_reroll();
             drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
         }
