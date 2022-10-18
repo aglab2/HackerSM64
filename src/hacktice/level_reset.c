@@ -35,6 +35,7 @@ static void resetTransition()
 }
 
 extern s32 gCurrLevelArea;
+extern u8 gLowGravityEnabled;
 static void miniResetCommon()
 {
     gMarioStates->health = 0x880;
@@ -46,6 +47,7 @@ static void miniResetCommon()
     Timer_reset();
     sWarpDest.type = 2;
     gCurrLevelArea = 0; // it will be set on init_camera
+    gLowGravityEnabled = 0;
     resetCamera();
     resetTransition();
 }

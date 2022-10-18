@@ -167,7 +167,6 @@ extern void slide_checkpoint_ctl_loop()
     {
         if (o->oTimer == 12)
         {
-            set_gravity(0);
             gMarioStates->pos[0] = o->oPosX;
             gMarioStates->pos[1] = o->oPosY;
             gMarioStates->pos[2] = o->oPosZ;
