@@ -273,7 +273,10 @@ void ow_part_loop()
                     obj_translate_xyz_random(sparkle, 1500.0f);
                     obj_scale_random(sparkle, 10.0f, 5.0f);
                 }
+            }
 
+            if (o->oTimer < 59)
+            {
                 if (gPlayer1Controller->buttonPressed)
                 {
                     o->oOWPartPressCount++;
@@ -296,7 +299,6 @@ void ow_part_loop()
             {
                 cur_obj_play_sound_2(SOUND_GENERAL2_STAR_APPEARS);
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 40, 0, 0, 0);
-                gAllowPausing = 0;
             }
             else if (o->oTimer == 101)
             {
@@ -309,7 +311,6 @@ void ow_part_loop()
             else if (o->oTimer == 102)
             {
                 play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 30, 0, 0, 0);
-                gAllowPausing = 1;
             }
             else if (200 == o->oTimer)
             {

@@ -1,17 +1,19 @@
 #include "level_reset.h"
 #include "binary.h"
 
-#include "types.h"
 #include "game/camera.h"
 #include "game/level_update.h"
 #include "game/envfx_snow.h"
 
 #include "cfg.h"
+#include "main.h"
 #include "timer.h"
 
 static bool sTimerRunningDeferred = false;
 extern u8 sTransitionColorFadeCount[4];
 extern u16 sTransitionTextureFadeCount[2];
+
+extern void rovert_init(void);
 
 static void resetCamera()
 {
@@ -36,6 +38,7 @@ static void resetTransition()
 
 extern s32 gCurrLevelArea;
 extern u8 gLowGravityEnabled;
+extern u8 gAllowPausing;
 static void miniResetCommon()
 {
     gMarioStates->health = 0x880;
@@ -48,6 +51,8 @@ static void miniResetCommon()
     sWarpDest.type = 2;
     gCurrLevelArea = 0; // it will be set on init_camera
     gLowGravityEnabled = 0;
+    gAllowPausing = 1;
+    rovert_init();
     resetCamera();
     resetTransition();
 }
@@ -108,4 +113,15 @@ void LevelReset_onNormal()
         Timer_reset();
         resetCamera();
     }
+}
+
+s32 LevelReset_onSpawnObjectsFromInfoHook(u32* behaviorArg)
+{
+    if (sTimerRunningDeferred)
+    {
+        *behaviorArg &= ~(RESPAWN_INFO_DONT_RESPAWN << 8);
+        return true;
+    }
+
+    return (*behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8)) != (RESPAWN_INFO_DONT_RESPAWN << 8);
 }
