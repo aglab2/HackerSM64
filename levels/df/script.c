@@ -70,7 +70,6 @@ const LevelScript level_df_entry[] = {
 		OBJECT(MODEL_NONE, -7116, 705, -4681, 0, -180, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -7745, -530, -5298, 0, -180, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -3053, -530, -4305, 0, -141, 0, 0x00000000, bhvCoinFormation),
-		OBJECT(MODEL_NONE, -6899, 705, -4331, 0, -24, 0, (4 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -1243, 1493, -5459, 0, -180, 0, (2 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -662, -530, -2462, 0, 154, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -859, -345, -632, 0, 0, 0, 0x00000000, bhvDfLevelReset),

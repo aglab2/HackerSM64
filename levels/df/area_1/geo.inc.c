@@ -12,6 +12,7 @@ const GeoLayout df_area_1_geo[] = {
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, df_dl_Dice_Fortress_002_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, df_dl_Dice_Fortress_003_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 90, 0, 0, df_dl_Dice_Fortress_004_mesh_layer_6),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 90, 0, 0, df_dl_Dice_Fortress_005_mesh_layer_6),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
