@@ -61,6 +61,7 @@ const LevelScript level_bdf_entry[] = {
 		OBJECT(MODEL_NONE, 7034, 1397, -8691, 0, 0, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, 460, 3071, -68, 0, 0, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_CHAIN_CHOMP, 15, 296, -2338, 0, 0, 0, (17 << 16), bhvChainChomp),
+		OBJECT(MODEL_NONE, 7034, 468, -8691, 0, 0, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, 1209, 383, -10, 0, 0, 0, 0x00000000, bhvBowserCourseWarpCtl),
 		OBJECT(MODEL_WOODEN_SIGNPOST, -663, 383, -74, 0, 90, 0, (90 << 24) | (90 << 16), bhvMessagePanel),
 		OBJECT(MODEL_NONE, 6398, 326, -8098, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
