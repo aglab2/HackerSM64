@@ -6,11 +6,11 @@ const GeoLayout vcm_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, vcm_dl_pj74_vc_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, vcm_dl_pj74_vc_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, vcm_dl_pj74_vc_mesh_layer_5),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, vcm_dl_pj74_vc_002_mesh_layer_4),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT_DECAL, 10566, -2398, -411, 0, -180, 0, vcm_dl_pj74_vc_003_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, vcm_dl_pj74_vc_005_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, vcm_dl_pj74_vc_006_mesh_layer_6),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT_DECAL, 9722, -2398, -411, 0, -180, 0, vcm_dl_pj74_vc_007_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, vcm_dl_pj74_vc_008_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
