@@ -574,6 +574,7 @@ extern const BehaviorScript bhvMfKnife[];
 extern const BehaviorScript bhvMfKQ[];
 extern const BehaviorScript bhvDfLevelReset[];
 extern const BehaviorScript bhvDfArrow[];
+extern const BehaviorScript bhvSpidersArrow[];
 extern const BehaviorScript bhvMtcYellowSpawner[];
 extern const BehaviorScript bhvMtcYellowBall[];
 extern const BehaviorScript bhvMtcYellowPurpleSwitch[];

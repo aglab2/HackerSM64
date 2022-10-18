@@ -1,0 +1,11 @@
+extern const GeoLayout spiders_arrow_geo[];
+extern Lights1 spiders_arrow_f3d_material_lights;
+extern u8 spiders_arrow_omm_texture_hud_arrow_ci8[];
+extern u8 spiders_arrow_omm_texture_hud_arrow_ci8_pal_rgba16[];
+extern Vtx spiders_arrow_Plane_mesh_layer_4_vtx_cull[8];
+extern Vtx spiders_arrow_Plane_mesh_layer_4_vtx_0[4];
+extern Gfx spiders_arrow_Plane_mesh_layer_4_tri_0[];
+extern Gfx mat_spiders_arrow_f3d_material[];
+extern Gfx mat_revert_spiders_arrow_f3d_material[];
+extern Gfx spiders_arrow_Plane_mesh_layer_4[];
+extern Gfx spiders_arrow_material_revert_render_settings[];

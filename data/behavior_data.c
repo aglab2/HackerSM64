@@ -6390,6 +6390,17 @@ const BehaviorScript bhvDfArrow[] = {
     END_LOOP(),
 };
 
+extern void spiders_arrow_init();
+extern void spiders_arrow_loop();
+const BehaviorScript bhvSpidersArrow[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(spiders_arrow_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(spiders_arrow_loop),
+    END_LOOP(),
+};
+
 extern void mtc_yellow_spawner_init();
 extern void mtc_yellow_spawner_loop();
 const BehaviorScript bhvMtcYellowSpawner[] = {

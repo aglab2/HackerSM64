@@ -27,3 +27,4 @@
 #include "levels/spiders/waterfally_switchblock/geo.inc.c"
 #include "levels/spiders/spiders_cage/geo.inc.c"
 #include "levels/spiders/spiders_comb/geo.inc.c"
+#include "levels/spiders/spiders_arrow/geo.inc.c"

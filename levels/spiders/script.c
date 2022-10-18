@@ -45,6 +45,7 @@ const LevelScript level_spiders_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SPIDERS_SWITCH, waterfally_switch_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SPIDERS_SWITCHBLOCK, waterfally_switchblock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SPIDERS_GATE, spiders_cage_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SPIDERS_ARROW, spiders_arrow_geo),
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_WARP_PIPE, warp_pipe_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
@@ -56,6 +57,7 @@ const LevelScript level_spiders_entry[] = {
 		WARP_NODE(0xf1, LEVEL_CASTLE, 0x01, 0x30, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x11, LEVEL_SPIDERS, 0x01, 0x12, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x12, LEVEL_SPIDERS, 0x01, 0x11, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_SPIDERS_ARROW, -452, -530, -553, 0, 0, 0, 0x00000000, bhvSpidersArrow),
 		OBJECT(MODEL_NONE, -5006, 229, 611, 0, 7, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -777, -109, -7478, 0, 106, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(MODEL_NONE, 3199, -358, -6968, 0, 62, 0, 0x00000000, bhvCoinFormation),
