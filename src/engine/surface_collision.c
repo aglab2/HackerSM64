@@ -523,7 +523,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
         if (gGravityMode) height = 9000.f - height;
 
         // Exclude floors lower than the previous highest floor.
-        if (height < *pheight) continue;
+        if (height <= *pheight) continue;
 
         // Checks for floor interaction with a FIND_FLOOR_BUFFER unit buffer.
         if (bufferY < height) continue;
