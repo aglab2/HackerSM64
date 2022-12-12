@@ -240,7 +240,7 @@ enum SurfaceTypes {
 #define SURFACE_IS_PAINTING_WARP_RIGHT(cmd)     ((((cmd) - SURFACE_PAINTING_WARP_D5  ) % 3) == 0)
 #define SURFACE_IS_INSTANT_WARP(cmd)            (((cmd) >= SURFACE_INSTANT_WARP_1B) && ((cmd) <= SURFACE_INSTANT_WARP_1E))
 #define SURFACE_IS_WARP(cmd)                    (((cmd) == SURFACE_LOOK_UP_WARP) || ((cmd) == SURFACE_WOBBLING_WARP) || SURFACE_IS_PAINTING_WARP(cmd) || SURFACE_IS_INSTANT_WARP(cmd))
-#define SURFACE_IS_UNSAFE(cmd)                  (((cmd) == SURFACE_BURNING) || SURFACE_IS_QUICKSAND(cmd)) // Reonu note: I need to be able to ledge grab instant warps in my level. This is such an edge case I don't think it needs a level check.
+#define SURFACE_IS_UNSAFE(cmd)                  (((cmd) == SURFACE_BURNING) || (cmd) == SURFACE_INSTANT_MOVING_QUICKSAND || (cmd) == SURFACE_INSTANT_QUICKSAND)
 
 enum SurfaceClass {
     SURFACE_CLASS_DEFAULT,
