@@ -76,7 +76,13 @@ f32 gCurrAnimTranslationMultiplier;
 u16 *gCurrAnimAttribute;
 s16 *gCurrAnimData;
 
-struct AllocOnlyPool *gDisplayListHeap;
+#define RM_AA_ZB_TEX_EDGE_DECAL(clk) \
+    AA_EN | Z_CMP | IM_RD | CVG_DST_WRAP |        \
+    CVG_X_ALPHA | ALPHA_CVG_SEL | ZMODE_DEC | TEX_EDGE |    \
+    GBL_c##clk(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)
+    
+#define	G_RM_AA_ZB_TEX_EDGE_DECAL	RM_AA_ZB_TEX_EDGE_DECAL(1)
+#define	G_RM_AA_ZB_TEX_EDGE_DECAL2	RM_AA_ZB_TEX_EDGE_DECAL(2)
 
 /* Rendermode settings for cycle 1 for all 8 or 13 layers. */
 struct RenderModeContainer renderModeTable_1Cycle[2] = { 
@@ -475,8 +481,7 @@ void geo_append_display_list(void *displayList, s32 layer) {
     }
 #endif // F3DEX_GBI_2 || SILHOUETTE
     if (gCurGraphNodeMasterList != NULL) {
-        struct DisplayListNode *listNode =
-            alloc_only_pool_alloc(gDisplayListHeap, sizeof(struct DisplayListNode));
+        struct DisplayListNode *listNode = main_pool_alloc(sizeof(struct DisplayListNode));
 
         listNode->transform = gMatStackFixed[gMatStackIndex];
         listNode->displayList = displayList;
@@ -1352,7 +1357,7 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         Mtx *initialMatrix;
         Vp *viewport = alloc_display_list(sizeof(*viewport));
 
-        gDisplayListHeap = alloc_only_pool_init(main_pool_available() - sizeof(struct AllocOnlyPool), MEMORY_POOL_LEFT);
+        main_pool_push_state();
         initialMatrix = alloc_display_list(sizeof(*initialMatrix));
         gCurLookAt = (LookAt*)alloc_display_list(sizeof(LookAt));
         bzero(gCurLookAt, sizeof(LookAt));
@@ -1389,6 +1394,6 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
             print_text_fmt_int(180, 36, "MEM %d", gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
         }
 #endif
-        main_pool_free(gDisplayListHeap);
+        main_pool_pop_state();
     }
 }

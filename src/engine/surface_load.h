@@ -32,10 +32,8 @@ enum SpatialPartitions {
 typedef struct SurfaceNode SpatialPartitionCell[NUM_SPATIAL_PARTITIONS];
 
 extern SpatialPartitionCell gStaticSurfacePartition[NUM_CELLS][NUM_CELLS];
-extern SpatialPartitionCell gDynamicSurfacePartition[NUM_CELLS][NUM_CELLS];
-extern void *gCurrStaticSurfacePool;
+extern SpatialPartitionCell gDynamicSurfacePartition[NUM_CELLS][NUM_CELLS];\
 extern void *gDynamicSurfacePool;
-extern void *gCurrStaticSurfacePoolEnd;
 extern void *gDynamicSurfacePoolEnd;
 extern u32 gTotalStaticSurfaceData;
 
