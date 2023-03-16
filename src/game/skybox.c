@@ -11,6 +11,7 @@
 #include "sm64.h"
 #include "geo_commands.h"
 #include "color_presets.h"
+#include "main.h"
 
 /**
  * @file skybox.c
@@ -239,15 +240,19 @@ void *create_skybox_ortho_matrix(s8 player) {
     f32 top = sSkyBoxInfo[player].scaledY;
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
 
-#ifdef WIDESCREEN
-    f32 half_width = (4.0f / 3.0f) / GFX_DIMENSIONS_ASPECT_RATIO * SCREEN_CENTER_X;
-    f32 center = (sSkyBoxInfo[player].scaledX + SCREEN_CENTER_X);
-    if (half_width < SCREEN_CENTER_X) {
-        // A wider screen than 4:3
-        left = center - half_width;
-        right = center + half_width;
-    }
-#endif
+    // skybox does not draw enough tiles for this to work atm 
+    // if (sAspectRatio > ((4.0f / 3.0f)+__FLT_EPSILON__)) {
+    //     f32 extraBit = (f32)(((SCREEN_WIDTH * (16.0 / 9.0) / (4.0 / 3.0)) - SCREEN_WIDTH) * 0.5);
+    //     left -= extraBit;
+    //     right += extraBit;
+    // }
+
+    // this removes a bit of the top and bottom, and while technically more efficient,
+    // it alters the perspective in a way that doesnt quite make sense since vertical fov doesnt change with aspect ratio 
+    // if (sAspectRatio > ((4.0f / 3.0f)+__FLT_EPSILON__)) {
+    //     bottom += 30.0f;
+    //     top -= 30.0f;
+    // }
 
     if (mtx != NULL) {
         guOrtho(mtx, left, right, bottom, top, 0.0f, 3.0f, 1.0f);

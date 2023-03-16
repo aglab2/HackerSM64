@@ -18,6 +18,7 @@
 #include "puppycam2.h"
 #include "puppyprint.h"
 #include "rovert.h"
+#include "main.h"
 
 #include "config.h"
 
@@ -421,9 +422,9 @@ void render_debug_mode(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X), HUD_TOP_Y - 20, "$"); // 'Coin' glyph
-    print_text((GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16), HUD_TOP_Y - 20, "*"); // 'X' glyph
-    print_text_fmt_int(14 + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16), HUD_TOP_Y - 20, "%d", gHudDisplay.coins);
+    print_text(gScreenWidth - (HUD_STARS_X), HUD_TOP_Y - 20, "$"); // 'Coin' glyph
+    print_text((gScreenWidth - (HUD_STARS_X) + 16), HUD_TOP_Y - 20, "*"); // 'X' glyph
+    print_text_fmt_int(14 + gScreenWidth - (HUD_STARS_X - 16), HUD_TOP_Y - 20, "%d", gHudDisplay.coins);
 }
 
 /**
@@ -433,9 +434,9 @@ void render_hud_coins(void) {
 void render_hud_stars(void) {
     if (gHudFlash == HUD_FLASH_STARS && gGlobalTimer & 0x8) return;
     s8 showX = (gHudDisplay.stars < 100);
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X), HUD_TOP_Y, "^"); // 'Star' glyph
-    if (showX) print_text((GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16), HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16),
+    print_text(gScreenWidth - (HUD_STARS_X), HUD_TOP_Y, "^"); // 'Star' glyph
+    if (showX) print_text((gScreenWidth - (HUD_STARS_X) + 16), HUD_TOP_Y, "*"); // 'X' glyph
+    print_text_fmt_int((showX * 14) + gScreenWidth - (HUD_STARS_X - 16),
                        HUD_TOP_Y, "%d", gHudDisplay.stars);
 }
 
@@ -473,29 +474,29 @@ void render_hud_timer(void) {
     {
 #if MULTILANG
     switch (eu_get_language()) {
-        case LANGUAGE_ENGLISH: print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185,  "TIME"); break;
-        case LANGUAGE_FRENCH:  print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(155), 185, "TEMPS"); break;
-        case LANGUAGE_GERMAN:  print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185,  "ZEIT"); break;
+        case LANGUAGE_ENGLISH: print_text(gScreenWidth - (150), 185,  "TIME"); break;
+        case LANGUAGE_FRENCH:  print_text(gScreenWidth - (155), 185, "TEMPS"); break;
+        case LANGUAGE_GERMAN:  print_text(gScreenWidth - (150), 185,  "ZEIT"); break;
     }
 #else
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 165, "TIME");
+    print_text(gScreenWidth - (150), 165, "TIME");
 #endif
     }
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 165, "%0d", timerMins);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 165, "%02d", timerSecs);
+    print_text_fmt_int(gScreenWidth - (91), 165, "%0d", timerMins);
+    print_text_fmt_int(gScreenWidth - (71), 165, "%02d", timerSecs);
     if (Hacktice_gEnabled)
     {
-        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 165, "%02d", timerFracSecs);
+        print_text_fmt_int(gScreenWidth - (37), 165, "%02d", timerFracSecs);
     }
     else
     {
-        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 165, "%d", timerFracSecs);
+        print_text_fmt_int(gScreenWidth - (37), 165, "%d", timerFracSecs);
     }
 
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 56, (*hudLUT)[GLYPH_APOSTROPHE]);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46), 56, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
+    render_hud_tex_lut(gScreenWidth - (81), 56, (*hudLUT)[GLYPH_APOSTROPHE]);
+    render_hud_tex_lut(gScreenWidth - (46), 56, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
@@ -513,8 +514,8 @@ void set_hud_camera_status(s16 status) {
  */
 void render_hud_camera_status(void) {
     Texture *(*cameraLUT)[6] = segmented_to_virtual(&main_hud_camera_lut);
-    s32 x = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(54);
-    s32 y = 205;
+    s32 x = gScreenWidth - (54);
+    s32 y = gScreenHeight - 35;
 
     if (sCameraHUD.status == CAM_STATUS_NONE) {
         return;
