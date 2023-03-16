@@ -722,7 +722,6 @@ void load_object_collision_model(void) {
  * Transform an object's vertices and add them to the static surface pool.
  */
 void load_object_static_model(void) {
-    TerrainData vertexData[600];
     TerrainData *collisionData = o->collisionData;
 
     // Initialise a new surface pool for this block of surface data
