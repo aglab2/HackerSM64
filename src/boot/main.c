@@ -372,15 +372,12 @@ void thread3_main(UNUSED void *arg) {
         } else {
             gCacheEmulated = FALSE;
         }
-        VI.comRegs.vSync = 525*20;   
-        change_vi(&VI, 320, 240);
-        osViSetMode(&VI);
-        osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
-        osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     } else {
         gIsConsole = TRUE;
+        change_vi(&VI, 304, 224);
         gBorderHeight = BORDER_HEIGHT_CONSOLE;
     }
+
 #ifdef DEBUG
     gIdleThreadStack[0] = 0;
     gIdleThreadStack[THREAD1_STACK - 1] = 0;
@@ -550,12 +547,16 @@ void thread1_idle(UNUSED void *arg) {
             break;
     }
     get_audio_frequency();
-    change_vi(&VI, 320, 240);
+
+    gScreenWidth = 320;
+    gScreenHeight = 240;
+
     osViSetMode(&VI);
     osViBlack(TRUE);
-    osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
+    osViSetSpecialFeatures(OS_VI_DIVOT_ON);
+    osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
+    // osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF); // off because the performance of this game is lmao
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
-    osViSetSpecialFeatures(OS_VI_DIVOT_OFF);
     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
     create_thread(&gMainThread, THREAD_3_MAIN, thread3_main, NULL, gThread3Stack + THREAD3_STACK, 100);
     osStartThread(&gMainThread);
@@ -566,6 +567,7 @@ void thread1_idle(UNUSED void *arg) {
     while (TRUE) {
         ;
     }
+
 }
 
 // Clear RAM on boot
