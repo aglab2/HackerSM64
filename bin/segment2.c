@@ -2683,6 +2683,13 @@ static const Vtx vertex_shadow[] = {
 #endif
 };
 
+const Gfx dl_shadow_circle_tris[] = {
+    gsSPVertex(vertex_shadow, 4, 0),
+    gsSP2Triangles( 0,  2,  1, 0x0,  1,  2,  3, 0x0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
 // 0x02014638 - 0x02014660
 const Gfx dl_shadow_end[] = {
     gsSPVertex(vertex_shadow, 4, 0),
