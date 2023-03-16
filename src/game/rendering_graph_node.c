@@ -99,12 +99,14 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_OCCLUDE_SILHOUETTE_OPAQUE] = G_RM_AA_OPA_SURF,
         [LAYER_OCCLUDE_SILHOUETTE_ALPHA] = G_RM_AA_TEX_EDGE,
 #endif
+        [LAYER_CIRCLE_SHADOW] = G_RM_CLD_SURF,
+        [LAYER_CIRCLE_SHADOW_TRANSPARENT] = G_RM_CLD_SURF,
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF,
     } },
     [RENDER_ZB] = { {
-        [LAYER_FORCE] = G_RM_ZB_OPA_SURF,
+        [LAYER_FORCE] = G_RM_AA_ZB_XLU_DECAL,
         [LAYER_OPAQUE] = G_RM_AA_ZB_OPA_SURF,
         [LAYER_OPAQUE_INTER] = G_RM_AA_ZB_OPA_INTER,
         [LAYER_OPAQUE_DECAL] = G_RM_AA_ZB_OPA_DECAL,
@@ -116,6 +118,8 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_OCCLUDE_SILHOUETTE_OPAQUE] = G_RM_AA_ZB_OPA_SURF,
         [LAYER_OCCLUDE_SILHOUETTE_ALPHA] = G_RM_AA_ZB_TEX_EDGE,
 #endif
+        [LAYER_CIRCLE_SHADOW] = G_RM_AA_ZB_XLU_DECAL,
+        [LAYER_CIRCLE_SHADOW_TRANSPARENT] = G_RM_ZB_CLD_SURF,
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER,
@@ -136,6 +140,8 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_OCCLUDE_SILHOUETTE_OPAQUE] = G_RM_AA_OPA_SURF2,
         [LAYER_OCCLUDE_SILHOUETTE_ALPHA] = G_RM_AA_TEX_EDGE2,
 #endif
+        [LAYER_CIRCLE_SHADOW] = G_RM_CLD_SURF2,
+        [LAYER_CIRCLE_SHADOW_TRANSPARENT] = G_RM_CLD_SURF2,
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF2,
@@ -153,6 +159,8 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_OCCLUDE_SILHOUETTE_OPAQUE] = G_RM_AA_ZB_OPA_SURF2,
         [LAYER_OCCLUDE_SILHOUETTE_ALPHA] = G_RM_AA_ZB_TEX_EDGE2,
 #endif
+        [LAYER_CIRCLE_SHADOW] = G_RM_AA_ZB_XLU_DECAL2,
+        [LAYER_CIRCLE_SHADOW_TRANSPARENT] = G_RM_ZB_CLD_SURF2,
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL2,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER2,
@@ -389,43 +397,29 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
         for (currLayer = startLayer; currLayer <= endLayer; currLayer++) {
             // Set 'currList' to the first DisplayListNode on the current layer.
             currList = node->listHeads[ucode][currLayer];
-#if defined(DISABLE_AA) || !SILHOUETTE
-            // Set the render mode for the current layer.
             gDPSetRenderMode(gDisplayListHead++, mode1List->modes[currLayer],
                                                  mode2List->modes[currLayer]);
-#else
-            if (phaseIndex == RENDER_PHASE_NON_SILHOUETTE) {
-                // To properly cover the silhouette, disable AA.
-                // The silhouette model does not have AA due to the hack used to prevent triangle overlap.
-                gDPSetRenderMode(gDisplayListHead++, (mode1List->modes[currLayer] & ~IM_RD),
-                                                     (mode2List->modes[currLayer] & ~IM_RD));
-            } else {
-                // Set the render mode for the current dl.
-                gDPSetRenderMode(gDisplayListHead++, mode1List->modes[currLayer],
-                                                     mode2List->modes[currLayer]);
+
+            if (currLayer == LAYER_CIRCLE_SHADOW) {
+                gSPDisplayList(gDisplayListHead++, dl_shadow_circle);
             }
-#endif
+
             // Iterate through all the displaylists on the current layer.
             while (currList != NULL) {
                 // Add the display list's transformation to the master list.
                 gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
                           (G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH));
-#if SILHOUETTE
-                if (phaseIndex == RENDER_PHASE_SILHOUETTE) {
-                    // Add the current display list to the master list, with silhouette F3D.
-                    gSPDisplayList(gDisplayListHead++, dl_silhouette_begin);
-                    gSPDisplayList(gDisplayListHead++, currList->displayList);
-                    gSPDisplayList(gDisplayListHead++, dl_silhouette_end);
-                } else {
-                    // Add the current display list to the master list.
-                    gSPDisplayList(gDisplayListHead++, currList->displayList);
-                }
-#else
+
                 // Add the current display list to the master list.
                 gSPDisplayList(gDisplayListHead++, currList->displayList);
-#endif
                 // Move to the next DisplayListNode.
                 currList = currList->next;
+            }
+
+            if (currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT) {
+                gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
+                gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING | G_CULL_BACK);
+                gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
             }
         }
     }
@@ -1027,9 +1021,16 @@ void geo_process_shadow(struct GraphNodeShadow *node) {
                 gCurrShadow.floorNormal, shadowPos, gCurrShadow.scale, gCurGraphNodeObject->angle[1]);
 
             inc_mat_stack();
+            
+            s32 layer;
+            if (node->shadowType == SHADOW_CIRCLE) {
+                layer = gCurrShadow.isDecal ? LAYER_CIRCLE_SHADOW : LAYER_CIRCLE_SHADOW_TRANSPARENT;
+            } else {
+                layer = gCurrShadow.isDecal ? LAYER_TRANSPARENT_DECAL : LAYER_TRANSPARENT;
+            }
+
             geo_append_display_list(
-                (void *) VIRTUAL_TO_PHYSICAL(shadowList),
-                gCurrShadow.isDecal ? LAYER_TRANSPARENT_DECAL : LAYER_TRANSPARENT
+                (void *) VIRTUAL_TO_PHYSICAL(shadowList), layer
             );
 
             gMatStackIndex--;
