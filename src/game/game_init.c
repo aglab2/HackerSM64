@@ -126,9 +126,9 @@ const Gfx init_rdp[] = {
     gsDPSetCombineKey(G_CK_NONE),
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetColorDither(G_CD_MAGICSQ),
+    gsDPSetColorDither(G_CD_DISABLE),
     gsDPSetCycleType(G_CYC_FILL),
-    gsDPSetAlphaDither(G_AD_PATTERN),
+    gsDPSetAlphaDither(G_AD_DISABLE),
     gsSPEndDisplayList(),
 };
 
@@ -421,7 +421,7 @@ void render_init(void) {
         VI.comRegs.vSync = 525*4;   
         change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
         osViSetMode(&VI);
-        osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
+        osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
         osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
         gViHackEnabled = TRUE;
         if (!gIsVC) {
