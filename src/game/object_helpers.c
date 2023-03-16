@@ -2485,7 +2485,6 @@ Gfx *geo_set_blinking_platform_prim_alpha(s32 callContext, struct GraphNode *nod
     return dlStart;    
 }
 
-extern struct AllocOnlyPool *gDisplayListHeap;
 extern void geo_append_display_list(void *displayList, s16 layer);
 extern s16 gMatStackIndex;
 extern Mat4 gMatStack[32];
