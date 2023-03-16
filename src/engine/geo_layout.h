@@ -37,7 +37,6 @@ enum GeoCommandFlags {
 #define cur_geo_cmd_ptr(offset) \
     (*(void **) &gGeoLayoutCommand[CMD_PROCESS_OFFSET(offset)])
 
-extern struct AllocOnlyPool *gGraphNodePool;
 extern struct GraphNode *gCurRootGraphNode;
 extern struct GraphNode **gGeoViews;
 extern u16 gGeoNumViews;
@@ -85,6 +84,6 @@ void geo_layout_cmd_node_held_obj(void);
 void geo_layout_cmd_node_culling_radius(void);
 void geo_layout_cmd_bone(void);
 
-struct GraphNode *process_geo_layout(struct AllocOnlyPool *pool, void *segptr);
+struct GraphNode *process_geo_layout(void *segptr);
 
 #endif // GEO_LAYOUT_H
