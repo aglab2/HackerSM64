@@ -6087,4 +6087,13 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
-
+const BehaviorScript bhvAglabLakitu[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, lakitu_seg6_anims_060058F8),
+    ANIMATE(CAMERA_LAKITU_ANIM_DEFAULT),
+    CALL_NATIVE(bhv_aglab_lakitu_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_aglab_lakitu_loop),
+    END_LOOP(),
+};
