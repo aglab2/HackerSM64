@@ -273,6 +273,11 @@ SECTIONS
    END_NOLOAD(engine)
 
    . = _engineSegmentBssEnd;
+#ifndef USE_EXT_RAM
+   . = 0x80280000;
+#else
+   . = 0x80480000;
+#endif
    BEGIN_NOLOAD(framebuffers)
    {
       BUILD_DIR/src/buffers/framebuffers.o(.bss*);

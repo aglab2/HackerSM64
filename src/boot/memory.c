@@ -361,6 +361,9 @@ void *main_pool_alloc_freeable(u32 size) {
 }
 
 void *main_pool_alloc_aligned_freeable(u32 size, u32 alignment) {
+    if (!alignment)
+        alignment = 16;
+
     size = ALIGN4(size);
     for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
         struct MainPoolRegion* region = &sMainPool.regions[i];
@@ -459,6 +462,18 @@ void dma_read(u8 *dest, u8 *srcStart, u8 *srcEnd) {
 void *dynamic_dma_read(u8 *srcStart, u8 *srcEnd, u32 alignment, u32 bssLength) {
     u32 size = ALIGN16(srcEnd - srcStart);
     void* dest = main_pool_alloc_aligned(size + bssLength, alignment);
+    if (dest != NULL) {
+        dma_read(((u8 *)dest), srcStart, srcEnd);
+        if (bssLength) {
+            bzero(((u8 *)dest + size), bssLength);
+        }
+    }
+    return dest;
+}
+
+static void *dynamic_dma_read_freeable(u8 *srcStart, u8 *srcEnd, u32 alignment, u32 bssLength) {
+    u32 size = ALIGN16(srcEnd - srcStart);
+    void* dest = main_pool_alloc_aligned_freeable(size + bssLength, alignment);
     if (dest != NULL) {
         dma_read(((u8 *)dest), srcStart, srcEnd);
         if (bssLength) {
@@ -753,7 +768,7 @@ void *alloc_display_list(u32 size) {
 }
 
 static struct DmaTable *load_dma_table_address(u8 *srcAddr) {
-    struct DmaTable *table = dynamic_dma_read(srcAddr, srcAddr + sizeof(u32), 0, 0);
+    struct DmaTable *table = dynamic_dma_read_freeable(srcAddr, srcAddr + sizeof(u32), 0, 0);
     u32 size = table->count * sizeof(struct OffsetSizePair) +
         sizeof(struct DmaTable) - sizeof(struct OffsetSizePair);
     main_pool_free(table);
