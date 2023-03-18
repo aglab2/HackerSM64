@@ -2792,6 +2792,7 @@ sound_ref .sound_general_boing3
 sound_ref .sound_general_grand_star
 sound_ref .sound_general_grand_star_jump
 sound_ref .sound_general_boat_rock
+sound_ref .sound_aglab_castle
 sound_ref .sound_general_vanish_sfx
 sound_ref .sound_menu_enter_hole
 sound_ref .sound_general_red_coin
@@ -4803,6 +4804,16 @@ chan_setinstr 5
 chan_setdecayrelease 20
 chan_setlayer 1, .layer_1DE4
 chan_setlayer 2, .layer_1DE2
+chan_end
+
+.layer_aglab:
+layer_note1 39, 0x226, 255
+layer_end
+
+.sound_aglab_castle:
+chan_setbank 10
+chan_setinstr 24
+chan_setlayer 0, .layer_aglab
 chan_end
 
 .layer_1DD4:

@@ -362,6 +362,8 @@ enum SoundBank {
 #define SOUND_GENERAL_BOAT_ROCK                  /* 0x30750080 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x75, 0x00, SOUND_DISCRETE) // unverified
 #define SOUND_GENERAL_VANISH_SFX                 /* 0x30762080 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x76, 0x20, SOUND_DISCRETE) // unverified
 
+#define SOUND_AGLAB_CASTLE SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x76, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE)
+
 /* Environment Sound Effects */
 #define SOUND_ENV_WATERFALL1                     /* 0x40000000 */ SOUND_ARG_LOAD(SOUND_BANK_ENV,      0x00, 0x00, 0) // unverified
 #define SOUND_ENV_WATERFALL2                     /* 0x40010000 */ SOUND_ARG_LOAD(SOUND_BANK_ENV,      0x01, 0x00, 0) // unverified
