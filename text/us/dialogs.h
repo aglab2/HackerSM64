@@ -385,32 +385,16 @@ Plumbers say that roof\n\
 is the most important\n\
 part of the building!"))
 
-DEFINE_DIALOG(DIALOG_039, 1, 4, 30, 200, _("\
-No visitors allowed,\n\
-by decree of\n\
-the Big Bob-omb\n\
-\n\
-I shall never surrender my\n\
-Stars, for they hold the\n\
-power of the castle in\n\
-their glow.\n\
-They were a gift from\n\
-Bowser, the Koopa King\n\
-himself, and they lie well\n\
-hidden within my realm.\n\
-Not a whisper of their\n\
-whereabouts shall leave\n\
-my lips. Oh, all right,\n\
-perhaps one hint:\n\
-Heed the Star names at\n\
-the beginning of the\n\
-course.\n\
-//--The Big Bob-omb"))
+DEFINE_DIALOG(DIALOG_039, 1, 3, 30, 200, _("\
+Depict the magesty of\n\
+peach's castle in these\n\
+4 side towers!"))
 
-DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
-Warning!\n\
-Cold, Cold Crevasse\n\
-Below!"))
+DEFINE_DIALOG(DIALOG_040, 1, 4, 30, 200, _("\
+The most important tower\n\
+is the central one.\n\
+It represents the power\n\
+of stars held in castle."))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
 I win! You lose!\n\
