@@ -275,6 +275,7 @@
 #define MODEL_CASTLE_GROUNDS_VCUTM_GRILL          0x36        // castle_grounds_geo_00070C
 #define MODEL_CASTLE_GROUNDS_FLAG                 0x37        // castle_grounds_geo_000660
 #define MODEL_CASTLE_GROUNDS_CANNON_GRILL         0x38        // castle_grounds_geo_000724
+#define MODEL_CASTLE_GROUNDS_ONE_TOWER         0x39
 
 // pss
 

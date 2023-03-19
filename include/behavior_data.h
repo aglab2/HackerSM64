@@ -262,6 +262,7 @@ extern const BehaviorScript bhvBetaBowserAnchor[];
 extern const BehaviorScript bhvStaticCheckeredPlatform[];
 extern const BehaviorScript bhvStar[];
 extern const BehaviorScript bhvStaticObject[];
+extern const BehaviorScript bhvStaticObjectEx[];
 // Static object stubs for backwards compatibility
 #define bhvLllHexagonalMesh bhvStaticObject
 #define bhvInsideCannon bhvStaticObject

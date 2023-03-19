@@ -4,8 +4,6 @@
 
 void bhv_aglab_lakitu_init()
 {
-    // spawn_object(o, MODEL_CASTLE_GROUNDS_VCUTM_GRILL, bhvStaticObject);
-
     o->oAglabLakituDialog = 30;
     spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
 }
@@ -360,15 +358,15 @@ extern u8 castle_grounds_dl_Shape_193_rgba16[];
 
 static const void* sMainTextures[][2] = 
 { 
-    { castle_grounds_dl_Shape_192_rgba16, castle_grounds_dl_Shape_193_rgba16 },
     { aglab_betaroof, aglab_betawall3 },
+    { castle_grounds_dl_Shape_192_rgba16, castle_grounds_dl_Shape_193_rgba16 },
     { castle_grounds_dl_Shape_192_rgba16, castle_grounds_dl_Shape_193_rgba16 },
     { aglab_zarroof, aglab_zarwall },
 };
 
 static void switch_main()
 {
-    u8 venv = gStates.main == 0 ? 0 : 0xff;
+    u8 venv = gStates.main == 2 ? 0 : 0xff;
     u8* env;
     env = (u8*) segmented_to_virtual(castle_grounds_dl_tmain_mesh_layer_1) + 15;
     *env = venv;
@@ -380,6 +378,31 @@ static void switch_main()
     *text = sMainTextures[gStates.main][0];
     text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_193_f3d) + 2*6 + 1;
     *text = sMainTextures[gStates.main][1];
+    
+    static u8 LastSpawnedTower = 0;
+    if (LastSpawnedTower != gStates.main)
+    {
+        LastSpawnedTower = gStates.main;
+        if (2 == gStates.main)
+        {
+            struct Object* tower = spawn_object(o, MODEL_CASTLE_GROUNDS_ONE_TOWER, bhvStaticObjectEx);
+            tower->oPosX = 0;
+            tower->oPosY = 0;
+            tower->oPosZ = 0;
+            tower->oFaceAngleYaw = 0;
+            tower->oFaceAnglePitch = 0;
+            tower->oFaceAngleRoll = 0;
+        }
+        else
+        {
+            f32 d;
+            struct Object* tower = cur_obj_find_nearest_object_with_behavior(bhvStaticObjectEx, &d);
+            if (tower)
+            {
+                tower->activeFlags = 0;
+            }
+        }
+    }
 }
 
 static void advance_state(int num, u8* val)

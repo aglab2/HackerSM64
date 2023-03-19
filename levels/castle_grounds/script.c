@@ -48,6 +48,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_VCUTM_GRILL, btowers_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG, etowers_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, vtowers_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_ONE_TOWER, one_tower_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
