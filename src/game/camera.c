@@ -10431,6 +10431,76 @@ struct Cutscene sCutsceneAglabBridge[] = {
     { cutscene_aglab_bridge, CUTSCENE_LOOP },
 };
 
+void cutscene_aglab_window(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = -88.f;
+    c->focus[1] = 1418.f;
+    c->focus[2] = 1627.f;
+    c->pos[0] = -137.f;
+    c->pos[1] = 2362.f;
+    c->pos[2] = -2433.f;
+}
+
+struct Cutscene sCutsceneAglabWindow[] = {
+    { cutscene_aglab_window, CUTSCENE_LOOP },
+};
+
+void cutscene_aglab_frame(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = -88.f;
+    c->focus[1] = 2418.f;
+    c->focus[2] = 1627.f;
+    c->pos[0] = -137.f;
+    c->pos[1] = 2362.f;
+    c->pos[2] = -433.f;
+}
+
+struct Cutscene sCutsceneAglabFrame[] = {
+    { cutscene_aglab_frame, CUTSCENE_LOOP },
+};
+
+void cutscene_aglab_roof(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = -88.f;
+    c->focus[1] = 2418.f;
+    c->focus[2] = 3627.f;
+    c->pos[0] = -137.f;
+    c->pos[1] = 4362.f;
+    c->pos[2] = -1433.f;
+}
+
+struct Cutscene sCutsceneAglabRoof[] = {
+    { cutscene_aglab_roof, CUTSCENE_LOOP },
+};
+
+void cutscene_aglab_towers(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = -1000.f-88.f;
+    c->focus[1] = 2418.f;
+    c->focus[2] = 3627.f;
+    c->pos[0] = -4887.f;
+    c->pos[1] = 4759.f;
+    c->pos[2] = -2816.f;
+}
+
+struct Cutscene sCutsceneAglabTowers[] = {
+    { cutscene_aglab_towers, CUTSCENE_LOOP },
+};
+
+void cutscene_aglab_main(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = -88.f;
+    c->focus[1] = 5218.f;
+    c->focus[2] = 3627.f;
+    c->pos[0] = -137.f;
+    c->pos[1] = 7862.f;
+    c->pos[2] = -1433.f;
+}
+
+struct Cutscene sCutsceneAglabMain[] = {
+    { cutscene_aglab_main, CUTSCENE_LOOP },
+};
+
 /* TODO:
  * The next two arrays are both related to levels, and they look generated.
  * These should be split into their own file.
@@ -10898,6 +10968,11 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_AGLAB_CASTLE_WALLS, sCutsceneAglabCastleWalls)
         CUTSCENE(CUTSCENE_AGLAB_WATER, sCutsceneAglabWater)
         CUTSCENE(CUTSCENE_AGLAB_BRIDGE, sCutsceneAglabBridge)
+        CUTSCENE(CUTSCENE_AGLAB_WINDOW, sCutsceneAglabWindow)
+        CUTSCENE(CUTSCENE_AGLAB_FRAME, sCutsceneAglabFrame)
+        CUTSCENE(CUTSCENE_AGLAB_ROOF, sCutsceneAglabRoof)
+        CUTSCENE(CUTSCENE_AGLAB_TOWERS, sCutsceneAglabTowers)
+        CUTSCENE(CUTSCENE_AGLAB_MAIN, sCutsceneAglabMain)
     }
 
 #undef CUTSCENE

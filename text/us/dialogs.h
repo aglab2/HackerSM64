@@ -364,55 +364,26 @@ DEFINE_DIALOG(DIALOG_034, 1, 2, 30, 200, _("\
 Let's get some fresh\n\
 action going in the moat!"))
 
-DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
-There are four camera, or\n\
-『[C],』 Buttons. Press [C]^\n\
-to look around using the\n\
-Control Stick.\n\
-\n\
-You'll usually see Mario\n\
-through Lakitu's camera.\n\
-It is the camera\n\
-recommended for normal\n\
-play.\n\
-You can change angles by\n\
-pressing [C]>. If you press\n\
-[R], the view switches to\n\
-Mario's camera, which\n\
-is directly behind him.\n\
-Press [R] again to return\n\
-to Lakitu's camera. Press\n\
-[C]| to see Mario from\n\
-afar, using either\n\
-Lakitu's or Mario's view."))
+DEFINE_DIALOG(DIALOG_035, 1, 3, 30, 200, _("\
+Choose a new bridge\n\
+for the castle!\n\
+Please make it sturdy!"))
 
-DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
-OBSERVATION PLATFORM\n\
-Press [C]^ to take a look\n\
-around. Don't miss\n\
-anything!\n\
-\n\
-Press [R] to switch to\n\
-Mario's camera. It\n\
-always follows Mario.\n\
-Press [R] again to switch\n\
-to Lakitu's camera.\n\
-Pause the game and\n\
-switch the mode to 『fix』\n\
-the camera in place while\n\
-holding [R]. Give it a try!"))
+DEFINE_DIALOG(DIALOG_036, 1, 4, 30, 200, _("\
+How about installing\n\
+a new window frame?\n\
+Pick wisely - castle\n\
+inhabitants need light!"))
 
-DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
-I win! You lose!\n\
-Ha ha ha ha!\n\
-You're no slouch, but I'm\n\
-a better sledder!\n\
-Better luck next time!"))
+DEFINE_DIALOG(DIALOG_037, 1, 3, 30, 200, _("\
+Any plans for replacing\n\
+the picture frame?\n\
+I want something spicy!"))
 
-DEFINE_DIALOG(DIALOG_038, 1, 3, 95, 200, _("\
-Reacting to the Star\n\
-power, the door slowly\n\
-opens."))
+DEFINE_DIALOG(DIALOG_038, 1, 3, 30, 200, _("\
+Plumbers say that roof\n\
+is the most important\n\
+part of the building!"))
 
 DEFINE_DIALOG(DIALOG_039, 1, 4, 30, 200, _("\
 No visitors allowed,\n\

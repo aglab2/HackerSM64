@@ -33,3 +33,7 @@
 #include "levels/castle_grounds/areas/1/movtext.inc.c"
 
 #include "levels/castle_grounds/leveldata.inc.c"
+
+#include "levels/castle_grounds/vtowers/model.inc.c"
+#include "levels/castle_grounds/btowers/model.inc.c"
+#include "levels/castle_grounds/etowers/model.inc.c"

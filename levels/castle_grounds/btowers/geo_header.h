@@ -1,0 +1,14 @@
+extern const GeoLayout btowers_geo[];
+extern Lights1 btowers___f3d_lights;
+extern Lights1 btowers__1_f3d_lights;
+extern u8 btowers___rgba16[];
+extern u8 btowers__1_rgba32[];
+extern Vtx btowers_Untitled_mesh_layer_1_vtx_cull[8];
+extern Vtx btowers_Untitled_mesh_layer_1_vtx_0[1078];
+extern Gfx btowers_Untitled_mesh_layer_1_tri_0[];
+extern Vtx btowers_Untitled_mesh_layer_1_vtx_1[40];
+extern Gfx btowers_Untitled_mesh_layer_1_tri_1[];
+extern Gfx mat_btowers___f3d[];
+extern Gfx mat_btowers__1_f3d[];
+extern Gfx btowers_Untitled_mesh_layer_1[];
+extern Gfx btowers_material_revert_render_settings[];

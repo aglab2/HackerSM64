@@ -150,3 +150,39 @@ ALIGNED8 const Texture aglab_betawwall2[] = {
 ALIGNED8 const Texture aglab_hdwall[] = {
 #include "levels/castle_grounds/hdwall.rgba16.inc.c"
 };
+
+ALIGNED8 const Texture aglab_zarwindow[] = {
+#include "levels/castle_grounds/zarwindow.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_luigiwindow[] = {
+#include "levels/castle_grounds/luigi_window.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_mariowindow[] = {
+#include "levels/castle_grounds/mario_window.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_betawindow[] = {
+#include "levels/castle_grounds/betawindow.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_jamst[] = {
+#include "levels/castle_grounds/jamst.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_jamsb[] = {
+#include "levels/castle_grounds/jamsb.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_hdroof[] = {
+#include "levels/castle_grounds/hdroof.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_zarroof[] = {
+#include "levels/castle_grounds/zarroof.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_betaroof[] = {
+#include "levels/castle_grounds/betaroof.rgba16.inc.c"
+};

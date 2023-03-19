@@ -20,3 +20,7 @@
 #include "levels/castle_grounds/areas/1/geo.inc.c"
 
 #include "levels/castle_grounds/geo.inc.c"
+
+#include "levels/castle_grounds/vtowers/geo.inc.c"
+#include "levels/castle_grounds/btowers/geo.inc.c"
+#include "levels/castle_grounds/etowers/geo.inc.c"

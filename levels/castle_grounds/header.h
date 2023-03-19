@@ -44,4 +44,10 @@ extern const LevelScript level_castle_grounds_entry[];
 
 #include "levels/castle_grounds/header.inc.h"
 
+#include "levels/castle_grounds/vtowers/geo_header.h"
+
+#include "levels/castle_grounds/btowers/geo_header.h"
+
+#include "levels/castle_grounds/etowers/geo_header.h"
+
 #endif
