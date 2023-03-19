@@ -332,105 +332,37 @@ stairs, you need 70\n\
 Stars.\n\
 Bwa ha ha!"))
 
-DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
-\n\
-\n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+DEFINE_DIALOG(DIALOG_030, 1, 5, 30, 200, _("\
+Hey, Mario!\n\
+What happened? Ah, it is\n\
+Bowser again with his\n\
+old tricks, he must\n\
+have stolen the castle!"))
 
-DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
-No way! You beat me...\n\
-again!! And I just spent\n\
-my entire savings on\n\
-these new Koopa\n\
-Mach 1 Sprint shoes!\n\
-Here, I guess I have to\n\
-hand over this Star to\n\
-the winner of the race.\n\
-Congrats, Mario!"))
+DEFINE_DIALOG(DIALOG_031, 1, 7, 30, 200, _("\
+Fear not, I have\n\
+everything ready to build\n\
+the castle from scratch!\n\
+Let's practice on the\n\
+surroundings of the castle\n\
+first before getting to\n\
+the large constructions."))
 
-DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
-\n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+DEFINE_DIALOG(DIALOG_032, 1, 4, 30, 200, _("\
+I will change the ground\n\
+pattern. Press the [A]\n\
+button when you are\n\
+happy with the choice."))
 
-DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+DEFINE_DIALOG(DIALOG_033, 1, 4, 30, 200, _("\
+What do you think of\n\
+decorating the castle?\n\
+Do you want to put\n\
+some fancy bricks?"))
 
-DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
-Good afternoon. The\n\
-Lakitu Bros., here,\n\
-reporting live from just\n\
-outside the Princess's\n\
-castle.\n\
-\n\
-Mario has just arrived\n\
-on the scene, and we'll\n\
-be filming the action live\n\
-as he enters the castle\n\
-and pursues the missing\n\
-Power Stars.\n\
-As seasoned cameramen,\n\
-we'll be shooting from the\n\
-recommended angle, but\n\
-you can change the\n\
-camera angle by pressing\n\
-the [C] Buttons.\n\
-If we can't adjust the\n\
-view any further, we'll\n\
-buzz. To take a look at\n\
-the surroundings, stop\n\
-and press [C]^.\n\
-\n\
-Press [A] to resume play.\n\
-Switch camera modes with\n\
-the [R] Button. Signs along\n\
-the way will review these\n\
-instructions.\n\
-\n\
-For now, reporting live,\n\
-this has been the\n\
-Lakitu Bros."))
+DEFINE_DIALOG(DIALOG_034, 1, 2, 30, 200, _("\
+Let's get some fresh\n\
+action going in the moat!"))
 
 DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
 There are four camera, or\n\

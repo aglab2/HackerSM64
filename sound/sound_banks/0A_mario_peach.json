@@ -138,6 +138,16 @@
             "release_rate": 208,
             "envelope": "envelope0",
             "sound": "17_castle"
+        },
+        "inst24": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "18_castle2"
+        },
+        "inst25": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "19_surroundings"
         }
     },
     "instrument_list": [
@@ -165,6 +175,8 @@
         "inst20",
         "inst21",
         "inst22",
-        "inst23"
+        "inst23",
+        "inst24",
+        "inst25"
     ]
 }

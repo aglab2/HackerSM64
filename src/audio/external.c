@@ -78,6 +78,8 @@ enum DialogSpeakers {
     WIGLR,
     YOSHI,
     AGLAB_CASTLE,
+    AGLAB_CASTLE2,
+    AGLAB_SURROUNDINGS,
 };
 
 #define _ 0xFF
@@ -87,7 +89,7 @@ u8 sDialogSpeaker[] = {
     /* 0*/ _,     BOMB,  BOMB,  BOMB,  BOMB,  KOOPA, KOOPA, KOOPA, _,     KOOPA,
     /* 1*/ _,     _,     _,     _,     _,     _,     _,     KBOMB, _,     _,
     /* 2*/ _,     BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1, BOWS1,
-    /* 3*/ AGLAB_CASTLE,     _,     _,     _,     _,     _,     _,     TUXIE, _,     _,
+    /* 3*/ AGLAB_CASTLE, AGLAB_CASTLE2, AGLAB_SURROUNDINGS,     _,     _,     _,     _,     TUXIE, _,     _,
     /* 4*/ _,     KOOPA, _,     _,     _,     _,     _,     BOMB,  _,     _,
     /* 5*/ _,     _,     _,     _,     _,     TUXIE, TUXIE, TUXIE, TUXIE, TUXIE,
     /* 6*/ _,     _,     _,     _,     _,     _,     _,     BOWS2, _,     _,
@@ -119,6 +121,8 @@ s32 sDialogSpeakerVoice[] = {
     SOUND_OBJ_WIGGLER_TALK,
     SOUND_GENERAL_YOSHI_TALK,
     SOUND_AGLAB_CASTLE,
+    SOUND_AGLAB_CASTLE2,
+    SOUND_AGLAB_SURROUNDINGS,
 #if defined(VERSION_JP) || defined(VERSION_US)
     NO_SOUND,
     NO_SOUND,

@@ -1254,6 +1254,8 @@
 #define /*0x0FC*/ oYoshiChosenHome OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oYoshiTargetYaw  OBJECT_FIELD_S32(0x1E)
 
+#define /*0x0F4*/ oAglabLakituDialog OBJECT_FIELD_F32(0x1B)
+#define /*0x0F4*/ oAglabLakituNextAction OBJECT_FIELD_F32(0x1C)
 
 /*Custom general defines:
 

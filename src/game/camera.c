@@ -10347,6 +10347,76 @@ struct Cutscene sCutsceneReadMessage[] = {
     { cutscene_read_message_end, 0 }
 };
 
+void cutscene_aglab_outsides_cs(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->pos[0] = -2639.f;
+    c->pos[1] = 2312.f;
+    c->pos[2] = -4829.f;
+    c->focus[0] = 2222.f;
+    c->focus[1] = 324.f;
+    c->focus[2] = -2638.f;
+}
+
+struct Cutscene sCutsceneAglabOutsides[] = {
+    { cutscene_aglab_outsides_cs, CUTSCENE_LOOP },
+};
+
+struct CutsceneSplinePoint gCSAglab1Pos[] = {
+    { 0, 0, { 6367, 5207, -3756 } },
+    { 1, 0, { 3261, 5207, -5569 } },
+    { 2, 0, { -2307, 5207, -4915 } },
+    { 3, 0, { -4861, 5207, -3715 } },
+    { -1, 0, { -4861, 5207, -3715 } },
+};
+
+struct CutsceneSplinePoint gCSAglab1Focus[] = {
+    { 0, 200, {  62, 2023, 1714 } }, 
+    { 1, 200, {  162, 2023, 1714 } },
+    { 2, 200, { -502, 2023, 1714 } },
+    { 3, 200, { -502, 2023, 1714 } },
+    { -1, 0, { -562, 2023, 1714 } },
+};
+void cutscene_aglab_castle_view(struct Camera *c) {
+    cutscene_event(cutscene_end_waving_start, c, 0, 0);
+    if (gCutsceneTimer > 200)
+        return;
+
+    move_point_along_spline(c->pos, gCSAglab1Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab1Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+struct Cutscene sCutsceneAglabCastleView[] = {
+    { cutscene_aglab_castle_view, CUTSCENE_LOOP },
+};
+
+void cutscene_aglab_castle_walls(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->pos[0] = 68.f;
+    c->pos[1] = 1575.f;
+    c->pos[2] = -821.f;
+    c->focus[0] = 68.f;
+    c->focus[1] = 727.f;
+    c->focus[2] = 1577.f;
+}
+
+struct Cutscene sCutsceneAglabCastleWalls[] = {
+    { cutscene_aglab_castle_walls, CUTSCENE_LOOP },
+};
+
+void cutscene_aglab_water(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = 3897.f;
+    c->focus[1] = -421.f;
+    c->focus[2] = 2810.f;
+    c->pos[0] = 2397.f;
+    c->pos[1] = 1191.f;
+    c->pos[2] = -984.f;
+}
+
+struct Cutscene sCutsceneAglabWater[] = {
+    { cutscene_aglab_water, CUTSCENE_LOOP },
+};
+
 /* TODO:
  * The next two arrays are both related to levels, and they look generated.
  * These should be split into their own file.
@@ -10808,6 +10878,11 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_RACE_DIALOG,          sCutsceneDialog)
         CUTSCENE(CUTSCENE_ENTER_PYRAMID_TOP,    sCutsceneEnterPyramidTop)
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE,  sCutscenePyramidTopExplode)
+
+        CUTSCENE(CUTSCENE_AGLAB_OUTSIDES, sCutsceneAglabOutsides)
+        CUTSCENE(CUTSCENE_AGLAB_CASTLE_VIEW, sCutsceneAglabCastleView)
+        CUTSCENE(CUTSCENE_AGLAB_CASTLE_WALLS, sCutsceneAglabCastleWalls)
+        CUTSCENE(CUTSCENE_AGLAB_WATER, sCutsceneAglabWater)
     }
 
 #undef CUTSCENE

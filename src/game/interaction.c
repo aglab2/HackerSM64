@@ -1847,12 +1847,16 @@ void mario_process_interactions(struct MarioState *m) {
     }
 }
 
+#include "config/config_debug.h"
+
 void check_death_barrier(struct MarioState *m) {
+#ifndef TEST_LEVEL
     if (m->pos[1] < m->floorHeight + 2048.0f) {
         if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_FALL_SOUND_PLAYED)) {
             play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
         }
     }
+#endif
 }
 
 void check_lava_boost(struct MarioState *m) {
