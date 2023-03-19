@@ -142,3 +142,11 @@ ALIGNED8 const Texture aglab_betaground2[] = {
 ALIGNED8 const Texture aglab_betawall3[] = {
 #include "levels/castle_grounds/betawall3.rgba16.inc.c"
 };
+
+ALIGNED8 const Texture aglab_betawwall2[] = {
+#include "levels/castle_grounds/betawwall2.rgba16.inc.c"
+};
+
+ALIGNED8 const Texture aglab_hdwall[] = {
+#include "levels/castle_grounds/hdwall.rgba16.inc.c"
+};

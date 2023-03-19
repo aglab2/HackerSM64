@@ -19,6 +19,7 @@ enum LakituActions
     LA_SWITCH_SURROUNDINGS,
     LA_SWITCH_CASTLE,
     LA_SWITCH_POOL,
+    LA_SWITCH_BRIDGE,
 };
 
 static void show_cs_time_advance(int cs, int deadline)
@@ -60,6 +61,7 @@ struct SelectedStates
     u8 surroundings;
     u8 castle;
     u8 pool;
+    u8 bridge;
 };
 
 static struct SelectedStates gStates = { 0 };
@@ -179,6 +181,42 @@ static void switch_water()
     *text = sWaterTextures[gStates.pool][4];
 }
 
+extern const Texture aglab_betawwall2[];
+extern const Texture aglab_hdwall[];
+extern Gfx castle_grounds_dl_briodge_mesh_layer_4[];
+
+extern u8 castle_grounds_dl_Shape_133_rgba16[];
+extern u8 castle_grounds_dl_Shape_135_rgba16[];
+
+extern Gfx mat_castle_grounds_dl_Shape_133_f3d[];
+extern Gfx mat_castle_grounds_dl_Shape_135_f3d[];
+extern Gfx mat_castle_grounds_dl_Shape_137_f3d[];
+
+static const void* sBridgeTextures[][2] = {
+    { aglab_jamground2, aglab_hdwall },
+    { castle_grounds_dl_Shape_133_rgba16, castle_grounds_dl_Shape_135_rgba16 },
+    { aglab_zarrock, aglab_zarwall },
+    { aglab_betaground1, aglab_betawwall2 },
+};
+
+static void switch_bridge()
+{
+    const void** text;
+    u8* env;
+    env = (u8*) segmented_to_virtual(castle_grounds_dl_briodge_mesh_layer_4) + 15;
+    *env = 0xff;
+    
+    text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_133_f3d) + 2*7 + 1;
+    *text = sBridgeTextures[gStates.bridge][0];
+    text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_135_f3d) + 2*6 + 1;
+    *text = sBridgeTextures[gStates.bridge][1];
+    text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_137_f3d) + 2*7 + 1;
+    *text = sBridgeTextures[gStates.bridge][1];
+}
+
+extern Gfx castle_grounds_dl_frame_mesh_layer_6[];
+extern Gfx castle_grounds_dl_frame_mesh_layer_4[];
+
 static void advance_state(int num, u8* val)
 {
     if (0 == o->oTimer % num)
@@ -241,6 +279,12 @@ void bhv_aglab_lakitu_loop()
         advance_state(30, &gStates.pool);
         switch_water();
         show_cs_time_advance(CUTSCENE_AGLAB_WATER, 0);
+    }
+    else if (LA_SWITCH_BRIDGE == o->oAction)
+    {
+        advance_state(30, &gStates.bridge);
+        switch_bridge();
+        show_cs_time_advance(CUTSCENE_AGLAB_BRIDGE, 0);
     }
 
     o->oHomeX = gLakituState.curFocus[0];

@@ -10417,6 +10417,20 @@ struct Cutscene sCutsceneAglabWater[] = {
     { cutscene_aglab_water, CUTSCENE_LOOP },
 };
 
+void cutscene_aglab_bridge(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->focus[0] = 82.f;
+    c->focus[1] = 455.f;
+    c->focus[2] = 904.f;
+    c->pos[0] = -1116.f;
+    c->pos[1] = 983.f;
+    c->pos[2] = -334.f;
+}
+
+struct Cutscene sCutsceneAglabBridge[] = {
+    { cutscene_aglab_bridge, CUTSCENE_LOOP },
+};
+
 /* TODO:
  * The next two arrays are both related to levels, and they look generated.
  * These should be split into their own file.
@@ -10883,6 +10897,7 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_AGLAB_CASTLE_VIEW, sCutsceneAglabCastleView)
         CUTSCENE(CUTSCENE_AGLAB_CASTLE_WALLS, sCutsceneAglabCastleWalls)
         CUTSCENE(CUTSCENE_AGLAB_WATER, sCutsceneAglabWater)
+        CUTSCENE(CUTSCENE_AGLAB_BRIDGE, sCutsceneAglabBridge)
     }
 
 #undef CUTSCENE
