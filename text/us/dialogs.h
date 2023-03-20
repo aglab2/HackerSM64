@@ -403,22 +403,10 @@ Pick the one that\n\
 fits castle the best."))
 
 DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
-Caution! Narrow Bridge!\n\
-Cross slowly!\n\
-\n\
-\n\
-You can jump to the edge\n\
-of the cliff and hang on,\n\
-and you can climb off the\n\
-edge if you move slowly.\n\
-When you want to let go,\n\
-either press [Z] or press\n\
-the Control Stick in the\n\
-direction of Mario's back.\n\
-To climb up, press Up on\n\
-the Control Stick. To\n\
-scurry up quickly, press\n\
-the [A] Button."))
+And the castle is\n\
+ready! Let's see...\n\
+What kind of facade\n\
+did you make..."))
 
 DEFINE_DIALOG(DIALOG_043, 1, 5, 30, 200, _("\
 If you jump and hold the\n\
@@ -1032,13 +1020,12 @@ Red Circle: Elevator 2\n\
 //// Underground Lake\n\
 Arrow: You are here"))
 
-DEFINE_DIALOG(DIALOG_090, 1, 6, 30, 200, _("\
-Bwa ha ha ha!\n\
-You've stepped right into\n\
-my trap, just as I knew\n\
-you would! I warn you,\n\
-『Friend,』 watch your\n\
-step!"))
+DEFINE_DIALOG(DIALOG_090, 1, 5, 30, 200, _("\
+What is this castle?\n\
+What are you Mario?\n\
+Is that the doing\n\
+of Chaos Matters?\n\
+Perish!"))
 
 DEFINE_DIALOG(DIALOG_091, 2, 2, 30, 200, _("\
 Danger!\n\

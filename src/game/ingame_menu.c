@@ -1905,9 +1905,9 @@ s32 render_pause_courses_and_castle(void) {
 
         case DIALOG_STATE_HORIZONTAL:
             shade_screen();
-            print_hud_pause_colorful_str();
-            render_pause_castle_menu_box(160, 143);
-            render_pause_castle_main_strings(104, 60);
+            // print_hud_pause_colorful_str();
+            // render_pause_castle_menu_box(160, 143);
+            // render_pause_castle_main_strings(104, 60);
 
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | Z_TRIG)) {
                 level_set_transition(0, NULL);

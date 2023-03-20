@@ -30,6 +30,12 @@ enum LakituActions
     LA_SWITCH_BG,
 
     LA_SCORING,
+
+    LA_S_VANILLA,
+    LA_S_BOWSER,
+    LA_S_BETA,
+    LA_S_JAMS,
+    LA_WHAT,
 };
 
 extern s16 gCutsceneTimer;
@@ -46,6 +52,17 @@ static void show_cs_time_advance(int cs, int deadline, int dialog)
         gCamera->cutscene = cs;
         o->oAglabLakituDialog = dialog;
         o->oAglabLakituNextAction = o->oAction + 1;
+        o->oAction = LA_ADVANCE;
+    }
+}
+
+static void show_finale(int cs, int picked)
+{
+    gCamera->cutscene = cs;
+    if (gDialogID == DIALOG_NONE)
+    {
+        o->oAglabLakituDialog = 50 + 10 * picked;
+        o->oAglabLakituNextAction = LA_SCORING + 1 + picked;
         o->oAction = LA_ADVANCE;
     }
 }
@@ -219,10 +236,32 @@ static const void* sBridgeTextures[][2] = {
 
 static void switch_bridge()
 {
+    static u8 LastSpawned = 0;
+    if (LastSpawned != gStates.bridge)
+    {
+        f32 d;
+        struct Object* br = cur_obj_find_nearest_object_with_behavior(bhvStaticObjectEx2, &d);
+        if (br)
+        {
+            br->activeFlags = 0;
+        }
+
+        if (0 == gStates.bridge)
+        {
+            struct Object* b = spawn_object(o, MODEL_CASTLE_GROUNDS_DISASTER_BRIDGE, bhvStaticObjectEx2);
+            b->oPosX = 0;
+            b->oPosY = 0;
+            b->oPosZ = 0;
+        }
+
+        LastSpawned = gStates.bridge;
+    }
+
     const void** text;
     u8* env;
+    u8 venv = 0 == gStates.bridge ? 0 : 0xff;
     env = (u8*) segmented_to_virtual(castle_grounds_dl_briodge_mesh_layer_4) + 15;
-    *env = 0xff;
+    *env = venv;
     
     text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_133_f3d) + 2*7 + 1;
     *text = sBridgeTextures[gStates.bridge][0];
@@ -531,7 +570,7 @@ void bhv_aglab_lakitu_loop()
     // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
-    // print_text_fmt_int(20, 200, "A %d", o->oAction);
+    print_text_fmt_int(20, 200, "A %d", o->oAction);
     // print_text_fmt_int(20, 180, "T %d", o->oTimer);
 
     if (LA_INIT == o->oAction)
@@ -619,7 +658,7 @@ void bhv_aglab_lakitu_loop()
     {
         advance_state(30, &gStates.bg);
         switch_bg();
-        show_cs_time_advance(CUTSCENE_AGLAB_BG, 0, 50);
+        show_cs_time_advance(CUTSCENE_AGLAB_BG, 0, 42);
     }
     else if (LA_SCORING == o->oAction)
     {
@@ -628,13 +667,42 @@ void bhv_aglab_lakitu_loop()
             gCutsceneTimer = 0;
             calculate_score();
             o->oAglabLakituChosen = find_largest_score();
+            if (gScores.arr[o->oAglabLakituChosen] < 9)
+            {
+                o->oAglabLakituChosen = 4; /*invalid*/
+            }
         }
-        show_cs_time_advance(CUTSCENE_AGLAB_CASTLE_VIEW2, 0, 51);
 
-        print_text_fmt_int(20, 80, "J %d", gScores.arr[3]);
-        print_text_fmt_int(20, 60, "B %d", gScores.arr[2]);
-        print_text_fmt_int(20, 40, "Z %d", gScores.arr[1]);
-        print_text_fmt_int(20, 20, "V %d", gScores.arr[0]);
+        show_finale(CUTSCENE_AGLAB_CASTLE_VIEW2, o->oAglabLakituChosen);
+        // print_text_fmt_int(20, 80, "J %d", gScores.arr[3]);
+        // print_text_fmt_int(20, 60, "B %d", gScores.arr[2]);
+        // print_text_fmt_int(20, 40, "Z %d", gScores.arr[1]);
+        // print_text_fmt_int(20, 20, "V %d", gScores.arr[0]);
+    }
+    else if (LA_S_VANILLA == o->oAction)
+    {
+    }
+    else if (LA_S_BOWSER == o->oAction)
+    {
+        
+    }
+    else if (LA_S_BETA == o->oAction)
+    {
+        
+    }
+    else if (LA_S_JAMS == o->oAction)
+    {
+        
+    }
+    else if (LA_WHAT == o->oAction)
+    {
+        gCamera->cutscene = 0;
+        if (gDialogID == DIALOG_NONE)
+        {
+            o->oAglabLakituDialog = 30;
+            gMarioStates->health = 1;
+            set_mario_npc_dialog(MARIO_DIALOG_STOP);
+        }
     }
 
     o->oHomeX = gLakituState.curFocus[0];

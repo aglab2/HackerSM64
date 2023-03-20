@@ -38,3 +38,4 @@
 #include "levels/castle_grounds/btowers/model.inc.c"
 #include "levels/castle_grounds/etowers/model.inc.c"
 #include "levels/castle_grounds/one_tower/model.inc.c"
+#include "levels/castle_grounds/disaster_bridge/model.inc.c"
