@@ -668,3 +668,39 @@ s32 load_patchable_table(struct DmaHandlerList *list, s32 index) {
     }
     return FALSE;
 }
+
+ALIGNED8 u8 gSkyboxBuffer[0x20140];
+void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd) {
+    // UNUSED void *dest = NULL;
+#ifdef GZIP
+    u32 compSize = (srcEnd - 4 - srcStart);
+#else
+    u32 compSize = ALIGN16(srcEnd - srcStart);
+#endif
+    u8 *compressed = main_pool_alloc(compSize, MEMORY_POOL_RIGHT);
+#ifdef GZIP
+    // Decompressed size from end of gzip
+    u32 *size = (u32 *) (compressed + compSize);
+#endif
+    if (compressed != NULL) {
+#ifdef UNCOMPRESSED
+        dma_read(gSkyboxBuffer, srcStart, srcEnd);
+#else
+        dma_read(compressed, srcStart, srcEnd);
+#endif
+#ifdef GZIP
+        expand_gzip(compressed, gSkyboxBuffer, compSize, (u32)size);
+#elif RNC1
+        Propack_UnpackM1(compressed, gSkyboxBuffer);
+#elif RNC2
+        Propack_UnpackM2(compressed, gSkyboxBuffer);
+#elif YAY0
+        slidstart(compressed, gSkyboxBuffer);
+#elif MIO0
+        decompress(compressed, gSkyboxBuffer);
+#endif
+        set_segment_base_addr(segment, gSkyboxBuffer); sSegmentROMTable[segment] = (uintptr_t) srcStart;
+        main_pool_free(compressed);
+    }
+    return gSkyboxBuffer;
+}

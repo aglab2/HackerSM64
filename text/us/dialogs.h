@@ -392,18 +392,15 @@ peach's castle in these\n\
 
 DEFINE_DIALOG(DIALOG_040, 1, 4, 30, 200, _("\
 The most important tower\n\
-is the central one.\n\
+is the central one!\n\
 It represents the power\n\
 of stars held in castle."))
 
-DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
-I win! You lose!\n\
-Ha ha ha!\n\
-\n\
-That's what you get for\n\
-messin' with Koopa the\n\
-Quick.\n\
-Better luck next time!"))
+DEFINE_DIALOG(DIALOG_041, 1, 4, 30, 200, _("\
+Wanna mix around the\n\
+background too?\n\
+Pick the one that\n\
+fits castle the best."))
 
 DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
 Caution! Narrow Bridge!\n\

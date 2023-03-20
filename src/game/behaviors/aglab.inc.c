@@ -2,6 +2,8 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 
+extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
+
 void bhv_aglab_lakitu_init()
 {
     o->oAglabLakituDialog = 30;
@@ -25,6 +27,7 @@ enum LakituActions
     LA_SWITCH_ROOF,
     LA_SWITCH_TOWERS,
     LA_SWITCH_MAIN,
+    LA_SWITCH_BG
 };
 
 static void show_cs_time_advance(int cs, int deadline, int dialog)
@@ -72,6 +75,7 @@ struct SelectedStates
     u8 frame;
     u8 roof;
     u8 main;
+    u8 bg;
 };
 
 static struct SelectedStates gStates = { 0 };
@@ -414,6 +418,30 @@ static void advance_state(int num, u8* val)
     }
 }
 
+static void switch_bg()
+{
+    static u8 LastBg = 0;
+    if (LastBg != gStates.bg)
+    {
+        LastBg = gStates.bg;
+        switch (gStates.bg)
+        {
+            case 0:
+                load_segment_decompress_skybox(0xA,_bidw_skybox_mio0SegmentRomStart, _bidw_skybox_mio0SegmentRomEnd);
+                break;
+            case 1:
+                load_segment_decompress_skybox(0xA,_cloud_floor_skybox_yay0SegmentRomStart, _cloud_floor_skybox_yay0SegmentRomEnd);
+                break;
+            case 2:
+                load_segment_decompress_skybox(0xA,_ccm_skybox_mio0SegmentRomStart, _ccm_skybox_mio0SegmentRomEnd);
+                break;
+            case 3:
+                load_segment_decompress_skybox(0xA,_bitfs_skybox_mio0SegmentRomStart, _bitfs_skybox_mio0SegmentRomEnd);
+                break;
+        }
+    }
+}
+
 void bhv_aglab_lakitu_loop()
 {
     print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
@@ -503,6 +531,12 @@ void bhv_aglab_lakitu_loop()
         advance_state(30, &gStates.main);
         switch_main();
         show_cs_time_advance(CUTSCENE_AGLAB_MAIN, 0, 41);
+    }
+    else if (LA_SWITCH_BG == o->oAction)
+    {
+        advance_state(30, &gStates.bg);
+        switch_bg();
+        show_cs_time_advance(CUTSCENE_AGLAB_BG, 0, 42);
     }
 
     o->oHomeX = gLakituState.curFocus[0];

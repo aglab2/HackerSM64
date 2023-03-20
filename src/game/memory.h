@@ -70,6 +70,8 @@ void load_engine_code_segment(void);
 #define load_engine_code_segment(...)
 #endif
 
+void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
+
 struct AllocOnlyPool *alloc_only_pool_init(u32 size, u32 side);
 void *alloc_only_pool_alloc(struct AllocOnlyPool *pool, s32 size);
 struct AllocOnlyPool *alloc_only_pool_resize(struct AllocOnlyPool *pool, u32 size);
