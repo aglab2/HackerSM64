@@ -10376,6 +10376,7 @@ struct CutsceneSplinePoint gCSAglab1Focus[] = {
     { 3, 200, { -502, 2023, 1714 } },
     { -1, 0, { -562, 2023, 1714 } },
 };
+
 void cutscene_aglab_castle_view(struct Camera *c) {
     cutscene_event(cutscene_end_waving_start, c, 0, 0);
     if (gCutsceneTimer > 200)
@@ -10387,6 +10388,35 @@ void cutscene_aglab_castle_view(struct Camera *c) {
 
 struct Cutscene sCutsceneAglabCastleView[] = {
     { cutscene_aglab_castle_view, CUTSCENE_LOOP },
+};
+
+struct CutsceneSplinePoint gCSAglab2Pos[] = {
+    { 0, 0, { 6367 + 3000.f, 5207, -3756 } },
+    { 1, 0, { 3261 + 2200.f, 5207, -5569 - 2200.f } },
+    { 2, 0, { -2307, 5207, -4915 - 1000.f } },
+    { 3, 0, { -4861 - 2200.f, 5207, -3715 + 2200.f } },
+    { -1, 0, { -4861 - 3000.f, 5207, -3715 } },
+};
+
+struct CutsceneSplinePoint gCSAglab2Focus[] = {
+    { 0, 200, {  62, 3023, 1714 } }, 
+    { 1, 200, {  162, 3023, 1714 } },
+    { 2, 200, { -502, 3023, 1714 } },
+    { 3, 200, { -502, 3023, 1714 } },
+    { -1, 0, { -562, 3023, 1714 } },
+};
+
+void cutscene_aglab_castle_view2(struct Camera *c) {
+    cutscene_event(cutscene_end_waving_start, c, 0, 0);
+    if (gCutsceneTimer > 200)
+        return;
+
+    move_point_along_spline(c->pos, gCSAglab2Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab2Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+struct Cutscene sCutsceneAglabCastleView2[] = {
+    { cutscene_aglab_castle_view2, CUTSCENE_LOOP },
 };
 
 void cutscene_aglab_castle_walls(struct Camera *c) {
@@ -10979,6 +11009,7 @@ void play_cutscene(struct Camera *c) {
 
         CUTSCENE(CUTSCENE_AGLAB_OUTSIDES, sCutsceneAglabOutsides)
         CUTSCENE(CUTSCENE_AGLAB_CASTLE_VIEW, sCutsceneAglabCastleView)
+        CUTSCENE(CUTSCENE_AGLAB_CASTLE_VIEW2, sCutsceneAglabCastleView2)
         CUTSCENE(CUTSCENE_AGLAB_CASTLE_WALLS, sCutsceneAglabCastleWalls)
         CUTSCENE(CUTSCENE_AGLAB_WATER, sCutsceneAglabWater)
         CUTSCENE(CUTSCENE_AGLAB_BRIDGE, sCutsceneAglabBridge)

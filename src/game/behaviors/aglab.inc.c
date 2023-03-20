@@ -27,8 +27,12 @@ enum LakituActions
     LA_SWITCH_ROOF,
     LA_SWITCH_TOWERS,
     LA_SWITCH_MAIN,
-    LA_SWITCH_BG
+    LA_SWITCH_BG,
+
+    LA_SCORING,
 };
+
+extern s16 gCutsceneTimer;
 
 static void show_cs_time_advance(int cs, int deadline, int dialog)
 {
@@ -442,14 +446,93 @@ static void switch_bg()
     }
 }
 
+struct Scores
+{
+    s8 arr[4];
+};
+
+enum ScoreTypes
+{
+    S_VANILLA,
+    S_BOWSER,
+    S_BETA,
+    S_JAMS,
+};
+
+struct Scores gScores = { 0 };
+
+static void calculate_score()
+{
+    gScores = (struct Scores){ 0 };
+
+    if (0 == gStates.surroundings) gScores.arr[S_BOWSER] += 1;
+    // if (1 == gStates.surroundings) vanilla += 1;
+    if (2 == gStates.surroundings) gScores.arr[S_BETA] += 1;
+
+    if (0 == gStates.castle) gScores.arr[S_VANILLA] += 2;
+    if (1 == gStates.castle) gScores.arr[S_BETA] += 2;
+    if (2 == gStates.castle) gScores.arr[S_BOWSER] += 1;
+
+    if (0 == gStates.pool) gScores.arr[S_BETA] += 1;
+    if (1 == gStates.pool) gScores.arr[S_JAMS] += 3;
+    if (2 == gStates.pool) gScores.arr[S_VANILLA] += 2;
+    if (3 == gStates.pool) gScores.arr[S_BOWSER] += 3;
+
+    if (1 == gStates.bridge) gScores.arr[S_VANILLA] += 1;
+    if (2 == gStates.bridge) gScores.arr[S_BOWSER] += 1;
+    if (3 == gStates.bridge) gScores.arr[S_BETA] += 1;
+
+    if (0 == gStates.window) gScores.arr[S_JAMS] += 3;
+    if (1 == gStates.window) gScores.arr[S_VANILLA] += 1;
+    if (2 == gStates.window) gScores.arr[S_BOWSER] += 1;
+
+    if (0 == gStates.frame) gScores.arr[S_BETA] += 3;
+    if (1 == gStates.frame) gScores.arr[S_JAMS] += 3;
+    if (2 == gStates.frame) gScores.arr[S_VANILLA] += 2;
+    if (3 == gStates.frame) gScores.arr[S_BOWSER] += 2;
+
+    if (0 == gStates.roof) gScores.arr[S_VANILLA] += 2;
+    if (2 == gStates.roof) gScores.arr[S_BOWSER] += 2;
+    if (3 == gStates.roof) gScores.arr[S_BETA] += 2;
+
+    if (0 == gStates.towers) gScores.arr[S_VANILLA] += 2;
+    if (1 == gStates.towers) gScores.arr[S_BOWSER] += 1;
+    if (2 == gStates.towers) gScores.arr[S_BETA] += 2;
+    if (3 == gStates.towers) gScores.arr[S_JAMS] += 3;
+
+    if (0 == gStates.main) gScores.arr[S_BETA] += 3;
+    if (1 == gStates.main) gScores.arr[S_VANILLA] += 2;
+    if (2 == gStates.main) gScores.arr[S_JAMS] += 3;
+    if (3 == gStates.main) gScores.arr[S_BOWSER] += 1;
+
+    if (3 == gStates.bg) gScores.arr[S_BOWSER] += 2;
+    if (0 == gStates.bg) gScores.arr[S_VANILLA] += 1;
+}
+
+static int find_largest_score()
+{
+    int which = 0;
+    int score = gScores.arr[0];
+    for (int i = 1; i < 4; i++)
+    {
+        if (score < gScores.arr[i])
+        {
+            score = gScores.arr[i];
+            which = i;
+        }
+    }
+
+    return which;
+}
+
 void bhv_aglab_lakitu_loop()
 {
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
-    print_text_fmt_int(20, 200, "A %d", o->oAction);
-    print_text_fmt_int(20, 180, "T %d", o->oTimer);
+    // print_text_fmt_int(20, 200, "A %d", o->oAction);
+    // print_text_fmt_int(20, 180, "T %d", o->oTimer);
 
     if (LA_INIT == o->oAction)
     {
@@ -536,7 +619,22 @@ void bhv_aglab_lakitu_loop()
     {
         advance_state(30, &gStates.bg);
         switch_bg();
-        show_cs_time_advance(CUTSCENE_AGLAB_BG, 0, 42);
+        show_cs_time_advance(CUTSCENE_AGLAB_BG, 0, 50);
+    }
+    else if (LA_SCORING == o->oAction)
+    {
+        if (0 == o->oTimer)
+        {
+            gCutsceneTimer = 0;
+            calculate_score();
+            o->oAglabLakituChosen = find_largest_score();
+        }
+        show_cs_time_advance(CUTSCENE_AGLAB_CASTLE_VIEW2, 0, 51);
+
+        print_text_fmt_int(20, 80, "J %d", gScores.arr[3]);
+        print_text_fmt_int(20, 60, "B %d", gScores.arr[2]);
+        print_text_fmt_int(20, 40, "Z %d", gScores.arr[1]);
+        print_text_fmt_int(20, 20, "V %d", gScores.arr[0]);
     }
 
     o->oHomeX = gLakituState.curFocus[0];
