@@ -4,10 +4,143 @@
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
+extern Lights1 mario_blue_lights;
+extern Lights1 mario_red_lights;
+extern Lights1 mario_button_v4_lights;
+extern Lights1 mario_face_0___eye_open_v4_lights;
+extern Lights1 mario_skin_lights;
+extern Lights1 mario_mustache_v4_lights;
+extern Lights1 mario_hair_001_v4_lights;
+extern Lights1 mario_sideburns_v4_lights;
+extern Lights1 mario_logo_lights;
+extern Lights1 mario_face_1___eye_half_v4_lights;
+extern Lights1 mario_face_2___eye_closed_v4_lights;
+extern Lights1 mario_face_7___eye_X_v4_lights;
+extern Lights1 mario_gloves_v4_lights;
+extern Lights1 mario_red_dark_lights;
+extern Lights1 mario_shoes_v4_lights;
+
+static void reset_mao()
+{
+    Lights1* light;
+
+    light = (Lights1*) segmented_to_virtual(&mario_blue_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0xD, 0x6, 0x43,
+        0x0, 0x6E, 0xFF, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_red_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x5C, 0x0, 0x23,
+        0xC9, 0x0, 0x0, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_button_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x0, 0x12, 0x6D,
+        0x0, 0x6E, 0xFF, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_face_0___eye_open_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_skin_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_mustache_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_hair_001_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x39, 0x2, 0x0,
+        0x73, 0x5, 0x0, 0x28, 0x28, 0x28);
+
+    light = (Lights1*) segmented_to_virtual(&mario_sideburns_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_logo_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x5C, 0x0, 0x23,
+        0xC9, 0x0, 0x0, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_face_1___eye_half_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_face_2___eye_closed_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_face_7___eye_X_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x9C, 0x66, 0x50,
+        0xFE, 0xC1, 0x79, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_gloves_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x69, 0x7B, 0x90,
+        0xF3, 0xF3, 0xFF, 0x3F, 0x59, 0x3F);
+
+    light = (Lights1*) segmented_to_virtual(&mario_red_dark_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x20, 0x0, 0x7,
+        0x40, 0x0, 0xF, 0x28, 0x28, 0x28);
+
+    light = (Lights1*) segmented_to_virtual(&mario_shoes_v4_lights);
+    *light = (Lights1) gdSPDefLights1(
+        0x7F, 0x7F, 0x7F,
+        0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+}
+
+static void randomize_color(Lights1* vlight)
+{
+    Lights1* light = (Lights1*) segmented_to_virtual(vlight);
+
+    u8 r = random_float() * 255;
+    u8 g = random_float() * 255;
+    u8 b = random_float() * 255;
+
+    u8 x = random_float() * 255;
+    u8 y = random_float() * 255;
+    u8 z = random_float() * 255;
+
+    *light = (Lights1) gdSPDefLights1(
+        r * random_float(), g * random_float(), b * random_float(),
+        r, g, b, x, y, z);
+}
+
+static void randomize_mao()
+{
+    randomize_color(&mario_blue_lights);
+    randomize_color(&mario_red_lights);
+    randomize_color(&mario_button_v4_lights);
+    randomize_color(&mario_face_0___eye_open_v4_lights);
+    randomize_color(&mario_skin_lights);
+    randomize_color(&mario_mustache_v4_lights);
+    randomize_color(&mario_hair_001_v4_lights);
+    randomize_color(&mario_sideburns_v4_lights);
+    randomize_color(&mario_logo_lights);
+    randomize_color(&mario_face_1___eye_half_v4_lights);
+    randomize_color(&mario_face_2___eye_closed_v4_lights);
+    randomize_color(&mario_face_7___eye_X_v4_lights);
+    randomize_color(&mario_gloves_v4_lights);
+    randomize_color(&mario_red_dark_lights);
+    randomize_color(&mario_shoes_v4_lights);
+}
+
 void bhv_aglab_lakitu_init()
 {
     o->oAglabLakituDialog = 30;
     spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
+    reset_mao();
 }
 
 extern s16 gDialogID;
@@ -696,6 +829,11 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_WHAT == o->oAction)
     {
+        if (0 == o->oTimer)
+        {
+            randomize_mao();
+        }
+
         gCamera->cutscene = 0;
         if (gDialogID == DIALOG_NONE)
         {
