@@ -54,4 +54,6 @@ extern const LevelScript level_castle_grounds_entry[];
 
 #include "levels/castle_grounds/disaster_bridge/geo_header.h"
 
+#include "levels/castle_grounds/final_bridge/collision_header.h"
+
 #endif

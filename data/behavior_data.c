@@ -6109,3 +6109,25 @@ const BehaviorScript bhvAglabLakitu[] = {
         CALL_NATIVE(bhv_aglab_lakitu_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvFinalBridge[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(final_bridge_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_toad_runner_init(void);
+extern void bhv_toad_runner_loop(void);
+const BehaviorScript bhvToadRunner[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, toad_seg6_anims_0600FB58),
+    ANIMATE(TOAD_ANIM_EAST_WALKING),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_toad_runner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_toad_runner_loop),
+    END_LOOP(),
+};

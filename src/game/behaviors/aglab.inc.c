@@ -136,6 +136,8 @@ static void randomize_mao()
     randomize_color(&mario_shoes_v4_lights);
 }
 
+extern const BehaviorScript bhvToadRunner[];
+
 void bhv_aglab_lakitu_init()
 {
     o->oAglabLakituDialog = 30;
@@ -172,6 +174,7 @@ enum LakituActions
 };
 
 extern s16 gCutsceneTimer;
+static u8 gBurnToads;
 
 static void show_cs_time_advance(int cs, int deadline, int dialog)
 {
@@ -385,6 +388,9 @@ static void switch_bridge()
             b->oPosX = 0;
             b->oPosY = 0;
             b->oPosZ = 0;
+            b->oFaceAngleYaw = 0;
+            b->oFaceAnglePitch = 0;
+            b->oFaceAngleRoll = 0;
         }
 
         LastSpawned = gStates.bridge;
@@ -683,7 +689,7 @@ static void calculate_score()
 
 static int find_largest_score()
 {
-    return S_BOWSER;
+    return S_BETA;
 
     int which = 0;
     int score = gScores.arr[0];
@@ -703,6 +709,8 @@ static int find_largest_score()
 
     return which;
 }
+
+extern const BehaviorScript bhvFinalBridge[];
 
 u8 gWantCustomDeath = 0;
 void bhv_aglab_lakitu_loop()
@@ -830,10 +838,28 @@ void bhv_aglab_lakitu_loop()
     {
         if (0 == o->oTimer)
         {
+            gBurnToads = 0;
+            {
+                struct Object* br = spawn_object(o, 0, bhvFinalBridge);
+                br->oPosX = br->oPosY = br->oPosZ = 0;
+                br->oFaceAngleYaw = 0;
+                br->oFaceAnglePitch = 0;
+                br->oFaceAngleRoll = 0;
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                struct Object* toad = spawn_object(o, MODEL_TOAD, bhvToadRunner);
+                toad->oPosX = random_f32_around_zero(900.f);
+                toad->oPosY = 600.f;
+                toad->oPosZ = 2600.f + random_f32_around_zero(400.f);
+                toad->oFaceAngleYaw = 0;
+                toad->oFaceAnglePitch = 0;
+                toad->oFaceAngleRoll = 0;
+            }
             o->oAglabLakituFriend = spawn_object(o, MODEL_BOWSER, bhvBowser);
-            o->oAglabLakituFriend->oPosX = gMarioStates->pos[0];
-            o->oAglabLakituFriend->oPosY = gMarioStates->pos[1];
-            o->oAglabLakituFriend->oPosZ = gMarioStates->pos[2];
+            o->oAglabLakituFriend->oPosX = gMarioStates->pos[0] = -39.f;
+            o->oAglabLakituFriend->oPosY = gMarioStates->pos[1] = 365.f;
+            o->oAglabLakituFriend->oPosZ = gMarioStates->pos[2] = -399.f;
             o->oAglabLakituFriend->oFaceAngleYaw = 0x8000;
             o->oAglabLakituFriend->oFaceAnglePitch = 0;
             o->oAglabLakituFriend->oFaceAngleRoll = 0;
@@ -854,8 +880,12 @@ void bhv_aglab_lakitu_loop()
             if (50 == o->oTimer)
             {
                 gMarioStates->usedObj = o;
-                SET_BPARAM2(o->oBehParams, 0xb);
+                SET_BPARAM2(o->oBehParams, 0xc);
                 level_trigger_warp(gMarioStates, WARP_OP_TELEPORT);
+            }
+            if (60 == o->oTimer)
+            {
+                gBurnToads = 1;
             }
             // set_mario_npc_dialog(MARIO_DIALOG_STOP);
         }
@@ -920,7 +950,57 @@ void bhv_aglab_lakitu_loop()
     }
 }
 
-void bhv_aglab_towers_loop()
+void bhv_toad_runner_init(void)
 {
+    o->oVelZ = -9.f;
+    o->oHomeZ = o->oPosZ;
+}
 
+static f32 anim_fixup(int fr)
+{
+    f32 d = 0;
+    if (fr < 30)
+    {
+        return fr * 7.f;
+    }
+
+    d += 30 * 7.f;
+    fr -= 30;
+
+    if (fr < 30)
+    {
+        return d + fr * 12.f;
+    }
+    
+    d += 30 * 12.f;
+    fr -= 30;
+
+    return d + fr * 13.f;
+}
+
+void bhv_toad_runner_loop(void)
+{
+    if (cur_obj_check_if_near_animation_end())
+    {
+        o->header.gfx.animInfo.animFrame = 0;
+    }
+    // print_text_fmt_int(20, 100, "%d", o->header.gfx.animInfo.animFrame);
+
+    o->oOpacity = 255;
+
+    o->oVelZ += random_float() / 100.f;
+    o->oHomeZ += o->oVelZ;
+    // from 7.f at 30 till 12.5f at 60
+    o->oPosZ = o->oHomeZ + anim_fixup(o->header.gfx.animInfo.animFrame);
+    struct Surface* floor;
+    o->oPosY = find_floor(o->oPosX, o->oPosY + 100.f, o->oHomeZ, &floor);
+
+    if (gBurnToads && o->oHomeZ > -300.f)
+    {
+        o->activeFlags = 0;
+        struct Object* flame = spawn_object(o, MODEL_RED_FLAME, bhvFlame);
+        flame->oPosX = o->oPosX;
+        flame->oPosY = o->oPosY;
+        flame->oPosZ = o->oHomeZ;
+    }
 }

@@ -57,6 +57,45 @@ const LevelScript level_castle_courtyard_entry[] = {
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
+	AREA(2, castle_courtyard_area_2),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, 18, 160, 232, 0, 0, 0, (0xa << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, 20, 0, -158, 0, 0, 0, (0xb << 16), bhvWarp),
+		TERRAIN(castle_courtyard_area_2_collision),
+		MACRO_OBJECTS(castle_courtyard_area_2_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		TERRAIN_TYPE(TERRAIN_WATER),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(3, castle_courtyard_area_3),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, -7, 160, 224, 0, 0, 0, (0xa << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, -5, 0, -166, 0, 0, 0, (0xb << 16), bhvWarp),
+		TERRAIN(castle_courtyard_area_3_collision),
+		MACRO_OBJECTS(castle_courtyard_area_3_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		TERRAIN_TYPE(TERRAIN_WATER),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(4, castle_courtyard_area_4),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, -2621, 160, 224, 0, 0, 0, (0xa << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, -2619, 0, -166, 0, 0, 0, (0xb << 16), bhvWarp),
+		TERRAIN(castle_courtyard_area_4_collision),
+		MACRO_OBJECTS(castle_courtyard_area_4_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		TERRAIN_TYPE(TERRAIN_WATER),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
 	FREE_LEVEL_POOL(),
 	MARIO_POS(1, 0, 0, 0, 0),
 	CALL(0, lvl_init_or_update),
