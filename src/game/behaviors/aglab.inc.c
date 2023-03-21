@@ -1,6 +1,6 @@
 #include "config/config_debug.h"
 
-// #define DEBUG_TRIGGER_IMMEDIATELY
+#define DEBUG_TRIGGER_IMMEDIATELY
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -683,6 +683,8 @@ static void calculate_score()
 
 static int find_largest_score()
 {
+    return S_BOWSER;
+
     int which = 0;
     int score = gScores.arr[0];
     for (int i = 1; i < 4; i++)
@@ -694,16 +696,28 @@ static int find_largest_score()
         }
     }
 
+    if (gScores.arr[which] < 9)
+    {
+        return 4; /*invalid*/
+    }
+
     return which;
 }
 
 void bhv_aglab_lakitu_loop()
 {
+    o->oHomeX = gLakituState.curFocus[0];
+    o->oHomeZ = gLakituState.curFocus[2];
+
+    o->oFaceAngleYaw = cur_obj_angle_to_home();
+    o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
+
     // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
     // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
     print_text_fmt_int(20, 200, "A %d", o->oAction);
+    print_text_fmt_int(20, 180, "T %d", o->oSubAction);
     // print_text_fmt_int(20, 180, "T %d", o->oTimer);
 
     if (LA_INIT == o->oAction)
@@ -800,10 +814,6 @@ void bhv_aglab_lakitu_loop()
             gCutsceneTimer = 0;
             calculate_score();
             o->oAglabLakituChosen = find_largest_score();
-            if (gScores.arr[o->oAglabLakituChosen] < 9)
-            {
-                o->oAglabLakituChosen = 4; /*invalid*/
-            }
         }
 
         show_finale(CUTSCENE_AGLAB_CASTLE_VIEW2, o->oAglabLakituChosen);
@@ -821,7 +831,38 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BETA == o->oAction)
     {
-        
+        gCamera->cutscene = 0;
+        if (0 == o->oSubAction)
+        {
+            if (gDialogID == DIALOG_NONE)
+            {
+                o->oSubAction++;
+            }
+        }
+        else if (1 == o->oSubAction)
+        {
+            set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP);
+            create_dialog_box(71);
+            o->oSubAction = 2;
+
+            struct Object* obj = spawn_object(o, MODEL_THWOMP, bhvThwomp);
+            obj->oPosX = gMarioStates->pos[0];
+            obj->oPosY = gMarioStates->pos[1];
+            obj->oPosZ = gMarioStates->pos[2];
+            obj->oFaceAngleYaw = 0x8000;
+            obj->oFaceAnglePitch = 0;
+            obj->oFaceAngleRoll = 0;
+        }
+        else if (2 == o->oSubAction)
+        {
+            if (gDialogID == DIALOG_NONE)
+            {
+                o->oAglabLakituDialog = 30;
+                gMarioStates->health = 1;
+                set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                o->oSubAction = 3;
+            }
+        }
     }
     else if (LA_S_JAMS == o->oAction)
     {
@@ -842,12 +883,6 @@ void bhv_aglab_lakitu_loop()
             set_mario_npc_dialog(MARIO_DIALOG_STOP);
         }
     }
-
-    o->oHomeX = gLakituState.curFocus[0];
-    o->oHomeZ = gLakituState.curFocus[2];
-
-    o->oFaceAngleYaw = cur_obj_angle_to_home();
-    o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gLakituState.curFocus[1]);
 }
 
 void bhv_aglab_towers_loop()

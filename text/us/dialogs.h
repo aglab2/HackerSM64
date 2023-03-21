@@ -606,35 +606,10 @@ looks nothing like me!\n\
 Her parents must be\n\
 worried sick!"))
 
-DEFINE_DIALOG(DIALOG_060, 1, 4, 30, 200, _("\
-ATTENTION!\n\
-Read Before Diving In!\n\
-\n\
-\n\
-If you stay under the\n\
-water for too long, you'll\n\
-run out of oxygen.\n\
-\n\
-Return to the surface for\n\
-air or find an air bubble\n\
-or coins to breathe while\n\
-underwater.\n\
-Press [A] to swim. Hold [A]\n\
-to swim slow and steady.\n\
-Tap [A] with smooth timing\n\
-to gain speed.\n\
-Press Up on the\n\
-Control Stick and press [A]\n\
-to dive.\n\
-\n\
-Press Down on the Control\n\
-Stick and press [A] to\n\
-return to the surface.\n\
-\n\
-Hold Down and press [A]\n\
-while on the surface near\n\
-the edge of the water to\n\
-jump out."))
+DEFINE_DIALOG(DIALOG_060, 1, 3, 30, 200, _("\
+Oh no! You are not Mario!\n\
+You are a villain Bowser!\n\
+Everybody run!!!"))
 
 DEFINE_DIALOG(DIALOG_061, 1, 4, 30, 200, _("\
 BRRR! Frostbite Danger!\n\
@@ -762,47 +737,14 @@ worlds. If you hit a wall\n\
 while flying, you'll bounce\n\
 back."))
 
-DEFINE_DIALOG(DIALOG_070, 1, 5, 30, 200, _("\
-You can return to the\n\
-castle's main hall at any\n\
-time from the painting\n\
-worlds where the enemies\n\
-live.\n\
-Just stop, stand still,\n\
-press Start to pause the\n\
-game, then select\n\
-『Exit Course.』\n\
-\n\
-You don't have to collect\n\
-all Power Stars in one\n\
-course before going on to\n\
-the next.\n\
-\n\
-Return later, when you're\n\
-more experienced, to pick\n\
-up difficult ones.\n\
-\n\
-\n\
-Whenever you find a Star,\n\
-a hint for finding the\n\
-next one will appear on\n\
-the course's start screen.\n\
-\n\
-You can, however, collect\n\
-any of the remaining\n\
-Stars next. You don't\n\
-have to recover the one\n\
-described by the hint."))
+DEFINE_DIALOG(DIALOG_070, 1, 4, 30, 200, _("\
+Hmm... This does look like\n\
+a vanilla castle but\n\
+something doesn't match.\n\
+I know what is wrong..."))
 
-DEFINE_DIALOG(DIALOG_071, 1, 3, 30, 200, _("\
-Danger Ahead!\n\
-Beware of the strange\n\
-cloud! Don't inhale!\n\
-If you feel faint, run for\n\
-higher ground and fresh\n\
-air!\n\
-Circle: Shelter\n\
-Arrow: Entrance-Exit"))
+DEFINE_DIALOG(DIALOG_071, 1, 1, 30, 200, _("\
+You are a beta male Mario!"))
 
 DEFINE_DIALOG(DIALOG_072, 1, 5, 30, 200, _("\
 High winds ahead!\n\
@@ -1023,9 +965,8 @@ Arrow: You are here"))
 DEFINE_DIALOG(DIALOG_090, 1, 5, 30, 200, _("\
 What is this castle?\n\
 What are you Mario?\n\
-Is that the doing\n\
-of Chaos Matters?\n\
-Perish!"))
+Is this a randomizer castle\n\
+or something? Perish!"))
 
 DEFINE_DIALOG(DIALOG_091, 2, 2, 30, 200, _("\
 Danger!\n\

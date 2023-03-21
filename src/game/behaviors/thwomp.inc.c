@@ -5,7 +5,7 @@ void grindel_thwomp_act_on_ground(void) {
         o->oThwompRandomTimer = random_float() * 10.0f + 20.0f;
     }
     if (o->oTimer > o->oThwompRandomTimer) {
-        o->oAction = GRINDEL_THWOMP_ACT_RISING;
+        o->oAction = GRINDEL_THWOMP_ACT_RISING_FRFR;
     }
 }
 
@@ -20,7 +20,7 @@ void grindel_thwomp_act_falling(void) {
 }
 
 void grindel_thwomp_act_land(void) {
-    if (o->oTimer == 0 && o->oDistanceToMario < 1500.0f) {
+    if (o->oTimer == 0) {
         cur_obj_shake_screen(SHAKE_POS_SMALL);
         cur_obj_play_sound_2(SOUND_OBJ_THWOMP);
     }
@@ -38,13 +38,17 @@ void grindel_thwomp_act_floating(void) {
     }
 }
 
+extern s16 gDialogID;
 void grindel_thwomp_act_rising(void) {
-    if (o->oBehParams2ndByte + 40 < o->oTimer) {
-        o->oAction = GRINDEL_THWOMP_ACT_FLOATING;
-        o->oPosY += 5.0f;
-    } else {
-        o->oPosY += 10.0f;
-    }
+    if (0 == o->oTimer)
+        o->oPosY += 300.f;
+    
+    if (gDialogID == DIALOG_NONE)
+        o->oAction = GRINDEL_THWOMP_ACT_FALLING;
+}
+
+void grindel_thwomp_act_rising_frfr(void) {
+    o->oPosY += 15.f;
 }
 
 ObjActionFunc sGrindelThwompActions[] = {
@@ -52,7 +56,8 @@ ObjActionFunc sGrindelThwompActions[] = {
     grindel_thwomp_act_floating,
     grindel_thwomp_act_falling,
     grindel_thwomp_act_land,
-    grindel_thwomp_act_on_ground
+    grindel_thwomp_act_on_ground,
+    grindel_thwomp_act_rising_frfr
 };
 
 void bhv_grindel_thwomp_loop(void) {

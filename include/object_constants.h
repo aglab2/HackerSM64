@@ -2623,6 +2623,7 @@ enum animIDsFirePiranhaPlant {
     #define GRINDEL_THWOMP_ACT_FALLING                      0x2
     #define GRINDEL_THWOMP_ACT_LAND                         0x3
     #define GRINDEL_THWOMP_ACT_ON_GROUND                    0x4
+    #define GRINDEL_THWOMP_ACT_RISING_FRFR                    0x5
 
 /* Whomp */
     /* oBehParams2ndByte */

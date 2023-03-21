@@ -94,4 +94,12 @@ extern const Gfx yoshi_seg5_dl_05022408[];
 extern const Gfx yoshi_seg5_dl_05022608[];
 extern const struct Animation *const yoshi_seg5_anims_05024100[];
 
+// thwomp
+extern const GeoLayout thwomp_geo[];
+extern const Gfx thwomp_seg5_dl_0500B570[];
+extern const Gfx thwomp_seg5_dl_0500B718[];
+extern const Gfx thwomp_seg5_dl_0500B750[];
+extern const Collision thwomp_seg5_collision_0500B7D0[];
+extern const Collision thwomp_seg5_collision_0500B92C[];
+
 #endif
