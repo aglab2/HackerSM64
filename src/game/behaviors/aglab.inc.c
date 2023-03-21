@@ -689,7 +689,7 @@ static void calculate_score()
 
 static int find_largest_score()
 {
-    return S_BETA;
+    return S_BOWSER;
 
     int which = 0;
     int score = gScores.arr[0];
