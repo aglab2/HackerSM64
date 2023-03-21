@@ -688,6 +688,7 @@ void initiate_painting_warp(void) {
  * based on the warp operation and sometimes Mario's used object.
  * Return the time left until the delayed warp is initiated.
  */
+extern u8 gWantCustomDeath;
 s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
     s32 fadeMusic = TRUE;
 
@@ -731,7 +732,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 }
 #endif
                 sDelayedWarpTimer = 48;
-                sSourceWarpNodeId = WARP_NODE_DEATH;
+                sSourceWarpNodeId = gWantCustomDeath ? 0xc : WARP_NODE_DEATH;
                 play_transition(WARP_TRANSITION_FADE_INTO_BOWSER, sDelayedWarpTimer, 0x00, 0x00, 0x00);
                 play_sound(SOUND_MENU_BOWSER_LAUGH, gGlobalSoundSource);
 #ifdef PREVENT_DEATH_LOOP
@@ -771,10 +772,10 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_TELEPORT:
-                sDelayedWarpTimer = 20;
+                sDelayedWarpTimer = 100;
                 sSourceWarpNodeId = GET_BPARAM2(m->usedObj->oBehParams);
                 fadeMusic = !music_unchanged_through_warp(sSourceWarpNodeId);
-                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, sDelayedWarpTimer, 0xFF, 0xFF, 0xFF);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, sDelayedWarpTimer, 0 ,0, 0);
                 break;
 
             case WARP_OP_WARP_DOOR:

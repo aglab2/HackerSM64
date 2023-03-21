@@ -23,3 +23,8 @@ UNUSED static const u64 binid_2 = 2;
 
 #include "boo_castle/model.inc.c"
 UNUSED static const u64 binid_3 = 3;
+
+#include "bowser/model.inc.c"
+#include "bowser/anims/data.inc.c"
+#include "bowser/anims/table.inc.c"
+#include "bowser/flames_data.inc.c"

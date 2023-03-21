@@ -1257,6 +1257,7 @@
 #define /*0x0F4*/ oAglabLakituDialog OBJECT_FIELD_S32(0x1B)
 #define /*0x0F4*/ oAglabLakituNextAction OBJECT_FIELD_S32(0x1C)
 #define /*0x0F4*/ oAglabLakituChosen OBJECT_FIELD_S32(0x1D)
+#define /*0x0F4*/ oAglabLakituFriend OBJECT_FIELD_OBJ(0x1E)
 
 /*Custom general defines:
 

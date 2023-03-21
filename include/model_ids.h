@@ -391,7 +391,7 @@
 
 // second set of actor bins, (0x64-0x73)
 // group 12
-#define MODEL_BOWSER                      0x64        // bowser_geo
+#define MODEL_BOWSER                      0xf1        // bowser_geo
 #define MODEL_BOWSER_BOMB_CHILD_OBJ       0x65        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
 #define MODEL_BOWSER_SMOKE                0x66        // bowser_impact_smoke_geo
 #define MODEL_BOWSER_FLAMES               0x67        // bowser_flames_geo
