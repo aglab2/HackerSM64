@@ -138,9 +138,15 @@ static void randomize_mao()
 }
 
 extern const BehaviorScript bhvToadRunner[];
+extern const BehaviorScript bhvAglabPeach[];
 
 void bhv_aglab_lakitu_init()
 {
+    struct Object* p = spawn_object(o, MODEL_PEACH, bhvAglabPeach);
+    p->oPosX = 811.f;
+    p->oPosY = -185.f;
+    p->oPosZ = -4078.f;
+
     o->oAglabLakituDialog = 30;
     spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
     reset_mao();
@@ -651,9 +657,10 @@ struct Scores gScores = { 0 };
 
 static void calculate_score()
 {
+    // I really should refactor this jesus christ
     gScores = (struct Scores){ 0 };
 
-    if (0 == gStates.surroundings) gScores.arr[S_BOWSER] += 1;
+    if (0 == gStates.surroundings) gScores.arr[S_BOWSER] += 2;
     // if (1 == gStates.surroundings) vanilla += 1;
     if (2 == gStates.surroundings) gScores.arr[S_BETA] += 1;
 
@@ -664,10 +671,10 @@ static void calculate_score()
     if (0 == gStates.pool) gScores.arr[S_BETA] += 1;
     if (1 == gStates.pool) gScores.arr[S_JAMS] += 3;
     if (2 == gStates.pool) gScores.arr[S_VANILLA] += 2;
-    if (3 == gStates.pool) gScores.arr[S_BOWSER] += 3;
+    if (3 == gStates.pool) gScores.arr[S_BOWSER] += 2;
 
     if (2 == gStates.bridge) gScores.arr[S_VANILLA] += 1;
-    if (1 == gStates.bridge) gScores.arr[S_BOWSER] += 1;
+    if (1 == gStates.bridge) gScores.arr[S_BOWSER] += 2;
     if (3 == gStates.bridge) gScores.arr[S_BETA] += 1;
 
     if (0 == gStates.window) gScores.arr[S_JAMS] += 3;
@@ -693,7 +700,7 @@ static void calculate_score()
     if (2 == gStates.main) gScores.arr[S_JAMS] += 3;
     if (3 == gStates.main) gScores.arr[S_BOWSER] += 1;
 
-    if (3 == gStates.bg) gScores.arr[S_BOWSER] += 2;
+    if (3 == gStates.bg) gScores.arr[S_BOWSER] += 1;
     if (0 == gStates.bg) gScores.arr[S_VANILLA] += 1;
 }
 
@@ -1017,4 +1024,15 @@ void bhv_toad_runner_loop(void)
         flame->oPosY = o->oPosY;
         flame->oPosZ = o->oHomeZ;
     }
+}
+
+void bhv_aglab_peach_init()
+{
+}
+
+void bhv_aglab_peach_loop()
+{
+    cur_obj_init_animation_with_sound(PEACH_ANIM_KISS);
+    o->oOpacity = 0xff;
+    // -
 }

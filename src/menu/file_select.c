@@ -1305,6 +1305,7 @@ s32 update_text_fade_out(void) {
  * If a save doesn't exist, print "NEW" instead.
  */
 void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
+    return;
     u8 starCountText[4];
     s8 offset = 0;
 

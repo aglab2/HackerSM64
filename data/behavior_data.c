@@ -6131,3 +6131,16 @@ const BehaviorScript bhvToadRunner[] = {
         CALL_NATIVE(bhv_toad_runner_loop),
     END_LOOP(),
 };
+
+extern void bhv_aglab_peach_init(void);
+extern void bhv_aglab_peach_loop(void);
+const BehaviorScript bhvAglabPeach[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_ANIMATIONS(oAnimations, peach_seg5_anims_0501C41C),
+    ANIMATE(PEACH_ANIM_KISS),
+    CALL_NATIVE(bhv_aglab_peach_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_aglab_peach_loop),
+    END_LOOP(),
+};
