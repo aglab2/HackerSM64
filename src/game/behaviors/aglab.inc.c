@@ -661,7 +661,7 @@ static void calculate_score()
     gScores = (struct Scores){ 0 };
 
     if (0 == gStates.surroundings) gScores.arr[S_BOWSER] += 2;
-    // if (1 == gStates.surroundings) vanilla += 1;
+    if (1 == gStates.surroundings) gScores.arr[S_VANILLA] += 1;
     if (2 == gStates.surroundings) gScores.arr[S_BETA] += 1;
 
     if (0 == gStates.castle) gScores.arr[S_VANILLA] += 2;
@@ -690,7 +690,7 @@ static void calculate_score()
     if (2 == gStates.roof) gScores.arr[S_BOWSER] += 2;
     if (3 == gStates.roof) gScores.arr[S_BETA] += 2;
 
-    if (0 == gStates.towers) gScores.arr[S_VANILLA] += 2;
+    if (0 == gStates.towers) gScores.arr[S_VANILLA] += 1;
     if (1 == gStates.towers) gScores.arr[S_BOWSER] += 1;
     if (2 == gStates.towers) gScores.arr[S_BETA] += 2;
     if (3 == gStates.towers) gScores.arr[S_JAMS] += 3;
