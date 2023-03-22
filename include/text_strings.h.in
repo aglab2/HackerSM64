@@ -79,6 +79,7 @@
  */
 // File Select
 #define TEXT_NEW _("NEW") // New File Text
+#define TEXT_CLEAR _("CLEAR") // New File Text
 #define TEXT_4DASHES _("----") // Used in Score File Menu
 
 // Ingame Menu

@@ -966,7 +966,12 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_JAMS == o->oAction)
     {
-        
+        if (0 == o->oTimer)
+        {
+            // need to set save random flag so game dont complain
+            save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
+            save_file_do_save(gCurrSaveFileNum - 1);     
+        }   
     }
     else if (LA_WHAT == o->oAction)
     {

@@ -133,6 +133,7 @@ unsigned char textMarioC[] = { TEXT_FILE_MARIO_C };
 unsigned char textMarioD[] = { TEXT_FILE_MARIO_D };
 
 unsigned char textNew[] = { TEXT_NEW };
+unsigned char textClear[] = { TEXT_CLEAR };
 unsigned char starIcon[] = { GLYPH_STAR, GLYPH_SPACE };
 unsigned char xIcon[] = { GLYPH_MULTIPLY, GLYPH_SPACE };
 
@@ -1305,27 +1306,12 @@ s32 update_text_fade_out(void) {
  * If a save doesn't exist, print "NEW" instead.
  */
 void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
-    return;
     u8 starCountText[4];
     s8 offset = 0;
 
     if (save_file_exists(fileIndex)) {
-        s16 starCount = save_file_get_total_star_count(fileIndex,
-                                                       COURSE_NUM_TO_INDEX(COURSE_MIN),
-                                                       COURSE_NUM_TO_INDEX(COURSE_MAX));
-        // Print star icon
-        print_hud_lut_string(HUD_LUT_GLOBAL, x, y, starIcon);
-        // If star count is less than 100, print x icon and move
-        // the star count text one digit to the right.
-        if (starCount < 100) {
-            print_hud_lut_string(HUD_LUT_GLOBAL, x + 16, y, xIcon);
-            offset = 16;
-        }
-        // Print star count
-        int_to_str(starCount, starCountText);
-        print_hud_lut_string(HUD_LUT_GLOBAL, x + offset + 16, y, starCountText);
+        print_hud_lut_string(HUD_LUT_GLOBAL, x, y, LANGUAGE_ARRAY(textClear));
     } else {
-        // Print "new" text
         print_hud_lut_string(HUD_LUT_GLOBAL, x, y, LANGUAGE_ARRAY(textNew));
     }
 }
