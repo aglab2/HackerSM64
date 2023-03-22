@@ -6144,3 +6144,11 @@ const BehaviorScript bhvAglabPeach[] = {
         CALL_NATIVE(bhv_aglab_peach_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvJam[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        ADD_INT(oFaceAngleYaw, 0x269),
+    END_LOOP(),
+};

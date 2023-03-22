@@ -22,6 +22,7 @@
 /* Fast64 begin persistent block [scripts] */
 /* Fast64 end persistent block [scripts] */
 
+extern const BehaviorScript bhvJam[];
 const LevelScript level_castle_grounds_entry[] = {
 	INIT_LEVEL(),
 	LOAD_YAY0(0x07, _castle_grounds_segment_7SegmentRomStart, _castle_grounds_segment_7SegmentRomEnd), 
@@ -67,6 +68,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_LAKITU, -183, 669, -493, 0, 0, 0, 0x00000000, bhvAglabLakitu),
 		OBJECT(MODEL_NONE, 1290, 670, -4715, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, 1270, 654, -4707, 0, 0, 0, (0xf1 << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_CASTLE_GROUNDS_DISASTER_JAM, 743, -85, -4147, 0, 0, 0, 0, bhvJam),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, 0),

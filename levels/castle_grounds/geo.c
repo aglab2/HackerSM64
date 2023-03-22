@@ -26,3 +26,4 @@
 #include "levels/castle_grounds/etowers/geo.inc.c"
 #include "levels/castle_grounds/one_tower/geo.inc.c"
 #include "levels/castle_grounds/disaster_bridge/geo.inc.c"
+#include "levels/castle_grounds/jam/geo.inc.c"
