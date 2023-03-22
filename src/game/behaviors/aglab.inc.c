@@ -1,6 +1,7 @@
 #include "config/config_debug.h"
 
-/// #define DEBUG_TRIGGER_IMMEDIATELY
+// #define DEBUG_TRIGGER_IMMEDIATELY
+// #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -365,8 +366,8 @@ extern Gfx mat_castle_grounds_dl_Shape_137_f3d[];
 
 static const void* sBridgeTextures[][2] = {
     { aglab_jamground2, aglab_hdwall },
-    { castle_grounds_dl_Shape_133_rgba16, castle_grounds_dl_Shape_135_rgba16 },
     { aglab_zarrock, aglab_zarwall },
+    { castle_grounds_dl_Shape_133_rgba16, castle_grounds_dl_Shape_135_rgba16 },
     { aglab_betaground1, aglab_betawwall2 },
 };
 
@@ -591,8 +592,17 @@ static void switch_main()
     }
 }
 
+extern s8 gDialogBoxState;
+extern u8 gBlockDialogClosing;
+
 static void advance_state(int num, u8* val)
 {
+    // print_text_fmt_int(200, 20, "%d", gDialogBoxState);
+    if (gDialogBoxState == 3)
+    {
+        return;
+    }
+
     if (0 == o->oTimer % num)
     {
         (*val)++;
@@ -656,8 +666,8 @@ static void calculate_score()
     if (2 == gStates.pool) gScores.arr[S_VANILLA] += 2;
     if (3 == gStates.pool) gScores.arr[S_BOWSER] += 3;
 
-    if (1 == gStates.bridge) gScores.arr[S_VANILLA] += 1;
-    if (2 == gStates.bridge) gScores.arr[S_BOWSER] += 1;
+    if (2 == gStates.bridge) gScores.arr[S_VANILLA] += 1;
+    if (1 == gStates.bridge) gScores.arr[S_BOWSER] += 1;
     if (3 == gStates.bridge) gScores.arr[S_BETA] += 1;
 
     if (0 == gStates.window) gScores.arr[S_JAMS] += 3;
@@ -715,8 +725,8 @@ extern const BehaviorScript bhvFinalBridge[];
 u8 gWantCustomDeath = 0;
 void bhv_aglab_lakitu_loop()
 {
-    o->oHomeX = gLakituState.curFocus[0];
-    o->oHomeZ = gLakituState.curFocus[2];
+    o->oHomeX = gMarioStates->pos[0];
+    o->oHomeZ = gMarioStates->pos[2];
 
     o->oFaceAngleYaw = cur_obj_angle_to_home();
     o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
@@ -758,6 +768,10 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_SWITCH_SURROUNDINGS == o->oAction)
     {
+#ifndef DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
+        gBlockDialogClosing = o->oTimer < 60;
+#endif
+
         advance_state(30, &gStates.surroundings);
         switch_surroundings();
         show_cs_time_advance(CUTSCENE_AGLAB_OUTSIDES, 0, 33);

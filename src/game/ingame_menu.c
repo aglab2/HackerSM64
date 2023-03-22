@@ -1138,6 +1138,8 @@ s8  gDialogCourseActNum     =  1;
 #define DIAG_VAL4   5
 #define DIAG_VAL2 240 // JP & US
 
+u8 gBlockDialogClosing = 0;
+
 void render_dialog_entries(void) {
     s8 lowerBound = 0;
     void **dialogTable = segmented_to_virtual(languageTable[gInGameLanguage][0]);
@@ -1174,7 +1176,7 @@ void render_dialog_entries(void) {
         case DIALOG_STATE_VERTICAL:
             gDialogBoxOpenTimer = 0.0f;
 
-            if (gPlayer3Controller->buttonPressed & (A_BUTTON)) {
+            if (gPlayer3Controller->buttonPressed & (A_BUTTON) && !gBlockDialogClosing) {
                 if (gLastDialogPageStrPos == -1) {
                     handle_special_dialog_text(gDialogID);
                     gDialogBoxState = DIALOG_STATE_CLOSING;
