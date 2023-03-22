@@ -2359,6 +2359,7 @@ static void end_peach_cutscene_kiss_from_peach(struct MarioState *m) {
     }
 }
 
+extern const BehaviorScript bhvAglabPeach[];
 static void end_peach_cutscene_star_dance(struct MarioState *m) {
     s32 animFrame = set_mario_animation(m, MARIO_ANIM_CREDITS_PEACE_SIGN);
 
@@ -2382,16 +2383,14 @@ static void end_peach_cutscene_star_dance(struct MarioState *m) {
         case  90: sPeachManualBlinkTime = 3; break;
         case 120: sPeachManualBlinkTime = 0; break;
 
-        case 140:
-#ifndef VERSION_JP
-            seq_player_unlower_volume(SEQ_PLAYER_LEVEL, 60);
-#endif
-            play_cutscene_music(SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_CREDITS));
-            break;
-
-        case 142:
-            advance_cutscene_step(m);
-            break;
+        case 60:
+        {
+            f32 d;
+            struct Object* peach = cur_obj_find_nearest_object_with_behavior(bhvAglabPeach, &d);
+            gMarioStates->usedObj = peach;
+            SET_BPARAM2(peach->oBehParams, 0xd);
+            level_trigger_warp(gMarioStates, WARP_OP_TELEPORT);
+        }
     }
 }
 

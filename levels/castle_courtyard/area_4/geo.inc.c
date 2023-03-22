@@ -3,8 +3,9 @@
 const GeoLayout castle_courtyard_area_4_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -15, -684, -371, -180, 0, 0, castle_courtyard_dl_letters_001_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -52, -684, -371, -180, 0, 0, castle_courtyard_dl_letters_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -24, 0, 0, castle_courtyard_dl_Plane_003_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -24, 0, 0, castle_courtyard_dl_Plane_004_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

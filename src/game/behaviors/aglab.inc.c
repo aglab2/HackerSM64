@@ -2,6 +2,7 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
+#define DEBUG_OVERRIDE_SCORE S_VANILLA
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -142,11 +143,6 @@ extern const BehaviorScript bhvAglabPeach[];
 
 void bhv_aglab_lakitu_init()
 {
-    struct Object* p = spawn_object(o, MODEL_PEACH, bhvAglabPeach);
-    p->oPosX = 811.f;
-    p->oPosY = -185.f;
-    p->oPosZ = -4078.f;
-
     o->oAglabLakituDialog = 30;
     spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
     reset_mao();
@@ -706,7 +702,9 @@ static void calculate_score()
 
 static int find_largest_score()
 {
-    return S_BOWSER;
+#ifdef DEBUG_OVERRIDE_SCORE
+    return DEBUG_OVERRIDE_SCORE;
+#endif
 
     int which = 0;
     int score = gScores.arr[0];
@@ -854,6 +852,22 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_VANILLA == o->oAction)
     {
+        gCamera->cutscene = 0;
+        if (gDialogID == DIALOG_NONE && 0 == o->oSubAction)
+        {
+            o->oSubAction = 1;
+            struct Object* p = spawn_object(o, MODEL_PEACH, bhvAglabPeach);
+            p->oPosX = gMarioStates->pos[0] + 120.f * sins(gMarioStates->faceAngle[1]);
+            p->oPosY = gMarioStates->pos[1];
+            p->oPosZ = gMarioStates->pos[2] + 120.f * coss(gMarioStates->faceAngle[1]);
+            p->oFaceAngleRoll = 0;
+            p->oFaceAnglePitch = 0;
+            p->oFaceAngleYaw = 0x8000 + gMarioStates->faceAngle[1];
+
+            set_mario_animation(gMarioStates, MARIO_ANIM_CREDITS_LOOK_UP);
+            set_mario_action(gMarioStates, ACT_END_PEACH_CUTSCENE, 8);
+            gMarioStates->actionArg = 8;
+        }
     }
     else if (LA_S_BOWSER == o->oAction)
     {
