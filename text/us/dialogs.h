@@ -956,7 +956,7 @@ Arrow: You are here"))
 DEFINE_DIALOG(DIALOG_090, 1, 5, 30, 200, _("\
 What is this castle?\n\
 What are you Mario?\n\
-Is this a randomizer castle\n\
+Is this randomizer castle\n\
 or something? Perish!"))
 
 DEFINE_DIALOG(DIALOG_091, 2, 2, 30, 200, _("\

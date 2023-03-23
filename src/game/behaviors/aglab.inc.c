@@ -294,6 +294,15 @@ struct SelectedStates
 
 static struct SelectedStates gStates = { 0 };
 
+static void randomize_state()
+{
+    u8* states = &gStates.surroundings;
+    for (int i = 0; i < sizeof(gStates); i++)
+    {
+        states[i] = (u8) random_u16();
+    }
+}
+
 static const void* sSurroundingsTextures[][3] = {
     { aglab_zargrass, aglab_zarsand, aglab_zarside },
     { castle_grounds_dl_Shape_144_rgba16, castle_grounds_dl_Shape_145_rgba16, castle_grounds_dl_Shape_160_rgba16 },
@@ -858,6 +867,8 @@ void bhv_aglab_lakitu_loop()
     {
         if (0 == o->oTimer)
         {
+            randomize_state();
+            // doesnt work?
             begin_background_music_fade(50);
             seq_player_play_sequence(0, get_next_music(), 50);
         }
