@@ -53,7 +53,7 @@ static u8 get_next_music()
     else
     {
         int idx = sMusicNext++;
-        if (idx == 4)
+        if (idx == 3)
         {
             sMusicNext = 0;
         }
