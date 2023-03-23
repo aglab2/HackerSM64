@@ -6165,3 +6165,11 @@ const BehaviorScript bhvJam[] = {
         ADD_INT(oFaceAngleYaw, 0x269),
     END_LOOP(),
 };
+
+extern void bhv_lava_bg_loop();
+const BehaviorScript bhvLavaBG[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lava_bg_loop),
+    END_LOOP(),
+};

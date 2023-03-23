@@ -2,7 +2,7 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-#define DEBUG_OVERRIDE_SCORE S_VANILLA
+// #define DEBUG_OVERRIDE_SCORE S_VANILLA
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -21,6 +21,46 @@ extern Lights1 mario_face_7___eye_X_v4_lights;
 extern Lights1 mario_gloves_v4_lights;
 extern Lights1 mario_red_dark_lights;
 extern Lights1 mario_shoes_v4_lights;
+
+extern u8 begin_background_music_fade(u16 fadeDuration);
+extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
+
+static int sMusicNext = 0;
+static u8 sMusicPool[] = { 0x23, 0x25, 0x26, 0x27 };
+
+static u8 get_next_music()
+{
+    if (0 == sMusicNext)
+    {
+        // shuffle
+        sMusicPool[0] = 0x23;
+        sMusicPool[1] = 0x25;
+        sMusicPool[2] = 0x26;
+        sMusicPool[3] = 0x27;
+
+        for (int i  = 0; i < 12; i++)
+        {
+            int idx0 = random_u16() & 3;
+            int idx1 = random_u16() & 3;
+            u8 tmp = sMusicPool[idx0];
+            sMusicPool[idx0] = sMusicPool[idx1];
+            sMusicPool[idx1] = tmp;
+        }
+
+        sMusicNext++;
+        return sMusicPool[0];
+    }
+    else
+    {
+        int idx = sMusicNext++;
+        if (idx == 4)
+        {
+            sMusicNext = 0;
+        }
+
+        return sMusicPool[idx];
+    }
+}
 
 static void despawn_all_objects_with_behavior(const BehaviorScript *behavior) {
     uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
@@ -760,7 +800,7 @@ static int find_largest_score()
         }
     }
 
-    if (gScores.arr[which] < 9)
+    if (gScores.arr[which] < 11)
     {
         return 4; /*invalid*/
     }
@@ -816,6 +856,12 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_SWITCH_SURROUNDINGS == o->oAction)
     {
+        if (0 == o->oTimer)
+        {
+            begin_background_music_fade(50);
+            seq_player_play_sequence(0, get_next_music(), 50);
+        }
+
 #ifndef DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
         gBlockDialogClosing = o->oTimer < 60;
 #endif
@@ -881,6 +927,13 @@ void bhv_aglab_lakitu_loop()
     else if (LA_SCORING == o->oAction)
     {
         if (0 == o->oTimer)
+            seq_player_play_sequence(0, 0x24, 0);
+
+#ifndef DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
+        gBlockDialogClosing = o->oTimer < 100;
+#endif
+
+        if (0 == o->oTimer)
         {
             gCutsceneTimer = 0;
             calculate_score();
@@ -895,6 +948,9 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_VANILLA == o->oAction)
     {
+        if (0 == o->oTimer)
+            seq_player_play_sequence(0, 0x1a, 0);
+
         gCamera->cutscene = 0;
         if (gDialogID == DIALOG_NONE && 0 == o->oSubAction)
         {
@@ -914,6 +970,9 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BOWSER == o->oAction)
     {
+        if (0 == o->oTimer)
+            seq_player_play_sequence(0, SEQ_LEVEL_BOSS_KOOPA, 0);
+
         if (0 == o->oTimer)
         {
             gBurnToads = 0;
@@ -974,6 +1033,9 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BETA == o->oAction)
     {
+        if (0 == o->oTimer)
+            seq_player_play_sequence(0, 3, 0);
+
         gCamera->cutscene = 0;
         if (0 == o->oSubAction)
         {
@@ -1010,6 +1072,9 @@ void bhv_aglab_lakitu_loop()
     else if (LA_S_JAMS == o->oAction)
     {
         if (0 == o->oTimer)
+            seq_player_play_sequence(0, 6, 0);
+
+        if (0 == o->oTimer)
         {
             // need to set save random flag so game dont complain
             save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
@@ -1018,6 +1083,9 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_WHAT == o->oAction)
     {
+        if (0 == o->oTimer)
+            seq_player_play_sequence(0, 0, 0);
+
         if (0 == o->oTimer)
         {
             randomize_mao();
@@ -1154,4 +1222,10 @@ void bhv_aglab_koopa_loop(void)
         drop->oVelY = random_float() * 30.0f;
         obj_translate_xz_random(drop, 110.0f);
     }
+}
+
+extern void bhv_lava_bg_loop()
+{
+    load_segment_decompress_skybox(0xA,_bitfs_skybox_mio0SegmentRomStart, _bitfs_skybox_mio0SegmentRomEnd);
+    o->activeFlags = 0;
 }

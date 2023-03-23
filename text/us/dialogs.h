@@ -491,18 +491,9 @@ bounce to gain momentum.\n\
 Practice makes perfect!"))
 
 DEFINE_DIALOG(DIALOG_050, 1, 4, 30, 200, _("\
-Hold [Z] to crouch and\n\
-slide down a slope.\n\
-Or press [Z] while in the\n\
-air to Pound the Ground!\n\
-If you stop, crouch, then\n\
-jump, you'll do a\n\
-Backward Somersault!\n\
-Got that?\n\
-There's more. Crouch and\n\
-then jump to do a\n\
-Long Jump! Or crouch and\n\
-walk to...never mind."))
+Mario, you are did it!\n\
+You restored the castle!\n\
+Oh look who is it?"))
 
 DEFINE_DIALOG(DIALOG_051, 1, 6, 30, 200, _("\
 Climbing's easy! When you\n\
