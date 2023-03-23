@@ -6145,6 +6145,19 @@ const BehaviorScript bhvAglabPeach[] = {
     END_LOOP(),
 };
 
+extern void bhv_aglab_koopa_init(void);
+extern void bhv_aglab_koopa_loop(void);
+extern const BehaviorScript bhvAglabKoopa[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_ANIMATIONS(oAnimations, koopa_seg6_anims_06011364),
+    ANIMATE(KOOPA_ANIM_THE_QUICK_JUMP),
+    CALL_NATIVE(bhv_aglab_koopa_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_aglab_koopa_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvJam[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),

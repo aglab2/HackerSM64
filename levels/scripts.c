@@ -318,8 +318,6 @@ const LevelScript script_func_global_14[] = {
 const LevelScript script_func_global_15[] = {
     LOAD_MODEL_FROM_GEO(MODEL_PIRANHA_PLANT,           piranha_plant_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WHOMP,                   whomp_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITH_SHELL,        koopa_with_shell_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITHOUT_SHELL,     koopa_without_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_METALLIC_BALL,           metallic_ball_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHAIN_CHOMP,             chain_chomp_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_FLAG,              koopa_flag_geo),
@@ -333,6 +331,8 @@ const LevelScript script_func_global_16[] = {
     LOAD_MODEL_FROM_GEO(MODEL_LAKITU,                  lakitu_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER,                  bowser_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITH_SHELL,        koopa_with_shell_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_KOOPA_WITHOUT_SHELL,     koopa_without_shell_geo),
     RETURN(),
 };
 

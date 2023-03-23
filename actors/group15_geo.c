@@ -12,3 +12,4 @@
 #include "mips/geo.inc.c"
 #include "boo_castle/geo.inc.c"
 #include "bowser/geo.inc.c"
+#include "koopa/geo.inc.c"

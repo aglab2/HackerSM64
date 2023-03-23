@@ -22,6 +22,19 @@ extern Lights1 mario_gloves_v4_lights;
 extern Lights1 mario_red_dark_lights;
 extern Lights1 mario_shoes_v4_lights;
 
+static void despawn_all_objects_with_behavior(const BehaviorScript *behavior) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    struct Object *obj = (struct Object *) listHead->next;
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr) {
+            obj->activeFlags = 0;
+        }
+
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
 static void reset_mao()
 {
     Lights1* light;
@@ -140,6 +153,7 @@ static void randomize_mao()
 
 extern const BehaviorScript bhvToadRunner[];
 extern const BehaviorScript bhvAglabPeach[];
+extern const BehaviorScript bhvAglabKoopa[];
 
 void bhv_aglab_lakitu_init()
 {
@@ -353,6 +367,52 @@ static void switch_water()
     *text = sWaterTextures[gStates.pool][3];
     text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_136_f3d) + 2*7 + 1;
     *text = sWaterTextures[gStates.pool][4];
+
+    if (1 == gStates.pool)
+    {
+        f32 d;
+        if (!cur_obj_find_nearest_object_with_behavior(bhvAglabKoopa, &d))
+        {
+            f32 y = -416.f;
+            for (int i = 0; i < 3; i++)
+            {
+                {
+                    struct Object* koopa = spawn_object(o, MODEL_KOOPA_WITHOUT_SHELL, bhvAglabKoopa);
+                    koopa->oPosX = random_float_ft(3588.f, 4511.f);
+                    koopa->oPosY = y;
+                    koopa->oPosZ = random_float_ft(2835.f, 4525.f);
+                    koopa->oAglabKoopaAngle = random_u16();
+                    koopa->oTimer = random_float() * 140;
+                    koopa->oFaceAngleYaw = koopa->oFaceAngleRoll = koopa->oFaceAnglePitch = 0;
+                }
+                {
+                    struct Object* koopa = spawn_object(o, MODEL_KOOPA_WITHOUT_SHELL, bhvAglabKoopa);
+                    koopa->oPosX = random_float_ft(3588.f, 4511.f);
+                    koopa->oPosY = y;
+                    koopa->oPosZ = random_float_ft(1000.f, 2835.f);
+                    koopa->oAglabKoopaAngle = random_u16();
+                    koopa->oTimer = random_float() * 140;
+                    koopa->oFaceAngleYaw = koopa->oFaceAngleRoll = koopa->oFaceAnglePitch = 0;
+                }
+                {
+                    struct Object* koopa = spawn_object(o, MODEL_KOOPA_WITHOUT_SHELL, bhvAglabKoopa);
+                    koopa->oPosX = random_float_ft(645.f, 2466.f);
+                    koopa->oPosY = y;
+                    koopa->oPosZ = random_float_ft(273.f, 2286.f);
+                    koopa->oAglabKoopaAngle = random_u16();
+                    koopa->oTimer = random_float() * 140;
+                    koopa->oFaceAngleYaw = koopa->oFaceAngleRoll = koopa->oFaceAnglePitch = 0;
+                }
+            }
+        }
+    }
+    else
+    {
+        despawn_all_objects_with_behavior(bhvAglabKoopa);
+        despawn_all_objects_with_behavior(bhvKoopaShell);
+        despawn_all_objects_with_behavior(bhvWaterDroplet);
+        despawn_all_objects_with_behavior(bhvObjectWaveTrail);
+    }
 }
 
 extern const Texture aglab_betawwall2[];
@@ -378,13 +438,7 @@ static void switch_bridge()
     static u8 LastSpawned = 0;
     if (LastSpawned != gStates.bridge)
     {
-        f32 d;
-        struct Object* br = cur_obj_find_nearest_object_with_behavior(bhvStaticObjectEx2, &d);
-        if (br)
-        {
-            br->activeFlags = 0;
-        }
-
+        despawn_all_objects_with_behavior(bhvStaticObjectEx2);
         if (0 == gStates.bridge)
         {
             struct Object* b = spawn_object(o, MODEL_CASTLE_GROUNDS_DISASTER_BRIDGE, bhvStaticObjectEx2);
@@ -512,14 +566,8 @@ static void switch_towers()
     static u8 LastSpawnedTower = 0;
     if (LastSpawnedTower != gStates.towers)
     {
-        f32 d;
-        struct Object* tower = cur_obj_find_nearest_object_with_behavior(bhvStaticObject, &d);
-        if (tower)
-        {
-            tower->activeFlags = 0;
-        }
-        
-        tower = spawn_object(o, sTowerModels[gStates.towers], bhvStaticObject);
+        despawn_all_objects_with_behavior(bhvStaticObject);
+        struct Object* tower = spawn_object(o, sTowerModels[gStates.towers], bhvStaticObject);
         tower->oPosX = 0;
         tower->oPosY = 0;
         tower->oPosZ = 0;
@@ -584,12 +632,7 @@ static void switch_main()
         }
         else
         {
-            f32 d;
-            struct Object* tower = cur_obj_find_nearest_object_with_behavior(bhvStaticObjectEx, &d);
-            if (tower)
-            {
-                tower->activeFlags = 0;
-            }
+            despawn_all_objects_with_behavior(bhvStaticObjectEx);
         }
     }
 }
@@ -1054,4 +1097,61 @@ void bhv_aglab_peach_loop()
     cur_obj_init_animation_with_sound(PEACH_ANIM_KISS);
     o->oOpacity = 0xff;
     // -
+}
+
+void bhv_aglab_koopa_init(void)
+{
+    obj_scale(o, 1.5f);
+    o->parentObj = spawn_object(o, MODEL_KOOPA_SHELL, bhvKoopaShell);
+    o->oHomeX = o->oPosX;
+    o->oHomeY = o->oPosY;
+    o->oHomeZ = o->oPosZ;
+}
+
+void bhv_aglab_koopa_loop(void)
+{
+    o->oAglabKoopaAngle += 0x369;
+    o->oPosX = o->oHomeX + 300.f * sins(o->oAglabKoopaAngle);
+    o->oPosZ = o->oHomeZ + 300.f * coss(o->oAglabKoopaAngle);
+
+    if (100 < o->oTimer && o->oTimer <= 130)
+    {
+        s32 dt = 130 - o->oTimer;
+        f32 y = (30*30 - dt*dt) / 2.f;
+        o->oPosY = o->oHomeY + y;
+        o->oFaceAngleYaw += 0x1900;
+        if (130 == o->oTimer)
+        {
+            spawn_mist_particles();
+        }
+    }
+    else if (130 < o->oTimer && o->oTimer <= 140)
+    {
+        s32 dt = 140 - o->oTimer;
+        f32 y = dt * 45.f;
+        o->oPosY = o->oHomeY + y;
+        o->oFaceAngleYaw += 0x2900;
+    }
+    else
+    {
+        o->oFaceAngleYaw = 0x4000 + o->oAglabKoopaAngle;
+    }
+
+    if (o->oTimer > 140)
+    {
+        o->oTimer = 0;
+    }
+
+    o->parentObj->oFaceAngleYaw = o->oFaceAngleYaw;
+    o->parentObj->oPosX = o->oPosX;
+    o->parentObj->oPosY = o->oPosY - 40.f;
+    o->parentObj->oPosZ = o->oPosZ;
+
+    if (0 == (o->oTimer % 10))
+    {
+        spawn_object(o, MODEL_WAVE_TRAIL, bhvObjectWaveTrail);
+        struct Object *drop = spawn_object_with_scale(o, MODEL_WHITE_PARTICLE_SMALL, bhvWaterDroplet, 1.5f);
+        drop->oVelY = random_float() * 30.0f;
+        obj_translate_xz_random(drop, 110.0f);
+    }
 }

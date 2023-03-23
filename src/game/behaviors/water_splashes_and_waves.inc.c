@@ -83,7 +83,7 @@ void bhv_water_droplet_loop(void) {
             obj_mark_for_deletion(o);
         }
     }
-    if (waterLevel < FLOOR_LOWER_LIMIT_MISC) {
+    if (o->oTimer > 30) {
         obj_mark_for_deletion(o);
     }
 }

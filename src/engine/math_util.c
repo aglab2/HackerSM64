@@ -58,6 +58,12 @@ f32 random_float(void) {
     return ((f32) random_u16() / (f32) 0x10000);
 }
 
+f32 random_float_ft(f32 f, f32 t)
+{
+    f32 d = t - f;
+    return f + d * random_float();
+}
+
 // Return either -1 or 1 with a 50:50 chance.
 s32 random_sign(void) {
     return ((random_u16() >= 0x7FFF) ? 1 : -1);

@@ -28,3 +28,7 @@ UNUSED static const u64 binid_3 = 3;
 #include "bowser/anims/data.inc.c"
 #include "bowser/anims/table.inc.c"
 #include "bowser/flames_data.inc.c"
+
+#include "koopa/model.inc.c"
+#include "koopa/anims/data.inc.c"
+#include "koopa/anims/table.inc.c"

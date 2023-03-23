@@ -477,6 +477,7 @@ ALWAYS_INLINE s32 absi(s32 in) {
 
 u16 random_u16(void);
 f32 random_float(void);
+f32 random_float_ft(f32 f, f32 t);
 s32 random_sign(void);
 
 f32  min_3f(   f32 a, f32 b, f32 c);

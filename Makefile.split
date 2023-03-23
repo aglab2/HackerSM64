@@ -59,7 +59,7 @@ YAY0_OBJ_FILES := $(YAY0_FILES:.szp=.szp.o)
 # --------------------------------------
 
 # Actor Directories
-KOOPA_DIRS       := koopa_flag poundable_pole koopa piranha_plant whomp chain_ball chain_chomp
+KOOPA_DIRS       := koopa_flag poundable_pole piranha_plant whomp chain_ball chain_chomp
 CAPSWITCH_DIRS   := capswitch springboard
 CHILLYCHIEF_DIRS := chillychief moneybag
 BULLY_DIRS       := bully blargg
@@ -75,7 +75,7 @@ KLEPTO_DIRS      := klepto eyerok pokey tornado
 SEA_DIRS         := clam_shell manta sushi unagi whirlpool
 AMP_DIRS         := blue_coin_switch amp cannon_lid cannon_base cannon_barrel chuckya purple_switch checkerboard_platform heart flyguy breakable_box exclamation_box goomba bobomb metal_box exclamation_box_outline test_platform koopa_shell
 MOLE_DIRS        := monty_mole_hole monty_mole smoke ukiki fwoosh
-LAKITU_DIRS      := lakitu_cameraman toad mips boo_castle bowser
+LAKITU_DIRS      := lakitu_cameraman toad mips boo_castle bowser koopa
 PEACH_DIRS       := bird peach yoshi thwomp
 BOWSER_DIRS      := bowser_flame impact_ring yellow_sphere bomb impact_smoke
 MARIO_DIRS       := mario bubble walk_smoke burn_smoke small_water_splash water_wave sparkle water_splash white_particle_small sparkle_animation

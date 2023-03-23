@@ -62,22 +62,22 @@ void koopa_shell_spawn_sparkles(f32 a) {
 void bhv_koopa_shell_loop(void) {
     struct Surface *floor;
 
-    obj_set_hitbox(o, &sKoopaShellHitbox);
+    // obj_set_hitbox(o, &sKoopaShellHitbox);
     cur_obj_scale(1.0f);
 
     switch (o->oAction) {
         case KOOPA_SHELL_ACT_MARIO_NOT_RIDING:
-            cur_obj_update_floor_and_walls();
-            cur_obj_if_hit_wall_bounce_away();
+            // cur_obj_update_floor_and_walls();
+            // cur_obj_if_hit_wall_bounce_away();
 
             if (o->oInteractStatus & INT_STATUS_INTERACTED) {
                 o->oAction = KOOPA_SHELL_ACT_MARIO_RIDING;
             }
 
-            o->oFaceAngleYaw += 0x1000;
-            cur_obj_move_standard(-20);
-            koopa_shell_spawn_sparkles(10.0f);
-            shell_despawn();
+            // o->oFaceAngleYaw += 0x1000;
+            // cur_obj_move_standard(-20);
+            // koopa_shell_spawn_sparkles(10.0f);
+            // shell_despawn();
             break;
 
         case KOOPA_SHELL_ACT_MARIO_RIDING:
