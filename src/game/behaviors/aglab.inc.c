@@ -484,11 +484,10 @@ static const void* sBridgeTextures[][2] = {
 
 static void switch_bridge()
 {
-    static u8 LastSpawned = 0;
-    if (LastSpawned != gStates.bridge)
+    if (0 == gStates.bridge)
     {
-        despawn_all_objects_with_behavior(bhvStaticObjectEx2);
-        if (0 == gStates.bridge)
+        f32 d;
+        if (!cur_obj_find_nearest_object_with_behavior(bhvStaticObjectEx2, &d))
         {
             struct Object* b = spawn_object(o, MODEL_CASTLE_GROUNDS_DISASTER_BRIDGE, bhvStaticObjectEx2);
             b->oPosX = 0;
@@ -498,8 +497,10 @@ static void switch_bridge()
             b->oFaceAnglePitch = 0;
             b->oFaceAngleRoll = 0;
         }
-
-        LastSpawned = gStates.bridge;
+    }
+    else
+    {
+        despawn_all_objects_with_behavior(bhvStaticObjectEx2);
     }
 
     const void** text;
@@ -612,27 +613,28 @@ extern Gfx mat_vtowers_Shape_134_f3d[];
 
 static void switch_towers()
 {
-    static u8 LastSpawnedTower = 0;
-    if (LastSpawnedTower != gStates.towers)
+    f32 d;
+    struct Object* tower = cur_obj_find_nearest_object_with_behavior(bhvStaticObject, &d);
+    if (!tower)
     {
-        despawn_all_objects_with_behavior(bhvStaticObject);
-        struct Object* tower = spawn_object(o, sTowerModels[gStates.towers], bhvStaticObject);
+        tower = spawn_object(o, sTowerModels[gStates.towers], bhvStaticObject);
         tower->oPosX = 0;
         tower->oPosY = 0;
         tower->oPosZ = 0;
         tower->oFaceAngleYaw = 0;
         tower->oFaceAnglePitch = 0;
         tower->oFaceAngleRoll = 0;
-        LastSpawnedTower = gStates.towers;
-
-        void** text;
-        text = (const void**) segmented_to_virtual(mat_vtowers_Shape_135_f3d) + 2*6 + 1;
-        *text = gStates.towers ? aglab_betawwall2 : castle_grounds_dl_Shape_135_rgba16;
-        text = (const void**) segmented_to_virtual(mat_vtowers_Shape_139_f3d) + 2*6 + 1;
-        *text = gStates.towers ? aglab_betawall : castle_grounds_dl_Shape_139_rgba16;
-        text = (const void**) segmented_to_virtual(mat_vtowers_Shape_134_f3d) + 2*7 + 1;
-        *text = gStates.towers ? aglab_betaroof : castle_grounds_dl_Shape_134_rgba16;
     }
+
+    obj_set_model(tower, sTowerModels[gStates.towers]);
+
+    void** text;
+    text = (const void**) segmented_to_virtual(mat_vtowers_Shape_135_f3d) + 2*6 + 1;
+    *text = gStates.towers ? aglab_betawwall2 : castle_grounds_dl_Shape_135_rgba16;
+    text = (const void**) segmented_to_virtual(mat_vtowers_Shape_139_f3d) + 2*6 + 1;
+    *text = gStates.towers ? aglab_betawall : castle_grounds_dl_Shape_139_rgba16;
+    text = (const void**) segmented_to_virtual(mat_vtowers_Shape_134_f3d) + 2*7 + 1;
+    *text = gStates.towers ? aglab_betaroof : castle_grounds_dl_Shape_134_rgba16;
 }
 
 extern Gfx castle_grounds_dl_tmain_mesh_layer_1[];
@@ -664,12 +666,11 @@ static void switch_main()
     *text = sMainTextures[gStates.main][0];
     text = (const void**) segmented_to_virtual(mat_castle_grounds_dl_Shape_193_f3d) + 2*6 + 1;
     *text = sMainTextures[gStates.main][1];
-    
-    static u8 LastSpawnedTower = 0;
-    if (LastSpawnedTower != gStates.main)
+
+    if (2 == gStates.main)
     {
-        LastSpawnedTower = gStates.main;
-        if (2 == gStates.main)
+        f32 d;
+        if (!cur_obj_find_nearest_object_with_behavior(bhvStaticObjectEx, &d))
         {
             struct Object* tower = spawn_object(o, MODEL_CASTLE_GROUNDS_ONE_TOWER, bhvStaticObjectEx);
             tower->oPosX = 0;
@@ -679,10 +680,10 @@ static void switch_main()
             tower->oFaceAnglePitch = 0;
             tower->oFaceAngleRoll = 0;
         }
-        else
-        {
-            despawn_all_objects_with_behavior(bhvStaticObjectEx);
-        }
+    }
+    else
+    {
+        despawn_all_objects_with_behavior(bhvStaticObjectEx);
     }
 }
 
