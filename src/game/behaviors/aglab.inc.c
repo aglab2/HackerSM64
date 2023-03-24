@@ -3,6 +3,8 @@
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
 // #define DEBUG_OVERRIDE_SCORE S_VANILLA
+// #define DEBUG_ALWAYS_CALCULATE_SCORE
+// #define DEBUG_JUKEBOX
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -299,7 +301,11 @@ static void randomize_state()
     u8* states = &gStates.surroundings;
     for (int i = 0; i < sizeof(gStates); i++)
     {
+#ifdef DEBUG_ALWAYS_CALCULATE_SCORE
+        states[i] = -1;
+#else
         states[i] = (u8) random_u16();
+#endif
     }
 }
 
@@ -692,8 +698,7 @@ extern u8 gBlockDialogClosing;
 
 static void advance_state(int num, u8* val)
 {
-    // print_text_fmt_int(200, 20, "%d", gDialogBoxState);
-    if (gDialogBoxState == 3)
+    if (0 != o->oTimer && gDialogBoxState != 1)
     {
         return;
     }
@@ -750,7 +755,7 @@ static void calculate_score()
     gScores = (struct Scores){ 0 };
 
     if (0 == gStates.surroundings) gScores.arr[S_BOWSER] += 2;
-    if (1 == gStates.surroundings) gScores.arr[S_VANILLA] += 1;
+    if (1 == gStates.surroundings) gScores.arr[S_VANILLA] += 2;
     if (2 == gStates.surroundings) gScores.arr[S_BETA] += 1;
 
     if (0 == gStates.castle) gScores.arr[S_VANILLA] += 2;
@@ -765,8 +770,9 @@ static void calculate_score()
     if (2 == gStates.bridge) gScores.arr[S_VANILLA] += 1;
     if (1 == gStates.bridge) gScores.arr[S_BOWSER] += 2;
     if (3 == gStates.bridge) gScores.arr[S_BETA] += 1;
+    if (0 == gStates.bridge) gScores.arr[S_JAMS] += 2;
 
-    if (0 == gStates.window) gScores.arr[S_JAMS] += 3;
+    if (0 == gStates.window) gScores.arr[S_JAMS] += 2;
     if (1 == gStates.window) gScores.arr[S_VANILLA] += 1;
     if (2 == gStates.window) gScores.arr[S_BOWSER] += 1;
 
@@ -775,14 +781,14 @@ static void calculate_score()
     if (2 == gStates.frame) gScores.arr[S_VANILLA] += 2;
     if (3 == gStates.frame) gScores.arr[S_BOWSER] += 2;
 
-    if (0 == gStates.roof) gScores.arr[S_VANILLA] += 2;
+    if (0 == gStates.roof) gScores.arr[S_VANILLA] += 1;
     if (2 == gStates.roof) gScores.arr[S_BOWSER] += 2;
     if (3 == gStates.roof) gScores.arr[S_BETA] += 2;
 
     if (0 == gStates.towers) gScores.arr[S_VANILLA] += 1;
     if (1 == gStates.towers) gScores.arr[S_BOWSER] += 1;
     if (2 == gStates.towers) gScores.arr[S_BETA] += 2;
-    if (3 == gStates.towers) gScores.arr[S_JAMS] += 3;
+    if (3 == gStates.towers) gScores.arr[S_JAMS] += 2;
 
     if (0 == gStates.main) gScores.arr[S_BETA] += 3;
     if (1 == gStates.main) gScores.arr[S_VANILLA] += 2;
@@ -790,7 +796,7 @@ static void calculate_score()
     if (3 == gStates.main) gScores.arr[S_BOWSER] += 1;
 
     if (3 == gStates.bg) gScores.arr[S_BOWSER] += 1;
-    if (0 == gStates.bg) gScores.arr[S_VANILLA] += 1;
+    if (1 == gStates.bg) gScores.arr[S_VANILLA] += 1;
 }
 
 static int find_largest_score()
@@ -823,19 +829,50 @@ extern const BehaviorScript bhvFinalBridge[];
 u8 gWantCustomDeath = 0;
 void bhv_aglab_lakitu_loop()
 {
+#ifdef DEBUG_JUKEBOX
+    static u8 sPlayingSong = 0;
+    static u8 sWantSong = 0x25;
+
+    if (gPlayer1Controller->buttonPressed & L_JPAD)
+    {
+        sWantSong--;
+    }
+    if (gPlayer1Controller->buttonPressed & R_JPAD)
+    {
+        sWantSong++;
+    }
+    
+    if (sWantSong != sPlayingSong)
+    {
+        sPlayingSong = sWantSong;
+        seq_player_play_sequence(0, sPlayingSong, 0);
+    }
+    print_text_fmt_int(20, 20, "%d", sPlayingSong);
+#endif
+
     o->oHomeX = gMarioStates->pos[0];
     o->oHomeZ = gMarioStates->pos[2];
 
     o->oFaceAngleYaw = cur_obj_angle_to_home();
     o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
 
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
-    print_text_fmt_int(20, 200, "A %d", o->oAction);
-    print_text_fmt_int(20, 180, "T %d", o->oSubAction);
+    // print_text_fmt_int(20, 200, "A %d", o->oAction);
+    // print_text_fmt_int(20, 180, "T %d", o->oSubAction);
+    
     // print_text_fmt_int(20, 180, "T %d", o->oTimer);
+
+#ifdef DEBUG_ALWAYS_CALCULATE_SCORE
+    calculate_score();
+
+    print_text_fmt_int(20, 80, "J %d", gScores.arr[S_JAMS]);
+    print_text_fmt_int(20, 60, "B %d", gScores.arr[S_BOWSER]);
+    print_text_fmt_int(20, 40, "Z %d", gScores.arr[S_BETA]);
+    print_text_fmt_int(20, 20, "V %d", gScores.arr[S_VANILLA]);
+#endif
 
     if (LA_INIT == o->oAction)
     {
@@ -953,10 +990,6 @@ void bhv_aglab_lakitu_loop()
         }
 
         show_finale(CUTSCENE_AGLAB_CASTLE_VIEW2, o->oAglabLakituChosen);
-        // print_text_fmt_int(20, 80, "J %d", gScores.arr[3]);
-        // print_text_fmt_int(20, 60, "B %d", gScores.arr[2]);
-        // print_text_fmt_int(20, 40, "Z %d", gScores.arr[1]);
-        // print_text_fmt_int(20, 20, "V %d", gScores.arr[0]);
     }
     else if (LA_S_VANILLA == o->oAction)
     {
