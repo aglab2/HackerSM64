@@ -857,73 +857,33 @@ So, how about it?\n\
 \n\
 //Free him/ Hold on"))
 
-DEFINE_DIALOG(DIALOG_080, 1, 1, 30, 200, _("\
-Eeeh hee hee hee!"))
+DEFINE_DIALOG(DIALOG_080, 1, 2, 30, 200, _("\
+Oh wow, this castle\n\
+is jammin' hard!"))
 
-DEFINE_DIALOG(DIALOG_081, 1, 4, 30, 200, _("\
-The mystery is of Wet\n\
-or Dry.\n\
-And where does the\n\
-solution lie?\n\
-The city welcomes visitors\n\
-with the depth they bring\n\
-as they enter."))
+DEFINE_DIALOG(DIALOG_081, 1, 2, 30, 200, _("\
+Look at Mario & Luigi\n\
+Duality windows!"))
 
-DEFINE_DIALOG(DIALOG_082, 1, 4, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-injured easily.\n\
-\n\
-If you do lose your Cap,\n\
-you'll have to find it in\n\
-the course where you\n\
-lost it.\n\
-Oh, boy, it's not looking\n\
-good for Peach. She's\n\
-still trapped somewhere\n\
-inside the walls.\n\
-Please, Mario, you have\n\
-to help her! Did you know\n\
-that there are enemy\n\
-worlds inside the walls?\n\
-Yup. It's true. Bowser's\n\
-troops are there, too.\n\
-Oh, here, take this. I've\n\
-been keeping it for you."))
+DEFINE_DIALOG(DIALOG_082, 1, 2, 30, 200, _("\
+These trees are a great\n\
+Evolution example"))
 
-DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
-There's something strange\n\
-about that clock. As you\n\
-jump inside, watch the\n\
-position of the big hand.\n\
-Oh, look what I found!\n\
-Here, Mario, catch!"))
+DEFINE_DIALOG(DIALOG_083, 1, 2, 30, 200, _("\
+Ah this bridge,\n\
+a complete Disaster!"))
 
-DEFINE_DIALOG(DIALOG_084, 1, 3, 30, 200, _("\
-Yeeoww! Unhand me,\n\
-brute! I'm late, so late,\n\
-I must make haste!\n\
-This shiny thing? Mine!\n\
-It's mine. Finders,\n\
-keepers, losers...\n\
-Late, late, late...\n\
-Ouch! Take it then! A\n\
-gift from Bowser, it was.\n\
-Now let me be! I have a\n\
-date! I cannot be late\n\
-for tea!"))
+DEFINE_DIALOG(DIALOG_084, 1, 2, 30, 200, _("\
+Even koopas are Shell\n\
+Shredding in the moat!"))
 
-DEFINE_DIALOG(DIALOG_085, 1, 5, 30, 200, _("\
-You don't stand a ghost\n\
-of a chance in this house.\n\
-If you walk out of here,\n\
-you deserve...\n\
-...a Ghoul Medal..."))
+DEFINE_DIALOG(DIALOG_085, 1, 1, 30, 200, _("\
+One"))
 
 DEFINE_DIALOG(DIALOG_086, 1, 3, 30, 200, _("\
-Running around in circles\n\
-makes some bad guys roll\n\
-their eyes."))
+This castle is amazing!\n\
+You did great and\n\
+thank you making!"))
 
 DEFINE_DIALOG(DIALOG_087, 1, 4, 30, 200, _("\
 Santa Claus isn't the only\n\

@@ -2,10 +2,10 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-// #define DEBUG_OVERRIDE_SCORE S_VANILLA
+#define DEBUG_OVERRIDE_SCORE S_JAMS
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
-#define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_TOWERS_SHOWCASE
+// #define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_MAIN_SHOWCASE
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -231,6 +231,12 @@ enum LakituActions
     LA_S_BETA,
     LA_S_JAMS,
     LA_WHAT,
+
+    LA_ENDING_DUALITY,
+    LA_ENDING_EVOLUTION,
+    LA_ENDING_DISASTER,
+    LA_ENDING_SHELL,
+    LA_ENDING_ONE,
 };
 
 extern s16 gCutsceneTimer;
@@ -864,9 +870,9 @@ void bhv_aglab_lakitu_loop()
     o->oFaceAngleYaw = cur_obj_angle_to_home();
     o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
 
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
     // print_text_fmt_int(20, 200, "A %d", o->oAction);
     // print_text_fmt_int(20, 180, "T %d", o->oSubAction);
@@ -920,7 +926,7 @@ void bhv_aglab_lakitu_loop()
         }
 
 #ifndef DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-        gBlockDialogClosing = o->oTimer < 60;
+        gBlockDialogClosing = o->oTimer < 30;
 #endif
 
         advance_state(30, &gStates.surroundings);
@@ -1132,7 +1138,14 @@ void bhv_aglab_lakitu_loop()
             // need to set save random flag so game dont complain
             save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
             save_file_do_save(gCurrSaveFileNum - 1);     
-        }   
+        }
+
+        gCamera->cutscene = 0;
+        if (gDialogID == DIALOG_NONE)
+        {
+            o->oAglabLakituDialog = 81;
+            o->oAction = LA_ENDING_DUALITY;
+        }
     }
     else if (LA_WHAT == o->oAction)
     {
@@ -1151,6 +1164,26 @@ void bhv_aglab_lakitu_loop()
             gWantCustomDeath = 0;
             set_mario_npc_dialog(MARIO_DIALOG_STOP);
         }
+    }
+    else if (LA_ENDING_DUALITY == o->oAction)
+    {
+        show_cs_time_advance(CUTSCENE_AGLAB_WINDOW_SHOWCASE, 0, 81);
+    }
+    else if (LA_ENDING_EVOLUTION == o->oAction)
+    {
+        show_cs_time_advance(CUTSCENE_AGLAB_TOWERS_SHOWCASE, 0, 82);
+    }
+    else if (LA_ENDING_DISASTER == o->oAction)
+    {
+        show_cs_time_advance(CUTSCENE_AGLAB_BRIDGE_SHOWCASE, 0, 83);
+    }
+    else if (LA_ENDING_ONE == o->oAction)
+    {
+        show_cs_time_advance(CUTSCENE_AGLAB_MAIN_SHOWCASE, 0, 84);
+    }
+    else if (LA_ENDING_SHELL == o->oAction)
+    {
+        show_cs_time_advance(CUTSCENE_AGLAB_WATER_SHOWCASE, 0, 85);
     }
 }
 

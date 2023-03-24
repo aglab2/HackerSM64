@@ -10670,7 +10670,31 @@ struct Cutscene sCutsceneAglabTowersShowcase[] = {
     { cutscene_aglab_towers_sc, CUTSCENE_LOOP },
 };
 
-static void cutscene_aglab_main_sc(struct Camera *c) {}
+struct CutsceneSplinePoint gCSAglabMainPos[] = {
+    { 0, 0, { -137.f + 500.f, 7862.f, -1433.f } },
+    { 1, 0, { -137.f + 350.f, 7862.f, -1433.f + 350.f } },
+    { 2, 0, { -137.f, 7862.f, -1433.f + 500.f } },
+    { 3, 0, { -137.f - 350.f, 7862.f, -1433.f - 350.f } },
+    { -1, 0, { -137.f - 500.f, 7862.f, -1433.f } },
+};
+
+struct CutsceneSplinePoint gCSAglabMainFocus[] = {
+    { 0, 200, { -88.f, 5218.f, 3627.f } }, 
+    { 1, 200, { -88.f, 5218.f, 3627.f } },
+    { 2, 200, { -88.f, 5218.f, 3627.f } },
+    { 3, 200, { -88.f, 5218.f, 3627.f } },
+    { -1, 0, { -88.f, 5218.f, 3627.f } },
+};
+
+static void cutscene_aglab_main_sc(struct Camera *c)
+{
+    cutscene_event(cutscene_end_waving_start, c, 0, 0);
+    if (gCutsceneTimer > 200)
+        return;
+
+    move_point_along_spline(c->pos, gCSAglabMainPos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglabMainFocus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
 
 struct Cutscene sCutsceneAglabMainShowcase[] = {
     { cutscene_aglab_main_sc, CUTSCENE_LOOP },
