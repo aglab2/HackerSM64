@@ -1274,3 +1274,11 @@ extern void bhv_lava_bg_loop()
     load_segment_decompress_skybox(0xA,_bitfs_skybox_mio0SegmentRomStart, _bitfs_skybox_mio0SegmentRomEnd);
     o->activeFlags = 0;
 }
+
+extern void bhv_sparkler_loop()
+{
+    if (0 == (o->oTimer % 16))
+    {
+        spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner);
+    }
+}
