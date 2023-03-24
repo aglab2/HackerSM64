@@ -5,6 +5,7 @@
 // #define DEBUG_OVERRIDE_SCORE S_VANILLA
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
+#define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_TOWERS_SHOWCASE
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -829,6 +830,13 @@ extern const BehaviorScript bhvFinalBridge[];
 u8 gWantCustomDeath = 0;
 void bhv_aglab_lakitu_loop()
 {
+    gStates.towers = 3;
+    switch_towers();
+#ifdef DEBUG_TURN_ON_CS
+    if (o->oTimer > 30)
+        gCamera->cutscene = DEBUG_TURN_ON_CS;
+#endif
+
 #ifdef DEBUG_JUKEBOX
     static u8 sPlayingSong = 0;
     static u8 sWantSong = 0x25;
@@ -856,9 +864,9 @@ void bhv_aglab_lakitu_loop()
     o->oFaceAngleYaw = cur_obj_angle_to_home();
     o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
 
-    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
     // print_text_fmt_int(20, 200, "A %d", o->oAction);
     // print_text_fmt_int(20, 180, "T %d", o->oSubAction);
