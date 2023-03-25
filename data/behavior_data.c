@@ -2082,7 +2082,7 @@ const BehaviorScript bhvFallingBowserPlatform[] = {
 const BehaviorScript bhvBlueBowserFlame[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_INTERACT_TYPE(INTERACT_FLAME),
+    // SET_INTERACT_TYPE(INTERACT_FLAME),
     BILLBOARD(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_blue_bowser_flame_init),
@@ -6155,7 +6155,7 @@ const BehaviorScript bhvAglabPeach[] = {
 
 extern void bhv_aglab_koopa_init(void);
 extern void bhv_aglab_koopa_loop(void);
-extern const BehaviorScript bhvAglabKoopa[] = {
+const BehaviorScript bhvAglabKoopa[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_ANIMATIONS(oAnimations, koopa_seg6_anims_06011364),
@@ -6174,9 +6174,13 @@ const BehaviorScript bhvJam[] = {
     END_LOOP(),
 };
 
+extern void bhv_lava_bg_init();
 extern void bhv_lava_bg_loop();
 const BehaviorScript bhvLavaBG[] = {
     BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_ANIMATIONS(oAnimations, bowser_seg6_anims_06057690),
+    CALL_NATIVE(bhv_lava_bg_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_lava_bg_loop),
     END_LOOP(),

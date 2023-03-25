@@ -194,7 +194,7 @@ void bhv_blue_bowser_flame_init(void) {
 void bhv_blue_bowser_flame_loop(void) {
     s32 i;
 
-    obj_set_hitbox(o, &sGrowingBowserFlameHitbox);
+    // obj_set_hitbox(o, &sGrowingBowserFlameHitbox);
 
     if (o->oFlameScale < 16.0f) {
         o->oFlameScale = o->oFlameScale + 0.5f;

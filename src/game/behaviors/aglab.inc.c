@@ -3,10 +3,11 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-#define DEBUG_OVERRIDE_SCORE S_BETA
+#define DEBUG_OVERRIDE_SCORE S_BOWSER
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
 // #define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_MAIN_SHOWCASE
+#define DEBUG_WARP_TO 0xc
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
@@ -900,6 +901,15 @@ extern s32 sDialogSpeakerVoice[];
 
 void bhv_aglab_lakitu_loop()
 {
+#ifdef DEBUG_WARP_TO
+    if (0 == o->oTimer)
+    {
+        gMarioStates->usedObj = o;
+        SET_BPARAM2(o->oBehParams, DEBUG_WARP_TO);
+        level_trigger_warp(gMarioStates, WARP_OP_TELEPORT);
+    }
+#endif
+
 #ifdef DEBUG_TURN_ON_CS
     if (o->oTimer > 30)
         gCamera->cutscene = DEBUG_TURN_ON_CS;
@@ -1096,7 +1106,6 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BOWSER == o->oAction)
     {
-        gMarioSounds = 2;
         if (0 == o->oTimer)
             seq_player_play_sequence(0, SEQ_LEVEL_BOSS_KOOPA, 0);
 
@@ -1160,7 +1169,6 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BETA == o->oAction)
     {
-        set_fb_effect_col(255, 255, 255, 100);
         gMarioSounds = 1;
         if (0 == o->oTimer)
             seq_player_play_sequence(0, 3, 0);
@@ -1175,6 +1183,7 @@ void bhv_aglab_lakitu_loop()
         }
         else if (1 == o->oSubAction)
         {
+            set_fb_effect_col(255, 255, 255, 100);
             set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP);
             create_dialog_box(71);
             o->oSubAction = 2;
@@ -1407,13 +1416,53 @@ void bhv_aglab_koopa_loop(void)
     }
 }
 
-extern void bhv_lava_bg_loop()
+void bhv_lava_bg_init()
 {
     load_segment_decompress_skybox(0xA,_bitfs_skybox_mio0SegmentRomStart, _bitfs_skybox_mio0SegmentRomEnd);
-    o->activeFlags = 0;
+    obj_scale(o, 0.5f);
 }
 
-extern void bhv_sparkler_loop()
+void bhv_lava_bg_loop()
+{
+    gMarioSounds = 2;
+    if (1 == o->oAction)
+    {
+        // Spawn flames in the middle of the animation
+        s32 animFrame = o->header.gfx.animInfo.animFrame;
+        if (animFrame > 24 && animFrame < 36) {
+            cur_obj_play_sound_1(SOUND_AIR_BOWSER_SPIT_FIRE);
+            if (animFrame == 35) { // Spawns Blue flames at this frame
+                spawn_object_relative(1, 0, 200, 50, o, MODEL_RED_FLAME, bhvBlueBowserFlame);
+            } else { // Spawns Red flames
+                spawn_object_relative(0, 0, 200, 50, o, MODEL_RED_FLAME, bhvBlueBowserFlame);
+            }
+        }
+        // Return to default act once the animation is over
+        if (cur_obj_check_if_near_animation_end()) {
+            o->oAction = 0;
+        }
+    }
+    else
+    {
+        cur_obj_init_animation_with_sound(BOWSER_ANIM_RUN);
+        if (gPlayer1Controller->buttonPressed & B_BUTTON && gPrevFrameObjectCount < (OBJECT_POOL_CAPACITY - 90))
+        {
+            o->oAction = 1;
+            cur_obj_init_animation_with_sound(BOWSER_ANIM_BREATH_UP);
+        }
+    }
+
+    o->oPosX = gMarioStates->pos[0];
+    o->oPosY = gMarioStates->pos[1];
+    o->oPosZ = gMarioStates->pos[2];
+    o->oFaceAnglePitch = gMarioStates->faceAngle[0];
+    o->oFaceAngleYaw = gMarioStates->faceAngle[1];
+    o->oFaceAngleRoll = gMarioStates->faceAngle[2];
+    gMarioObject->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    o->oOpacity = 255;
+}
+
+void bhv_sparkler_loop()
 {
     if (0 == (o->oTimer % 16))
     {
