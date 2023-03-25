@@ -2,7 +2,7 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-// #define DEBUG_OVERRIDE_SCORE S_JAMS
+#define DEBUG_OVERRIDE_SCORE S_BETA
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
 // #define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_MAIN_SHOWCASE
@@ -24,6 +24,8 @@ extern Lights1 mario_face_7___eye_X_v4_lights;
 extern Lights1 mario_gloves_v4_lights;
 extern Lights1 mario_red_dark_lights;
 extern Lights1 mario_shoes_v4_lights;
+
+u8 gMarioSounds = 0;
 
 extern u8 begin_background_music_fade(u16 fadeDuration);
 extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
@@ -952,6 +954,7 @@ void bhv_aglab_lakitu_loop()
 
     if (LA_INIT == o->oAction)
     {
+        gMarioSounds = 0;
 #ifndef DEBUG_TRIGGER_IMMEDIATELY
         if (o->oDistanceToMario < 500.f)
 #endif
@@ -1091,6 +1094,7 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BOWSER == o->oAction)
     {
+        gMarioSounds = 2;
         if (0 == o->oTimer)
             seq_player_play_sequence(0, SEQ_LEVEL_BOSS_KOOPA, 0);
 
@@ -1154,6 +1158,7 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BETA == o->oAction)
     {
+        gMarioSounds = 1;
         if (0 == o->oTimer)
             seq_player_play_sequence(0, 3, 0);
 

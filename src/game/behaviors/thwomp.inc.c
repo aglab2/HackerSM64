@@ -49,6 +49,11 @@ void grindel_thwomp_act_rising(void) {
 
 void grindel_thwomp_act_rising_frfr(void) {
     o->oPosY += 15.f;
+
+    if (o->oTimer > 30)
+    {
+        cur_obj_play_sound_2(SOUND_AGLAB_BETA_OO);
+    }
 }
 
 ObjActionFunc sGrindelThwompActions[] = {

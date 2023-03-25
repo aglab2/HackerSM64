@@ -244,14 +244,43 @@ void play_sound_if_no_flag(struct MarioState *m, u32 soundBits, u32 flags) {
 /**
  * Plays a jump sound if one has not been played since the last action change.
  */
+extern u8 gMarioSounds;
+static u8 do_play_tj_sound(struct MarioState *m)
+{
+    switch (gMarioSounds)
+    {
+        case 0:
+            play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16), m->marioObj->header.gfx.cameraToObject);
+        break;
+        case 1:
+            play_sound(SOUND_AGLAB_BETA_OO, m->marioObj->header.gfx.cameraToObject);
+        break;
+        default:
+        break;
+    }
+}
+
+static u8 do_play_j_sound(struct MarioState *m)
+{
+    switch (gMarioSounds)
+    {
+        case 0:
+            play_sound(SOUND_MARIO_YAH_WAH_HOO + ((gAudioRandom % 3) << 16), m->marioObj->header.gfx.cameraToObject);
+        break;
+        case 1:
+            play_sound(SOUND_AGLAB_BETA_YAHHA, m->marioObj->header.gfx.cameraToObject);
+        break;
+        default:
+        break;
+    }
+}
+
 void play_mario_jump_sound(struct MarioState *m) {
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
         if (m->action == ACT_TRIPLE_JUMP) {
-            play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16),
-                       m->marioObj->header.gfx.cameraToObject);
+            do_play_tj_sound(m);
         } else {
-            play_sound(SOUND_MARIO_YAH_WAH_HOO + ((gAudioRandom % 3) << 16),
-                       m->marioObj->header.gfx.cameraToObject);
+            do_play_j_sound(m);
         }
         m->flags |= MARIO_MARIO_SOUND_PLAYED;
     }

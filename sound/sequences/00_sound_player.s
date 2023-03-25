@@ -4959,6 +4959,60 @@ chan_setinstr 48
 chan_setlayer 0, .layer_aglab
 chan_end
 
+.sound_aglab_beta_oo:
+chan_setbank 10
+chan_setinstr 49
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_yow:
+chan_setbank 10
+chan_setinstr 50
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_ou:
+chan_setbank 10
+chan_setinstr 51
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_yahha:
+chan_setbank 10
+chan_setinstr 52
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_haugh:
+chan_setbank 10
+chan_setinstr 53
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_hoo:
+chan_setbank 10
+chan_setinstr 54
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_hoo2:
+chan_setbank 10
+chan_setinstr 55
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_huah:
+chan_setbank 10
+chan_setinstr 56
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta_no:
+chan_setbank 10
+chan_setinstr 57
+chan_setlayer 0, .layer_aglab
+chan_end
+
 .layer_1DD4:
 layer_transpose -12
 layer_somethingon
@@ -7089,6 +7143,15 @@ sound_ref .sound_aglab_sidetowers
 sound_ref .sound_aglab_walls
 sound_ref .sound_aglab_window
 sound_ref .sound_aglab_rando
+sound_ref .sound_aglab_beta_oo
+sound_ref .sound_aglab_beta_yow
+sound_ref .sound_aglab_beta_ou
+sound_ref .sound_aglab_beta_yahha
+sound_ref .sound_aglab_beta_haugh
+sound_ref .sound_aglab_beta_hoo
+sound_ref .sound_aglab_beta_hoo2
+sound_ref .sound_aglab_beta_huah
+sound_ref .sound_aglab_beta_no
 sound_ref .chan_2D18
 sound_ref .sound_menu_power_meter
 sound_ref .sound_menu_camera_buzz
