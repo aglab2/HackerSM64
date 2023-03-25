@@ -22,7 +22,6 @@
 /* Fast64 begin persistent block [scripts] */
 /* Fast64 end persistent block [scripts] */
 
-extern const BehaviorScript bhvJam[];
 const LevelScript level_castle_grounds_entry[] = {
 	INIT_LEVEL(),
 	LOAD_YAY0(0x07, _castle_grounds_segment_7SegmentRomStart, _castle_grounds_segment_7SegmentRomEnd), 
