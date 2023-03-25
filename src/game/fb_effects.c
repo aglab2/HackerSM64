@@ -226,11 +226,11 @@ void render_motion_blur(void) {
         0, 0, 0, ENVIRONMENT
     );
 
-    gDPSetEnvColor(gDisplayListHead++, sFBEffects.r - 10 * random_float(), sFBEffects.g - 10 * random_float(), sFBEffects.b, sFBEffects.a + 10 * random_float());
+    gDPSetEnvColor(gDisplayListHead++, sFBEffects.r - 15 * random_float(), sFBEffects.g - 15 * random_float(), sFBEffects.b, sFBEffects.a + 15 * random_float());
     gDPPipeSync(gDisplayListHead++);
     gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
     gDPSetColorDither(gDisplayListHead++, G_CD_NOISE);
-    gDPSetAlphaDither(gDisplayListHead++, G_AD_NOISE);
+    gDPSetAlphaDither(gDisplayListHead++, G_AD_PATTERN);
     gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
 
     if (gFBE) {
