@@ -101,6 +101,7 @@ enum DialogSpeakers {
     AGLAB_SIDETOWERS,
     AGLAB_WALLS,
     AGLAB_WINDOW,
+    AGLAB_RANDO,
 };
 
 #define _ 0xFF
@@ -116,7 +117,7 @@ u8 sDialogSpeaker[] = {
     /* 6*/ AGLAB_BOWSER,     _,     _,     _,     _,     _,     _,     BOWS2, _,     _,
     /* 7*/ AGLAB_BETA1, AGLAB_BETA2,     _,     _,     _,     _,     _,     _,     _,     UKIKI,
     /* 8*/ AGLAB_JAM0, AGLAB_JAMS_DUALITY, AGLAB_JAMS_EVOLUTION, AGLAB_JAMS_DISASTER, AGLAB_JAMS_SHELL, AGLAB_JAMS_ONE, AGLAB_JAMS_DONE,     _,     _,     _,
-    /* 9*/ BOWS2, _,     BOWS2, BOWS2, _,     _,     _,     _,     BOO,   BOO,
+    /* 9*/ AGLAB_RANDO, _,     BOWS2, BOWS2, _,     _,     _,     _,     BOO,   BOO,
     /*10*/ UKIKI, UKIKI, _,     _,     _,     BOMB,  BOMB,  BOO,   BOO,   _,
     /*11*/ _,     _,     _,     _,     GRUNT, GRUNT, KBOMB, GRUNT, GRUNT, _,
     /*12*/ _,     _,     _,     _,     _,     _,     _,     _,     KBOMB, _,
@@ -165,6 +166,7 @@ s32 sDialogSpeakerVoice[] = {
     SOUND_AGLAB_SIDETOWERS,
     SOUND_AGLAB_WALLS,
     SOUND_AGLAB_WINDOW,
+    SOUND_AGLAB_RANDO,
 #if defined(VERSION_JP) || defined(VERSION_US)
     NO_SOUND,
     NO_SOUND,

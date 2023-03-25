@@ -253,6 +253,11 @@
             "release_rate": 208,
             "envelope": "envelope0",
             "sound": "40_window"
+        },
+        "inst47": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "41_rando"
         }
     },
     "instrument_list": [
@@ -303,6 +308,7 @@
         "inst43",
         "inst44",
         "inst45",
-        "inst46"
+        "inst46",
+        "inst47"
     ]
 }

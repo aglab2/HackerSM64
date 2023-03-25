@@ -4953,6 +4953,12 @@ chan_setinstr 47
 chan_setlayer 0, .layer_aglab
 chan_end
 
+.sound_aglab_rando:
+chan_setbank 10
+chan_setinstr 48
+chan_setlayer 0, .layer_aglab
+chan_end
+
 .layer_1DD4:
 layer_transpose -12
 layer_somethingon
@@ -7082,6 +7088,7 @@ sound_ref .sound_aglab_roof
 sound_ref .sound_aglab_sidetowers
 sound_ref .sound_aglab_walls
 sound_ref .sound_aglab_window
+sound_ref .sound_aglab_rando
 sound_ref .chan_2D18
 sound_ref .sound_menu_power_meter
 sound_ref .sound_menu_camera_buzz

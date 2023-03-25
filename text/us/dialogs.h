@@ -913,7 +913,7 @@ Red Circle: Elevator 2\n\
 //// Underground Lake\n\
 Arrow: You are here"))
 
-DEFINE_DIALOG(DIALOG_090, 1, 5, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_090, 1, 4, 30, 200, _("\
 What is this castle?\n\
 What are you Mario?\n\
 Is this randomizer castle\n\
