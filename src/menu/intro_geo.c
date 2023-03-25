@@ -111,7 +111,7 @@ Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUS
             gSPDisplayList(dlIter++, &intro_towerr_titlescreen_002_mesh);
         }
 
-        if (sIntroFrameCounter > 50)
+        if (sIntroFrameCounter > 60)
         {
             gSPDisplayList(dlIter++, &intro_windowry_titlescreen_005_mesh);
         }

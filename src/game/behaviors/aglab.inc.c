@@ -1476,6 +1476,7 @@ void bhv_startup_loop(void)
 {
     if (o->oTimer == 20)
     {
+        play_sound(SOUND_OBJ_THWOMP, gGlobalSoundSource);
         for (int i = 0; i <= 5; i++)
         {
             f32 pos = -750.f + i * 300.f;
@@ -1485,14 +1486,16 @@ void bhv_startup_loop(void)
     }
     if (o->oTimer == 40)
     {
+        play_sound(SOUND_OBJ_THWOMP, gGlobalSoundSource);
         o->oPosX = 1126.f;
         spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
         
         o->oPosX = -1126.f;
         spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
     }
-    if (o->oTimer == 50)
+    if (o->oTimer == 60)
     {
+        play_sound(SOUND_GENERAL_SPLATTERING, gGlobalSoundSource);
         o->oPosX = -600.f;
         o->oPosY = 200.f;
         spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
