@@ -6,7 +6,6 @@
 
 #include "common1.h"
 
-#include "mist/geo.inc.c"
 #include "explosion/geo.inc.c"
 #include "butterfly/geo.inc.c"
 #include "coin/geo.inc.c"

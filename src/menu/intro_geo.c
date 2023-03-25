@@ -39,6 +39,12 @@ static s32 sTmCopyrightAlpha;
 /**
  * Geo callback to render the "Super Mario 64" logo on the title screen
  */
+extern Gfx intro_towerl_titlescreen_001_mesh[];
+extern Gfx intro_towerr_titlescreen_002_mesh[];
+extern Gfx intro_base_titlescreen_004_mesh[];
+extern Gfx intro_main_titlescreen_003_mesh[];
+extern Gfx intro_windowry_titlescreen_005_mesh[];
+
 Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     struct GraphNode *graphNode = node;
     Gfx *dl = NULL;
@@ -51,7 +57,8 @@ Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUS
         f32 *scaleTable2 = segmented_to_virtual(intro_seg7_table_scale_2);
         SET_GRAPH_NODE_LAYER(graphNode->flags, LAYER_OPAQUE);
         Mtx *scaleMat = alloc_display_list(sizeof(*scaleMat));
-        dl = alloc_display_list(4 * sizeof(*dl));
+        Mtx *moveMat = alloc_display_list(sizeof(*moveMat));
+        dl = alloc_display_list(20 * sizeof(*dl));
         dlIter = dl;
         Vec3f scale;
 
@@ -71,8 +78,44 @@ Gfx *geo_intro_super_mario_64_logo(s32 callContext, struct GraphNode *node, UNUS
         }
         guScale(scaleMat, scale[0], scale[1], scale[2]);
 
+#define STAGE_LEN 20
+        int stage = sIntroFrameCounter / STAGE_LEN;
+        int stageProgress = sIntroFrameCounter % STAGE_LEN;
+
         gSPMatrix(dlIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-        gSPDisplayList(dlIter++, &intro_seg7_dl_main_logo);  // draw model
+        gSPDisplayList(dlIter++, &intro_base_titlescreen_004_mesh);
+
+        if (0 == stage)
+        {
+            guTranslate(moveMat, 0.f, (STAGE_LEN - stageProgress) * 100.f, 0.f);
+            gSPMatrix(dlIter++, moveMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+            gSPDisplayList(dlIter++, &intro_main_titlescreen_003_mesh);
+            gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
+        }
+        else if (stage > 0)
+        {
+            gSPDisplayList(dlIter++, &intro_main_titlescreen_003_mesh);
+        }
+
+        if (1 == stage)
+        {
+            guTranslate(moveMat, 0.f, (STAGE_LEN - stageProgress) * 100.f, 0.f);
+            gSPMatrix(dlIter++, moveMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+            gSPDisplayList(dlIter++, &intro_towerl_titlescreen_001_mesh);
+            gSPDisplayList(dlIter++, &intro_towerr_titlescreen_002_mesh);
+            gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
+        }
+        else if (stage > 1)
+        {
+            gSPDisplayList(dlIter++, &intro_towerl_titlescreen_001_mesh);
+            gSPDisplayList(dlIter++, &intro_towerr_titlescreen_002_mesh);
+        }
+
+        if (sIntroFrameCounter > 50)
+        {
+            gSPDisplayList(dlIter++, &intro_windowry_titlescreen_005_mesh);
+        }
+
         gSPPopMatrix(dlIter++, G_MTX_MODELVIEW);
         gSPEndDisplayList(dlIter);
 

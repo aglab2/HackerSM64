@@ -5176,6 +5176,14 @@ const BehaviorScript bhvFloombaStartup[] = {
 };
 #endif
 
+extern void bhv_startup_loop(void);
+const BehaviorScript bhvStartup[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_startup_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvFloombaTripletSpawner[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     SET_INT(oIsFloomba, TRUE),

@@ -26,4 +26,14 @@ extern const LevelScript script_intro_main_level_entry_stop_music[];
 extern const LevelScript script_intro_main_level_entry[];
 extern const LevelScript script_intro_splash_screen[];
 
+#include "levels/intro/intro_towerl/header.h"
+
+#include "levels/intro/intro_towerr/header.h"
+
+#include "levels/intro/intro_main/header.h"
+
+#include "levels/intro/intro_base/header.h"
+
+#include "levels/intro/intro_windowry/header.h"
+
 #endif

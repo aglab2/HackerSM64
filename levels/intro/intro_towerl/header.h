@@ -1,0 +1,17 @@
+extern Lights1 intro_towerl__4_f3d_lights;
+extern Lights1 intro_towerl__2_f3d_lights;
+extern Lights1 intro_towerl__3_f3d_lights;
+extern u8 intro_towerl__4_rgba16[];
+extern u8 intro_towerl__2_rgba16[];
+extern u8 intro_towerl__3_rgba16[];
+extern Vtx intro_towerl_titlescreen_001_mesh_vtx_cull[8];
+extern Vtx intro_towerl_titlescreen_001_mesh_vtx_0[5];
+extern Gfx intro_towerl_titlescreen_001_mesh_tri_0[];
+extern Vtx intro_towerl_titlescreen_001_mesh_vtx_1[16];
+extern Gfx intro_towerl_titlescreen_001_mesh_tri_1[];
+extern Vtx intro_towerl_titlescreen_001_mesh_vtx_2[16];
+extern Gfx intro_towerl_titlescreen_001_mesh_tri_2[];
+extern Gfx mat_intro_towerl__4_f3d[];
+extern Gfx mat_intro_towerl__2_f3d[];
+extern Gfx mat_intro_towerl__3_f3d[];
+extern Gfx intro_towerl_titlescreen_001_mesh[];

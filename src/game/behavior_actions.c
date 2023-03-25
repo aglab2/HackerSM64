@@ -97,6 +97,22 @@ void spawn_mist_particles_variable(s32 count, s32 offsetY, f32 size) {
     cur_obj_spawn_particles(&sMistParticles);
 }
 
+void spawn_mist_particles_variable_ranged(s32 count, s32 offsetY, f32 size, f32 range) {
+    sMistParticles.sizeBase = size;
+    sMistParticles.sizeRange = range;
+    sMistParticles.offsetY = offsetY;
+
+    if (count == 0) {
+        sMistParticles.count = 20;
+    } else if (count > 20) {
+        sMistParticles.count = count;
+    } else {
+        sMistParticles.count = 4;
+    }
+
+    cur_obj_spawn_particles(&sMistParticles);
+}
+
 #include "behaviors/sparkle_spawn_star.inc.c"
 #include "behaviors/coin.inc.c"
 #include "behaviors/collide_particles.inc.c"

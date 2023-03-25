@@ -457,6 +457,7 @@ extern const BehaviorScript bhvFloomba[];
 #ifdef INTRO_FLOOMBAS
 extern const BehaviorScript bhvFloombaStartup[];
 #endif
+extern const BehaviorScript bhvStartup[];
 extern const BehaviorScript bhvFloombaTripletSpawner[];
 #endif
 extern const BehaviorScript bhvChainChomp[];

@@ -1469,3 +1469,44 @@ void bhv_sparkler_loop()
         spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner);
     }
 }
+
+extern void spawn_mist_particles_variable_ranged(s32 count, s32 offsetY, f32 size, f32 range);
+
+void bhv_startup_loop(void)
+{
+    if (o->oTimer == 20)
+    {
+        for (int i = 0; i <= 5; i++)
+        {
+            f32 pos = -750.f + i * 300.f;
+            o->oPosX = pos;
+            spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+        }
+    }
+    if (o->oTimer == 40)
+    {
+        o->oPosX = 1126.f;
+        spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+        
+        o->oPosX = -1126.f;
+        spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+    }
+    if (o->oTimer == 50)
+    {
+        o->oPosX = -600.f;
+        o->oPosY = 200.f;
+        spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+        
+        o->oPosX = 0.f;
+        o->oPosY = 200.f;
+        spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+
+        o->oPosX = 0.f;
+        o->oPosY = -300.f;
+        spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+
+        o->oPosX = 600.f;
+        o->oPosY = 200.f;
+        spawn_mist_particles_variable_ranged(30, 0, 46.0f, 100.f);
+    }
+}

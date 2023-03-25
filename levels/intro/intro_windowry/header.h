@@ -1,0 +1,14 @@
+extern Lights1 intro_windowry__7_f3d_layer1_lights;
+extern Lights1 intro_windowry__8_f3d_layer1_lights;
+extern u8 intro_windowry__7_rgba16[];
+extern u8 intro_windowry__8_rgba16[];
+extern Vtx intro_windowry_titlescreen_005_mesh_vtx_cull[8];
+extern Vtx intro_windowry_titlescreen_005_mesh_vtx_0[12];
+extern Gfx intro_windowry_titlescreen_005_mesh_tri_0[];
+extern Vtx intro_windowry_titlescreen_005_mesh_vtx_1[4];
+extern Gfx intro_windowry_titlescreen_005_mesh_tri_1[];
+extern Gfx mat_intro_windowry__7_f3d_layer1[];
+extern Gfx mat_revert_intro_windowry__7_f3d_layer1[];
+extern Gfx mat_intro_windowry__8_f3d_layer1[];
+extern Gfx mat_revert_intro_windowry__8_f3d_layer1[];
+extern Gfx intro_windowry_titlescreen_005_mesh[];

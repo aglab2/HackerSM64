@@ -1,0 +1,12 @@
+extern Lights1 intro_main__5_f3d_lights;
+extern Lights1 intro_main___f3d_lights;
+extern u8 intro_main__5_rgba16[];
+extern u8 intro_main___rgba16[];
+extern Vtx intro_main_titlescreen_003_mesh_vtx_cull[8];
+extern Vtx intro_main_titlescreen_003_mesh_vtx_0[6];
+extern Gfx intro_main_titlescreen_003_mesh_tri_0[];
+extern Vtx intro_main_titlescreen_003_mesh_vtx_1[4];
+extern Gfx intro_main_titlescreen_003_mesh_tri_1[];
+extern Gfx mat_intro_main__5_f3d[];
+extern Gfx mat_intro_main___f3d[];
+extern Gfx intro_main_titlescreen_003_mesh[];

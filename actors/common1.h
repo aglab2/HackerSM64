@@ -212,12 +212,6 @@ extern const Gfx mario_cap_seg3_dl_03023108[];
 extern const Gfx mario_cap_seg3_dl_03023160[];
 extern const Gfx mario_cap_seg3_dl_03023298[];
 
-// mist
-extern const GeoLayout mist_geo[];
-extern const GeoLayout white_puff_geo[];
-extern const Gfx mist_seg3_dl_03000880[];
-extern const Gfx mist_seg3_dl_03000920[];
-
 // mushroom_1up
 extern const GeoLayout mushroom_1up_geo[];
 extern const Gfx mushroom_1up_seg3_dl_0302A628[];
