@@ -3320,14 +3320,14 @@ const Gfx intro_seg7_dl_main_logo[] = {
 // 0x0700B420 - 0x0700B460
 static const Vtx intro_seg7_vertex_copyright[] = {
 #ifdef INTRO_CREDIT
-    {{{    80,     60,     -1}, 0, {     0,      0}, {0x00, 0xff, 0xf7, 0xff}}}, // 0
-    {{{   240,     60,     -1}, 0, {256<<5,      0}, {0x00, 0xff, 0xf7, 0xff}}}, // 1
+    {{{    40,     50,     -1}, 0, {     0,      0}, {0x00, 0xff, 0xf7, 0xff}}}, // 0
+    {{{   280,     50,     -1}, 0, {256<<5,      0}, {0x00, 0xff, 0xf7, 0xff}}}, // 1
 
-    {{{    80,     48,     -1}, 0, {     0,  16<<5}, {0x00, 0xff, 0xff, 0xff}}}, // 2
-    {{{   240,     48,     -1}, 0, {256<<5,  16<<5}, {0x00, 0xff, 0xff, 0xff}}}, // 3
+    {{{    40,     30,     -1}, 0, {     0,  16<<5}, {0x00, 0xff, 0xff, 0xff}}}, // 2
+    {{{   280,     30,     -1}, 0, {256<<5,  16<<5}, {0x00, 0xff, 0xff, 0xff}}}, // 3
 
-    {{{    80,     36,     -1}, 0, {     0,  32<<5}, {0x00, 0x7f, 0xff, 0xff}}}, // 4
-    {{{   240,     36,     -1}, 0, {256<<5,  32<<5}, {0x00, 0x7f, 0xff, 0xff}}}, // 5
+    {{{    40,     10,     -1}, 0, {     0,  32<<5}, {0x00, 0x7f, 0xff, 0xff}}}, // 4
+    {{{   280,     10,     -1}, 0, {256<<5,  32<<5}, {0x00, 0x7f, 0xff, 0xff}}}, // 5
 #else
     {{{    96,     58,     -1}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}}, // 0
     {{{   224,     58,     -1}, 0, {128<<5,      0}, {0xff, 0xff, 0xff, 0xff}}}, // 1
@@ -3413,10 +3413,10 @@ const Gfx intro_seg7_dl_copyright_trademark[] = {
     gsSP2Triangles( 0,  3,  1, 0x0,  0,  2,  3, 0x0),
     gsSP2Triangles( 2,  5,  3, 0x0,  2,  4,  5, 0x0),
     
-    gsDPLoadTextureBlock_4b(intro_seg7_texture_trademark, G_IM_FMT_I, 64, 64, (G_TX_NOMIRROR | G_TX_CLAMP), (G_TX_NOMIRROR | G_TX_CLAMP), 0, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPVertex(intro_seg7_vertex_trademark, 6, 0),
-    gsSP2Triangles( 0,  3,  1, 0x0,  0,  2,  3, 0x0),
-    gsSP2Triangles( 2,  5,  3, 0x0,  2,  4,  5, 0x0),
+    // gsDPLoadTextureBlock_4b(intro_seg7_texture_trademark, G_IM_FMT_I, 64, 64, (G_TX_NOMIRROR | G_TX_CLAMP), (G_TX_NOMIRROR | G_TX_CLAMP), 0, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
+    // gsSPVertex(intro_seg7_vertex_trademark, 6, 0),
+    // gsSP2Triangles( 0,  3,  1, 0x0,  0,  2,  3, 0x0),
+    // gsSP2Triangles( 2,  5,  3, 0x0,  2,  4,  5, 0x0),
 #else
     gsDPLoadTextureBlock(intro_seg7_texture_copyright, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 16, 0, G_TX_CLAMP, G_TX_CLAMP, 7, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPVertex(intro_seg7_vertex_copyright, 4, 0),
