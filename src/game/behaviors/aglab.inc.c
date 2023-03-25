@@ -28,6 +28,22 @@ extern Lights1 mario_shoes_v4_lights;
 extern u8 begin_background_music_fade(u16 fadeDuration);
 extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 
+struct SelectedStates
+{
+    u8 surroundings;
+    u8 castle;
+    u8 pool;
+    u8 bridge;
+    u8 towers;
+    u8 window;
+    u8 frame;
+    u8 roof;
+    u8 main;
+    u8 bg;
+};
+
+static struct SelectedStates gStates = { 0 };
+
 static int sMusicNext = 0;
 static u8 sMusicPool[] = { 0x23, 0x25, 0x26, 0x27 };
 
@@ -211,6 +227,7 @@ enum LakituActions
 {
     LA_INIT,
     LA_ADVANCE,
+    LA_JAMS_ADVANCE,
     LA_WELCOME,
     LA_SHOW_SURROUNDINGS,
     LA_SWITCH_SURROUNDINGS,
@@ -259,6 +276,61 @@ static void show_cs_time_advance(int cs, int deadline, int dialog)
     }
 }
 
+enum JamsEndings
+{
+    JE_DUALITY,
+    JE_EVOLUTION,
+    JE_DISASTER,
+    JE_SHELL,
+    JE_ONE,
+    // the final one
+    JE_JAMIFY,
+};
+
+static u8 dialog_from_je(u8 state)
+{
+    return 81 + state;
+}
+
+static struct
+{
+    u8* ptr;
+    u8 val;
+}
+sJamEndingsVerifiers[] = 
+{
+    [ JE_DUALITY   ] = { &gStates.window, 0 },
+    [ JE_EVOLUTION ] = { &gStates.towers, 3 },
+    [ JE_DISASTER  ] = { &gStates.bridge, 0 },
+    [ JE_SHELL     ] = { &gStates.pool, 1 },
+    [ JE_ONE       ] = { &gStates.main, 2 },
+};
+
+static void show_cs_time_advance_jams(int cs)
+{
+    if (o->oTimer == 0)
+    {
+        gCutsceneTimer = 0;
+    }
+
+    gCamera->cutscene = cs;
+    if (gDialogID == DIALOG_NONE)
+    {
+        for (s32 nextAction = o->oAction + 1; ; nextAction++)
+        {
+            s32 nextJam = nextAction - LA_ENDING_DUALITY;
+            if (nextAction == LA_ENDING_JAMIFY 
+            || (sJamEndingsVerifiers[nextJam].val == *sJamEndingsVerifiers[nextJam].ptr))
+            { 
+                o->oAglabLakituDialog = dialog_from_je(nextJam);
+                o->oAglabLakituNextAction = nextAction;
+                o->oAction = LA_ADVANCE;
+                break;
+            }
+        }
+    }
+}
+
 static void show_finale(int cs, int picked)
 {
     gCamera->cutscene = cs;
@@ -287,22 +359,6 @@ extern Gfx mat_castle_grounds_dl_Shape_144_f3d[];
 extern Gfx mat_castle_grounds_dl_Shape_145_f3d[];
 extern Gfx mat_castle_grounds_dl_Shape_152_f3d[];
 extern Gfx mat_castle_grounds_dl_Shape_160_f3d[];
-
-struct SelectedStates
-{
-    u8 surroundings;
-    u8 castle;
-    u8 pool;
-    u8 bridge;
-    u8 towers;
-    u8 window;
-    u8 frame;
-    u8 roof;
-    u8 main;
-    u8 bg;
-};
-
-static struct SelectedStates gStates = { 0 };
 
 static void randomize_state()
 {
@@ -873,9 +929,9 @@ void bhv_aglab_lakitu_loop()
     o->oFaceAngleYaw = cur_obj_angle_to_home();
     o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
 
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
 #if 0
     print_text_fmt_int(200, 200, "A %d", o->oAction);
@@ -1149,9 +1205,8 @@ void bhv_aglab_lakitu_loop()
         gCamera->cutscene = 0;
         if (gDialogID == DIALOG_NONE)
         {
-            o->oAglabLakituDialog = 81;
-            o->oAglabLakituNextAction = LA_ENDING_DUALITY;
-            o->oAction = LA_ADVANCE;
+            o->oAction = LA_ENDING_DUALITY - 1;
+            show_cs_time_advance_jams(0);
         }
     }
     else if (LA_WHAT == o->oAction)
@@ -1175,27 +1230,27 @@ void bhv_aglab_lakitu_loop()
     else if (LA_ENDING_DUALITY == o->oAction)
     {
         if (0 == o->oTimer) gCutsceneTimer = 0;
-        show_cs_time_advance(CUTSCENE_AGLAB_WINDOW_SHOWCASE, 0, 82);
+        show_cs_time_advance_jams(CUTSCENE_AGLAB_WINDOW_SHOWCASE);
     }
     else if (LA_ENDING_EVOLUTION == o->oAction)
     {
         if (0 == o->oTimer) gCutsceneTimer = 0;
-        show_cs_time_advance(CUTSCENE_AGLAB_TOWERS_SHOWCASE, 0, 83);
+        show_cs_time_advance_jams(CUTSCENE_AGLAB_TOWERS_SHOWCASE);
     }
     else if (LA_ENDING_DISASTER == o->oAction)
     {
         if (0 == o->oTimer) gCutsceneTimer = 0;
-        show_cs_time_advance(CUTSCENE_AGLAB_BRIDGE_SHOWCASE, 0, 84);
+        show_cs_time_advance_jams(CUTSCENE_AGLAB_BRIDGE_SHOWCASE);
     }
     else if (LA_ENDING_SHELL == o->oAction)
     {
         if (0 == o->oTimer) gCutsceneTimer = 0;
-        show_cs_time_advance(CUTSCENE_AGLAB_WATER_SHOWCASE, 0, 85);
+        show_cs_time_advance_jams(CUTSCENE_AGLAB_WATER_SHOWCASE);
     }
     else if (LA_ENDING_ONE == o->oAction)
     {
         if (0 == o->oTimer) gCutsceneTimer = 0;
-        show_cs_time_advance(CUTSCENE_AGLAB_MAIN_SHOWCASE, 0, 86);
+        show_cs_time_advance_jams(CUTSCENE_AGLAB_MAIN_SHOWCASE);
     }
     else if (LA_ENDING_JAMIFY == o->oAction)
     {
