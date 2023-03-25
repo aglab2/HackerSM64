@@ -61,5 +61,6 @@ ObjActionFunc sGrindelThwompActions[] = {
 };
 
 void bhv_grindel_thwomp_loop(void) {
+    o->oFaceAngleYaw = gLakituState.yaw;
     cur_obj_call_action_function(sGrindelThwompActions);
 }
