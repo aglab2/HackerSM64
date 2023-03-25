@@ -25,6 +25,7 @@
 
 #include "game/object_list_processor.h"
 
+extern const GeoLayout intro_mist_geo[];
 const LevelScript level_intro_splash_screen[] = {
     INIT_LEVEL(),
 #ifdef SKIP_TITLE_SCREEN
@@ -34,11 +35,9 @@ const LevelScript level_intro_splash_screen[] = {
     LOAD_BEHAVIOR_DATA(),
     LOAD_LEVEL_DATA(intro),
 #if defined(FLOOMBAS) && defined(INTRO_FLOOMBAS)
-    LOAD_COMMON0(),
-
     // Load "Super Mario 64" logo
     ALLOC_LEVEL_POOL(),
-    LOAD_MODEL_FROM_GEO(MODEL_MIST, mist_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_MIST, intro_mist_geo),
     AREA(/*index*/ 1, intro_geo_splash_screen),
             OBJECT(/*model*/ 0, /*pos*/ -570, -350, 765, /*angle*/ 0,  50, 0, /*behParam*/ BP(0x18, 0x00, 0x10, 0x0B), /*beh*/ bhvStartup),
     END_AREA(),

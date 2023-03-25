@@ -288,4 +288,10 @@ extern const Gfx wooden_signpost_seg3_dl_0302DCD0[];
 extern const Gfx wooden_signpost_seg3_dl_0302DD08[];
 extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 
+// mist
+extern const GeoLayout mist_geo[];
+extern const GeoLayout white_puff_geo[];
+extern const Gfx mist_seg3_dl_03000880[];
+extern const Gfx mist_seg3_dl_03000920[];
+
 #endif

@@ -3,11 +3,11 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-#define DEBUG_OVERRIDE_SCORE S_BOWSER
+// #define DEBUG_OVERRIDE_SCORE S_BOWSER
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
 // #define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_MAIN_SHOWCASE
-#define DEBUG_WARP_TO 0xc
+// #define DEBUG_WARP_TO 0xc
 
 extern void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 

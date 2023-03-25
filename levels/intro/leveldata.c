@@ -3477,3 +3477,4 @@ const f32 intro_seg7_table_scale_2[] = {
 #include "levels/intro/intro_main/model.inc.c"
 #include "levels/intro/intro_base/model.inc.c"
 #include "levels/intro/intro_windowry/model.inc.c"
+#include "levels/intro/intro_mist/model.inc.c"

@@ -149,3 +149,4 @@ const GeoLayout intro_geo_debug_level_select[] = {
    GEO_END(),
 };
 
+#include "intro_mist/geo.inc.c"

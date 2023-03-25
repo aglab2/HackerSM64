@@ -195,10 +195,4 @@ extern const GeoLayout test_platform_geo[];
 extern const Gfx unknown_seg8_dl_08026260[];
 extern const Collision unknown_seg8_collision_080262F8[];
 
-// mist
-extern const GeoLayout mist_geo[];
-extern const GeoLayout white_puff_geo[];
-extern const Gfx mist_seg3_dl_03000880[];
-extern const Gfx mist_seg3_dl_03000920[];
-
 #endif
