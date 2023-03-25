@@ -2792,9 +2792,6 @@ sound_ref .sound_general_boing3
 sound_ref .sound_general_grand_star
 sound_ref .sound_general_grand_star_jump
 sound_ref .sound_general_boat_rock
-sound_ref .sound_aglab_castle
-sound_ref .sound_aglab_castle2
-sound_ref .sound_aglab_surroundings
 sound_ref .sound_general_vanish_sfx
 sound_ref .sound_menu_enter_hole
 sound_ref .sound_general_red_coin
@@ -4827,6 +4824,132 @@ chan_end
 .sound_aglab_surroundings:
 chan_setbank 10
 chan_setinstr 26
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta1:
+chan_setbank 10
+chan_setinstr 27
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_beta2:
+chan_setbank 10
+chan_setinstr 28
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_bg:
+chan_setbank 10
+chan_setinstr 29
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_bowser:
+chan_setbank 10
+chan_setinstr 30
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_bridge:
+chan_setbank 10
+chan_setinstr 31
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_done:
+chan_setbank 10
+chan_setinstr 32
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_j_disaster:
+chan_setbank 10
+chan_setinstr 33
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_j_done:
+chan_setbank 10
+chan_setinstr 34
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_j_duality:
+chan_setbank 10
+chan_setinstr 35
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_j_evolution:
+chan_setbank 10
+chan_setinstr 36
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_j_one:
+chan_setbank 10
+chan_setinstr 37
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_j_shell:
+chan_setbank 10
+chan_setinstr 38
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_jam0:
+chan_setbank 10
+chan_setinstr 39
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_main:
+chan_setbank 10
+chan_setinstr 40
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_moat:
+chan_setbank 10
+chan_setinstr 41
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_peach:
+chan_setbank 10
+chan_setinstr 42
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_portrait:
+chan_setbank 10
+chan_setinstr 43
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_roof:
+chan_setbank 10
+chan_setinstr 44
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_sidetowers:
+chan_setbank 10
+chan_setinstr 45
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_walls:
+chan_setbank 10
+chan_setinstr 46
+chan_setlayer 0, .layer_aglab
+chan_end
+
+.sound_aglab_window:
+chan_setbank 10
+chan_setinstr 47
 chan_setlayer 0, .layer_aglab
 chan_end
 
@@ -6935,6 +7058,30 @@ sound_ref .sound_menu_pinch_mario_face
 sound_ref .sound_menu_let_go_mario_face
 sound_ref .sound_menu_hand_appear
 sound_ref .sound_menu_hand_disappear
+sound_ref .sound_aglab_castle
+sound_ref .sound_aglab_castle2
+sound_ref .sound_aglab_surroundings
+sound_ref .sound_aglab_beta1
+sound_ref .sound_aglab_beta2
+sound_ref .sound_aglab_bg
+sound_ref .sound_aglab_bowser
+sound_ref .sound_aglab_bridge
+sound_ref .sound_aglab_done
+sound_ref .sound_aglab_j_disaster
+sound_ref .sound_aglab_j_done
+sound_ref .sound_aglab_j_duality
+sound_ref .sound_aglab_j_evolution
+sound_ref .sound_aglab_j_one
+sound_ref .sound_aglab_j_shell
+sound_ref .sound_aglab_jam0
+sound_ref .sound_aglab_main
+sound_ref .sound_aglab_moat
+sound_ref .sound_aglab_peach
+sound_ref .sound_aglab_portrait
+sound_ref .sound_aglab_roof
+sound_ref .sound_aglab_sidetowers
+sound_ref .sound_aglab_walls
+sound_ref .sound_aglab_window
 sound_ref .chan_2D18
 sound_ref .sound_menu_power_meter
 sound_ref .sound_menu_camera_buzz

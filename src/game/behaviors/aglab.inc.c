@@ -2,7 +2,7 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-#define DEBUG_OVERRIDE_SCORE S_BETA
+#define DEBUG_OVERRIDE_SCORE S_JAMS
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
 // #define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_MAIN_SHOWCASE
@@ -836,6 +836,9 @@ extern const BehaviorScript bhvFinalBridge[];
 extern const BehaviorScript bhvJam[];
 
 u8 gWantCustomDeath = 0;
+extern u8 sDialogSpeaker[];
+extern s32 sDialogSpeakerVoice[];
+
 void bhv_aglab_lakitu_loop()
 {
 #ifdef DEBUG_TURN_ON_CS
@@ -874,11 +877,11 @@ void bhv_aglab_lakitu_loop()
     // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
-    print_text_fmt_int(20, 200, "A %d", o->oAction);
-    print_text_fmt_int(20, 180, "T %d", o->oSubAction);
-    print_text_fmt_int(20, 160, "C %d", gCamera->cutscene);
-    
-    // print_text_fmt_int(20, 180, "T %d", o->oTimer);
+    print_text_fmt_int(200, 200, "A %d", o->oAction);
+    print_text_fmt_int(200, 180, "T %d", o->oSubAction);
+    print_text_fmt_int(200, 160, "D %d", gDialogID);
+    print_text_fmt_int(200, 140, "S %d", sDialogSpeaker[gDialogID]);
+    print_text_fmt_int(200, 120, "V %x", 0xffff & (sDialogSpeakerVoice[sDialogSpeaker[gDialogID]] >> 16));
 
 #ifdef DEBUG_ALWAYS_CALCULATE_SCORE
     calculate_score();
@@ -907,7 +910,6 @@ void bhv_aglab_lakitu_loop()
         set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP);
         create_dialog_box(o->oAglabLakituDialog);
         o->oAction = o->oAglabLakituNextAction;
-        gCutsceneTimer = 0;
     }
     else if (LA_WELCOME == o->oAction)
     {
@@ -1170,22 +1172,27 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_ENDING_DUALITY == o->oAction)
     {
+        if (0 == o->oTimer) gCutsceneTimer = 0;
         show_cs_time_advance(CUTSCENE_AGLAB_WINDOW_SHOWCASE, 0, 82);
     }
     else if (LA_ENDING_EVOLUTION == o->oAction)
     {
+        if (0 == o->oTimer) gCutsceneTimer = 0;
         show_cs_time_advance(CUTSCENE_AGLAB_TOWERS_SHOWCASE, 0, 83);
     }
     else if (LA_ENDING_DISASTER == o->oAction)
     {
+        if (0 == o->oTimer) gCutsceneTimer = 0;
         show_cs_time_advance(CUTSCENE_AGLAB_BRIDGE_SHOWCASE, 0, 84);
     }
     else if (LA_ENDING_SHELL == o->oAction)
     {
+        if (0 == o->oTimer) gCutsceneTimer = 0;
         show_cs_time_advance(CUTSCENE_AGLAB_WATER_SHOWCASE, 0, 85);
     }
     else if (LA_ENDING_ONE == o->oAction)
     {
+        if (0 == o->oTimer) gCutsceneTimer = 0;
         show_cs_time_advance(CUTSCENE_AGLAB_MAIN_SHOWCASE, 0, 86);
     }
     else if (LA_ENDING_JAMIFY == o->oAction)

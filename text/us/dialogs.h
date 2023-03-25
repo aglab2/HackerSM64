@@ -394,7 +394,7 @@ DEFINE_DIALOG(DIALOG_040, 1, 4, 30, 200, _("\
 The most important tower\n\
 is the central one!\n\
 It represents the power\n\
-of stars held in castle."))
+of stars held in castle!"))
 
 DEFINE_DIALOG(DIALOG_041, 1, 4, 30, 200, _("\
 Wanna mix around the\n\
@@ -404,8 +404,8 @@ fits castle the best."))
 
 DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
 And the castle is\n\
-ready! Let's see...\n\
-What kind of facade\n\
+ready! Let's see\n\
+what kind of facade\n\
 did you make..."))
 
 DEFINE_DIALOG(DIALOG_043, 1, 5, 30, 200, _("\
@@ -491,9 +491,9 @@ bounce to gain momentum.\n\
 Practice makes perfect!"))
 
 DEFINE_DIALOG(DIALOG_050, 1, 4, 30, 200, _("\
-Mario, you are did it!\n\
+Mario, you did it!\n\
 You restored the castle!\n\
-Oh look who is it?"))
+Oh, look who is it?"))
 
 DEFINE_DIALOG(DIALOG_051, 1, 6, 30, 200, _("\
 Climbing's easy! When you\n\
@@ -867,7 +867,7 @@ Duality windows!"))
 
 DEFINE_DIALOG(DIALOG_082, 1, 2, 30, 200, _("\
 These trees are a great\n\
-Evolution example"))
+Evolution example."))
 
 DEFINE_DIALOG(DIALOG_083, 1, 2, 30, 200, _("\
 Ah this bridge,\n\
