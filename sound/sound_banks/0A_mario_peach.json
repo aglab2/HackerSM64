@@ -258,6 +258,51 @@
             "release_rate": 208,
             "envelope": "envelope0",
             "sound": "41_rando"
+        },
+        "inst48": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "42_betaoo"
+        },
+        "inst49": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "43_betayow"
+        },
+        "inst50": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "44_betaou"
+        },
+        "inst51": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "45_betayahaa"
+        },
+        "inst52": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "46_betahaugh"
+        },
+        "inst53": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "47_betahoo"
+        },
+        "inst54": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "48_betahoo2"
+        },
+        "inst55": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "49_betahuah"
+        },
+        "inst56": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "50_betano"
         }
     },
     "instrument_list": [
@@ -309,6 +354,15 @@
         "inst44",
         "inst45",
         "inst46",
-        "inst47"
+        "inst47",
+        "inst48",
+        "inst49",
+        "inst50",
+        "inst51",
+        "inst52",
+        "inst53",
+        "inst54",
+        "inst55",
+        "inst56"
     ]
 }
