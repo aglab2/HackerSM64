@@ -277,7 +277,7 @@
 #define MODEL_CASTLE_GROUNDS_CANNON_GRILL         0x38        // castle_grounds_geo_000724
 #define MODEL_CASTLE_GROUNDS_ONE_TOWER         0x39
 #define MODEL_CASTLE_GROUNDS_DISASTER_BRIDGE         0x3A
-#define MODEL_CASTLE_GROUNDS_DISASTER_JAM         0x3B
+#define MODEL_CASTLE_GROUNDS_JAM         0x3B
 
 // pss
 

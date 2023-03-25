@@ -51,6 +51,7 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, vtowers_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_ONE_TOWER, one_tower_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_DISASTER_BRIDGE, disaster_bridge_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_JAM, jam_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -68,7 +69,6 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_LAKITU, -183, 669, -493, 0, 0, 0, 0x00000000, bhvAglabLakitu),
 		OBJECT(MODEL_NONE, 1290, 670, -4715, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, 1270, 654, -4707, 0, 0, 0, (0xf1 << 16), bhvAirborneDeathWarp),
-		OBJECT(MODEL_CASTLE_GROUNDS_DISASTER_JAM, 743, -85, -4147, 0, 0, 0, 0, bhvJam),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, 0x00),

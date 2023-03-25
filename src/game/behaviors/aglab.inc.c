@@ -237,6 +237,7 @@ enum LakituActions
     LA_ENDING_DISASTER,
     LA_ENDING_SHELL,
     LA_ENDING_ONE,
+    LA_ENDING_JAMIFY,
 };
 
 extern s16 gCutsceneTimer;
@@ -832,12 +833,11 @@ static int find_largest_score()
 }
 
 extern const BehaviorScript bhvFinalBridge[];
+extern const BehaviorScript bhvJam[];
 
 u8 gWantCustomDeath = 0;
 void bhv_aglab_lakitu_loop()
 {
-    gStates.towers = 3;
-    switch_towers();
 #ifdef DEBUG_TURN_ON_CS
     if (o->oTimer > 30)
         gCamera->cutscene = DEBUG_TURN_ON_CS;
@@ -874,8 +874,9 @@ void bhv_aglab_lakitu_loop()
     // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
-    // print_text_fmt_int(20, 200, "A %d", o->oAction);
-    // print_text_fmt_int(20, 180, "T %d", o->oSubAction);
+    print_text_fmt_int(20, 200, "A %d", o->oAction);
+    print_text_fmt_int(20, 180, "T %d", o->oSubAction);
+    print_text_fmt_int(20, 160, "C %d", gCamera->cutscene);
     
     // print_text_fmt_int(20, 180, "T %d", o->oTimer);
 
@@ -906,6 +907,7 @@ void bhv_aglab_lakitu_loop()
         set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP);
         create_dialog_box(o->oAglabLakituDialog);
         o->oAction = o->oAglabLakituNextAction;
+        gCutsceneTimer = 0;
     }
     else if (LA_WELCOME == o->oAction)
     {
@@ -1131,7 +1133,7 @@ void bhv_aglab_lakitu_loop()
     else if (LA_S_JAMS == o->oAction)
     {
         if (0 == o->oTimer)
-            seq_player_play_sequence(0, 6, 0);
+            seq_player_play_sequence(0, 0x2d, 0);
 
         if (0 == o->oTimer)
         {
@@ -1144,7 +1146,8 @@ void bhv_aglab_lakitu_loop()
         if (gDialogID == DIALOG_NONE)
         {
             o->oAglabLakituDialog = 81;
-            o->oAction = LA_ENDING_DUALITY;
+            o->oAglabLakituNextAction = LA_ENDING_DUALITY;
+            o->oAction = LA_ADVANCE;
         }
     }
     else if (LA_WHAT == o->oAction)
@@ -1167,23 +1170,45 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_ENDING_DUALITY == o->oAction)
     {
-        show_cs_time_advance(CUTSCENE_AGLAB_WINDOW_SHOWCASE, 0, 81);
+        show_cs_time_advance(CUTSCENE_AGLAB_WINDOW_SHOWCASE, 0, 82);
     }
     else if (LA_ENDING_EVOLUTION == o->oAction)
     {
-        show_cs_time_advance(CUTSCENE_AGLAB_TOWERS_SHOWCASE, 0, 82);
+        show_cs_time_advance(CUTSCENE_AGLAB_TOWERS_SHOWCASE, 0, 83);
     }
     else if (LA_ENDING_DISASTER == o->oAction)
     {
-        show_cs_time_advance(CUTSCENE_AGLAB_BRIDGE_SHOWCASE, 0, 83);
-    }
-    else if (LA_ENDING_ONE == o->oAction)
-    {
-        show_cs_time_advance(CUTSCENE_AGLAB_MAIN_SHOWCASE, 0, 84);
+        show_cs_time_advance(CUTSCENE_AGLAB_BRIDGE_SHOWCASE, 0, 84);
     }
     else if (LA_ENDING_SHELL == o->oAction)
     {
         show_cs_time_advance(CUTSCENE_AGLAB_WATER_SHOWCASE, 0, 85);
+    }
+    else if (LA_ENDING_ONE == o->oAction)
+    {
+        show_cs_time_advance(CUTSCENE_AGLAB_MAIN_SHOWCASE, 0, 86);
+    }
+    else if (LA_ENDING_JAMIFY == o->oAction)
+    {
+        gCamera->cutscene = 0;
+        if (0 == o->oTimer)
+        {
+            struct Object* jam = spawn_object(o, MODEL_CASTLE_GROUNDS_JAM, bhvJam);
+            jam->oPosX = gMarioStates->pos[0];
+            jam->oPosY = gMarioStates->pos[1] + 80.f;
+            jam->oPosZ = gMarioStates->pos[2];
+            jam->oFaceAngleYaw = 0;
+            jam->oFaceAnglePitch = 0;
+            jam->oFaceAngleRoll = 0;
+        }
+        gMarioObject->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+
+        if (gDialogID == DIALOG_NONE)
+        {
+            gMarioStates->usedObj = o;
+            SET_BPARAM2(o->oBehParams, 0xf0);
+            level_trigger_warp(gMarioStates, WARP_OP_TELEPORT);
+        }
     }
 }
 

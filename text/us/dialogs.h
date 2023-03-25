@@ -882,8 +882,8 @@ One"))
 
 DEFINE_DIALOG(DIALOG_086, 1, 3, 30, 200, _("\
 This castle is amazing!\n\
-You did great and\n\
-thank you making!"))
+I knew you are a jammer\n\
+too, Mario!"))
 
 DEFINE_DIALOG(DIALOG_087, 1, 4, 30, 200, _("\
 Santa Claus isn't the only\n\

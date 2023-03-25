@@ -10611,7 +10611,7 @@ struct Cutscene sCutsceneAglabBridgeShowcase[] = {
 static void cutscene_aglab_window_sc(struct Camera *c) 
 {
     cutscene_event(cutscene_end_waving_start, c, 0, 0);
-    int diff = gCutsceneTimer / 50;
+    int diff = gCutsceneTimer / 30;
     if (diff % 2)
     {
         c->focus[0] = 1999.f;
@@ -10647,19 +10647,19 @@ struct CutsceneSplinePoint gCSAglabTowersPos[] = {
 };
 
 struct CutsceneSplinePoint gCSAglabTowersFocus[] = {
-    { 0, 150, { 3747.f, 2546.f, 6325.f } }, 
-    { 1, 150, { 3747.f, 2546.f, 6325.f } }, 
-    { 2, 150, { 3110.f, 1046.f, 2727.f } },
-    { 3, 150, { -3254.f, 2546.f, 2876.f } },
-    { 4, 150, { -3934.f, 2546.f, 6317.f } },
-    { 5, 150, { -5934.f, 2546.f, 6817.f } },
+    { 0, 70, { 3747.f, 2546.f, 6325.f } }, 
+    { 1, 70, { 3747.f, 2546.f, 6325.f } }, 
+    { 2, 70, { 3110.f, 1046.f, 2727.f } },
+    { 3, 70, { -3254.f, 2546.f, 2876.f } },
+    { 4, 70, { -3934.f, 2546.f, 6317.f } },
+    { 5, 70, { -5934.f, 2546.f, 6817.f } },
     { -1, 0, { -3925.f, 2586.f, 6317.f } },
 };
 
 static void cutscene_aglab_towers_sc(struct Camera *c)
 {
     cutscene_event(cutscene_end_waving_start, c, 0, 0);
-    if (gCutsceneTimer > 450)
+    if (gCutsceneTimer > 3*70)
         return;
 
     move_point_along_spline(c->pos, gCSAglabTowersPos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
