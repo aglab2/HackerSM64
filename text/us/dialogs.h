@@ -863,22 +863,22 @@ is jammin' hard!"))
 
 DEFINE_DIALOG(DIALOG_081, 1, 2, 30, 200, _("\
 Look at Mario & Luigi\n\
-Duality windows!"))
+@FFFF00FFDuality@FFFFFFFF windows!"))
 
 DEFINE_DIALOG(DIALOG_082, 1, 2, 30, 200, _("\
 These trees are a great\n\
-Evolution example."))
+@FFFF00FFEvolution@FFFFFFFF example."))
 
 DEFINE_DIALOG(DIALOG_083, 1, 2, 30, 200, _("\
 Ah this bridge,\n\
-a complete Disaster!"))
+a complete @FFFF00FFDisaster@FFFFFFFF!"))
 
 DEFINE_DIALOG(DIALOG_084, 1, 2, 30, 200, _("\
-Even koopas are Shell\n\
-Shredding in the moat!"))
+Even koopas are @FFFF00FFShell\n\
+Shredding@FFFFFFFF in the moat!"))
 
 DEFINE_DIALOG(DIALOG_085, 1, 1, 30, 200, _("\
-One"))
+@FFFF00FFOne@FFFFFFFF"))
 
 DEFINE_DIALOG(DIALOG_086, 1, 3, 30, 200, _("\
 This castle is amazing!\n\
