@@ -2,7 +2,7 @@
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
-#define DEBUG_OVERRIDE_SCORE S_JAMS
+// #define DEBUG_OVERRIDE_SCORE S_JAMS
 // #define DEBUG_ALWAYS_CALCULATE_SCORE
 // #define DEBUG_JUKEBOX
 // #define DEBUG_TURN_ON_CS CUTSCENE_AGLAB_MAIN_SHOWCASE
@@ -873,15 +873,17 @@ void bhv_aglab_lakitu_loop()
     o->oFaceAngleYaw = cur_obj_angle_to_home();
     o->oFaceAnglePitch = atan2s(cur_obj_lateral_dist_to_home(), o->oPosY - gMarioStates->pos[1]);
 
-    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 
+#if 0
     print_text_fmt_int(200, 200, "A %d", o->oAction);
     print_text_fmt_int(200, 180, "T %d", o->oSubAction);
     print_text_fmt_int(200, 160, "D %d", gDialogID);
     print_text_fmt_int(200, 140, "S %d", sDialogSpeaker[gDialogID]);
     print_text_fmt_int(200, 120, "V %x", 0xffff & (sDialogSpeakerVoice[sDialogSpeaker[gDialogID]] >> 16));
+#endif
 
 #ifdef DEBUG_ALWAYS_CALCULATE_SCORE
     calculate_score();
