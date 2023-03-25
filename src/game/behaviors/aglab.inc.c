@@ -1,4 +1,5 @@
 #include "config/config_debug.h"
+#include "game/fb_effects.h"
 
 // #define DEBUG_TRIGGER_IMMEDIATELY
 // #define DEBUG_DONT_BLOCK_A_PRESS_FOR_FIRST
@@ -955,6 +956,7 @@ void bhv_aglab_lakitu_loop()
     if (LA_INIT == o->oAction)
     {
         gMarioSounds = 0;
+        set_fb_effect_col(255, 255, 255, 0);
 #ifndef DEBUG_TRIGGER_IMMEDIATELY
         if (o->oDistanceToMario < 500.f)
 #endif
@@ -1158,6 +1160,7 @@ void bhv_aglab_lakitu_loop()
     }
     else if (LA_S_BETA == o->oAction)
     {
+        set_fb_effect_col(255, 255, 255, 100);
         gMarioSounds = 1;
         if (0 == o->oTimer)
             seq_player_play_sequence(0, 3, 0);
