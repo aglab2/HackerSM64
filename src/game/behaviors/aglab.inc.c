@@ -1171,7 +1171,7 @@ void bhv_aglab_lakitu_loop()
     {
         gMarioSounds = 1;
         if (0 == o->oTimer)
-            seq_player_play_sequence(0, 3, 0);
+            seq_player_play_sequence(0, SEQ_LEVEL_WATER, 0);
 
         gCamera->cutscene = 0;
         if (0 == o->oSubAction)
