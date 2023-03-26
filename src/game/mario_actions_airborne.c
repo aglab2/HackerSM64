@@ -168,9 +168,24 @@ s32 should_get_stuck_in_ground(struct MarioState *m) {
 }
 #endif
 
+static void do_play_oof_sound(struct MarioState *m)
+{
+    switch (gMarioSounds)
+    {
+        case 0:
+            play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
+        break;
+        case 1:
+            play_sound(SOUND_AGLAB_BETA_OU, m->marioObj->header.gfx.cameraToObject);
+        break;
+        default:
+        break;
+    }
+}
+
 s32 check_fall_damage_or_get_stuck(struct MarioState *m, u32 hardFallAction) {
     if (should_get_stuck_in_ground(m)) {
-        play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
+        do_play_oof_sound(m);
         m->particleFlags |= PARTICLE_MIST_CIRCLE;
         drop_and_set_mario_action(m, ACT_FEET_STUCK_IN_GROUND, 0);
 #if ENABLE_RUMBLE
@@ -819,21 +834,6 @@ static void do_play_dive_sound(struct MarioState *m)
         break;
         case 1:
             play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_AGLAB_BETA_HOO2);
-        break;
-        default:
-        break;
-    }
-}
-
-static void do_play_oof_sound(struct MarioState *m)
-{
-    switch (gMarioSounds)
-    {
-        case 0:
-            play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
-        break;
-        case 1:
-            play_sound(SOUND_AGLAB_BETA_OU, m->marioObj->header.gfx.cameraToObject);
         break;
         default:
         break;

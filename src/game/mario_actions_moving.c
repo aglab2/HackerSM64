@@ -1567,6 +1567,22 @@ s32 act_dive_slide(struct MarioState *m) {
     return FALSE;
 }
 
+extern u8 gMarioSounds;
+static void do_play_oof_sound(struct MarioState *m)
+{
+    switch (gMarioSounds)
+    {
+        case 0:
+            play_sound_if_no_flag(m, SOUND_MARIO_OOOF2, MARIO_MARIO_SOUND_PLAYED);
+        break;
+        case 1:
+            play_sound_if_no_flag(m, SOUND_AGLAB_BETA_OO, MARIO_MARIO_SOUND_PLAYED);
+        break;
+        default:
+        break;
+    }
+}
+
 s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 checkFrame, s32 playLandingSound, s32 actionArg) {
     if (playLandingSound) {
         play_mario_heavy_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
@@ -1575,7 +1591,7 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
     if (actionArg > 0) {
         play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, MARIO_MARIO_SOUND_PLAYED);
     } else {
-        play_sound_if_no_flag(m, SOUND_MARIO_OOOF2, MARIO_MARIO_SOUND_PLAYED);
+        do_play_oof_sound(m);
     }
 
     if (m->forwardVel > 32.0f) {
@@ -1853,6 +1869,22 @@ s32 act_double_jump_land(struct MarioState *m) {
     return FALSE;
 }
 
+extern u8 gMarioSounds;
+static void do_play_haha_sound(struct MarioState *m)
+{
+    switch (gMarioSounds)
+    {
+        case 0:
+            play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
+        break;
+        case 1:
+            play_sound_if_no_flag(m, SOUND_AGLAB_BETA_OO, MARIO_MARIO_SOUND_PLAYED);
+        break;
+        default:
+        break;
+    }
+}
+
 s32 act_triple_jump_land(struct MarioState *m) {
     m->input &= ~INPUT_A_PRESSED;
 
@@ -1861,7 +1893,7 @@ s32 act_triple_jump_land(struct MarioState *m) {
     }
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
+        do_play_haha_sound(m);
     }
 
     common_landing_action(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_FREEFALL);
@@ -1878,7 +1910,7 @@ s32 act_backflip_land(struct MarioState *m) {
     }
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
+        do_play_haha_sound(m);
     }
 
     common_landing_action(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_FREEFALL);
