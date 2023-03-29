@@ -438,7 +438,7 @@ static void load_environmental_regions(TerrainData **data) {
  * Allocate the dynamic surface pool for object collision.
  */
 void alloc_surface_pools(void) {
-    gDynamicSurfacePool = main_pool_alloc_aligned(DYNAMIC_SURFACE_POOL_SIZE, 16);
+    gDynamicSurfacePool = main_pool_alloc_aligned(DYNAMIC_SURFACE_POOL_SIZE, 0);
     gDynamicSurfacePoolEnd = gDynamicSurfacePool;
 
     gCCMEnteredSlide = FALSE;

@@ -295,9 +295,9 @@ SECTIONS
    }
    END_NOLOAD(engine)
 #ifndef USE_EXT_RAM
-   . = 0x80280000;
+   . = 0x8028f800;
 #else
-   . = 0x80480000;
+   . = 0x8048f800;
 #endif
    BEGIN_NOLOAD(framebuffers)
    {
