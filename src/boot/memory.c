@@ -21,6 +21,7 @@
 #endif
 #include "game/puppyprint.h"
 
+// #define MAIN_POOL_USE_BEST_FIT
 // #define MAIN_POOL_DEBUG_CORRUPTION_SIZE
 
 #define MAIN_POOL_CORRUPTED() main_pool_corrupted(__LINE__, __func__)
@@ -57,7 +58,9 @@ struct MainPoolRegion {
 struct MainPoolContext {
     struct MainPoolRegion regions[MAIN_POOL_REGIONS_COUNT];
     u32 freeSpace;
+#ifdef MAIN_POOL_USE_BEST_FIT
     u8 regionIds[MAIN_POOL_REGIONS_COUNT];
+#endif
 };
 
 struct MainPoolState {
@@ -155,6 +158,7 @@ static void main_pool_calculate_size(void) {
     }
 }
 
+#ifdef MAIN_POOL_USE_BEST_FIT
 static void main_pool_region_swap(struct MainPoolRegion* r1, struct MainPoolRegion* r2) {
     struct MainPoolRegion tmp = *r1;
     *r1 = *r2;
@@ -203,10 +207,11 @@ static void main_pool_sort_up(int from) {
 }
 #undef COMPARE
 #undef COMPARE_BREAK
+#endif
 
 extern u8 _framebuffersSegmentBssStart[];
-extern u8 _framebuffersSegmentBssEnd[];
-extern u8 _zbufferSegmentBssStart[];
+// extern u8 _framebuffersSegmentBssEnd[];
+// extern u8 _zbufferSegmentBssStart[];
 extern u8 _zbufferSegmentBssEnd[];
 extern u8 _goddardSegmentStart[];
 
@@ -216,17 +221,29 @@ extern u8 _goddardSegmentStart[];
  * freeing the object that was most recently allocated from a side.
  */
 void main_pool_init() {
-    sMainPool.regions[0].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
-    sMainPool.regions[0].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[0].start;
-    sMainPool.regionIds[0] = 0;
-    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_framebuffersSegmentBssEnd);
-    sMainPool.regions[1].size = (u8 *) DOWN4((uintptr_t)_zbufferSegmentBssStart) - sMainPool.regions[1].start;
-    sMainPool.regionIds[1] = 1;
+#ifdef USE_EXT_RAM
+    sMainPool.regions[0].start = (u8 *) 0x80600000;
+    sMainPool.regions[0].size = (u8 *) DOWN4(_goddardSegmentStart) - sMainPool.regions[0].start;
+    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
+    sMainPool.regions[1].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[1].start;
     sMainPool.regions[2].start = (u8 *) ALIGN4((uintptr_t)_zbufferSegmentBssEnd);
-    sMainPool.regions[2].size = (u8*) DOWN4(_goddardSegmentStart) - sMainPool.regions[2].start;
+    sMainPool.regions[2].size = (u8*) 0x80600000 - sMainPool.regions[2].start;
+#else
+    sMainPool.regions[0].start = (u8 *) ALIGN4((uintptr_t)_zbufferSegmentBssEnd);
+    sMainPool.regions[0].size = (u8*) DOWN4(_goddardSegmentStart) - sMainPool.regions[0].start;
+    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
+    sMainPool.regions[2].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[1].start;
+    sMainPool.regions[2].start = NULL;
+    sMainPool.regions[2].size = 0;
+#endif
+    
+#ifdef MAIN_POOL_USE_BEST_FIT
+    sMainPool.regionIds[1] = 1;
+    sMainPool.regionIds[0] = 0;
     sMainPool.regionIds[2] = 2;
-
     main_pool_sort();
+#endif
+
     main_pool_calculate_size();
 
 #if PUPPYPRINT_DEBUG
@@ -307,12 +324,14 @@ void *main_pool_alloc(u32 size) {
         if (!ret)
             continue;
 
+#ifdef MAIN_POOL_USE_BEST_FIT
         // There is only a point in re-sorting if 2 conditions occur
         // 1) It is not the first region, it is already the smallest
         // 2) Final region size is smaller than size. If this is not true,
         //    'regions[i-1]->size < size <= regions[i]->size' satisfies
         if (i && region->size < size)
             main_pool_sort_down(i);
+#endif
 
         return ret;
     }
@@ -332,9 +351,11 @@ void *main_pool_alloc_aligned(u32 size, u32 alignment) {
         if (!ret)
             continue;
 
+#ifdef MAIN_POOL_USE_BEST_FIT
         // Performing +(2 * alignment) check here to give some flexibility to ALIGN that could have caused some changes
         if (i && region->size < size + 2 * alignment)
             main_pool_sort_down(i);
+#endif
 
         return ret;
     }
@@ -347,13 +368,19 @@ void *main_pool_alloc_freeable(u32 size) {
     size = ALIGN4(size) + sizeof(struct MainPoolFreeableHeader);
     for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
         struct MainPoolRegion* region = &sMainPool.regions[i];
+#ifdef MAIN_POOL_USE_BEST_FIT
         u8 regionId = sMainPool.regionIds[i];
+#else
+        u8 regionId = (u8) i;
+#endif
         void* ret = main_pool_region_try_alloc_from_end_freeable(region, regionId, size);
         if (!ret)
             continue;
 
+#ifdef MAIN_POOL_USE_BEST_FIT
         if (i && region->size < size)
             main_pool_sort_down(i);
+#endif
 
         return ret;
     }
@@ -369,13 +396,19 @@ void *main_pool_alloc_aligned_freeable(u32 size, u32 alignment) {
     size = ALIGN4(size);
     for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
         struct MainPoolRegion* region = &sMainPool.regions[i];
+#ifdef MAIN_POOL_USE_BEST_FIT
         u8 regionId = sMainPool.regionIds[i];
+#else
+        u8 regionId = (u8) i;
+#endif
         void* ret = main_pool_region_try_alloc_from_end_aligned_freeable(region, regionId, size, alignment);
         if (!ret)
             continue;
 
+#ifdef MAIN_POOL_USE_BEST_FIT
         if (i && region->size < size + sizeof(struct MainPoolFreeableHeader) + 2 * alignment)
             main_pool_sort_down(i);
+#endif
 
         return ret;
     }
@@ -392,6 +425,7 @@ void *main_pool_alloc_aligned_freeable(u32 size, u32 alignment) {
 void main_pool_free(void *addr) {
     const struct MainPoolFreeableHeader* header = (struct MainPoolFreeableHeader*) ((u8*) addr - sizeof(struct MainPoolFreeableHeader));
     if (header->magic == MAIN_POOL_FREEABLE_HEADER_MAGIC_RIGHT) {
+#ifdef MAIN_POOL_USE_BEST_FIT
         for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
             if (header->id == sMainPool.regionIds[i]) {
                 struct MainPoolRegion* region = &sMainPool.regions[i];
@@ -401,6 +435,10 @@ void main_pool_free(void *addr) {
                 break;
             }
         }
+#else
+    struct MainPoolRegion* region = &sMainPool.regions[header->id];
+    region->size = header->ptr - region->start;
+#endif
     } else {
         DEBUG_ASSERT("Incorrect magic for free");
     }
@@ -575,7 +613,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 #else
     u32 compSize = ALIGN16(srcEnd - srcStart);
 #endif
-    u8 *compressed = main_pool_alloc_aligned_freeable(compSize, 16);
+    u8 *compressed = main_pool_alloc_aligned_freeable(compSize, 0);
 #ifdef GZIP
     // Decompressed size from end of gzip
     u32 *size = (u32 *) (compressed + compSize);
@@ -585,11 +623,11 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 #endif
     if (compressed != NULL) {
 #ifdef UNCOMPRESSED
-        dest = main_pool_alloc_aligned(compSize, 16);
+        dest = main_pool_alloc_aligned(compSize, 0);
         dma_read(dest, srcStart, srcEnd);
 #else
         dma_read(compressed, srcStart, srcEnd);
-        dest = main_pool_alloc_aligned(*size, 16);
+        dest = main_pool_alloc_aligned(*size, 0);
 #endif
         if (dest != NULL) {
             osSyncPrintf("start decompress\n");
@@ -623,7 +661,7 @@ void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
 #else
     u32 compSize = ALIGN16(srcEnd - srcStart);
 #endif
-    u8 *compressed = main_pool_alloc_aligned_freeable(compSize, 16);
+    u8 *compressed = main_pool_alloc_aligned_freeable(compSize, 0);
 #ifdef GZIP
     // Decompressed size from end of gzip
     u32 *size = (u32 *) (compressed + compSize);

@@ -753,11 +753,11 @@ void setup_game_memory(void) {
     gPhysicalFramebuffers[1] = VIRTUAL_TO_PHYSICAL(gFramebuffer1);
     gPhysicalFramebuffers[2] = VIRTUAL_TO_PHYSICAL(gFramebuffer2);
     // Setup Mario Animations
-    gMarioAnimsMemAlloc = main_pool_alloc_aligned(MARIO_ANIMS_POOL_SIZE, 16);
+    gMarioAnimsMemAlloc = main_pool_alloc_aligned(MARIO_ANIMS_POOL_SIZE, 0);
     set_segment_base_addr(SEGMENT_MARIO_ANIMS, (void *) gMarioAnimsMemAlloc);
     setup_dma_table_list(&gMarioAnimsBuf, gMarioAnims, gMarioAnimsMemAlloc);
     // Setup Demo Inputs List
-    gDemoInputsMemAlloc = main_pool_alloc_aligned(DEMO_INPUTS_POOL_SIZE, 16);
+    gDemoInputsMemAlloc = main_pool_alloc_aligned(DEMO_INPUTS_POOL_SIZE, 0);
     set_segment_base_addr(SEGMENT_DEMO_INPUTS, (void *) gDemoInputsMemAlloc);
     setup_dma_table_list(&gDemoInputsBuf, gDemoInputs, gDemoInputsMemAlloc);
     // Setup Level Script Entry
