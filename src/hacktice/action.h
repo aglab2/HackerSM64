@@ -1,13 +1,20 @@
 #pragma once
 #include "bool.h"
-#include "types.h"
-
 #include "game/level_update.h"
 
-extern u32 sLastAction;
+extern u32 Action_sLastAction;
+
 static inline void Action_onNormal()
-{ sLastAction = gMarioStates->action; }
-static inline u32  Action_last()
-{ return sLastAction; }
+{
+    Action_sLastAction = gMarioStates->action;
+}
+
+static inline u32 Action_last()
+{
+    return Action_sLastAction;
+}
+
 static inline bool Action_changed()
-{ return sLastAction != gMarioStates->action; }
+{
+    return Action_sLastAction != gMarioStates->action;
+}

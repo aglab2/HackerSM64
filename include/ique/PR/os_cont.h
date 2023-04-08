@@ -97,9 +97,9 @@ typedef struct {
  */
 
 #ifndef _HW_VERSION_1
-#define MAXCONTROLLERS  4
+#define MAXCONTROLLERS  2
 #else
-#define MAXCONTROLLERS  6
+#define MAXCONTROLLERS  2
 #endif
 
 /* controller errors */

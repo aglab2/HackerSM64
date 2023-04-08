@@ -11,9 +11,10 @@
 #include "text_manager.h"
 #include "sm64.h"
 
-bool sShow = false;
-static int wasLastNumCollidedObjects = 0;
-static bool wasLastPlatform = false;
+static int sWasLastNumCollidedObjects = 0;
+static bool sWasLastPlatform = false;
+
+char Checkpoint_gShow = false;
 
 static void addTimeLine()
 {
@@ -30,26 +31,26 @@ static void addTimeLine()
 
 void Checkpoint_onNormal()
 {
-    if (sShow)
+    if (Checkpoint_gShow)
     {
-        sShow = false;
+        Checkpoint_gShow = false;
         return addTimeLine();
     }
 
     if (Config_checkpointObject())
     {
-        int lastNumCollidedObjects = wasLastNumCollidedObjects;
+        int lastNumCollidedObjects = sWasLastNumCollidedObjects;
         int numCollidingObjs = gMarioObject ? gMarioObject->numCollidedObjs : 0;
-        wasLastNumCollidedObjects = numCollidingObjs;
+        sWasLastNumCollidedObjects = numCollidingObjs;
         if (numCollidingObjs > lastNumCollidedObjects)
             return addTimeLine();
     }
 
     if (Config_checkpointPlatform())
     {
-        bool wasPlatform = wasLastPlatform;
+        bool wasPlatform = sWasLastPlatform;
         bool isPlatform = gMarioObject && !!gMarioObject->platform;
-        wasLastPlatform = isPlatform;
+        sWasLastPlatform = isPlatform;
         if (!wasPlatform && isPlatform)
             return addTimeLine();
     }

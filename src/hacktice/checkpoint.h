@@ -4,6 +4,7 @@
 
 void Checkpoint_onNormal();
 
-extern bool sShow;
+extern char Checkpoint_gShow;
+
 static inline void Checkpoint_registerEvent()
-{ sShow = true; }
+{ Checkpoint_gShow = true; }

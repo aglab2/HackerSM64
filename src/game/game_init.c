@@ -31,6 +31,8 @@
 #include "debug_box.h"
 #include "vc_check.h"
 #include "vc_ultra.h"
+
+#include "hacktice/cfg.h"
 #include "hacktice/main.h"
 #include "profiling.h"
 
@@ -812,6 +814,12 @@ void setup_game_memory(void) {
     load_segment_decompress(SEGMENT_SEGMENT2, _segment2_mio0SegmentRomStart, _segment2_mio0SegmentRomEnd);
 }
 
+#include "level_update.h"
+
+extern s16 sCurrPlayMode;
+extern struct WarpDest sWarpDest;
+extern u16 gRandomSeed16;
+
 /**
  * Main game loop thread. Runs forever as long as the game continues.
  */
@@ -870,6 +878,14 @@ void thread5_game_loop(UNUSED void *arg) {
             Hacktice_onFrame();
         }
         profiler_update(PROFILER_TIME_CONTROLLERS);
+        const int ResetCombo = L_TRIG | Z_TRIG;
+        if (sConfig.softReset && (ResetCombo == (gPlayer1Controller->buttonDown & ResetCombo)))
+        {
+            sCurrPlayMode = 4;
+            sWarpDest.type = 1;
+            sWarpDest.levelNum = 1;
+            gRandomSeed16 = 0;
+        }
         addr = level_script_execute(addr);
 #if !PUPPYPRINT_DEBUG && defined(VISUAL_DEBUG)
         debug_box_input();

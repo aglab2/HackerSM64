@@ -480,7 +480,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
         script = segmented_to_virtual(spawnInfo->behaviorScript);
 
         // If the object was previously killed/collected, don't respawn it
-        if (LevelReset_onSpawnObjectsFromInfoHook(&spawnInfo->behaviorArg)) {
+        if (LevelReset_onSpawnObjectsFromInfoHook(spawnInfo)) {
             object = create_object(script);
 
             // Behavior parameters are often treated as four separate bytes, but

@@ -1,4 +1,3 @@
 #include "action.h"
-#include "game/level_update.h"
 
-u32 sLastAction = 0;
+u32 Action_sLastAction = 0;
