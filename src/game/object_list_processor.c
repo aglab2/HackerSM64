@@ -22,6 +22,7 @@
 #include "puppyprint.h"
 #include "puppylights.h"
 
+#include "hacktice/level_reset.h"
 #include "hacktice/main.h"
 
 /**
@@ -407,9 +408,6 @@ s32 unload_deactivated_objects_in_list(struct ObjectNode *objList) {
  * SpawnInfo.
  */
 void set_object_respawn_info_bits(struct Object *obj, u8 bits) {
-    if (Hacktice_gEnabled)
-        return;
-
     u32 *info32;
     u16 *info16;
 
@@ -474,8 +472,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
         script = segmented_to_virtual(spawnInfo->behaviorScript);
 
         // If the object was previously killed/collected, don't respawn it
-        if ((spawnInfo->behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8))
-            != (RESPAWN_INFO_DONT_RESPAWN << 8)) {
+        if (LevelReset_onSpawnObjectsFromInfoHook(spawnInfo)) {
             object = create_object(script);
 
             // Behavior parameters are often treated as four separate bytes, but

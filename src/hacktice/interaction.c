@@ -1,5 +1,4 @@
 #include "interaction.h"
-#include "binary.h"
 
 #include "game/interaction.h"
 #include "game/memory.h"
@@ -7,7 +6,16 @@
 #include "checkpoint.h"
 #include "cfg.h"
 
+typedef u32 (*InteractionHandlerFn)(struct MarioState *, u32, struct Object *);
+typedef struct InteractionHandler {
+    u32 interactType;
+    InteractionHandlerFn handler;
+} InteractionHandler;
+
 static InteractionHandlerFn gOrigHandlers[32];
+
+// TODO: drop hardcode
+static InteractionHandler* sInteractionHandlers = (InteractionHandler*) 0x8032d950;
 
 #define HOOK(name) \
 static u32 hook_##name(struct MarioState* m, u32 v, struct Object* o) \
