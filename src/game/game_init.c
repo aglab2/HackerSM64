@@ -839,7 +839,6 @@ void thread5_game_loop(UNUSED void *arg) {
             Hacktice_onFrame();
         }
         const int ResetCombo = L_TRIG | Z_TRIG;
-        print_text_fmt_int(20, 20, "%d", gPlayer1Controller->buttonDown);
         if (sConfig.softReset && (ResetCombo == (gPlayer1Controller->buttonDown & ResetCombo)))
         {
             sCurrPlayMode = 4;
