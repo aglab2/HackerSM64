@@ -5,6 +5,7 @@
 
 // game <-> game_init
 #ifdef BINARY
+#include "types.h"
 #include "game/game.h"
 #else
 #include <ultra64.h>
@@ -54,4 +55,8 @@ static void* sCourseNames = (void*) 0x02010f68;
 #else
 extern u8 seg2_course_name_table[];
 UNUSED static const void* sCourseNames = (void*) seg2_course_name_table;
+#endif
+
+#ifdef BINARY
+#define MARIO_FALL_SOUND_PLAYED MARIO_UNKNOWN_18
 #endif
