@@ -23,6 +23,7 @@
 
 // #define MAIN_POOL_USE_BEST_FIT
 // #define MAIN_POOL_DEBUG_CORRUPTION_SIZE
+// #define MAIN_POOL_DEBUG_STACK_DEPTH
 
 #define MAIN_POOL_CORRUPTED() main_pool_corrupted(__LINE__, __func__)
 
@@ -247,7 +248,7 @@ void main_pool_init() {
     main_pool_calculate_size();
 
 #if PUPPYPRINT_DEBUG
-    mempool = sPoolFreeSpace;
+    mempool = main_pool_available();
 #endif
 }
 
@@ -452,11 +453,18 @@ u32 main_pool_available(void) {
     return sMainPool.freeSpace;
 }
 
+#ifdef MAIN_POOL_DEBUG_STACK_DEPTH
+int sDepth = 0;
+#endif
+
 /**
  * Push pool state, to be restored later. Return the amount of free space left
  * in the pool.
  */
 void main_pool_push_state(void) {
+#ifdef MAIN_POOL_DEBUG_STACK_DEPTH
+    sDepth++;
+#endif
     struct MainPoolState *prevState = gMainPoolState;
     struct MainPoolContext ctx = sMainPool;
 
@@ -470,6 +478,9 @@ void main_pool_push_state(void) {
  * amount of free space left in the pool.
  */
 void main_pool_pop_state(void) {
+#ifdef MAIN_POOL_DEBUG_STACK_DEPTH
+    sDepth--;
+#endif
     sMainPool = gMainPoolState->ctx;
     gMainPoolState = gMainPoolState->prev;
 }

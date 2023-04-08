@@ -44,6 +44,7 @@ void *main_pool_alloc_aligned_freeable(u32 size, u32 alignment);
 void main_pool_free(void *addr);
 void main_pool_push_state(void);
 void main_pool_pop_state(void);
+u32 main_pool_available();
 
 #ifndef NO_SEGMENTED_MEMORY
 void *load_segment(s32 segment, u8 *srcStart, u8 *srcEnd, u8 *bssStart, u8 *bssEnd);
