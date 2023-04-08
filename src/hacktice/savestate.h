@@ -16,4 +16,8 @@ typedef struct
     char memory[MaxStateSize];
 } State;
 
-extern State gHacktice_State[1];
+#ifdef BINARY
+#define Hacktice_gState ((State*) 0x80026000)
+#else
+extern State Hacktice_gState[1];
+#endif

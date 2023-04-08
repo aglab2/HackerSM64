@@ -4,6 +4,7 @@
 #include "game/level_update.h"
 #include "sm64.h"
 
+#include "binary.h"
 #include "cfg.h"
 #include "death.h"
 

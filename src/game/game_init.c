@@ -33,6 +33,7 @@
 
 #include "hacktice/cfg.h"
 #include "hacktice/main.h"
+#include "hacktice/soft_reset.h"
 
 // First 3 controller slots
 struct Controller gControllers[3];
@@ -839,12 +840,9 @@ void thread5_game_loop(UNUSED void *arg) {
             Hacktice_onFrame();
         }
         const int ResetCombo = L_TRIG | Z_TRIG;
-        if (sConfig.softReset && (ResetCombo == (gPlayer1Controller->buttonDown & ResetCombo)))
+        if (Hacktice_gConfig.softReset)
         {
-            sCurrPlayMode = 4;
-            sWarpDest.type = 1;
-            sWarpDest.levelNum = 1;
-            gRandomSeed16 = 0;
+            SoftReset_onFrame();
         }
         addr = level_script_execute(addr);
 #if !PUPPYPRINT_DEBUG && defined(VISUAL_DEBUG)
