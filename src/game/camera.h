@@ -247,6 +247,7 @@ enum Cutscenes {
     CUTSCENE_INTRO_PEACH,
     CUTSCENE_DANCE_ROTATE,
     CUTSCENE_ENTER_BOWSER_ARENA,
+    CUTSCENE_ENTER_BOWSER_ARENA_2,
     CUTSCENE_0F_UNUSED, // Never activated, stub cutscene functions
     CUTSCENE_UNUSED_146,
     CUTSCENE_UNUSED_EXIT, // Never activated

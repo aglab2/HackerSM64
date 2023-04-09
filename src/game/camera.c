@@ -3257,7 +3257,7 @@ void init_camera(struct Camera *c) {
             // If it is, then set CamAct to the end to directly activate Bowser
             // If it isn't, then start cutscene
             if (gCurrDemoInput == NULL) {
-                start_cutscene(c, CUTSCENE_ENTER_BOWSER_ARENA);
+                start_cutscene(c, CUTSCENE_ENTER_BOWSER_ARENA_2);
             } else if (gSecondCameraFocus != NULL) {
                 gSecondCameraFocus->oBowserCamAct = BOWSER_CAM_ACT_END;
             }
@@ -7806,6 +7806,41 @@ void cutscene_bowser_arena(struct Camera *c) {
     }
 }
 
+struct CutsceneSplinePoint gCSAglab1Pos[] = {
+    { 0, 0, { 1740, 1778, -8042 } },
+    { 1, 0, { 1524, 1778, -7029 } },
+    { 2, 0, { 820, 1778, -6833 } },
+    { 3, 0, { 200, 1778, -7068 } },
+    { -1, 0, { -8, 1778, -7873 } },
+};
+struct CutsceneSplinePoint gCSAglab1Focus[] = {
+    { 0, 250, { 849, 1614, -8432 } },
+    { 1, 250, { 849, 1614, -8432 } },
+    { 2, 250, { 849, 1614, -8432 } },
+    { 3, 250, { 849, 1614, -8432 } },
+    { -1, 0, { 849, 1614, -8432 } },
+};
+
+void cutscene_bowser_arena_short(struct Camera *c) {
+    cutscene_event(cutscene_bowser_arena_mario_dialog, c, 0, -1);
+    move_point_along_spline(c->pos, gCSAglab1Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab1Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+void cutscene_bowser_arena_dialog_short(struct Camera *c) {
+    cutscene_event(bowser_fight_intro_dialog, c, 0, 0);
+
+    if (get_dialog_id() == DIALOG_NONE) {
+        gCutsceneTimer = CUTSCENE_LOOP;
+    }
+    
+    if (gCutsceneTimer < 240)
+    {
+        move_point_along_spline(c->pos, gCSAglab1Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+        move_point_along_spline(c->focus, gCSAglab1Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    }
+}
+
 void cutscene_star_spawn_store_info(struct Camera *c) {
     store_info_star(c);
 }
@@ -10198,6 +10233,12 @@ struct Cutscene sCutsceneEnterBowserArena[] = {
     { cutscene_bowser_arena_end, 0 }
 };
 
+struct Cutscene sCutsceneEnterBowserArena2[] = {
+    { cutscene_bowser_arena_short, 2 },
+    { cutscene_bowser_arena_dialog_short, CUTSCENE_LOOP },
+    { cutscene_bowser_arena_end, 0 }
+};
+
 // The dance cutscenes are automatically stopped since reset_camera() is called after Mario warps.
 
 /**
@@ -10738,6 +10779,7 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_UNUSED_EXIT,          sCutsceneUnusedExit)
         CUTSCENE(CUTSCENE_INTRO_PEACH,          sCutsceneIntroPeach)
         CUTSCENE(CUTSCENE_ENTER_BOWSER_ARENA,   sCutsceneEnterBowserArena)
+        CUTSCENE(CUTSCENE_ENTER_BOWSER_ARENA_2, sCutsceneEnterBowserArena2)
         CUTSCENE(CUTSCENE_DANCE_ROTATE,         sCutsceneDanceDefaultRotate)
         CUTSCENE(CUTSCENE_DANCE_DEFAULT,        sCutsceneDanceDefaultRotate)
         CUTSCENE(CUTSCENE_DANCE_FLY_AWAY,       sCutsceneDanceFlyAway)
