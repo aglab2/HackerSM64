@@ -1317,3 +1317,14 @@ void bhv_fireplace_loop()
         }
     }
 }
+
+void sparkler_loop()
+{
+    if (0 == (o->oTimer % 4))
+    {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX += random_f32_around_zero(100.f);
+        spark->oPosY += random_f32_around_zero(100.f);
+        spark->oPosZ += random_f32_around_zero(100.f);
+    }
+}

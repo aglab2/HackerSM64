@@ -6396,3 +6396,11 @@ const BehaviorScript bhvFireplace[] = {
         CALL_NATIVE(bhv_fireplace_loop),
     END_LOOP(),
 };
+
+extern void sparkler_loop();
+const BehaviorScript bhvSparkler[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    BEGIN_LOOP(),
+        CALL_NATIVE(sparkler_loop),
+    END_LOOP(),
+};
