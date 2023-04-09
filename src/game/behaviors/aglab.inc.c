@@ -1287,3 +1287,33 @@ void bhv_tree_init(void)
         obj_scale_xyz(gCurrentObject, 0.7f + random_float() * 0.3f, 0.97f + 0.06f * random_float(), 0.7f + random_float() * 0.3f);
     }
 }
+
+void bhv_fireplace_init()
+{
+    f32 d;
+    o->parentObj = cur_obj_find_nearest_object_with_behavior(bhvSmallPenguin, &d);
+    struct Object* flame = spawn_object(o, MODEL_RED_FLAME, bhvFlame);
+    obj_scale(o, 0.4f);
+    o->oPosY += 20.f;
+    flame->oPosY += 40.f;
+}
+
+void bhv_fireplace_loop()
+{
+    if (0 == o->oAction)
+    {
+        f32 dx = o->oPosX - o->parentObj->oPosX;
+        f32 dy = o->oPosY - o->parentObj->oPosY;
+        f32 dz = o->oPosZ - o->parentObj->oPosZ;
+        f32 d = dx*dx + dy*dy + dz*dz;
+        if (d < 3000.f)
+        {
+            mario_drop_held_object(gMarioStates);
+            o->parentObj->activeFlags = 0;
+            spawn_object(o, MODEL_BOWSER_FLAMES, bhvBowserBombExplosion);
+            create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
+            set_camera_shake_from_point(SHAKE_POS_LARGE, o->oPosX, o->oPosY, o->oPosZ);
+            o->oAction = 1;
+        }
+    }
+}

@@ -6,7 +6,6 @@
 #include "types.h"
 #include "make_const_nonconst.h"
 
-#include "bowser_flame/model.inc.c"
 UNUSED static const u64 binid_0 = 0;
 
 #include "impact_ring/model.inc.c"
@@ -24,5 +23,4 @@ UNUSED static const u64 binid_3 = 3;
 #include "bomb/model.inc.c"
 UNUSED static const u64 binid_4 = 4;
 
-#include "impact_smoke/model.inc.c"
 UNUSED static const u64 binid_5 = 5;

@@ -23,4 +23,6 @@ extern const LevelScript level_cotmc_entry[];
 
 #include "levels/cotmc/header.inc.h"
 
+#include "levels/cotmc/fireplace/header.h"
+
 #endif

@@ -1,0 +1,9 @@
+extern Lights1 fireplace_f3dlite_material_lights;
+extern u8 fireplace_tex1_64x64_9E63089FE40F6741_12_ci4[];
+extern u8 fireplace_tex1_64x64_9E63089FE40F6741_12_pal_rgba16[];
+extern Vtx fireplace_Cube_mesh_vtx_cull[8];
+extern Vtx fireplace_Cube_mesh_vtx_0[72];
+extern Gfx fireplace_Cube_mesh_tri_0[];
+extern Gfx mat_fireplace_f3dlite_material[];
+extern Gfx mat_revert_fireplace_f3dlite_material[];
+extern Gfx fireplace_Cube_mesh[];

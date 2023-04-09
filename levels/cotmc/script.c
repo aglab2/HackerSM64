@@ -38,6 +38,7 @@ const LevelScript level_cotmc_entry[] = {
 	JUMP_LINK(script_func_global_15), 
 	JUMP_LINK(script_func_global_1), 
 	LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE, palm_tree_geo), 
+	LOAD_MODEL_FROM_DL(MODEL_FIREPLACE, fireplace_Cube_mesh, LAYER_OPAQUE),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -46,6 +47,7 @@ const LevelScript level_cotmc_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf0, LEVEL_CASTLE_COURTYARD, 0x01, 0x21, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_CASTLE_COURTYARD, 0x01, 0x22, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_FIREPLACE, -157, 1281, -3131, 0, 0, 0, 0x00000000, bhvFireplace),
 		OBJECT(MODEL_MR_BLIZZARD, 2369, 2799, 6557, 0, 0, 0, 0x00000000, bhvMrBlizzard),
 		OBJECT(MODEL_MR_BLIZZARD, 3573, 1848, 4465, 0, 0, 0, 0x00000000, bhvMrBlizzard),
 		OBJECT(MODEL_MR_BLIZZARD, 3917, 1702, 686, 0, 0, 0, 0x00000000, bhvMrBlizzard),

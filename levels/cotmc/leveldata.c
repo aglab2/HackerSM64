@@ -18,3 +18,5 @@
 #include "levels/cotmc/movtext.inc.c"
 
 #include "levels/cotmc/leveldata.inc.c"
+
+#include "levels/cotmc/fireplace/model.inc.c"

@@ -6386,3 +6386,13 @@ const BehaviorScript bhvChiaki[] = {
         CALL_NATIVE(bhv_chiaki_loop),
     END_LOOP(),
 };
+
+extern void bhv_fireplace_init();
+extern void bhv_fireplace_loop();
+const BehaviorScript bhvFireplace[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    CALL_NATIVE(bhv_fireplace_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fireplace_loop),
+    END_LOOP(),
+};

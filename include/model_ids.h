@@ -392,8 +392,8 @@
 // group 12
 #define MODEL_BOWSER                      0x64        // bowser_geo
 #define MODEL_BOWSER_BOMB_CHILD_OBJ       0x65        // bowser_bomb_geo - Spawns as a chill object in bowser's behavior command, causing an explosion if it touches a bomb
-#define MODEL_BOWSER_SMOKE                0x66        // bowser_impact_smoke_geo
-#define MODEL_BOWSER_FLAMES               0x67        // bowser_flames_geo
+#define MODEL_BOWSER_SMOKE                0xfb        // bowser_impact_smoke_geo
+#define MODEL_BOWSER_FLAMES               0xfc        // bowser_flames_geo
 #define MODEL_BOWSER_WAVE                 0x68        // invisible_bowser_accessory_geo
 #define MODEL_BOWSER_NO_SHADOW            0x69        // bowser_geo_no_shadow
 
@@ -584,5 +584,7 @@
 #define MODEL_HOLLOW_STAR 0xee
 
 #define MODEL_RED_COIN_RADAR 0xf7
+
+#define MODEL_FIREPLACE 0xfa
 
 #endif // MODEL_IDS_H
