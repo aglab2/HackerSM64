@@ -81,7 +81,7 @@ const LevelScript level_bitfs_entry[] = {
 		WARP_NODE(0xf1, LEVEL_CASTLE, 2, 0x82, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_BULLY_BOSS, -3, 3476, -6, 0, 0, 0, 0x00000000, bhvBigBully),
 		OBJECT(0xf2, -1, 3476, -5, 0, 0, 0, 0x00000000, bhvBitfsThing),
-		OBJECT(MODEL_NONE, 28, 3476, -1896, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 28, 3476 + 200, -1896, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		MARIO_POS(0x01, 0, 21, 3476, -1902),
 		TERRAIN(bitfs_area_1_collision),
 		MACRO_OBJECTS(bitfs_area_1_macro_objs),
