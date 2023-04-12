@@ -1913,6 +1913,10 @@ void check_lava_boost(struct MarioState *m) {
             {
                 m->hurtCounter += 4;
             }
+            else if (gCurrCourseNum == COURSE_JRB)
+            {
+                m->hurtCounter += 8;
+            }
             else
             {
                 m->hurtCounter += 12;
