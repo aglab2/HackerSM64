@@ -50,6 +50,7 @@ const LevelScript level_wmotr_entry[] = {
 		WARP_NODE(0xf1, LEVEL_CASTLE, 3, 0x32, WARP_NO_CHECKPOINT),
 		MARIO_POS(0x01, 0, 3940, 21, -3476),
 		OBJECT(MODEL_NONE, -4489, 21 + 200, 8317, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_BOBOMB_BUDDY, -4248, 21, 8038, 0, 0, 0, (34 << 24) | (34 << 16), bhvBobombBuddy),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, 4660, -352, -4338, 0, 0, 0, 0x00000000, bhvLllMovingOctagonalMeshPlatform),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, 3415, -346, -7061, 0, 0, 0, (1 << 16), bhvLllMovingOctagonalMeshPlatform),
 		OBJECT(MODEL_LLL_MOVING_OCTAGONAL_MESH_PLATFORM, -6556, -428, 3002, 0, 0, 0, (2 << 16), bhvLllMovingOctagonalMeshPlatform),
