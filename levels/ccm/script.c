@@ -118,7 +118,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_STAR, -1086, 2970, 1235, 0, 0, 0, (5 << 24), bhvStar),
 		OBJECT(MODEL_CAP_SWITCH, -5364, 1619, -5483, 0, 0, 0, (2 << 16), bhvCapSwitch),
 		OBJECT(MODEL_NONE, -2919, -480, -956, 0, -90, 0, (4 << 16), bhvCoinFormation),
-		OBJECT(MODEL_NONE, -1092, 6095, 7630, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, -1092, 6095 + 200, 7630, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -4667, -1206, -940, 0, 0, 0, 0x00000000, bhvWaterLevelDiamond),
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -5917, 1386, -2471, 0, 0, 0, 0x00000000, bhvWaterLevelDiamond),
 		OBJECT(0xf3, -150, 425, 396, 0, 0, 0, 0x00000000, bhvWarpGateBlock),

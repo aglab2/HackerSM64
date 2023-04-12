@@ -116,7 +116,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 8636, 336, -8525, 0, 0, 0, (2 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, 1553, 3312, -43, 0, 0, 0, (2 << 16), bhvCoinFormation),
 		MARIO_POS(0x01, 0, -6613, 2752, -9223),
-		OBJECT(MODEL_NONE, 7577, 1883, 6168, 0, -89, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 7577, 1883 + 200, 6168, 0, -89, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_EXCLAMATION_BOX, 1788, 1527, 30, 0, 0, 0, (1 << 16), bhvExclamationBox),
 		OBJECT(MODEL_HOOT, 5787, 4983, 7484, 0, 0, 0, 0x00000000, bhvHoot),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 2618, 183, 276, 0, 0, 0, (0 << 16), bhvBlueCoinSwitch),

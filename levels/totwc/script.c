@@ -81,7 +81,7 @@ const LevelScript level_totwc_entry[] = {
 		OBJECT(MODEL_HEAVE_HO, 2204, 1892, -3339, 0, -39, 0, 0x00000000, bhvHeaveHo),
 		OBJECT(MODEL_HEAVE_HO, -2848, -137, 8882, 0, -39, 0, 0x00000000, bhvHeaveHo),
 		MARIO_POS(0x01, -2, 6147, 1892, -218),
-		OBJECT(MODEL_NONE, 4447, -994, 12143, 0, -94, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 4447, -994 + 200, 12143, 0, -94, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, 4447, -794, 12143, 0, -94, 0, (0x31 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 2332, -137, 10061, 0, -2, 0, 0x00000000, bhvRainbowCtl),
 		OBJECT(MODEL_RED_COIN, -6816, -17, 8745, 0, 0, 0, 0x00000000, bhvRedCoin),

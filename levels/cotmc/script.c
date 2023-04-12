@@ -63,7 +63,7 @@ const LevelScript level_cotmc_entry[] = {
 		OBJECT(MODEL_NONE, 2869, 1848, 5465, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -449, 1848, 2382, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		MARIO_POS(0x01, 0, 2425, 1848, 1330),
-		OBJECT(MODEL_NONE, 2411, 1848, 1332, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 2411, 1848 + 200, 1332, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_PENGUIN, -633, 1848, 2050, 0, 0, 0, 0x00000000, bhvTuxiesMother),
 		OBJECT(MODEL_PENGUIN, -7864, 1340, -4806, 0, 0, 0, 0x00000000, bhvSmallPenguin),
 		OBJECT(MODEL_PIRANHA_PLANT, 6685, 1922, 7561, 0, 0, 0, 0x00000000, bhvPiranhaPlant),

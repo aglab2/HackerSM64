@@ -111,7 +111,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, 2939, -685, 7800, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_HEART, 15385, 732, 752, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		MARIO_POS(0x01, 90, -5236, -685, 11303),
-		OBJECT(MODEL_NONE, 487, -685, 14126, 0, -108, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 487, -685 + 200, 14126, 0, -108, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT_WITH_ACTS(MODEL_HMC_METAL_PLATFORM, -8574, -464, 5687, 0, 0, 0, 0x00000000, bhvControllablePlatform, ACT_1 | ACT_2 | ACT_3 | ACT_4),
 		OBJECT_WITH_ACTS(MODEL_RED_COIN, 9786, -2036, -2273, 0, 0, 0, 0x00000000, bhvRedCoin, ACT_1 | ACT_2 | ACT_3 | ACT_4),
 		OBJECT_WITH_ACTS(MODEL_RED_COIN, 12140, -2036, -1341, 0, 0, 0, 0x00000000, bhvRedCoin, ACT_1 | ACT_2 | ACT_3 | ACT_4),

@@ -73,7 +73,7 @@ const LevelScript level_bits_entry[] = {
 		OBJECT(MODEL_HEAVE_HO, -866, 827, -6483, 0, 0, 0, 0x00000000, bhvHeaveHo),
 		OBJECT(MODEL_HEAVE_HO, -483, 213, -6464, 0, 0, 0, 0x00000000, bhvHeaveHo),
 		OBJECT(MODEL_HEAVE_HO, -71, -452, -3673, 0, 0, 0, 0x00000000, bhvHeaveHo),
-		OBJECT(MODEL_NONE, 1273, -2995, 15373, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 1273, -2995 + 200, 15373, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
 		MARIO_POS(0x01, 0, 114, 2774, -8864),
 		OBJECT(MODEL_BITS_WARP_PIPE, -124, 4462, -14034, 0, 0, 0, (0xb << 16), bhvWarpPipe),
 		OBJECT(MODEL_PURPLE_SWITCH, 1279, -1601, 10170, 0, 0, 0, 0x00000000, bhvFloorSwitchHiddenObjects),

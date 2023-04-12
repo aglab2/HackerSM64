@@ -68,7 +68,7 @@ const LevelScript level_pss_entry[] = {
 		OBJECT(MODEL_TTC_ROTATING_PRISM, -3933, 5743, -4020, 0, 0, 0, (1 << 16), bhvTTCRotatingSolid),
 		OBJECT(MODEL_TTC_ROTATING_CUBE, -4863, 5977, -4022, 0, 0, 0, 0x00000000, bhvTTCRotatingSolid),
 		MARIO_POS(0x01, 0, -4637, 2881, 3045),
-		OBJECT(MODEL_NONE, 4783, 14201, 1699, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 4783, 14201 + 200, 1699, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_BITS_WARP_PIPE, 3976, 14206, 2258, 0, 0, 0, (0xb << 16), bhvWarpPipe),
 		OBJECT(MODEL_NONE, -4883, 2608, 2747, 0, 0, 0, (0xc << 16), bhvWarpPipe),
 		OBJECT(MODEL_BITS_WARP_PIPE, 3454, 147, 2644, 0, 0, 0, (0xd << 16), bhvWarpPipe),

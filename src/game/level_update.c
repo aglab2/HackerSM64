@@ -731,8 +731,13 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
             case WARP_OP_WARP_FLOOR:
                 sSourceWarpNodeId = WARP_NODE_WARP_FLOOR;
                 s32 canUse = gMarioStates->numStars > 0;
-                if (gCurrCourseNum == COURSE_BOB && gCurrActNum == 1 && gMarioStates->pos[1] < -1500.f)
-                    sSourceWarpNodeId = 0x40;
+                if (gCurrCourseNum == COURSE_BOB)
+                {
+                    if (gMarioStates->pos[1] < -1500.f)
+                        sSourceWarpNodeId = 0x40;
+                    else if (gCurrActNum == 4 || gCurrActNum == 5)
+                        sSourceWarpNodeId = 0x42;
+                }
                 
                 if (gCurrCourseNum == COURSE_PSS)
                 {

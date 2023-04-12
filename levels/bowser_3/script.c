@@ -56,7 +56,7 @@ const LevelScript level_bowser_3_entry[] = {
 		OBJECT(MODEL_KING_BOBOMB, 0, 843, -15, 0, 0, 0, 0x00000000, bhvKingBobomb),
 		OBJECT(MODEL_NONE, -7, 843, -16, 0, 0, 0, 0x00000000, bhvKingBobombCtl),
 		MARIO_POS(0x01, 0, 8, 843, -2634),
-		OBJECT(MODEL_NONE, 15, 843, -2636, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 15, 843 + 200, -2636, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		TERRAIN(bowser_3_area_1_collision),
 		MACRO_OBJECTS(bowser_3_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_F2),

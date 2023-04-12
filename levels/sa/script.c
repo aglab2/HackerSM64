@@ -49,7 +49,7 @@ const LevelScript level_sa_entry[] = {
 		OBJECT(MODEL_HEART, -5, 1621, -992, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		MARIO_POS(0x01, 0, 6, 1561, -1537),
 		OBJECT(MODEL_MR_I, -4, 1561, 0, 0, 0, 0, (1 << 16), bhvMrI),
-		OBJECT(MODEL_NONE, 7, 1561, -1539, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		OBJECT(MODEL_NONE, 7, 1561 + 200, -1539, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
 		TERRAIN(sa_area_1_collision),
 		MACRO_OBJECTS(sa_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_EYE),
