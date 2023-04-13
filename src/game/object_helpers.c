@@ -117,7 +117,7 @@ Gfx *geo_update_layer_transparency_hd_tree(s32 callContext, struct GraphNode *no
                 SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_OPAQUE);
             }
 
-            objectGraphNode->oAnimState = TRANSPARENCY_ANIM_STATE_OPAQUE + (gIsConsole ? 0 : 2);
+            objectGraphNode->oAnimState = TRANSPARENCY_ANIM_STATE_OPAQUE + (objectGraphNode->oHDTree ? 2 : 0);
         } else {
             if (currentGraphNode->parameter == GEO_TRANSPARENCY_MODE_DECAL) {
                 SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_DECAL);
@@ -125,7 +125,7 @@ Gfx *geo_update_layer_transparency_hd_tree(s32 callContext, struct GraphNode *no
                 SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT);
             }
 
-            objectGraphNode->oAnimState = TRANSPARENCY_ANIM_STATE_TRANSPARENT + (gIsConsole ? 0 : 2);
+            objectGraphNode->oAnimState = TRANSPARENCY_ANIM_STATE_TRANSPARENT + (objectGraphNode->oHDTree ? 2 : 0);
 
             if (currentGraphNode->parameter != GEO_TRANSPARENCY_MODE_NO_DITHER
                 && (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA)) {
