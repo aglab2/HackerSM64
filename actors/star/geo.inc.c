@@ -90,7 +90,7 @@ const GeoLayout star_geo[] = {
          GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_OPAQUE, star_seg3_dl_body),
          GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, star_seg3_dl_eyes),
       GEO_CLOSE_NODE(),
-	  GEO_CULL(10, -10, -20000, 20000, -20000, 20000),
+	  // GEO_CULL(10, -10, -20000, 20000, -20000, 20000),
       GEO_OPEN_NODE(),
         GEO_BILLBOARD(),
         GEO_OPEN_NODE(),
