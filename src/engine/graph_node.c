@@ -547,6 +547,23 @@ struct GraphNodeHeldObject *init_graph_node_held_object(s32 alloc,
     return graphNode;
 }
 
+struct GraphNodeCoin *init_graph_node_coin(s32 alloc,
+                                           struct GraphNodeCoin *graphNode,
+                                           s32 drawingLayer, void* displayList, void* displayList_r) {
+    if (alloc) {
+        graphNode = main_pool_alloc(sizeof(struct GraphNodeCoin));
+    }
+
+    if (graphNode != NULL) {
+        init_scene_graph_node_links(&graphNode->node, GRAPH_NODE_TYPE_COIN);
+        SET_GRAPH_NODE_LAYER(graphNode->node.flags, drawingLayer);
+        graphNode->displayList = displayList;
+        graphNode->displayList_r = displayList_r;
+    }
+
+    return graphNode;
+}
+
 /**
  * Adds 'childNode' to the end of the list children from 'parent'
  */
