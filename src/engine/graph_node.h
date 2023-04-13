@@ -78,6 +78,7 @@ enum GraphNodeTypes {
     GRAPH_NODE_TYPE_START,
 
     GRAPH_NODE_TYPE_CULL,
+    GRAPH_NODE_TYPE_COIN,
 };
 #else
 // Whether the node type has a function pointer of type GraphNodeFunc
@@ -407,6 +408,15 @@ struct GraphNodeCullingRadius {
     // u8 filler[2];
 };
 
+/** A GraphNode that simply draws a display list without doing any
+ *  transformation beforehand. It does inherit the parent's transformation.
+ */
+struct GraphNodeCoin {
+    /*0x00*/ struct GraphNode node;
+    /*0x14*/ void* displayList;
+    /*0x14*/ void* displayList_r;
+};
+
 extern struct GraphNodeMasterList  *gCurGraphNodeMasterList;
 extern struct GraphNodePerspective *gCurGraphNodeCamFrustum;
 extern struct GraphNodeCamera      *gCurGraphNodeCamera;
@@ -443,6 +453,7 @@ struct GraphNodeShadow              *init_graph_node_shadow              (s32 al
 struct GraphNodeObjectParent        *init_graph_node_object_parent       (s32 alloc, struct GraphNodeObjectParent        *graphNode, struct GraphNode *sharedChild);
 struct GraphNodeGenerated           *init_graph_node_generated           (s32 alloc, struct GraphNodeGenerated           *graphNode, GraphNodeFunc gfxFunc, s32 parameter);
 struct GraphNodeBackground          *init_graph_node_background          (s32 alloc, struct GraphNodeBackground          *graphNode, u16 background, GraphNodeFunc backgroundFunc, s32 zero);
+struct GraphNodeCoin                *init_graph_node_coin                (s32 alloc, struct GraphNodeCoin                *graphNode, s32 drawingLayer, void* displayList, void* displayList_r);
 struct GraphNodeHeldObject          *init_graph_node_held_object         (s32 alloc, struct GraphNodeHeldObject          *graphNode, struct Object *objNode, Vec3s translation, GraphNodeFunc nodeFunc, s32 playerIndex);
 
 struct GraphNode *geo_add_child       (struct GraphNode *parent, struct GraphNode *childNode);

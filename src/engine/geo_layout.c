@@ -45,6 +45,7 @@ GeoLayoutCommandProc GeoLayoutJumpTable[] = {
     /*GEO_CMD_NODE_BONE                 */ geo_layout_cmd_bone,
     
     /*GEO_CMD_NODE_CULL      */            geo_layout_cmd_cull,
+    /*GEO_COIN      */                     geo_layout_cmd_coin,
 };
 
 struct GraphNode gObjParentGraphNode;
@@ -332,6 +333,20 @@ void geo_layout_cmd_cull(void)
     register_scene_graph_node(&graphNode->node);
 
     gGeoLayoutCommand += 0x10 << CMD_SIZE_SHIFT;
+}
+
+void geo_layout_cmd_coin()
+{
+    struct GraphNodeCoin *graphNode;
+    s32 drawingLayer = cur_geo_cmd_u8(0x01);
+    void* displayList = cur_geo_cmd_ptr(0x04);
+    void* displayList_r = cur_geo_cmd_ptr(0x08);
+
+    graphNode = init_graph_node_coin(TRUE, NULL, drawingLayer, displayList, displayList_r);
+
+    register_scene_graph_node(&graphNode->node);
+
+    gGeoLayoutCommand += 0x0C << CMD_SIZE_SHIFT;
 }
 
 /*
