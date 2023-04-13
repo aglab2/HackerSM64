@@ -42,6 +42,9 @@ GeoLayoutCommandProc GeoLayoutJumpTable[] = {
     /*GEO_CMD_NOP_1E                    */ geo_layout_cmd_nop2,
     /*GEO_CMD_NOP_1F                    */ geo_layout_cmd_nop3,
     /*GEO_CMD_NODE_CULLING_RADIUS       */ geo_layout_cmd_node_culling_radius,
+
+    /*GEO_CMD_NODE_CULL      */            geo_layout_cmd_cull,
+    /*GEO_COIN      */                     geo_layout_cmd_coin,
 };
 
 struct GraphNode gObjParentGraphNode;
@@ -312,6 +315,37 @@ void geo_layout_cmd_node_level_of_detail(void) {
     register_scene_graph_node(&graphNode->node);
 
     gGeoLayoutCommand += 0x08 << CMD_SIZE_SHIFT;
+}
+
+void geo_layout_cmd_cull(void)
+{
+    s16 x0 = cur_geo_cmd_s16(0x04);
+    s16 x1 = cur_geo_cmd_s16(0x06);
+    s16 y0 = cur_geo_cmd_s16(0x08);
+    s16 y1 = cur_geo_cmd_s16(0x0a);
+    s16 z0 = cur_geo_cmd_s16(0x0c);
+    s16 z1 = cur_geo_cmd_s16(0x0e);
+
+    struct GraphNodeCull *graphNode =
+        init_graph_node_cull(TRUE, NULL, x0, x1, y0, y1, z0, z1);
+
+    register_scene_graph_node(&graphNode->node);
+
+    gGeoLayoutCommand += 0x10 << CMD_SIZE_SHIFT;
+}
+
+void geo_layout_cmd_coin()
+{
+    struct GraphNodeCoin *graphNode;
+    s32 drawingLayer = cur_geo_cmd_u8(0x01);
+    void* displayList = cur_geo_cmd_ptr(0x04);
+    void* displayList_r = cur_geo_cmd_ptr(0x08);
+
+    graphNode = init_graph_node_coin(TRUE, NULL, drawingLayer, displayList, displayList_r);
+
+    register_scene_graph_node(&graphNode->node);
+
+    gGeoLayoutCommand += 0x0C << CMD_SIZE_SHIFT;
 }
 
 /*

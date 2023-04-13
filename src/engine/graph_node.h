@@ -75,6 +75,9 @@ enum GraphNodeTypes {
     GRAPH_NODE_TYPE_CULLING_RADIUS,
     GRAPH_NODE_TYPE_ROOT,
     GRAPH_NODE_TYPE_START,
+
+    GRAPH_NODE_TYPE_CULL,
+    GRAPH_NODE_TYPE_COIN,
 };
 #else
 // Whether the node type has a function pointer of type GraphNodeFunc
@@ -104,6 +107,8 @@ enum GraphNodeTypes {
     GRAPH_NODE_TYPE_BACKGROUND           = (0x2C | GRAPH_NODE_TYPE_FUNCTIONAL),
     GRAPH_NODE_TYPE_HELD_OBJ             = (0x2E | GRAPH_NODE_TYPE_FUNCTIONAL),
     GRAPH_NODE_TYPE_CULLING_RADIUS       =  0x2F,
+    GRAPH_NODE_TYPE_CULL,
+    GRAPH_NODE_TYPE_COIN,
 
     GRAPH_NODE_TYPES_MASK                =  0xFF,
 };
@@ -386,6 +391,25 @@ struct GraphNodeCullingRadius {
     // u8 filler[2];
 };
 
+struct GraphNodeCull {
+    /*0x00*/ struct GraphNode node;
+    /*0x14*/ s16 x0;
+    /*0x16*/ s16 x1;
+    /*0x14*/ s16 y0;
+    /*0x16*/ s16 y1;
+    /*0x14*/ s16 z0;
+    /*0x16*/ s16 z1;
+};
+
+/** A GraphNode that simply draws a display list without doing any
+ *  transformation beforehand. It does inherit the parent's transformation.
+ */
+struct GraphNodeCoin {
+    /*0x00*/ struct GraphNode node;
+    /*0x14*/ void* displayList;
+    /*0x14*/ void* displayList_r;
+};
+
 extern struct GraphNodeMasterList  *gCurGraphNodeMasterList;
 extern struct GraphNodePerspective *gCurGraphNodeCamFrustum;
 extern struct GraphNodeCamera      *gCurGraphNodeCamera;
@@ -412,6 +436,7 @@ struct GraphNodeTranslation         *init_graph_node_translation         (s32 al
 struct GraphNodeRotation            *init_graph_node_rotation            (s32 alloc, struct GraphNodeRotation            *graphNode, s32 drawingLayer, void *displayList, Vec3s rotation);
 struct GraphNodeScale               *init_graph_node_scale               (s32 alloc, struct GraphNodeScale               *graphNode, s32 drawingLayer, void *displayList, f32 scale);
 struct GraphNodeObject              *init_graph_node_object              (s32 alloc, struct GraphNodeObject              *graphNode, struct GraphNode *sharedChild, Vec3f pos, Vec3s angle, Vec3f scale);
+struct GraphNodeCull                *init_graph_node_cull                (s32 alloc, struct GraphNodeCull                *graphNode, s16 x0, s16 x1, s16 y0, s16 y1, s16 z0, s16 z1);
 struct GraphNodeCullingRadius       *init_graph_node_culling_radius      (s32 alloc, struct GraphNodeCullingRadius       *graphNode, s16 radius);
 struct GraphNodeAnimatedPart        *init_graph_node_animated_part       (s32 alloc, struct GraphNodeAnimatedPart        *graphNode, s32 drawingLayer, void *displayList, Vec3s translation);
 struct GraphNodeBillboard           *init_graph_node_billboard           (s32 alloc, struct GraphNodeBillboard           *graphNode, s32 drawingLayer, void *displayList, Vec3s translation);
@@ -420,6 +445,7 @@ struct GraphNodeShadow              *init_graph_node_shadow              (s32 al
 struct GraphNodeObjectParent        *init_graph_node_object_parent       (s32 alloc, struct GraphNodeObjectParent        *graphNode, struct GraphNode *sharedChild);
 struct GraphNodeGenerated           *init_graph_node_generated           (s32 alloc, struct GraphNodeGenerated           *graphNode, GraphNodeFunc gfxFunc, s32 parameter);
 struct GraphNodeBackground          *init_graph_node_background          (s32 alloc, struct GraphNodeBackground          *graphNode, u16 background, GraphNodeFunc backgroundFunc, s32 zero);
+struct GraphNodeCoin                *init_graph_node_coin                (s32 alloc, struct GraphNodeCoin                *graphNode, s32 drawingLayer, void* displayList, void* displayList_r);
 struct GraphNodeHeldObject          *init_graph_node_held_object         (s32 alloc, struct GraphNodeHeldObject          *graphNode, struct Object *objNode, Vec3s translation, GraphNodeFunc nodeFunc, s32 playerIndex);
 
 struct GraphNode *geo_add_child       (struct GraphNode *parent, struct GraphNode *childNode);

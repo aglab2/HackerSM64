@@ -20,6 +20,7 @@
 #include "text_engine.h"
 #include "config.h"
 #include "config/config_world.h"
+#include "actors/common1.h"
 
 /**
  * This file contains the code that processes the scene graph for rendering.
@@ -91,6 +92,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_OPA_SURF,                   // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_TEX_EDGE,                   // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_TEX_EDGE,                   // LAYER_COIN
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_DECAL
@@ -111,7 +113,8 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
-        G_RM_AA_ZB_XLU_DECAL,                   // LAYER_CIRCLE_SHADOW
+        G_RM_AA_ZB_TEX_EDGE,                // LAYER_COIN
+        G_RM_AA_ZB_XLU_DECAL,               // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF,                   // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_TRANSPARENT_DECAL
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT
@@ -132,6 +135,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_OPA_SURF2,                  // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_TEX_EDGE2,                  // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_TEX_EDGE2,                   // LAYER_COIN
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_DECAL
@@ -152,6 +156,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_ZB_TEX_EDGE2,               // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_ZB_TEX_EDGE2,               // LAYER_COIN
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF2,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_TRANSPARENT_DECAL
@@ -278,6 +283,17 @@ void switch_ucode(s32 ucode) {
  * 3. It does this, because layers 5-7 are non zbuffered, and just doing 0-7 of ZEX, then 0-7 of REJ
  * would make the ZEX 0-4 render on top of Rej's 5-7.
  */
+
+static const Gfx* sCoinsTextureDls[] = {
+    dl_coin_0,
+    dl_coin_22_5,
+    dl_coin_45,
+    dl_coin_67_5,
+    dl_coin_90,
+};
+
+extern uintptr_t sSegmentTable[32];
+
 void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     struct RenderPhase *renderPhase;
     struct DisplayListNode *currList;
@@ -289,6 +305,7 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     s32 enableZBuffer = (node->node.flags & GRAPH_RENDER_Z_BUFFER) != 0;
     struct RenderModeContainer *mode1List = &renderModeTable_1Cycle[enableZBuffer];
     struct RenderModeContainer *mode2List = &renderModeTable_2Cycle[enableZBuffer];
+    int frame = gGlobalTimer % 8;
 
 #ifdef F3DEX_GBI_2
     // @bug This is where the LookAt values should be calculated but aren't.
@@ -326,8 +343,23 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             gDPSetRenderMode(gDisplayListHead++, mode1List->modes[currLayer],
                                                  mode2List->modes[currLayer]);
 
-            if (currLayer == LAYER_CIRCLE_SHADOW) {
-                gSPDisplayList(gDisplayListHead++, dl_shadow_circle);
+            if (!__builtin_expect(!sSegmentTable[3], 0))
+            {
+                if (currLayer == LAYER_COIN) 
+                {
+                    if (frame < 5)
+                    {
+                        gSPDisplayList(gDisplayListHead++, sCoinsTextureDls[frame]);
+                    }
+                    else
+                    {
+                        gSPDisplayList(gDisplayListHead++, sCoinsTextureDls[8 - frame]);
+                    }
+                }
+
+                if (currLayer == LAYER_CIRCLE_SHADOW) {
+                    gSPDisplayList(gDisplayListHead++, dl_shadow_circle);
+                }
             }
 
             // Iterate through all the displaylists on the current layer.
@@ -342,10 +374,19 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 currList = currList->next;
             }
 
-            if (currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT) {
-                gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
-                gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING | G_CULL_BACK);
-                gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
+            if (!__builtin_expect(!sSegmentTable[3], 0))
+            {
+                if (currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT) {
+                    gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
+                    gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING | G_CULL_BACK);
+                    gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
+                }
+                if (currLayer == LAYER_COIN)
+                {
+                    gSPTexture(gDisplayListHead++, 0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF);
+                    gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
+                    gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING);
+                }
             }
         }
     }
@@ -525,6 +566,46 @@ void geo_process_level_of_detail(struct GraphNodeLevelOfDetail *node) {
         && node->node.children != 0) {
         geo_process_node_and_siblings(node->node.children);
     }
+}
+
+#define __unlikely(x) __builtin_expect((x),0)
+void geo_process_cull(struct GraphNodeCull *node)
+{
+    s32 active = TRUE;
+#ifdef AUTO_LOD
+    if (!__unlikely(!gIsConsole))
+#endif
+    {
+        if (node->z1 == 32000)
+        {
+            if (node->z0 < gMarioStates->pos[2])
+            {
+                active = TRUE;
+            }
+            else
+            {
+                active = node->x0 < gMarioStates->pos[0] && gMarioStates->pos[0] < node->x1
+                      && node->y0 < gMarioStates->pos[1] && gMarioStates->pos[1] < node->y1;
+            }
+        }
+        else
+        {
+            active = node->x0 < gMarioStates->pos[0] && gMarioStates->pos[0] < node->x1
+                  && node->y0 < gMarioStates->pos[1] && gMarioStates->pos[1] < node->y1
+                  && node->z0 < gMarioStates->pos[2] && gMarioStates->pos[2] < node->z1;
+        }
+    }
+
+    if (active
+        && node->node.children != 0) {
+        geo_process_node_and_siblings(node->node.children);
+    }
+}
+
+void geo_process_coin(struct GraphNodeCoin *node)
+{
+    void* dl = gGlobalTimer % 8 < 5 ? node->displayList : node->displayList_r;
+    geo_append_display_list(dl, GET_GRAPH_NODE_LAYER(node->node.flags));
 }
 
 /**
@@ -1173,6 +1254,8 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
                     case GRAPH_NODE_TYPE_GENERATED_LIST:       geo_process_generated_list      ((struct GraphNodeGenerated           *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_BACKGROUND:           geo_process_background          ((struct GraphNodeBackground          *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_HELD_OBJ:             geo_process_held_object         ((struct GraphNodeHeldObject          *) curGraphNode); break;
+                    case GRAPH_NODE_TYPE_CULL:                 geo_process_cull                ((struct GraphNodeCull                *) curGraphNode); break;
+                    case GRAPH_NODE_TYPE_COIN:                 geo_process_coin                ((struct GraphNodeCull                *) curGraphNode); break;
                     default:                                   geo_try_process_children        ((struct GraphNode                    *) curGraphNode); break;
                 }
             }

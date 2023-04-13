@@ -63,6 +63,8 @@ void geo_layout_cmd_node_start(void);
 void geo_layout_cmd_nop3(void);
 void geo_layout_cmd_node_master_list(void);
 void geo_layout_cmd_node_level_of_detail(void);
+void geo_layout_cmd_cull(void);
+void geo_layout_cmd_coin(void);
 void geo_layout_cmd_node_switch_case(void);
 void geo_layout_cmd_node_camera(void);
 void geo_layout_cmd_node_translation_rotation(void);

@@ -58,6 +58,8 @@ enum GeoLayoutCommands {
     /*0x1E*/ GEO_CMD_NOP_1E,
     /*0x1F*/ GEO_CMD_NOP_1F,
     /*0x20*/ GEO_CMD_NODE_CULLING_RADIUS,
+    /*0x21*/ GEO_CMD_NODE_CULL,
+    /*0x22*/ GEO_CMD_NODE_COIN,
 };
 
 // geo layout macros
@@ -466,5 +468,10 @@ enum GeoLayoutCommands {
  */
 #define GEO_CULLING_RADIUS(cullingRadius) \
     CMD_BBH(GEO_CMD_NODE_CULLING_RADIUS, 0x00, cullingRadius)
+    
+#define GEO_COIN(layer, displayList, displayList_r) \
+    CMD_BBH(GEO_CMD_NODE_COIN, layer, 0x0000), \
+    CMD_PTR(displayList), \
+    CMD_PTR(displayList_r)
 
 #endif // GEO_COMMANDS_H
