@@ -76,6 +76,7 @@ enum GraphNodeTypes {
     GRAPH_NODE_TYPE_START,
 
     GRAPH_NODE_TYPE_CULL,
+    GRAPH_NODE_TYPE_COIN,
 };
 
 // Passed as first argument to a GraphNodeFunc to give information about in
@@ -359,13 +360,20 @@ struct GraphNodeCullingRadius {
 };
 
 struct GraphNodeCull {
+    struct GraphNode node;
+    s16 x0;
+    s16 x1;
+    s16 y0;
+    s16 y1;
+    s16 z0;
+    s16 z1;
+    s16 style;
+};
+
+struct GraphNodeCoin {
     /*0x00*/ struct GraphNode node;
-    /*0x14*/ s16 x0;
-    /*0x16*/ s16 x1;
-    /*0x14*/ s16 y0;
-    /*0x16*/ s16 y1;
-    /*0x14*/ s16 z0;
-    /*0x16*/ s16 z1;
+    /*0x14*/ void* displayList;
+    /*0x14*/ void* displayList_r;
 };
 
 extern struct GraphNodeMasterList  *gCurGraphNodeMasterList;
@@ -403,6 +411,7 @@ struct GraphNodeShadow              *init_graph_node_shadow              (s32 al
 struct GraphNodeObjectParent        *init_graph_node_object_parent       (s32 alloc, struct GraphNodeObjectParent        *graphNode, struct GraphNode *sharedChild);
 struct GraphNodeGenerated           *init_graph_node_generated           (s32 alloc, struct GraphNodeGenerated           *graphNode, GraphNodeFunc gfxFunc, s32 parameter);
 struct GraphNodeBackground          *init_graph_node_background          (s32 alloc, struct GraphNodeBackground          *graphNode, u16 background, GraphNodeFunc backgroundFunc, s32 zero);
+struct GraphNodeCoin                *init_graph_node_coin                (s32 alloc, struct GraphNodeCoin                *graphNode, s32 drawingLayer, void* displayList, void* displayList_r);
 struct GraphNodeHeldObject          *init_graph_node_held_object         (s32 alloc, struct GraphNodeHeldObject          *graphNode, struct Object *objNode, Vec3s translation, GraphNodeFunc nodeFunc, s32 playerIndex);
 
 struct GraphNode *geo_add_child       (struct GraphNode *parent, struct GraphNode *childNode);

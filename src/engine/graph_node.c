@@ -151,7 +151,7 @@ struct GraphNodeCull* init_graph_node_cull(s32 alloc,
                                            struct GraphNodeCull *graphNode,
                                            s16 x0, s16 x1,
                                            s16 y0, s16 y1,
-                                           s16 z0, s16 z1)
+                                           s16 z0, s16 z1, s16 style)
 {
     if (alloc) {
         graphNode = main_pool_alloc(sizeof(struct GraphNodeCull));
@@ -165,6 +165,7 @@ struct GraphNodeCull* init_graph_node_cull(s32 alloc,
         graphNode->y1 = y1;
         graphNode->z0 = z0;
         graphNode->z1 = z1;
+        graphNode->style = style;
     }
 
     return graphNode;
@@ -540,6 +541,23 @@ struct GraphNodeHeldObject *init_graph_node_held_object(s32 alloc,
         if (nodeFunc != NULL) {
             nodeFunc(GEO_CONTEXT_CREATE, &graphNode->fnNode.node, (void*) alloc);
         }
+    }
+
+    return graphNode;
+}
+
+struct GraphNodeCoin *init_graph_node_coin(s32 alloc,
+                                           struct GraphNodeCoin *graphNode,
+                                           s32 drawingLayer, void* displayList, void* displayList_r) {
+    if (alloc) {
+        graphNode = main_pool_alloc(sizeof(struct GraphNodeCoin));
+    }
+
+    if (graphNode != NULL) {
+        init_scene_graph_node_links(&graphNode->node, GRAPH_NODE_TYPE_COIN);
+        SET_GRAPH_NODE_LAYER(graphNode->node.flags, drawingLayer);
+        graphNode->displayList = displayList;
+        graphNode->displayList_r = displayList_r;
     }
 
     return graphNode;
