@@ -752,6 +752,14 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                        sSourceWarpNodeId = 0x30;
                 }
 
+                if (gCurrCourseNum == COURSE_BBH)
+                {
+                    if (gMarioStates->pos[2] > 13500.f)
+                        sSourceWarpNodeId = 0x30;
+                    if (gMarioStates->pos[0] > 2000.f)
+                        sSourceWarpNodeId = 0x32;
+                }
+
                 if (!canUse || area_get_warp_node(sSourceWarpNodeId) == NULL) {
 #ifndef DISABLE_LIVES
                     if (m->numLives == 0) {
