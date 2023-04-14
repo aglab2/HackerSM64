@@ -348,20 +348,11 @@ hand over this Star to\n\
 the winner of the race.\n\
 Congrats, Mario!"))
 
-DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
-\n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+DEFINE_DIALOG(DIALOG_032, 1, 4, 30, 200, _("\
+Mario, there are exactly\n\
+46 stars in the Jail!\n\
+Make sure you have 'em all\n\
+if you want that Full Clear!"))
 
 DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
        GAME OVER\n\

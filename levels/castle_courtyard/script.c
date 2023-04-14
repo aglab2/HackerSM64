@@ -57,6 +57,7 @@ const LevelScript level_castle_courtyard_entry[] = {
 		WARP_NODE(0x22, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x31, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x32, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_BOBOMB_BUDDY, -15379, -2743, 8838, 0, 0, 0, 32 << 16, bhvBobombBuddy),
 		OBJECT(MODEL_NONE, 5520, -2520, 11125, 0, 2, 0, (0x32 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, 5525, -2520, 11124, 0, 2, 0, (0x31 << 16), bhvAirborneStarCollectWarp),
 		OBJECT(MODEL_BLACK_BOBOMB, -2408, -2813, -7625, 0, 90, 0, 0x00000000, bhvBobomb),
