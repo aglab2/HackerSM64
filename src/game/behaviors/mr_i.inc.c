@@ -229,13 +229,14 @@ void mr_i_body_act_idle(void) {
     s16 angleToMario = obj_angle_to_object(o, gMarioObject);
     s16 angleDiffMoveYawToMario        = abs_angle_diff(o->oMoveAngleYaw, angleToMario);
     s16 angleDiffMoveYawToMarioFaceYaw = abs_angle_diff(o->oMoveAngleYaw, gMarioObject->oFaceAngleYaw);
+    s32 wantRNG = 0 == o->oBehParams2ndByte;
 
     if (o->oTimer == 0) {
         cur_obj_become_tangible();
-        o->oMoveAngleYaw = random_u16();
+        o->oMoveAngleYaw = wantRNG ? random_u16() : 0xd000;
         o->oMoveAnglePitch = 0;
         o->oMrIParticleTimer = 30;
-        o->oMrIParticleTimerTarget = 2.f * random_float(); // * 20.0f;
+        o->oMrIParticleTimerTarget = wantRNG ? 2.f * random_float() : 1.f; // * 20.0f;
         o->oAngleVelYaw = o->oMrIParticleTimerTarget & 0x1 ? -512 : 512;
     }
 
@@ -253,7 +254,7 @@ void mr_i_body_act_idle(void) {
 
     if (o->oMrIParticleTimer > o->oMrIParticleTimerTarget + 80) {
         o->oMrIParticleTimer = 0;
-        o->oMrIParticleTimerTarget = 2.f * random_float(); // * 80.0f;
+        o->oMrIParticleTimerTarget = wantRNG ? 2.f * random_float() : 1.f; // * 80.0f;
         spawn_mr_i_particle();
     }
 }
