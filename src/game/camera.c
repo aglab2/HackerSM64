@@ -1135,7 +1135,8 @@ void mode_8_directions_camera(struct Camera *c) {
     }
 #endif
 
-    lakitu_zoom(400.f, 0x900);
+    f32 zoom = (gCurrLevelNum == LEVEL_CASTLE && gCurrAreaIndex == 1) ? 120.f : 400.f;
+    lakitu_zoom(zoom, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];

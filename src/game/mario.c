@@ -1855,7 +1855,7 @@ void init_mario(void) {
     gMarioState->marioObj->header.gfx.animInfo.animID = -1;
     vec3s_copy(gMarioState->faceAngle, gMarioSpawnInfo->startAngle);
     vec3_zero(gMarioState->angleVel);
-    if (save_file_get_flags() & SAVE_FLAG_FILE_EXISTS)
+    if ((save_file_get_flags() & SAVE_FLAG_FILE_EXISTS) && gCurrLevelNum == LEVEL_CASTLE && gCurrAreaIndex == 1 && gMarioSpawnInfo->startPos[0] == -6839)
     {
         gMarioStates->pos[0] = 6842.f;
         gMarioStates->pos[1] = -504.f;
