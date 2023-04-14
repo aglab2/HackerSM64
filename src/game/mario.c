@@ -1855,7 +1855,17 @@ void init_mario(void) {
     gMarioState->marioObj->header.gfx.animInfo.animID = -1;
     vec3s_copy(gMarioState->faceAngle, gMarioSpawnInfo->startAngle);
     vec3_zero(gMarioState->angleVel);
-    vec3s_to_vec3f(gMarioState->pos, gMarioSpawnInfo->startPos);
+    if (save_file_get_flags() & SAVE_FLAG_FILE_EXISTS)
+    {
+        gMarioStates->pos[0] = 6842.f;
+        gMarioStates->pos[1] = -504.f;
+        gMarioStates->pos[2] = -218.f;
+    }
+    else
+    {
+        vec3s_to_vec3f(gMarioState->pos, gMarioSpawnInfo->startPos);
+    }
+
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
     vec3_zero(gMarioState->vel);
     gMarioState->floorHeight =
