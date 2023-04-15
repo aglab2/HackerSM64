@@ -1214,6 +1214,8 @@ Gfx mat_revert_tree_winter_wood_002[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1245,6 +1247,8 @@ Gfx mat_revert_tree_winter_leaves_001[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1276,28 +1280,28 @@ Gfx mat_revert_tree_winter_snow[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
-	gsSPEndDisplayList(),
-};
-
-Gfx tree_winter__Tree_Winter_015_mesh[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(tree_winter__Tree_Winter_015_mesh_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_tree_winter_wood_002),
-	gsSPDisplayList(tree_winter__Tree_Winter_015_mesh_tri_0),
-	gsSPDisplayList(mat_revert_tree_winter_wood_002),
-	gsSPDisplayList(mat_tree_winter_leaves_001),
-	gsSPDisplayList(tree_winter__Tree_Winter_015_mesh_tri_1),
-	gsSPDisplayList(mat_revert_tree_winter_leaves_001),
-	gsSPDisplayList(mat_tree_winter_snow),
-	gsSPDisplayList(tree_winter__Tree_Winter_015_mesh_tri_2),
-	gsSPDisplayList(mat_revert_tree_winter_snow),
-	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPClearGeometryMode(G_TEXTURE_GEN),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
+Gfx tree_winter__Tree_Winter_015_mesh_wood[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_winter__Tree_Winter_015_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_winter__Tree_Winter_015_mesh_tri_0),
+};
+
+Gfx tree_winter__Tree_Winter_015_mesh_leaves[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_winter__Tree_Winter_015_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_winter__Tree_Winter_015_mesh_tri_1),
+};
+
+Gfx tree_winter__Tree_Winter_015_mesh_snow[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_winter__Tree_Winter_015_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_winter__Tree_Winter_015_mesh_tri_2),
+};

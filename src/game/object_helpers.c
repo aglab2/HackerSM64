@@ -96,44 +96,29 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
 
 Gfx *geo_update_layer_transparency_hd_tree(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart = NULL;
+    struct GraphNodeGenerated *currentGraphNode = (struct GraphNodeGenerated *) node;
 
     if (callContext == GEO_CONTEXT_RENDER) {
         struct Object *objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
-        struct GraphNodeGenerated *currentGraphNode = (struct GraphNodeGenerated *) node;
 
         if (gCurGraphNodeHeldObject != NULL) {
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
 
         s32 objectOpacity = objectGraphNode->oOpacity;
-        dlStart = alloc_display_list(sizeof(Gfx) * 3);
-
-        Gfx *dlHead = dlStart;
-
         if (objectOpacity == 0xFF) {
-            if (currentGraphNode->parameter == GEO_TRANSPARENCY_MODE_DECAL) {
-                //SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_DECAL);
-            } else {
-                //SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_OPAQUE);
-            }
-
             objectGraphNode->oAnimState = TRANSPARENCY_ANIM_STATE_OPAQUE + (objectGraphNode->oHDTree ? 2 : 0);
         } else {
-            if (currentGraphNode->parameter == GEO_TRANSPARENCY_MODE_DECAL) {
-                //SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_DECAL);
-            } else {
-                //SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT);
-            }
-
             objectGraphNode->oAnimState = TRANSPARENCY_ANIM_STATE_TRANSPARENT + (objectGraphNode->oHDTree ? 2 : 0);
-
-            if (currentGraphNode->parameter != GEO_TRANSPARENCY_MODE_NO_DITHER
-                && (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA)) {
-                gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
-            }
+            dlStart = alloc_display_list(sizeof(Gfx) * 2);
+            Gfx *dlHead = dlStart;
+            gDPSetEnvColor(dlHead++, 255, 255, 255, objectOpacity);
+            gSPEndDisplayList(dlHead);
         }
-        gDPSetEnvColor(dlHead++, 255, 255, 255, objectOpacity);
-        gSPEndDisplayList(dlHead);
+    }
+    else
+    {
+        SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, currentGraphNode->parameter);
     }
 
     return dlStart;

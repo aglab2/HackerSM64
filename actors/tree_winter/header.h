@@ -20,4 +20,6 @@ extern Gfx mat_tree_winter_leaves_001[];
 extern Gfx mat_revert_tree_winter_leaves_001[];
 extern Gfx mat_tree_winter_snow[];
 extern Gfx mat_revert_tree_winter_snow[];
-extern Gfx tree_winter__Tree_Winter_015_mesh[];
+extern Gfx tree_winter__Tree_Winter_015_mesh_wood[];
+extern Gfx tree_winter__Tree_Winter_015_mesh_leaves[];
+extern Gfx tree_winter__Tree_Winter_015_mesh_snow[];

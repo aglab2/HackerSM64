@@ -98,6 +98,8 @@ const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE2
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE3
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE4
+        G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE5
+        G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE6
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_INTER
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_DECAL
@@ -117,6 +119,8 @@ const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE2
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE3
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE4
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE5
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE6
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_INTER
     } },
@@ -127,6 +131,8 @@ const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE2
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE3
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE4
+        G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE5
+        G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE6
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE
         G_RM_AA_ZB_TEX_EDGE_DECAL,               // LAYER_OPAQUE_INTER
         G_RM_AA_ZB_OPA_DECAL,               // LAYER_OPAQUE_DECAL
@@ -146,6 +152,8 @@ const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE2
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE3
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE4
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE5
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE6
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT
         G_RM_AA_ZB_XLU_INTER,               // LAYER_TRANSPARENT_INTER
     } } };
@@ -157,6 +165,8 @@ const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE2
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE3
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE4
+        G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE5
+        G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE6
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_INTER
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_DECAL
@@ -176,6 +186,8 @@ const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE2
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE3
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE4
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE5
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE6
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_INTER
     } },
@@ -186,6 +198,8 @@ const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE2
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE3
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE4
+        G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE5
+        G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE6
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE
         G_RM_AA_ZB_TEX_EDGE_DECAL2,              // LAYER_OPAQUE_INTER
         G_RM_AA_ZB_OPA_DECAL2,              // LAYER_OPAQUE_DECAL
@@ -205,6 +219,8 @@ const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE2
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE3
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE4
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE5
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE6
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT
         G_RM_AA_ZB_XLU_INTER2,              // LAYER_TRANSPARENT_INTER
     } } };
@@ -343,8 +359,8 @@ static const Gfx* sCoinsTextureDls[] = {
 
 struct CourseTextures
 {
-    const Gfx* start[4];
-    const Gfx* end[4];
+    const Gfx* start[6];
+    const Gfx* end[6];
 };
 
 extern Gfx mat_tree_grass_leaves[];
@@ -356,9 +372,25 @@ extern Gfx mat_revert_tree_grass2_wood_001[];
 extern Gfx mat_tree_grass2_grass[];
 extern Gfx mat_revert_tree_grass2_grass[];
 
+extern Gfx mat_tree_winter_wood_002[];
+extern Gfx mat_revert_tree_winter_wood_002[];
+extern Gfx mat_tree_winter_leaves_001[];
+extern Gfx mat_revert_tree_winter_leaves_001[];
+extern Gfx mat_tree_winter_snow[];
+extern Gfx mat_revert_tree_winter_snow[];
+extern Gfx mat_tree_winter2_wood_003[];
+extern Gfx mat_revert_tree_winter2_wood_003[];
+extern Gfx mat_tree_winter2_snow_001[] ;
+extern Gfx mat_revert_tree_winter2_snow_001[];
+extern Gfx mat_tree_winter2_grass_001[];
+extern Gfx mat_revert_tree_winter2_grass_001[];
+
 static const struct CourseTextures sCoursesTextures[] = {
-    [ COURSE_BOB ] = { { mat_tree_grass_leaves, mat_tree_grass_wood, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
-                     , { mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
+    [ COURSE_BOB ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
+                     , { NULL, mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, NULL, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
+
+    [ COURSE_WF ]  = { { mat_tree_winter_snow, mat_tree_winter_leaves_001, mat_tree_winter_wood_002, mat_tree_winter2_snow_001, mat_tree_winter2_grass_001, mat_tree_winter2_wood_003,  }
+                     , { mat_revert_tree_winter_snow, mat_revert_tree_winter_leaves_001, mat_revert_tree_winter_wood_002, mat_revert_tree_winter2_snow_001, mat_revert_tree_winter2_grass_001, mat_revert_tree_winter2_wood_003 }, },
 };
 
 extern const Gfx dl_shadow_circle_end[];
@@ -443,16 +475,16 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 endDl = dl_shadow_circle_end;
             }
 
-            if (LAYER_OPAQUE_PRE1 <= currLayer && currLayer <= LAYER_OPAQUE_PRE4)
+            if (LAYER_OPAQUE_PRE1 <= currLayer && currLayer <= LAYER_OPAQUE_PRE6)
             {
                 startDl = sCoursesTextures[gCurrCourseNum].start[currLayer - LAYER_OPAQUE_PRE1];
                 endDl   = sCoursesTextures[gCurrCourseNum].end  [currLayer - LAYER_OPAQUE_PRE1];
             }
 
-            if (LAYER_TRANSPARENT_PRE1 <= currLayer && currLayer <= LAYER_TRANSPARENT_PRE4)
+            if (LAYER_TRANSPARENT_PRE6 <= currLayer && currLayer <= LAYER_TRANSPARENT_PRE1)
             {
-                startDl = sCoursesTextures[gCurrCourseNum].start[currLayer - LAYER_TRANSPARENT_PRE1];
-                endDl   = sCoursesTextures[gCurrCourseNum].end  [currLayer - LAYER_TRANSPARENT_PRE1];
+                startDl = sCoursesTextures[gCurrCourseNum].start[LAYER_TRANSPARENT_PRE1 - currLayer];
+                endDl   = sCoursesTextures[gCurrCourseNum].end  [LAYER_TRANSPARENT_PRE1 - currLayer];
             }
 
             if (startDl != curStartDl)
