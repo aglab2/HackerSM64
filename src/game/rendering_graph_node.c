@@ -1,8 +1,10 @@
 #include <PR/ultratypes.h>
 
 #include "area.h"
+#include "course_table.h"
 #include "engine/math_util.h"
 #include "game_init.h"
+#include "game/area.h"
 #include "gfx_dimensions.h"
 #include "main.h"
 #include "memory.h"
@@ -92,6 +94,10 @@ struct RenderModeContainer {
 /* Rendermode settings for cycle 1 for all 8 or 13 layers. */
 struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_OPA_SURF,                      // LAYER_FORCE
+        G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE1
+        G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE2
+        G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE3
+        G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE4
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_INTER
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_DECAL
@@ -107,12 +113,20 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_DECAL
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE1
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE2
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE3
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_PRE4
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_INTER
     } },
     { {
         /* z-buffered */
         G_RM_ZB_OPA_SURF,                   // LAYER_FORCE
+        G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE1
+        G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE2
+        G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE3
+        G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE_PRE4
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OPAQUE
         G_RM_AA_ZB_TEX_EDGE_DECAL,               // LAYER_OPAQUE_INTER
         G_RM_AA_ZB_OPA_DECAL,               // LAYER_OPAQUE_DECAL
@@ -128,6 +142,10 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF,                   // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_TRANSPARENT_DECAL
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE1
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE2
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE3
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_PRE4
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT
         G_RM_AA_ZB_XLU_INTER,               // LAYER_TRANSPARENT_INTER
     } } };
@@ -135,6 +153,10 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
 /* Rendermode settings for cycle 2 for all 13 layers. */
 struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_OPA_SURF2,                     // LAYER_FORCE
+        G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE1
+        G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE2
+        G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE3
+        G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE4
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_INTER
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_DECAL
@@ -150,12 +172,20 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_DECAL
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE1
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE2
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE3
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_PRE4
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_INTER
     } },
     { {
         /* z-buffered */
         G_RM_ZB_OPA_SURF2,                  // LAYER_FORCE
+        G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE1
+        G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE2
+        G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE3
+        G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE_PRE4
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OPAQUE
         G_RM_AA_ZB_TEX_EDGE_DECAL2,              // LAYER_OPAQUE_INTER
         G_RM_AA_ZB_OPA_DECAL2,              // LAYER_OPAQUE_DECAL
@@ -171,6 +201,10 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF2,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_TRANSPARENT_DECAL
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE1
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE2
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE3
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_PRE4
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT
         G_RM_AA_ZB_XLU_INTER2,              // LAYER_TRANSPARENT_INTER
     } } };
@@ -305,6 +339,15 @@ static const Gfx* sCoinsTextureDls[] = {
     dl_coin_45,
     dl_coin_67_5,
     dl_coin_90,
+};
+
+struct CourseTextures
+{
+    const Gfx* textures[4];
+};
+
+static struct CourseTextures sCoursesTextures[] = {
+    [ COURSE_BOB ] = { 0, 0, 0, 0 },
 };
 
 extern uintptr_t sSegmentTable[32];
@@ -1314,7 +1357,7 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
                     case GRAPH_NODE_TYPE_HELD_OBJ:             geo_process_held_object         ((struct GraphNodeHeldObject          *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_BONE:                 geo_process_bone                ((struct GraphNodeBone                *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_CULL:                 geo_process_cull                ((struct GraphNodeCull                *) curGraphNode); break;
-                    case GRAPH_NODE_TYPE_COIN:                 geo_process_coin                ((struct GraphNodeCull                *) curGraphNode); break;
+                    case GRAPH_NODE_TYPE_COIN:                 geo_process_coin                ((struct GraphNodeCoin                *) curGraphNode); break;
                     default:                                   geo_try_process_children        ((struct GraphNode                    *) curGraphNode); break;
                 }
             }
