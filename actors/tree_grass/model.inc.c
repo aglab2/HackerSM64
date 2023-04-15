@@ -879,6 +879,8 @@ Gfx mat_revert_tree_grass_wood[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -910,9 +912,12 @@ Gfx mat_revert_tree_grass_leaves[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
+#if 0
 Gfx tree_grass_Tree_temp_climate_008_mesh[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPVertex(tree_grass_Tree_temp_climate_008_mesh_vtx_cull + 0, 8, 0),
@@ -931,4 +936,18 @@ Gfx tree_grass_Tree_temp_climate_008_mesh[] = {
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
+#endif
 
+Gfx tree_grass_Tree_temp_climate_008_mesh_wood[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_grass_Tree_temp_climate_008_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_grass_Tree_temp_climate_008_mesh_tri_0),
+};
+
+Gfx tree_grass_Tree_temp_climate_008_mesh_grass_leaves[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_grass_Tree_temp_climate_008_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_grass_Tree_temp_climate_008_mesh_tri_1),
+};

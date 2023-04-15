@@ -471,7 +471,7 @@ void geo_layout_cmd_node_translation_rotation(void) {
 
     if (params & 0x80) {
         displayList = *(void **) &cmdPos[0];
-        drawingLayer = params & 0x0F;
+        drawingLayer = params & 0x7F;
         cmdPos += 2 << CMD_SIZE_SHIFT;
     }
 
@@ -512,7 +512,7 @@ void geo_layout_cmd_node_translation(void) {
 
     if (params & 0x80) {
         displayList = *(void **) &cmdPos[0];
-        drawingLayer = params & 0x0F;
+        drawingLayer = params & 0x7F;
         cmdPos += 2 << CMD_SIZE_SHIFT;
     }
 
@@ -552,7 +552,7 @@ void geo_layout_cmd_node_rotation(void) {
 
     if (params & 0x80) {
         displayList = *(void **) &cmdPos[0];
-        drawingLayer = params & 0x0F;
+        drawingLayer = params & 0x7F;
         cmdPos += 2 << CMD_SIZE_SHIFT;
     }
 
@@ -581,7 +581,7 @@ void geo_layout_cmd_node_scale(void) {
 
     if (params & 0x80) {
         displayList = cur_geo_cmd_ptr(0x08);
-        drawingLayer = params & 0x0F;
+        drawingLayer = params & 0x7F;
         gGeoLayoutCommand += 4 << CMD_SIZE_SHIFT;
     }
 
@@ -644,7 +644,7 @@ void geo_layout_cmd_node_billboard(void) {
 
     if (params & 0x80) {
         displayList = *(void **) &cmdPos[0];
-        drawingLayer = params & 0x0F;
+        drawingLayer = params & 0x7F;
         cmdPos += 2 << CMD_SIZE_SHIFT;
     }
 

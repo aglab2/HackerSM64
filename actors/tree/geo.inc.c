@@ -1,6 +1,7 @@
 // 0x16000FE8
 
-extern Gfx tree_grass_Tree_temp_climate_008_mesh[];
+extern Gfx tree_grass_Tree_temp_climate_008_mesh_grass_leaves[];
+extern Gfx tree_grass_Tree_temp_climate_008_mesh_wood[];
 extern Gfx tree_grass2_Tree_temp_climate_018_mesh[];
 extern Gfx tree_grass3_Tree_temp_climate_017_mesh[];
 extern Gfx tree_grass4_Tree_temp_climate_010_mesh[];
@@ -22,8 +23,17 @@ const GeoLayout bubbly_tree_geo[] = {
 #ifdef OBJ_OPACITY_BY_CAM_DIST
          GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_seg3_dl_bubbly_transparent),
          
-         GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_grass_Tree_temp_climate_008_mesh),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_grass_Tree_temp_climate_008_mesh),
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE1, tree_grass_Tree_temp_climate_008_mesh_grass_leaves),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE2, tree_grass_Tree_temp_climate_008_mesh_wood),
+         GEO_CLOSE_NODE(),
+         
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE1, tree_grass_Tree_temp_climate_008_mesh_grass_leaves),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE2, tree_grass_Tree_temp_climate_008_mesh_wood),
+         GEO_CLOSE_NODE(),
       GEO_CLOSE_NODE(),
 #endif
    GEO_CLOSE_NODE(),

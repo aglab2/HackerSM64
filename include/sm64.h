@@ -57,11 +57,11 @@
 
 enum RenderLayers {
     LAYER_FORCE,
-    LAYER_OPAQUE,
     LAYER_OPAQUE_PRE1,
     LAYER_OPAQUE_PRE2,
     LAYER_OPAQUE_PRE3,
     LAYER_OPAQUE_PRE4,
+    LAYER_OPAQUE,
     LAYER_OPAQUE_INTER,
     LAYER_OPAQUE_DECAL,
     LAYER_ALPHA,
@@ -99,8 +99,8 @@ enum RenderLayers {
 #define LAYER_OPAQUE_ORIG                   LAYER_OPAQUE
 #define LAYER_ALPHA_ORIG                    LAYER_ALPHA
 #else
-#define LAYER_ZB_LAST                       LAYER_ALPHA
-#define LAYER_ALPHA_DECAL                   LAYER_ALPHA
+#define LAYER_ZB_LAST                       LAYER_COIN
+#define LAYER_ALPHA_DECAL                   LAYER_COIN
 #define LAYER_SILHOUETTE_OPAQUE             LAYER_OPAQUE // is zbuffered
 #define LAYER_SILHOUETTE_ALPHA              LAYER_ALPHA  // is zbuffered
 #define LAYER_OCCLUDE_SILHOUETTE_OPAQUE     LAYER_OPAQUE // is zbuffered

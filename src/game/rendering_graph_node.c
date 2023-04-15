@@ -92,7 +92,7 @@ struct RenderModeContainer {
 #define	G_RM_AA_ZB_TEX_EDGE_DECAL2	RM_AA_ZB_TEX_EDGE_DECAL(2)
 
 /* Rendermode settings for cycle 1 for all 8 or 13 layers. */
-struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
+const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_OPA_SURF,                      // LAYER_FORCE
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE1
         G_RM_AA_OPA_SURF,                   // LAYER_OPAQUE_PRE2
@@ -151,7 +151,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
     } } };
 
 /* Rendermode settings for cycle 2 for all 13 layers. */
-struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
+const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_OPA_SURF2,                     // LAYER_FORCE
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE1
         G_RM_AA_OPA_SURF2,                  // LAYER_OPAQUE_PRE2
@@ -260,7 +260,7 @@ struct RenderPhase {
 };
 
 //                                               startLayer                      endLayer                        ucode
-static struct RenderPhase sRenderPhases[] = {
+static const struct RenderPhase sRenderPhases[] = {
 #ifdef OBJECTS_REJ
  #if SILHOUETTE
     // Silhouette, .rej
@@ -343,17 +343,24 @@ static const Gfx* sCoinsTextureDls[] = {
 
 struct CourseTextures
 {
-    const Gfx* textures[4];
+    const Gfx* start[4];
+    const Gfx* end[4];
 };
 
-static struct CourseTextures sCoursesTextures[] = {
-    [ COURSE_BOB ] = { 0, 0, 0, 0 },
+extern Gfx mat_tree_grass_leaves[];
+extern Gfx mat_tree_grass_wood[];
+extern Gfx mat_revert_tree_grass_leaves[];
+extern Gfx mat_revert_tree_grass_wood[];
+
+static const struct CourseTextures sCoursesTextures[] = {
+    [ COURSE_BOB ] = { { mat_tree_grass_leaves, mat_tree_grass_wood, 0, 0 }
+                     , { mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, 0, 0 }, },
 };
 
-extern uintptr_t sSegmentTable[32];
+extern const Gfx dl_shadow_circle_end[];
 
 void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
-    struct RenderPhase *renderPhase;
+    const struct RenderPhase *renderPhase;
     struct DisplayListNode *currList;
     s32 currLayer     = LAYER_FIRST;
     s32 startLayer    = LAYER_FIRST;
@@ -361,9 +368,11 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     s32 ucode         = GRAPH_NODE_UCODE_DEFAULT;
     s32 phaseIndex    = RENDER_PHASE_FIRST;
     s32 enableZBuffer = (node->node.flags & GRAPH_RENDER_Z_BUFFER) != 0;
-    struct RenderModeContainer *mode1List = &renderModeTable_1Cycle[enableZBuffer];
-    struct RenderModeContainer *mode2List = &renderModeTable_2Cycle[enableZBuffer];
+    const struct RenderModeContainer *mode1List = &renderModeTable_1Cycle[enableZBuffer];
+    const struct RenderModeContainer *mode2List = &renderModeTable_2Cycle[enableZBuffer];
     int frame = gGlobalTimer % 8;
+    u32 curMode1 = 0, curMode2 = 0;
+    const Gfx* curStartDl = NULL, *curEndDl = NULL;
 
 #ifdef F3DEX_GBI_2
     // @bug This is where the LookAt values should be calculated but aren't.
@@ -398,26 +407,58 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
         for (currLayer = startLayer; currLayer <= endLayer; currLayer++) {
             // Set 'currList' to the first DisplayListNode on the current layer.
             currList = node->listHeads[ucode][currLayer];
-            gDPSetRenderMode(gDisplayListHead++, mode1List->modes[currLayer],
-                                                 mode2List->modes[currLayer]);
+            if (!currList)
+                continue;
 
-            if (!__builtin_expect(!sSegmentTable[3], 0))
+            u32 wantMode1 = mode1List->modes[currLayer];
+            u32 wantMode2 = mode2List->modes[currLayer];
+            if (wantMode1 != curMode1 || wantMode2 != curMode2)
             {
-                if (currLayer == LAYER_COIN) 
-                {
-                    if (frame < 5)
-                    {
-                        gSPDisplayList(gDisplayListHead++, sCoinsTextureDls[frame]);
-                    }
-                    else
-                    {
-                        gSPDisplayList(gDisplayListHead++, sCoinsTextureDls[8 - frame]);
-                    }
-                }
+                gDPSetRenderMode(gDisplayListHead++, wantMode1, wantMode2);
+                curMode1 = wantMode1; curMode2 = wantMode2;
+            }
 
-                if (currLayer == LAYER_CIRCLE_SHADOW) {
-                    gSPDisplayList(gDisplayListHead++, dl_shadow_circle);
+            const Gfx* startDl = NULL;
+            const Gfx* endDl = NULL;
+            if (currLayer == LAYER_COIN) 
+            {
+                if (frame < 5)
+                {
+                    startDl = sCoinsTextureDls[frame];
                 }
+                else
+                {
+                    startDl = sCoinsTextureDls[8 - frame];
+                }
+                endDl = dl_coin_end;
+            }
+
+            if (currLayer == LAYER_CIRCLE_SHADOW || currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT)
+            {
+                startDl = dl_shadow_circle;
+                endDl = dl_shadow_circle_end;
+            }
+
+            if (LAYER_OPAQUE_PRE1 <= currLayer && currLayer <= LAYER_OPAQUE_PRE4)
+            {
+                startDl = sCoursesTextures[gCurrCourseNum].start[currLayer - LAYER_OPAQUE_PRE1];
+                endDl   = sCoursesTextures[gCurrCourseNum].end  [currLayer - LAYER_OPAQUE_PRE1];
+            }
+
+            if (LAYER_TRANSPARENT_PRE1 <= currLayer && currLayer <= LAYER_TRANSPARENT_PRE4)
+            {
+                startDl = sCoursesTextures[gCurrCourseNum].start[currLayer - LAYER_TRANSPARENT_PRE1];
+                endDl   = sCoursesTextures[gCurrCourseNum].end  [currLayer - LAYER_TRANSPARENT_PRE1];
+            }
+
+            if (startDl != curStartDl)
+            {
+                // It is reasonable to expect 'startDl' and 'endDl' be paired together so it is abused here
+                // We want to switch dls as few times as possible so it is assumed that startDl+endDl can be merged together in no-op
+                if (curEndDl) gSPDisplayList(gDisplayListHead++, curEndDl);
+                if (startDl)  gSPDisplayList(gDisplayListHead++, startDl);
+                curStartDl = startDl;
+                curEndDl = endDl;
             }
 
             // Iterate through all the displaylists on the current layer.
@@ -431,23 +472,10 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 // Move to the next DisplayListNode.
                 currList = currList->next;
             }
-
-            if (!__builtin_expect(!sSegmentTable[3], 0))
-            {
-                if (currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT) {
-                    gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
-                    gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING | G_CULL_BACK);
-                    gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
-                }
-                if (currLayer == LAYER_COIN)
-                {
-                    gSPTexture(gDisplayListHead++, 0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF);
-                    gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
-                    gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING);
-                }
-            }
         }
     }
+    
+    if (curEndDl) gSPDisplayList(gDisplayListHead++, curEndDl);
 
     if (enableZBuffer) {
         // Disable z buffer.

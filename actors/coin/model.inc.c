@@ -118,6 +118,13 @@ const Gfx coin_seg3_dl_start[] = {
     gsSPEndDisplayList(),
 };
 
+const Gfx dl_coin_end[] = {
+    gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsSPSetGeometryMode(G_LIGHTING),
+    gsSPEndDisplayList(),
+};
+
 const Gfx dl_coin_0[] = {
     gsDPPipeSync(),
     gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, 64, coin_seg3_texture_0_ia8),
