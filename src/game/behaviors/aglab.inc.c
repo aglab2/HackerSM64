@@ -1278,7 +1278,7 @@ void bhv_chiaki_loop()
 void bhv_tree_init(void)
 {
     o->oHDTree = 1;
-    // if (gIsConsole)
+    if (gIsConsole)
     {
         if (gCurrCourseNum == COURSE_TOTWC || gCurrCourseNum == COURSE_COTMC)
             o->oHDTree = 0;

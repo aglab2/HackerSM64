@@ -409,11 +409,14 @@ static const struct CourseTextures sCoursesTextures[] = {
                      , { mat_revert_tree_winter_snow, mat_revert_tree_winter_leaves_001, mat_revert_tree_winter_wood_002, mat_revert_tree_winter2_snow_001, mat_revert_tree_winter2_grass_001, mat_revert_tree_winter2_wood_003 }, },
 
     [ COURSE_TOTWC ] = { { tree_seg3_sub_dl_palm2_start },
+                          { tree_seg3_sub_dl_palm2_end }, },
+    [ COURSE_COTMC ] = { { tree_seg3_sub_dl_palm2_start },
                           { tree_seg3_sub_dl_palm2_end }, }
 };
 
 static const struct AlphaCourseTexture sAlphaCourseTextures[] = {
     [ COURSE_TOTWC ] = { tree_seg3_sub_dl_palm2_start, tree_seg3_sub_dl_palm2_end, },
+    [ COURSE_COTMC ] = { tree_seg3_sub_dl_palm2_start, tree_seg3_sub_dl_palm2_end, },
 };
 
 extern const Gfx dl_shadow_circle_end[];
