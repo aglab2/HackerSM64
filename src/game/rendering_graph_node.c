@@ -397,6 +397,12 @@ extern Gfx mat_revert_tree_winter2_grass_001[];
 
 extern const Gfx tree_seg3_sub_dl_palm2_start[];
 extern const Gfx tree_seg3_sub_dl_palm2_end[];
+extern Gfx mat_tree_tropics_wood_006[];
+extern Gfx mat_revert_tree_tropics_wood_006[];
+extern Gfx mat_tree_tropics_leaves_003[];
+extern Gfx mat_revert_tree_tropics_leaves_003[];
+extern Gfx mat_tree_tropics_coonute[];
+extern Gfx mat_revert_tree_tropics_coonute[];
 
 static const struct CourseTextures sCoursesTextures[] = {
     [ COURSE_NONE ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
@@ -410,8 +416,8 @@ static const struct CourseTextures sCoursesTextures[] = {
 
     [ COURSE_TOTWC ] = { { tree_seg3_sub_dl_palm2_start },
                           { tree_seg3_sub_dl_palm2_end }, },
-    [ COURSE_COTMC ] = { { tree_seg3_sub_dl_palm2_start },
-                          { tree_seg3_sub_dl_palm2_end }, }
+    [ COURSE_COTMC ] = { { tree_seg3_sub_dl_palm2_start, NULL, NULL, mat_tree_tropics_leaves_003, mat_tree_tropics_coonute, mat_tree_tropics_wood_006 },
+                          { tree_seg3_sub_dl_palm2_end, NULL, NULL, mat_revert_tree_tropics_leaves_003, mat_revert_tree_tropics_coonute, mat_revert_tree_tropics_wood_006 }, }
 };
 
 static const struct AlphaCourseTexture sAlphaCourseTextures[] = {
@@ -474,7 +480,7 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
 
             u32 wantMode1 = mode1List->modes[currLayer];
             u32 wantMode2 = mode2List->modes[currLayer];
-            if (wantMode1 != curMode1 || wantMode2 != curMode2)
+            if (wantMode1 != curMode1 || wantMode2 != curMode2 || currLayer == LAYER_COIN)
             {
                 gDPSetRenderMode(gDisplayListHead++, wantMode1, wantMode2);
                 curMode1 = wantMode1; curMode2 = wantMode2;

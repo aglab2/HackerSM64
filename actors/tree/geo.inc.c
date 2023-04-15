@@ -6,7 +6,9 @@ extern Gfx tree_grass2_Tree_temp_climate_018_mesh_grass[];
 extern Gfx tree_grass2_Tree_temp_climate_018_mesh_wood[];
 extern Gfx tree_grass3_Tree_temp_climate_017_mesh[];
 extern Gfx tree_grass4_Tree_temp_climate_010_mesh[];
-extern Gfx tree_tropics__Tree_Tropic_001_mesh[];
+extern Gfx tree_tropics__Tree_Tropic_001_mesh_wood[];
+extern Gfx tree_tropics__Tree_Tropic_001_mesh_leaves[];
+extern Gfx tree_tropics__Tree_Tropic_001_mesh_nuts[];
 extern Gfx tree_winter__Tree_Winter_015_mesh_wood[];
 extern Gfx tree_winter__Tree_Winter_015_mesh_leaves[];
 extern Gfx tree_winter__Tree_Winter_015_mesh_snow[];
@@ -171,15 +173,38 @@ const GeoLayout palm_tree_geo[] = {
 #ifdef OBJ_OPACITY_BY_CAM_DIST
       GEO_ASM(LAYER_TRANSPARENT, geo_update_layer_transparency_hd_tree),
       GEO_ASM(LAYER_TRANSPARENT_PRE1, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT_PRE4, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT_PRE5, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT_PRE6, geo_update_layer_transparency_hd_tree),
       GEO_SWITCH_CASE(4, geo_switch_anim_state),
       GEO_OPEN_NODE(),
 #endif
-         GEO_DISPLAY_LIST(LAYER_ALPHA_PRE1, tree_seg3_dl_palm2),
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE4, tree_tropics__Tree_Tropic_001_mesh_leaves),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE6, tree_tropics__Tree_Tropic_001_mesh_wood),
+         GEO_CLOSE_NODE(),
+
 #ifdef OBJ_OPACITY_BY_CAM_DIST
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE1, tree_seg3_dl_palm2_transparent),
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE4, tree_tropics__Tree_Tropic_001_mesh_leaves),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE6, tree_tropics__Tree_Tropic_001_mesh_wood),
+         GEO_CLOSE_NODE(),
          
-         GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_tropics__Tree_Tropic_001_mesh),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_tropics__Tree_Tropic_001_mesh),
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE4, tree_tropics__Tree_Tropic_001_mesh_leaves),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE5, tree_tropics__Tree_Tropic_001_mesh_nuts),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE6, tree_tropics__Tree_Tropic_001_mesh_wood),
+         GEO_CLOSE_NODE(),
+         
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE4, tree_tropics__Tree_Tropic_001_mesh_leaves),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE5, tree_tropics__Tree_Tropic_001_mesh_nuts),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE6, tree_tropics__Tree_Tropic_001_mesh_wood),
+         GEO_CLOSE_NODE(),
       GEO_CLOSE_NODE(),
 #endif
    GEO_CLOSE_NODE(),

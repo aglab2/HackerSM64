@@ -1076,6 +1076,8 @@ Gfx mat_revert_tree_tropics_wood_006[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1107,6 +1109,8 @@ Gfx mat_revert_tree_tropics_leaves_003[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1138,28 +1142,28 @@ Gfx mat_revert_tree_tropics_coonute[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
-	gsSPEndDisplayList(),
-};
-
-Gfx tree_tropics__Tree_Tropic_001_mesh[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(tree_tropics__Tree_Tropic_001_mesh_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_tree_tropics_wood_006),
-	gsSPDisplayList(tree_tropics__Tree_Tropic_001_mesh_tri_0),
-	gsSPDisplayList(mat_revert_tree_tropics_wood_006),
-	gsSPDisplayList(mat_tree_tropics_leaves_003),
-	gsSPDisplayList(tree_tropics__Tree_Tropic_001_mesh_tri_1),
-	gsSPDisplayList(mat_revert_tree_tropics_leaves_003),
-	gsSPDisplayList(mat_tree_tropics_coonute),
-	gsSPDisplayList(tree_tropics__Tree_Tropic_001_mesh_tri_2),
-	gsSPDisplayList(mat_revert_tree_tropics_coonute),
-	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPClearGeometryMode(G_TEXTURE_GEN),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
 
+Gfx tree_tropics__Tree_Tropic_001_mesh_wood[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_tropics__Tree_Tropic_001_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_tropics__Tree_Tropic_001_mesh_tri_0),
+};
+
+Gfx tree_tropics__Tree_Tropic_001_mesh_leaves[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_tropics__Tree_Tropic_001_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_tropics__Tree_Tropic_001_mesh_tri_1),
+};
+
+Gfx tree_tropics__Tree_Tropic_001_mesh_nuts[] = {
+	gsDPPipeSync(),
+	gsSPVertex(tree_tropics__Tree_Tropic_001_mesh_vtx_cull + 0, 8, 0),
+	gsSPCullDisplayList(0, 7),
+	gsSPBranchList(tree_tropics__Tree_Tropic_001_mesh_tri_2),
+};

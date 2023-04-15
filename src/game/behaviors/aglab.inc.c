@@ -1284,15 +1284,14 @@ void bhv_tree_init(void)
             o->oHDTree = 0;
     }
 
+    o->oDrawingDistance = 6000.f;
     if (o->oHDTree)
     {
-        o->oDrawingDistance = 5000.f;
         gCurrentObject->oFaceAngleYaw = random_u16();
         obj_scale_xyz(gCurrentObject, 0.7f + random_float() * 0.3f, 0.97f + 0.06f * random_float(), 0.7f + random_float() * 0.3f);
     }
     else
     {
-        o->oDrawingDistance = 30000.f;
         gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
     }
 }
