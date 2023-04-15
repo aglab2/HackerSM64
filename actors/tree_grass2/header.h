@@ -13,4 +13,5 @@ extern Gfx mat_tree_grass2_wood_001[];
 extern Gfx mat_revert_tree_grass2_wood_001[];
 extern Gfx mat_tree_grass2_grass[];
 extern Gfx mat_revert_tree_grass2_grass[];
-extern Gfx tree_grass2_Tree_temp_climate_018_mesh[];
+extern Gfx tree_grass2_Tree_temp_climate_018_mesh_grass[];
+extern Gfx tree_grass2_Tree_temp_climate_018_mesh_wood[];

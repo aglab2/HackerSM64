@@ -351,10 +351,14 @@ extern Gfx mat_tree_grass_leaves[];
 extern Gfx mat_tree_grass_wood[];
 extern Gfx mat_revert_tree_grass_leaves[];
 extern Gfx mat_revert_tree_grass_wood[];
+extern Gfx mat_tree_grass2_wood_001[];
+extern Gfx mat_revert_tree_grass2_wood_001[];
+extern Gfx mat_tree_grass2_grass[];
+extern Gfx mat_revert_tree_grass2_grass[];
 
 static const struct CourseTextures sCoursesTextures[] = {
-    [ COURSE_BOB ] = { { mat_tree_grass_leaves, mat_tree_grass_wood, 0, 0 }
-                     , { mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, 0, 0 }, },
+    [ COURSE_BOB ] = { { mat_tree_grass_leaves, mat_tree_grass_wood, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
+                     , { mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
 };
 
 extern const Gfx dl_shadow_circle_end[];

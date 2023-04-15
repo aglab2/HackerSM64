@@ -2,7 +2,8 @@
 
 extern Gfx tree_grass_Tree_temp_climate_008_mesh_grass_leaves[];
 extern Gfx tree_grass_Tree_temp_climate_008_mesh_wood[];
-extern Gfx tree_grass2_Tree_temp_climate_018_mesh[];
+extern Gfx tree_grass2_Tree_temp_climate_018_mesh_grass[];
+extern Gfx tree_grass2_Tree_temp_climate_018_mesh_wood[];
 extern Gfx tree_grass3_Tree_temp_climate_017_mesh[];
 extern Gfx tree_grass4_Tree_temp_climate_010_mesh[];
 extern Gfx tree_tropics__Tree_Tropic_001_mesh[];
@@ -53,8 +54,17 @@ const GeoLayout spiky_tree_geo[] = {
 #ifdef OBJ_OPACITY_BY_CAM_DIST
          GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_seg3_dl_spiky_transparent),
          
-         GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_grass2_Tree_temp_climate_018_mesh),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_grass2_Tree_temp_climate_018_mesh),
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE3, tree_grass2_Tree_temp_climate_018_mesh_grass),
+            GEO_DISPLAY_LIST(LAYER_OPAQUE_PRE4, tree_grass2_Tree_temp_climate_018_mesh_wood),
+         GEO_CLOSE_NODE(),
+         
+         GEO_NODE_START(),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE3, tree_grass2_Tree_temp_climate_018_mesh_grass),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE4, tree_grass2_Tree_temp_climate_018_mesh_wood),
+         GEO_CLOSE_NODE(),
       GEO_CLOSE_NODE(),
 #endif
    GEO_CLOSE_NODE(),
