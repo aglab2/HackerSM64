@@ -386,6 +386,9 @@ extern Gfx mat_tree_winter2_grass_001[];
 extern Gfx mat_revert_tree_winter2_grass_001[];
 
 static const struct CourseTextures sCoursesTextures[] = {
+    [ COURSE_NONE ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
+                     , { NULL, mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, NULL, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
+
     [ COURSE_BOB ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
                      , { NULL, mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, NULL, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
 

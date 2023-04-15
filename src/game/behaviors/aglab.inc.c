@@ -1390,7 +1390,7 @@ void bhv_death_trigger_loop()
         }
         else
         {
-            print_text_fmt_int(20, 20, "%d", (int) floor->type);
+            // print_text_fmt_int(20, 20, "%d", (int) floor->type);
             if (floor && gMarioStates->floorHeight == gMarioStates->pos[1] && (floor->type == SURFACE_NOT_SLIPPERY || floor->type == SURFACE_HARD || floor->type == SURFACE_HARD_NOT_SLIPPERY || floor->type == 0))
             {
                 u32 rbTimer = rb->timer % 8;

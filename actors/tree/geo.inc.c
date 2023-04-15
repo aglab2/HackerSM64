@@ -81,7 +81,7 @@ const GeoLayout spiky_tree2_geo[] = {
    GEO_CULLING_RADIUS(800),
    GEO_OPEN_NODE(),
 #ifdef OBJ_OPACITY_BY_CAM_DIST
-      GEO_ASM(GEO_TRANSPARENCY_MODE_NORMAL, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT, geo_update_layer_transparency_hd_tree),
       GEO_SWITCH_CASE(4, geo_switch_anim_state),
       GEO_OPEN_NODE(),
 #endif
@@ -169,7 +169,7 @@ const GeoLayout palm_tree_geo[] = {
    GEO_CULLING_RADIUS(800),
    GEO_OPEN_NODE(),
 #ifdef OBJ_OPACITY_BY_CAM_DIST
-      GEO_ASM(GEO_TRANSPARENCY_MODE_NORMAL, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT, geo_update_layer_transparency_hd_tree),
       GEO_SWITCH_CASE(4, geo_switch_anim_state),
       GEO_OPEN_NODE(),
 #endif
@@ -190,7 +190,7 @@ const GeoLayout palm_tree2_geo[] = {
    GEO_CULLING_RADIUS(800),
    GEO_OPEN_NODE(),
 #ifdef OBJ_OPACITY_BY_CAM_DIST
-      GEO_ASM(GEO_TRANSPARENCY_MODE_NORMAL, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT, geo_update_layer_transparency_hd_tree),
       GEO_SWITCH_CASE(4, geo_switch_anim_state),
       GEO_OPEN_NODE(),
 #endif
