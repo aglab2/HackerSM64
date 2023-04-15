@@ -111,6 +111,7 @@ const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_OPA_SURF,                   // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_TEX_EDGE,                   // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_TEX_EDGE,                   // LAYER_ALPHA_PRE1
         G_RM_AA_TEX_EDGE,                   // LAYER_COIN
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW_TRANSPARENT
@@ -144,6 +145,7 @@ const struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_ZB_TEX_EDGE,                // LAYER_ALPHA_PRE1
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_COIN
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF,                   // LAYER_CIRCLE_SHADOW_TRANSPARENT
@@ -178,6 +180,7 @@ const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_OPA_SURF2,                  // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_TEX_EDGE2,                  // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_TEX_EDGE2,                   // LAYER_ALPHA_PRE1
         G_RM_AA_TEX_EDGE2,                   // LAYER_COIN
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW_TRANSPARENT
@@ -211,6 +214,7 @@ const struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_ZB_TEX_EDGE2,               // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_ZB_TEX_EDGE2,               // LAYER_ALPHA_PRE1
         G_RM_AA_ZB_TEX_EDGE2,               // LAYER_COIN
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF2,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
@@ -363,6 +367,12 @@ struct CourseTextures
     const Gfx* end[6];
 };
 
+struct AlphaCourseTexture
+{
+    const Gfx* start;
+    const Gfx* end;
+};
+
 extern Gfx mat_tree_grass_leaves[];
 extern Gfx mat_tree_grass_wood[];
 extern Gfx mat_revert_tree_grass_leaves[];
@@ -385,6 +395,9 @@ extern Gfx mat_revert_tree_winter2_snow_001[];
 extern Gfx mat_tree_winter2_grass_001[];
 extern Gfx mat_revert_tree_winter2_grass_001[];
 
+extern const Gfx tree_seg3_sub_dl_palm2_start[];
+extern const Gfx tree_seg3_sub_dl_palm2_end[];
+
 static const struct CourseTextures sCoursesTextures[] = {
     [ COURSE_NONE ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
                      , { NULL, mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, NULL, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
@@ -394,6 +407,13 @@ static const struct CourseTextures sCoursesTextures[] = {
 
     [ COURSE_WF ]  = { { mat_tree_winter_snow, mat_tree_winter_leaves_001, mat_tree_winter_wood_002, mat_tree_winter2_snow_001, mat_tree_winter2_grass_001, mat_tree_winter2_wood_003,  }
                      , { mat_revert_tree_winter_snow, mat_revert_tree_winter_leaves_001, mat_revert_tree_winter_wood_002, mat_revert_tree_winter2_snow_001, mat_revert_tree_winter2_grass_001, mat_revert_tree_winter2_wood_003 }, },
+
+    [ COURSE_TOTWC ] = { { tree_seg3_sub_dl_palm2_start },
+                          { tree_seg3_sub_dl_palm2_end }, }
+};
+
+static const struct AlphaCourseTexture sAlphaCourseTextures[] = {
+    [ COURSE_TOTWC ] = { tree_seg3_sub_dl_palm2_start, tree_seg3_sub_dl_palm2_end, },
 };
 
 extern const Gfx dl_shadow_circle_end[];
@@ -482,6 +502,12 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             {
                 startDl = sCoursesTextures[gCurrCourseNum].start[currLayer - LAYER_OPAQUE_PRE1];
                 endDl   = sCoursesTextures[gCurrCourseNum].end  [currLayer - LAYER_OPAQUE_PRE1];
+            }
+
+            if (LAYER_ALPHA_PRE1 == currLayer)
+            {
+                startDl = sAlphaCourseTextures[gCurrCourseNum].start;
+                endDl   = sAlphaCourseTextures[gCurrCourseNum].end;
             }
 
             if (LAYER_TRANSPARENT_PRE6 <= currLayer && currLayer <= LAYER_TRANSPARENT_PRE1)

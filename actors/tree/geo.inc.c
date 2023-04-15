@@ -191,12 +191,13 @@ const GeoLayout palm_tree2_geo[] = {
    GEO_OPEN_NODE(),
 #ifdef OBJ_OPACITY_BY_CAM_DIST
       GEO_ASM(LAYER_TRANSPARENT, geo_update_layer_transparency_hd_tree),
+      GEO_ASM(LAYER_TRANSPARENT_PRE1, geo_update_layer_transparency_hd_tree),
       GEO_SWITCH_CASE(4, geo_switch_anim_state),
       GEO_OPEN_NODE(),
 #endif
-         GEO_DISPLAY_LIST(LAYER_ALPHA, tree_seg3_dl_palm2),
+         GEO_DISPLAY_LIST(LAYER_ALPHA_PRE1, tree_seg3_dl_palm2),
 #ifdef OBJ_OPACITY_BY_CAM_DIST
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_seg3_dl_palm2_transparent),
+         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_PRE1, tree_seg3_dl_palm2_transparent),
          
          GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_grass4_Tree_temp_climate_010_mesh),
          GEO_DISPLAY_LIST(LAYER_TRANSPARENT, tree_grass4_Tree_temp_climate_010_mesh),

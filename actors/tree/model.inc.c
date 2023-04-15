@@ -277,8 +277,8 @@ const Gfx tree_seg3_sub_dl_palm[] = {
     gsSPEndDisplayList(),
 };
 
-// 0x03033258 - 0x03033300
-const Gfx tree_seg3_sub_dl_palm2[] = {
+const Gfx tree_seg3_sub_dl_palm2_start[] = {
+    gsDPPipeSync(), 
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -290,12 +290,22 @@ const Gfx tree_seg3_sub_dl_palm2[] = {
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLight(&tree_seg3_lights_0302DE10.l, 1),
     gsSPLight(&tree_seg3_lights_0302DE10.a, 2),
-    gsSPVertex(tree_seg3_vertex_palm, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSPEndDisplayList(),
+};
+
+const Gfx tree_seg3_sub_dl_palm2_end[] = {
+    gsDPPipeSync(), 
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
+    gsSPEndDisplayList(),
+};
+
+// 0x03033258 - 0x03033300
+const Gfx tree_seg3_sub_dl_palm2[] = {
+    gsDPPipeSync(), 
+    gsSPVertex(tree_seg3_vertex_palm, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
     gsSPEndDisplayList(),
 };
 
