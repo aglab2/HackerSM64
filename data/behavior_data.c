@@ -6404,3 +6404,13 @@ const BehaviorScript bhvSparkler[] = {
         CALL_NATIVE(sparkler_loop),
     END_LOOP(),
 };
+
+extern void bhv_death_trigger_init();
+extern void bhv_death_trigger_loop();
+const BehaviorScript bhvDeathTrigger[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    CALL_NATIVE(bhv_death_trigger_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_death_trigger_loop),
+    END_LOOP(),
+};

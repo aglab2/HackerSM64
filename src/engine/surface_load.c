@@ -645,6 +645,7 @@ static void get_optimal_coll_dist(struct Object *obj) {
 /**
  * Transform an object's vertices, reload them, and render the object.
  */
+extern u8 gIsConsole;
 void load_object_collision_model(void) {
     TerrainData vertexData[600];
 #if PUPPYPRINT_DEBUG
@@ -686,7 +687,8 @@ void load_object_collision_model(void) {
             load_object_surfaces(&collisionData, vertexData);
         }
     }
-    COND_BIT((marioDist < o->oDrawingDistance), o->header.gfx.node.flags, GRAPH_RENDER_ACTIVE);
+    if (gIsConsole)
+        COND_BIT((marioDist < o->oDrawingDistance), o->header.gfx.node.flags, GRAPH_RENDER_ACTIVE);
 #if PUPPYPRINT_DEBUG
     collisionTime[perfIteration] += osGetTime() - first;
 #endif

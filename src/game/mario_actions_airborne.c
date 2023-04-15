@@ -43,6 +43,14 @@ void play_knockback_sound(struct MarioState *m) {
     }
 }
 
+static s32 in_safe_square(struct MarioState *m)
+{
+    // (1360, 4215) - (10062, 295)
+    f32 x = m->pos[0];
+    f32 z = m->pos[2];
+    return 1360.f < x && x < 10062.f && 295.f < z && z < 4215.f;
+}
+
 s32 lava_boost_on_wall(struct MarioState *m) {
     m->faceAngle[1] = m->wallYaw;
 
@@ -57,7 +65,7 @@ s32 lava_boost_on_wall(struct MarioState *m) {
         }
         else if (gCurrCourseNum == COURSE_WF)
         {
-            m->hurtCounter += 16;
+            m->hurtCounter += in_safe_square(m) ? 12 : 4;
         }
         else if (gCurrCourseNum == COURSE_BITFS)
         {
@@ -1542,7 +1550,7 @@ s32 act_lava_boost(struct MarioState *m) {
                     }
                     else if (gCurrCourseNum == COURSE_WF)
                     {
-                        m->hurtCounter += 16;
+                        m->hurtCounter += in_safe_square(m) ? 12 : 4;
                     }
                     else if (gCurrCourseNum == COURSE_BITFS)
                     {

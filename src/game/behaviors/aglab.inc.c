@@ -1337,3 +1337,94 @@ void sparkler_loop()
         spark->oPosZ += random_f32_around_zero(100.f);
     }
 }
+
+extern u8 gAllowPausing;
+#define RING_BUFFER_SIZE 8
+struct SafePositionsPos
+{
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+static struct SafePositionsRingBuffer
+{
+    u32 timer;
+    struct SafePositionsPos positions[RING_BUFFER_SIZE];
+} sSafePositionsRingBuffer;
+
+extern u8 gAllowPausing;
+
+void bhv_death_trigger_init()
+{
+    sSafePositionsRingBuffer.timer = 0;
+    for (int i = 0; i < RING_BUFFER_SIZE; i++)
+    {
+        sSafePositionsRingBuffer.positions[i].x = gMarioStates->pos[0];
+        sSafePositionsRingBuffer.positions[i].y = gMarioStates->pos[1] - 100.f;
+        sSafePositionsRingBuffer.positions[i].z = gMarioStates->pos[2];
+    }
+}
+
+static s32 in_safe_square()
+{
+    // (1360, 4215) - (10062, 295)
+    f32 x = gMarioStates->pos[0];
+    f32 z = gMarioStates->pos[2];
+    return 1360.f < x && x < 10062.f && 295.f < z && z < 4215.f;
+}
+
+void bhv_death_trigger_loop()
+{
+    struct SafePositionsRingBuffer* rb = &sSafePositionsRingBuffer;
+    struct Surface* floor = gMarioStates->floor;
+    if (0 == o->oAction)
+    {
+        u32 rbTimerPrev = (rb->timer - 1 + RING_BUFFER_SIZE) % 8;
+        f32 lastY = rb->positions[rbTimerPrev].y;
+        if (gMarioStates->action == ACT_LAVA_BOOST && !(gMarioStates->flags & MARIO_METAL_CAP) && !in_safe_square() && lastY > 1000.f)
+        {
+            play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
+            gAllowPausing = 0;
+            o->oAction = 1;
+        }
+        else
+        {
+            print_text_fmt_int(20, 20, "%d", (int) floor->type);
+            if (floor && gMarioStates->floorHeight == gMarioStates->pos[1] && (floor->type == SURFACE_NOT_SLIPPERY || floor->type == SURFACE_HARD || floor->type == SURFACE_HARD_NOT_SLIPPERY || floor->type == 0))
+            {
+                u32 rbTimer = rb->timer % 8;
+                rb->positions[rbTimer].x = gMarioStates->pos[0];
+                rb->positions[rbTimer].y = gMarioStates->pos[1];
+                rb->positions[rbTimer].z = gMarioStates->pos[2];
+                rb->timer++;
+            }
+        }
+    }
+    else
+    {
+        if (o->oTimer == 12)
+        {
+            u32 rbTimerLast = rb->timer % 8;
+            gMarioStates->pos[0] = rb->positions[rbTimerLast].x;
+            gMarioStates->pos[1] = rb->positions[rbTimerLast].y + 100.f;
+            gMarioStates->pos[2] = rb->positions[rbTimerLast].z;
+            gMarioStates->vel[0] = 0;
+            gMarioStates->vel[1] = 0;
+            gMarioStates->vel[2] = 0;
+            gMarioStates->forwardVel = 0;
+            gMarioStates->squishTimer = 0;
+            drop_and_set_mario_action(gMarioStates, ACT_FREEFALL, 0);
+        }
+        if (o->oTimer == 13)
+        {
+            reset_camera(gCamera);
+        }
+        if (o->oTimer == 14)
+        {
+            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0,0,0);
+            gAllowPausing = 1;
+            o->oAction = 0;
+        }
+    }
+}

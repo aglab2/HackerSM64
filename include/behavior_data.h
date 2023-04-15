@@ -569,5 +569,6 @@ extern const BehaviorScript bhvDoorStop[];
 extern const BehaviorScript bhvChiaki[];
 extern const BehaviorScript bhvFireplace[];
 extern const BehaviorScript bhvSparkler[];
+extern const BehaviorScript bhvDeathTrigger[];
 
 #endif // BEHAVIOR_DATA_H

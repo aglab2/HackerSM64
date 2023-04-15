@@ -1890,6 +1890,14 @@ void check_death_barrier(struct MarioState *m) {
     }
 }
 
+static s32 in_safe_square(struct MarioState *m)
+{
+    // (1360, 4215) - (10062, 295)
+    f32 x = m->pos[0];
+    f32 z = m->pos[2];
+    return 1360.f < x && x < 10062.f && 295.f < z && z < 4215.f;
+}
+
 void check_lava_boost(struct MarioState *m) {
     if (!(m->action & ACT_FLAG_RIDING_SHELL) && m->pos[1] < m->floorHeight + 10.0f) {
         if (!(m->flags & MARIO_METAL_CAP)) {
@@ -1899,7 +1907,7 @@ void check_lava_boost(struct MarioState *m) {
             }
             else if (gCurrCourseNum == COURSE_WF)
             {
-                m->hurtCounter += 16;
+                m->hurtCounter += in_safe_square(m) ? 12 : 4;
             }
             else if (gCurrCourseNum == COURSE_BITFS)
             {
