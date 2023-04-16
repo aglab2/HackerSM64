@@ -92,11 +92,13 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_OPA_SURF,                   // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_TEX_EDGE,                   // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_TEX_EDGE,                   // LAYER_SMOKE_ALPHA
         G_RM_AA_TEX_EDGE,                   // LAYER_COIN
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_DECAL
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_INTER
     } },
     { {
@@ -113,11 +115,13 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF,                // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_ZB_TEX_EDGE,                // LAYER_SMOKE_ALPHA
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_COIN
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF,                   // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_TRANSPARENT_DECAL
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_ZB_XLU_INTER,               // LAYER_TRANSPARENT_INTER
     } } };
 
@@ -135,11 +139,13 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_OPA_SURF2,                  // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_TEX_EDGE2,                  // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_TEX_EDGE2,                   // LAYER_SMOKE_ALPHA
         G_RM_AA_TEX_EDGE2,                   // LAYER_COIN
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_DECAL
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_INTER
     } },
     { {
@@ -156,11 +162,13 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_OPA_SURF2,               // LAYER_OCCLUDE_SILHOUETTE_OPAQUE
         G_RM_AA_ZB_TEX_EDGE2,               // LAYER_OCCLUDE_SILHOUETTE_ALPHA
 #endif
+        G_RM_AA_ZB_TEX_EDGE2,               // LAYER_SMOKE_ALPHA
         G_RM_AA_ZB_TEX_EDGE2,               // LAYER_COIN
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF2,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_TRANSPARENT_DECAL
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_ZB_XLU_INTER2,              // LAYER_TRANSPARENT_INTER
     } } };
 
@@ -293,6 +301,46 @@ static const Gfx* sCoinsTextureDls[] = {
 };
 
 extern uintptr_t sSegmentTable[32];
+#if 0
+struct CourseTextures
+{
+    const Gfx* start[1];
+    const Gfx* end[1];
+};
+
+struct AlphaCourseTexture
+{
+    const Gfx* start;
+    const Gfx* end;
+};
+
+static const struct CourseTextures sCoursesTextures[] = {
+    [ COURSE_NONE ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
+                     , { NULL, mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, NULL, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
+
+    [ COURSE_BOB ] = { { NULL, mat_tree_grass_leaves, mat_tree_grass_wood, NULL, mat_tree_grass2_grass, mat_tree_grass2_wood_001 }
+                     , { NULL, mat_revert_tree_grass_leaves, mat_revert_tree_grass_wood, NULL, mat_revert_tree_grass2_grass, mat_revert_tree_grass2_wood_001 }, },
+
+    [ COURSE_WF ]  = { { mat_tree_winter_snow, mat_tree_winter_leaves_001, mat_tree_winter_wood_002, mat_tree_winter2_snow_001, mat_tree_winter2_grass_001, mat_tree_winter2_wood_003,  }
+                     , { mat_revert_tree_winter_snow, mat_revert_tree_winter_leaves_001, mat_revert_tree_winter_wood_002, mat_revert_tree_winter2_snow_001, mat_revert_tree_winter2_grass_001, mat_revert_tree_winter2_wood_003 }, },
+
+    [ COURSE_TOTWC ] = { { tree_seg3_sub_dl_palm2_start },
+                          { tree_seg3_sub_dl_palm2_end }, },
+    [ COURSE_COTMC ] = { { tree_seg3_sub_dl_palm2_start, NULL, NULL, mat_tree_tropics_leaves_003, mat_tree_tropics_coonute, mat_tree_tropics_wood_006 },
+                          { tree_seg3_sub_dl_palm2_end, NULL, NULL, mat_revert_tree_tropics_leaves_003, mat_revert_tree_tropics_coonute, mat_revert_tree_tropics_wood_006 }, }
+};
+
+static const struct AlphaCourseTexture sAlphaCourseTextures[] = {
+    [ COURSE_TOTWC ] = { tree_seg3_sub_dl_palm2_start, tree_seg3_sub_dl_palm2_end, },
+    [ COURSE_COTMC ] = { tree_seg3_sub_dl_palm2_start, tree_seg3_sub_dl_palm2_end, },
+};
+#endif
+
+extern const Gfx dl_shadow_circle_end[];
+
+extern Gfx burn_smoke_seg4_sub_dl_begin_translucent[];
+extern Gfx burn_smoke_seg4_sub_dl_begin_alpha[];
+extern const Gfx burn_smoke_seg4_sub_dl_end[];
 
 void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     struct RenderPhase *renderPhase;
@@ -306,6 +354,8 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     struct RenderModeContainer *mode1List = &renderModeTable_1Cycle[enableZBuffer];
     struct RenderModeContainer *mode2List = &renderModeTable_2Cycle[enableZBuffer];
     int frame = gGlobalTimer % 8;
+    u32 curMode1 = 0, curMode2 = 0;
+    const Gfx* curStartDl = NULL, *curEndDl = NULL;
 
 #ifdef F3DEX_GBI_2
     // @bug This is where the LookAt values should be calculated but aren't.
@@ -340,30 +390,63 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
         for (currLayer = startLayer; currLayer <= endLayer; currLayer++) {
             // Set 'currList' to the first DisplayListNode on the current layer.
             currList = node->listHeads[ucode][currLayer];
-            gDPSetRenderMode(gDisplayListHead++, mode1List->modes[currLayer],
-                                                 mode2List->modes[currLayer]);
+            if (!currList)
+                continue;
 
-            if (!__builtin_expect(!sSegmentTable[3], 0))
+            u32 wantMode1 = mode1List->modes[currLayer];
+            u32 wantMode2 = mode2List->modes[currLayer];
+            // TODO: this is a hack!!!
+            if (wantMode1 != curMode1 || wantMode2 != curMode2 || currLayer == LAYER_SMOKE_ALPHA || currLayer == LAYER_COIN)
             {
-                if (currLayer == LAYER_COIN) 
-                {
-                    if (frame < 5)
-                    {
-                        gSPDisplayList(gDisplayListHead++, sCoinsTextureDls[frame]);
-                    }
-                    else
-                    {
-                        gSPDisplayList(gDisplayListHead++, sCoinsTextureDls[8 - frame]);
-                    }
-                }
+                gDPSetRenderMode(gDisplayListHead++, wantMode1, wantMode2);
+                curMode1 = wantMode1; curMode2 = wantMode2;
+            }
 
-                if (currLayer == LAYER_CIRCLE_SHADOW) {
-                    gSPDisplayList(gDisplayListHead++, dl_shadow_circle);
+            const Gfx* startDl = NULL;
+            const Gfx* endDl = NULL;
+            if (currLayer == LAYER_COIN) 
+            {
+                if (frame < 5)
+                {
+                    startDl = sCoinsTextureDls[frame];
                 }
+                else
+                {
+                    startDl = sCoinsTextureDls[8 - frame];
+                }
+                endDl = dl_coin_end;
+            }
+
+            if (currLayer == LAYER_CIRCLE_SHADOW || currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT)
+            {
+                startDl = dl_shadow_circle;
+                endDl = dl_shadow_circle_end;
+            }
+
+            if (LAYER_SMOKE_ALPHA == currLayer)
+            {
+                startDl = burn_smoke_seg4_sub_dl_begin_alpha;
+                endDl   = burn_smoke_seg4_sub_dl_end;
+            }
+            
+            if (LAYER_SMOKE_TRANSPARENT == currLayer)
+            {
+                startDl = burn_smoke_seg4_sub_dl_begin_translucent;
+                endDl   = burn_smoke_seg4_sub_dl_end;
+            }
+
+            if (startDl != curStartDl)
+            {
+                // It is reasonable to expect 'startDl' and 'endDl' be paired together so it is abused here
+                // We want to switch dls as few times as possible so it is assumed that startDl+endDl can be merged together in no-op
+                if (curEndDl) gSPDisplayList(gDisplayListHead++, curEndDl);
+                if (startDl)  gSPDisplayList(gDisplayListHead++, startDl);
+                curStartDl = startDl;
+                curEndDl = endDl;
             }
 
             // Iterate through all the displaylists on the current layer.
-            while (currList != NULL) {
+            do {
                 // Add the display list's transformation to the master list.
                 gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
                           (G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH));
@@ -373,23 +456,11 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 // Move to the next DisplayListNode.
                 currList = currList->next;
             }
-
-            if (!__builtin_expect(!sSegmentTable[3], 0))
-            {
-                if (currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT) {
-                    gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
-                    gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING | G_CULL_BACK);
-                    gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
-                }
-                if (currLayer == LAYER_COIN)
-                {
-                    gSPTexture(gDisplayListHead++, 0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF);
-                    gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
-                    gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING);
-                }
-            }
+            while (currList != NULL);
         }
     }
+    
+    if (curEndDl) gSPDisplayList(gDisplayListHead++, curEndDl);
 
     if (enableZBuffer) {
         // Disable z buffer.

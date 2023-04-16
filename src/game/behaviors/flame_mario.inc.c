@@ -1,5 +1,7 @@
 // flame_mario.inc.c
 
+extern Gfx burn_smoke_seg4_sub_dl_begin[];
+
 void bhv_black_smoke_upward_loop(void) {
     spawn_object_with_scale(o, MODEL_BURN_SMOKE, bhvBlackSmokeBowser, o->header.gfx.scale[0]);
 }
