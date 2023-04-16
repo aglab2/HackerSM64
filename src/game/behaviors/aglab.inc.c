@@ -1427,3 +1427,63 @@ void bhv_death_trigger_loop()
         }
     }
 }
+
+void bhv_trunk_init()
+{
+    o->oDrawingDistance = 4000.f;
+    obj_scale(o, 0.6f);
+    for (int i = 0; i < 3; i++)
+    {
+        struct Object* root = spawn_object(o, MODEL_TREE_ROOT, bhvC1TrunkRoot);
+        s16 angle = 16000 + 21845 * i;
+        root->oPosX += sins(angle) * 600.f;
+        root->oPosZ += coss(angle) * 600.f;
+        root->oFaceAngleYaw = angle;
+        root->oBehParams2ndByte = i;
+    }
+}
+
+void bhv_trunk_loop()
+{
+
+}
+
+void bhv_trunk_root_init()
+{
+    struct Object* shadow = spawn_object(o, MODEL_TREE_ROOT_SHADOW, bhvStaticObject);
+    shadow->oDrawingDistance = 3300.f;
+    o->oDrawingDistance = 3300.f;
+    o->oPosY += 5.f;
+}
+
+void bhv_trunk_root_loop()
+{
+    if (o->oAction == 0)
+    {
+        o->oPosY += 6.f;
+        if (o->oTimer >= 54)
+        {
+            o->oAction = 1;
+        }
+    }
+    else
+    {
+        int timeFrameStart = 5 + o->oBehParams2ndByte * 10;
+        int timeFrameEnd = 15 + o->oBehParams2ndByte * 10;
+        if (timeFrameStart <= o->oTimer && o->oTimer <= timeFrameEnd)
+        {
+            o->oPosY -= 30.f;
+        }
+
+        if (timeFrameStart + 5 == o->oTimer)
+        {
+            if (o->oDistanceToMario < 3000.f)
+                cur_obj_play_sound_2(SOUND_OBJ_THWOMP);
+        }
+
+        if (o->oTimer > 40)
+        {
+            o->oAction = 0;
+        }
+    }
+}

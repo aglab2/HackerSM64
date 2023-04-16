@@ -53,3 +53,9 @@ ALIGNED8 static const Texture wf_seg7_texture_07002000[] = {
 
 #include "levels/wf/sliding_platform/model.inc.c"
 #include "levels/wf/sliding_platform/collision.inc.c"
+
+#include "levels/bob/tree_root/collision.inc.c"
+#include "levels/bob/tree_root/model.inc.c"
+#include "levels/bob/tree_trunk/collision.inc.c"
+#include "levels/bob/tree_trunk/model.inc.c"
+#include "levels/bob/tree_root_shadow/model.inc.c"

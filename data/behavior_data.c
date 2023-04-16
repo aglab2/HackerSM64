@@ -6414,3 +6414,29 @@ const BehaviorScript bhvDeathTrigger[] = {
         CALL_NATIVE(bhv_death_trigger_loop),
     END_LOOP(),
 };
+
+extern void bhv_trunk_init();
+extern void bhv_trunk_loop();
+const BehaviorScript bhvC1Trunk[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    LOAD_COLLISION_DATA(tree_trunk_collision),
+    CALL_NATIVE(bhv_trunk_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_trunk_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_trunk_root_init();
+extern void bhv_trunk_root_loop();
+const BehaviorScript bhvC1TrunkRoot[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(tree_root_collision),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_trunk_root_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_trunk_root_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

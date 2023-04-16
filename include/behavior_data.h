@@ -570,5 +570,7 @@ extern const BehaviorScript bhvChiaki[];
 extern const BehaviorScript bhvFireplace[];
 extern const BehaviorScript bhvSparkler[];
 extern const BehaviorScript bhvDeathTrigger[];
+extern const BehaviorScript bhvC1Trunk[];
+extern const BehaviorScript bhvC1TrunkRoot[];
 
 #endif // BEHAVIOR_DATA_H

@@ -55,4 +55,14 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/header.inc.h"
 
+#include "levels/bob/tree_root/collision_header.h"
+
+#include "levels/bob/tree_root/geo_header.h"
+
+#include "levels/bob/tree_trunk/collision_header.h"
+
+#include "levels/bob/tree_trunk/geo_header.h"
+
+#include "levels/bob/tree_root_shadow/geo_header.h"
+
 #endif

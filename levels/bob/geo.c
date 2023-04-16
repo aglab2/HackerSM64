@@ -34,3 +34,7 @@ extern const Gfx wf_seg7_dl_0700A170[];
 
 #include "levels/wf/kickable_board/geo.inc.c"
 #include "levels/wf/sliding_platform/geo.inc.c"
+
+#include "levels/bob/tree_root/geo.inc.c"
+#include "levels/bob/tree_trunk/geo.inc.c"
+#include "levels/bob/tree_root_shadow/geo.inc.c"

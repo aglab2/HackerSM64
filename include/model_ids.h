@@ -587,4 +587,8 @@
 
 #define MODEL_FIREPLACE 0xfa
 
+#define MODEL_TREE_ROOT 0xfd
+#define MODEL_TREE_TRUNK 0xf4
+#define MODEL_TREE_ROOT_SHADOW 0xf3
+
 #endif // MODEL_IDS_H
