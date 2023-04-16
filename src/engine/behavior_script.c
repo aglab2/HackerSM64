@@ -934,7 +934,7 @@ void cur_obj_update(void) {
         && !(objFlags & OBJ_FLAG_ACTIVE_FROM_AFAR)
     ) {
         // If the object has a render distance, check if it should be shown.
-        if ( distanceFromMario > o->oDrawingDistance) {
+        if (gIsConsole && distanceFromMario > o->oDrawingDistance) {
             // Out of render distance, hide the object.
             o->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
             o->activeFlags |= ACTIVE_FLAG_FAR_AWAY;

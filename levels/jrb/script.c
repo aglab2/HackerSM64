@@ -185,6 +185,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, 4238, -1540, -10229, 0, -136, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, 5443, -923, -8999, 0, -144, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
 		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, -12574, -736, 7128, 0, 0, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
+		OBJECT(MODEL_LLL_TILTING_SQUARE_PLATFORM, -11459, -1500, 6200, 0, 0, 0, 0x00000000, bhvLllTiltingInvertedPyramid),
 		OBJECT(MODEL_TRIMO, 9008, -1551, 5349, 0, -1, 0, 0x00000000, bhvTrimo),
 		OBJECT(MODEL_TRIMO, 12105, -1551, 5306, 0, -1, 0, (1 << 16), bhvTrimo),
 		OBJECT(MODEL_TRIMO, 13702, -1551, 6772, 0, -1, 0, (2 << 16), bhvTrimo),
