@@ -73,7 +73,7 @@ void snufit_act_idle(void) {
         o->oSnufitBodyScalePeriod
             = approach_s16_symmetric(o->oSnufitBodyScalePeriod, 0, 1500);
         o->oSnufitBodyBaseScale
-            = approach_s16_symmetric(o->oSnufitBodyBaseScale, 600, 90);
+            = approach_s16_symmetric(o->oSnufitBodyBaseScale, 600, 60);
 
         if ((s16) o->oSnufitBodyScalePeriod == 0 && o->oSnufitBodyBaseScale == 600) {
             o->oAction = SNUFIT_ACT_SHOOT;
