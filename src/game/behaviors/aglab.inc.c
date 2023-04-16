@@ -1284,7 +1284,7 @@ void bhv_tree_init(void)
             o->oHDTree = 0;
     }
 
-    o->oDrawingDistance = gCurrCourseNum == COURSE_BOB ? 3000.f : 6000.f;
+    o->oDrawingDistance = (gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 1) ? 3000.f : 6000.f;
     if (o->oHDTree)
     {
         gCurrentObject->oFaceAngleYaw = random_u16();
