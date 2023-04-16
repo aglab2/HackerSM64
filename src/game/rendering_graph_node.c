@@ -546,12 +546,14 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
 
             if (LAYER_RED_FLAME == currLayer)
             {
-                startDl = sRedFlameTextureDls[frame];
+                int flFrame = (gGlobalTimer / 2) % 8;
+                startDl = sRedFlameTextureDls[flFrame];
                 endDl = flame_seg3_dl_end;
             }
             if (LAYER_BLUE_FLAME == currLayer)
             {
-                startDl = sBlueFlameTextureDls[frame];
+                int flFrame = (gGlobalTimer / 2) % 8;
+                startDl = sBlueFlameTextureDls[flFrame];
                 endDl = flame_seg3_dl_end;
             }
 
