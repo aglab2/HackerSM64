@@ -584,7 +584,7 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
     u32 srcSize = ALIGN16(srcEnd - srcStart);
     u32 destSize = (u8*) RAM_END - srcStart;
     if (srcSize <= destSize) {
-        bzero(dest, destSize);
+        bzero(dest, ((u8*)0x80800000) - dest);
         osWritebackDCacheAll();
         dma_read(dest, srcStart, srcEnd);
         osInvalICache(dest, destSize);
