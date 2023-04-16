@@ -107,6 +107,8 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_XLU_SURF,
+        [LAYER_RED_FLAME] = G_RM_AA_XLU_SURF,
+        [LAYER_BLUE_FLAME] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF,
     } },
     [RENDER_ZB] = { {
@@ -129,6 +131,8 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
+        [LAYER_RED_FLAME] = G_RM_AA_ZB_XLU_SURF,
+        [LAYER_BLUE_FLAME] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER,
     } } };
 
@@ -154,6 +158,8 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF2,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_XLU_SURF2,
+        [LAYER_RED_FLAME] = G_RM_AA_XLU_SURF2,
+        [LAYER_BLUE_FLAME] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF2,
     } },
     [RENDER_ZB] = { {
@@ -176,6 +182,8 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL2,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF2,
+        [LAYER_RED_FLAME] = G_RM_AA_ZB_XLU_SURF2,
+        [LAYER_BLUE_FLAME] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER2,
     } } };
 
@@ -375,14 +383,6 @@ Mtx identityMatrixWorldScale = {{
      0x00000000,                            LOWER_FIXED(1.0f)               <<  0}
 }};
 
-/**
- * Process a master list node. This has been modified, so now it runs twice, for each microcode.
- * It iterates through the first 5 layers of if the first index using F3DLX2.Rej, then it switches
- * to F3DZEX and iterates through all layers, then switches back to F3DLX2.Rej and finishes the last
- * 3. It does this, because layers 5-7 are non zbuffered, and just doing 0-7 of ZEX, then 0-7 of REJ
- * would make the ZEX 0-4 render on top of Rej's 5-7.
- */
-
 static const Gfx* sCoinsTextureDls[] = {
     dl_coin_0,
     dl_coin_22_5,
@@ -392,10 +392,39 @@ static const Gfx* sCoinsTextureDls[] = {
 };
 
 extern const Gfx dl_shadow_circle_end[];
+static const Gfx* sRedFlameTextureDls[] = {
+    flame_seg3_dl_0301B3B0,
+    flame_seg3_dl_0301B3C8,
+    flame_seg3_dl_0301B3E0,
+    flame_seg3_dl_0301B3F8,
+    flame_seg3_dl_0301B410,
+    flame_seg3_dl_0301B428,
+    flame_seg3_dl_0301B440,
+    flame_seg3_dl_0301B458,
+};
+
+static const Gfx* sBlueFlameTextureDls[] = {
+    flame_seg3_dl_0301B500,
+    flame_seg3_dl_0301B518,
+    flame_seg3_dl_0301B530,
+    flame_seg3_dl_0301B548,
+    flame_seg3_dl_0301B560,
+    flame_seg3_dl_0301B578,
+    flame_seg3_dl_0301B590,
+    flame_seg3_dl_0301B5A8,
+};
 
 extern Gfx burn_smoke_seg4_sub_dl_begin_translucent[];
 extern Gfx burn_smoke_seg4_sub_dl_begin_alpha[];
 extern const Gfx burn_smoke_seg4_sub_dl_end[];
+
+/**
+ * Process a master list node. This has been modified, so now it runs twice, for each microcode.
+ * It iterates through the first 5 layers of if the first index using F3DLX2.Rej, then it switches
+ * to F3DZEX and iterates through all layers, then switches back to F3DLX2.Rej and finishes the last
+ * 3. It does this, because layers 5-7 are non zbuffered, and just doing 0-7 of ZEX, then 0-7 of REJ
+ * would make the ZEX 0-4 render on top of Rej's 5-7.
+ */
 
 void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     struct RenderPhase *renderPhase;
@@ -457,6 +486,17 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                     startDl = sCoinsTextureDls[8 - frame];
                 }
                 endDl = dl_coin_end;
+            }
+
+            if (LAYER_RED_FLAME == currLayer)
+            {
+                startDl = sRedFlameTextureDls[frame];
+                endDl = flame_seg3_dl_end;
+            }
+            if (LAYER_BLUE_FLAME == currLayer)
+            {
+                startDl = sBlueFlameTextureDls[frame];
+                endDl = flame_seg3_dl_end;
             }
 
             if (currLayer == LAYER_CIRCLE_SHADOW || currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT)
