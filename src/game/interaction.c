@@ -1887,6 +1887,7 @@ void mario_process_interactions(struct MarioState *m) {
 void check_death_barrier(struct MarioState *m) {
     if (m->pos[1] < m->floorHeight + 2048.0f) {
         DeathFloor_checkDeathBarrierHook(m);
+        mario_stop_riding_object(m);
     }
 }
 
