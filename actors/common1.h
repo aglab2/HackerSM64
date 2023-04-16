@@ -35,6 +35,7 @@ extern const GeoLayout red_coin_no_shadow_geo[];
 extern const GeoLayout silver_coin_geo[];
 extern const GeoLayout silver_coin_no_shadow_geo[];
 
+extern const Gfx dl_coin_end[];
 extern const Gfx dl_coin_0[];
 extern const Gfx dl_coin_22_5[];
 extern const Gfx dl_coin_45[];
