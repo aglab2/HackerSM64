@@ -170,6 +170,7 @@ extern const Gfx flame_seg3_dl_0301B560[];
 extern const Gfx flame_seg3_dl_0301B578[];
 extern const Gfx flame_seg3_dl_0301B590[];
 extern const Gfx flame_seg3_dl_0301B5A8[];
+extern const Gfx flame_seg3_dl_end[];
 
 // leaves
 extern const GeoLayout leaves_geo[];
