@@ -98,6 +98,8 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_DECAL
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_RED_FLAME
+        G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_BLUE_FLAME
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_XLU_SURF,                   // LAYER_TRANSPARENT_INTER
     } },
@@ -121,6 +123,8 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_ZB_CLD_SURF,                   // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL,               // LAYER_TRANSPARENT_DECAL
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_RED_FLAME
+        G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_BLUE_FLAME
         G_RM_AA_ZB_XLU_SURF,                // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_ZB_XLU_INTER,               // LAYER_TRANSPARENT_INTER
     } } };
@@ -145,6 +149,8 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_DECAL
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_RED_FLAME
+        G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_BLUE_FLAME
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_XLU_SURF2,                  // LAYER_TRANSPARENT_INTER
     } },
@@ -168,6 +174,8 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_ZB_CLD_SURF2,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_TRANSPARENT_DECAL
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_RED_FLAME
+        G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_BLUE_FLAME
         G_RM_AA_ZB_XLU_SURF2,               // LAYER_TRANSPARENT_SMOKE
         G_RM_AA_ZB_XLU_INTER2,              // LAYER_TRANSPARENT_INTER
     } } };
@@ -300,7 +308,28 @@ static const Gfx* sCoinsTextureDls[] = {
     dl_coin_90,
 };
 
-extern uintptr_t sSegmentTable[32];
+static const Gfx* sRedFlameTextureDls[] = {
+    flame_seg3_dl_0301B3B0,
+    flame_seg3_dl_0301B3C8,
+    flame_seg3_dl_0301B3E0,
+    flame_seg3_dl_0301B3F8,
+    flame_seg3_dl_0301B410,
+    flame_seg3_dl_0301B428,
+    flame_seg3_dl_0301B440,
+    flame_seg3_dl_0301B458,
+};
+
+static const Gfx* sBlueFlameTextureDls[] = {
+    flame_seg3_dl_0301B500,
+    flame_seg3_dl_0301B518,
+    flame_seg3_dl_0301B530,
+    flame_seg3_dl_0301B548,
+    flame_seg3_dl_0301B560,
+    flame_seg3_dl_0301B578,
+    flame_seg3_dl_0301B590,
+    flame_seg3_dl_0301B5A8,
+};
+
 #if 0
 struct CourseTextures
 {
@@ -415,6 +444,17 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                     startDl = sCoinsTextureDls[8 - frame];
                 }
                 endDl = dl_coin_end;
+            }
+
+            if (LAYER_RED_FLAME == currLayer)
+            {
+                startDl = sRedFlameTextureDls[frame];
+                endDl = flame_seg3_dl_end;
+            }
+            if (LAYER_BLUE_FLAME == currLayer)
+            {
+                startDl = sBlueFlameTextureDls[frame];
+                endDl = flame_seg3_dl_end;
             }
 
             if (currLayer == LAYER_CIRCLE_SHADOW || currLayer == LAYER_CIRCLE_SHADOW_TRANSPARENT)

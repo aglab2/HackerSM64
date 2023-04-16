@@ -7,21 +7,13 @@ const GeoLayout red_flame_shadow_geo[] = {
    GEO_END(),
 };
 
+extern const Gfx flame_seg3_dl_draw[];
+
 // 0x16000B2C
 const GeoLayout red_flame_geo[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),
-      GEO_SWITCH_CASE(8, geo_switch_anim_state),
-      GEO_OPEN_NODE(),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B3B0),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B3C8),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B3E0),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B3F8),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B410),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B428),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B440),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B458),
-      GEO_CLOSE_NODE(),
+      GEO_DISPLAY_LIST(LAYER_RED_FLAME, flame_seg3_dl_draw),
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
@@ -30,17 +22,7 @@ const GeoLayout red_flame_geo[] = {
 const GeoLayout blue_flame_geo[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),
-      GEO_SWITCH_CASE(8, geo_switch_anim_state),
-      GEO_OPEN_NODE(),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B500),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B518),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B530),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B548),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B560),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B578),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B590),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, flame_seg3_dl_0301B5A8),
-      GEO_CLOSE_NODE(),
+      GEO_DISPLAY_LIST(LAYER_BLUE_FLAME, flame_seg3_dl_draw),
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
@@ -50,18 +32,8 @@ extern Gfx *geo_update_layer_envcolor(s32 callContext, struct GraphNode *node, U
 const GeoLayout fight_flame_geo[] = {
    GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0x50, 20),
    GEO_OPEN_NODE(),
-      GEO_ASM(GEO_TRANSPARENCY_MODE_INTER, geo_update_layer_envcolor),
-      GEO_SWITCH_CASE(8, geo_switch_anim_state),
-      GEO_OPEN_NODE(),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B500),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B518),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B530),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B548),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B560),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B578),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B590),
-         GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, fight_flame_seg3_dl_0301B5A8),
-      GEO_CLOSE_NODE(),
+      GEO_ASM(LAYER_RED_FLAME, geo_update_layer_envcolor),
+      GEO_DISPLAY_LIST(LAYER_RED_FLAME, flame_seg3_dl_draw),
    GEO_CLOSE_NODE(),
    GEO_END(),
 };

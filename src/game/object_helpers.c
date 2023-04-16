@@ -144,14 +144,7 @@ Gfx *geo_update_layer_envcolor(s32 callContext, struct GraphNode *node, UNUSED v
         struct RGBA* colors = (struct RGBA*) &objectGraphNode->oFightFlameColor;
 
         {
-            if (parameter == GEO_TRANSPARENCY_MODE_DECAL) {
-                SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_DECAL);
-            } else if (parameter == GEO_TRANSPARENCY_MODE_INTER) {
-                SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_INTER);
-            } else {
-                SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT);
-            }
-
+            SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, parameter);
             if (parameter != GEO_TRANSPARENCY_MODE_NO_DITHER
                 && (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA)) {
                 gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
