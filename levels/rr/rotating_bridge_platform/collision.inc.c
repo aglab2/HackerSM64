@@ -35,7 +35,7 @@ const Collision rr_seg7_collision_rotating_platform_with_fire[] = {
     COL_VERTEX(-144, 614, 381),
     COL_VERTEX(133, 614, 381),
     COL_VERTEX(376, 614, 138),
-    COL_TRI_INIT(SURFACE_DEFAULT, 50),
+    COL_TRI_INIT(SURFACE_VANISH_CAP_WALLS, 50),
     COL_TRI(8, 12, 9),
     COL_TRI(0, 1, 2),
     COL_TRI(0, 2, 3),

@@ -10,7 +10,7 @@ const Collision rr_seg7_collision_07029750[] = {
     COL_VERTEX(307, 0, 768),
     COL_VERTEX(-306, 0, 768),
     COL_VERTEX(-306, 102, 819),
-    COL_TRI_INIT(SURFACE_DEFAULT, 12),
+    COL_TRI_INIT(SURFACE_VANISH_CAP_WALLS, 12),
     COL_TRI(0, 1, 2),
     COL_TRI(2, 1, 3),
     COL_TRI(2, 3, 4),
