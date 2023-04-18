@@ -4,7 +4,11 @@ extern const Trajectory wf_area_1_spline_balls_path_1[];
 extern const Trajectory wf_area_1_spline_balls_path_2[];
 
 extern const Trajectory bbh_area_1_spline_NurbsCurve[];
+extern const Trajectory bbh_area_1_spline_NurbsCurve_l[];
+extern const Trajectory bbh_area_1_spline_NurbsCurve_r[];
 extern const Trajectory bbh_area_1_spline_NurbsCurve_001[];
+extern const Trajectory bbh_area_1_spline_NurbsCurve_001_l[];
+extern const Trajectory bbh_area_1_spline_NurbsCurve_001_r[];
 extern const Trajectory bbh_area_1_spline_NurbsCurve_002[];
 
 static struct ObjectHitbox sBowlingBallHitbox = {
@@ -60,7 +64,18 @@ void bowling_ball_set_hitbox(void) {
     }
 }
 
+static const void* sTrajectories2[] = 
+{
+    bbh_area_1_spline_NurbsCurve_001, bbh_area_1_spline_NurbsCurve_001_l, bbh_area_1_spline_NurbsCurve_001, bbh_area_1_spline_NurbsCurve_001_r
+};
+
+static const void* sTrajectories3[] = 
+{
+    bbh_area_1_spline_NurbsCurve, bbh_area_1_spline_NurbsCurve_l, bbh_area_1_spline_NurbsCurve, bbh_area_1_spline_NurbsCurve_r
+};
+
 void bowling_ball_set_waypoints(void) {
+    static int ballCounters[5] = { 0 };
     switch (o->oBehParams2ndByte) {
         case BBALL_BP_STYPE_BOB_UPPER:
             o->oPathedStartWaypoint = segmented_to_virtual(wf_area_1_spline_balls_path_1);
@@ -75,11 +90,11 @@ void bowling_ball_set_waypoints(void) {
             break;
 
         case BBALL_BP_STYPE_THI_LARGE:
-            o->oPathedStartWaypoint = segmented_to_virtual(bbh_area_1_spline_NurbsCurve_001);
+            o->oPathedStartWaypoint = segmented_to_virtual(sTrajectories2[((++ballCounters[BBALL_BP_STYPE_THI_LARGE]) / 2) % 4]);
             break;
 
         case BBALL_BP_STYPE_THI_SMALL:
-            o->oPathedStartWaypoint = segmented_to_virtual(bbh_area_1_spline_NurbsCurve);
+            o->oPathedStartWaypoint = segmented_to_virtual(sTrajectories3[((++ballCounters[BBALL_BP_STYPE_THI_SMALL]) / 2) % 4]);
             break;
     }
 }
