@@ -461,6 +461,7 @@
 #define /*0x0F8*/ oControllablePlatformWallHitDirection OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oControllablePlatformInitPosY         OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oControllablePlatformIsFarFromMario   OBJECT_FIELD_S32(0x1E)
+#define /*0x100*/ oControllablePlatformFlameTop         OBJECT_FIELD_OBJ(0x1F)
 
 /* Breakable Box Small (Small Cork Box) */
 #define /*0x0F4*/ oBreakableBoxSmallReleased            OBJECT_FIELD_S32(0x1B)

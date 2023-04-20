@@ -54,7 +54,17 @@ void bhv_controllable_platform_sub_loop(void) {
     }
 }
 
+extern const BehaviorScript bhvFlame2[];
 void bhv_controllable_platform_init(void) {
+    f32 d;
+    o->parentObj = cur_obj_find_nearest_object_with_behavior(bhvFlame, &d);
+    if (!o->parentObj)
+        o->parentObj = spawn_object(o, MODEL_BLUE_FLAME, bhvFlame);
+
+    o->oControllablePlatformFlameTop = cur_obj_find_nearest_object_with_behavior(bhvFlame2, &d);
+    if (!o->oControllablePlatformFlameTop)
+        o->oControllablePlatformFlameTop = spawn_object(o, MODEL_BLUE_FLAME, bhvFlame2);
+
     struct Object *sp34;
 
     sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 
@@ -253,8 +263,7 @@ void bhv_controllable_platform_loop(void) {
 
         case 9:
             controllable_platform_shake_on_wall_hit();
-            return;
-            break;
+            goto flame_ctl;
 
         case 10:
             if (obj_flicker_and_disappear(o, 150)) {
@@ -270,4 +279,27 @@ void bhv_controllable_platform_loop(void) {
     if (sControllablePlatformDirectionState != 0 && sControllablePlatformDirectionState != 10) {
         cur_obj_play_sound_1(SOUND_ENV_ELEVATOR2);
     }
+
+flame_ctl:
+    load_object_collision_model();
+
+    f32 d = ((6000.f - gMarioStates->pos[2]) / 10.f);
+    static s16 flameTimer = 0;
+    flameTimer += (369 + d);
+    const f32 upd = 100.f;
+    o->parentObj->oPosX = o->oPosX + 244.f * sins(flameTimer);
+    o->parentObj->oPosZ = o->oPosZ + 244.f * coss(flameTimer);
+    o->parentObj->oPosY = find_floor_height(o->parentObj->oPosX, o->oPosY + 200.0f, o->parentObj->oPosZ) + upd;
+    if (o->parentObj->oPosY < o->oPosY)
+    {
+        o->parentObj->oPosY = 51.f + upd + o->oPosY;
+    }
+
+    f32 zup = (-7000.f - o->oPosX) / 2.f;
+    if (zup < 0)
+        zup = 0.f;
+
+    o->oControllablePlatformFlameTop->oPosX = o->oPosX;
+    o->oControllablePlatformFlameTop->oPosZ = o->oPosZ;
+    o->oControllablePlatformFlameTop->oPosY = o->oPosY + 151.f + zup;
 }
