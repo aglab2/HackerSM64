@@ -604,7 +604,7 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             }
 
             // Iterate through all the displaylists on the current layer.
-            while (currList != NULL) {
+            do {
                 // Add the display list's transformation to the master list.
                 gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
                           (G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH));
@@ -614,6 +614,7 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 // Move to the next DisplayListNode.
                 currList = currList->next;
             }
+            while (currList != NULL);
         }
     }
     
