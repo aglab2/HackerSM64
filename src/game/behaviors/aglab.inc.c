@@ -1489,3 +1489,60 @@ void bhv_trunk_root_loop()
         }
     }
 }
+
+static struct ObjectHitbox sBlarrgHitBox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
+static struct ObjectHitbox sBlarrgHitBox2 = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 112,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 82,
+    /* hurtboxHeight:     */ 40,
+};
+
+void bhv_blarrg_loop_sub()
+{
+    obj_set_hitbox(o, &sBlarrgHitBox2);
+    o->oInteractStatus = INT_STATUS_NONE;
+    o->oPosX = o->parentObj->oPosX + sins(o->parentObj->oMoveAngleYaw) * 120.f;
+    o->oPosY = o->parentObj->oPosY + 20.f;
+    o->oPosZ = o->parentObj->oPosZ + coss(o->parentObj->oMoveAngleYaw) * 120.f;
+}
+
+extern const BehaviorScript bhvBlarrgSub[];
+void bhv_blarrg_init()
+{
+    spawn_object(o, MODEL_NONE, bhvBlarrgSub);
+}
+
+void bhv_blarrg_loop()
+{
+    obj_set_hitbox(o, &sGoombaHitbox);
+    cur_obj_init_animation_with_sound(0);
+    o->oInteractStatus = INT_STATUS_NONE;
+    o->oMoveAngleYaw += 0x257;
+    if (0 == o->oBehParams2ndByte)
+    {
+        o->oPosX = o->oHomeX + 200.f * sins(-0x4000 + o->oMoveAngleYaw);
+        o->oPosZ = o->oHomeZ + 200.f * coss(-0x4000 + o->oMoveAngleYaw);
+    }
+    if (1 == o->oBehParams2ndByte)
+    {
+        o->oPosX = o->oHomeX + 200.f * sins(-0x4000 + o->oMoveAngleYaw);
+        o->oPosZ = o->oHomeZ + 200.f * sins(-0x4000 + o->oMoveAngleYaw);
+    }
+}

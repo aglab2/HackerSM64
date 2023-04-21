@@ -22,6 +22,7 @@
 /* Fast64 begin persistent block [scripts] */
 /* Fast64 end persistent block [scripts] */
 
+extern const BehaviorScript bhvBlarrg[];
 const LevelScript level_jrb_entry[] = {
 	INIT_LEVEL(),
 	LOAD_YAY0(0x07, _jrb_segment_7SegmentRomStart, _jrb_segment_7SegmentRomEnd), 
@@ -76,6 +77,8 @@ const LevelScript level_jrb_entry[] = {
 		WARP_NODE(0x31, LEVEL_JRB, 0x01, 0x30, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x41, LEVEL_BOB, 0x01, 0x41, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x42, LEVEL_BOB, 0x01, 0x41, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_BLARGG,-988, -2426 + 20, 6770, 0, 0, 0, 0, bhvBlarrg),
+		OBJECT(MODEL_BLARGG,-8453, 200 + 20, 2266, 0, 0, 0, (0x1 << 16), bhvBlarrg),
 		OBJECT(MODEL_NONE, -2811, -1116, 2590, 0, 180, 0, (0x41 << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -1496, -2111, 6260, 0, 90, 0, (0x42 << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_AMP, 12224, -1422, -1069, 0, -1, 0, 0x00000000, bhvCirclingAmp),

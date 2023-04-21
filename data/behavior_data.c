@@ -6481,3 +6481,33 @@ const BehaviorScript bhvMotos[] = {
         CALL_NATIVE(bhv_motos_loop),
     END_LOOP(),
 };
+
+extern void bhv_blarrg_init();
+extern void bhv_blarrg_loop();
+const BehaviorScript bhvBlarrg[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, blargg_seg5_anims_0500616C),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    SET_INT(oDamageOrCoinValue, 2),
+    SET_HITBOX(/*Radius*/ 140, /*Height*/ 80),
+    SET_HURTBOX(/*Radius*/ 40, /*Height*/ 60),
+    CALL_NATIVE(bhv_blarrg_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_blarrg_loop),
+    END_LOOP(),
+};
+
+extern void bhv_blarrg_loop_sub();
+const BehaviorScript bhvBlarrgSub[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),\
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oDamageOrCoinValue, 2),
+    SET_HITBOX(/*Radius*/ 140, /*Height*/ 80),
+    SET_HURTBOX(/*Radius*/ 40, /*Height*/ 60),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_blarrg_loop_sub),
+    END_LOOP(),
+};
