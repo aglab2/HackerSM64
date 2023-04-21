@@ -7,7 +7,7 @@ const Collision lll_seg7_collision_inverted_pyramid[] = {
     COL_VERTEX(-306, 307, 307),
     COL_VERTEX(307, 307, -306),
     COL_VERTEX(-306, 307, -306),
-    COL_TRI_INIT(SURFACE_DEFAULT, 6),
+    COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 6),
     COL_TRI(0, 1, 2),
     COL_TRI(0, 3, 1),
     COL_TRI(1, 4, 2),
