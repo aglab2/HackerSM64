@@ -23,6 +23,8 @@
 /* Fast64 begin persistent block [scripts] */
 /* Fast64 end persistent block [scripts] */
 
+extern const GeoLayout RCP_HmsEnemymotos_basedata_A[];
+extern const BehaviorScript bhvMotos[];
 const LevelScript level_bowser_1_entry[] = {
 	INIT_LEVEL(),
 	LOAD_YAY0(0x07, _bowser_1_segment_7SegmentRomStart, _bowser_1_segment_7SegmentRomEnd), 
@@ -42,6 +44,7 @@ const LevelScript level_bowser_1_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TTC_PUSH_BLOCK, ttc_geo_0002C8), 
 	LOAD_MODEL_FROM_GEO(MODEL_TTC_ROTATING_HEXAGON, ttc_geo_0002E0), 
 	LOAD_MODEL_FROM_GEO(MODEL_TTC_ROTATING_TRIANGLE, ttc_geo_0002F8), 
+	LOAD_MODEL_FROM_GEO(MODEL_TTC_PIT_BLOCK, RCP_HmsEnemymotos_basedata_A), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -50,6 +53,10 @@ const LevelScript level_bowser_1_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf0, LEVEL_CASTLE_GROUNDS, 0x01, 0xf0, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xf1, LEVEL_CASTLE_GROUNDS, 0x01, 0xf1, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_TTC_PIT_BLOCK, 5321, 2973, -2675, 0,180,0, 0x00000000, bhvMotos),
+		OBJECT(MODEL_TTC_PIT_BLOCK, 5137, 2973, -1559, 0,180,0, 0x00000000, bhvMotos),
+		OBJECT(MODEL_TTC_PIT_BLOCK, 5592, 2973, 942, 0,180,0, 0x00000000, bhvMotos),
+		OBJECT(MODEL_TTC_PIT_BLOCK, 5345, 2973, 2588, 0,180,0, 0x00000000, bhvMotos),
 		OBJECT(MODEL_BLACK_BOBOMB, 1336, 1658, -262, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BLACK_BOBOMB, 4086, 385, 1655, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BLACK_BOBOMB, 5390, 2973, -1128, 0, 0, 0, 0x00000000, bhvBobomb),

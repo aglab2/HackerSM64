@@ -22,4 +22,6 @@ extern const GeoLayout ttc_geo_0002F8[];
 
 #include "levels/bowser_1/header.inc.h"
 
+#include "levels/bowser_1/motos/header.h"
+
 #endif

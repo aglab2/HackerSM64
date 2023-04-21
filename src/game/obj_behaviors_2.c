@@ -817,4 +817,5 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/bubba.inc.c"
 
 #include "behaviors/aglab.inc.c"
+#include "behaviors/motos.inc.c"
 #include "behaviors/omm.inc.c"
