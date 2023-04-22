@@ -356,7 +356,7 @@ extern void bhv_pipe_raiser_loop()
     }
 }
 
-#define CREDITS_SIZE 8
+#define CREDITS_SIZE 10
 extern const char* gCreditsStr[CREDITS_SIZE];
 extern int gCreditsLength[CREDITS_SIZE];
 extern int gCreditsAlign[CREDITS_SIZE];
@@ -560,6 +560,10 @@ void bhv_peach_ending_cs_loop()
         fade_in_text(5);
         set_text(6, "HackerSM64 discord", -1, 2, 270, 140);
         fade_in_text(6);
+        set_text(7, "Dog Collab", -1, 0, 30, 160);
+        fade_in_text(7);
+        set_text(8, "The Lads", -1, 2, 270, 160);
+        fade_in_text(8);
     }
     else if (o->oTimer < 820)
     {
