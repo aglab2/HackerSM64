@@ -12,13 +12,14 @@ void bhv_piranha_particle_loop(void) {
 }
 
 void mr_i_piranha_particle_act_move(void) {
-#ifdef MR_I_PITCH_SHOOTING
-    // Take pitch into account
-    o->oVelX = (o->oForwardVel *  coss(o->oMoveAnglePitch) * sins(o->oMoveAngleYaw));
-    o->oVelY = (o->oForwardVel * -sins(o->oMoveAnglePitch)                         );
-    o->oVelZ = (o->oForwardVel *  coss(o->oMoveAnglePitch) * coss(o->oMoveAngleYaw));
-    vec3f_add(&o->oPosVec, &o->oVelVec);
-#endif
+    if (0 == o->oBehParams2ndByte)
+    {
+        // Take pitch into account
+        o->oVelX = (o->oForwardVel *  coss(o->oMoveAnglePitch) * sins(o->oMoveAngleYaw));
+        o->oVelY = (o->oForwardVel * -sins(o->oMoveAnglePitch)                         );
+        o->oVelZ = (o->oForwardVel *  coss(o->oMoveAnglePitch) * coss(o->oMoveAngleYaw));
+        vec3f_add(&o->oPosVec, &o->oVelVec);
+    }
 
     cur_obj_scale(3.0f);
     o->oForwardVel = 20.0f;
@@ -54,16 +55,20 @@ void spawn_mr_i_particle(void) {
     f32 yScale = o->header.gfx.scale[1];
 
     struct Object *particle = spawn_object(o, MODEL_PURPLE_MARBLE, bhvMrIParticle);
-#ifdef MR_I_PITCH_SHOOTING
-    // Take pitch into account
-    particle->oPosX += (90.0f * yScale) *  coss(o->oMoveAnglePitch) * sins(o->oMoveAngleYaw);
-    particle->oPosY += (90.0f * yScale) * -sins(o->oMoveAnglePitch) + (50.0f * yScale);
-    particle->oPosZ += (90.0f * yScale) *  coss(o->oMoveAnglePitch) * coss(o->oMoveAngleYaw);
-#else
-    particle->oPosY += 50.0f * yScale;
-    particle->oPosX += sins(o->oMoveAngleYaw) * 90.0f * yScale;
-    particle->oPosZ += coss(o->oMoveAngleYaw) * 90.0f * yScale;
-#endif
+    if (0 == o->oBehParams2ndByte)
+    {
+        // Take pitch into account
+        particle->oPosX += (90.0f * yScale) *  coss(o->oMoveAnglePitch) * sins(o->oMoveAngleYaw);
+        particle->oPosY += (90.0f * yScale) * -sins(o->oMoveAnglePitch) + (50.0f * yScale);
+        particle->oPosZ += (90.0f * yScale) *  coss(o->oMoveAnglePitch) * coss(o->oMoveAngleYaw);
+    }
+    else
+    {
+        particle->oPosY += 50.0f * yScale;
+        particle->oPosX += sins(o->oMoveAngleYaw) * 90.0f * yScale;
+        particle->oPosZ += coss(o->oMoveAngleYaw) * 90.0f * yScale;
+    }
+
     cur_obj_play_sound_2(SOUND_OBJ_MRI_SHOOT);
 }
 
@@ -153,6 +158,9 @@ void mr_i_body_act_looking_at_mario(void) {
     s16 startYaw = o->oMoveAngleYaw;
 
     if (o->oTimer == 0) {
+        if (0 == o->oBehParams2ndByte)
+            play_sound(SOUND_PEACH_DEAR_MARIO, gGlobalSoundSource);
+
         if (o->oBehParams2ndByte) {
             o->oMrISpinAngle = 200;
         } else {
@@ -241,7 +249,7 @@ void mr_i_body_act_idle(void) {
     }
 
     f32 dist = o->oBehParams2ndByte ? 1000.f : 600.f;
-    if (o->oDistanceToMario < dist && angleDiffMoveYawToMario < 1024) {
+    if (o->oDistanceToMario < dist && angleDiffMoveYawToMario < 2024) {
         o->oAction = MR_I_BODY_ACT_LOOKING_AT_MARIO;
     } else {
         o->oMoveAngleYaw += o->oAngleVelYaw;
