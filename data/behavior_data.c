@@ -4595,6 +4595,17 @@ const BehaviorScript bhvStar[] = {
     END_LOOP(),
 };
 
+extern void bhv_running_star_init();
+extern void bhv_running_star_loop();
+const BehaviorScript bhvStarRunningCtl[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    CALL_NATIVE(bhv_running_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_running_star_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvStarSpawnCoordinates[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),

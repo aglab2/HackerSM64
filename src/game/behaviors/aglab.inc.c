@@ -1698,3 +1698,53 @@ void bhv_bitfs_fight_loop()
         o->oSubAction = 1;
     }
 }
+
+void bhv_running_star_init()
+{
+    f32 d;
+    o->parentObj = cur_obj_find_nearest_object_with_behavior(bhvStar, &d);
+    o->oPosY = o->parentObj->oPosY = find_ceil(o->oPosX, 0.f, o->oPosZ, &o->oFloor) - 10.f;
+}
+
+void bhv_running_star_loop()
+{
+    if (0 == o->parentObj->activeFlags)
+    {
+        o->activeFlags = 0;
+    }
+
+    if (o->oPosZ < 0.f)
+        return;
+
+    f32 afterSlide = o->oPosZ > 1100.f;
+    f32 afterSlope = o->oFloor->normal.y < -0.5f;
+    f32 td = afterSlide ? 300.f : 500.f;
+    if (o->oDistanceToMario < td)
+    {
+        if (afterSlide)
+        {
+            o->oPosZ -= 10.f;
+        }
+        else
+        {
+            o->oPosZ -= 30.f;
+        }
+        f32 y = find_ceil(o->oPosX, 0.f, o->oPosZ, &o->oFloor);
+        if (o->oFloor)
+        {
+            o->oPosY = y - (afterSlope ? (600.f - o->oPosZ) : 10.f);
+        }
+    }
+    
+    o->parentObj->oPosX = o->oPosX;
+    o->parentObj->oPosZ = o->oPosZ;
+    if (o->oPosY > o->parentObj->oPosY)
+    {
+        o->parentObj->oPosY += 10.f;
+    }
+    else
+    {
+        o->parentObj->oPosY = o->oPosY;
+    }
+    o->parentObj->oFloor = NULL;
+}

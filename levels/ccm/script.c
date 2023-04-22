@@ -116,6 +116,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_STAR, 6386, 300, -1118, 0, 0, 0, (3 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 2245, 245, 3093, 0, 0, 0, (1 << 24), bhvHiddenStar),
 		OBJECT(MODEL_STAR, -1086, 2970, 1235, 0, 0, 0, (5 << 24), bhvStar),
+		OBJECT(MODEL_NONE, -1086, 2970, 1235, 0, 0, 0, (5 << 24), bhvStarRunningCtl),
 		OBJECT(MODEL_CAP_SWITCH, -5364, 1619, -5483, 0, 0, 0, (2 << 16), bhvCapSwitch),
 		OBJECT(MODEL_NONE, -2919, -480, -956, 0, -90, 0, (4 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -1092, 6095, 7630, 0, -180, 0, (0xa << 16), bhvInstantActiveWarp),
