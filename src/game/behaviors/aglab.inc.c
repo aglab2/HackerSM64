@@ -1714,10 +1714,13 @@ void bhv_running_star_loop()
     }
 
     if (o->oPosZ < 0.f)
+    {
+        o->activeFlags = 0;
         return;
+    }
 
     f32 afterSlide = o->oPosZ > 1100.f;
-    f32 afterSlope = o->oFloor->normal.y < -0.5f;
+    f32 afterSlope = o->oFloor && o->oFloor->normal.y < -0.5f;
     f32 td = afterSlide ? 300.f : 500.f;
     if (o->oDistanceToMario < td)
     {
