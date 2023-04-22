@@ -941,7 +941,7 @@ void bhv_ronpa_init()
 
     f32 d;
     o->oRonpaStar = cur_obj_find_nearest_object_with_behavior(bhvStar, &d);
-    o->oRonpaStar->oPosZ = 14000.f;
+    o->oRonpaStar->oPosZ = 27000.f;
     
     // mario stupidity
     o->oPosY -= 307.f;
@@ -950,24 +950,92 @@ void bhv_ronpa_init()
 }
 
 static u16 gActiveMasks[] = 
-{ 0x0, 0x0, 0x0, 0x0, 
+{ 0x0, 0x0, 
+  // 1
+  0x0, 0x0, 
+  // 2
   0b0000001001001001,
   0x0, 
+  // 3
   0b0100100100100100,
   0b1101101101101101,
+  // 4
   0b1001001001001001,
   0b0110110110110110,
+  // 4
   0b1001001001001001,
   0b0110110110110110,
+  // 3
   0b0100100100100100,
   0b1101101101101101,
+  // 2
   0b0000001001001001,
   0x0, 
+
+  // 4
+  0b1001001001001001,
+  0b0110110110110110,
+  // 2
+  0b0000001001001001,
   0x0, 
-  0x0, 
+  // 4
+  0b1001001001001001,
+  0b0110110110110110,
+  // 3
+  0b0100100100100100,
+  0b1101101101101101,
+  // 4
+  0b1001001001001001,
+  0b0110110110110110,
+
+  // 1
+  0x0, 0x0, 
+  // 1
+  0x0, 0x0, 
+
   0xff, 
   0xff, 
 };
+
+static int get_tube_number()
+{
+    if (o->oSubAction < 7)
+    {
+        return o->oSubAction < 4 ? (MODEL_TUBE1 + o->oSubAction) : (MODEL_TUBE4 - o->oSubAction + 4);
+    }
+    else if (o->oSubAction == 7)
+    {
+        return MODEL_TUBE4;
+    }
+    else if (o->oSubAction == 8)
+    {
+        return MODEL_TUBE2;
+    }
+    else if (o->oSubAction == 9)
+    {
+        return MODEL_TUBE4;
+    }
+    else if (o->oSubAction == 10)
+    {
+        return MODEL_TUBE3;
+    }
+    else if (o->oSubAction == 11)
+    {
+        return MODEL_TUBE4;
+    }
+    else if (o->oSubAction == 12)
+    {
+        return MODEL_TUBE1;
+    }
+    else if (o->oSubAction == 13)
+    {
+        return MODEL_TUBE1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 extern Gfx mat_jrb_dl_sand_ded[];
 void bhv_ronpa_loop()
@@ -1038,10 +1106,10 @@ void bhv_ronpa_loop()
         gMarioStates->pos[2] = o->oPosZ;
 
         s32 turnStep = o->oSubAction * 2 + (o->oRonpaDist > 0);
-        //print_text_fmt_int(20, 20, "%d", turnStep);
-        //print_text_fmt_int(20, 40, "%d", turnNum);
-        //print_text_fmt_int(20, 60, "%d", gActiveMasks[turnStep] & (1 << turnNum));
-        s32 inactive = gActiveMasks[turnStep] & (1 << turnNum);
+        // print_text_fmt_int(20, 20, "%d", turnStep);
+        // print_text_fmt_int(20, 40, "%d", turnNum);
+        // print_text_fmt_int(20, 60, "%d", gActiveMasks[turnStep] & (1 << turnNum));
+        s32 inactive = gMarioStates->riddenObj && gActiveMasks[turnStep] & (1 << turnNum);
 
         if (!inactive || o->oRonpaDist < -1033.f || o->oRonpaDist > 1033.f || (-100.f < o->oRonpaDist && o->oRonpaDist < 100.f))
         {
@@ -1057,7 +1125,7 @@ void bhv_ronpa_loop()
             }
             o->oRonpaPrev = o->oRonpaCurr;
             o->oRonpaCurr = o->oRonpaNext;
-            int tubeNumber = o->oSubAction < 4 ? MODEL_TUBE1 + o->oSubAction : MODEL_TUBE4 - o->oSubAction + 4;
+            int tubeNumber = get_tube_number();
             o->oRonpaNext = spawn_object(o, tubeNumber >= MODEL_TUBE1 ? tubeNumber : 0, bhvTubeCommon);
             o->oRonpaNext->oPosX = o->oRonpaCurr->oPosX;
             o->oRonpaNext->oPosY = o->oRonpaCurr->oPosY;
