@@ -658,7 +658,7 @@ Have this as a reward."))
 DEFINE_DIALOG(DIALOG_059, 1, 3, 30, 200, _("\
 What have you done???\n\
 It was my baby you\n\
-murderous fiend!\n"))
+murderous fiend!"))
 
 DEFINE_DIALOG(DIALOG_060, 1, 4, 30, 200, _("\
 ATTENTION!\n\

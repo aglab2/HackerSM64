@@ -1,5 +1,6 @@
 // tuxie.inc.c
 
+static s32 sWantAngry = 0;
 void play_penguin_walking_sound(s32 walk) {
     if (o->oSoundStateID == PENGUIN_ANIM_WALK) {
         set_obj_anim_with_accel_and_sound(
@@ -84,6 +85,7 @@ void tuxies_mother_act_receiving_baby(void) {
 void tuxies_mother_act_idle(void) {
     f32 dist;
     struct Object *smallPenguinObj = cur_obj_find_nearest_object_with_behavior(bhvSmallPenguin, &dist);
+    sWantAngry = !smallPenguinObj;
 
     cur_obj_scale(4.0f);
     cur_obj_init_animation_with_sound(PENGUIN_ANIM_IDLE);
@@ -316,7 +318,7 @@ Gfx *geo_switch_tuxie_mother_eyes(s32 callContext, struct GraphNode *node, UNUSE
          * after giving it back. The easiest way to check this is to see if she's
          * moving, since she only does when she's chasing Mario.
          */
-        if (obj->oForwardVel > 5.0f && segmented_to_virtual(bhvTuxiesMother) == obj->behavior) {
+        if ((obj->oAction == 0 && sWantAngry) || (obj->oForwardVel > 5.0f && segmented_to_virtual(bhvTuxiesMother) == obj->behavior)) {
             switchCase->selectedCase = PENGUIN_ANIM_STATE_EYES_ANGRY;
         }
     }

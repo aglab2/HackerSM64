@@ -1395,8 +1395,15 @@ void bhv_fireplace_loop()
             spawn_object(o, MODEL_BOWSER_FLAMES, bhvBowserBombExplosion);
             create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
             set_camera_shake_from_point(SHAKE_POS_LARGE, o->oPosX, o->oPosY, o->oPosZ);
-            cur_obj_spawn_star_at_y_offset(-396.0f, 1449.0f, -2383.0f, 200.0f);
             o->oAction = 1;
+        }
+    }
+    else if (1 == o->oAction)
+    {
+        if (o->oTimer > 28)
+        {
+            cur_obj_spawn_star_at_y_offset(-396.0f, 1449.0f, -2383.0f, 200.0f);
+            o->oAction = 2;
         }
     }
 }
