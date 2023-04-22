@@ -56,6 +56,8 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0xf1, LEVEL_CASTLE, 3, 0x22, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xb, LEVEL_WF, 0x01, 0x0c, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xc, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, -5783, 5444, 211, 0, 90, 0, 0, bhvCoinFormation),
+		OBJECT(MODEL_NONE, -7600, 5044, 2167, 0, 0, 0, 0, bhvCoinFormation),
 		OBJECT(MODEL_NONE, -12686, 6235, 4175, 0, 0, 0, (0 << 16), bhvDeathTrigger),
 		OBJECT(MODEL_NONE, -12686, 6235, 4175, 0, 0, 0, (0 << 16), bhvBobBowlingBallSpawner),
 		OBJECT(MODEL_NONE, -7119, 7615, -943, 0, 0, 0, (1 << 16), bhvBobBowlingBallSpawner),

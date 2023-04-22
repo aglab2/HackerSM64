@@ -1463,7 +1463,7 @@ void bhv_death_trigger_loop()
     {
         u32 rbTimerPrev = (rb->timer - 1 + RING_BUFFER_SIZE) % 8;
         f32 lastY = rb->positions[rbTimerPrev].y;
-        if (gMarioStates->action == ACT_LAVA_BOOST && !(gMarioStates->flags & MARIO_METAL_CAP) && !in_safe_square() && lastY > 1740.f)
+        if ((o->oDeathTriggerLastAction != gMarioStates->action) && gMarioStates->action == ACT_LAVA_BOOST && !(gMarioStates->flags & MARIO_METAL_CAP) && !in_safe_square() && lastY > 1740.f)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
             gAllowPausing = 0;
@@ -1481,6 +1481,8 @@ void bhv_death_trigger_loop()
                 rb->timer++;
             }
         }
+
+        o->oDeathTriggerLastAction = gMarioStates->action;
     }
     else
     {
