@@ -1357,7 +1357,7 @@ void bhv_tree_init(void)
     }
 
     o->oDrawingDistance = (gCurrCourseNum == COURSE_BOB && gCurrAreaIndex == 1) ? 3000.f : 6000.f;
-    if (gCurrCourseNum == COURSE_TOTWC) o->oDrawingDistance = 3500.f;
+    if (gCurrCourseNum == COURSE_TOTWC) o->oDrawingDistance = 7000.f;
 
     if (o->oHDTree)
     {
@@ -1818,7 +1818,7 @@ void bhv_running_star_loop()
     }
     
     o->parentObj->oPosX = o->oPosX;
-    o->parentObj->oPosZ = o->oPosZ;
+    o->parentObj->oPosZ = o->oPosZ + 80.f;
     if (o->oPosY > o->parentObj->oPosY)
     {
         o->parentObj->oPosY += 10.f;
