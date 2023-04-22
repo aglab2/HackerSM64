@@ -1549,6 +1549,7 @@ void bhv_blarrg_loop()
 
 void bhv_iceblock_init()
 {
+    o->oTimer = o->oPosX;
     obj_scale_xyz(o, 0.3f, 0.015f, 0.3f);
 }
 
@@ -1563,6 +1564,7 @@ void bhv_iceblock_loop()
 
 void bhv_iceblock_init_small()
 {
+    o->oTimer = o->oPosX;
     obj_scale_xyz(o, 0.3f, 0.015f, 0.3f);
 }
 
