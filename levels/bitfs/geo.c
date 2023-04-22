@@ -49,3 +49,4 @@
 #include "levels/bitfs/geo.inc.c"
 
 #include "levels/bitfs/bitfs_thing/geo.inc.c"
+#include "levels/bitfs/bitfsplate/geo.inc.c"

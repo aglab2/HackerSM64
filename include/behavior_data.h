@@ -574,5 +574,6 @@ extern const BehaviorScript bhvC1Trunk[];
 extern const BehaviorScript bhvC1TrunkRoot[];
 extern const BehaviorScript bhvIceBlock[];
 extern const BehaviorScript bhvIceBlockMini[];
+extern const BehaviorScript bhvBitfsPlate[];
 
 #endif // BEHAVIOR_DATA_H

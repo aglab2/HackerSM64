@@ -101,4 +101,8 @@ extern const LevelScript level_bitfs_entry[];
 
 #include "levels/bitfs/bitfs_thing/collision_header.h"
 
+#include "levels/bitfs/bitfsplate/geo_header.h"
+
+#include "levels/bitfs/bitfsplate/collision_header.h"
+
 #endif

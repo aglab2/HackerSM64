@@ -61,3 +61,5 @@
 
 #include "levels/bitfs/bitfs_thing/model.inc.c"
 #include "levels/bitfs/bitfs_thing/collision.inc.c"
+#include "levels/bitfs/bitfsplate/model.inc.c"
+#include "levels/bitfs/bitfsplate/collision.inc.c"

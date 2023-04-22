@@ -188,6 +188,7 @@ void bully_spawn_coin(void) {
     coin->oMoveAngleYaw = (f32)(o->oBullyMarioCollisionAngle + 0x8000) + random_float() * 1024.0f;
 }
 
+extern const BehaviorScript bhvBigBullyPhase2Ctl[];
 void bully_act_level_death(void) {
     if (obj_lava_death() == TRUE) {
         if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
@@ -196,13 +197,10 @@ void bully_act_level_death(void) {
             }
             bully_spawn_coin();
         } else {
-            spawn_mist_particles();
-
-            if (o->oBullySubtype == BULLY_STYPE_CHILL) {
-                spawn_default_star(0.0f, 3700.0f, 0.0f);
-            } else {
-                spawn_default_star(0.0f, 3700.0f, 0.0f);
-            }
+            struct Object* ctl = spawn_object(o, MODEL_NONE, bhvBigBullyPhase2Ctl);
+            ctl->oPosX = 0.f;
+            ctl->oPosY = 3476.f;
+            ctl->oPosZ = 0.f;
         }
     }
 }

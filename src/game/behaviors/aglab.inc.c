@@ -1580,3 +1580,121 @@ void bhv_iceblock_loop_small()
     f32 y = volume / xz / xz;
     obj_scale_xyz(o, xz, y, xz);
 }
+
+void bhv_bitfsplate_init()
+{
+    o->parentObj = spawn_object(o, MODEL_BULLY, bhvSmallBully);
+    o->parentObj->oPosX = o->oPosX;
+    o->parentObj->oPosY = o->oPosY;
+    o->parentObj->oPosZ = o->oPosZ;
+    o->oHomeY = o->oPosY;
+}
+
+void bhv_bitfsplate_loop()
+{
+    o->oFaceAngleYaw += 0x68;
+    struct Object* ctl = o->oBitfsPlatformCtl;
+    if (ctl->oAction < 3)
+    {
+        o->oFaceAngleYaw += 0xA0;
+    }
+    if (ctl->oAction < 2)
+    {
+        o->oPosY = o->oHomeY + 100.f * (1 - coss(0x234 * ctl->oBitfsCtlTimer));
+    }
+
+    f32 r = 1200.f;
+    o->oPosX = r * sins(o->oFaceAngleYaw);
+    o->oPosZ = r * coss(o->oFaceAngleYaw);
+
+    if (0 == o->oAction)
+    {
+        if (o->parentObj->oAction <= 1)
+        {
+            o->parentObj->oPosX = o->oPosX;
+            o->parentObj->oPosY = o->oPosY;
+            o->parentObj->oPosZ = o->oPosZ;
+        }
+        else
+        {
+            o->oAction = 1;
+        }
+    }
+    else if (1 == o->oAction)
+    {
+        if (o->parentObj->oAction == OBJ_ACT_LAVA_DEATH)
+        {
+            ctl->oAction--;
+            o->oAction = 2;
+        }
+    }
+    else
+    {
+        // -
+    }
+}
+
+static struct SpawnParticlesInfo sMistParticles = {
+    /* behParam:        */ 2,
+    /* count:           */ 20,
+    /* model:           */ MODEL_MIST,
+    /* offsetY:         */ 0,
+    /* forwardVelBase:  */ 40,
+    /* forwardVelRange: */ 5,
+    /* velYBase:        */ 30,
+    /* velYRange:       */ 20,
+    /* gravity:         */ 252,
+    /* dragStrength:    */ 30,
+    /* sizeBase:        */ 330.0f,
+    /* sizeRange:       */ 10.0f,
+};
+
+static void spawn_mist_particles_variable_ranged(s32 count, s32 offsetY, f32 size, f32 range) {
+    sMistParticles.sizeBase = size;
+    sMistParticles.sizeRange = range;
+    sMistParticles.offsetY = offsetY;
+
+    if (count == 0) {
+        sMistParticles.count = 20;
+    } else if (count > 20) {
+        sMistParticles.count = count;
+    } else {
+        sMistParticles.count = 4;
+    }
+
+    cur_obj_spawn_particles(&sMistParticles);
+}
+
+void bhv_bitfs_fight_init()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        s32 angle =  0x10000 / 3 * i;
+        f32 r = 1200.f;
+        o->oPosX = r * sins(angle);   
+        o->oPosZ = r * coss(angle);
+        spawn_mist_particles_variable_ranged(10, 0, 46.0f, 100.f);
+
+        struct Object* plate = spawn_object(o, MODEL_BITFS_PLATFORM_ON_TRACK, bhvBitfsPlate);
+        plate->oFaceAngleYaw = 0x10000 / 3 * i;
+        plate->oBitfsPlatformCtl = o;
+    }
+    o->oAction = 3;
+    
+    o->oPosX = 0;
+    o->oPosZ = 0;
+    cur_obj_play_sound_2(SOUND_OBJ_BOWSER_LAUGH);
+}
+
+void bhv_bitfs_fight_loop()
+{
+    if (1 == o->oAction)
+    {
+        o->oBitfsCtlTimer++;
+    }
+    if (0 == o->oAction && 0 == o->oSubAction)
+    {
+        spawn_default_star(0.f, 3700.f, 0.f);
+        o->oSubAction = 1;
+    }
+}

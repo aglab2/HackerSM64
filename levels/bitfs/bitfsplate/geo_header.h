@@ -1,0 +1,11 @@
+extern const GeoLayout bitfsplate_geo[];
+extern Lights1 bitfsplate_f3dlite_material_lights;
+extern u8 bitfsplate_tex1_64x64_5EDACDD1976521A6_12_ci4[];
+extern u8 bitfsplate_tex1_64x64_5EDACDD1976521A6_12_pal_rgba16[];
+extern Vtx bitfsplate_Cube_mesh_layer_1_vtx_cull[8];
+extern Vtx bitfsplate_Cube_mesh_layer_1_vtx_0[24];
+extern Gfx bitfsplate_Cube_mesh_layer_1_tri_0[];
+extern Gfx mat_bitfsplate_f3dlite_material[];
+extern Gfx mat_revert_bitfsplate_f3dlite_material[];
+extern Gfx bitfsplate_Cube_mesh_layer_1[];
+extern Gfx bitfsplate_material_revert_render_settings[];

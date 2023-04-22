@@ -6187,8 +6187,8 @@ const BehaviorScript bhvRainbowCtl[] = {
 void bhv_bitfs_thing_loop(void);
 const BehaviorScript bhvBitfsThing[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_FLOAT(oCollisionDistance, 1000),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST),
+    SET_FLOAT(oCollisionDistance, 30000),
     SET_FLOAT(oDrawingDistance, 30000),
     SET_HOME(),
     LOAD_COLLISION_DATA(bitfs_thing_collision),
@@ -6538,5 +6538,29 @@ const BehaviorScript bhvIceBlockMini[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_iceblock_loop_small),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_bitfsplate_init();
+extern void bhv_bitfsplate_loop();
+const BehaviorScript bhvBitfsPlate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(bitfsplate_collision),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST),
+    SET_FLOAT(oCollisionDistance, 30000),
+    CALL_NATIVE(bhv_bitfsplate_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bitfsplate_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_bitfs_fight_init();
+extern void bhv_bitfs_fight_loop();
+const BehaviorScript bhvBigBullyPhase2Ctl[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    CALL_NATIVE(bhv_bitfs_fight_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bitfs_fight_loop),
     END_LOOP(),
 };

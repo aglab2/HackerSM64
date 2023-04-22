@@ -1289,6 +1289,9 @@
 
 #define /*0x100*/ oHDTree OBJECT_FIELD_S32(0x1B)
 
+#define /*0x100*/ oBitfsPlatformCtl OBJECT_FIELD_OBJ(0x1B)
+#define /*0x100*/ oBitfsCtlTimer OBJECT_FIELD_S32(0x1C)
+
 /*Custom general defines:
 
 For general s32 ints, use o->oF4, oF8, oFC, o100, o104, o108, o10C, and o110
