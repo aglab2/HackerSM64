@@ -1383,7 +1383,7 @@ void bhv_death_trigger_loop()
     {
         u32 rbTimerPrev = (rb->timer - 1 + RING_BUFFER_SIZE) % 8;
         f32 lastY = rb->positions[rbTimerPrev].y;
-        if (gMarioStates->action == ACT_LAVA_BOOST && !(gMarioStates->flags & MARIO_METAL_CAP) && !in_safe_square() && lastY > 1000.f)
+        if (gMarioStates->action == ACT_LAVA_BOOST && !(gMarioStates->flags & MARIO_METAL_CAP) && !in_safe_square() && lastY > 1740.f)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0,0,0);
             gAllowPausing = 0;
@@ -1545,4 +1545,18 @@ void bhv_blarrg_loop()
         o->oPosX = o->oHomeX + 200.f * sins(-0x4000 + o->oMoveAngleYaw);
         o->oPosZ = o->oHomeZ + 200.f * sins(-0x4000 + o->oMoveAngleYaw);
     }
+}
+
+void bhv_iceblock_init()
+{
+    obj_scale_xyz(o, 0.3f, 0.015f, 0.3f);
+}
+
+void bhv_iceblock_loop()
+{
+    f32 volume = 0.3f * 0.015f * 0.3f;
+    f32 t = (sins(o->oTimer * 460) + 1.f) / 2.f;
+    f32 xz = 0.09f + t * 0.26f;
+    f32 y = volume / xz / xz;
+    obj_scale_xyz(o, xz, y, xz);
 }

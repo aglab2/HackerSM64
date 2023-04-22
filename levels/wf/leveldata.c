@@ -66,3 +66,6 @@
 
 #include "levels/sl/snow_mound/model.inc.c"
 #include "levels/sl/snow_mound/collision.inc.c"
+
+#include "levels/wf/iceblock/model.inc.c"
+#include "levels/wf/iceblock/collision.inc.c"

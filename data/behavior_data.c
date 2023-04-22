@@ -1540,7 +1540,7 @@ const BehaviorScript bhvRrRotatingBridgePlatform[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_UCODE_LARGE)),
     LOAD_COLLISION_DATA(rr_seg7_collision_rotating_platform_with_fire),
-    SET_FLOAT(oCollisionDistance, 1500),
+    SET_FLOAT(oDrawingDistance, 9000),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_rr_rotating_bridge_platform_loop),
@@ -5625,6 +5625,7 @@ const BehaviorScript bhvOctagonalPlatformRotating[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_UCODE_LARGE),
     CALL_NATIVE(bhv_rotating_octagonal_plat_init),
+    SET_FLOAT(oDrawingDistance, 9000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_rotating_octagonal_plat_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -6007,8 +6008,8 @@ const BehaviorScript bhvSwingPlatform[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(rr_seg7_collision_pendulum),
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_UCODE_LARGE)),
-    SET_FLOAT(oCollisionDistance, 2000),
     CALL_NATIVE(bhv_swing_platform_init),
+    SET_FLOAT(oDrawingDistance, 9000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_swing_platform_update),
         CALL_NATIVE(load_object_collision_model),
@@ -6509,5 +6510,18 @@ const BehaviorScript bhvBlarrgSub[] = {
     SET_HURTBOX(/*Radius*/ 40, /*Height*/ 60),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blarrg_loop_sub),
+    END_LOOP(),
+};
+
+extern void bhv_iceblock_init();
+extern void bhv_iceblock_loop();
+const BehaviorScript bhvIceBlock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(iceblock_collision),
+    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_iceblock_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_iceblock_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

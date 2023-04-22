@@ -97,4 +97,8 @@ extern const GeoLayout sl_geo_000390[];
 
 #include "levels/wf/header.inc.h"
 
+#include "levels/wf/iceblock/geo_header.h"
+
+#include "levels/wf/iceblock/collision_header.h"
+
 #endif

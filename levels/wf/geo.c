@@ -43,3 +43,5 @@
 #include "levels/rr/swinging_platform/geo.inc.c"
 
 #include "levels/sl/snow_mound/geo.inc.c"
+
+#include "levels/wf/iceblock/geo.inc.c"
