@@ -95,7 +95,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_MR_I, 4408, -856, -623, 0, 0, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 3156, -633, -226, 0, 0, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, -6784, 165, 593, 0, 0, 0, 0x00000000, bhvMrI),
-		MARIO_POS(0x01, 78, -6839, 165, 3163),
+		MARIO_POS(0x01, 78, -6839, 365, 3163),
 		TERRAIN(castle_inside_area_1_collision),
 		MACRO_OBJECTS(castle_inside_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_OW1),
@@ -238,7 +238,7 @@ const LevelScript level_castle_inside_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 78, -6839, 165, 3163),
+	MARIO_POS(0x01, 78, -6839, 365, 3163),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
