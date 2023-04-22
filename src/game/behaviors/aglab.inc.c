@@ -1352,7 +1352,7 @@ void bhv_tree_init(void)
     o->oHDTree = 1;
     if (gIsConsole)
     {
-        if (gCurrCourseNum == COURSE_TOTWC || gCurrCourseNum == COURSE_COTMC)
+        if (gCurrCourseNum == COURSE_TOTWC)
             o->oHDTree = 0;
     }
 
