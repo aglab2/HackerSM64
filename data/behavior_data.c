@@ -6518,10 +6518,25 @@ extern void bhv_iceblock_loop();
 const BehaviorScript bhvIceBlock[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(iceblock_collision),
-    OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST),
+    SET_FLOAT(oCollisionDistance, 1100),
     CALL_NATIVE(bhv_iceblock_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_iceblock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_iceblock_init_small();
+extern void bhv_iceblock_loop_small();
+const BehaviorScript bhvIceBlockMini[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(iceblock_collision_walk),
+    OR_LONG(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST),
+    SET_FLOAT(oCollisionDistance, 800),
+    CALL_NATIVE(bhv_iceblock_init_small),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_iceblock_loop_small),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

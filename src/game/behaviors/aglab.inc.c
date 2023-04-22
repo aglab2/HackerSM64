@@ -1560,3 +1560,17 @@ void bhv_iceblock_loop()
     f32 y = volume / xz / xz;
     obj_scale_xyz(o, xz, y, xz);
 }
+
+void bhv_iceblock_init_small()
+{
+    obj_scale_xyz(o, 0.3f, 0.015f, 0.3f);
+}
+
+void bhv_iceblock_loop_small()
+{
+    f32 volume = 0.3f * 0.015f * 0.3f;
+    f32 t = (sins(o->oTimer * 460) + 1.f) / 2.f;
+    f32 xz = 0.1f + t * 0.1f;
+    f32 y = volume / xz / xz;
+    obj_scale_xyz(o, xz, y, xz);
+}

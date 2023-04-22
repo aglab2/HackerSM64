@@ -573,5 +573,6 @@ extern const BehaviorScript bhvDeathTrigger[];
 extern const BehaviorScript bhvC1Trunk[];
 extern const BehaviorScript bhvC1TrunkRoot[];
 extern const BehaviorScript bhvIceBlock[];
+extern const BehaviorScript bhvIceBlockMini[];
 
 #endif // BEHAVIOR_DATA_H
