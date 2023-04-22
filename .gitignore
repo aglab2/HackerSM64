@@ -96,7 +96,7 @@ build/*
 !/textures/segment2/segment2.silver_coin.*.png
 !/textures/segment2/shadow_quarter_circle_64.ia8.png
 !/textures/segment2/shadow_quarter_square_64.ia8.png
-
+!/sound/samples/sfx_mario_peach/0E_peach_dear_mario.aiff
 
 
 # libultra
