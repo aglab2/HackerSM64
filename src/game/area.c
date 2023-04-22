@@ -379,7 +379,7 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
-#define CREDITS_SIZE 8
+#define CREDITS_SIZE 10
 const char* gCreditsStr[CREDITS_SIZE];
 int gCreditsAlign[CREDITS_SIZE];
 int gCreditsLength[CREDITS_SIZE];
@@ -409,11 +409,11 @@ void render_game(void) {
         do_cutscene_handler();
         print_displaying_credits_entry();
         
-        if (gCurrCourseNum == COURSE_LLL && gCreditsEnvColor)
+        if (gCurrCourseNum == COURSE_LLL)
         {
             for (int i = 0; i < CREDITS_SIZE; i++)
             {
-                if (!gCreditsEnvColor[i])
+                if (0 == gCreditsEnvColor[i])
                     continue;
                     
                 print_set_envcolour(200, 200, 200, gCreditsEnvColor[i]);
