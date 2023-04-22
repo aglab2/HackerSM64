@@ -368,6 +368,10 @@ extern s32 gCreditsLastSize;
 void bhv_peach_ending_cs_init()
 {
     gCamera->cutscene = CUTSCENE_INTRO_PEACH;
+    for (int i = 0; i < CREDITS_SIZE; i++)
+    {
+        gCreditsEnvColor[i] = 0;
+    }
 }
 
 static void fade_in_text(int i)
@@ -396,7 +400,7 @@ static void fade_out_text(int i)
 
 static void fade_out_all()
 {
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < CREDITS_SIZE; i++)
     {
         fade_out_text(i);
     }
@@ -441,10 +445,10 @@ void bhv_peach_ending_cs_loop()
     if (0 == o->oTimer)
     {
         s32 timeLeft = gSaveBuffer.files[gCurrSaveFileNum - 1][0].timer;
-        s32 f = 1.666666666666666f * (timeLeft % 60);
-        s32 s = (timeLeft / 60) % 60;
-        s32 m = (timeLeft / 60 / 60) % 60;
-        s32 h = timeLeft / 60 / 60 / 60;
+        s32 f = 3 * (timeLeft % 30);
+        s32 s = (timeLeft / 30) % 60;
+        s32 m = (timeLeft / 60 / 30) % 60;
+        s32 h = timeLeft / 60 / 30 / 60;
 
         sprintf(sGameTime + 10, "%02d", h);
         if (sGameTime[10] == '0')
