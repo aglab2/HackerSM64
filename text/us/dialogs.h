@@ -655,11 +655,10 @@ to stay close to the\n\
 coastline...\n\
 Have this as a reward."))
 
-DEFINE_DIALOG(DIALOG_059, 1, 4, 30, 200, _("\
-That's not my baby! She\n\
-looks nothing like me!\n\
-Her parents must be\n\
-worried sick!"))
+DEFINE_DIALOG(DIALOG_059, 1, 3, 30, 200, _("\
+What have you done???\n\
+It was my baby you\n\
+murderous fiend!\n"))
 
 DEFINE_DIALOG(DIALOG_060, 1, 4, 30, 200, _("\
 ATTENTION!\n\

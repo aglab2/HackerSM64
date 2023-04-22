@@ -100,14 +100,16 @@ void tuxies_mother_act_idle(void) {
                 }
                 break;
             case MOTHER_PENGUIN_SUB_ACT_ASK_FOR_BABY:
-                if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
-                    DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_057)) {
-                    o->oSubAction++; // MOTHER_PENGUIN_SUB_ACT_ALREADY_ASKED
+                {
+                    if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+                        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, smallPenguinObj ? DIALOG_057 : DIALOG_059)) {
+                        o->oSubAction++; // MOTHER_PENGUIN_SUB_ACT_ALREADY_ASKED
+                    }
                 }
                 break;
             case MOTHER_PENGUIN_SUB_ACT_ALREADY_ASKED:
                 if (o->oDistanceToMario > 450.0f) {
-                    o->oSubAction++; // MOTHER_PENGUIN_SUB_ACT_READY_TO_ASK
+                    o->oSubAction = 0; // MOTHER_PENGUIN_SUB_ACT_READY_TO_ASK
                 }
                 break;
         }

@@ -1388,13 +1388,14 @@ void bhv_fireplace_loop()
         f32 dy = o->oPosY - o->parentObj->oPosY;
         f32 dz = o->oPosZ - o->parentObj->oPosZ;
         f32 d = dx*dx + dy*dy + dz*dz;
-        if (d < 3000.f)
+        if (d < 6000.f)
         {
             mario_drop_held_object(gMarioStates);
             o->parentObj->activeFlags = 0;
             spawn_object(o, MODEL_BOWSER_FLAMES, bhvBowserBombExplosion);
             create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
             set_camera_shake_from_point(SHAKE_POS_LARGE, o->oPosX, o->oPosY, o->oPosZ);
+            cur_obj_spawn_star_at_y_offset(-396.0f, 1449.0f, -2383.0f, 200.0f);
             o->oAction = 1;
         }
     }
