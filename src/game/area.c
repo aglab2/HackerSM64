@@ -27,7 +27,6 @@
 #include "engine/colors.h"
 #include "dnvic_print.h"
 #include "profiling.h"
-#include "main.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
@@ -402,11 +401,11 @@ void render_game(void) {
 
         gSPViewport(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gViewport));
 
-        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, gScreenWidth,
-                      gScreenHeight- gBorderHeight);
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                      SCREEN_HEIGHT - gBorderHeight);
         render_hud();
 
-        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, gScreenWidth, SCREEN_HEIGHT);
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
         do_cutscene_handler();
         print_displaying_credits_entry();
@@ -473,8 +472,8 @@ void render_game(void) {
             }
         }
 
-        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, gScreenWidth,
-                      gScreenHeight- gBorderHeight);
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                      SCREEN_HEIGHT - gBorderHeight);
         gMenuOptSelectIndex = render_menus_and_dialogs();
 
         if (gMenuOptSelectIndex != 0) {
@@ -484,8 +483,8 @@ void render_game(void) {
         if (gViewportClip != NULL) {
             make_viewport_clip_rect(gViewportClip);
         } else
-            gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, gScreenWidth,
-                          gScreenHeight- gBorderHeight);
+            gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                          SCREEN_HEIGHT - gBorderHeight);
 
         if (gWarpTransition.isActive) {
             if (gWarpTransDelay == 0) {

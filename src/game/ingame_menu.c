@@ -1253,7 +1253,7 @@ void render_dialog_entries(void) {
 #endif
                   ensure_nonnegative(DIAG_VAL2 - dialog->width),
 #ifdef WIDESCREEN
-                  gScreenWidth,
+                  SCREEN_WIDTH,
 #else
                   ensure_nonnegative(DIAG_VAL3 + dialog->leftOffset),
 #endif
@@ -1263,7 +1263,7 @@ void render_dialog_entries(void) {
     if (gLastDialogPageStrPos == -1 && gLastDialogResponse == 1) {
         render_dialog_triangle_choice();
     }
-    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 2, 2, gScreenWidth - gBorderHeight / 2, gScreenHeight - gBorderHeight / 2);
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 2, 2, SCREEN_WIDTH - gBorderHeight / 2, SCREEN_HEIGHT - gBorderHeight / 2);
     if (gLastDialogPageStrPos != -1 && gDialogBoxState == DIALOG_STATE_VERTICAL) {
         render_dialog_triangle_next(dialog->linesPerBox);
     }
@@ -1553,11 +1553,11 @@ void render_widescreen_setting(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
     if (!gConfig.widescreen) {
-        print_generic_string(10, (SCREEN_HEIGHT - gScreenHeight) + 20, textCurrRatio43);
-        print_generic_string(10,  (SCREEN_HEIGHT - gScreenHeight) + 7, textPressL);
+        print_generic_string(10, 20, textCurrRatio43);
+        print_generic_string(10,  7, textPressL);
     } else {
-        print_generic_string(10, (SCREEN_HEIGHT - gScreenHeight) + 20, textCurrRatio169);
-        print_generic_string(10,  (SCREEN_HEIGHT - gScreenHeight) + 7, textPressL);
+        print_generic_string(10, 20, textCurrRatio169);
+        print_generic_string(10,  7, textPressL);
     }
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     if (gPlayer1Controller->buttonPressed & L_TRIG){

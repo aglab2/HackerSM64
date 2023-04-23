@@ -33,7 +33,6 @@
 #include "vc_ultra.h"
 #include "hacktice/main.h"
 #include "profiling.h"
-#include "main.h"
 
 // First 3 controller slots
 struct Controller gControllers[3];
@@ -98,8 +97,6 @@ void (*gGoddardVblankCallback)(void) = NULL;
 struct Controller *gPlayer1Controller = &gControllers[0];
 struct Controller *gPlayer2Controller = &gControllers[1];
 struct Controller *gPlayer3Controller = &gControllers[2]; // Probably debug only, see note below
-
-s32 sMaxContPort = 0;
 
 // Title Screen Demo Handler
 struct DemoInput *gCurrDemoInput = NULL;
@@ -167,14 +164,14 @@ void init_z_buffer(s32 resetZB) {
     gDPSetDepthSource(gDisplayListHead++, G_ZS_PIXEL);
     gDPSetDepthImage(gDisplayListHead++, gPhysicalZBuffer);
 
-    gDPSetColorImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth, gPhysicalZBuffer);
+    gDPSetColorImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, gPhysicalZBuffer);
     if (!resetZB)
         return;
     gDPSetFillColor(gDisplayListHead++,
                     GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0));
 
-    gDPFillRectangle(gDisplayListHead++, 0, gBorderHeight, gScreenWidth - 1,
-                     gScreenHeight - 1 - gBorderHeight);
+    gDPFillRectangle(gDisplayListHead++, 0, gBorderHeight, SCREEN_WIDTH - 1,
+                     SCREEN_HEIGHT - 1 - gBorderHeight);
 }
 
 /**
@@ -184,10 +181,10 @@ void select_framebuffer(void) {
     gDPPipeSync(gDisplayListHead++);
 
     gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-    gDPSetColorImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, gScreenWidth,
+    gDPSetColorImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                      gPhysicalFramebuffers[sRenderingFramebuffer]);
-    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, gScreenWidth,
-                  gScreenHeight - gBorderHeight);
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                  SCREEN_HEIGHT - gBorderHeight);
 }
 
 /**
@@ -203,7 +200,7 @@ void clear_framebuffer(s32 color) {
     gDPSetFillColor(gDisplayListHead++, color);
     gDPFillRectangle(gDisplayListHead++,
                      GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(0), gBorderHeight,
-                     GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, gScreenHeight - gBorderHeight - 1);
+                     GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, SCREEN_HEIGHT - gBorderHeight - 1);
 
     gDPPipeSync(gDisplayListHead++);
 
@@ -221,7 +218,7 @@ void clear_viewport(Vp *viewport, s32 color) {
 
 #ifdef WIDESCREEN
     vpUlx = GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(vpUlx);
-    vpLrx = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(gScreenWidth - vpLrx);
+    vpLrx = GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(SCREEN_WIDTH - vpLrx);
 #endif
 
     gDPPipeSync(gDisplayListHead++);
@@ -243,7 +240,7 @@ void clear_viewport(Vp *viewport, s32 color) {
 void draw_screen_borders(void) {
     gDPPipeSync(gDisplayListHead++);
 
-    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, gScreenWidth, gScreenHeight);
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
 
@@ -253,8 +250,8 @@ void draw_screen_borders(void) {
         gDPFillRectangle(gDisplayListHead++, GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(0), 0,
                         GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, gBorderHeight - 1);
         gDPFillRectangle(gDisplayListHead++,
-                        GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(0), gScreenHeight - gBorderHeight,
-                        GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, gScreenHeight - 1);
+                        GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(0), SCREEN_HEIGHT - gBorderHeight,
+                        GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(0) - 1, SCREEN_HEIGHT - 1);
     }
 }
 
@@ -379,13 +376,13 @@ void draw_reset_bars(void) {
         }
 
         fbPtr = (u64 *) PHYSICAL_TO_VIRTUAL(gPhysicalFramebuffers[fbNum]);
-        fbPtr += gNmiResetBarsTimer++ * (gScreenWidth / 4);
+        fbPtr += gNmiResetBarsTimer++ * (SCREEN_WIDTH / 4);
 
-        for (width = 0; width < ((gScreenHeight / 16) + 1); width++) {
-            for (height = 0; height < (gScreenWidth / 4); height++) {
+        for (width = 0; width < ((SCREEN_HEIGHT / 16) + 1); width++) {
+            for (height = 0; height < (SCREEN_WIDTH / 4); height++) {
                 *fbPtr++ = 0;
             }
-            fbPtr += ((gScreenWidth / 4) * 14);
+            fbPtr += ((SCREEN_WIDTH / 4) * 14);
         }
     }
 
@@ -408,8 +405,6 @@ void check_cache_emulation() {
     // Restore interrupts
     __osRestoreInt(saved);
 }
-
-extern OSViMode VI;
 
 /**
  * Initial settings for the first rendered frame.
@@ -663,8 +658,7 @@ void read_controller_inputs(s32 threadID) {
     run_demo_inputs();
 #endif
 
-    s32 numPorts = MIN(sMaxContPort, 2);
-    for (i = 0; i < numPorts; i++) {
+    for (i = 0; i < 2; i++) {
         struct Controller *controller = &gControllers[i];
         // if we're receiving inputs, update the controller struct with the new button info.
         if (controller->controllerData != NULL) {
@@ -739,13 +733,12 @@ void init_controllers(void) {
     gSramProbe = nuPiInitSram();
 #endif
 
-    s32 maxPort = 0;
     // Loop over the 4 ports and link the controller structs to the appropriate
     // status and pad. Interestingly, although there are pointers to 3 controllers,
     // only 2 are connected here. The third seems to have been reserved for debug
     // purposes and was never connected in the retail ROM, thus gPlayer3Controller
     // cannot be used, despite being referenced in various code.
-    for (cont = 0, port = 0; port < MAXCONTROLLERS && cont < 2; port++) {
+    for (cont = 0, port = 0; port < 4 && cont < 2; port++) {
         // Is controller plugged in?
         if (gControllerBits & (1 << port)) {
             // The game allows you to have just 1 controller plugged
@@ -757,7 +750,6 @@ void init_controllers(void) {
 #endif
             gControllers[cont].statusData = &gControllerStatuses[port];
             gControllers[cont++].controllerData = &gControllerPads[port];
-            maxPort = port;
         }
     }
     if (__osControllerTypes[1] == CONT_TYPE_GCN) {
@@ -769,7 +761,6 @@ void init_controllers(void) {
         }
         gPlayer1Controller = &gControllers[0];
     }
-    sMaxContPort = MIN(maxPort+1, MAXCONTROLLERS);
 }
 
 // Game thread core

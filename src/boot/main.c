@@ -364,20 +364,6 @@ void thread3_main(UNUSED void *arg) {
     osSyncPrintf("Linker  : %s\n", __linker__);
 #endif
 
-    if (IO_READ(DPC_CLOCK_REG) == 0) {
-        gIsConsole = FALSE;
-        gBorderHeight = BORDER_HEIGHT_EMULATOR;
-        if (!gIsVC) {
-            check_cache_emulation();
-        } else {
-            gCacheEmulated = FALSE;
-        }
-    } else {
-        gIsConsole = TRUE;
-        change_vi(&VI, 304, 224);
-        gBorderHeight = BORDER_HEIGHT_CONSOLE;
-    }
-
 #ifdef DEBUG
     gIdleThreadStack[0] = 0;
     gIdleThreadStack[THREAD1_STACK - 1] = 0;
@@ -484,30 +470,22 @@ void turn_off_audio(void) {
     }
 }
 
-u16 gScreenWidth;
-u16 gScreenHeight;
-
 void change_vi(OSViMode *mode, int width, int height){
-    s32 addPAL = 0;
-    s32 addX = 16;
-
-    mode->comRegs.width = width;
-    mode->comRegs.xScale = ((width + addX)*512)/320;
-    // Y Scale
-    mode->fldRegs[0].yScale = (((height + 16 - (addPAL * 2))*1024)/240);
-    mode->fldRegs[1].yScale = (((height + 16 - (addPAL * 2))*1024)/240);
-    // X Centre
-    mode->fldRegs[0].origin = width*2;
-    mode->fldRegs[1].origin = width*4;
-
-    mode->comRegs.hStart = (428-304) << 16 | (428+304);
-    mode->fldRegs[0].vStart = (277-height) << 16 | (271+height);
-    mode->fldRegs[1].vStart = (277-height) << 16 | (271+height);
-
-    gScreenWidth = width;
-    gScreenHeight = height;
-
-    //gAspectRatio = (f32) gScreenWidth / gScreenHeight;
+    mode->comRegs.width  = width;
+    mode->comRegs.xScale = ((width * 512) / 320);
+    if (height > 240) {
+        mode->comRegs.ctrl     |= 0x40;
+        mode->fldRegs[0].origin = (width * 2);
+        mode->fldRegs[1].origin = (width * 4);
+        mode->fldRegs[0].yScale = (0x2000000 | ((height * 1024) / 240));
+        mode->fldRegs[1].yScale = (0x2000000 | ((height * 1024) / 240));
+        mode->fldRegs[0].vStart = (mode->fldRegs[1].vStart - 0x20002);
+    } else {
+        mode->fldRegs[0].origin = (width * 2);
+        mode->fldRegs[1].origin = (width * 4);
+        mode->fldRegs[0].yScale = ((height * 1024) / 240);
+        mode->fldRegs[1].yScale = ((height * 1024) / 240);
+    }
 }
 
 void get_audio_frequency(void) {
@@ -547,10 +525,7 @@ void thread1_idle(UNUSED void *arg) {
             break;
     }
     get_audio_frequency();
-
-    gScreenWidth = 320;
-    gScreenHeight = 240;
-
+    change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
     osViSetMode(&VI);
     osViBlack(TRUE);
     osViSetSpecialFeatures(OS_VI_DIVOT_ON);
