@@ -477,7 +477,6 @@ N64CKSUM              := $(TOOLS_DIR)/n64cksum
 N64GRAPHICS           := $(TOOLS_DIR)/n64graphics
 N64GRAPHICS_CI        := $(TOOLS_DIR)/n64graphics_ci
 BINPNG                := $(TOOLS_DIR)/BinPNG.py
-TECONV                := $(TOOLS_DIR)/TE_encode.py
 TEXTCONV              := $(TOOLS_DIR)/textconv
 AIFF_EXTRACT_CODEBOOK := $(TOOLS_DIR)/aiff_extract_codebook
 VADPCM_ENC            := $(TOOLS_DIR)/vadpcm_enc
@@ -629,22 +628,9 @@ $(BUILD_DIR)/src/game/rendering_graph_node.o: OPT_FLAGS := $(GRAPH_NODE_OPT_FLAG
 
 ALL_DIRS := $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) asm/debug $(GODDARD_SRC_DIRS) $(LIBZ_SRC_DIRS) $(ULTRA_BIN_DIRS) $(BIN_DIRS) $(TEXTURE_DIRS) $(TEXT_DIRS) $(SOUND_SAMPLE_DIRS) $(addprefix levels/,$(LEVEL_DIRS)) rsp include) $(YAY0_DIR) $(addprefix $(YAY0_DIR)/,$(VERSION)) $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/sequences/$(VERSION)
 
-TE_DIRS := $(SRC_DIRS) $(ASM_DIRS) $(TEXTURE_DIRS) $(TEXT_DIRS) $(SOUND_SAMPLE_DIRS) $(addprefix levels/,$(LEVEL_DIRS))
-
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
 
-# TE files
-TE_FILES := $(foreach dir,$(TE_DIRS),$(wildcard $(dir)/*_te.py))
-# TE H files
-TEH_FILES := $(foreach file,$(TE_FILES),$(BUILD_DIR)/$(file))
-#create text engine encoded strings
-$(TEH_FILES):$(TE_FILES)
-	$(call print,Converting TE string:,$?,$@)
-	python3 $(TECONV) $? $@
-
-$(BUILD_DIR)/src/game/text_engine.o:  OPT_FLAGS := -fkeep-static-consts
-$(BUILD_DIR)/src/game/text_engine.o:  $(TEH_FILES)
 $(BUILD_DIR)/include/text_strings.h: $(BUILD_DIR)/include/text_menu_strings.h
 $(BUILD_DIR)/src/menu/file_select.o: $(BUILD_DIR)/include/text_strings.h
 $(BUILD_DIR)/src/menu/star_select.o: $(BUILD_DIR)/include/text_strings.h

@@ -17,7 +17,7 @@
 #include "behavior_data.h"
 #include "string.h"
 #include "color_presets.h"
-#include "text_engine.h"
+
 #include "config.h"
 #include "config/config_world.h"
 #include "actors/common1.h"
@@ -77,6 +77,9 @@ f32 gCurrAnimTranslationMultiplier;
 u16 *gCurrAnimAttribute;
 s16 *gCurrAnimData;
 
+struct RenderModeContainer {
+    u32 modes[LAYER_COUNT];
+};
 
 /* Rendermode settings for cycle 1 for all 8 or 13 layers. */
 struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
@@ -1416,7 +1419,6 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         if (node->node.children != NULL) {
             geo_process_node_and_siblings(node->node.children);
         }
-		RunTextEngine();
         gCurGraphNodeRoot = NULL;
 #ifdef VANILLA_DEBUG
         if (gShowDebugText) {

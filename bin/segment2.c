@@ -9,11 +9,6 @@
 #include "make_const_nonconst.h"
 
 // SM64 (US/JP/EU/SH) Segment 02
-
-ALIGNED8 const Texture small_font[] = {
-#include "textures/segment2/custom_text_TE.i4.inc.c"
-};
-
 #ifdef PUPPYPRINT
 ALIGNED8 static const Texture small_font_1[] = {
 #include "textures/segment2/custom_text.i4.inc.c"
@@ -2225,9 +2220,9 @@ const Gfx dl_rgba16_text_end[] = {
 
 // 0x0200EDA8 - 0x0200EDE8
 static const Vtx vertex_text_bg_box[] = {
-    {{{     0,    -80,      0}, 0, {     0,   2048}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   130,    -80,      0}, 0, {  2048,   2048}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   130,      0,      0}, 0, {  2048,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     0,    -80,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   130,    -80,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   130,      0,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
     {{{     0,      0,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
@@ -2237,12 +2232,6 @@ const Gfx dl_draw_text_bg_box[] = {
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetCombineMode(G_CC_FADE, G_CC_FADE),
     gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
-    gsSPVertex(vertex_text_bg_box, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
-    gsSPEndDisplayList(),
-};
-
-const Gfx dl_draw_text_bg_box_TE[] = {
     gsSPVertex(vertex_text_bg_box, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
     gsSPEndDisplayList(),

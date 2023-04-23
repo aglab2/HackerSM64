@@ -6,7 +6,6 @@
 
 extern void *puppyprint_font_lut[2];
 extern void *puppyprint_kerning_lut[2][80];
-extern ALIGNED8 const Texture small_font[];
 
 extern u8 seg2_course_name_table[];
 extern u8 seg2_act_name_table[];
@@ -56,7 +55,6 @@ extern Gfx dl_rgba16_load_tex_block[];
 extern void *main_credits_font_lut[];
 extern Texture *main_hud_camera_lut[6];
 extern Gfx dl_draw_text_bg_box[];
-extern Gfx dl_draw_text_bg_box_TE[];
 extern Gfx dl_draw_triangle[];
 extern void *seg2_dialog_table[];
 extern Gfx dl_billboard_num_0[];

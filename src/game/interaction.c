@@ -1756,37 +1756,6 @@ u32 check_read_sign(struct MarioState *m, struct Object *obj) {
     return FALSE;
 }
 
-#include "text_engine.h"
-u32 check_read_sign_TE(struct MarioState *m, struct Object *obj) {
-	if (mario_can_talk(m, 0) && object_facing_mario(m, obj, SIGN_RANGE)) {
-#ifdef DIALOG_INDICATOR
-        if (obj->behavior == segmented_to_virtual(bhvSignOnWall)) {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 180, 32, obj, MODEL_NUMBER, bhvOrangeNumber);
-        } else {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 160,  8, obj, MODEL_NUMBER, bhvOrangeNumber);
-        }
-#endif
-		if((m->input & READ_MASK)){
-			s16 facingDYaw = (s16)(obj->oMoveAngleYaw + 0x8000) - m->faceAngle[1];
-			if (facingDYaw >= -SIGN_RANGE && facingDYaw <= SIGN_RANGE) {
-				f32 targetX = obj->oPosX + 105.0f * sins(obj->oMoveAngleYaw);
-				f32 targetZ = obj->oPosZ + 105.0f * coss(obj->oMoveAngleYaw);
-
-				m->marioObj->oMarioReadingSignDYaw = facingDYaw;
-				m->marioObj->oMarioReadingSignDPosX = targetX - m->pos[0];
-				m->marioObj->oMarioReadingSignDPosZ = targetZ - m->pos[2];
-				SetupTextEngine(32,60,TE_Strings[obj->oBehParams],TE_STATE_MAIN);
-
-				m->interactObj = obj;
-				m->usedObj = obj;
-				return set_mario_action(m, ACT_WAITING_FOR_DIALOG, 0);
-			}
-		}
-	}
-
-    return FALSE;
-}
-
 u32 check_npc_talk(struct MarioState *m, struct Object *obj) {
 #ifdef EASIER_DIALOG_TRIGGER
     if (
@@ -1828,9 +1797,7 @@ u32 interact_text(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
     if (obj->oInteractionSubtype & INT_SUBTYPE_SIGN) {
         interact = check_read_sign(m, obj);
-    } else if (obj->oInteractionSubtype & INT_SUBTYPE_TE) {
-        interact = check_read_sign_TE(m, obj);
-	}else if (obj->oInteractionSubtype & INT_SUBTYPE_NPC) {
+    } else if (obj->oInteractionSubtype & INT_SUBTYPE_NPC) {
         interact = check_npc_talk(m, obj);
     } else {
         push_mario_out_of_object(m, obj, 2.0f);

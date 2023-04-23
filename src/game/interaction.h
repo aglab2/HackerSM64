@@ -65,7 +65,6 @@ enum InteractSubtypes {
     // INTERACT_TEXT
     INT_SUBTYPE_SIGN                = /* 0x00001000 */ (1 << 12),
     INT_SUBTYPE_NPC                 = /* 0x00004000 */ (1 << 14),
-    INT_SUBTYPE_TE                  = /* 0x00008000 */ (1 << 15),
     // INTERACT_CLAM_OR_BUBBA
     INT_SUBTYPE_EATS_MARIO          = /* 0x00002000 */ (1 << 13),
     

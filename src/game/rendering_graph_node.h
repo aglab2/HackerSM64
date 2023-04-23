@@ -5,13 +5,6 @@
 
 #include "engine/graph_node.h"
 
-struct RenderModeContainer {
-    u32 modes[LAYER_COUNT];
-};
-
-extern struct RenderModeContainer renderModeTable_1Cycle[];
-extern struct RenderModeContainer renderModeTable_2Cycle[];
-
 extern struct GraphNodeRoot        *gCurGraphNodeRoot;
 extern struct GraphNodeMasterList  *gCurGraphNodeMasterList;
 extern struct GraphNodePerspective *gCurGraphNodeCamFrustum;
