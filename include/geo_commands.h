@@ -240,6 +240,7 @@ enum GeoLayoutCommands {
     CMD_HHHHHH(tx, ty, tz, rx, ry, rz), \
     CMD_PTR(displayList)
 
+#if 0
 /**
  *   fieldLayout = 1: Translate
  *     0x02: s16 xTranslation
@@ -280,6 +281,7 @@ enum GeoLayoutCommands {
 #define GEO_ROTATE_Y_WITH_DL(layer, ry, displayList) \
     CMD_BBH(GEO_CMD_NODE_TRANSLATION_ROTATION, (0x30 | layer | 0x80), ry), \
     CMD_PTR(displayList)
+#endif
 
 /**
  * 0x11: Create translation scene graph node with optional display list

@@ -444,6 +444,7 @@ void geo_layout_cmd_node_translation_rotation(void) {
     s16 params = cur_geo_cmd_u8(0x01);
     s16 *cmdPos = (s16 *) gGeoLayoutCommand;
 
+#if 0
     switch ((params & 0x70) >> 4) {
         case 0:
             cmdPos = read_vec3s(translation, &cmdPos[2]);
@@ -463,6 +464,10 @@ void geo_layout_cmd_node_translation_rotation(void) {
             cmdPos += 2 << CMD_SIZE_SHIFT;
             break;
     }
+#else
+    cmdPos = read_vec3s(translation, &cmdPos[2]);
+    cmdPos = read_vec3s_angle(rotation, cmdPos);
+#endif
 
     if (params & 0x80) {
         displayList = *(void **) &cmdPos[0];
