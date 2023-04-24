@@ -51,6 +51,7 @@ s32 osContInit(OSMesgQueue* mq, u8* bitpattern, OSContStatus* data) {
     return ret;
 }
 
+#if 0
 void __osContGetInitData(u8* pattern, OSContStatus* data) {
     u8* ptr;
     __OSContRequesFormat requestHeader;
@@ -72,6 +73,7 @@ void __osContGetInitData(u8* pattern, OSContStatus* data) {
     }
     *pattern = bits;
 }
+#endif
 
 void __osPackRequestData(u8 cmd) {
     u8* ptr;

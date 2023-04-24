@@ -357,7 +357,7 @@ extern OSMesgQueue __osEepromTimerQ;
 extern OSMesg __osEepromTimerMsg;
 
 // Linker script will resolve references to the original function with this one instead
-void __osContGetInitDataEx(u8* pattern, OSContStatus* data) {
+void __osContGetInitData(u8* pattern, OSContStatus* data) {
     u8* ptr;
     __OSContRequesFormat requestHeader;
     s32 i;
