@@ -29,7 +29,6 @@ void sequence_channel_init(struct SequenceChannel *seqChannel) {
     seqChannel->stopScript = FALSE;
     seqChannel->stopSomething2 = FALSE;
     seqChannel->hasInstrument = FALSE;
-    seqChannel->stereoHeadsetEffects = FALSE;
     seqChannel->transposition = 0;
     seqChannel->largeNotes = FALSE;
 #if defined(VERSION_EU) || defined(VERSION_SH)
@@ -1869,7 +1868,7 @@ void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
 #endif
 
                     case 0xd0: // chan_stereoheadseteffects
-                        seqChannel->stereoHeadsetEffects = m64_read_u8(state);
+                        (void) m64_read_u8(state);
                         break;
 
                     case 0xd1: // chan_setnoteallocationpolicy

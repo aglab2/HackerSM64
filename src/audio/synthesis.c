@@ -191,10 +191,8 @@ u64 *note_apply_headset_pan_effects(u64 *cmd, struct NoteSubEu *noteSubEu, struc
 u64 *synthesis_process_notes(s16 *aiBuf, s32 bufLen, u64 *cmd);
 u64 *load_wave_samples(u64 *cmd, struct Note *note, s32 nSamplesToLoad);
 u64 *final_resample(u64 *cmd, struct Note *note, s32 count, u16 pitch, u16 dmemIn, u32 flags);
-u64 *process_envelope(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf, s32 headsetPanSettings,
-                      u32 flags);
-u64 *process_envelope_inner(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf,
-                            s32 headsetPanSettings, struct VolumeChange *vol);
+u64 *process_envelope(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf);
+u64 *process_envelope_inner(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf, struct VolumeChange *vol);
 u64 *note_apply_headset_pan_effects(u64 *cmd, struct Note *note, s32 bufLen, s32 flags, s32 leftRight);
 #endif
 
@@ -872,7 +870,6 @@ u64 *synthesis_process_notes(s16 *aiBuf, s32 bufLen, u64 *cmd) {
     s32 nSamplesToProcess;  // sp10c/a0, spE0
 #endif
 
-    s32 leftRight;
     s32 s3;
     s32 s5; //s4
 
@@ -1272,35 +1269,11 @@ u64 *synthesis_process_notes(s16 *aiBuf, s32 bufLen, u64 *cmd) {
 #endif
 
 #ifdef VERSION_EU
-            if (noteSubEu->headsetPanRight != 0 || synthesisState->prevHeadsetPanRight != 0) {
-                leftRight = 1;
-            } else if (noteSubEu->headsetPanLeft != 0 || synthesisState->prevHeadsetPanLeft != 0) {
-                leftRight = 2;
-#else
-            if (note->headsetPanRight != 0 || note->prevHeadsetPanRight != 0) {
-                leftRight = 1;
-            } else if (note->headsetPanLeft != 0 || note->prevHeadsetPanLeft != 0) {
-                leftRight = 2;
-#endif
-            } else {
-                leftRight = 0;
-            }
-
-#ifdef VERSION_EU
             cmd = process_envelope(cmd, noteSubEu, synthesisState, bufLen, 0, leftRight, flags);
 #else
-            cmd = process_envelope(cmd, note, bufLen, 0, leftRight, flags);
+            cmd = process_envelope(cmd, note, bufLen, 0);
 #endif
 
-#ifdef VERSION_EU
-            if (noteSubEu->usesHeadsetPanEffects) {
-                cmd = note_apply_headset_pan_effects(cmd, noteSubEu, synthesisState, bufLen * 2, flags, leftRight);
-            }
-#else
-            if (note->usesHeadsetPanEffects) {
-                cmd = note_apply_headset_pan_effects(cmd, note, bufLen * 2, flags, leftRight);
-            }
-#endif
         }
 #ifndef VERSION_EU
     }
@@ -1370,8 +1343,7 @@ u64 *final_resample(u64 *cmd, struct Note *note, s32 count, u16 pitch, u16 dmemI
 #endif
 
 #ifndef VERSION_EU
-u64 *process_envelope(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf, s32 headsetPanSettings,
-                      UNUSED u32 flags) {
+u64 *process_envelope(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf) {
     struct VolumeChange vol;
     vol.sourceLeft = note->curVolLeft;
     vol.sourceRight = note->curVolRight;
@@ -1379,11 +1351,11 @@ u64 *process_envelope(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf, s32 
     vol.targetRight = note->targetVolRight;
     note->curVolLeft = vol.targetLeft;
     note->curVolRight = vol.targetRight;
-    return process_envelope_inner(cmd, note, nSamples, inBuf, headsetPanSettings, &vol);
+    return process_envelope_inner(cmd, note, nSamples, inBuf, &vol);
 }
 
 u64 *process_envelope_inner(u64 *cmd, struct Note *note, s32 nSamples, u16 inBuf,
-                            s32 headsetPanSettings, struct VolumeChange *vol) {
+                            struct VolumeChange *vol) {
     u8 mixerFlags;
     s32 rampLeft, rampRight;
 #elif defined(VERSION_EU)
@@ -1414,45 +1386,8 @@ u64 *process_envelope(u64 *cmd, struct NoteSubEu *note, struct NoteSynthesisStat
     // in, dry left, count without A_AUX flag.
     // dry right, wet left, wet right with A_AUX flag.
 
-    if (note->usesHeadsetPanEffects) {
-        aClearBuffer(cmd++, DMEM_ADDR_NOTE_PAN_TEMP, DEFAULT_LEN_1CH);
-
-        switch (headsetPanSettings) {
-            case 1:
-                aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_NOTE_PAN_TEMP, nSamples * 2);
-                aSetBuffer(cmd++, A_AUX, DMEM_ADDR_RIGHT_CH, DMEM_ADDR_WET_LEFT_CH,
-                           DMEM_ADDR_WET_RIGHT_CH);
-                break;
-            case 2:
-                aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_LEFT_CH, nSamples * 2);
-                aSetBuffer(cmd++, A_AUX, DMEM_ADDR_NOTE_PAN_TEMP, DMEM_ADDR_WET_LEFT_CH,
-                           DMEM_ADDR_WET_RIGHT_CH);
-                break;
-            default:
-                aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_LEFT_CH, nSamples * 2);
-                aSetBuffer(cmd++, A_AUX, DMEM_ADDR_RIGHT_CH, DMEM_ADDR_WET_LEFT_CH,
-                           DMEM_ADDR_WET_RIGHT_CH);
-                break;
-        }
-    } else {
-        // It's a bit unclear what the "stereo strong" concept does.
-        // Instead of mixing the opposite channel to the normal buffers, the sound is first
-        // mixed into a temporary buffer and then subtracted from the normal buffer.
-        if (note->stereoStrongRight) {
-            aClearBuffer(cmd++, DMEM_ADDR_STEREO_STRONG_TEMP_DRY, DEFAULT_LEN_2CH);
-            aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_STEREO_STRONG_TEMP_DRY, nSamples * 2);
-            aSetBuffer(cmd++, A_AUX, DMEM_ADDR_RIGHT_CH, DMEM_ADDR_STEREO_STRONG_TEMP_WET,
-                       DMEM_ADDR_WET_RIGHT_CH);
-        } else if (note->stereoStrongLeft) {
-            aClearBuffer(cmd++, DMEM_ADDR_STEREO_STRONG_TEMP_DRY, DEFAULT_LEN_2CH);
-            aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_LEFT_CH, nSamples * 2);
-            aSetBuffer(cmd++, A_AUX, DMEM_ADDR_STEREO_STRONG_TEMP_DRY, DMEM_ADDR_WET_LEFT_CH,
-                       DMEM_ADDR_STEREO_STRONG_TEMP_WET);
-        } else {
-            aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_LEFT_CH, nSamples * 2);
-            aSetBuffer(cmd++, A_AUX, DMEM_ADDR_RIGHT_CH, DMEM_ADDR_WET_LEFT_CH, DMEM_ADDR_WET_RIGHT_CH);
-        }
-    }
+    aSetBuffer(cmd++, 0, inBuf, DMEM_ADDR_LEFT_CH, nSamples * 2);
+    aSetBuffer(cmd++, A_AUX, DMEM_ADDR_RIGHT_CH, DMEM_ADDR_WET_LEFT_CH, DMEM_ADDR_WET_RIGHT_CH);
 
 #ifdef VERSION_EU
     if (targetLeft == sourceLeft && targetRight == sourceRight && !note->envMixerNeedsInit) {
@@ -1488,136 +1423,10 @@ u64 *process_envelope(u64 *cmd, struct NoteSubEu *note, struct NoteSynthesisStat
 #endif
     }
 
-#ifdef VERSION_EU
-    if (gUseReverb && note->reverbVol != 0) {
-        aEnvMixer(cmd++, mixerFlags | A_AUX,
-                  VIRTUAL_TO_PHYSICAL2(synthesisState->synthesisBuffers->mixEnvelopeState));
-#else
     if (gSynthesisReverb.useReverb && note->reverbVol != 0) {
-        aEnvMixer(cmd++, mixerFlags | A_AUX,
-                  VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->mixEnvelopeState));
-#endif
-        if (note->stereoStrongRight) {
-            aSetBuffer(cmd++, 0, 0, 0, nSamples * 2);
-            // 0x8000 is -100%, so subtract sound instead of adding...
-            aMix(cmd++, 0, /*gain*/ 0x8000, /*in*/ DMEM_ADDR_STEREO_STRONG_TEMP_DRY, /*out*/ DMEM_ADDR_LEFT_CH);
-            aMix(cmd++, 0, /*gain*/ 0x8000, /*in*/ DMEM_ADDR_STEREO_STRONG_TEMP_WET, /*out*/ DMEM_ADDR_WET_LEFT_CH);
-        } else if (note->stereoStrongLeft) {
-            aSetBuffer(cmd++, 0, 0, 0, nSamples * 2);
-            aMix(cmd++, 0, /*gain*/ 0x8000, /*in*/ DMEM_ADDR_STEREO_STRONG_TEMP_DRY, /*out*/ DMEM_ADDR_RIGHT_CH);
-            aMix(cmd++, 0, /*gain*/ 0x8000, /*in*/ DMEM_ADDR_STEREO_STRONG_TEMP_WET, /*out*/ DMEM_ADDR_WET_RIGHT_CH);
-        }
-    } else {
-#ifdef VERSION_EU
-        aEnvMixer(cmd++, mixerFlags, VIRTUAL_TO_PHYSICAL2(synthesisState->synthesisBuffers->mixEnvelopeState));
-#else
-        aEnvMixer(cmd++, mixerFlags, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->mixEnvelopeState));
-#endif
-        if (note->stereoStrongRight) {
-            aSetBuffer(cmd++, 0, 0, 0, nSamples * 2);
-            aMix(cmd++, 0, /*gain*/ 0x8000, /*in*/ DMEM_ADDR_STEREO_STRONG_TEMP_DRY,
-                 /*out*/ DMEM_ADDR_LEFT_CH);
-        } else if (note->stereoStrongLeft) {
-            aSetBuffer(cmd++, 0, 0, 0, nSamples * 2);
-            aMix(cmd++, 0, /*gain*/ 0x8000, /*in*/ DMEM_ADDR_STEREO_STRONG_TEMP_DRY,
-                 /*out*/ DMEM_ADDR_RIGHT_CH);
-        }
+        mixerFlags |= A_AUX;
     }
-    return cmd;
-}
-
-#ifdef VERSION_EU
-u64 *note_apply_headset_pan_effects(u64 *cmd, struct NoteSubEu *noteSubEu, struct NoteSynthesisState *note, s32 bufLen, s32 flags, s32 leftRight) {
-#else
-u64 *note_apply_headset_pan_effects(u64 *cmd, struct Note *note, s32 bufLen, s32 flags, s32 leftRight) {
-#endif
-    u16 dest;
-    u16 pitch;
-#ifdef VERSION_EU
-    u8 prevPanShift;
-    u8 panShift;
-    UNUSED u8 unkDebug;
-#else
-    u16 prevPanShift;
-    u16 panShift;
-#endif
-
-    switch (leftRight) {
-        case 1:
-            dest = DMEM_ADDR_LEFT_CH;
-#ifdef VERSION_EU
-            panShift = noteSubEu->headsetPanRight;
-#else
-            panShift = note->headsetPanRight;
-#endif
-            note->prevHeadsetPanLeft = 0;
-            prevPanShift = note->prevHeadsetPanRight;
-            note->prevHeadsetPanRight = panShift;
-            break;
-        case 2:
-            dest = DMEM_ADDR_RIGHT_CH;
-#ifdef VERSION_EU
-            panShift = noteSubEu->headsetPanLeft;
-#else
-            panShift = note->headsetPanLeft;
-#endif
-            note->prevHeadsetPanRight = 0;
-
-            prevPanShift = note->prevHeadsetPanLeft;
-            note->prevHeadsetPanLeft = panShift;
-            break;
-        default:
-            return cmd;
-    }
-
-    if (flags != 1) { // A_INIT?
-        // Slightly adjust the sample rate in order to fit a change in pan shift
-        if (prevPanShift == 0) {
-            // Kind of a hack that moves the first samples into the resample state
-            aDMEMMove(cmd++, DMEM_ADDR_NOTE_PAN_TEMP, DMEM_ADDR_TEMP, 8);
-            aClearBuffer(cmd++, 8, 8); // Set pitch accumulator to 0 in the resample state
-            aDMEMMove(cmd++, DMEM_ADDR_NOTE_PAN_TEMP, DMEM_ADDR_TEMP + 0x10,
-                      0x10); // No idea, result seems to be overwritten later
-
-            aSetBuffer(cmd++, 0, 0, DMEM_ADDR_TEMP, 32);
-            aSaveBuffer(cmd++, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->panResampleState));
-
-            pitch = (bufLen << 0xf) / (bufLen + panShift - prevPanShift + 8);
-            aSetBuffer(cmd++, 0, DMEM_ADDR_NOTE_PAN_TEMP + 8, DMEM_ADDR_TEMP, panShift + bufLen - prevPanShift);
-            aResample(cmd++, 0, pitch, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->panResampleState));
-        } else {
-            if (panShift == 0) {
-                pitch = (bufLen << 0xf) / (bufLen - prevPanShift - 4);
-            } else {
-                pitch = (bufLen << 0xf) / (bufLen + panShift - prevPanShift);
-            }
-
-            aSetBuffer(cmd++, 0, DMEM_ADDR_NOTE_PAN_TEMP, DMEM_ADDR_TEMP, panShift + bufLen - prevPanShift);
-            aResample(cmd++, 0, pitch, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->panResampleState));
-        }
-
-        if (prevPanShift != 0) {
-            aSetBuffer(cmd++, 0, DMEM_ADDR_NOTE_PAN_TEMP, 0, prevPanShift);
-            aLoadBuffer(cmd++, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->panSamplesBuffer));
-            aDMEMMove(cmd++, DMEM_ADDR_TEMP, DMEM_ADDR_NOTE_PAN_TEMP + prevPanShift, panShift + bufLen - prevPanShift);
-        } else {
-            aDMEMMove(cmd++, DMEM_ADDR_TEMP, DMEM_ADDR_NOTE_PAN_TEMP, panShift + bufLen - prevPanShift);
-        }
-    } else {
-        // Just shift right
-        aDMEMMove(cmd++, DMEM_ADDR_NOTE_PAN_TEMP, DMEM_ADDR_TEMP, bufLen);
-        aDMEMMove(cmd++, DMEM_ADDR_TEMP, DMEM_ADDR_NOTE_PAN_TEMP + panShift, bufLen);
-        aClearBuffer(cmd++, DMEM_ADDR_NOTE_PAN_TEMP, panShift);
-    }
-
-    if (panShift) {
-        // Save excessive samples for next iteration
-        aSetBuffer(cmd++, 0, 0, DMEM_ADDR_NOTE_PAN_TEMP + bufLen, panShift);
-        aSaveBuffer(cmd++, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->panSamplesBuffer));
-    }
-
-    aSetBuffer(cmd++, 0, 0, 0, bufLen);
-    aMix(cmd++, 0, /*gain*/ 0x7fff, /*in*/ DMEM_ADDR_NOTE_PAN_TEMP, /*out*/ dest);
+    aEnvMixer(cmd++, mixerFlags, VIRTUAL_TO_PHYSICAL2(note->synthesisBuffers->mixEnvelopeState));
 
     return cmd;
 }
@@ -1639,37 +1448,7 @@ void note_init_volume(struct Note *note) {
 void note_set_vel_pan_reverb(struct Note *note, f32 velocity, f32 pan, u8 reverbVol) {
     f32 volLeft, volRight;
     s32 panIndex = (s32)(pan * 127.5f) & 127;
-    if (note->stereoHeadsetEffects && gSoundMode == SOUND_MODE_HEADSET) {
-        s8 smallPanIndex;
-        s8 temp = (s8)(pan * 10.0f);
-        if (temp < 9) {
-            smallPanIndex = temp;
-        } else {
-            smallPanIndex = 9;
-        }
-        note->headsetPanLeft = gHeadsetPanQuantization[smallPanIndex];
-        note->headsetPanRight = gHeadsetPanQuantization[9 - smallPanIndex];
-        note->stereoStrongRight = FALSE;
-        note->stereoStrongLeft = FALSE;
-        note->usesHeadsetPanEffects = TRUE;
-        volLeft = gHeadsetPanVolume[panIndex];
-        volRight = gHeadsetPanVolume[127 - panIndex];
-    } else if (note->stereoHeadsetEffects && gSoundMode == SOUND_MODE_STEREO) {
-        u8 strongLeft = FALSE;
-        u8 strongRight = FALSE;
-        note->headsetPanLeft = 0;
-        note->headsetPanRight = 0;
-        note->usesHeadsetPanEffects = FALSE;
-        volLeft = gStereoPanVolume[panIndex];
-        volRight = gStereoPanVolume[127 - panIndex];
-        if (panIndex < 0x20) {
-            strongLeft = TRUE;
-        } else if (panIndex > 0x60) {
-            strongRight = TRUE;
-        }
-        note->stereoStrongRight = strongRight;
-        note->stereoStrongLeft = strongLeft;
-    } else if (gSoundMode == SOUND_MODE_MONO) {
+    if (gSoundMode == SOUND_MODE_MONO) {
         volLeft = 0.707f;
         volRight = 0.707f;
     } else {
@@ -1707,13 +1486,6 @@ void note_enable(struct Note *note) {
     note->needsInit = TRUE;
     note->restart = FALSE;
     note->finished = FALSE;
-    note->stereoStrongRight = FALSE;
-    note->stereoStrongLeft = FALSE;
-    note->usesHeadsetPanEffects = FALSE;
-    note->headsetPanLeft = 0;
-    note->headsetPanRight = 0;
-    note->prevHeadsetPanRight = 0;
-    note->prevHeadsetPanLeft = 0;
 }
 
 void note_disable(struct Note *note) {

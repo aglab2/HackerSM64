@@ -363,7 +363,7 @@ struct ReverbBitsData {
     /* 0x00 */ u8 bit1 : 1;
     /* 0x00 */ u8 bit2 : 1;
     /* 0x00 */ u8 usesHeadsetPanEffects : 1;
-    /* 0x00 */ u8 stereoHeadsetEffects : 2;
+    /*0x00, 0x00*/ u8 paddingBit : 2;
     /* 0x00 */ u8 strongRight : 1;
     /* 0x00 */ u8 strongLeft : 1;
 };
@@ -413,7 +413,7 @@ struct SequenceChannel {
     /*0x00, 0x00*/ u8 stopScript : 1;
     /*0x00, 0x00*/ u8 stopSomething2 : 1; // sets SequenceChannelLayer.stopSomething
     /*0x00, 0x00*/ u8 hasInstrument : 1;
-    /*0x00, 0x00*/ u8 stereoHeadsetEffects : 1;
+    /*0x00, 0x00*/ u8 _pad : 1;
     /*0x00, ????*/ u8 largeNotes : 1; // notes specify duration and velocity
     /*0x00, ????*/ u8 unused : 1; // never read, set to 0
 #if defined(VERSION_EU) || defined(VERSION_SH)
@@ -660,10 +660,8 @@ struct Note {
     /*0x00*/ u8 restart              : 1;
     /*0x00*/ u8 finished             : 1;
     /*0x00*/ u8 envMixerNeedsInit    : 1;
-    /*0x00*/ u8 stereoStrongRight    : 1;
-    /*0x00*/ u8 stereoStrongLeft     : 1;
-    /*0x00*/ u8 stereoHeadsetEffects : 1;
-    /*0x01*/ u8 usesHeadsetPanEffects;
+    /*0x00*/ u8 padBits              : 3;
+    /*0x01*/ u8 unusedHeadsetPadding;
     /*0x02*/ u8 unk2;
     /*0x03*/ u8 sampleDmaIndex;
     /*0x04, 0x30*/ u8 priority;
@@ -672,10 +670,10 @@ struct Note {
     /*0x07*/ u8 bankId; // in NoteSubEu on EU
     /*0x08*/ s16 adsrVolScale;
     /*    */ u8 pad1[2];
-    /*0x0C, 0xB3*/ u16 headsetPanRight;
-    /*0x0E, 0xB4*/ u16 headsetPanLeft;
-    /*0x10*/ u16 prevHeadsetPanRight;
-    /*0x12*/ u16 prevHeadsetPanLeft;
+    /*0x0C, 0xB3*/ u16 _pad0;
+    /*0x0E, 0xB4*/ u16 _pad1;
+    /*0x10*/ u16 _pad2;
+    /*0x12*/ u16 _pad3;
     /*0x14*/ s32 samplePosInt;
     /*0x18, 0x38*/ f32 portamentoFreqScale;
     /*0x1C, 0x3C*/ f32 vibratoFreqScale;
