@@ -33,6 +33,8 @@
  * General data types for R4300
  */
 
+#ifndef __ASM__
+
 typedef signed char            s8;
 typedef unsigned char          u8;
 typedef signed short int       s16;
@@ -77,6 +79,7 @@ typedef volatile s16 vs16;
 typedef volatile s32 vs32;
 typedef volatile s64 vs64;
 
+#endif
 
 /*************************************************************************
  * Common definitions

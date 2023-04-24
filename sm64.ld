@@ -160,11 +160,7 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.text*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(.text*);
-#else
-      */libultra_rom.a:*.o(.text*);
-#endif
+      BUILD_DIR/src/ultra*.o(.text*);
       */libnustd.a:*.o(.text*);
       */libgcc.a:*.o(.text*);
       */librtc.a:*.o(.text*);
@@ -186,11 +182,7 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.*data*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(.data*);
-#else
-      */libultra_rom.a:*.o(.data*);
-#endif
+      BUILD_DIR/src/ultra*.o(.data*);
       */libhvqm2.a:*.o(.data*);
       */librtc.a:*.o(.data*);
       */libz.a:*.o(.data*);
@@ -206,11 +198,7 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.rodata*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(.rodata*);
-#else
-      */libultra_rom.a:*.o(.rodata*);
-#endif
+      BUILD_DIR/src/ultra*.o(.rodata*);
       */libgcc.a:*.o(.rodata*);
       */librtc.a:*.o(.rodata*);
       */libz.a:*.o(.rodata*);
@@ -227,15 +215,7 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.*bss*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(COMMON);
-      */libultra_d.a:*.o(.scommon);
-      */libultra_d.a:*.o(.*bss*);
-#else
-      */libultra_rom.a:*.o(COMMON);
-      */libultra_rom.a:*.o(.scommon);
-      */libultra_rom.a:*.o(.*bss*);
-#endif
+      BUILD_DIR/src/ultra*.o(.bss*);
       */libhvqm2.a:*.o(.bss*);
       */librtc.a:*.o(.bss*);
       */libz.a:*.o(.bss*);

@@ -21,6 +21,10 @@
 #ifndef __R4300_H__
 #define __R4300_H__
 
+#ifdef __ASM__
+#undef _LANGUAGE_C
+#endif
+
 #include <PR/ultratypes.h>
 
 /*
