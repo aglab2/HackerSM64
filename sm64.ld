@@ -104,6 +104,7 @@ SECTIONS
    . = (RAM_START + 0x400);
    BEGIN_NOLOAD(buffers)
    {
+      BUILD_DIR/src/buffers/buffers.o(.data*);
       BUILD_DIR/src/buffers/buffers.o(.bss*);
       BUILD_DIR/src/audio/globals_start.o(.bss*);
       BUILD_DIR/src/audio/synthesis.o(.bss*);

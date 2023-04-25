@@ -411,9 +411,9 @@ void mtc_red_ground_init()
 }
 
 extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_0[60];
-extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_1[12];
+extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_1[12] __attribute__((section(".data")));
 extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_2[24];
-extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_3[14];
+extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_3[14] __attribute__((section(".data")));
 
 static void switch_vcol_alpha(Vtx* svtx, int size, u8 a)
 {

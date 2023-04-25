@@ -19,7 +19,7 @@ extern u8 gDecompressionHeap[];
 
 extern u8 gAudioHeap[];
 
-extern u8 gIdleThreadStack[THREAD1_STACK];
+extern u8 gIdleThreadStack[THREAD1_STACK] __attribute__((section(".data")));
 extern u8 gThread3Stack[THREAD3_STACK];
 extern u8 gThread4Stack[THREAD4_STACK];
 extern u8 gThread5Stack[THREAD5_STACK];

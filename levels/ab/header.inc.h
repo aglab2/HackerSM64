@@ -386,7 +386,7 @@ extern Gfx ab_dl_tf_mesh_layer_5_tri_0[];
 extern Vtx ab_dl_zw_mesh_layer_5_vtx_cull[8];
 extern Vtx ab_dl_zw_mesh_layer_5_vtx_0[177];
 extern Gfx ab_dl_zw_mesh_layer_5_tri_0[];
-extern Vtx ab_dl_zw_mesh_layer_5_vtx_1[12];
+extern Vtx ab_dl_zw_mesh_layer_5_vtx_1[12] __attribute__((section(".data")));
 extern Gfx ab_dl_zw_mesh_layer_5_tri_1[];
 extern Vtx ab_dl_zw_mesh_layer_1_vtx_cull[8];
 extern Vtx ab_dl_zw_mesh_layer_1_vtx_0[224];

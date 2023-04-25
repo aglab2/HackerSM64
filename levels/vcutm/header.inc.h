@@ -396,7 +396,7 @@ extern Vtx vcutm_dl_chireiden_alice_mesh_layer_1_vtx_5[34];
 extern Gfx vcutm_dl_chireiden_alice_mesh_layer_1_tri_5[];
 extern Vtx vcutm_dl_chireiden_alice_mesh_layer_1_vtx_6[44];
 extern Gfx vcutm_dl_chireiden_alice_mesh_layer_1_tri_6[];
-extern Vtx vcutm_dl_chireiden_alice_mesh_layer_1_vtx_7[9];
+extern Vtx vcutm_dl_chireiden_alice_mesh_layer_1_vtx_7[9] __attribute__((section(".data")));
 extern Gfx vcutm_dl_chireiden_alice_mesh_layer_1_tri_7[];
 extern Vtx vcutm_dl_chireiden_alice_mesh_layer_1_vtx_8[38];
 extern Gfx vcutm_dl_chireiden_alice_mesh_layer_1_tri_8[];
