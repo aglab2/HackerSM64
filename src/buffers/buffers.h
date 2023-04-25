@@ -29,7 +29,7 @@ extern u8 gThread6Stack[THREAD6_STACK];
 
 extern u8 gGfxSPTaskYieldBuffer[];
 
-extern struct SaveBuffer gSaveBuffer;
+extern struct SaveBuffer gSaveBuffer __attribute__((section(".data")));
 
 extern u8 gGfxSPTaskStack[];
 

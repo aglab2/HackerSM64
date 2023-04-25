@@ -3,7 +3,7 @@ extern Lights1 ab_sand_thingies_lights;
 extern u8 ab_sand_tex1_64x64_0D13701A852189CE_12_ci4[];
 extern u8 ab_sand_tex1_64x64_0D13701A852189CE_12_ci4_pal_rgba16[];
 extern Vtx ab_sand_Plane_mesh_layer_5_vtx_cull[8];
-extern Vtx ab_sand_Plane_mesh_layer_5_vtx_0[25];
+extern Vtx ab_sand_Plane_mesh_layer_5_vtx_0[25] __attribute__((section(".data")));
 extern Gfx ab_sand_Plane_mesh_layer_5_tri_0[];
 extern Gfx mat_ab_sand_thingies[];
 extern Gfx mat_revert_ab_sand_thingies[];

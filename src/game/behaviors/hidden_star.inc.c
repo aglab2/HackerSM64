@@ -30,7 +30,7 @@ void bhv_hidden_star_loop(void) {
 }
 
 // every 4 vertices are referring to a cross for 5 secrets
-extern Vtx rovert_dl_nonsolid_001_mesh_layer_6_vtx_1[20];
+extern Vtx rovert_dl_nonsolid_001_mesh_layer_6_vtx_1[20] __attribute__((section(".data")));
 void bhv_hidden_star_trigger_loop(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
         struct Object *hiddenStar = cur_obj_nearest_object_with_behavior(bhvHiddenStar);

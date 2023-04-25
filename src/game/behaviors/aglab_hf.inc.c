@@ -1,10 +1,10 @@
 
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_0[26];
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_0_backup[26];
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_0[26] __attribute__((section(".data")));
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_0_backup[26] __attribute__((section(".data")));
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_1[7] __attribute__((section(".data")));
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_1_backup[7] __attribute__((section(".data")));
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_2[26];
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_2_backup[26];
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_2[26] __attribute__((section(".data")));
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_2_backup[26] __attribute__((section(".data")));
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_3[6] __attribute__((section(".data")));
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_3_backup[6] __attribute__((section(".data")));
 

@@ -108,7 +108,7 @@ void bhv_ab_sand_init()
 }
 
 extern const BehaviorScript bhvHiddenStarTrigger[];
-extern Vtx ab_sand_Plane_mesh_layer_5_vtx_0[25];
+extern Vtx ab_sand_Plane_mesh_layer_5_vtx_0[25] __attribute__((section(".data")));
 void bhv_ab_sand_loop()
 {
     // raise self up
