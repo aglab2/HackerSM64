@@ -413,7 +413,7 @@ void check_cache_emulation() {
 /**
  * Initial settings for the first rendered frame.
  */
-extern OSViMode VI;
+extern OSViMode VI __attribute__((section(".data")));
 void render_init(void) {
 #ifdef DEBUG_FORCE_CRASH_ON_BOOT
     FORCE_CRASH

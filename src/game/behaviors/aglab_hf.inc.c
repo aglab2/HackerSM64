@@ -1,12 +1,12 @@
 
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_0[26];
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_0_backup[26];
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_1[7];
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_1_backup[7];
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_1[7] __attribute__((section(".data")));
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_1_backup[7] __attribute__((section(".data")));
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_2[26];
 extern Vtx hf_boo_boo_mesh_layer_1_vtx_2_backup[26];
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_3[6];
-extern Vtx hf_boo_boo_mesh_layer_1_vtx_3_backup[6];
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_3[6] __attribute__((section(".data")));
+extern Vtx hf_boo_boo_mesh_layer_1_vtx_3_backup[6] __attribute__((section(".data")));
 
 #define SIGN(x) ((x) < 0 ? -1 : 1)
 
@@ -968,8 +968,8 @@ Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8] = {
 };
 */
 
-extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_0[8];
-extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8];
+extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_0[8] __attribute__((section(".data")));
+extern Vtx hf_dl_noticeme_mesh_layer_6_vtx_1[8] __attribute__((section(".data")));
 
 static void serialize_quad_pos_to_ice_quad(Vtx* vtx, const struct IceQuad* iq, const struct QuadPos* qp)
 {

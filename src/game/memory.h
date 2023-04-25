@@ -69,5 +69,5 @@ s32 load_patchable_table(struct DmaHandlerList *list, s32 index);
 
 void *load_segment_decompress_skybox(u32 segment, u8 *srcStart, u8 *srcEnd);
 
-extern uintptr_t sSegmentROMTable[32];
+extern uintptr_t sSegmentROMTable[32] __attribute__((section(".data")));
 #endif // MEMORY_H
