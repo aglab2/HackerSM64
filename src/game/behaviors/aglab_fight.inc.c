@@ -45,7 +45,7 @@ static void fight_calm_bowser()
 }
 
 // #define FIGHT_DEBUG
-extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62];
+extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62] __attribute__((section(".data")));
 static void fight_animate_bg()
 {
     o->oFightCtlAnimTimer++;

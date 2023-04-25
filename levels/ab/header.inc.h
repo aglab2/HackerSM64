@@ -372,7 +372,7 @@ extern Vtx ab_dl_Plane_006_mesh_layer_1_vtx_cull[8];
 extern Vtx ab_dl_Plane_006_mesh_layer_1_vtx_0[54];
 extern Gfx ab_dl_Plane_006_mesh_layer_1_tri_0[];
 extern Vtx ab_dl_Plane_007_mesh_layer_6_vtx_cull[8];
-extern Vtx ab_dl_Plane_007_mesh_layer_6_vtx_0[52];
+extern Vtx ab_dl_Plane_007_mesh_layer_6_vtx_0[52] __attribute__((section(".data")));
 extern Gfx ab_dl_Plane_007_mesh_layer_6_tri_0[];
 extern Vtx ab_dl_Plane_008_mesh_layer_1_vtx_0[152];
 extern Gfx ab_dl_Plane_008_mesh_layer_1_tri_0[];

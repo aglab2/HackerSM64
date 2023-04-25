@@ -281,7 +281,7 @@ extern Vtx rovert_dl_Cylinder_mesh_layer_4_vtx_cull[8];
 extern Vtx rovert_dl_Cylinder_mesh_layer_4_vtx_0[64];
 extern Gfx rovert_dl_Cylinder_mesh_layer_4_tri_0[];
 extern Vtx rovert_dl_Cylinder_003_mesh_layer_5_vtx_cull[8];
-extern Vtx rovert_dl_Cylinder_003_mesh_layer_5_vtx_0[37];
+extern Vtx rovert_dl_Cylinder_003_mesh_layer_5_vtx_0[37] __attribute__((section(".data")));
 extern Gfx rovert_dl_Cylinder_003_mesh_layer_5_tri_0[];
 extern Vtx rovert_dl_Cylinder_005_mesh_layer_6_vtx_cull[8];
 extern Vtx rovert_dl_Cylinder_005_mesh_layer_6_vtx_0[346];

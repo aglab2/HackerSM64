@@ -12,7 +12,7 @@ extern Vtx Floating_Plat_static_gfx_mesh_layer_1_vtx_0[16];
 extern Gfx Floating_Plat_static_gfx_mesh_layer_1_tri_0[];
 extern Vtx Floating_Plat_static_gfx_mesh_layer_1_vtx_1[8];
 extern Gfx Floating_Plat_static_gfx_mesh_layer_1_tri_1[];
-extern Vtx Floating_Plat_static_gfx_mesh_layer_5_vtx_0[57];
+extern Vtx Floating_Plat_static_gfx_mesh_layer_5_vtx_0[57] __attribute__((section(".data")));
 extern Gfx Floating_Plat_static_gfx_mesh_layer_5_tri_0[];
 extern Gfx mat_Floating_Plat_side[];
 extern Gfx mat_revert_Floating_Plat_side[];

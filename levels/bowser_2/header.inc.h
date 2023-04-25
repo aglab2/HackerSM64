@@ -36,7 +36,7 @@ extern u8 bowser_2_dl__0E012050_ia16[];
 extern u8 bowser_2_dl___ci4_copy[];
 extern u8 bowser_2_dl___ci4_pal_rgba16_copy[];
 extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_cull[8];
-extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62];
+extern Vtx bowser_2_dl_cupol_mesh_layer_1_vtx_0[62] __attribute__((section(".data")));
 extern Gfx bowser_2_dl_cupol_mesh_layer_1_tri_0[];
 extern Vtx bowser_2_dl_fight_mesh_layer_4_vtx_cull[8];
 extern Vtx bowser_2_dl_fight_mesh_layer_4_vtx_0[12];

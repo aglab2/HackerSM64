@@ -226,7 +226,7 @@ extern Vtx mtc_dl_Course_13_004_mesh_layer_1_vtx_cull[8];
 extern Vtx mtc_dl_Course_13_004_mesh_layer_1_vtx_0[20];
 extern Gfx mtc_dl_Course_13_004_mesh_layer_1_tri_0[];
 extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_cull[8];
-extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_0[60];
+extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_0[60] __attribute__((section(".data")));
 extern Gfx mtc_dl_Course_13_007_mesh_layer_1_tri_0[];
 extern Vtx mtc_dl_Course_13_007_mesh_layer_1_vtx_1[12] __attribute__((section(".data")));
 extern Gfx mtc_dl_Course_13_007_mesh_layer_1_tri_1[];

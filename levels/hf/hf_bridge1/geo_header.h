@@ -2,7 +2,7 @@ extern const GeoLayout hf_bridge1_geo[];
 extern Lights1 hf_bridge1__Color_A01_1_f3d_lights;
 extern u8 hf_bridge1__Color_A01_1_rgba16[];
 extern Vtx hf_bridge1_c5_005_mesh_layer_4_vtx_cull[8];
-extern Vtx hf_bridge1_c5_005_mesh_layer_4_vtx_0[40];
+extern Vtx hf_bridge1_c5_005_mesh_layer_4_vtx_0[40] __attribute__((section(".data")));
 extern Gfx hf_bridge1_c5_005_mesh_layer_4_tri_0[];
 extern Gfx mat_hf_bridge1__Color_A01_1_f3d[];
 extern Gfx mat_revert_hf_bridge1__Color_A01_1_f3d[];

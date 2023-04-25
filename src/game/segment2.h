@@ -5,7 +5,7 @@
 #include <PR/gbi.h>
 
 extern void *puppyprint_font_lut[2] __attribute__((section(".data")));
-extern void *puppyprint_kerning_lut[2][80];
+extern void *puppyprint_kerning_lut[2][80] __attribute__((section(".data")));
 
 extern u8 seg2_course_name_table[];
 extern u8 seg2_act_name_table[];

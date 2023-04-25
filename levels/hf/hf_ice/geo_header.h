@@ -3,7 +3,7 @@ extern Lights1 hf_ice_ice_lights;
 extern u8 hf_ice_tex1_64x64_D71C3452E2172AE6_12_ci4[];
 extern u8 hf_ice_tex1_64x64_D71C3452E2172AE6_12_ci4_pal_rgba16[];
 extern Vtx hf_ice_Plane_002_mesh_layer_1_vtx_cull[8];
-extern Vtx hf_ice_Plane_002_mesh_layer_1_vtx_0[45];
+extern Vtx hf_ice_Plane_002_mesh_layer_1_vtx_0[45] __attribute__((section(".data")));
 extern Gfx hf_ice_Plane_002_mesh_layer_1_tri_0[];
 extern Gfx mat_hf_ice_ice[];
 extern Gfx mat_revert_hf_ice_ice[];

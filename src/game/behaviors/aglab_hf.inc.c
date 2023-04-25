@@ -323,8 +323,8 @@ void hf_crystal_block_loop()
 extern const Collision hf_ice_collision[];
 extern const Collision hf_ice_collision_backup[];
 
-extern const Vtx hf_ice_Plane_002_mesh_layer_1_vtx_0[45];
-extern const Vtx hf_ice_Plane_002_mesh_layer_1_vtx_0_backup[45];
+extern const Vtx hf_ice_Plane_002_mesh_layer_1_vtx_0[45] __attribute__((section(".data")));
+extern const Vtx hf_ice_Plane_002_mesh_layer_1_vtx_0_backup[45] __attribute__((section(".data")));
 
 struct IceQuad
 {
@@ -516,7 +516,7 @@ void hf_bridge_init()
 }
 
 extern Collision hf_bridge1_collision[];
-extern Vtx hf_bridge1_c5_005_mesh_layer_4_vtx_0[40];
+extern Vtx hf_bridge1_c5_005_mesh_layer_4_vtx_0[40] __attribute__((section(".data")));
 // coll 10, 11 - 21, 22
 // visu 16, 19 - 33, 34
 
