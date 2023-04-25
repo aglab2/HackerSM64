@@ -4,7 +4,7 @@
 #include <PR/ultratypes.h>
 #include <PR/gbi.h>
 
-extern void *puppyprint_font_lut[2];
+extern void *puppyprint_font_lut[2] __attribute__((section(".data")));
 extern void *puppyprint_kerning_lut[2][80];
 
 extern u8 seg2_course_name_table[];
@@ -53,7 +53,7 @@ extern void *main_font_lut[];
 extern Gfx dl_ia_text_tex_settings[];
 extern Gfx dl_rgba16_load_tex_block[];
 extern void *main_credits_font_lut[];
-extern Texture *main_hud_camera_lut[6];
+extern Texture *main_hud_camera_lut[6] __attribute__((section(".data")));
 extern Gfx dl_draw_text_bg_box[];
 extern Gfx dl_draw_triangle[];
 extern void *seg2_dialog_table[];

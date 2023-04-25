@@ -218,14 +218,14 @@ u8 __osContAddressCrc(u16 addr);
 u8 __osContDataCrc(u8 *data);
 s32 __osPfsGetStatus(OSMesgQueue *queue, int channel);
 
-extern u8 __osContLastCmd;
+extern u8 __osContLastCmd __attribute__((section(".data")));
 extern OSTimer __osEepromTimer;
 extern OSMesg __osEepromTimerMsg;
 extern OSMesgQueue __osEepromTimerQ;
 extern OSPifRam __osEepPifRam;
-extern OSPifRam __osContPifRam;
+extern OSPifRam __osContPifRam __attribute__((section(".data")));
 extern OSPifRam __osPfsPifRam;
-extern u8 __osMaxControllers;
+extern u8 __osMaxControllers __attribute__((section(".data")));
 
 //some version of this almost certainly existed since there's plenty of times where it's used right before a return 0
 #define ERRCK(fn) \

@@ -98,7 +98,7 @@ extern uintptr_t sSegmentTable[32];
  * Memory pool for small graphical effects that aren't connected to Objects.
  * Used for colored text, paintings, and environmental snow and bubbles.
  */
-struct MemoryPool *gEffectsMemoryPool;
+struct MemoryPool *gEffectsMemoryPool __attribute__((section(".data")));
 
 
 
@@ -214,6 +214,7 @@ extern u8 _framebuffersSegmentBssStart[];
 // extern u8 _zbufferSegmentBssStart[];
 extern u8 _zbufferSegmentBssEnd[];
 extern u8 _goddardSegmentStart[];
+extern u8 _sbssSegmentBssEnd[];
 
 /**
  * Initialize the main memory pool. This pool is conceptually regions
@@ -224,14 +225,14 @@ void main_pool_init() {
 #ifdef USE_EXT_RAM
     sMainPool.regions[0].start = (u8 *) 0x80600000;
     sMainPool.regions[0].size = (u8 *) DOWN4(_goddardSegmentStart) - sMainPool.regions[0].start;
-    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
+    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_sbssSegmentBssEnd);
     sMainPool.regions[1].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[1].start;
     sMainPool.regions[2].start = (u8 *) ALIGN4((uintptr_t)_zbufferSegmentBssEnd);
     sMainPool.regions[2].size = (u8*) 0x80600000 - sMainPool.regions[2].start;
 #else
     sMainPool.regions[0].start = (u8 *) ALIGN4((uintptr_t)_zbufferSegmentBssEnd);
     sMainPool.regions[0].size = (u8*) DOWN4(_goddardSegmentStart) - sMainPool.regions[0].start;
-    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
+    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_sbssSegmentBssEnd);
     sMainPool.regions[2].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[1].start;
     sMainPool.regions[2].start = NULL;
     sMainPool.regions[2].size = 0;
@@ -681,6 +682,22 @@ void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
         main_pool_free(compressed);
     }
     return gDecompressionHeap;
+}
+
+extern u8 _gp[];
+extern u8 _sdataSegmentStart[];
+extern u8 _sdataSegmentEnd[];
+extern u8 _sdataSegmentRomStart[];
+extern u8 _sdataSegmentRomEnd[];
+
+void load_sdata(void) {
+    void *startAddr = (void *) _sdataSegmentStart;
+    u32 totalSize = _sdataSegmentEnd - _sdataSegmentStart;
+
+    bzero(startAddr, totalSize);
+    osWritebackDCacheAll();
+    dma_read(startAddr, _sdataSegmentRomStart, _sdataSegmentRomEnd);
+    osInvalDCache(startAddr, totalSize);
 }
 
 void load_engine_code_segment(void) {

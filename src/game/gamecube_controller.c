@@ -60,8 +60,8 @@ typedef struct
     /* 0x26 */ u8 datacrc;
 } __OSContRamReadFormat;
 
-extern OSPifRam __osContPifRam;
-extern u8 __osMaxControllers;
+extern OSPifRam __osContPifRam __attribute__((section(".data")));
+extern u8 __osMaxControllers __attribute__((section(".data")));
 
 #define CONT_CMD_READ_BUTTON    1
 
@@ -162,7 +162,7 @@ typedef struct
     /* 0xC */ u8 l_trig;
     /* 0xD */ u8 r_trig;
 } __OSContGCNShortPollFormat;
-extern u8 __osContLastCmd;
+extern u8 __osContLastCmd __attribute__((section(".data")));
 u8 __osControllerTypes[MAXCONTROLLERS];
 u8 __osGamecubeRumbleEnabled[MAXCONTROLLERS];
 

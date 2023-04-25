@@ -237,8 +237,8 @@ enum
 
 extern Gfx mat_mario_red[];
 extern Gfx mat_mario_logo[];
-extern Lights1 mario_blue_lights;
-extern Lights1 mario_red_lights;
+extern Lights1 mario_blue_lights __attribute__((section(".data")));
+extern Lights1 mario_red_lights __attribute__((section(".data")));
 
 extern u8 gLowGravityEnabled;
 static void airlock_switch_airlock(u8 value)

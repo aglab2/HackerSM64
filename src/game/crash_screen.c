@@ -394,11 +394,12 @@ extern u16 sRenderedFramebuffer;
 extern void audio_signal_game_loop_tick(void);
 extern void stop_sounds_in_continuous_banks(void);
 extern void read_controller_inputs(s32 threadID);
-extern struct SequenceQueueItem sBackgroundMusicQueue[6];
+extern struct SequenceQueueItem sBackgroundMusicQueue[6] __attribute__((section(".data")));
 
 void thread2_crash_screen(UNUSED void *arg) {
     OSMesg mesg;
     OSThread *thread = NULL;
+    setgp();
 
     osSetEventMesg(OS_EVENT_CPU_BREAK, &gCrashScreen.mesgQueue, (OSMesg) 1);
     osSetEventMesg(OS_EVENT_FAULT,     &gCrashScreen.mesgQueue, (OSMesg) 2);

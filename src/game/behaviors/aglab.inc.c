@@ -7,7 +7,7 @@ extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 
 extern u8 gDoInertia;
 extern u8 gDoPlatformDisplacement;
-extern s32 gTatums;
+extern s32 gTatums __attribute__((section(".data")));
 extern u8 gAllowPausing;
 
 u32 aglabScratch[100];

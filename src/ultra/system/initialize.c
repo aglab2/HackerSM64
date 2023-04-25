@@ -7,7 +7,7 @@ typedef struct {
     /* 0x8 */ unsigned int inst3;
     /* 0xC */ unsigned int inst4;
 } __osExceptionVector;
-extern __osExceptionVector __osExceptionPreamble;
+extern __osExceptionVector __osExceptionPreamble __attribute__((section(".data")));
 
 extern OSPiHandle __Dom1SpeedParam;
 extern OSPiHandle __Dom2SpeedParam;

@@ -34,7 +34,7 @@ struct RumbleSettings {
     s16 decay;
 };
 
-extern struct Config gConfig;
+extern struct Config gConfig __attribute__((section(".data")));
 
 // extern OSThread gUnkThread;
 extern OSThread gIdleThread;
@@ -61,9 +61,9 @@ extern OSMesg gSIEventMesgBuf[1];
 extern OSMesg gIntrMesgBuf[16];
 extern OSMesg gUnknownMesgBuf[16];
 extern OSIoMesg gDmaIoMesg;
-extern OSMesg gMainReceivedMesg;
+extern OSMesg gMainReceivedMesg __attribute__((section(".data")));
 extern OSMesgQueue gDmaMesgQueue;
-extern OSMesgQueue gSIEventMesgQueue;
+extern OSMesgQueue gSIEventMesgQueue __attribute__((section(".data")));
 #if ENABLE_RUMBLE
 extern OSMesg gRumblePakSchedulerMesgBuf[1];
 extern OSMesg gRumbleThreadVIMesgBuf[1];
@@ -72,14 +72,14 @@ extern struct RumbleData gRumbleDataQueue[3];
 extern struct RumbleSettings gCurrRumbleSettings;
 #endif
 
-extern struct VblankHandler *gVblankHandler1;
-extern struct VblankHandler *gVblankHandler2;
-extern struct SPTask *gActiveSPTask;
-extern s8 gAudioEnabled;
-extern u32 gNumVblanks;
-extern s8 gResetTimer;
-extern s8 gNmiResetBarsTimer;
-extern s8 gDebugLevelSelect;
+extern struct VblankHandler *gVblankHandler1 __attribute__((section(".data")));
+extern struct VblankHandler *gVblankHandler2 __attribute__((section(".data")));
+extern struct SPTask *gActiveSPTask __attribute__((section(".data")));
+extern s8 gAudioEnabled __attribute__((section(".data")));
+extern u32 gNumVblanks __attribute__((section(".data")));
+extern s8 gResetTimer __attribute__((section(".data")));
+extern s8 gNmiResetBarsTimer __attribute__((section(".data")));
+extern s8 gDebugLevelSelect __attribute__((section(".data")));
 #ifdef VANILLA_DEBUG
 extern s8 gShowDebugText;
 #endif
@@ -87,5 +87,6 @@ extern s8 gShowDebugText;
 void set_vblank_handler(s32 index, struct VblankHandler *handler, OSMesgQueue *queue, OSMesg *msg);
 void dispatch_audio_sptask(struct SPTask *spTask);
 void exec_display_list(struct SPTask *spTask);
+void setgp();
 
 #endif // MAIN_H

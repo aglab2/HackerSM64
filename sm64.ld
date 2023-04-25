@@ -53,10 +53,10 @@ OUTPUT_ARCH (mips)
    END_SEG(name##_segment_7) \
    BEGIN_SEG(name, 0x0E000000) \
    { \
-      KEEP(BUILD_DIR/levels/name/script.o(.*data*)); \
+      KEEP(BUILD_DIR/levels/name/script.o(.data*)); \
       KEEP(BUILD_DIR/levels/name/script.o(.text*)); \
       KEEP(BUILD_DIR/levels/name/script.o(.rodata*)); \
-      KEEP(BUILD_DIR/levels/name/geo.o(.*data*)); \
+      KEEP(BUILD_DIR/levels/name/geo.o(.data*)); \
       KEEP(BUILD_DIR/levels/name/geo.o(.text*)); \
       KEEP(BUILD_DIR/levels/name/geo.o(.rodata*)); \
    } \
@@ -77,7 +77,7 @@ OUTPUT_ARCH (mips)
    END_SEG(name##_yay0) \
    BEGIN_SEG(name##_geo, geoAddr) \
    { \
-      KEEP(BUILD_DIR/actors/name##_geo.o(.*data*)); \
+      KEEP(BUILD_DIR/actors/name##_geo.o(.data*)); \
       KEEP(BUILD_DIR/actors/name##_geo.o(.rodata*)); \
       KEEP(BUILD_DIR/actors/name##_geo.o(.text*)); \
    } \
@@ -150,6 +150,7 @@ SECTIONS
    {
       KEEP(BUILD_DIR/asm/entry.o(.text*));
       KEEP(BUILD_DIR/asm/n64_assert.o(.text*));
+      KEEP(BUILD_DIR/asm/setgp.o(.text*));
 #ifdef EEP
       KEEP(BUILD_DIR/asm/vc_bin.o(.text*));
 #endif
@@ -174,11 +175,11 @@ SECTIONS
       _mainSegmentTextEnd = .;
 
       /* data */
-      BUILD_DIR/asm/n64_assert.o(.*data*);
-      BUILD_DIR/src/boot*.o(.*data*);
-      BUILD_DIR/src/audio*.o(.*data*);
+      BUILD_DIR/asm/n64_assert.o(.data*);
+      BUILD_DIR/src/boot*.o(.data*);
+      BUILD_DIR/src/audio*.o(.data*);
 #ifdef S2DEX_TEXT_ENGINE
-      lib/libs2d_engine.a:*(.*data*);
+      lib/libs2d_engine.a:*(.data*);
 #endif
       BUILD_DIR/src/ultra*.o(.data*);
       */libhvqm2.a:*.o(.data*);
@@ -206,12 +207,12 @@ SECTIONS
    END_SEG(main)
    BEGIN_NOLOAD(main)
    {
-      BUILD_DIR/src/boot*.o(.*bss*);
-      BUILD_DIR/src/hvqm*.o(.*bss*);
-      BUILD_DIR/src/usb*.o(.*bss*);
-      BUILD_DIR/src/audio*.o(.*bss*);
+      BUILD_DIR/src/boot*.o(.bss*);
+      BUILD_DIR/src/hvqm*.o(.bss*);
+      BUILD_DIR/src/usb*.o(.bss*);
+      BUILD_DIR/src/audio*.o(.bss*);
 #ifdef S2DEX_TEXT_ENGINE
-      lib/libs2d_engine.a:*(.*bss*);
+      lib/libs2d_engine.a:*(.bss*);
 #endif
       BUILD_DIR/src/ultra*.o(.bss*);
       */libhvqm2.a:*.o(.bss*);
@@ -243,11 +244,6 @@ SECTIONS
       BUILD_DIR/src/engine*.o(.data*);
       BUILD_DIR/src/usb*.o(.data*);
       BUILD_DIR/src/hacktice*.o(.data*);
-      /* sdata */
-      BUILD_DIR/src/game*.o(.sdata*);
-      BUILD_DIR/src/engine*.o(.sdata*);
-      BUILD_DIR/src/usb*.o(.data*);
-      BUILD_DIR/src/hacktice*.o(.sdata*);
       /* rodata */
       BUILD_DIR/src/game*.o(.rodata*);
       BUILD_DIR/src/engine*.o(.rodata*);
@@ -258,16 +254,40 @@ SECTIONS
    END_SEG(engine)
    BEGIN_NOLOAD(engine)
    {
-      BUILD_DIR/src/game/crash_screen.o(.*bss*);
-      BUILD_DIR/src/game/game_init.o(.*bss*);
+      BUILD_DIR/src/game/crash_screen.o(.bss*);
+      BUILD_DIR/src/game/game_init.o(.bss*);
       _hackticeStateDataStart = .;
-      BUILD_DIR/src/game*.o(.*bss*);
+      BUILD_DIR/src/game*.o(.bss*);
       _hackticeStateDataEnd = .;
       BUILD_DIR/src/engine*.o(.bss*);
-      BUILD_DIR/src/hacktice*.o(.*bss*);
+      BUILD_DIR/src/hacktice*.o(.bss*);
       . = ALIGN(0x40);
    }
    END_NOLOAD(engine)
+
+   _gp = . + 0x8000;
+   BEGIN_SEG(sdata, .)
+   {
+      BUILD_DIR/src/game*.o(.sdata*);
+      BUILD_DIR/src/audio*.o(.sdata*);
+      BUILD_DIR/src/engine*.o(.sdata*);
+      BUILD_DIR/src/usb*.o(.sdata*);
+      BUILD_DIR/src/menu*.o(.sdata*);
+      BUILD_DIR/src/hacktice*.o(.sdata*);
+   }
+   END_SEG(sdata)
+   BEGIN_NOLOAD(sbss)
+   {
+      BUILD_DIR/src/game*.o(.sbss*);
+      BUILD_DIR/src/audio*.o(.sbss*);
+      BUILD_DIR/src/engine*.o(.sbss*);
+      BUILD_DIR/src/usb*.o(.sbss*);
+      BUILD_DIR/src/menu*.o(.sbss*);
+      BUILD_DIR/src/hacktice*.o(.sbss*);
+      . = ALIGN(0x40);
+   }
+   END_NOLOAD(sbss)
+
 #ifndef USE_EXT_RAM
    . = 0x8028f800;
 #else
@@ -411,7 +431,7 @@ SECTIONS
    /* 0x268020 0x268020-0 [0] */
    BEGIN_SEG(intro, 0x14000000)
    {
-      KEEP(BUILD_DIR/levels/intro/script.o(.*data));
+      KEEP(BUILD_DIR/levels/intro/script.o(.data));
       KEEP(BUILD_DIR/levels/intro/script.o(.rodata*));
       KEEP(BUILD_DIR/levels/intro/script.o(.text*));
       KEEP(BUILD_DIR/levels/intro/geo.o(.data*));

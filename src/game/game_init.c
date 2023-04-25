@@ -827,6 +827,7 @@ extern u16 gRandomSeed16;
  */
 extern u8 gLowGravityEnabled;
 void thread5_game_loop(UNUSED void *arg) {
+    setgp();
     setup_game_memory();
 #if ENABLE_RUMBLE
     init_rumble_pak_scheduler_queue();

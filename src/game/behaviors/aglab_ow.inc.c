@@ -602,7 +602,7 @@ static void ow2_write_colors(void)
 extern u8 gLowGravityEnabled;
 extern Gfx mat_mario_red[];
 extern Gfx mat_mario_logo[];
-extern Lights1 mario_red_lights;
+extern Lights1 mario_red_lights __attribute__((section(".data")));
 extern void rovert_init(void);
 
 static void ow_ctl2_pipe_init(int enabled, int bparam)

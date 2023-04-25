@@ -225,7 +225,7 @@ extern Gfx castle_grounds_dl_Lake_of_the_East_mesh_layer_1_tri_27[];
 extern Vtx castle_grounds_dl_Lake_of_the_East_mesh_layer_1_vtx_28[28];
 extern Gfx castle_grounds_dl_Lake_of_the_East_mesh_layer_1_tri_28[];
 extern Vtx castle_grounds_dl_Lake_of_the_East_mesh_layer_5_vtx_cull[8];
-extern Vtx castle_grounds_dl_Lake_of_the_East_mesh_layer_5_vtx_0[4];
+extern Vtx castle_grounds_dl_Lake_of_the_East_mesh_layer_5_vtx_0[4] __attribute__((section(".data")));
 extern Gfx castle_grounds_dl_Lake_of_the_East_mesh_layer_5_tri_0[];
 extern Vtx castle_grounds_dl_Lake_of_the_East_mesh_layer_2_vtx_cull[8];
 extern Vtx castle_grounds_dl_Lake_of_the_East_mesh_layer_2_vtx_0[12];
