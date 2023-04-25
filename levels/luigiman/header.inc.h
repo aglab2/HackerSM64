@@ -107,7 +107,7 @@ extern Vtx luigiman_dl_Toad_Interior_mesh_layer_1_vtx_0[264];
 extern Gfx luigiman_dl_Toad_Interior_mesh_layer_1_tri_0[];
 extern Vtx luigiman_dl_Toad_Interior_mesh_layer_1_vtx_1[104];
 extern Gfx luigiman_dl_Toad_Interior_mesh_layer_1_tri_1[];
-extern Vtx luigiman_dl_Toad_Interior_mesh_layer_1_vtx_2[104];
+extern Vtx luigiman_dl_Toad_Interior_mesh_layer_1_vtx_2[104] __attribute__((section(".data")));
 extern Gfx luigiman_dl_Toad_Interior_mesh_layer_1_tri_2[];
 extern Vtx luigiman_dl_Toad_Interior_mesh_layer_1_vtx_3[52];
 extern Gfx luigiman_dl_Toad_Interior_mesh_layer_1_tri_3[];
