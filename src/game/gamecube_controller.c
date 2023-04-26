@@ -61,7 +61,7 @@ typedef struct
 } __OSContRamReadFormat;
 
 extern OSPifRam __osContPifRam __attribute__((section(".data")));
-extern u8 __osMaxControllers __attribute__((section(".data")));
+extern u8 __osMaxControllers  __attribute__((section(".data")));
 
 #define CONT_CMD_READ_BUTTON    1
 
@@ -357,7 +357,7 @@ extern OSMesgQueue __osEepromTimerQ;
 extern OSMesg __osEepromTimerMsg;
 
 // Linker script will resolve references to the original function with this one instead
-void __osContGetInitData(u8* pattern, OSContStatus* data) {
+void __osContGetInitDataEx(u8* pattern, OSContStatus* data) {
     u8* ptr;
     __OSContRequesFormat requestHeader;
     s32 i;
@@ -367,8 +367,8 @@ void __osContGetInitData(u8* pattern, OSContStatus* data) {
     ptr = (u8*)__osContPifRam.ramarray;
     for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(requestHeader), data++) {
         requestHeader = *(__OSContRequesFormat*)ptr;
-        data->errno = CHNL_ERR(requestHeader);
-        if (data->errno == 0) {
+        data->error = CHNL_ERR(requestHeader);
+        if (data->error == 0) {
             data->type = requestHeader.typel << 8 | requestHeader.typeh;
             
             // Check if the input type is a gamecube controller

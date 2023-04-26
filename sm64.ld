@@ -162,7 +162,11 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.text*);
 #endif
-      BUILD_DIR/src/ultra*.o(.text*);
+#if defined(ISVPRINT) || defined(UNF)
+      */libultra_d.a:*.o(.text*);
+#else
+      */libultra_rom.a:*.o(.text*);
+#endif
       */libnustd.a:*.o(.text*);
       */libgcc.a:*.o(.text*);
       */librtc.a:*.o(.text*);
@@ -174,6 +178,8 @@ SECTIONS
       lib/PR/audio/n_aspMain.o(.text*);
       lib/PR/hvqm/hvqm2sp1.o(.text*);
       _mainSegmentTextEnd = .;
+      /* Overwrite a libultra function with its modified counterpart for GCN controller support */
+      __osContGetInitData = __osContGetInitDataEx;
 
       /* data */
       BUILD_DIR/asm/n64_assert.o(.data*);
@@ -182,7 +188,11 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.data*);
 #endif
-      BUILD_DIR/src/ultra*.o(.data*);
+#if defined(ISVPRINT) || defined(UNF)
+      */libultra_d.a:*.o(.data*);
+#else
+      */libultra_rom.a:*.o(.data*);
+#endif
       */libhvqm2.a:*.o(.data*);
       */librtc.a:*.o(.data*);
       */libz.a:*.o(.data*);
@@ -198,7 +208,11 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.rodata*);
 #endif
-      BUILD_DIR/src/ultra*.o(.rodata*);
+#if defined(ISVPRINT) || defined(UNF)
+      */libultra_d.a:*.o(.rodata*);
+#else
+      */libultra_rom.a:*.o(.rodata*);
+#endif
       */libgcc.a:*.o(.rodata*);
       */librtc.a:*.o(.rodata*);
       */libz.a:*.o(.rodata*);
@@ -215,7 +229,15 @@ SECTIONS
 #ifdef S2DEX_TEXT_ENGINE
       lib/libs2d_engine.a:*(.bss*);
 #endif
-      BUILD_DIR/src/ultra*.o(.bss*);
+#if defined(ISVPRINT) || defined(UNF)
+      */libultra_d.a:*.o(COMMON);
+      */libultra_d.a:*.o(.scommon);
+      */libultra_d.a:*.o(.*bss*);
+#else
+      */libultra_rom.a:*.o(COMMON);
+      */libultra_rom.a:*.o(.scommon);
+      */libultra_rom.a:*.o(.*bss*);
+#endif
       */libhvqm2.a:*.o(.bss*);
       */librtc.a:*.o(.bss*);
       */libz.a:*.o(.bss*);

@@ -7,12 +7,6 @@
 #define GLOBAL_ASM(...)
 #endif
 
-#define ALIGNED(x) __attribute__((aligned(x)))
-
-#define ARRLEN(x) ((s32)(sizeof(x) / sizeof(x[0])))
-
-#define STUBBED_PRINTF(x)
-
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
 #define GLUE(a, b) a ## b
