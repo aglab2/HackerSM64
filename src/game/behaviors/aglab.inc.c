@@ -122,6 +122,7 @@ void bhv_bobomb_fight_ctl_loop()
         if (b->oHealth == 2 && (o->oTimer % 20) == 0)
         {
             struct Object* flameObj = spawn_object(b, MODEL_RED_FLAME, bhvBouncingFireballFlame);
+            flameObj->oPosY += 100.f;
             f32 scale = 6.f;
             obj_scale(flameObj, scale);
             obj_become_tangible(flameObj);
