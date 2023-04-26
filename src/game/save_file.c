@@ -25,7 +25,7 @@
 
 //STATIC_ASSERT(sizeof(struct SaveBuffer) == EEPROM_SIZE, "eeprom buffer size must match");
 
-extern struct SaveBuffer gSaveBuffer __attribute__((section(".data")));
+extern struct SaveBuffer gSaveBuffer __attribute__((section(".bss.gSaveBuffer")));
 
 struct WarpCheckpoint gWarpCheckpoint;
 
