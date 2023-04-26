@@ -73,18 +73,6 @@ void bhv_bobomb_fight_ctl_init()
 
 void bhv_bobomb_fight_ctl_loop()
 {
-    o->oBobombCtlTimer++;
-
-    if (3100 == o->oBobombCtlTimer)
-    {
-        seq_player_fade_out(0, 100);
-    }
-    if (3130 == o->oBobombCtlTimer)
-    {
-        seq_player_play_sequence(0, SEQ_F2, 0);
-        o->oBobombCtlTimer = 0;
-    }
-    
     struct Object* b = o->oBobombCtlMain;
 
     if (0 == o->oAction)

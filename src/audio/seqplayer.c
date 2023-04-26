@@ -2180,6 +2180,7 @@ void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
     }
 }
 
+s32 gTatums = 0;
 void sequence_player_process_sequence(struct SequencePlayer *seqPlayer) {
     u8 cmd;
     u8 loBits;
@@ -2286,6 +2287,7 @@ void sequence_player_process_sequence(struct SequencePlayer *seqPlayer) {
 
     // Check if we surpass the number of ticks needed for a tatum, else stop.
     seqPlayer->tempoAcc += seqPlayer->tempo;
+    gTatums++;
 #ifdef VERSION_SH
     seqPlayer->tempoAcc += seqPlayer->tempoAdd;
 #endif

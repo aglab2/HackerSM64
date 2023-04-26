@@ -365,7 +365,21 @@ void king_bobomb_move(void) {
     }
 }
 
+extern s32 gTatums;
+
+void bhv_king_bobomb_init()
+{
+    gTatums = 0;
+}
+
 void bhv_king_bobomb_loop(void) {
+    print_text_fmt_int(20, 20, "%d", gTatums);
+    if (gTatums > 3130 * 16)
+    {
+        seq_player_play_sequence(0, SEQ_F2, 0);
+        gTatums = 0;
+    }
+
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 
     switch (o->oHeldState) {
