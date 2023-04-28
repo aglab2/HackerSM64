@@ -54,8 +54,8 @@ extern const GeoLayout mario_002_switch_opt0_001_switch_opt0_000_switch_opt0_000
 extern const GeoLayout mario_002_switch_opt0_001_switch_opt0_000_switch_opt0_000_switch_001_opt6[];
 extern const GeoLayout mario_002_switch_opt0_001_switch_opt0_000_switch_opt0_000_switch_001_opt7[];
 extern const GeoLayout mario_geo[];
-extern Lights1 mario_blue_lights;
-extern Lights1 mario_red_lights;
+extern Lights1 mario_blue_lights __attribute__((section(".data")));
+extern Lights1 mario_red_lights __attribute__((section(".data")));
 extern Lights1 mario_button_v4_lights;
 extern Lights1 mario_face_0___eye_open_v4_lights;
 extern Lights1 mario_skin_lights;

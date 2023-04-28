@@ -13,6 +13,10 @@ extern Texture gate_draw_s2[];
 extern Texture ccm_dl_default_rgba16[];
 
 static Texture* sTextures[] = { gate_draw_s1, gate_draw_s2, ccm_dl_default_rgba16 };
+extern u8 gDoInertia __attribute__((section(".data")));
+extern u8 gDoPlatformDisplacement __attribute__((section(".data")));
+extern s32 gTatums __attribute__((section(".data")));
+extern u8 gAllowPausing __attribute__((section(".data")));
 
 void bhv_gate_rotat_ctl_loop(void)
 {
@@ -419,7 +423,7 @@ static void fade_in_text_fast(int i)
     }
 }
 
-extern struct SaveBuffer gSaveBuffer;
+extern struct SaveBuffer gSaveBuffer __attribute__((section(".bss.gSaveBuffer")));
 static char sGameTime[] = "Game Time: 0:00:00'00";
 
 void bhv_peach_ending_cs_loop()

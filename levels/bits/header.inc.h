@@ -56,7 +56,7 @@ extern Gfx bits_dl_b1_mesh_layer_4_tri_1[];
 extern Vtx bits_dl_b1_mesh_layer_4_vtx_2[16];
 extern Gfx bits_dl_b1_mesh_layer_4_tri_2[];
 extern Vtx bits_dl_b1_mesh_layer_1_vtx_cull[8];
-extern Vtx bits_dl_b1_mesh_layer_1_vtx_0[37];
+extern Vtx bits_dl_b1_mesh_layer_1_vtx_0[37] __attribute__((section(".data")));
 extern Gfx bits_dl_b1_mesh_layer_1_tri_0[];
 extern Vtx bits_dl_b1_mesh_layer_1_vtx_1[144];
 extern Gfx bits_dl_b1_mesh_layer_1_tri_1[];

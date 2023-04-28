@@ -780,6 +780,7 @@ void thread5_game_loop(UNUSED void *arg) {
     OSTime lastTime = 0;
 #endif
 
+    setgp();
     setup_game_memory();
 #if ENABLE_RUMBLE
     init_rumble_pak_scheduler_queue();

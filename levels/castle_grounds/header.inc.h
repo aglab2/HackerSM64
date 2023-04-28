@@ -81,7 +81,7 @@ extern Gfx castle_grounds_dl_flower8_mesh_layer_5_tri_0[];
 extern Vtx castle_grounds_dl_flower9_mesh_layer_5_vtx_0[40];
 extern Gfx castle_grounds_dl_flower9_mesh_layer_5_tri_0[];
 extern Vtx castle_grounds_dl_LAVA_mesh_layer_1_vtx_cull[8];
-extern Vtx castle_grounds_dl_LAVA_mesh_layer_1_vtx_0[111];
+extern Vtx castle_grounds_dl_LAVA_mesh_layer_1_vtx_0[111] __attribute__((section(".data")));
 extern Gfx castle_grounds_dl_LAVA_mesh_layer_1_tri_0[];
 extern Vtx castle_grounds_dl_LAVA_mesh_layer_1_vtx_1[50];
 extern Gfx castle_grounds_dl_LAVA_mesh_layer_1_tri_1[];

@@ -17,7 +17,7 @@ extern u8 sa_dl__2_ci4_pal_rgba16[];
 extern u8 sa_dl__3_ci4[];
 extern u8 sa_dl__3_ci4_pal_rgba16[];
 extern Vtx sa_dl_eye_002_mesh_layer_1_vtx_cull[8];
-extern Vtx sa_dl_eye_002_mesh_layer_1_vtx_0[45];
+extern Vtx sa_dl_eye_002_mesh_layer_1_vtx_0[45] __attribute__((section(".data")));
 extern Gfx sa_dl_eye_002_mesh_layer_1_tri_0[];
 extern Vtx sa_dl_eye_002_mesh_layer_1_vtx_1[48];
 extern Gfx sa_dl_eye_002_mesh_layer_1_tri_1[];

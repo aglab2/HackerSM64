@@ -17,7 +17,7 @@ extern u8 bitfs_dl__2_ci4_pal_rgba16[];
 extern u8 bitfs_dl__3_ci4[];
 extern u8 bitfs_dl__3_ci4_pal_rgba16[];
 extern Vtx bitfs_dl_bully_mesh_layer_1_vtx_cull[8];
-extern Vtx bitfs_dl_bully_mesh_layer_1_vtx_0[18];
+extern Vtx bitfs_dl_bully_mesh_layer_1_vtx_0[18] __attribute__((section(".data")));
 extern Gfx bitfs_dl_bully_mesh_layer_1_tri_0[];
 extern Vtx bitfs_dl_bully_mesh_layer_1_vtx_1[57];
 extern Gfx bitfs_dl_bully_mesh_layer_1_tri_1[];

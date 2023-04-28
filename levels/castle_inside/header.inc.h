@@ -232,7 +232,7 @@ extern Gfx castle_inside_dl_Plane_001_mesh_layer_1_tri_0[];
 extern Vtx castle_inside_dl_Plane_001_mesh_layer_1_vtx_1[90];
 extern Gfx castle_inside_dl_Plane_001_mesh_layer_1_tri_1[];
 extern Vtx castle_inside_dl_Sphere_mesh_layer_1_vtx_cull[8];
-extern Vtx castle_inside_dl_Sphere_mesh_layer_1_vtx_0[87];
+extern Vtx castle_inside_dl_Sphere_mesh_layer_1_vtx_0[87] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_Sphere_mesh_layer_1_tri_0[];
 extern Gfx mat_castle_inside_dl__auto_6_f3d[];
 extern Gfx mat_revert_castle_inside_dl__auto_6_f3d[];

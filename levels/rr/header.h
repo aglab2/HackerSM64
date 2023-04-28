@@ -56,7 +56,7 @@ extern const Gfx rr_seg7_dl_07015C68[];
 extern const Gfx rr_seg7_dl_07017530[];
 extern const Gfx rr_seg7_dl_07018B58[];
 extern const Gfx rr_seg7_dl_070191A0[];
-extern const s16 flying_carpet_static_vertex_data[];
+extern const s16 flying_carpet_static_vertex_data[] __attribute__((section(".data")));
 extern const Gfx dl_flying_carpet_begin[];
 extern const Gfx dl_flying_carpet_model_half[];
 extern const Gfx dl_flying_carpet_end[];

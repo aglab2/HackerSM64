@@ -279,7 +279,7 @@ extern Vtx wf_dl_e5_mesh_layer_4_vtx_cull[8];
 extern Vtx wf_dl_e5_mesh_layer_4_vtx_0[12];
 extern Gfx wf_dl_e5_mesh_layer_4_tri_0[];
 extern Vtx wf_dl_zbg_mesh_layer_5_vtx_cull[8];
-extern Vtx wf_dl_zbg_mesh_layer_5_vtx_0[16];
+extern Vtx wf_dl_zbg_mesh_layer_5_vtx_0[16] __attribute__((section(".data")));
 extern Gfx wf_dl_zbg_mesh_layer_5_tri_0[];
 extern Gfx mat_wf_dl_bg_4_0_layer5[];
 extern Gfx mat_revert_wf_dl_bg_4_0_layer5[];

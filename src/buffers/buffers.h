@@ -12,7 +12,7 @@ extern u8 gDecompressionHeap[];
 
 extern u8 gAudioHeap[];
 
-extern u8 gIdleThreadStack[];
+extern u8 gIdleThreadStack[] __attribute__((section(".bss.gIdleThreadStack")));
 extern u8 gThread3Stack[];
 extern u8 gThread4Stack[];
 extern u8 gThread5Stack[];
@@ -22,9 +22,9 @@ extern u8 gThread6Stack[];
 
 extern u8 gGfxSPTaskYieldBuffer[];
 
-extern struct SaveBuffer gSaveBuffer;
+extern struct SaveBuffer gSaveBuffer __attribute__((section(".bss.gSaveBuffer")));
 
-extern u8 gGfxSPTaskStack[];
+extern u8 gGfxSPTaskStack[] __attribute__((section(".bss.gGfxSPTaskStack")));
 
 extern struct GfxPool gGfxPools[2];
 
