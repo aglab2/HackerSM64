@@ -279,6 +279,7 @@ SECTIONS
    {
       BUILD_DIR/src/game/crash_screen.o(.*bss*);
       BUILD_DIR/src/game/game_init.o(.*bss*);
+      BUILD_DIR/src/game/sound_init.o(.*bss*);
       _hackticeStateDataStart = .;
       BUILD_DIR/src/game*.o(.*bss*);
       _hackticeStateDataEnd = .;
