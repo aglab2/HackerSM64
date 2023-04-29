@@ -1572,7 +1572,7 @@ void bhv_trunk_root_loop()
     }
 }
 
-static struct ObjectHitbox sBlarrgHitBox = {
+static const struct ObjectHitbox sBlarrgHitBox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
@@ -1584,7 +1584,7 @@ static struct ObjectHitbox sBlarrgHitBox = {
     /* hurtboxHeight:     */ 40,
 };
 
-static struct ObjectHitbox sBlarrgHitBox2 = {
+static const struct ObjectHitbox sBlarrgHitBox2 = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
@@ -1712,7 +1712,7 @@ void bhv_bitfsplate_loop()
     }
 }
 
-static struct SpawnParticlesInfo sMistParticles = {
+static struct SpawnParticlesInfo sMistParticlesXd = {
     /* behParam:        */ 2,
     /* count:           */ 20,
     /* model:           */ MODEL_MIST,
@@ -1728,19 +1728,19 @@ static struct SpawnParticlesInfo sMistParticles = {
 };
 
 static void spawn_mist_particles_variable_ranged(s32 count, s32 offsetY, f32 size, f32 range) {
-    sMistParticles.sizeBase = size;
-    sMistParticles.sizeRange = range;
-    sMistParticles.offsetY = offsetY;
+    sMistParticlesXd.sizeBase = size;
+    sMistParticlesXd.sizeRange = range;
+    sMistParticlesXd.offsetY = offsetY;
 
     if (count == 0) {
-        sMistParticles.count = 20;
+        sMistParticlesXd.count = 20;
     } else if (count > 20) {
-        sMistParticles.count = count;
+        sMistParticlesXd.count = count;
     } else {
-        sMistParticles.count = 4;
+        sMistParticlesXd.count = 4;
     }
 
-    cur_obj_spawn_particles(&sMistParticles);
+    cur_obj_spawn_particles(&sMistParticlesXd);
 }
 
 void bhv_bitfs_fight_init()

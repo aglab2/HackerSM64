@@ -1,6 +1,6 @@
 // metal_box.inc.c
 
-struct ObjectHitbox sMetalBoxHitbox = {
+static const struct ObjectHitbox sMetalBoxHitbox = {
     /* interactType:      */ INTERACT_NONE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,

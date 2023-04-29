@@ -59,7 +59,7 @@ static void fish_spawner_act_respawn(void) {
     o->oAction = FISH_SPAWNER_ACT_SPAWN;
 }
 
-static ObjActionFunc sFishSpawnerActions[] = {
+static const ObjActionFunc sFishSpawnerActions[] = {
     fish_spawner_act_spawn,
     fish_spawner_act_idle,
     fish_spawner_act_respawn,
@@ -208,7 +208,7 @@ static void fish_act_init(void) {
     o->oAction = FISH_ACT_ROAM;
 }
 
-static ObjActionFunc sFishActions[] = {
+static const ObjActionFunc sFishActions[] = {
     fish_act_init,
     fish_act_roam,
     fish_act_flee,

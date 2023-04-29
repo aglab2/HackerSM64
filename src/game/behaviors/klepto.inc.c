@@ -1,6 +1,6 @@
 // klepto.inc.c
 
-static struct ObjectHitbox sKleptoHitbox = {
+static const struct ObjectHitbox sKleptoHitbox = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,
@@ -12,13 +12,13 @@ static struct ObjectHitbox sKleptoHitbox = {
     /* hurtboxHeight:     */ 200,
 };
 
-static Vec3f sKleptoTargetPositions[] = {
+static const Vec3f sKleptoTargetPositions[] = {
     { 2200.0f, 1250.0f, -2820.0f },
     { -6200.0f, 1250.0f, -2800.0f },
     { -6200.0f, 1250.0f, 1150.0f },
 };
 
-static u8 sKleptoAttackHandlers[] = { 2, 2, 5, 5, 2, 2 };
+static const u8 sKleptoAttackHandlers[] = { 2, 2, 5, 5, 2, 2 };
 
 static void klepto_target_mario(void) {
     o->oKleptoDistanceToTarget = lateral_dist_between_objects(gMarioObject, o);

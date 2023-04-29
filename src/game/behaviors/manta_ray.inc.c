@@ -6,7 +6,7 @@
  * These rings contain a significant bug that is documented in water_ring.inc.c
  */
 
-static Trajectory sMantaRayTraj[] = { 
+static const Trajectory sMantaRayTraj[] = { 
     TRAJECTORY_POS(0, /*pos*/ -4500, -1380,   -40), 
     TRAJECTORY_POS(1, /*pos*/ -4120, -2240,   740), 
     TRAJECTORY_POS(2, /*pos*/ -3280, -3080,  1040), 
@@ -18,7 +18,7 @@ static Trajectory sMantaRayTraj[] = {
     TRAJECTORY_END(),
 };
 
-static struct ObjectHitbox sMantaRayHitbox = {
+static const struct ObjectHitbox sMantaRayHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,

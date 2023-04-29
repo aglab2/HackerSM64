@@ -15,7 +15,7 @@ struct LllOctagonalMeshAction {
 };
 
 // Path for big bullies platforms
-static struct LllOctagonalMeshAction gLllOctagonalMeshAction0[] = {
+static const struct LllOctagonalMeshAction gLllOctagonalMeshAction0[] = {
     // instruction                time  moveAngle  forwardVel
     { LLL_OCTMESH_WAIT_FOR_MARIO,    0,         0,          0 },
     { LLL_OCTMESH_LINEAR_MOVE,      20,    0x8000,          0 }, // 90 degrees
@@ -28,7 +28,7 @@ static struct LllOctagonalMeshAction gLllOctagonalMeshAction0[] = {
 };
 
 // Path for rolling log
-static struct LllOctagonalMeshAction gLllOctagonalMeshAction1[] = {
+static const struct LllOctagonalMeshAction gLllOctagonalMeshAction1[] = {
     // instruction                time  moveAngle  forwardVel
     { LLL_OCTMESH_WAIT_FOR_MARIO,    0,         0,          0 },
     { LLL_OCTMESH_LINEAR_MOVE,      20,    0,          0 }, // 90 degrees
@@ -41,17 +41,17 @@ static struct LllOctagonalMeshAction gLllOctagonalMeshAction1[] = {
 };
 
 // pausechamp
-static struct LllOctagonalMeshAction gLllOctagonalMeshAction2[] = {
+static const struct LllOctagonalMeshAction gLllOctagonalMeshAction2[] = {
     // instruction                time  moveAngle  forwardVel
     { LLL_OCTMESH_WAIT_FOR_MARIO,    0,         0,          0 },
     { LLL_OCTMESH_RESET,             0,         0,          0 }
 };
 
 // picked by oBehParams2ndByte
-static struct LllOctagonalMeshAction *gLllOctagonalMeshActionList[] = { gLllOctagonalMeshAction0, gLllOctagonalMeshAction1, gLllOctagonalMeshAction2 };
+static const struct LllOctagonalMeshAction* gLllOctagonalMeshActionList[] = { gLllOctagonalMeshAction0, gLllOctagonalMeshAction1, gLllOctagonalMeshAction2 };
 
-s32 lll_octagonal_mesh_move(struct LllOctagonalMeshAction *actionTable, s32 actionOffset) {
-    struct LllOctagonalMeshAction *action = &(actionTable[actionOffset]);
+s32 lll_octagonal_mesh_move(const struct LllOctagonalMeshAction *actionTable, s32 actionOffset) {
+    const struct LllOctagonalMeshAction *action = &(actionTable[actionOffset]);
     switch (action->instruction) {
         case LLL_OCTMESH_WAIT_FOR_MARIO:
             o->oMoveAngleYaw = action->moveAngle;

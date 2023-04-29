@@ -319,7 +319,7 @@ void king_bobomb_act_return_home(void) { // act 5
     }
 }
 
-ObjActionFunc sKingBobombActions[] = {
+static const ObjActionFunc sKingBobombActions[] = {
     king_bobomb_act_inactive,
     king_bobomb_act_activate,
     king_bobomb_act_active,
@@ -331,7 +331,7 @@ ObjActionFunc sKingBobombActions[] = {
     king_bobomb_act_stop_music,
 };
 
-struct SoundState sKingBobombSoundStates[] = {
+static const struct SoundState sKingBobombSoundStates[] = {
     { 0, 0, 0, NO_SOUND },
     { 1, 1, 20, SOUND_OBJ_KING_BOBOMB_POUNDING1_HIGHPRIO },
     { 0, 0, 0, NO_SOUND },

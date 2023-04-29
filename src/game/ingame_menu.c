@@ -42,12 +42,12 @@ s16 gCutsceneMsgXOffset;
 s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
 #if defined(WIDE) && !defined(PUPPYCAM)
-u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
-u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
-u8 textPressL[] = { TEXT_HUD_PRESS_L };
+static const u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
+static const u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
+static const u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
-u8 holdBToWarp[] = { TEXT_HUD_HOLD_B_TO_WARP };
-u8 pressBToHacktice[] = { TEXT_HUD_PRESS_B_TO_HACKTICE };
+static const u8 holdBToWarp[] = { TEXT_HUD_HOLD_B_TO_WARP };
+static const u8 pressBToHacktice[] = { TEXT_HUD_PRESS_B_TO_HACKTICE };
 
 #if MULTILANG
 #define seg2_course_name_table course_name_table_eu_en
@@ -621,7 +621,7 @@ void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8
     }
 }
 
-s32 get_str_x_pos_from_center(s16 centerPos, u8 *str, UNUSED f32 scale) {
+s32 get_str_x_pos_from_center(s16 centerPos, const u8 *str, UNUSED f32 scale) {
     s16 strPos = 0;
     f32 spacesWidth = 0.0f;
 
@@ -1103,17 +1103,17 @@ void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
 
 s16 gMenuMode = MENU_MODE_NONE;
 
-u8 gEndCutsceneStrEn0[] = { TEXT_FILE_MARIO_EXCLAMATION };
-u8 gEndCutsceneStrEn1[] = { TEXT_POWER_STARS_RESTORED };
-u8 gEndCutsceneStrEn2[] = { TEXT_THANKS_TO_YOU };
-u8 gEndCutsceneStrEn3[] = { TEXT_THANK_YOU_MARIO };
-u8 gEndCutsceneStrEn4[] = { TEXT_SOMETHING_SPECIAL };
-u8 gEndCutsceneStrEn5[] = { TEXT_LISTEN_EVERYBODY };
-u8 gEndCutsceneStrEn6[] = { TEXT_LETS_HAVE_CAKE };
-u8 gEndCutsceneStrEn7[] = { TEXT_FOR_MARIO };
-u8 gEndCutsceneStrEn8[] = { TEXT_FILE_MARIO_QUESTION };
+static const u8 gEndCutsceneStrEn0[] = { TEXT_FILE_MARIO_EXCLAMATION };
+static const u8 gEndCutsceneStrEn1[] = { TEXT_POWER_STARS_RESTORED };
+static const u8 gEndCutsceneStrEn2[] = { TEXT_THANKS_TO_YOU };
+static const u8 gEndCutsceneStrEn3[] = { TEXT_THANK_YOU_MARIO };
+static const u8 gEndCutsceneStrEn4[] = { TEXT_SOMETHING_SPECIAL };
+static const u8 gEndCutsceneStrEn5[] = { TEXT_LISTEN_EVERYBODY };
+static const u8 gEndCutsceneStrEn6[] = { TEXT_LETS_HAVE_CAKE };
+static const u8 gEndCutsceneStrEn7[] = { TEXT_FOR_MARIO };
+static const u8 gEndCutsceneStrEn8[] = { TEXT_FILE_MARIO_QUESTION };
 
-u8 *gEndCutsceneStringsEn[] = {
+static const u8 *gEndCutsceneStringsEn[] = {
     gEndCutsceneStrEn0,
     gEndCutsceneStrEn1,
     gEndCutsceneStrEn2,

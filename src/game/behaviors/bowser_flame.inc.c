@@ -1,6 +1,6 @@
 // bowser_flame.inc.c
 
-struct ObjectHitbox sGrowingBowserFlameHitbox = {
+static const struct ObjectHitbox sGrowingBowserFlameHitbox = {
     /* interactType:      */ INTERACT_FLAME,
     /* downOffset:        */ 20,
     /* damageOrCoinValue: */ 1,
@@ -12,7 +12,7 @@ struct ObjectHitbox sGrowingBowserFlameHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
-struct ObjectHitbox sBowserFlameHitbox = {
+static const struct ObjectHitbox sBowserFlameHitbox = {
     /* interactType:      */ INTERACT_FLAME,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
@@ -153,7 +153,7 @@ void bhv_flame_floating_landing_init(void) {
     o->oFlameSpeedTimerOffset = random_float() * 64.0f;
 }
 
-f32 sFlameFloatingYLimit[] = { -8.0f, -6.0f, -3.0f };
+static const f32 sFlameFloatingYLimit[] = { -8.0f, -6.0f, -3.0f };
 
 void bhv_flame_floating_landing_loop(void) {
     cur_obj_update_floor_and_walls();

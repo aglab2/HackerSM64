@@ -50,7 +50,7 @@ void bowser_tail_anchor_act_touched_mario(void) {
     cur_obj_become_intangible();
 }
 
-ObjActionFunc sBowserTailAnchorActions[] = {
+static const ObjActionFunc sBowserTailAnchorActions[] = {
     bowser_tail_anchor_act_default,
     bowser_tail_anchor_thrown,
     bowser_tail_anchor_act_touched_mario,
@@ -1072,7 +1072,7 @@ void bowser_act_jump_onto_stage(void) {
 /**
  * The frames of the Bowser's timer on which to play a "stomp" sound
  */
-s8 sBowserDanceStepNoises[] = { 24, 42, 60, -1 };
+static const s8 sBowserDanceStepNoises[] = { 24, 42, 60, -1 };
 
 /**
  * Makes Bowser's dance as a "taunt"
@@ -1198,7 +1198,7 @@ void bowser_dead_hide(void) {
 /**
  * Dialog values that are set on each stage Bowser's is defeated
  */
-s16 sBowserDefeatedDialogText[3] = { DIALOG_119, DIALOG_120, DIALOG_121 };
+static const s16 sBowserDefeatedDialogText[3] = { DIALOG_119, DIALOG_120, DIALOG_121 };
 
 /**
  * Bowser's dead sequence that plays in BitDW/BitFS
@@ -1348,7 +1348,7 @@ struct BowserTiltPlatformInfo {
 /**
  * Data for the BitFS tilt Platform
  */
-struct BowserTiltPlatformInfo sBowsertiltPlatformData[] = {
+static const struct BowserTiltPlatformInfo sBowsertiltPlatformData[] = {
     {  1,   10,  40 },
     {  0,    0,  74 },
     { -1,  -10, 114 },
@@ -1442,7 +1442,7 @@ struct PlatformDisplacementInfo sBowserDisplacementInfo;
 /**
  * Set Bowser's actions
  */
-ObjActionFunc sBowserActions[] = {
+static const ObjActionFunc sBowserActions[] = {
     bowser_act_default,
     bowser_act_thrown,
     bowser_act_jump_onto_stage,
@@ -1468,7 +1468,7 @@ ObjActionFunc sBowserActions[] = {
 /**
  * Set Bowser's sound animations
  */
-struct SoundState sBowserSoundStates[] = {
+static const struct SoundState sBowserSoundStates[] = {
     { 0, 0, 0, NO_SOUND },
     { 0, 0, 0, NO_SOUND },
     { 0, 0, 0, NO_SOUND },
@@ -1501,12 +1501,12 @@ struct SoundState sBowserSoundStates[] = {
 /**
  * Set whenever Bowser should have rainbow light or not on each stage
  */
-s8 sBowserRainbowLight[] = { FALSE, FALSE, TRUE };
+static const s8 sBowserRainbowLight[] = { FALSE, FALSE, TRUE };
 
 /**
  * Set how much health Bowser has on each stage
  */
-s8 sBowserHealth[] = { 1, 1, 3 };
+static const s8 sBowserHealth[] = { 1, 1, 3 };
 
 /**
  * Update Bowser's actions when he's hands free

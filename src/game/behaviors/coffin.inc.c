@@ -17,7 +17,7 @@ struct LateralPosition {
 /**
  * Array of positions for all coffins relative to their spawner.
  */
-struct LateralPosition coffinRelativePos[] = {
+static const struct LateralPosition coffinRelativePos[] = {
     { 412, -150 }, { 762, -150 }, { 1112, -150 },
     { 412,  150 }, { 762,  150 }, { 1112,  150 },
 };

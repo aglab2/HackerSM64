@@ -68,7 +68,7 @@ void cap_switch_act_being_pressed(void) {
 void cap_switch_act_idle_pressed(void) {
 }
 
-ObjActionFunc sCapSwitchActions[] = {
+static const ObjActionFunc sCapSwitchActions[] = {
     cap_switch_act_init,
     cap_switch_act_idle_unpressed,
     cap_switch_act_being_pressed,

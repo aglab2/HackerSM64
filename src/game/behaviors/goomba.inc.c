@@ -8,7 +8,7 @@
 /**
  * Hitbox for goomba.
  */
-static struct ObjectHitbox sGoombaHitbox = {
+static const struct ObjectHitbox sGoombaHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
@@ -33,7 +33,7 @@ struct GoombaProperties {
 /**
  * Properties for regular, huge, and tiny goombas.
  */
-static struct GoombaProperties sGoombaProperties[] = {
+static const struct GoombaProperties sGoombaProperties[] = {
     { 1.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 4000, 1 },
     { 3.5f, SOUND_OBJ_ENEMY_DEATH_LOW, 4000, 2 },
     { 0.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 1500, 0 },
@@ -42,7 +42,7 @@ static struct GoombaProperties sGoombaProperties[] = {
 /**
  * Attack handlers for goombas.
  */
-static u8 sGoombaAttackHandlers[][6] = {
+static const u8 sGoombaAttackHandlers[][6] = {
     // regular and tiny
     {
         /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,

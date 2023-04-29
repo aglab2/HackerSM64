@@ -216,7 +216,7 @@ void piranha_plant_act_respawn(void) {
  * The frames of the Piranha Plant's biting animation on which to play a bite
  * sound.
  */
-static s8 sPiranhaPlantBiteSoundFrames[] = { 12, 28, 50, 64, -1 };
+static const s8 sPiranhaPlantBiteSoundFrames[] = { 12, 28, 50, 64, -1 };
 
 /**
  * Make the Piranha Plant bite in the direction of the player. If the player
@@ -293,7 +293,7 @@ void piranha_plant_act_stopped_biting(void) {
 /**
  * Table of functions corresponding to the actions the Piranha Plant can take.
  */
-ObjActionFunc TablePiranhaPlantActions[] = {
+static const ObjActionFunc TablePiranhaPlantActions[] = {
     piranha_plant_act_idle,            // PIRANHA_PLANT_ACT_IDLE,
     piranha_plant_act_sleeping,        // PIRANHA_PLANT_ACT_SLEEPING,
     piranha_plant_act_biting,          // PIRANHA_PLANT_ACT_BITING,

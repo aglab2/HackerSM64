@@ -105,7 +105,7 @@ extern s8 sUnusedGotGlobalCoinHiScore;
 extern u8 gGotFileCoinHiScore;
 extern u8 gCurrCourseStarFlags;
 extern u8 gSpecialTripleJump;
-extern s8 gLevelToCourseNumTable[];
+extern const s8 gLevelToCourseNumTable[];
 
 enum CourseFlags {
     COURSE_FLAG_CANNON_UNLOCKED      = (1 <<  7), /* 0x00000080 */

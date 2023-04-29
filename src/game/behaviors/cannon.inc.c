@@ -107,7 +107,7 @@ void opened_cannon_act_resetting(void) { // act 3
     }
 }
 
-ObjActionFunc sOpenedCannonActions[] = {
+static const ObjActionFunc sOpenedCannonActions[] = {
     opened_cannon_act_idle,
     opened_cannon_act_ready,
     opened_cannon_act_shoot,

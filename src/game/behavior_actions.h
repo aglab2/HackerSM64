@@ -10,7 +10,7 @@ void spawn_mist_from_global(void);
 void clear_particle_flags(u32 flags);
 void spawn_wind_particles(s16 pitch, s16 yaw);
 s32 check_if_moving_over_floor(f32 maxDist, f32 offset);
-s32 arc_to_goal_pos(Vec3f a0, Vec3f a1, f32 yVel, f32 gravity);
+s32 arc_to_goal_pos(const Vec3f a0, const Vec3f a1, f32 yVel, f32 gravity);
 void tox_box_move(f32 forwardVel, f32 a1, s16 deltaPitch, s16 deltaRoll);
 void play_penguin_walking_sound(s32 walk);
 s32 update_angle_from_move_flags(s32 *angle);
@@ -572,7 +572,7 @@ Gfx *geo_snufit_scale_body(s32 callContext, struct GraphNode *node, UNUSED Mat4 
 Gfx *geo_scale_bowser_key(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
 
 // Water splash
-extern struct WaterDropletParams gShallowWaterSplashDropletParams;
-extern struct WaterDropletParams gShallowWaterWaveDropletParams;
+extern const struct WaterDropletParams gShallowWaterSplashDropletParams;
+extern const struct WaterDropletParams gShallowWaterWaveDropletParams;
 
 #endif // BEHAVIOR_ACTIONS_H

@@ -29,7 +29,7 @@ void bub_spawner_act_reset(void) {
     o->oAction = BUB_SPAWNER_ACT_SPAWN_BUBS;
 }
 
-ObjActionFunc sBirdChirpChirpActions[] = {
+static const ObjActionFunc sBirdChirpChirpActions[] = {
     bub_spawner_act_spawn_bubs,
     bub_spawner_act_idle,
     bub_spawner_act_remove_bubs,
@@ -136,7 +136,7 @@ void bub_act_swimming_away_from_mario(void) {
     }
 }
 
-ObjActionFunc sCheepCheepActions[] = {
+static const ObjActionFunc sCheepCheepActions[] = {
     bub_act_init,
     bub_act_swimming_towards_mario,
     bub_act_swimming_away_from_mario,

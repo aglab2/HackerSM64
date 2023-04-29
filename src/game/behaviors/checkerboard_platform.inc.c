@@ -6,7 +6,7 @@ struct CheckerBoardPlatformInitPosition {
     f32 radius;
 };
 
-struct CheckerBoardPlatformInitPosition sCheckerBoardPlatformInitPositions[] = {
+static const struct CheckerBoardPlatformInitPosition sCheckerBoardPlatformInitPositions[] = {
     { 145, { 0.7f, 1.5f, 0.7f }, 7.0f },
     { 235, { 1.2f, 2.0f, 1.2f }, 11.6f }
 };

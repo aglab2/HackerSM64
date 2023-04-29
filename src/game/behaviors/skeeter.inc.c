@@ -5,7 +5,7 @@ struct SkeeterRelPos {
     s16 relPosZ;
 };
 
-struct ObjectHitbox sSkeeterHitbox = {
+static const struct ObjectHitbox sSkeeterHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 20,
     /* damageOrCoinValue: */ 2,
@@ -17,7 +17,7 @@ struct ObjectHitbox sSkeeterHitbox = {
     /* hurtboxHeight:     */ 90,
 };
 
-struct SkeeterRelPos sSkeeterRelPositions[] = {
+static const struct SkeeterRelPos sSkeeterRelPositions[] = {
     { 0xFF7E, 0xFF42 },
     { 0x0082, 0xFF42 },
     { 0xFF4C, 0x0082 },

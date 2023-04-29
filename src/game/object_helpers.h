@@ -81,7 +81,7 @@ struct Object *spawn_object_abs_with_rot(struct Object *parent, s16 uselessArg, 
 struct Object *spawn_object_rel_with_rot(struct Object *parent, ModelID32 model, const BehaviorScript *behavior,
                                          s16 xOff, s16 yOff, s16 zOff, s16 pitch, s16 yaw, s16 roll);
 struct Object *spawn_obj_with_transform_flags(struct Object *parent, ModelID32 model, const BehaviorScript *behavior);
-struct Object *spawn_water_droplet(struct Object *parent, struct WaterDropletParams *params);
+struct Object *spawn_water_droplet(struct Object *parent, const struct WaterDropletParams *params);
 struct Object *spawn_object_at_origin(struct Object *parent, UNUSED s32 unusedArg, ModelID32 model, const BehaviorScript *behavior);
 struct Object *spawn_object(struct Object *parent, ModelID32 model, const BehaviorScript *behavior);
 struct Object *try_to_spawn_object(s16 offsetY, f32 scale, struct Object *parent, ModelID32 model, const BehaviorScript *behavior);
@@ -197,7 +197,7 @@ void obj_scale_random(struct Object *obj, f32 rangeLength, f32 minScale);
 void obj_translate_xyz_random(struct Object *obj, f32 rangeLength);
 void obj_translate_xz_random(struct Object *obj, f32 rangeLength);
 void cur_obj_set_pos_via_transform(void);
-void cur_obj_spawn_particles(struct SpawnParticlesInfo *info);
+void cur_obj_spawn_particles(const struct SpawnParticlesInfo *info);
 s32 cur_obj_reflect_move_angle_off_wall(void);
 
 #define WAYPOINT_FLAGS_END -1
@@ -218,24 +218,24 @@ enum ObjScaleAxis {
     SCALE_AXIS_Z = (1 << 2), // 0x04
 };
 
-void obj_set_hitbox(struct Object *obj, struct ObjectHitbox *hitbox);
+void obj_set_hitbox(struct Object *obj, const struct ObjectHitbox *hitbox);
 s32 cur_obj_wait_then_blink(s32 timeUntilBlinking, s32 numBlinks);
 s32 cur_obj_is_mario_ground_pounding_platform(void);
 void spawn_mist_particles(void);
 void spawn_mist_particles_with_sound(u32 soundMagic);
 void cur_obj_push_mario_away(f32 radius);
 void cur_obj_push_mario_away_from_cylinder(f32 radius, f32 extentY);
-s32 cur_obj_set_direction_table(s8 *a0);
+s32 cur_obj_set_direction_table(const s8 *a0);
 s32 cur_obj_progress_direction_table(void);
 void cur_obj_scale_over_time(s32 axis, s32 times, f32 start, f32 end);
 void cur_obj_set_pos_to_home_with_debug(void);
 s32 cur_obj_is_mario_on_platform(void);
-void cur_obj_call_action_function(ObjActionFunc actionFunctions[]);
+void cur_obj_call_action_function(const ObjActionFunc actionFunctions[]);
 s32 cur_obj_mario_far_away(void);
 s32 is_mario_moving_fast_or_in_air(s32 speedThreshold);
-s32 is_item_in_array(s8 item, s8 *array);
+s32 is_item_in_array(s8 item, const s8 *array);
 void cur_obj_enable_rendering_if_mario_in_room(void);
-s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deathSound, s32 noLootCoins);
+s32 cur_obj_set_hitbox_and_die_if_attacked(const struct ObjectHitbox *hitbox, s32 deathSound, s32 noLootCoins);
 void obj_explode_and_spawn_coins(f32 mistSize, s32 coinType);
 void obj_set_collision_data(struct Object *obj, const void *segAddr);
 void cur_obj_if_hit_wall_bounce_away(void);

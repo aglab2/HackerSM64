@@ -42,14 +42,14 @@ s16 gSnowParticleMaxCount;
 s8 gEnvFxMode = ENVFX_MODE_NONE;
 
 /// Template for a snow particle triangle
-Vtx gSnowTempVtx[3] = { { { { -5, 5, 0 }, 0, { 0, 0 }, { 0x7F, 0x7F, 0x7F, 0xFF } } },
+static const Vtx gSnowTempVtx[3] = { { { { -5, 5, 0 }, 0, { 0, 0 }, { 0x7F, 0x7F, 0x7F, 0xFF } } },
                         { { { -5, -5, 0 }, 0, { 0, 960 }, { 0x7F, 0x7F, 0x7F, 0xFF } } },
                         { { { 5, 5, 0 }, 0, { 960, 0 }, { 0x7F, 0x7F, 0x7F, 0xFF } } } };
 
 // Change these to make snowflakes smaller or bigger
-struct SnowFlakeVertex gSnowFlakeVertex1 = { -5, 5, 0 };
-struct SnowFlakeVertex gSnowFlakeVertex2 = { -5, -5, 0 };
-struct SnowFlakeVertex gSnowFlakeVertex3 = { 5, 5, 0 };
+static const struct SnowFlakeVertex gSnowFlakeVertex1 = { -5, 5, 0 };
+static const struct SnowFlakeVertex gSnowFlakeVertex2 = { -5, -5, 0 };
+static const struct SnowFlakeVertex gSnowFlakeVertex3 = { 5, 5, 0 };
 
 extern void *tiny_bubble_dl_0B006AB0;
 extern void *tiny_bubble_dl_0B006A50;

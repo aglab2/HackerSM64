@@ -42,7 +42,7 @@ void mr_i_piranha_particle_act_interacted(void) {
     }
 }
 
-ObjActionFunc sMrIParticleActions[] = {
+static const ObjActionFunc sMrIParticleActions[] = {
     mr_i_piranha_particle_act_move,
     mr_i_piranha_particle_act_interacted,
 };
@@ -281,14 +281,14 @@ void mr_i_body_act_far_away(void) {
     }
 }
 
-ObjActionFunc sMrIBodyActions[] = {
+static const ObjActionFunc sMrIBodyActions[] = {
     mr_i_body_act_far_away,
     mr_i_body_act_idle,
     mr_i_body_act_looking_at_mario,
     mr_i_body_act_spin_death,
 };
 
-struct ObjectHitbox sMrIHitbox = {
+static const struct ObjectHitbox sMrIHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,

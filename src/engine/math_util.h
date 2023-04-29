@@ -10,17 +10,17 @@
 
 #define FLOAT_ONE   0x3F800000
 
-extern Vec3f gVec3fX;
-extern Vec3f gVec3fY;
-extern Vec3f gVec3fZ;
-extern Vec3f gVec3fNX;
-extern Vec3f gVec3fNY;
-extern Vec3f gVec3fNZ;
-extern Vec3f gVec3fZero;
-extern Vec3s gVec3sZero;
-extern Vec3i gVec3iZero;
-extern Vec3f gVec3fOne;
-extern Vec3s gVec3sOne;
+extern const Vec3f gVec3fX;
+extern const Vec3f gVec3fY;
+extern const Vec3f gVec3fZ;
+extern const Vec3f gVec3fNX;
+extern const Vec3f gVec3fNY;
+extern const Vec3f gVec3fNZ;
+extern const Vec3f gVec3fZero;
+extern const Vec3s gVec3sZero;
+extern const Vec3i gVec3iZero;
+extern const Vec3f gVec3fOne;
+extern const Vec3s gVec3sOne;
 
 /**
  * Converts an angle in degrees to sm64's s16 angle units. For example, DEGREES(90) == 0x4000
@@ -42,7 +42,7 @@ extern Vec3s gVec3sOne;
  * exploits array sizes for range analysis-based optimizations as well).
  * Thus, for non-IDO compilers we use the standard-compliant version.
  */
-extern f32 gSineTable[];
+extern const f32 gSineTable[];
 #define gCosineTable (gSineTable + 0x400)
 
 #define sins(x) gSineTable[  (u16) (x) >> 4]
@@ -499,7 +499,7 @@ void vec3i_to_vec3f(Vec3f dest, const Vec3i src);
 void vec3f_to_vec3s(Vec3s dest, const Vec3f src);
 void vec3f_to_vec3i(Vec3i dest, const Vec3f src);
 
-void vec3f_copy_y_off(Vec3f dest, Vec3f src, f32 yOff);
+void vec3f_copy_y_off(Vec3f dest, const Vec3f src, f32 yOff);
 
 void surface_normal_to_vec3f(Vec3f dest, struct Surface *surf);
 
@@ -576,7 +576,7 @@ void vec3f_get_lateral_dist_and_pitch(         Vec3f from, Vec3f to,            
 void vec3f_get_lateral_dist_and_yaw(           Vec3f from, Vec3f to,            f32 *lateralDist,                Angle  *yaw);
 void vec3f_get_lateral_dist_and_angle(         Vec3f from, Vec3f to,            f32 *lateralDist, Angle  *pitch, Angle  *yaw);
 void vec3f_get_dist_and_lateral_dist_and_angle(Vec3f from, Vec3f to, f32 *dist, f32 *lateralDist, Angle  *pitch, Angle  *yaw);
-void vec3f_get_dist_and_angle(                 Vec3f from, Vec3f to, f32 *dist,                   Angle  *pitch, Angle  *yaw);
+void vec3f_get_dist_and_angle(                 const Vec3f from, Vec3f to, f32 *dist,                   Angle  *pitch, Angle  *yaw);
 void vec3s_get_dist_and_angle(                 Vec3s from, Vec3s to, s16 *dist,                   Angle  *pitch, Angle  *yaw);
 void vec3f_to_vec3s_get_dist_and_angle(        Vec3f from, Vec3s to, f32 *dist,                    Angle *pitch, Angle  *yaw);
 void vec3s_set_dist_and_angle(                 Vec3s from, Vec3s to, s16  dist,                   Angle32 pitch, Angle32 yaw);

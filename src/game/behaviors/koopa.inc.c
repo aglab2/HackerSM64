@@ -11,7 +11,7 @@
  * Hitbox for koopa - this is used for every form except Koopa the Quick, which
  * uses a hardcoded soft hitbox.
  */
-static struct ObjectHitbox sKoopaHitbox = {
+static const struct ObjectHitbox sKoopaHitbox = {
     /* interactType:      */ INTERACT_KOOPA,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,
@@ -26,7 +26,7 @@ static struct ObjectHitbox sKoopaHitbox = {
 /**
  * Attack handlers for unshelled koopa and tiny shelled koopa.
  */
-static u8 sKoopaUnshelledAttackHandlers[] = {
+static const u8 sKoopaUnshelledAttackHandlers[] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SQUISHED,
@@ -38,7 +38,7 @@ static u8 sKoopaUnshelledAttackHandlers[] = {
 /**
  * Attack handlers for regular sized shelled koopa.
  */
-static u8 sKoopaShelledAttackHandlers[] = {
+static const u8 sKoopaShelledAttackHandlers[] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_SPECIAL_KOOPA_LOSE_SHELL,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_SPECIAL_KOOPA_LOSE_SHELL,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SPECIAL_KOOPA_LOSE_SHELL,

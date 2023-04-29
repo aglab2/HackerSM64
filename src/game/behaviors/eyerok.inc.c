@@ -1,6 +1,6 @@
 // eyerok.inc.c
 
-struct ObjectHitbox sEyerokHitbox = {
+static const struct ObjectHitbox sEyerokHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,
@@ -12,7 +12,7 @@ struct ObjectHitbox sEyerokHitbox = {
     /* hurtboxHeight:     */ 1,
 };
 
-s8 sEyerokAnimStatesList[] = { 0, 1, 3, 2, 1, 0 };
+static const s8 sEyerokAnimStatesList[] = { 0, 1, 3, 2, 1, 0 };
 
 static s32 eyerok_check_mario_relative_z(s32 relZ) {
     return gMarioObject->oPosZ - o->oHomeZ < relZ;

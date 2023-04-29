@@ -38,8 +38,8 @@ void intro_lakitu_set_focus(struct Object *obj, Vec3f newFocus) {
  * Move lakitu along the spline `offset`, relative to the camera, and face him towards the corresponding
  * location along the spline `focus`.
  */
-s32 intro_lakitu_set_pos_and_focus(struct Object *obj, struct CutsceneSplinePoint offset[],
-                                   struct CutsceneSplinePoint focus[]) {
+s32 intro_lakitu_set_pos_and_focus(struct Object *obj, const struct CutsceneSplinePoint offset[],
+                                   const struct CutsceneSplinePoint focus[]) {
     Vec3f newOffset, newFocus;
     s32 splineFinished = 0;
     s16 splineSegment = obj->oIntroLakituSplineSegment;

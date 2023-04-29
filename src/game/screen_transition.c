@@ -158,7 +158,7 @@ void load_tex_transition_vertex(Vtx *verts, s8 fadeTimer, struct WarpTransitionD
     make_tex_transition_vertex(verts, 7, fadeTimer, transData, centerTransX, centerTransY, -2000, 2000, 0, 0);
 }
 
-void *sTextureTransitionID[] = {
+static const void *sTextureTransitionID[] = {
     texture_transition_star_half,
     texture_transition_circle_half,
     texture_transition_mario,

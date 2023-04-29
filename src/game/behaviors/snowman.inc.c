@@ -1,6 +1,6 @@
 // snowman.inc.c
 
-static struct ObjectHitbox sRollingSphereHitbox = {
+static const struct ObjectHitbox sRollingSphereHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 3,

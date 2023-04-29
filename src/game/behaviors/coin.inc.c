@@ -1,6 +1,6 @@
 // coin.inc.c
 
-struct ObjectHitbox sYellowCoinHitbox = {
+static const struct ObjectHitbox sYellowCoinHitbox = {
     /* interactType:      */ INTERACT_COIN,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
@@ -21,7 +21,7 @@ struct ObjectHitbox sYellowCoinHitbox = {
  * 
  *     0
  **/
-s16 sCoinArrowPositions[][2] = {
+static const s16 sCoinArrowPositions[][2] = {
     { 0, -150 },
     { 0, -50 },
     { 0, 50 },
@@ -301,7 +301,7 @@ void coin_inside_boo_act_carried(void) {
     }
 }
 
-ObjActionFunc sCoinInsideBooActions[] = {
+static const ObjActionFunc sCoinInsideBooActions[] = {
     coin_inside_boo_act_carried,
     coin_inside_boo_act_dropped
 };

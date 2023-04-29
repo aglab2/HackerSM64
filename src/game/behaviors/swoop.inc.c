@@ -7,7 +7,7 @@
 /**
  * Hitbox for swoop.
  */
-static struct ObjectHitbox sSwoopHitbox = {
+static const struct ObjectHitbox sSwoopHitbox = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,

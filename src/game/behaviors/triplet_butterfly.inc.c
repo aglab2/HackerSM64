@@ -6,7 +6,7 @@ struct TripletButterflyActivationData {
     f32 scale;
 };
 
-static struct ObjectHitbox sTripletButterflyExplodeHitbox = {
+static const struct ObjectHitbox sTripletButterflyExplodeHitbox = {
     /* interactType:      */ INTERACT_MR_BLIZZARD,
     /* downOffset:        */ 50,
     /* damageOrCoinValue: */ 2,

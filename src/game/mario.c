@@ -426,7 +426,7 @@ s32 mario_get_floor_class(struct MarioState *m) {
 }
 
 // clang-format off
-s8 sTerrainSounds[7][6] = {
+static const s8 sTerrainSounds[7][6] = {
     // default,              hard,                 slippery,
     // very slippery,        noisy default,        noisy slippery
     { SOUND_TERRAIN_DEFAULT, SOUND_TERRAIN_STONE,  SOUND_TERRAIN_GRASS,
@@ -1167,7 +1167,7 @@ s32 set_water_plunge_action(struct MarioState *m) {
  * These are the scaling values for the x and z axis for Mario
  * when he is close to unsquishing.
  */
-u8 sSquishScaleOverTime[16] = { 0x46, 0x32, 0x32, 0x3C, 0x46, 0x50, 0x50, 0x3C,
+static const u8 sSquishScaleOverTime[16] = { 0x46, 0x32, 0x32, 0x3C, 0x46, 0x50, 0x50, 0x3C,
                                 0x28, 0x14, 0x14, 0x1E, 0x32, 0x3C, 0x3C, 0x28 };
 
 /**
@@ -1591,7 +1591,7 @@ void sink_mario_in_quicksand(struct MarioState *m) {
  * Equals [1000]^5 . [100]^8 . [10]^9 . [1] in binary, which is
  * 100010001000100010001001001001001001001001001010101010101010101.
  */
-u64 sCapFlickerFrames = 0b100010001000100010001001001001001001001001001010101010101010101;
+static const u64 sCapFlickerFrames = 0b100010001000100010001001001001001001001001001010101010101010101;
 
 /**
  * Updates the cap flags mainly based on the cap timer.

@@ -6,7 +6,7 @@
  * Also includes behavior for the invisible hitboxes they spawn.
  */
 
-static struct ObjectHitbox sFallingPillarHitbox = {
+static const struct ObjectHitbox sFallingPillarHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 150,
     /* damageOrCoinValue: */ 3,

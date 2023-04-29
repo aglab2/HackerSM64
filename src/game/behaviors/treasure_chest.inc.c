@@ -3,7 +3,7 @@
 /**
  * Hitbox for treasure chest bottom.
  */
-static struct ObjectHitbox sTreasureChestBottomHitbox = {
+static const struct ObjectHitbox sTreasureChestBottomHitbox = {
     /* interactType:      */ INTERACT_SHOCK,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,

@@ -77,7 +77,7 @@ struct CreditsEntry {
     /*0x02*/ u8 actNum;
     /*0x03*/ s8 marioAngle;
     /*0x04*/ Vec3s marioPos;
-    /*0x0C*/ const char **string;
+    /*0x0C*/ const char *  const * string;
 };
 
 extern struct CreditsEntry *gCurrCreditsEntry;

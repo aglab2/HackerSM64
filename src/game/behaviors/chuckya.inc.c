@@ -156,7 +156,7 @@ void chuckya_act_2(void) {
     }
 }
 
-ObjActionFunc sChuckyaActions[] = {
+static const ObjActionFunc sChuckyaActions[] = {
     chuckya_act_0,
     chuckya_act_1,
     chuckya_act_2,

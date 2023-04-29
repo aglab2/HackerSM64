@@ -12,7 +12,7 @@ struct MacroPreset {
     /*0x06*/ s16 param;
 };
 
-struct MacroPreset MacroObjectPresets[] = {
+static const struct MacroPreset MacroObjectPresets[] = {
     {bhvYellowCoin,                     MODEL_YELLOW_COIN,                  0}, // macro_yellow_coin
     {bhvOneCoin,                        MODEL_YELLOW_COIN,                  0}, // macro_yellow_coin_2
     {bhvMovingBlueCoin,                 MODEL_BLUE_COIN,                    0}, // macro_moving_blue_coin

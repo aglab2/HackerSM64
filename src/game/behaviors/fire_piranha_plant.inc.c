@@ -1,6 +1,6 @@
 // fire_piranha_plant.inc.c
 
-struct ObjectHitbox sFirePiranhaPlantHitbox = {
+static const struct ObjectHitbox sFirePiranhaPlantHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
@@ -12,7 +12,7 @@ struct ObjectHitbox sFirePiranhaPlantHitbox = {
     /* hurtboxHeight:     */ 150,
 };
 
-struct ObjectHitbox sPiranhaPlantFireHitbox = {
+static const struct ObjectHitbox sPiranhaPlantFireHitbox = {
     /* interactType:      */ INTERACT_FLAME,
     /* downOffset:        */ 10,
     /* damageOrCoinValue: */ 0,

@@ -1,6 +1,6 @@
 // heave_ho.inc.c
 
-s16 sHeaveHoTimings[][2] = {
+static const s16 sHeaveHoTimings[][2] = {
     {  30, 0 },
     {  42, 1 },
     {  52, 0 },
@@ -107,7 +107,7 @@ void heave_ho_act_0(void) {
     }
 }
 
-ObjActionFunc sHeaveHoActions[] = {
+static const ObjActionFunc sHeaveHoActions[] = {
     heave_ho_act_0,
     heave_ho_act_1,
     heave_ho_act_2,

@@ -5,7 +5,7 @@ struct FloorSwitchTriggeredAnimationFrame {
     ModelID16 model;
 };
 
-struct FloorSwitchTriggeredAnimationFrame sFloorSwitchTriggeredAnimationFrames[][5] = {
+static const struct FloorSwitchTriggeredAnimationFrame sFloorSwitchTriggeredAnimationFrames[][5] = {
     {
         { bits_seg7_collision_0701B734, MODEL_BITS_STAIRCASE_FRAME4 },
         { bits_seg7_collision_0701B59C, MODEL_BITS_STAIRCASE_FRAME3 },
@@ -29,7 +29,7 @@ struct FloorSwitchTriggeredAnimationFrame sFloorSwitchTriggeredAnimationFrames[]
     },
 };
 
-s16 sAnimatesOnFloorSwitchPressTimers[] = { 250, 200, 200 };
+static const s16 sAnimatesOnFloorSwitchPressTimers[] = { 250, 200, 200 };
 
 void bhv_animates_on_floor_switch_press_init(void) {
     o->parentObj = cur_obj_nearest_object_with_behavior(bhvFloorSwitchAnimatesObject);

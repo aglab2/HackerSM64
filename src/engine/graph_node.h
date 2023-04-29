@@ -442,7 +442,7 @@ struct GraphNodeTranslationRotation *init_graph_node_translation_rotation(s32 al
 struct GraphNodeTranslation         *init_graph_node_translation         (s32 alloc, struct GraphNodeTranslation         *graphNode, s32 drawingLayer, void *displayList, Vec3s translation);
 struct GraphNodeRotation            *init_graph_node_rotation            (s32 alloc, struct GraphNodeRotation            *graphNode, s32 drawingLayer, void *displayList, Vec3s rotation);
 struct GraphNodeScale               *init_graph_node_scale               (s32 alloc, struct GraphNodeScale               *graphNode, s32 drawingLayer, void *displayList, f32 scale);
-struct GraphNodeObject              *init_graph_node_object              (s32 alloc, struct GraphNodeObject              *graphNode, struct GraphNode *sharedChild, Vec3f pos, Vec3s angle, Vec3f scale);
+struct GraphNodeObject              *init_graph_node_object              (s32 alloc, struct GraphNodeObject              *graphNode, struct GraphNode *sharedChild, const Vec3f pos, const Vec3s angle, const Vec3f scale);
 struct GraphNodeCull                *init_graph_node_cull                (s32 alloc, struct GraphNodeCull                *graphNode, s16 x0, s16 x1, s16 y0, s16 y1, s16 z0, s16 z1);
 struct GraphNodeCullingRadius       *init_graph_node_culling_radius      (s32 alloc, struct GraphNodeCullingRadius       *graphNode, s16 radius);
 struct GraphNodeAnimatedPart        *init_graph_node_animated_part       (s32 alloc, struct GraphNodeAnimatedPart        *graphNode, s32 drawingLayer, void *displayList, Vec3s translation);

@@ -6,7 +6,7 @@
 /**
  * Hitbox for fly guy.
  */
-static struct ObjectHitbox sFlyGuyHitbox = {
+static const struct ObjectHitbox sFlyGuyHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
@@ -21,7 +21,7 @@ static struct ObjectHitbox sFlyGuyHitbox = {
 /**
  * Unused jitter amounts.
  */
-static s16 sFlyGuyJitterAmounts[] = { 0x1000, -0x2000, 0x2000 };
+static const s16 sFlyGuyJitterAmounts[] = { 0x1000, -0x2000, 0x2000 };
 
 /**
  * Return to regular size. When mario is close enough or home is far enough,

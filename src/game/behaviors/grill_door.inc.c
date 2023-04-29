@@ -6,7 +6,7 @@ struct OpenableGrill {
     const Collision *collision;
 };
 
-struct OpenableGrill gOpenableGrills[] = {
+static const struct OpenableGrill gOpenableGrills[] = {
     { 320, MODEL_BOB_BARS_GRILLS, bob_seg7_collision_gate },
     { 410, MODEL_HMC_RED_GRILLS,  hmc_seg7_collision_grill_door }
 };

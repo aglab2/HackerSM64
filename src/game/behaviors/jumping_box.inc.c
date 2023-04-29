@@ -1,6 +1,6 @@
 // jumping_box.inc.c
 
-struct ObjectHitbox sJumpingBoxHitbox = {
+static const struct ObjectHitbox sJumpingBoxHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 20,
     /* damageOrCoinValue: */ 0,
@@ -34,7 +34,7 @@ void jumping_box_act_1(void) {
     }
 }
 
-ObjActionFunc sJumpingBoxActions[] = {
+static const ObjActionFunc sJumpingBoxActions[] = {
     jumping_box_act_0,
     jumping_box_act_1
 };

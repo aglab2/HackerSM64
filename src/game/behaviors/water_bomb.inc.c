@@ -12,7 +12,7 @@
  * Hitbox for water bombs that are spawned by a water bomb spawner. The water
  * bombs that are shot from cannons are intangible.
  */
-static struct ObjectHitbox sWaterBombHitbox = {
+static const struct ObjectHitbox sWaterBombHitbox = {
     /* interactType:      */ INTERACT_MR_BLIZZARD,
     /* downOffset:        */ 25,
     /* damageOrCoinValue: */ 1,
@@ -169,7 +169,7 @@ static void water_bomb_act_explode(void) {
     obj_mark_for_deletion(o);
 }
 
-static struct SpawnParticlesInfo sWaterBombCannonParticle = {
+static const struct SpawnParticlesInfo sWaterBombCannonParticle = {
     /* behParam:        */ 0,
     /* count:           */ 1,
     /* model:           */ MODEL_BUBBLE,

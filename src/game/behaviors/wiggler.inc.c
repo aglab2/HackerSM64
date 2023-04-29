@@ -10,7 +10,7 @@
 /**
  * Hitbox for wiggler's non-head body parts.
  */
-static struct ObjectHitbox sWigglerBodyPartHitbox = {
+static const struct ObjectHitbox sWigglerBodyPartHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 3,
@@ -25,7 +25,7 @@ static struct ObjectHitbox sWigglerBodyPartHitbox = {
 /**
  * Hitbox for wiggler's head.
  */
-static struct ObjectHitbox sWigglerHitbox = {
+static const struct ObjectHitbox sWigglerHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 3,
@@ -40,7 +40,7 @@ static struct ObjectHitbox sWigglerHitbox = {
 /**
  * Attack handler for wiggler while in the walking action.
  */
-static u8 sWigglerAttackHandlers[] = {
+static const u8 sWigglerAttackHandlers[] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON,
@@ -52,7 +52,7 @@ static u8 sWigglerAttackHandlers[] = {
 /**
  * Target speed while walking when wiggler has health 1, 2, 3, and 4.
  */
-static f32 sWigglerSpeeds[] = { 2.0f, 40.0f, 30.0f, 16.0f };
+static const f32 sWigglerSpeeds[] = { 2.0f, 40.0f, 30.0f, 16.0f };
 
 /**
  * Update function for bhvWigglerBody.

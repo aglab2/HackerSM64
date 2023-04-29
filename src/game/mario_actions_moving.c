@@ -28,15 +28,15 @@ struct LandingAction {
 };
 
 /*                                               numFrames, doubleJumpTimer,   verySteepAction,                   endAction,    aPressedAction,    offFloorAction,            slideAction, */
-struct LandingAction         sJumpLandAction = {         4,               5,      ACT_FREEFALL,          ACT_JUMP_LAND_STOP,   ACT_DOUBLE_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
-struct LandingAction     sFreefallLandAction = {         4,               5,      ACT_FREEFALL,      ACT_FREEFALL_LAND_STOP,   ACT_DOUBLE_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
-struct LandingAction     sSideFlipLandAction = {         4,               5,      ACT_FREEFALL,     ACT_SIDE_FLIP_LAND_STOP,   ACT_DOUBLE_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
-struct LandingAction     sHoldJumpLandAction = {         4,               5, ACT_HOLD_FREEFALL,     ACT_HOLD_JUMP_LAND_STOP,     ACT_HOLD_JUMP, ACT_HOLD_FREEFALL, ACT_HOLD_BEGIN_SLIDING, };
-struct LandingAction sHoldFreefallLandAction = {         4,               5, ACT_HOLD_FREEFALL, ACT_HOLD_FREEFALL_LAND_STOP,     ACT_HOLD_JUMP, ACT_HOLD_FREEFALL, ACT_HOLD_BEGIN_SLIDING, };
-struct LandingAction     sLongJumpLandAction = {         6,               5,      ACT_FREEFALL,     ACT_LONG_JUMP_LAND_STOP,     ACT_LONG_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
-struct LandingAction   sDoubleJumpLandAction = {         4,               5,      ACT_FREEFALL,   ACT_DOUBLE_JUMP_LAND_STOP,          ACT_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
-struct LandingAction   sTripleJumpLandAction = {         4,               0,      ACT_FREEFALL,   ACT_TRIPLE_JUMP_LAND_STOP, ACT_UNINITIALIZED,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
-struct LandingAction     sBackflipLandAction = {         4,               0,      ACT_FREEFALL,      ACT_BACKFLIP_LAND_STOP,      ACT_BACKFLIP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction         sJumpLandAction = {         4,               5,      ACT_FREEFALL,          ACT_JUMP_LAND_STOP,   ACT_DOUBLE_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction     sFreefallLandAction = {         4,               5,      ACT_FREEFALL,      ACT_FREEFALL_LAND_STOP,   ACT_DOUBLE_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction     sSideFlipLandAction = {         4,               5,      ACT_FREEFALL,     ACT_SIDE_FLIP_LAND_STOP,   ACT_DOUBLE_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction     sHoldJumpLandAction = {         4,               5, ACT_HOLD_FREEFALL,     ACT_HOLD_JUMP_LAND_STOP,     ACT_HOLD_JUMP, ACT_HOLD_FREEFALL, ACT_HOLD_BEGIN_SLIDING, };
+static const struct LandingAction sHoldFreefallLandAction = {         4,               5, ACT_HOLD_FREEFALL, ACT_HOLD_FREEFALL_LAND_STOP,     ACT_HOLD_JUMP, ACT_HOLD_FREEFALL, ACT_HOLD_BEGIN_SLIDING, };
+static const struct LandingAction     sLongJumpLandAction = {         6,               5,      ACT_FREEFALL,     ACT_LONG_JUMP_LAND_STOP,     ACT_LONG_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction   sDoubleJumpLandAction = {         4,               5,      ACT_FREEFALL,   ACT_DOUBLE_JUMP_LAND_STOP,          ACT_JUMP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction   sTripleJumpLandAction = {         4,               0,      ACT_FREEFALL,   ACT_TRIPLE_JUMP_LAND_STOP, ACT_UNINITIALIZED,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
+static const struct LandingAction     sBackflipLandAction = {         4,               0,      ACT_FREEFALL,      ACT_BACKFLIP_LAND_STOP,      ACT_BACKFLIP,      ACT_FREEFALL,      ACT_BEGIN_SLIDING, };
 
 Mat4 sFloorAlignMatrix[2];
 
@@ -1779,7 +1779,7 @@ u32 common_landing_action(struct MarioState *m, s16 animation, u32 airAction) {
     return stepResult;
 }
 
-s32 common_landing_cancels(struct MarioState *m, struct LandingAction *landingAction,
+s32 common_landing_cancels(struct MarioState *m, const struct LandingAction *landingAction,
                            s32 (*setAPressAction)(struct MarioState *m, u32 action, u32 actionArg)) {
     //! Everything here, including floor steepness, is checked before checking
     // if Mario is actually on the floor. This leads to e.g. remote sliding.

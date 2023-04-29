@@ -5,7 +5,7 @@ void bhv_pound_white_puffs_init(void) {
     spawn_mist_from_global();
 }
 
-static struct SpawnParticlesInfo sGlobalMistParticles = {
+static const struct SpawnParticlesInfo sGlobalMistParticles = {
     /* behParam:        */ 3,
     /* count:           */ 20,
     /* model:           */ MODEL_MIST,
@@ -24,7 +24,7 @@ void spawn_mist_from_global(void) {
     cur_obj_spawn_particles(&sGlobalMistParticles);
 }
 
-static struct SpawnParticlesInfo sSandParticles = {
+static const struct SpawnParticlesInfo sSandParticles = {
     /* behParam:        */ 0,
     /* count:           */ 5,
     /* model:           */ MODEL_SAND_DUST,
@@ -66,7 +66,7 @@ void clear_particle_flags(u32 flags) {
     o->parentObj->oActiveParticleFlags &= flags ^ 0xFFFFFFFF; // Clear the flags given (could just be ~flags)
 }
 
-static struct SpawnParticlesInfo sSnowParticles = {
+static const struct SpawnParticlesInfo sSnowParticles = {
     /* behParam:        */ 0,
     /* count:           */ 5,
     /* model:           */ MODEL_WHITE_PARTICLE_DL,

@@ -6,7 +6,7 @@
  * the snufit shoots at Mario.
  */
 
-struct ObjectHitbox sSnufitHitbox = {
+static const struct ObjectHitbox sSnufitHitbox = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
@@ -18,7 +18,7 @@ struct ObjectHitbox sSnufitHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
-struct ObjectHitbox sSnufitBulletHitbox = {
+static const struct ObjectHitbox sSnufitBulletHitbox = {
     /* interactType:      */ INTERACT_SNUFIT_BULLET,
     /* downOffset:        */ 50,
     /* damageOrCoinValue: */ 1,

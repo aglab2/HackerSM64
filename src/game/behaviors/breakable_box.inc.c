@@ -1,6 +1,6 @@
 // breakable_box.inc.c
 
-struct ObjectHitbox sBreakableBoxHitbox = {
+static const struct ObjectHitbox sBreakableBoxHitbox = {
     /* interactType:      */ INTERACT_BREAKABLE,
     /* downOffset:        */  20,
     /* damageOrCoinValue: */   0,

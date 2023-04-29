@@ -1,6 +1,6 @@
 // whirlpool.inc.c
 
-static struct ObjectHitbox sWhirlpoolHitbox = {
+static const struct ObjectHitbox sWhirlpoolHitbox = {
     /* interactType:      */ INTERACT_WHIRLPOOL,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,

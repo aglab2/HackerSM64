@@ -1,6 +1,6 @@
 // thi_top.inc.c
 
-static struct SpawnParticlesInfo sThiTopPuffs = {
+static const struct SpawnParticlesInfo sThiTopPuffs = {
     /* behParam:        */ 0,
     /* count:           */ 30,
     /* model:           */ MODEL_WHITE_PARTICLE_SMALL,

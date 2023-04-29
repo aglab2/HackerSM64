@@ -1,12 +1,12 @@
 // tox_box.inc.c
 
-s8 sToxBoxDirectionPattern1[] = { 4, 1, 4, 1, 6, 1, 6, 1, 5, 1, 5, 1, 6, 1, 6, 1, 5, 1, 2, 4, 1, 4, 1, 4, 1, 2,
+static const s8 sToxBoxDirectionPattern1[] = { 4, 1, 4, 1, 6, 1, 6, 1, 5, 1, 5, 1, 6, 1, 6, 1, 5, 1, 2, 4, 1, 4, 1, 4, 1, 2,
                                   5, 1, 5, 1, 7, 1, 7, 1, 4, 1, 4, 1, 7, 1, 7, 1, 5, 1, 5, 1, 5, 1, 2, 4, 1, -1 };
-s8 sToxBoxDirectionPattern2[] = { 4, 1, 4, 1, 7, 1, 7, 1, 7, 1, 2, 6, 1, 6, 1, 6, 1, 5,
+static const s8 sToxBoxDirectionPattern2[] = { 4, 1, 4, 1, 7, 1, 7, 1, 7, 1, 2, 6, 1, 6, 1, 6, 1, 5,
                                   1, 5, 1, 6, 1, 5, 1, 5, 1, 2, 4, 1, 4, 1, 7, 1, -1 };
-s8 sToxBoxDirectionPattern3[] = { 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 2, 5, 1, 5, 1, 5, 1, 5,
+static const s8 sToxBoxDirectionPattern3[] = { 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 2, 5, 1, 5, 1, 5, 1, 5,
                                   1, 5, 1, 7, 1, 2, 6, 1, 6, 1, 5, 1, 2, 4, 1, 7, 1, -1 };
-s8 *sToxBoxDirectionPatterns[] = {
+static const s8 *sToxBoxDirectionPatterns[] = {
     sToxBoxDirectionPattern1,
     sToxBoxDirectionPattern2,
     sToxBoxDirectionPattern3
@@ -80,11 +80,11 @@ void tox_box_act_3(void) {
 }
 
 void tox_box_act_0(void) {
-    s8 *pattern = sToxBoxDirectionPatterns[o->oBehParams2ndByte];
+    const s8 *pattern = sToxBoxDirectionPatterns[o->oBehParams2ndByte];
     o->oAction = cur_obj_set_direction_table(pattern);
 }
 
-ObjActionFunc sToxBoxActions[] = {
+static const ObjActionFunc sToxBoxActions[] = {
     tox_box_act_0,
     tox_box_act_1,
     tox_box_act_2,

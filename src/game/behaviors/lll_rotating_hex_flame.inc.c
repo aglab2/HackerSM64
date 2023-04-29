@@ -54,7 +54,7 @@ void fire_bar_act_remove_flames(void) {
     o->oAction = LLL_FIRE_BAR_ACT_INACTIVE;
 }
 
-ObjActionFunc sRotatingCwFireBarsActions[] = {
+static const ObjActionFunc sRotatingCwFireBarsActions[] = {
     fire_bar_act_inactive,
     fire_bar_act_spawn_flames,
     fire_bar_act_active,

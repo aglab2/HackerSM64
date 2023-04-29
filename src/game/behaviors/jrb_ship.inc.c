@@ -1,6 +1,6 @@
 // jrb_ship.inc.c
 
-struct ObjectHitbox sSkullSlidingBoxHitbox = {
+static const struct ObjectHitbox sSkullSlidingBoxHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,

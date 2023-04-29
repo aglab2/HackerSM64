@@ -266,7 +266,7 @@ void king_whomp_stop_music(void) {
     }
 }
 
-ObjActionFunc sWhompActions[] = {
+static const ObjActionFunc sWhompActions[] = {
     whomp_init,
     whomp_patrol,
     king_whomp_chase,

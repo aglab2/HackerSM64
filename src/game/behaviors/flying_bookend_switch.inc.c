@@ -5,7 +5,7 @@ struct BookSwitchPosition {
     s16 relPosY;
 };
 
-struct ObjectHitbox sFlyingBookendHitbox = {
+static const struct ObjectHitbox sFlyingBookendHitbox = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
@@ -17,13 +17,13 @@ struct ObjectHitbox sFlyingBookendHitbox = {
     /* hurtboxHeight:     */ 30,
 };
 
-struct BookSwitchPosition sBookSwitchPositions[] = {
+static const struct BookSwitchPosition sBookSwitchPositions[] = {
     { 52, 150 },
     { 135, 3 },
     { -75, 78 },
 };
 
-struct ObjectHitbox sBookSwitchHitbox = {
+static const struct ObjectHitbox sBookSwitchHitbox = {
     /* interactType:      */ INTERACT_BREAKABLE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,

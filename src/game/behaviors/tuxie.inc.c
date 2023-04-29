@@ -122,7 +122,7 @@ void tuxies_mother_act_idle(void) {
     }
 }
 
-ObjActionFunc sTuxiesMotherActions[] = {
+static const ObjActionFunc sTuxiesMotherActions[] = {
     tuxies_mother_act_idle,
     tuxies_mother_act_receiving_baby,
     tuxies_mother_act_received_baby,
@@ -245,7 +245,7 @@ void small_penguin_act_near_mother(void) {
     small_penguin_dive_with_mario();
 }
 
-ObjActionFunc sSmallPenguinActions[] = {
+static const ObjActionFunc sSmallPenguinActions[] = {
     small_penguin_act_walking,
     small_penguin_act_walking_toward_mario,
     small_penguin_act_walking_away_from_mario,

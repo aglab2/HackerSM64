@@ -309,7 +309,7 @@ static void monty_mole_act_jump_out_of_hole(void) {
 /**
  * Hitbox for monty mole.
  */
-static struct ObjectHitbox sMontyMoleHitbox = {
+static const struct ObjectHitbox sMontyMoleHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
@@ -422,7 +422,7 @@ static void monty_mole_rock_act_held(void) {
 /**
  * Hitbox for monty mole rock.
  */
-static struct ObjectHitbox sMontyMoleRockHitbox = {
+static const struct ObjectHitbox sMontyMoleRockHitbox = {
     /* interactType:      */ INTERACT_MR_BLIZZARD,
     /* downOffset:        */ 15,
     /* damageOrCoinValue: */ 1,
@@ -437,7 +437,7 @@ static struct ObjectHitbox sMontyMoleRockHitbox = {
 /**
  * The particles that spawn when a monty mole rock breaks.
  */
-static struct SpawnParticlesInfo sMontyMoleRockBreakParticles = {
+static const struct SpawnParticlesInfo sMontyMoleRockBreakParticles = {
     /* behParam:        */ 0,
     /* count:           */ 2,
     /* model:           */ MODEL_PEBBLE,

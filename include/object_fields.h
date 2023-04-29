@@ -353,8 +353,8 @@
 #define /*0x100*/ oBowserPuzzlePieceOffsetY                  OBJECT_FIELD_F32(O_BOWSER_PUZZLE_PIECE_OFFSET_Y_INDEX)
 #define /*0x104*/ oBowserPuzzlePieceOffsetZ                  OBJECT_FIELD_F32(O_BOWSER_PUZZLE_PIECE_OFFSET_Z_INDEX)
 #define /*0x108*/ oBowserPuzzlePieceContinuePerformingAction OBJECT_FIELD_S32(0x20)
-#define /*0x10C*/ oBowserPuzzlePieceActionList               OBJECT_FIELD_VPTR(0x21)
-#define /*0x110*/ oBowserPuzzlePieceNextAction               OBJECT_FIELD_VPTR(0x22)
+#define /*0x10C*/ oBowserPuzzlePieceActionList               OBJECT_FIELD_CVPTR(0x21)
+#define /*0x110*/ oBowserPuzzlePieceNextAction               OBJECT_FIELD_CVPTR(0x22)
 
 /* Bubba */
 #define /*0x0F4*/ oBubbaMovePitch                  OBJECT_FIELD_F32(0x1B)
@@ -1056,7 +1056,7 @@
 #define /*0x110*/ oToadMessageState          OBJECT_FIELD_S32(0x22)
 
 /* Tox Box */
-#define /*0x1AC*/ oToxBoxMovementPattern OBJECT_FIELD_VPTR(0x49)
+#define /*0x1AC*/ oToxBoxMovementPattern OBJECT_FIELD_CVPTR(0x49)
 #define /*0x1B0*/ oToxBoxMovementStep    OBJECT_FIELD_S32(0x4A)
 
 /* TTC Rotating Solid */

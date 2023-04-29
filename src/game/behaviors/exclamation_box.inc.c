@@ -8,7 +8,7 @@ struct ExclamationBoxContents {
     const BehaviorScript *behavior;
 };
 
-struct ObjectHitbox sExclamationBoxHitbox = {
+static const struct ObjectHitbox sExclamationBoxHitbox = {
     /* interactType:      */ INTERACT_BREAKABLE,
     /* downOffset:        */ 5,
     /* damageOrCoinValue: */ 0,
@@ -20,7 +20,7 @@ struct ObjectHitbox sExclamationBoxHitbox = {
     /* hurtboxHeight:     */ 30,
 };
 
-struct ExclamationBoxContents sExclamationBoxContents[] = {
+static const struct ExclamationBoxContents sExclamationBoxContents[] = {
     { EXCLAMATION_BOX_BP_WING_CAP,         0, 0, MODEL_MARIOS_WING_CAP,  bhvWingCap               },
     { EXCLAMATION_BOX_BP_METAL_CAP,        0, 0, MODEL_MARIOS_METAL_CAP, bhvMetalCap              },
     { EXCLAMATION_BOX_BP_VANISH_CAP,       0, 0, MODEL_MARIOS_CAP,       bhvVanishCap             },
@@ -114,7 +114,7 @@ void exclamation_box_act_scaling(void) {
     }
 }
 
-void exclamation_box_spawn_contents(struct ExclamationBoxContents *contentsList, u8 boxType) {
+void exclamation_box_spawn_contents(const struct ExclamationBoxContents *contentsList, u8 boxType) {
     struct Object *contentsObj = NULL;
 
     while (contentsList->id != EXCLAMATION_BOX_BP_NULL) {
@@ -152,7 +152,7 @@ void exclamation_box_act_wait_for_respawn(void) {
     }
 }
 
-ObjActionFunc sExclamationBoxActions[] = {
+static const ObjActionFunc sExclamationBoxActions[] = {
     exclamation_box_act_init,
     exclamation_box_act_outline,
     exclamation_box_act_active,

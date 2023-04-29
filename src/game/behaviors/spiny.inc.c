@@ -9,7 +9,7 @@
  * Hitbox for spiny both while thrown and walking. The interaction type is
  * changed to INTERACT_SPINY_WALKING while walking.
  */
-static struct ObjectHitbox sSpinyHitbox = {
+static const struct ObjectHitbox sSpinyHitbox = {
     /* interactType:      */ INTERACT_MR_BLIZZARD,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
@@ -24,7 +24,7 @@ static struct ObjectHitbox sSpinyHitbox = {
 /**
  * Attack handlers for spiny while walking.
  */
-static u8 sSpinyWalkAttackHandlers[] = {
+static const u8 sSpinyWalkAttackHandlers[] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_NOP,

@@ -164,7 +164,7 @@ static void beta_boo_key_inside_boo_loop(void) {
     o->oFaceAngleYaw += 0x200;
 }
 
-static ObjActionFunc sBetaBooKeyActions[] = {
+static const ObjActionFunc sBetaBooKeyActions[] = {
     beta_boo_key_inside_boo_loop,
     beta_boo_key_drop,
     beta_boo_key_dropped_loop,

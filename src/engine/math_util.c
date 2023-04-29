@@ -13,17 +13,17 @@
 #include "config.h"
 
 
-Vec3f gVec3fX    = {  1.0f,  0.0f,  0.0f };
-Vec3f gVec3fY    = {  0.0f,  1.0f,  0.0f };
-Vec3f gVec3fZ    = {  0.0f,  0.0f,  1.0f };
-Vec3f gVec3fNX   = { -1.0f,  0.0f,  0.0f };
-Vec3f gVec3fNY   = {  0.0f, -1.0f,  0.0f };
-Vec3f gVec3fNZ   = {  0.0f,  0.0f, -1.0f };
-Vec3f gVec3fZero = {  0.0f,  0.0f,  0.0f };
-Vec3f gVec3fOne  = {  1.0f,  1.0f,  1.0f };
-Vec3s gVec3sZero = {     0,     0,     0 };
-Vec3i gVec3iZero = {     0,     0,     0 };
-Vec3s gVec3sOne  = {     1,     1,     1 };
+const Vec3f gVec3fX    = {  1.0f,  0.0f,  0.0f };
+const Vec3f gVec3fY    = {  0.0f,  1.0f,  0.0f };
+const Vec3f gVec3fZ    = {  0.0f,  0.0f,  1.0f };
+const Vec3f gVec3fNX   = { -1.0f,  0.0f,  0.0f };
+const Vec3f gVec3fNY   = {  0.0f, -1.0f,  0.0f };
+const Vec3f gVec3fNZ   = {  0.0f,  0.0f, -1.0f };
+const Vec3f gVec3fZero = {  0.0f,  0.0f,  0.0f };
+const Vec3f gVec3fOne  = {  1.0f,  1.0f,  1.0f };
+const Vec3s gVec3sZero = {     0,     0,     0 };
+const Vec3i gVec3iZero = {     0,     0,     0 };
+const Vec3s gVec3sOne  = {     1,     1,     1 };
 
 u16 gRandomSeed16;
 
@@ -147,7 +147,7 @@ void vec3f_to_vec3i(Vec3i dest, const Vec3f src) { vec3_copy_bits_roundf(s32, de
     ((destFmt *) dest)[1] = y;                                  \
     ((destFmt *) dest)[2] = z;                                  \
 }
-void vec3f_copy_y_off(Vec3f dest, Vec3f src, f32 yOff) { vec3_copy_y_off_func(f32, dest, f32, src, yOff); }
+void vec3f_copy_y_off(Vec3f dest, const Vec3f src, f32 yOff) { vec3_copy_y_off_func(f32, dest, f32, src, yOff); }
 #undef vec3_copy_y_off_func
 
 /// Set vector 'dest' to (x, y, z)
@@ -905,7 +905,7 @@ void vec3f_get_lateral_dist_and_angle(Vec3f from, Vec3f to, f32 *lateralDist, An
 }
 
 /// Finds the distance and angles between two vectors.
-void vec3f_get_dist_and_angle(Vec3f from, Vec3f to, f32 *dist, Angle *pitch, Angle *yaw) {
+void vec3f_get_dist_and_angle(const Vec3f from, Vec3f to, f32 *dist, Angle *pitch, Angle *yaw) {
     Vec3f d;
     vec3_diff(d, to, from);
     register f32 xz = (sqr(d[0]) + sqr(d[2]));

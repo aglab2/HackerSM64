@@ -1,6 +1,6 @@
 // bully.inc.c
 
-static struct ObjectHitbox sSmallBullyHitbox = {
+static const struct ObjectHitbox sSmallBullyHitbox = {
     /* interactType:      */ INTERACT_BULLY,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
@@ -12,7 +12,7 @@ static struct ObjectHitbox sSmallBullyHitbox = {
     /* hurtboxHeight:     */ 113,
 };
 
-static struct ObjectHitbox sBigBullyHitbox = {
+static const struct ObjectHitbox sBigBullyHitbox = {
     /* interactType:      */ INTERACT_BULLY,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,

@@ -11,7 +11,7 @@ extern const Trajectory bbh_area_1_spline_NurbsCurve_001_l[];
 extern const Trajectory bbh_area_1_spline_NurbsCurve_001_r[];
 extern const Trajectory bbh_area_1_spline_NurbsCurve_002[];
 
-static struct ObjectHitbox sBowlingBallHitbox = {
+static const struct ObjectHitbox sBowlingBallHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,

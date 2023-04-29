@@ -10,7 +10,7 @@
 /**
  * Hitbox for a single pokey body part.
  */
-static struct ObjectHitbox sPokeyBodyPartHitbox = {
+static const struct ObjectHitbox sPokeyBodyPartHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 10,
     /* damageOrCoinValue: */ 2,
@@ -25,7 +25,7 @@ static struct ObjectHitbox sPokeyBodyPartHitbox = {
 /**
  * Attack handlers for pokey body part.
  */
-static u8 sPokeyBodyPartAttackHandlers[] = {
+static const u8 sPokeyBodyPartAttackHandlers[] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SQUISHED,

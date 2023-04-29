@@ -27,7 +27,7 @@ static s32 sBubbleParticleCount;
 static s32 sBubbleParticleMaxCount;
 
 /// Template for a bubble particle triangle
-Vtx_t gBubbleTempVtx[3] = {
+static const Vtx_t gBubbleTempVtx[3] = {
     { { 0, 0, 0 }, 0, { 1544, 964 }, { 0xFF, 0xFF, 0xFF, 0xFF } },
     { { 0, 0, 0 }, 0, { 522, -568 }, { 0xFF, 0xFF, 0xFF, 0xFF } },
     { { 0, 0, 0 }, 0, { -498, 964 }, { 0xFF, 0xFF, 0xFF, 0xFF } },

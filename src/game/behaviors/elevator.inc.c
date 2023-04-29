@@ -115,7 +115,7 @@ void bhv_elevator_init(void) {
     }
 }
 
-ObjActionFunc sElevatorActions[] = {
+static const ObjActionFunc sElevatorActions[] = {
     elevator_act_0,
     elevator_act_1,
     elevator_act_2,

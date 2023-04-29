@@ -198,7 +198,7 @@ extern Gfx    ssl_dl_pyramid_quicksand_pit_end[];
  * MovtexObjects that have no color attributes per vertex (though the mesh
  * as a whole can have a blend color).
  */
-struct MovtexObject gMovtexNonColored[] = {
+static const struct MovtexObject gMovtexNonColored[] = {
     // Inside the pyramid there is a sand pathway with the 5 secrets on it.
     // pathway_front is the highest 'sand fall', pathway_floor is the horizontal sand stream and pathway_side is the lower 'sand fall'.
     { MOVTEX_PYRAMID_SAND_PATHWAY_FRONT, TEX_PYRAMID_SAND_SSL,  8, ssl_movtex_tris_pyramid_sand_pathway_front, ssl_dl_pyramid_sand_pathway_begin,       ssl_dl_pyramid_sand_pathway_end,       ssl_dl_pyramid_sand_pathway_front_end, 0xff, 0xff, 0xff, 0xff, LAYER_TRANSPARENT_INTER },
@@ -230,7 +230,7 @@ struct MovtexObject gMovtexNonColored[] = {
 /**
  * MovtexObjects that have color attributes per vertex.
  */
-struct MovtexObject gMovtexColored[] = {
+static const struct MovtexObject gMovtexColored[] = {
     { MOVTEX_SSL_PYRAMID_SIDE,           TEX_QUICKSAND_SSL,    12, ssl_movtex_tris_pyramid_quicksand,          ssl_dl_quicksand_begin,                  ssl_dl_quicksand_end,                  ssl_dl_pyramid_quicksand,              0xff, 0xff, 0xff, 0xff, LAYER_OPAQUE            },
     { MOVTEX_SSL_PYRAMID_CORNER,         TEX_QUICKSAND_SSL,    16, ssl_movtex_tris_pyramid_corners_quicksand,  ssl_dl_quicksand_begin,                  ssl_dl_quicksand_end,                  ssl_dl_pyramid_corners_quicksand,      0xff, 0xff, 0xff, 0xff, LAYER_OPAQUE            },
     { MOVTEX_SSL_COURSE_EDGE,            TEX_QUICKSAND_SSL,    15, ssl_movtex_tris_sides_quicksand,            ssl_dl_quicksand_begin,                  ssl_dl_quicksand_end,                  ssl_dl_sides_quicksand,                0xff, 0xff, 0xff, 0xff, LAYER_OPAQUE            },
@@ -242,7 +242,7 @@ struct MovtexObject gMovtexColored[] = {
 /**
  * Treated identically to gMovtexColored.
  */
-struct MovtexObject gMovtexColored2[] = {
+static const struct MovtexObject gMovtexColored2[] = {
     { MOVTEX_SSL_SAND_PIT_OUTSIDE,       TEX_QUICKSAND_SSL,     8, ssl_movtex_tris_quicksand_pit,              ssl_dl_quicksand_pit_begin,              ssl_dl_quicksand_pit_end,              ssl_dl_quicksand_pit,                  0xff, 0xff, 0xff, 0xff, LAYER_OPAQUE            },
     { MOVTEX_SSL_SAND_PIT_PYRAMID,       TEX_PYRAMID_SAND_SSL,  8, ssl_movtex_tris_pyramid_quicksand_pit,      ssl_dl_pyramid_quicksand_pit_begin,      ssl_dl_pyramid_quicksand_pit_end,      ssl_dl_quicksand_pit,                  0xff, 0xff, 0xff, 0xff, LAYER_OPAQUE            },
     { 0x00000000,                        TEXTURE_WATER,         0, NULL,                                       NULL,                                    NULL,                                  NULL,                                  0x00, 0x00, 0x00, 0x00, LAYER_FORCE             },
@@ -656,7 +656,7 @@ void update_moving_texture_offset(s16 *movtexVerts, s32 attr) {
  * vertex's coordinates as base on which to apply offset.
  * The first vertex has offset 0 by definition, simplifying the calculations a bit.
  */
-void movtex_write_vertex_first(Vtx *vtx, s16 *movtexVerts, struct MovtexObject *c, s8 attrLayout) {
+void movtex_write_vertex_first(Vtx *vtx, s16 *movtexVerts, const struct MovtexObject *c, s8 attrLayout) {
     Vec3s pos;
     vec3s_copy(pos, &movtexVerts[MOVTEX_ATTR_POS_INDEX]);
     u8 alpha = c->a;
@@ -683,7 +683,7 @@ void movtex_write_vertex_first(Vtx *vtx, s16 *movtexVerts, struct MovtexObject *
  * movtex_write_vertex_first and subsequent vertices use vertex 0 as a base
  * for their texture coordinates.
  */
-void movtex_write_vertex_index(Vtx *verts, s32 index, s16 *movtexVerts, struct MovtexObject *d, s8 attrLayout) {
+void movtex_write_vertex_index(Vtx *verts, s32 index, s16 *movtexVerts, const struct MovtexObject *d, s8 attrLayout) {
     u8 alpha = d->a;
     Vec3s pos;
     s16 baseS, baseT;
@@ -723,7 +723,7 @@ void movtex_write_vertex_index(Vtx *verts, s32 index, s16 *movtexVerts, struct M
  * Generate a displaylist for a MovtexObject.
  * 'attrLayout' is one of MOVTEX_LAYOUT_NOCOLOR and MOVTEX_LAYOUT_COLORED.
  */
-Gfx *movtex_gen_list(s16 *movtexVerts, struct MovtexObject *movtexList, s8 attrLayout) {
+Gfx *movtex_gen_list(s16 *movtexVerts, const struct MovtexObject *movtexList, s8 attrLayout) {
     Vtx *verts = alloc_display_list(movtexList->vtx_count * sizeof(*verts));
     Gfx *gfxHead = alloc_display_list(11 * sizeof(*gfxHead));
     Gfx *gfx = gfxHead;

@@ -1,6 +1,6 @@
 // strong_wind_particle.inc.c
 
-struct ObjectHitbox sStrongWindParticleHitbox = {
+static const struct ObjectHitbox sStrongWindParticleHitbox = {
     /* interactType:      */ INTERACT_STRONG_WIND,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,

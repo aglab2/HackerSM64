@@ -315,8 +315,8 @@ struct GraphNodeScale *init_graph_node_scale(s32 alloc,
  */
 struct GraphNodeObject *init_graph_node_object(s32 alloc,
                                                struct GraphNodeObject *graphNode,
-                                               struct GraphNode *sharedChild, Vec3f pos, Vec3s angle,
-                                               Vec3f scale) {
+                                               struct GraphNode *sharedChild, const Vec3f pos, const Vec3s angle,
+                                               const Vec3f scale) {
     if (alloc) {
         graphNode = main_pool_alloc(sizeof(struct GraphNodeObject));
     }

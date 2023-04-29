@@ -78,7 +78,7 @@ void bullet_bill_act_4(void) {
     }
 }
 
-ObjActionFunc sBulletBillActions[] = {
+static const ObjActionFunc sBulletBillActions[] = {
     bullet_bill_act_0,
     bullet_bill_act_1,
     bullet_bill_act_2,

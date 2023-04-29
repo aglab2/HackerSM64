@@ -28,7 +28,7 @@
 #include "spawn_sound.h"
 #include "puppylights.h"
 
-static s8 sLevelsWithRooms[] = { LEVEL_BBH, LEVEL_CASTLE, LEVEL_HMC, -1 };
+static const s8 sLevelsWithRooms[] = { LEVEL_BBH, LEVEL_CASTLE, LEVEL_HMC, -1 };
 
 static s32 clear_move_flag(u32 *bitSet, s32 flag);
 
@@ -397,7 +397,7 @@ struct Object *spawn_obj_with_transform_flags(struct Object *parent, ModelID32 m
     return newObj;
 }
 
-struct Object *spawn_water_droplet(struct Object *parent, struct WaterDropletParams *params) {
+struct Object *spawn_water_droplet(struct Object *parent, const struct WaterDropletParams *params) {
     struct Object *newObj = spawn_object(parent, params->model, params->behavior);
 
     if (params->flags & WATER_DROPLET_FLAG_RAND_ANGLE) {
@@ -1719,7 +1719,7 @@ s32 cur_obj_reflect_move_angle_off_wall(void) {
     return (s16)(o->oWallAngle - ((s16) o->oMoveAngleYaw - (s16) o->oWallAngle) + 0x8000);
 }
 
-void cur_obj_spawn_particles(struct SpawnParticlesInfo *info) {
+void cur_obj_spawn_particles(const struct SpawnParticlesInfo *info) {
     struct Object *particle;
     s32 i;
     f32 scale;
@@ -1754,7 +1754,7 @@ void cur_obj_spawn_particles(struct SpawnParticlesInfo *info) {
     }
 }
 
-void obj_set_hitbox(struct Object *obj, struct ObjectHitbox *hitbox) {
+void obj_set_hitbox(struct Object *obj, const struct ObjectHitbox *hitbox) {
     if (!(obj->oFlags & OBJ_FLAG_HITBOX_WAS_SET)) {
         obj->oFlags |= OBJ_FLAG_HITBOX_WAS_SET;
 
@@ -1838,7 +1838,7 @@ void bhv_dust_smoke_loop(void) {
     o->oSmokeTimer++;
 }
 
-s32 cur_obj_set_direction_table(s8 *pattern) {
+s32 cur_obj_set_direction_table(const s8 *pattern) {
     o->oToxBoxMovementPattern = pattern;
     o->oToxBoxMovementStep = 0;
 
@@ -1899,7 +1899,7 @@ s32 cur_obj_shake_y_until(s32 cycles, s32 amount) {
     return o->oTimer == cycles * 2;
 }
 
-void cur_obj_call_action_function(ObjActionFunc actionFunctions[]) {
+void cur_obj_call_action_function(const ObjActionFunc actionFunctions[]) {
     ObjActionFunc actionFunction = actionFunctions[o->oAction];
     actionFunction();
 }
@@ -1918,7 +1918,7 @@ s32 is_mario_moving_fast_or_in_air(s32 speedThreshold) {
     );
 }
 
-s32 is_item_in_array(s8 item, s8 *array) {
+s32 is_item_in_array(s8 item, const s8 *array) {
     while (*array != -1) {
         if (*array == item) {
             return TRUE;
@@ -1963,7 +1963,7 @@ void cur_obj_enable_rendering_if_mario_in_room(void) {
     }
 }
 
-s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deathSound, s32 noLootCoins) {
+s32 cur_obj_set_hitbox_and_die_if_attacked(const struct ObjectHitbox *hitbox, s32 deathSound, s32 noLootCoins) {
     s32 interacted = FALSE;
 
     obj_set_hitbox(o, hitbox);

@@ -1,6 +1,6 @@
 // mad_piano.inc.c
 
-static struct ObjectHitbox sMadPianoHitbox = {
+static const struct ObjectHitbox sMadPianoHitbox = {
     /* interactType:      */ INTERACT_MR_BLIZZARD,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 3,

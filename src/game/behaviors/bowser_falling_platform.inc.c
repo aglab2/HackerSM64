@@ -7,7 +7,7 @@ struct BowserFallingPlatformData {
     s16 angle;
 };
 
-struct BowserFallingPlatformData sBowserFallingPlatform[] = {
+static const struct BowserFallingPlatformData sBowserFallingPlatform[] = {
     { NULL, 0, 0, 0 },
     { bowser_3_seg7_collision_07004B94,  -800, -1000, -20992 },
     { bowser_3_seg7_collision_07004C18, -1158,   390, -18432 },
@@ -91,7 +91,7 @@ void falling_bowser_plat_act_fall(void) {
     }
 }
 
-ObjActionFunc sFallingBowserPlatformActions[] = {
+static const ObjActionFunc sFallingBowserPlatformActions[] = {
     falling_bowser_plat_act_start,
     falling_bowser_plat_act_check,
     falling_bowser_plat_act_fall,
