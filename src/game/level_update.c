@@ -677,6 +677,7 @@ void initiate_painting_warp(void) {
  * based on the warp operation and sometimes Mario's used object.
  * Return the time left until the delayed warp is initiated.
  */
+extern s32 gSawSillyWilly;
 s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
     s32 fadeMusic = TRUE;
 
@@ -748,7 +749,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                     if (gMarioStates->pos[1] > 4500.f)
                        sSourceWarpNodeId = 0x32;
                     if (gMarioStates->pos[1] > 6000.f)
-                       sSourceWarpNodeId = 0x31;
+                       sSourceWarpNodeId = gSawSillyWilly ? 0x31 : 0x30;
                     if (gMarioStates->pos[1] > 9500.f)
                        sSourceWarpNodeId = 0x30;
                 }

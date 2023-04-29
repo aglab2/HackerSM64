@@ -6321,11 +6321,13 @@ const BehaviorScript bhvTrimo2[] = {
     END_LOOP(),
 };
 
+extern void bhv_silly_willy_init();
 extern void bhv_silly_willy_loop();
 const BehaviorScript bhvSillyWilly[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
     SET_HOME(),
+    CALL_NATIVE(bhv_silly_willy_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_silly_willy_loop),
     END_LOOP(),

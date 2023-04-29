@@ -803,6 +803,12 @@ void bhv_trimo_loop2()
 
 extern const Trajectory pss_area_1_spline_sillycurve[];
 s32 gSillyWilly = 0;
+s32 gSawSillyWilly = 0;
+void bhv_silly_willy_init()
+{
+    gSawSillyWilly = 0;
+}
+
 void bhv_silly_willy_loop()
 {
     gSillyWilly = o->oAction ? 1 + (o->oPathedPrevWaypoint - o->oPathedStartWaypoint) : 0;
@@ -811,6 +817,7 @@ void bhv_silly_willy_loop()
     {
         if (o->oDistanceToMario < 500.f)
         {
+            gSawSillyWilly = 1;
             o->oAction = 1;
             o->oPathedPrevWaypointFlags = 0;
             struct Waypoint* path = segmented_to_virtual(pss_area_1_spline_sillycurve);
