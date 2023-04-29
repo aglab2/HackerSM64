@@ -19,6 +19,7 @@
 #endif
 #include "game/puppyprint.h"
 #include "game/puppylights.h"
+#include "hacktice/savestate.h"
 
 // Message IDs
 enum MessageIDs {
@@ -305,6 +306,8 @@ void thread3_main(UNUSED void *arg) {
 #ifdef UNF
     debug_initialize();
 #endif
+
+    SaveState_Init();
 
 #ifdef DEBUG
     osSyncPrintf("Super Mario 64\n");

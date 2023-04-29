@@ -13,10 +13,15 @@
 void set_play_mode(s16 playMode);
 
 #ifdef BINARY
+#define Hacktice_gState ((State*) 0x80026000)
+#else
+static State* Hacktice_gState = NULL;
+#endif
+
+#ifdef BINARY
 static u8* _hackticeStateDataStart = (u8*) &gMarioStates;
 static u8* _hackticeStateDataEnd = ((u8*) &gMarioStates) + 0x26B28;
 #else
-State Hacktice_gState[1];
 extern u8 _hackticeStateDataStart[];
 extern u8 _hackticeStateDataEnd[];
 #endif
@@ -71,3 +76,13 @@ void SaveState_onPause()
         TextManager_addLine("STATE SET", 30);
     }
 }
+
+#ifndef BINARY
+#include "status.h"
+
+void SaveState_Init()
+{
+    Hacktice_gState = main_pool_alloc(sizeof(State) + _hackticeStateDataEnd - _hackticeStateDataStart);
+    HackticeSetSaveState((uintptr_t) Hacktice_gState);
+}
+#endif

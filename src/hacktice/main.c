@@ -73,7 +73,9 @@ uintptr_t Hacktice_start[] = {
 #undef HACKTICE_VERSION
     HACKTICE_STATUS_INIT,
     (uintptr_t) &Hacktice_gConfig,
-    (uintptr_t) Hacktice_gState,
+    // some version of hacktice UI assume this is valid vptr
+    // on decomp this will be overwritten with an actual value
+    0x80026000,
     (uintptr_t) LevelReset_onSpawnObjectsFromInfoHook,
 #ifdef BINARY
     (uintptr_t) LevelReset_setObjectRespawnInfoBits,
