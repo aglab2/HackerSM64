@@ -587,7 +587,7 @@ void kill_inputs()
 
 static void kill_z_cam()
 {
-    gControllers[0].controllerData->button &= ~(Z_TRIG | L_CBUTTONS | R_CBUTTONS | D_JPAD | U_JPAD | L_JPAD | R_JPAD);
+    gControllers[0].controllerData->button &= ~(R_TRIG | Z_TRIG | L_CBUTTONS | R_CBUTTONS | D_JPAD | U_JPAD | L_JPAD | R_JPAD);
 }
 
 /**
