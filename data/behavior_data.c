@@ -5891,9 +5891,9 @@ const BehaviorScript bhvPenguinRaceFinishLine[] = {
 
 const BehaviorScript bhvPenguinRaceShortcutCheck[] = {
     BEGIN(OBJ_LIST_DEFAULT),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_penguin_race_shortcut_check_update),
+        // CALL_NATIVE(bhv_penguin_race_shortcut_check_update),
     END_LOOP(),
 };
 
