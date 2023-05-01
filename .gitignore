@@ -1824,7 +1824,6 @@ textures/segment2/segment2.05400.rgba16.png
 textures/segment2/segment2.05600.rgba16.png
 textures/segment2/segment2.05800.rgba16.png
 textures/segment2/segment2.05A00.rgba16.png
-textures/segment2/segment2.05C00.rgba16.png
 textures/segment2/segment2.05E00.rgba16.png
 textures/segment2/segment2.06000.rgba16.png
 textures/segment2/segment2.06200.rgba16.png
@@ -2144,3 +2143,6 @@ lib/libs2d_engine.a
 
 # :Zone_Identifier files
 *Zone.Identifier
+
+*Thumbs.db
+*Thumbs.db:encryptable
