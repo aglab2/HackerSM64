@@ -9,6 +9,7 @@
 #include "dialog_ids.h"
 
 #include "make_const_nonconst.h"
+#if 0
 #include "levels/wf/texture.inc.c"
 #include "levels/wf/areas/1/1/model.inc.c"
 #include "levels/wf/areas/1/2/model.inc.c"
@@ -50,6 +51,7 @@
 #include "levels/wf/kickable_board/1.inc.c"
 #include "levels/wf/kickable_board/2.inc.c"
 #include "levels/wf/tower_door/model.inc.c"
+#endif
 #include "levels/wf/small_bomp/collision.inc.c"
 #include "levels/wf/large_bomp/collision.inc.c"
 #include "levels/wf/rotating_wooden_platform/collision.inc.c"
@@ -67,3 +69,7 @@
 #include "levels/wf/areas/1/collision.inc.c"
 #include "levels/wf/areas/1/macro.inc.c"
 #include "levels/wf/areas/1/movtext.inc.c"
+#include "levels/wf/grate_door/model.inc.c"
+#include "levels/wf/grate_door/collision.inc.c"
+
+#include "levels/wf/leveldata.inc.c"
