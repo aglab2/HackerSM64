@@ -87,6 +87,7 @@ const LevelScript level_cotmc_entry[] = {
 		OBJECT(23, -1210, 2378, 299, 0, 0, 0, 0x0, bhvTree),
 		TERRAIN(cotmc_area_1_collision),
 		MACRO_OBJECTS(cotmc_area_1_macro_objs),
+        SHOW_DIALOG(/*index*/ 0x00, 0),
 		SET_BACKGROUND_MUSIC(0x00, 17),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */

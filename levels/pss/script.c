@@ -87,6 +87,7 @@ const LevelScript level_pss_entry[] = {
 		OBJECT(122, 12, 5610, 0, 0, 0, 0, 0x0, bhvStar),
 		TERRAIN(pss_area_1_collision),
 		MACRO_OBJECTS(pss_area_1_macro_objs),
+        SHOW_DIALOG(/*index*/ 0x00, 0),
 		SET_BACKGROUND_MUSIC(0x00, 12),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
