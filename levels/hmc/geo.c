@@ -13,7 +13,6 @@
 
 #include "levels/hmc/header.h"
 
-#include "levels/hmc/grill_door/geo.inc.c"
 #include "levels/hmc/rolling_rock/geo.inc.c"
 #include "levels/hmc/rolling_rock_fragment_1/geo.inc.c"
 #include "levels/hmc/rolling_rock_fragment_2/geo.inc.c"

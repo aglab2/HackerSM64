@@ -13,7 +13,11 @@
 
 #include "levels/castle_courtyard/header.h"
 
+#if 0
 #include "levels/castle_courtyard/areas/1/spire/geo.inc.c"
 #include "levels/castle_courtyard/areas/1/geo.inc.c"
+#endif
+
+#include "levels/castle_courtyard/grill_door/geo.inc.c"
 
 #include "levels/castle_courtyard/geo.inc.c"

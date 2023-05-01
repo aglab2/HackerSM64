@@ -7,11 +7,6 @@ const GeoLayout castle_courtyard_area_1_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, castle_courtyard_dl_DL_castle_courtyard_1_0xe0109c0_Obj_mesh_layer_5),
 		GEO_CLOSE_NODE(),
-		GEO_ASM(0, geo_envfx_main),
-		GEO_ASM(20480, geo_movtex_draw_water_regions),
-		GEO_ASM(20481, geo_movtex_draw_water_regions),
-		GEO_ASM(20482, geo_movtex_draw_water_regions),
-		GEO_ASM(0, geo_cannon_circle_base),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -17,6 +17,10 @@ extern const Collision castle_courtyard_seg7_collision[];
 extern const MacroObject castle_courtyard_seg7_macro_objs[];
 extern const struct MovtexQuadCollection castle_courtyard_movtex_star_statue_water[];
 
+extern const Collision hmc_seg7_collision_grill_door[];
+extern const Gfx hmc_seg7_dl_0701FFF8[];
+extern const GeoLayout hmc_geo_000530[];
+
 // script
 extern const LevelScript level_castle_courtyard_entry[];
 

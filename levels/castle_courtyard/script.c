@@ -26,7 +26,7 @@ const LevelScript level_castle_courtyard_entry[] = {
 	INIT_LEVEL(),
 	LOAD_YAY0(0x07, _castle_courtyard_segment_7SegmentRomStart, _castle_courtyard_segment_7SegmentRomEnd), 
 	LOAD_YAY0(0x0A, _water_skybox_yay0SegmentRomStart, _water_skybox_yay0SegmentRomEnd), 
-	LOAD_YAY0_TEXTURE(0x09, _outside_yay0SegmentRomStart, _outside_yay0SegmentRomEnd), 
+	LOAD_YAY0_TEXTURE(0x09, _generic_yay0SegmentRomStart, _generic_yay0SegmentRomEnd), 
 	LOAD_YAY0(0x05, _group9_yay0SegmentRomStart, _group9_yay0SegmentRomEnd), 
 	LOAD_RAW(0x0C, _group9_geoSegmentRomStart, _group9_geoSegmentRomEnd), 
 	LOAD_YAY0(0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd), 
@@ -39,7 +39,8 @@ const LevelScript level_castle_courtyard_entry[] = {
 	JUMP_LINK(script_func_global_10), 
 	LOAD_MODEL_FROM_GEO(MODEL_COURTYARD_SPIKY_TREE, spiky_tree_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_COURTYARD_WOODEN_DOOR, wooden_door_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, castle_courtyard_geo_000200), 
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_BUBBLY_TREE,  bubbly_tree_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, hmc_geo_000530), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -64,7 +65,7 @@ const LevelScript level_castle_courtyard_entry[] = {
 		OBJECT(137, -476, 300, -340, 0, 33, 0, 0x10000, bhvExclamationBox),
 		OBJECT(137, -661, 300, -221, 0, 33, 0, 0x20000, bhvExclamationBox),
 		OBJECT(207, 2113, -459, 906, 0, -90, 0, 0x0, bhvFloorSwitchGrills),
-		OBJECT(0, -1831, 165, 2071, 0, 0, 0, 0x0, bhvOpenableGrill),
+		OBJECT(0, -1831, 165, 2071, 0, 0, 0, 0x1 << 16, bhvOpenableGrill),
 		OBJECT(0, 1573, 360, -1035, 0, 44, 0, 0x8e0000, bhvPaintingDeathWarp),
 		OBJECT(0, -2415, 660, -1947, 0, -180, 0, 0x980000, bhvPaintingDeathWarp),
 		OBJECT(0, -1259, 420, 66, 0, -18, 0, 0xf10000, bhvPaintingDeathWarp),
