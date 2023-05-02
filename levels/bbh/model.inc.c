@@ -17399,7 +17399,6 @@ Gfx mat_bbh_dl_SM64_DL_bbh_1_0xe025b30_F3D_Mat_28[] = {
 Gfx mat_bbh_dl_SM64_DL_bbh_1_0xe02ab18_F3D_Mat_0[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0),
-	gsSPClearGeometryMode(G_CULL_BACK),
 	gsDPSetAlphaDither(G_AD_DISABLE),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
@@ -17415,7 +17414,6 @@ Gfx mat_bbh_dl_SM64_DL_bbh_1_0xe02ab18_F3D_Mat_0[] = {
 
 Gfx mat_revert_bbh_dl_SM64_DL_bbh_1_0xe02ab18_F3D_Mat_0[] = {
 	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_CULL_BACK),
 	gsDPSetAlphaDither(G_AD_NOISE),
 	gsSPEndDisplayList(),
 };
