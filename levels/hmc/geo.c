@@ -13,6 +13,7 @@
 
 #include "levels/hmc/header.h"
 
+#if 0
 #include "levels/hmc/rolling_rock/geo.inc.c"
 #include "levels/hmc/rolling_rock_fragment_1/geo.inc.c"
 #include "levels/hmc/rolling_rock_fragment_2/geo.inc.c"
@@ -20,3 +21,8 @@
 #include "levels/hmc/arrow_platform_button/geo.inc.c"
 #include "levels/hmc/elevator_platform/geo.inc.c"
 #include "levels/hmc/areas/1/geo.inc.c"
+#endif
+
+#include "levels/hmc/sinking_rock_block/geo.inc.c"
+
+#include "levels/hmc/geo.inc.c"

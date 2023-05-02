@@ -37,7 +37,6 @@
 #include "levels/lll/sinking_square_platform/geo.inc.c"
 #include "levels/lll/tilting_square_platform/geo.inc.c"
 #include "levels/lll/puzzle_piece/geo.inc.c"
-#include "levels/lll/sinking_rock_block/geo.inc.c"
 #include "levels/lll/rolling_log/geo.inc.c"
 #include "levels/lll/areas/1/geo.inc.c"
 #include "levels/lll/volcano_falling_trap/geo.inc.c"

@@ -91,7 +91,6 @@ extern const Gfx lll_seg7_dl_bowser_puzzle_piece_12[];
 extern const Gfx lll_seg7_dl_bowser_puzzle_piece_13[];
 extern const Gfx lll_seg7_dl_bowser_puzzle_piece_14[];
 extern const Gfx lll_seg7_dl_bowser_puzzle_piece_shadow[];
-extern const Gfx lll_seg7_dl_0701A878[];
 extern const Gfx lll_seg7_dl_0701AD70[];
 extern const Collision lll_seg7_area_1_collision[];
 extern const MacroObject lll_seg7_area_1_macro_objs[];

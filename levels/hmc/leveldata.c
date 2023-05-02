@@ -9,6 +9,7 @@
 #include "dialog_ids.h"
 
 #include "make_const_nonconst.h"
+#if 0
 #include "levels/hmc/texture.inc.c"
 #include "levels/hmc/areas/1/1/model.inc.c"
 #include "levels/hmc/areas/1/2/model.inc.c"
@@ -48,6 +49,7 @@
 #include "levels/hmc/rolling_rock/model.inc.c"
 #include "levels/hmc/rolling_rock_fragment_1/model.inc.c"
 #include "levels/hmc/rolling_rock_fragment_2/model.inc.c"
+#endif
 #include "levels/hmc/areas/1/painting.inc.c"
 #include "levels/hmc/areas/1/collision.inc.c"
 #include "levels/hmc/areas/1/macro.inc.c"
@@ -57,3 +59,7 @@
 #include "levels/hmc/arrow_platform_button/collision.inc.c"
 #include "levels/hmc/areas/1/trajectory.inc.c"
 #include "levels/hmc/areas/1/movtext.inc.c"
+#include "levels/hmc/sinking_rock_block/model.inc.c"
+#include "levels/hmc/sinking_rock_block/collision.inc.c"
+
+#include "levels/hmc/leveldata.inc.c"
