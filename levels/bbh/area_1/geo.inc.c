@@ -35,7 +35,6 @@ const GeoLayout bbh_area_1_geo[] = {
 		GEO_CULL(500, 32000, -32000, 32000, -32000, 400, 1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_5),
-			GEO_DISPLAY_LIST(LAYER_ALPHA, bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_4),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bbh_dl_DL_bbh_1_0xe02b028_Obj_mesh_layer_4),
