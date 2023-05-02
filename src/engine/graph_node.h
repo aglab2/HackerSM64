@@ -356,13 +356,14 @@ struct GraphNodeCullingRadius {
 };
 
 struct GraphNodeCull {
-    /*0x00*/ struct GraphNode node;
+    struct GraphNode node;
     /*0x14*/ s16 x0;
-    /*0x16*/ s16 x1;
-    /*0x14*/ s16 y0;
-    /*0x16*/ s16 y1;
-    /*0x14*/ s16 z0;
-    /*0x16*/ s16 z1;
+    s16 x1;
+    s16 y0;
+    s16 y1;
+    s16 z0;
+    s16 z1;
+    s16 style;
 };
 
 extern struct GraphNodeMasterList  *gCurGraphNodeMasterList;
@@ -392,7 +393,7 @@ struct GraphNodeTranslation         *init_graph_node_translation         (s32 al
 struct GraphNodeRotation            *init_graph_node_rotation            (s32 alloc, struct GraphNodeRotation            *graphNode, s32 drawingLayer, void *displayList, Vec3s rotation);
 struct GraphNodeScale               *init_graph_node_scale               (s32 alloc, struct GraphNodeScale               *graphNode, s32 drawingLayer, void *displayList, f32 scale);
 struct GraphNodeObject              *init_graph_node_object              (s32 alloc, struct GraphNodeObject              *graphNode, struct GraphNode *sharedChild, Vec3f pos, Vec3s angle, Vec3f scale);
-struct GraphNodeCull                *init_graph_node_cull                (s32 alloc, struct GraphNodeCull                *graphNode, s16 x0, s16 x1, s16 y0, s16 y1, s16 z0, s16 z1);
+struct GraphNodeCull                *init_graph_node_cull                (s32 alloc, struct GraphNodeCull                *graphNode, s16 x0, s16 x1, s16 y0, s16 y1, s16 z0, s16 z1, s16 style);
 struct GraphNodeCullingRadius       *init_graph_node_culling_radius      (s32 alloc, struct GraphNodeCullingRadius       *graphNode, s16 radius);
 struct GraphNodeAnimatedPart        *init_graph_node_animated_part       (s32 alloc, struct GraphNodeAnimatedPart        *graphNode, s32 drawingLayer, void *displayList, Vec3s translation);
 struct GraphNodeBone                *init_graph_node_bone                (s32 alloc, struct GraphNodeBone                *graphNode, s32 drawingLayer, void *displayList, Vec3s translation, Vec3s rotation);

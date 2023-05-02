@@ -152,7 +152,7 @@ struct GraphNodeCull* init_graph_node_cull(s32 alloc,
                                            struct GraphNodeCull *graphNode,
                                            s16 x0, s16 x1,
                                            s16 y0, s16 y1,
-                                           s16 z0, s16 z1)
+                                           s16 z0, s16 z1, s16 style)
 {
     if (alloc) {
         graphNode = main_pool_alloc(sizeof(struct GraphNodeCull));
@@ -166,6 +166,7 @@ struct GraphNodeCull* init_graph_node_cull(s32 alloc,
         graphNode->y1 = y1;
         graphNode->z0 = z0;
         graphNode->z1 = z1;
+        graphNode->style = style;
     }
 
     return graphNode;

@@ -143,14 +143,8 @@ static void level_cmd_sleep(void) {
 }
 
 static void level_cmd_sleep2(void) {
-    sScriptStatus = SCRIPT_PAUSED2;
-
-    if (sDelayFrames2 == 0) {
-        sDelayFrames2 = CMD_GET(s16, 2);
-    } else if (--sDelayFrames2 == 0) {
-        sCurrentCmd = CMD_NEXT;
-        sScriptStatus = SCRIPT_RUNNING;
-    }
+    sCurrentCmd = CMD_NEXT;
+    sScriptStatus = SCRIPT_RUNNING;
 }
 
 static void level_cmd_jump(void) {

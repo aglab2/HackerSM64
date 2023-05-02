@@ -60,7 +60,7 @@ void geo_layout_cmd_node_root(void);
 void geo_layout_cmd_node_ortho_projection(void);
 void geo_layout_cmd_node_perspective(void);
 void geo_layout_cmd_node_start(void);
-void geo_layout_cmd_nop3(void);
+void geo_layout_cmd_node_cull(void);
 void geo_layout_cmd_node_master_list(void);
 void geo_layout_cmd_node_level_of_detail(void);
 void geo_layout_cmd_node_switch_case(void);

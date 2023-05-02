@@ -83,7 +83,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
 
             if (parameter != GEO_TRANSPARENCY_MODE_NO_DITHER
                 && (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA)) {
-                gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
+                // gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
             }
         }
         gDPSetEnvColor(dlHead++, 255, 255, 255, objectOpacity);
