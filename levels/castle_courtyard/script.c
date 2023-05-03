@@ -43,7 +43,7 @@ const LevelScript level_castle_courtyard_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_COURTYARD_SPIKY_TREE, spiky_tree_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_COURTYARD_WOODEN_DOOR, wooden_door_geo), 
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_BUBBLY_TREE,  bubbly_tree_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_BUBBLY_TREE, bubbly_tree_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, hmc_geo_000530), 
 
 	/* Fast64 begin persistent block [level commands] */
