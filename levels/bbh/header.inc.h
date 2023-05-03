@@ -145,9 +145,9 @@ extern Vtx bbh_dl_DL_bbh_1_0xe025b30_Obj_004_mesh_layer_1_vtx_1[100] __attribute
 extern Gfx bbh_dl_DL_bbh_1_0xe025b30_Obj_004_mesh_layer_1_tri_1[] __attribute__((section(".data")));
 extern Vtx bbh_dl_DL_bbh_1_0xe025b30_Obj_004_mesh_layer_1_vtx_2[16] __attribute__((section(".data")));
 extern Gfx bbh_dl_DL_bbh_1_0xe025b30_Obj_004_mesh_layer_1_tri_2[] __attribute__((section(".data")));
-extern Vtx bbh_dl_DL_bbh_1_0xe02ab18_Obj_mesh_layer_5_vtx_0[96] __attribute__((section(".data")));
+extern Vtx bbh_dl_DL_bbh_1_0xe02ab18_Obj_mesh_layer_5_vtx_0[866] __attribute__((section(".data")));
 extern Gfx bbh_dl_DL_bbh_1_0xe02ab18_Obj_mesh_layer_5_tri_0[] __attribute__((section(".data")));
-extern Vtx bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_5_vtx_0[130] __attribute__((section(".data")));
+extern Vtx bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_5_vtx_0[314] __attribute__((section(".data")));
 extern Gfx bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_5_vtx_1[8] __attribute__((section(".data")));
 extern Gfx bbh_dl_DL_bbh_1_0xe02ab18_Obj_001_mesh_layer_5_tri_1[] __attribute__((section(".data")));
