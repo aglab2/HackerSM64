@@ -5,11 +5,6 @@ const GeoLayout lll_area_1_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, lll_dl_DL_lll_1_0xe039f40_Obj_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, lll_dl_DL_lll_1_0xe047610_Obj_mesh_layer_5),
-		GEO_ASM(0, geo_envfx_main),
-		GEO_ASM(20480, geo_movtex_draw_water_regions),
-		GEO_ASM(20481, geo_movtex_draw_water_regions),
-		GEO_ASM(20482, geo_movtex_draw_water_regions),
-		GEO_ASM(0, geo_cannon_circle_base),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

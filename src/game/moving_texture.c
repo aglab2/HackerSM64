@@ -571,6 +571,7 @@ void movtex_change_texture_format(u32 quadCollectionId, Gfx **gfx) {
  * collection is drawn, see moving_texture.h.
  */
 Gfx *geo_movtex_draw_water_regions(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx) {
+    return NULL;
     Gfx *gfxHead = NULL;
     Gfx *gfx = NULL;
     Gfx *subList;

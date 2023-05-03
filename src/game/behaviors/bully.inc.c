@@ -197,14 +197,7 @@ void bully_act_level_death(void) {
             bully_spawn_coin();
         } else {
             spawn_mist_particles();
-
-            if (o->oBullySubtype == BULLY_STYPE_CHILL) {
-                spawn_default_star(130.0f, 1600.0f, -4335.0f);
-            } else {
-                spawn_default_star(0, 950.0f, -6800.0f);
-                spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvLllTumblingBridge,
-                                          0, 154, -5631, 0, 0, 0);
-            }
+            spawn_default_star(-1700.0f, -3000.0f, -326.0f);
         }
     }
 }
@@ -279,7 +272,7 @@ void bhv_big_bully_with_minions_init(void) {
 void big_bully_spawn_star(void) {
     if (obj_lava_death() == TRUE) {
         spawn_mist_particles();
-        spawn_default_star(3700.0f, 600.0f, -5500.0f);
+        spawn_default_star(-1700.0f, -3000.0f, -326.0f);
     }
 }
 
