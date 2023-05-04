@@ -69,8 +69,8 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
         } else {
             if (parameter == GEO_TRANSPARENCY_MODE_DECAL) {
                 SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_DECAL);
-            } else if (parameter == GEO_TRANSPARENCY_MODE_INTER) {
-                SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT_INTER);
+            } else if (parameter == GEO_TRANSPARENCY_MODE_MIST) {
+                SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_MIST);
             } else {
                 SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT);
             }
