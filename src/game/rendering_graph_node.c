@@ -490,12 +490,14 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
 
             if (LAYER_RED_FLAME == currLayer)
             {
-                startDl = sRedFlameTextureDls[frame];
+                int flFrame = (gGlobalTimer / 2) % 8;
+                startDl = sRedFlameTextureDls[flFrame];
                 endDl = flame_seg3_dl_end;
             }
             if (LAYER_BLUE_FLAME == currLayer)
             {
-                startDl = sBlueFlameTextureDls[frame];
+                int flFrame = (gGlobalTimer / 2) % 8;
+                startDl = sBlueFlameTextureDls[flFrame];
                 endDl = flame_seg3_dl_end;
             }
 
@@ -735,7 +737,10 @@ void geo_process_cull(struct GraphNodeCull* node)
                 && node->z0 < gMarioStates->pos[2] && gMarioStates->pos[2] < node->z1;
     }
 
-    if ((active ^ node->style) && node->node.children != 0) {
+    if (gMarioStates->floor && gMarioStates->floor->type == SURFACE_HARD && (2 & node->style))
+        return;
+
+    if ((active ^ (1 & node->style)) && node->node.children != 0) {
         geo_process_node_and_siblings(node->node.children);
     }
 }
