@@ -66,7 +66,7 @@ void tuxies_mother_act_receiving_baby(void) {
             if (o->prevObj->oHeldState == HELD_FREE) {
                 o->prevObj->oInteractionSubtype &= ~INT_SUBTYPE_DROP_IMMEDIATELY;
                 obj_set_behavior(o->prevObj, bhvSmallPenguinReturned);
-                cur_obj_spawn_star_at_y_offset(-767.0f, 433.0f, -592.0f, 200.0f);
+                cur_obj_spawn_star_at_y_offset(-792.0f, 570.0f, -627.0f, 200.0f);
                 o->oAction = MOTHER_PENGUIN_SUB_ACT_WRONG_BABY;
             }
             break;

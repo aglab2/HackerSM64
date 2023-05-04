@@ -197,7 +197,7 @@ void bully_act_level_death(void) {
             bully_spawn_coin();
         } else {
             spawn_mist_particles();
-            spawn_default_star(-1700.0f, -3000.0f, -326.0f);
+            spawn_default_star(-1612.0f, -2900.0f, -340.0f);
         }
     }
 }
