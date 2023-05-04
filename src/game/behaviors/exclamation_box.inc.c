@@ -160,7 +160,10 @@ ObjActionFunc sExclamationBoxActions[] = {
     exclamation_box_act_wait_for_respawn,
 };
 
-void bhv_exclamation_box_loop(void) {
+void bhv_exclamation_box_loop(void) { 
+    if (o->oBehParams2ndByte <= 3)
+        o->oFloor = NULL;
+
     cur_obj_scale(2.0f);
     cur_obj_call_action_function(sExclamationBoxActions);
 }
