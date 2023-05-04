@@ -3413,10 +3413,10 @@ const Gfx intro_seg7_dl_copyright_trademark[] = {
     gsSP2Triangles( 0,  3,  1, 0x0,  0,  2,  3, 0x0),
     gsSP2Triangles( 2,  5,  3, 0x0,  2,  4,  5, 0x0),
     
-    gsDPLoadTextureBlock_4b(intro_seg7_texture_trademark, G_IM_FMT_I, 64, 64, (G_TX_NOMIRROR | G_TX_CLAMP), (G_TX_NOMIRROR | G_TX_CLAMP), 0, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPVertex(intro_seg7_vertex_trademark, 6, 0),
-    gsSP2Triangles( 0,  3,  1, 0x0,  0,  2,  3, 0x0),
-    gsSP2Triangles( 2,  5,  3, 0x0,  2,  4,  5, 0x0),
+    // gsDPLoadTextureBlock_4b(intro_seg7_texture_trademark, G_IM_FMT_I, 64, 64, (G_TX_NOMIRROR | G_TX_CLAMP), (G_TX_NOMIRROR | G_TX_CLAMP), 0, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
+    // gsSPVertex(intro_seg7_vertex_trademark, 6, 0),
+    // gsSP2Triangles( 0,  3,  1, 0x0,  0,  2,  3, 0x0),
+    // gsSP2Triangles( 2,  5,  3, 0x0,  2,  4,  5, 0x0),
 #else
     gsDPLoadTextureBlock(intro_seg7_texture_copyright, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 16, 0, G_TX_CLAMP, G_TX_CLAMP, 7, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPVertex(intro_seg7_vertex_copyright, 4, 0),
@@ -3471,3 +3471,5 @@ const f32 intro_seg7_table_scale_2[] = {
     0.048600f, 0.048600f, 0.012800f, 0.012800f,
     0.012800f, 0.000000f, 0.000000f, 0.000000f,
 };
+
+#include "levels/intro/ldd_intro/model.inc.c"

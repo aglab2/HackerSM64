@@ -79,6 +79,7 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(31, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(212, 960, 160, 1073, 0, 0, 0, 0x0, bhv1Up),
 		OBJECT(0, -201, 64, -997, 0, 0, 0, (0xa << 16), bhvInstantActiveWarp),
+		MARIO_POS(0x01, 0, -201, 64, -995),
 		OBJECT(124, 43, 64, -1121, 0, -60, 0, (54 << 16), bhvMessagePanel),
 		OBJECT(124, -902, 50, -1366, 0, 43, 0, (60 << 16), bhvMessagePanel),
 		OBJECT(124, -1111, 96, -1169, 0, 43, 0, (61 << 16), bhvMessagePanel),
@@ -175,7 +176,7 @@ const LevelScript level_castle_inside_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, 0, 0, 0, 0),
+	MARIO_POS(0x01, 0, -201, 64, -995),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
