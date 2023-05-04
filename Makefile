@@ -462,7 +462,7 @@ ifeq ($(LD), tools/mips64-elf-ld)
 endif
 
 ifeq ($(TARGET_N64),1)
-  TARGET_CFLAGS := -nostdinc -DTARGET_N64 -D_LANGUAGE_C
+  TARGET_CFLAGS := -nostdinc -DTARGET_N64 -D_LANGUAGE_C -mfix4300
   CC_CFLAGS := -fno-builtin
 endif
 
