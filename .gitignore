@@ -139,8 +139,6 @@ actors/bullet_bill/bullet_bill_eye.rgba16.png
 actors/bullet_bill/bullet_bill_mouth.rgba16.png
 actors/bully/bully_eye.rgba16.png
 actors/bully/bully_horn.rgba16.png
-actors/bully/bully_left_side.rgba16.png
-actors/bully/bully_right_side.rgba16.png
 actors/burn_smoke/burn_smoke.ia16.png
 actors/butterfly/butterfly_wing.rgba16.png
 actors/cannon_barrel/cannon_barrel.rgba16.png
@@ -259,8 +257,6 @@ actors/king_bobomb/king_bob-omb_crown_rim.rgba16.png
 actors/king_bobomb/king_bob-omb_eyes.rgba16.png
 actors/king_bobomb/king_bob-omb_eyes_blink.rgba16.png
 actors/king_bobomb/king_bob-omb_hand.rgba16.png
-actors/king_bobomb/king_bob-omb_left_side.rgba16.png
-actors/king_bobomb/king_bob-omb_right_side.rgba16.png
 actors/klepto/klepto_beak.rgba16.png
 actors/klepto/klepto_chest_tuft.rgba16.png
 actors/klepto/klepto_eye.rgba16.png
@@ -489,7 +485,6 @@ actors/whirlpool/whirlpool.ia16.png
 actors/white_particle/snow_particle.rgba16.png
 actors/white_particle_small/small_snow_particle.rgba16.png
 actors/whomp/whomp_back.rgba16.png
-actors/whomp/whomp_face.rgba16.png
 actors/whomp/whomp_hand.rgba16.png
 actors/whomp/whomp_surface.rgba16.png
 actors/wiggler/wiggler_eye.rgba16.png
