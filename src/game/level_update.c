@@ -566,6 +566,11 @@ void check_instant_warp(void) {
     }
 }
 
+static s32 is_ow(s16 levelNum)
+{
+    return levelNum == LEVEL_CASTLE || levelNum == LEVEL_CASTLE_COURTYARD || levelNum == LEVEL_CASTLE_GROUNDS;
+}
+
 s16 music_unchanged_through_warp(s16 arg) {
     struct ObjectWarpNode *warpNode = area_get_warp_node(arg);
     s16 levelNum = warpNode->node.destLevel & 0x7F;
@@ -600,6 +605,10 @@ s16 music_unchanged_through_warp(s16 arg) {
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
     }
 #endif
+
+    if (is_ow(gCurrLevelNum) && is_ow(levelNum))
+        return TRUE;
+
     return unchanged;
 }
 
@@ -755,6 +764,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 #endif
                 sDelayedWarpTimer = 48;
                 sSourceWarpNodeId = WARP_NODE_DEATH;
+                fadeMusic = !music_unchanged_through_warp(sSourceWarpNodeId);
                 play_transition(WARP_TRANSITION_FADE_INTO_BOWSER, sDelayedWarpTimer, 0x00, 0x00, 0x00);
                 play_sound(SOUND_MENU_BOWSER_LAUGH, gGlobalSoundSource);
 #ifdef PREVENT_DEATH_LOOP
@@ -780,6 +790,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                     }                    
                 }
 
+                fadeMusic = !music_unchanged_through_warp(sSourceWarpNodeId);
                 sDelayedWarpTimer = 20;
                 play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, sDelayedWarpTimer, 0x00, 0x00, 0x00);
                 break;
