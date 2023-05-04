@@ -108,6 +108,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_XLU_SURF,
+        [LAYER_MIST] = G_RM_AA_XLU_SURF,
         [LAYER_RED_FLAME] = G_RM_AA_XLU_SURF,
         [LAYER_BLUE_FLAME] = G_RM_AA_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF,
@@ -132,6 +133,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF,
+        [LAYER_MIST] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_RED_FLAME] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_BLUE_FLAME] = G_RM_AA_ZB_XLU_SURF,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER,
@@ -159,6 +161,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT] = G_RM_AA_XLU_SURF2,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_XLU_SURF2,
+        [LAYER_MIST] = G_RM_AA_XLU_SURF2,
         [LAYER_RED_FLAME] = G_RM_AA_XLU_SURF2,
         [LAYER_BLUE_FLAME] = G_RM_AA_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_XLU_SURF2,
@@ -183,6 +186,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
         [LAYER_TRANSPARENT_DECAL] = G_RM_AA_ZB_XLU_DECAL2,
         [LAYER_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_SMOKE_TRANSPARENT] = G_RM_AA_ZB_XLU_SURF2,
+        [LAYER_MIST] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_RED_FLAME] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_BLUE_FLAME] = G_RM_AA_ZB_XLU_SURF2,
         [LAYER_TRANSPARENT_INTER] = G_RM_AA_ZB_XLU_INTER2,
@@ -413,6 +417,8 @@ static const Gfx* sBlueFlameTextureDls[] = {
 extern Gfx burn_smoke_seg4_sub_dl_begin_translucent[];
 extern Gfx burn_smoke_seg4_sub_dl_begin_alpha[];
 extern const Gfx burn_smoke_seg4_sub_dl_end[];
+extern const Gfx mist_dl[];
+extern const Gfx mist_dl_end[];
 
 /**
  * Process a master list node. This has been modified, so now it runs twice, for each microcode.
@@ -484,6 +490,11 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                 endDl = dl_coin_end;
             }
 
+            if (LAYER_MIST == currLayer)
+            {
+                startDl = mist_dl;
+                endDl = mist_dl_end;
+            }
             if (LAYER_RED_FLAME == currLayer)
             {
                 int flFrame = (gGlobalTimer / 2) % 8;
