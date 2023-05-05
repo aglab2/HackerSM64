@@ -6537,6 +6537,7 @@ Gfx mario_000_displaylist_005_mesh_layer_1[] = {
 	gsSPDisplayList(mat_mario_shoes_v4_001),
 	gsSPDisplayList(mario_000_displaylist_005_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_mario_shoes_v4_001),
+	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 
