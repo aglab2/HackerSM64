@@ -112,7 +112,7 @@ extern Vtx jrb_dl_dlx_mesh_layer_1_vtx_3[84] __attribute__((section(".data")));
 extern Gfx jrb_dl_dlx_mesh_layer_1_tri_3[] __attribute__((section(".data")));
 extern Vtx jrb_dl_dlx_mesh_layer_1_vtx_4[48] __attribute__((section(".data")));
 extern Gfx jrb_dl_dlx_mesh_layer_1_tri_4[] __attribute__((section(".data")));
-extern Vtx jrb_dl_dlx_mesh_layer_1_vtx_5[34] __attribute__((section(".data")));
+extern Vtx jrb_dl_dlx_mesh_layer_1_vtx_5[38] __attribute__((section(".data")));
 extern Gfx jrb_dl_dlx_mesh_layer_1_tri_5[] __attribute__((section(".data")));
 extern Vtx jrb_dl_dlx_mesh_layer_1_vtx_6[32] __attribute__((section(".data")));
 extern Gfx jrb_dl_dlx_mesh_layer_1_tri_6[] __attribute__((section(".data")));
