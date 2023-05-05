@@ -29,7 +29,20 @@ void bhv_hidden_star_loop(void) {
     }
 }
 
+void bhv_hidden_star_trigger_init()
+{
+    if (obj_has_model(o, 212))
+    {
+        gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+    }
+}
+
 void bhv_hidden_star_trigger_loop(void) {
+    if (obj_has_model(o, 212) && (0 == (o->oTimer % 8)))
+    {
+        spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+    }
+
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
         struct Object *hiddenStar = cur_obj_nearest_object_with_behavior(bhvHiddenStar);
 
