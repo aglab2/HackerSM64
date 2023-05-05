@@ -127,6 +127,7 @@ const LevelScript level_bitfs_entry[] = {
 		OBJECT(0, -455, 0, 228, 0, -179, 0, 0xa0000, bhvSpinAirborneWarp),
 		TERRAIN(bitfs_area_1_collision),
 		MACRO_OBJECTS(bitfs_area_1_macro_objs),
+        SHOW_DIALOG(/*index*/ 53, 0),
 		SET_BACKGROUND_MUSIC(0x00, 9),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
