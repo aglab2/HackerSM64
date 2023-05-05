@@ -49,7 +49,7 @@ extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_6[14] __attribute__((sec
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_tri_6[] __attribute__((section(".data")));
 extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_7[274] __attribute__((section(".data")));
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_tri_7[] __attribute__((section(".data")));
-extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_8[64] __attribute__((section(".data")));
+extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_8[67] __attribute__((section(".data")));
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_tri_8[] __attribute__((section(".data")));
 extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_9[414] __attribute__((section(".data")));
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_tri_9[] __attribute__((section(".data")));
@@ -63,8 +63,8 @@ extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_13[289] __attribute__((s
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_tri_13[] __attribute__((section(".data")));
 extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_vtx_14[100] __attribute__((section(".data")));
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1_tri_14[] __attribute__((section(".data")));
-extern Vtx wf_dl_DL_wf_1_0xe020da0_Obj_mesh_layer_5_vtx_0[40] __attribute__((section(".data")));
-extern Gfx wf_dl_DL_wf_1_0xe020da0_Obj_mesh_layer_5_tri_0[] __attribute__((section(".data")));
+extern Vtx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_4_vtx_0[40] __attribute__((section(".data")));
+extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_4_tri_0[] __attribute__((section(".data")));
 extern Gfx mat_wf_dl_SM64_DL_wf_1_0xe01b840_F3D_Mat_0[] __attribute__((section(".data")));
 extern Gfx mat_wf_dl_SM64_DL_wf_1_0xe01b840_F3D_Mat_1[] __attribute__((section(".data")));
 extern Gfx mat_wf_dl_SM64_DL_wf_1_0xe01b840_F3D_Mat_2[] __attribute__((section(".data")));
@@ -82,4 +82,4 @@ extern Gfx mat_wf_dl_SM64_DL_wf_1_0xe01b840_F3D_Mat_13[] __attribute__((section(
 extern Gfx mat_wf_dl_SM64_DL_wf_1_0xe01b840_F3D_Mat_14[] __attribute__((section(".data")));
 extern Gfx mat_wf_dl_SM64_DL_wf_1_0xe020da0_F3D_Mat_0[] __attribute__((section(".data")));
 extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_1[] __attribute__((section(".data")));
-extern Gfx wf_dl_DL_wf_1_0xe020da0_Obj_mesh_layer_5[] __attribute__((section(".data")));
+extern Gfx wf_dl_DL_wf_1_0xe01b840_Obj_mesh_layer_4[] __attribute__((section(".data")));
