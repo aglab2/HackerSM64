@@ -38,7 +38,7 @@ void bhv_hidden_star_trigger_init()
 }
 
 void bhv_hidden_star_trigger_loop(void) {
-    if (obj_has_model(o, 212) && (0 == (o->oTimer % 8)))
+    if (obj_has_model(o, 212) && (0 == (o->oTimer % 16)))
     {
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
     }
