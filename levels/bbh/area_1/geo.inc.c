@@ -65,7 +65,7 @@ const GeoLayout bbh_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_ZBUFFER(1),
 		GEO_OPEN_NODE(),
-			GEO_CAMERA_FRUSTUM_WITH_FUNC(45.0000, 100, 30000, geo_camera_fov),
+			GEO_CAMERA_FRUSTUM_WITH_FUNC(45.0000, 100, 20000, geo_camera_fov),
 			GEO_OPEN_NODE(),
 				GEO_CAMERA(1, 0, 0, 0, 0, -100, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
