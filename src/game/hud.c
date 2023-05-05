@@ -20,6 +20,8 @@
 
 #include "config.h"
 
+#include "hacktice/main.h"
+
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
  * That includes stars, lives, coins, camera status, power meter, timer
@@ -448,21 +450,11 @@ void render_hud_timer(void) {
     u16 timerValFrames = gHudDisplay.timer;
     u16 timerMins = timerValFrames / (30 * 60);
     u16 timerSecs = (timerValFrames - (timerMins * 1800)) / 30;
-    u16 timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) / 3;
-
-#if MULTILANG
-    switch (eu_get_language()) {
-        case LANGUAGE_ENGLISH: print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185,  "TIME"); break;
-        case LANGUAGE_FRENCH:  print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(155), 185, "TEMPS"); break;
-        case LANGUAGE_GERMAN:  print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185,  "ZEIT"); break;
-    }
-#else
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
-#endif
+    u16 timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) * 3.33333333333f;
 
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins);
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%02d", timerFracSecs);
 
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
     render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 32, (*hudLUT)[GLYPH_APOSTROPHE]);

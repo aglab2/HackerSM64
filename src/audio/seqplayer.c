@@ -7,6 +7,8 @@
 #include "load.h"
 #include "seqplayer.h"
 
+#include "hacktice/music.h"
+
 #ifdef VERSION_SH
 void seq_channel_layer_process_script_part1(struct SequenceChannelLayer *layer);
 s32 seq_channel_layer_process_script_part2(struct SequenceChannelLayer *layer);
@@ -1438,7 +1440,7 @@ void set_instrument(struct SequenceChannel *seqChannel, u8 instId) {
 }
 
 void sequence_channel_set_volume(struct SequenceChannel *seqChannel, u8 volume) {
-    seqChannel->volume = FLOAT_CAST(volume) / 127.0f;
+    Music_setVolumeHook(seqChannel, volume);
 }
 
 void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
