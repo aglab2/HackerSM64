@@ -32,7 +32,7 @@ static u8 sMusicVolume = 0;
 static u8 sBgMusicDisabled = FALSE;
 static u16 sCurrentMusic = MUSIC_NONE;
 static u16 sCurrentShellMusic = MUSIC_NONE;
-static u16 sCurrentCapMusic = MUSIC_NONE;
+u16 sCurrentCapMusic = MUSIC_NONE;
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
 static u8 sPlayingInfiniteStairs = FALSE;
 #endif

@@ -571,8 +571,12 @@ static s32 is_ow(s16 levelNum)
     return levelNum == LEVEL_CASTLE || levelNum == LEVEL_CASTLE_COURTYARD || levelNum == LEVEL_CASTLE_GROUNDS;
 }
 
+extern u16 sCurrentCapMusic;
 s16 music_unchanged_through_warp(s16 arg) {
     struct ObjectWarpNode *warpNode = area_get_warp_node(arg);
+    if (!warpNode)
+        return FALSE;
+
     s16 levelNum = warpNode->node.destLevel & 0x7F;
 
     s16 destArea = warpNode->node.destArea;
@@ -606,7 +610,7 @@ s16 music_unchanged_through_warp(s16 arg) {
     }
 #endif
 
-    if (is_ow(gCurrLevelNum) && is_ow(levelNum))
+    if (is_ow(gCurrLevelNum) && is_ow(levelNum) && !sCurrentCapMusic)
         return TRUE;
 
     return unchanged;
