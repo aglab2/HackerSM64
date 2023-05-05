@@ -489,7 +489,7 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             const Gfx* startDl = NULL;
             const Gfx* endDl = NULL;
             
-            if (LAYER_CORKBOX)
+            if (currLayer == LAYER_CORKBOX)
             {
                 startDl = breakable_box_seg8_dl_cork_box_init;
                 endDl = breakable_box_seg8_dl_cork_box_end;
