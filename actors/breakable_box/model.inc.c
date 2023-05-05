@@ -83,10 +83,32 @@ const Gfx breakable_box_seg8_dl_crazy_box[] = {
 };
 
 // 0x08012D20 - 0x08012D70
-const Gfx breakable_box_seg8_dl_cork_box[] = {
+const Gfx breakable_box_seg8_dl_cork_box_init[] = {
     gsSPDisplayList(breakable_box_seg8_sub_dl_begin),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, breakable_box_seg8_texture_08012290),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
-    gsSPBranchList(breakable_box_seg8_sub_dl_end),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x3f3f3fff),
+    gsSPEndDisplayList(),
+};
+
+const Gfx breakable_box_seg8_dl_cork_box[] = {
+    gsSPVertex(breakable_box_seg8_vertex, 26, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 3,  5,  6, 0x0,  7,  8,  9, 0x0),
+    gsSP2Triangles( 7,  9, 10, 0x0, 11, 12, 13, 0x0),
+    gsSP2Triangles(11, 13, 14, 0x0, 15, 16, 17, 0x0),
+    gsSP2Triangles(15, 18, 16, 0x0, 19, 20, 21, 0x0),
+    gsSP2Triangles(19, 21, 22, 0x0, 23, 24, 25, 0x0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+const Gfx breakable_box_seg8_dl_cork_box_end[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsSPSetGeometryMode(G_SHADING_SMOOTH),
+    gsSPEndDisplayList(),
 };

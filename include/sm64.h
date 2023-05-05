@@ -59,6 +59,7 @@
 
 enum RenderLayers {
     LAYER_FORCE,
+    LAYER_CORKBOX,
     LAYER_OPAQUE,
     LAYER_OPAQUE_INTER,
     LAYER_OPAQUE_DECAL,
