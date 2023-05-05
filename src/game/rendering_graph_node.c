@@ -89,6 +89,7 @@ s16 *gCurrAnimData;
 struct RenderModeContainer renderModeTable_1Cycle[2] = { 
     [RENDER_NO_ZB] = { {
         [LAYER_FORCE] = G_RM_OPA_SURF,
+        [LAYER_CORKBOX] = G_RM_AA_OPA_SURF,
         [LAYER_OPAQUE] = G_RM_AA_OPA_SURF,
         [LAYER_OPAQUE_INTER] = G_RM_AA_OPA_SURF,
         [LAYER_OPAQUE_DECAL] = G_RM_AA_OPA_SURF,
@@ -114,6 +115,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
     } },
     [RENDER_ZB] = { {
         [LAYER_FORCE] = G_RM_AA_ZB_XLU_DECAL,
+        [LAYER_CORKBOX] = G_RM_AA_ZB_OPA_SURF,
         [LAYER_OPAQUE] = G_RM_AA_ZB_OPA_SURF,
         [LAYER_OPAQUE_INTER] = G_RM_AA_ZB_OPA_INTER,
         [LAYER_OPAQUE_DECAL] = G_RM_AA_ZB_OPA_DECAL,
@@ -142,6 +144,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = {
 struct RenderModeContainer renderModeTable_2Cycle[2] = {
     [RENDER_NO_ZB] = { {
         [LAYER_FORCE] = G_RM_OPA_SURF2,
+        [LAYER_CORKBOX] = G_RM_AA_OPA_SURF2,
         [LAYER_OPAQUE] = G_RM_AA_OPA_SURF2,
         [LAYER_OPAQUE_INTER] = G_RM_AA_OPA_SURF2,
         [LAYER_OPAQUE_DECAL] = G_RM_AA_OPA_SURF2,
@@ -167,6 +170,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = {
     } },
     [RENDER_ZB] = { {
         [LAYER_FORCE] = G_RM_ZB_OPA_SURF2,
+        [LAYER_CORKBOX] = G_RM_AA_ZB_OPA_SURF2,
         [LAYER_OPAQUE] = G_RM_AA_ZB_OPA_SURF2,
         [LAYER_OPAQUE_INTER] = G_RM_AA_ZB_OPA_INTER2,
         [LAYER_OPAQUE_DECAL] = G_RM_AA_ZB_OPA_DECAL2,
@@ -419,6 +423,9 @@ extern const Gfx burn_smoke_seg4_sub_dl_end[];
 extern const Gfx mist_dl[];
 extern const Gfx mist_dl_end[];
 
+extern const Gfx breakable_box_seg8_dl_cork_box_init[];
+extern const Gfx breakable_box_seg8_dl_cork_box_end[];
+
 /**
  * Process a master list node. This has been modified, so now it runs twice, for each microcode.
  * It iterates through the first 5 layers of if the first index using F3DLX2.Rej, then it switches
@@ -476,6 +483,13 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
 
             const Gfx* startDl = NULL;
             const Gfx* endDl = NULL;
+            
+            if (LAYER_CORKBOX)
+            {
+                startDl = breakable_box_seg8_dl_cork_box_init;
+                endDl = breakable_box_seg8_dl_cork_box_end;
+            }
+
             if (currLayer == LAYER_COIN) 
             {
                 if (frame < 5)
