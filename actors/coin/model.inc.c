@@ -157,61 +157,61 @@ const Gfx dl_coin_90[] = {
 
 // YELLOW
 const Gfx coin_seg3_dl_yellow[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_yellow, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 const Gfx coin_seg3_dl_yellow_r[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_yellow_r, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 // BLUE
 const Gfx coin_seg3_dl_blue[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_blue, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 const Gfx coin_seg3_dl_blue_r[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_blue_r, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 // RED
 const Gfx coin_seg3_dl_red[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_red, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 const Gfx coin_seg3_dl_red_r[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_red, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 // SECRET
 const Gfx coin_seg3_dl_secret[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_secret, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
 const Gfx coin_seg3_dl_secret_r[] = {
-    gsDPPipeSync(),
     gsSPVertex(coin_seg3_vertex_secret, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
