@@ -91,12 +91,12 @@
 /**
  * Enables the ability to hold Z while twirling to descend faster.
  */
-#define Z_TWIRL
+// #define Z_TWIRL
 
 /**
  * Disables bonks when ground pounding next to a wall.
  */
-#define DISABLE_GROUNDPOUND_BONK
+// #define DISABLE_GROUNDPOUND_BONK
 
 /**
  * Allows Mario to jump kick on steep surfaces that are set to be non slippery, instead of being forced to dive.
