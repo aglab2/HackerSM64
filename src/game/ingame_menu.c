@@ -1607,6 +1607,7 @@ void render_pause_my_score_coins(void) {
             print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
         }
 
+        render_hacktice_setting(90, 40);
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     }
     else
