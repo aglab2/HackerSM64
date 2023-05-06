@@ -255,6 +255,11 @@ s32 intro_play_its_a_me_mario(void) {
  * Returns a level ID after their criteria is met.
  */
 s32 lvl_intro_update(s16 arg, UNUSED s32 unusedArg) {
+    if (arg == LVL_INTRO_GAME_OVER)
+    {
+        gSaveFileModified = 1;
+        save_file_do_save(gCurrSaveFileNum - 1);
+    }
     switch (arg) {
         case LVL_INTRO_PLAY_ITS_A_ME_MARIO: return intro_play_its_a_me_mario();
 #ifdef KEEP_MARIO_HEAD
