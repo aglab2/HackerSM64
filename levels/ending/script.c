@@ -16,8 +16,10 @@
 #include "make_const_nonconst.h"
 #include "levels/ending/header.h"
 
+extern s32 lvl_show_time(UNUSED s16 initOrUpdate, UNUSED s32 levelNum);
 const LevelScript level_ending_entry_loop[] = {
     SLEEP(/*frames*/ 1),
+    CALL(/*arg*/ 0, /*func*/ lvl_show_time),
     JUMP(level_ending_entry_loop), // (loop sleep 1 forever)
 };
 

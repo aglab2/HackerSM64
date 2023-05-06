@@ -352,8 +352,8 @@ s32 char_to_glyph_index(char c) {
         return GLYPH_PERIOD; // large shaded dot, JP only
     }
 
-    if (c == '|') {
-        return GLYPH_BETA_KEY; // beta key, JP only. Reused for Ü in EU.
+    if (c == ':') {
+        return GLYPH_MINUS - 1;
     }
 
     return GLYPH_SPACE;

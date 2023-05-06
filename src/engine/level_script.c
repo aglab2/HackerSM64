@@ -765,10 +765,12 @@ static void level_cmd_fadeout_music(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
+extern s32 gTimerOffset;
 static void level_cmd_get_or_set_var(void) {
     if (CMD_GET(u8, 2) == OP_SET) {
         switch (CMD_GET(u8, 3)) {
             case VAR_CURR_SAVE_FILE_NUM:
+                gTimerOffset = gGlobalTimer;
                 gCurrSaveFileNum = sRegister;
                 break;
             case VAR_CURR_COURSE_NUM:
