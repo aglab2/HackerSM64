@@ -15,6 +15,9 @@
 #if defined(RNC1) || defined(RNC2)
 #include <rnc.h>
 #endif
+#ifdef LZ4
+#include "lz4.h"
+#endif
 #ifdef UNF
 #include "usb/usb.h"
 #include "usb/debug.h"
@@ -636,6 +639,9 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             slidstart(compressed, dest);
 #elif MIO0
             decompress(compressed, dest);
+#elif LZ4
+            u32 lz4CompSize = *(u32 *) (compressed + 0);
+            LZ4_decompress_safe (compressed + 8, dest, lz4CompSize, *size);
 #endif
             osSyncPrintf("end decompress\n");
             set_segment_base_addr(segment, dest); sSegmentROMTable[segment] = (uintptr_t) srcStart;
@@ -678,6 +684,10 @@ void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
         slidstart(compressed, gDecompressionHeap);
 #elif MIO0
         decompress(compressed, gDecompressionHeap);
+#elif LZ4
+            u32 lz4CompSize = *(u32 *) (compressed + 0);
+            u32 lz4ResSize = *(u32 *) (compressed + 4);
+            LZ4_decompress_safe (compressed + 8, gDecompressionHeap, lz4CompSize, lz4ResSize);
 #endif
         set_segment_base_addr(segment, gDecompressionHeap); sSegmentROMTable[segment] = (uintptr_t) srcStart;
         main_pool_free(compressed);

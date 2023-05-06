@@ -7,7 +7,7 @@ CC           := gcc
 CXX          := g++
 CFLAGS       := -I. -O2 -s
 LDFLAGS      := -lm
-ALL_PROGRAMS := armips filesizer rncpack n64graphics n64graphics_ci mio0 slienc n64cksum textconv patch_elf_32bit aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv
+ALL_PROGRAMS := armips filesizer rncpack lz4pack n64graphics n64graphics_ci mio0 slienc n64cksum textconv patch_elf_32bit aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv
 LIBAUDIOFILE := audiofile/libaudiofile.a
 
 # Only build armips from tools if it is not found on the system
@@ -21,6 +21,7 @@ default: all
 
 filesizer_SOURCES	:= filesizer.c
 
+lz4pack_SOURCES	:= lz4.c lz4hc.c lz4pack.c
 rncpack_SOURCES	:= rncpack.c
 
 n64graphics_SOURCES := n64graphics.c utils.c
