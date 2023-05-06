@@ -301,8 +301,12 @@ static void restore_save_file_data(s32 fileIndex, s32 srcSlot) {
                       sizeof(gSaveBuffer.files[fileIndex][destSlot]));
 }
 
+extern s32 gTimerOffset;
 void save_file_do_save(s32 fileIndex) {
     if (gSaveFileModified) {
+        gSaveBuffer.files[fileIndex][0].timer += gGlobalTimer - gTimerOffset;
+        gTimerOffset = gGlobalTimer;
+
         // Compute checksum
         add_save_block_signature(&gSaveBuffer.files[fileIndex][0],
                                  sizeof(gSaveBuffer.files[fileIndex][0]), SAVE_FILE_MAGIC);
@@ -324,6 +328,7 @@ void save_file_erase(s32 fileIndex) {
     touch_high_score_ages(fileIndex);
     bzero(&gSaveBuffer.files[fileIndex][0], sizeof(gSaveBuffer.files[fileIndex][0]));
 
+    gTimerOffset = gGlobalTimer;
     gSaveFileModified = TRUE;
     save_file_do_save(fileIndex);
 }
@@ -333,6 +338,7 @@ void save_file_copy(s32 srcFileIndex, s32 destFileIndex) {
     bcopy(&gSaveBuffer.files[srcFileIndex][0], &gSaveBuffer.files[destFileIndex][0],
           sizeof(gSaveBuffer.files[destFileIndex][0]));
 
+    gTimerOffset = gGlobalTimer;
     gSaveFileModified = TRUE;
     save_file_do_save(destFileIndex);
 }
@@ -679,19 +685,11 @@ void save_file_set_cap_pos(s16 x, s16 y, s16 z) {
 
     saveFile->capLevel = gCurrLevelNum;
     saveFile->capArea = gCurrAreaIndex;
-    vec3s_set(saveFile->capPos, x, y, z);
+    // vec3s_set(saveFile->capPos, x, y, z);
     save_file_set_flags(SAVE_FLAG_CAP_ON_GROUND);
 }
 
 s32 save_file_get_cap_pos(Vec3s capPos) {
-    struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
-    s32 flags = save_file_get_flags();
-
-    if (saveFile->capLevel == gCurrLevelNum && saveFile->capArea == gCurrAreaIndex
-        && (flags & SAVE_FLAG_CAP_ON_GROUND)) {
-        vec3s_copy(capPos, saveFile->capPos);
-        return TRUE;
-    }
     return FALSE;
 }
 
