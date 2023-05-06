@@ -803,7 +803,6 @@ void thread5_game_loop(UNUSED void *arg) {
         {
             Hacktice_onFrame();
         }
-        const int ResetCombo = L_TRIG | Z_TRIG;
         if (Hacktice_gConfig.softReset)
         {
             SoftReset_onFrame();
