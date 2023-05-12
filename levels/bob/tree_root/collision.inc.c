@@ -11,7 +11,7 @@ const Collision tree_root_collision[] = {
 	COL_VERTEX(-298, 0, -433),
 	COL_VERTEX(354, 0, -471),
 	COL_VERTEX(298, 0, 341),
-	COL_TRI_INIT(SURFACE_DEFAULT, 13),
+	COL_TRI_INIT(SURFACE_NOT_SLIPPERY, 13),
 	COL_TRI(0, 1, 2),
 	COL_TRI(3, 2, 1),
 	COL_TRI(3, 1, 4),
