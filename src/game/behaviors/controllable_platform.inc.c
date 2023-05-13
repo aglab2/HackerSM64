@@ -134,7 +134,7 @@ void controllable_platform_check_walls(s8 nextDirection, s8 wallDisplacement[3],
         }
     }
 
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 1000)) {
         sControllablePlatformDirectionState = 10;
         o->oControllablePlatformIsFarFromMario = 1;
         o->oTimer = 0;
