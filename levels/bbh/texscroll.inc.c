@@ -2,7 +2,6 @@ void scroll_bbh_dl_c5_mesh_layer_1_vtx_8() {
 	int i = 0;
 	int count = 8;
 	int width = 32 * 0x20;
-	int height = 32 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -24,7 +23,6 @@ void scroll_bbh_dl_c5_001_mesh_layer_1_vtx_2() {
 	int i = 0;
 	int count = 8;
 	int width = 32 * 0x20;
-	int height = 32 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -44,8 +42,7 @@ void scroll_bbh_dl_c5_001_mesh_layer_1_vtx_2() {
 
 void scroll_bbh_dl_c5_001_mesh_layer_1_vtx_5() {
 	int i = 0;
-	int count = 40;
-	int width = 32 * 0x20;
+	int count = 42;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
@@ -68,7 +65,6 @@ void scroll_bbh_dl___mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 16;
 	int width = 32 * 0x20;
-	int height = 32 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -86,9 +82,11 @@ void scroll_bbh_dl___mesh_layer_1_vtx_0() {
 	currentX += deltaX;
 }
 
-void scroll_sts_mat_bbh_dl_laval_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_bbh_dl_laval_layer1);
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+void scroll_gfx_mat_bbh_dl_laval_001_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_bbh_dl_laval_001_layer1);
+
+	shift_t(mat, 16, PACK_TILESIZE(0, 1));
+
 };
 
 void scroll_bbh() {
@@ -96,5 +94,5 @@ void scroll_bbh() {
 	scroll_bbh_dl_c5_001_mesh_layer_1_vtx_2();
 	scroll_bbh_dl_c5_001_mesh_layer_1_vtx_5();
 	scroll_bbh_dl___mesh_layer_1_vtx_0();
-	scroll_sts_mat_bbh_dl_laval_layer1();
-}
+	scroll_gfx_mat_bbh_dl_laval_001_layer1();
+};

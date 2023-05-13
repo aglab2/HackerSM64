@@ -30,7 +30,7 @@ const GeoLayout bbh_area_1_geo[] = {
 				GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, bbh_dl_c5_008_mesh_layer_3),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE_INTER, 0, -2000, 0, 90, 0, 0, bbh_dl_c5_009_mesh_layer_3),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, bbh_dl_c5_009_mesh_layer_3),
 		GEO_ROTATION_NODE(LAYER_OPAQUE, 90, 0, 0),
 		GEO_OPEN_NODE(),
 			GEO_CULL(0, 20000, -20000, 20000, -20000, 8500),
@@ -63,9 +63,6 @@ const GeoLayout bbh_area_1[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE_INTER, bbh_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, bbh_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
