@@ -597,6 +597,9 @@ void bhv_peach_ending_cs_loop()
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
 extern Gfx mat_bbh_dl__auto_6_f3d_layer1[];
 extern Gfx mat_bbh_dl______layer1[];
+extern Gfx mat_bbh_dl_f3dlite_material_001[];
+extern Gfx mat_bbh_dl_f3dlite_material[];
+extern s8 sControllablePlatformDirectionState;
 void bhv_sand_color_ctl_loop()
 {
     {
@@ -616,6 +619,14 @@ void bhv_sand_color_ctl_loop()
         data[4] = 255 - (255 - 230) * dist;
         data[5] = 255 - (255 - 193) * dist;
         data[6] = 255 - (255 - 254) * dist;
+    }
+    {
+        u8* data = (u8*) segmented_to_virtual(mat_bbh_dl_f3dlite_material_001) + 5 * 8;
+        data[7]  = sControllablePlatformDirectionState ? 0 : 255;
+    }
+    {
+        u8* data = (u8*) segmented_to_virtual(mat_bbh_dl_f3dlite_material) + 5 * 8;
+        data[7] = gMarioStates->pos[0] < -9900.f ? 0 : 255;
     }
 }
 

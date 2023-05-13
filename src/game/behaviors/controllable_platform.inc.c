@@ -1,6 +1,6 @@
 // controllable_platform.inc.c
 
-static s8 sControllablePlatformDirectionState = 0;
+s8 sControllablePlatformDirectionState = 0;
 
 void controllable_platform_act_1(void) {
     o->oParentRelativePosY -= 4.0f;
@@ -266,7 +266,8 @@ void bhv_controllable_platform_loop(void) {
             goto flame_ctl;
 
         case 10:
-            if (obj_flicker_and_disappear(o, 150)) {
+            if (obj_flicker_and_disappear(o, 150) || (gMarioStates->pos[2] > 9000.f)) {
+                o->activeFlags = 0;
                 spawn_object_abs_with_rot(o, 0, MODEL_HMC_METAL_PLATFORM, bhvControllablePlatform,
                                           o->oHomeX, o->oHomeY, o->oHomeZ, 0, 0, 0);
             }
