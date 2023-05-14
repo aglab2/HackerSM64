@@ -101,7 +101,7 @@
 /**
  * Allows Mario to jump kick on steep surfaces that are set to be non slippery, instead of being forced to dive.
  */
-// #define JUMP_KICK_FIX
+#define JUMP_KICK_FIX
 
 /**
  * Allows Mario to grab hangable ceilings from any state.

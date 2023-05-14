@@ -30,6 +30,7 @@
 #include "profiling.h"
 
 static s32 sCenterBehindMario = 1;
+static s32 sNoCenterBehindMario = 0;
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -1112,7 +1113,8 @@ void mode_8_directions_camera(struct Camera *c) {
     if (sCenterBehindMario)
     {
         sCenterBehindMario = 0;
-        s8DirModeYawOffset = snap_to_45_degrees(gMarioState->faceAngle[1] - 0x8000);
+        if (!sNoCenterBehindMario)
+            s8DirModeYawOffset = snap_to_45_degrees(gMarioState->faceAngle[1] - 0x8000);
     }
 
     radial_camera_input(c);
@@ -1139,6 +1141,9 @@ void mode_8_directions_camera(struct Camera *c) {
     }
     else if (gPlayer1Controller->buttonDown & D_JPAD) {
         s8DirModeYawOffset = snap_to_45_degrees(s8DirModeYawOffset);
+    }
+    else if (gPlayer1Controller->buttonPressed & L_TRIG) {
+        sNoCenterBehindMario = !sNoCenterBehindMario;
     }
 #endif
 
