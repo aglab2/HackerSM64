@@ -140,6 +140,13 @@ static f32 random_float_ft(f32 from, f32 to)
     return from + random_float() * d;
 }
 
+static f32 random_float_ft_biased(f32 from, f32 to, f32 bias)
+{
+    f32 d = to - from;
+    f32 rad = d / 100;
+    return from + bias * d + random_f32_around_zero(rad);
+}
+
 #include "aglab_ab.inc.c"
 #include "aglab_mf.inc.c"
 #include "aglab_df.inc.c"

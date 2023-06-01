@@ -425,7 +425,7 @@ void render_init(void) {
         VI.comRegs.vSync = 525*4;   
         change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
         osViSetMode(&VI);
-        osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
+        osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
         osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
         gViHackEnabled = TRUE;
         if (!gIsVC) {

@@ -50,7 +50,7 @@ static void rng_reroll()
                 struct Object* mush = spawn_object(o, MODEL_EXCLAMATION_BOX, bhvExclamationBox);
                 mush->oPosX = random_float_ft(-748.f, 1702.f);
                 mush->oPosY = 2687.f + random_float() * 800.f;
-                mush->oPosZ = random_float_ft(-2842.f,  4200.f);
+                mush->oPosZ = random_float_ft_biased(-2842.f,  4200.f, i / 20.f);
                 mush->oBehParams = (1 << 24); // enable cap always
                 mush->oBehParams2ndByte = random_u16() % 3; // all caps
             }
@@ -70,7 +70,7 @@ static void rng_reroll()
                 struct Object* mush = spawn_object(o, MODEL_AGLAB_RNG_MUSHROOM, bhvAglabRngCollision);
                 mush->oPosX = random_float_ft(3031.f, 5475.f);
                 mush->oPosY = 3050.f - random_float() * 1300.f;
-                mush->oPosZ = random_float_ft(-8671.f, -1692.f);
+                mush->oPosZ = random_float_ft_biased(-8671.f, -1692.f, i / 20.f);
                 mush->oBehParams2ndByte = 0;
             }
         }
@@ -83,7 +83,7 @@ static void rng_reroll()
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_PYRAMID, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(-927.f, 1389.f);
                 pyr->oPosY = 3150.f - random_float() * 1200.f;
-                pyr->oPosZ = random_float_ft(-1900.f, 5070.f);
+                pyr->oPosZ = random_float_ft_biased(-1900.f, 5070.f, i / 12.f);
                 pyr->oBehParams2ndByte = 1;
                 pyr->oFaceAngleYaw = random_u16() & 0xe000;
             }
@@ -98,7 +98,7 @@ static void rng_reroll()
                 int model = random_u16() & 1;
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_CACTUS + model, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(86.f, 2536.f);
-                pyr->oPosZ = random_float_ft(-5200.f, 1800.f);
+                pyr->oPosZ = random_float_ft_biased(-5200.f, 1800.f, i / 30.f);
                 f32 yr = 4148.f - (4143.f + pyr->oPosZ) / 3.f;
                 pyr->oPosY = yr + random_float() * 1000.f;
                 pyr->oBehParams2ndByte = 6 + model;
@@ -113,7 +113,7 @@ static void rng_reroll()
             {
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_LAMP, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(-1112.f, 1338.f);
-                pyr->oPosZ = random_float_ft(-2700.f, 4000.f);
+                pyr->oPosZ = random_float_ft_biased(-2700.f, 4000.f, i / 20.f);
                 pyr->oPosY = 2400.f;
                 pyr->oBehParams2ndByte = 8;
                 pyr->oKleptoStartPosX = random_f32_around_zero(60.f);
@@ -126,13 +126,13 @@ static void rng_reroll()
         // shapes
         case 6:
         {
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 15; i++)
             {
                 int model = random_u16() & 3;
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_SHAPE1 + model, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(933.f, 3383.f);
-                pyr->oPosY = 3050.f - random_float() * 1300.f;
-                pyr->oPosZ = random_float_ft(-2500.f, 4000.f);
+                pyr->oPosY = 2250.f - random_float() * 1300.f;
+                pyr->oPosZ = random_float_ft_biased(-2500.f, 4000.f, i / 15.f);
                 pyr->oBehParams2ndByte = 2 + model;
                 pyr->oFaceAngleYaw = random_u16() & 0xc000;
                 pyr->oFaceAngleRoll = random_u16() & 0xc000;
@@ -389,19 +389,19 @@ void bhv_aglab_rng_collision_init()
         case 6:
         {
             obj_set_collision_data(o, rng_cactus_collision);
-            obj_scale_xyz(o, 1.15f, 1.15f, 1.15f);
+            obj_scale_xyz(o, 1.5f, 1.5f, 1.5f);
         }
         break;
         case 7:
         {
             obj_set_collision_data(o, rng_cactus2_collision);
-            obj_scale_xyz(o, 1.25f, 1.25f, 1.25f);
+            obj_scale_xyz(o, 1.5f, 1.5f, 1.5f);
         }
         break;
         case 8:
         {
             obj_set_collision_data(o, rng_lamp_collision);
-            obj_scale_xyz(o, 1.1f, 1.1f, 1.1f);
+            obj_scale_xyz(o, 1.f, 1.f, 1.f);
         }
         break;
     }
