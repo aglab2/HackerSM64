@@ -428,7 +428,7 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             u32 wantMode1 = mode1List->modes[currLayer];
             u32 wantMode2 = mode2List->modes[currLayer];
             // TODO: this is a hack!!!
-            if (wantMode1 != curMode1 || wantMode2 != curMode2 || currLayer == LAYER_SMOKE_ALPHA || currLayer == LAYER_COIN)
+            // if (wantMode1 != curMode1 || wantMode2 != curMode2 || currLayer == LAYER_SMOKE_ALPHA || currLayer == LAYER_COIN)
             {
                 gDPSetRenderMode(gDisplayListHead++, wantMode1, wantMode2);
                 curMode1 = wantMode1; curMode2 = wantMode2;
