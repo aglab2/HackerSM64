@@ -14,7 +14,7 @@ static void hf_alter_boo_vtx(f32 xoff, f32 zoff, Vtx* vs, Vtx* vb, int sz)
 {
     for (int i = 0; i < sz; i++)
     {
-        f32 l = sqrtf(vb[i].v.ob[0] * vb[i].v.ob[0] + vb[i].v.ob[1] + vb[i].v.ob[1]) / 30.f;
+        f32 l = sqrtf(vb[i].v.ob[0] * vb[i].v.ob[0] + vb[i].v.ob[1] * vb[i].v.ob[1]) / 30.f;
         f32 zs = 1.f + sins(vb[i].v.ob[1]) / 10.f;
         vs[i].v.ob[0] = vb[i].v.ob[0] + SIGN(vb[i].v.ob[0]) * l * xoff * zs;
         vs[i].v.ob[2] = vb[i].v.ob[2] + SIGN(vb[i].v.ob[2]) * l * zoff * zs;
