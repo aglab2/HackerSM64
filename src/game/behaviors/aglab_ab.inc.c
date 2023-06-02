@@ -47,7 +47,7 @@ void bhv_ab_manta_ray_loop()
     }
     else if (1 == o->oAction)
     {
-        if (gMarioObject->oPosY < 3000.f)
+        if (gMarioObject->oPosY < 1000.f)
         {
             manta_reset();
             o->oAction = 0;
@@ -104,7 +104,7 @@ void bhv_ab_manta_ray_loop()
 
 void bhv_ab_sand_init()
 { 
-    o->oHomeY = -6000.f;
+    o->oHomeY = -8000.f;
 }
 
 extern const BehaviorScript bhvHiddenStarTrigger[];
@@ -136,7 +136,7 @@ void bhv_ab_sand_loop()
     // warping thingy
     if (0 == o->oAction)
     {
-        if (gMarioStates->pos[1] < -5300.f)
+        if (gMarioStates->pos[1] < -7300.f)
         {
             spawn_star(o, 9085.f, 215.f, -8925.f);
             o->oHomeY = o->oPosY;
@@ -148,7 +148,7 @@ void bhv_ab_sand_loop()
         if (gMarioStates->floorHeight == gMarioStates->pos[1])
         {
             struct Surface* floor = gMarioStates->floor;
-            if (o->oHomeY < gMarioStates->pos[1] - 300.f && (o->oHomeY < (2000.f - 1272.f)) && floor && (floor->type == SURFACE_NOT_SLIPPERY || floor->type == 0))
+            if (o->oHomeY < gMarioStates->pos[1] - 300.f && o->oHomeY < -1272.f && floor && (floor->type == SURFACE_NOT_SLIPPERY || floor->type == 0))
             {
                 o->oKleptoStartPosX = gMarioStates->pos[0];
                 o->oKleptoStartPosY = gMarioStates->pos[1];
@@ -156,7 +156,7 @@ void bhv_ab_sand_loop()
                 o->oHomeY = gMarioStates->pos[1] - 300.f;
             }
         }
-        else if (gMarioStates->pos[1] < o->oPosY && (gMarioStates->pos[0] > (566.f + 1865.f)))
+        else if (gMarioStates->pos[1] < o->oPosY && gMarioStates->pos[0] > 1865.f)
         {
             play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0xc2 / 2, 0xb2 / 2, 0x30 / 2);
             o->oAction = 2;
@@ -214,16 +214,11 @@ void bhv_ab_clam_ctl_loop()
     }
 }
 
-extern Gfx ab_dl_tf_mesh_layer_5[]; // +10
-extern Gfx mat_ab_dl_tf_001[]; // +4
+extern Gfx mat_ab_dl_tf[];
 void bhv_ab_troll_loop()
 {
-#if 1
-    u8* env = (u8*) segmented_to_virtual(ab_dl_tf_mesh_layer_5) + 10 * 8 + 7;
-#else
-    u8* env = (u8*) segmented_to_virtual(mat_ab_dl_tf_001) + 4 * 8 + 7;
-#endif
-    if (gMarioStates->pos[1] < 2520.f || o->oDistanceToMario > 500.f)
+    u8* env = (u8*) segmented_to_virtual(mat_ab_dl_tf) + 19 * 8 + 7;
+    if (gMarioStates->pos[1] < 520.f || o->oDistanceToMario > 500.f)
     {
         *env = 0;
         return;
@@ -263,7 +258,7 @@ void ab_purple_switch_loop()
         case PURPLE_SWITCH_ACT_IDLE:
             if (o->parentObj)
             {
-                o->parentObj->oPosY = -6000.f;
+                o->parentObj->oPosY = -8000.f;
             }
 
             cur_obj_set_model(MODEL_PURPLE_SWITCH);
@@ -276,12 +271,12 @@ void ab_purple_switch_loop()
             {
                 if (!o->parentObj)
                 {
-                    o->parentObj = spawn_star(o, 566.f - 844.f, 2124.f-1183.f, 7638.f-9370.f);
+                    o->parentObj = spawn_star(o, -844.f, -1183.f, -9370.f);
                     o->parentObj->oBehParams = 4 << 24;
                 }
                 else
                 {
-                    o->parentObj->oPosY = 2000.f - 1183.f;
+                    o->parentObj->oPosY = -1183.f;
                 }
 
                 o->oAction = PURPLE_SWITCH_ACT_PRESSED;

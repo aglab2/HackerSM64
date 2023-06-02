@@ -685,7 +685,7 @@ static Gfx gd_dl_rdp_init[] = {
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
     gsDPNoOp(),
-    gsDPSetColorDither(G_CD_ENABLE),
+    gsDPSetColorDither(G_CD_MAGICSQ),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };

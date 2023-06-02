@@ -1,6 +1,19 @@
+void scroll_sts_mat_ab_dl_water_layer5() {
+	Gfx *mat = segmented_to_virtual(mat_ab_dl_water_layer5);
+	shift_t_down(mat, 13, PACK_TILESIZE(0, 1));
+	shift_s(mat, 21, PACK_TILESIZE(0, 1));
+};
+
+void scroll_sts_mat_ab_dl__16_f3d_layer5() {
+	Gfx *mat = segmented_to_virtual(mat_ab_dl__16_f3d_layer5);
+	shift_s(mat, 13, PACK_TILESIZE(0, 2));
+	shift_t_down(mat, 21, PACK_TILESIZE(0, 1));
+};
+
 void scroll_ab_dl_Plane_001_mesh_layer_1_vtx_20() {
 	int i = 0;
 	int count = 7;
+	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -19,9 +32,15 @@ void scroll_ab_dl_Plane_001_mesh_layer_1_vtx_20() {
 	currentY += deltaY;
 }
 
+void scroll_sts_mat_ab_dl__9_f3d() {
+	Gfx *mat = segmented_to_virtual(mat_ab_dl__9_f3d);
+	shift_s(mat, 17, PACK_TILESIZE(0, 1));
+};
+
 void scroll_ab_dl_Plane_002_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 8;
+	int count = 12;
+	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
@@ -42,7 +61,8 @@ void scroll_ab_dl_Plane_002_mesh_layer_1_vtx_1() {
 
 void scroll_ab_dl_Plane_003_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 5;
+	int count = 12;
+	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
@@ -65,6 +85,7 @@ void scroll_ab_dl_Plane_004_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 24;
 	int width = 64 * 0x20;
+	int height = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -85,6 +106,7 @@ void scroll_ab_dl_Plane_004_mesh_layer_1_vtx_0() {
 void scroll_ab_dl_Plane_007_mesh_layer_6_vtx_0() {
 	int i = 0;
 	int count = 52;
+	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
@@ -107,6 +129,7 @@ void scroll_ab_dl_zw_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 177;
 	int width = 32 * 0x20;
+	int height = 32 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -128,6 +151,7 @@ void scroll_ab_dl_zw_mesh_layer_5_vtx_1() {
 	int i = 0;
 	int count = 12;
 	int width = 64 * 0x20;
+	int height = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -148,6 +172,7 @@ void scroll_ab_dl_zw_mesh_layer_5_vtx_1() {
 void scroll_ab_dl_Azure_Abyss2_010_mesh_layer_1_vtx_6() {
 	int i = 0;
 	int count = 783;
+	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -170,6 +195,7 @@ void scroll_ab_dl_Plane_005_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 24;
 	int width = 64 * 0x20;
+	int height = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -187,33 +213,11 @@ void scroll_ab_dl_Plane_005_mesh_layer_1_vtx_0() {
 	currentX += deltaX;
 }
 
-void scroll_gfx_mat_ab_dl_water_001_layer5() {
-	Gfx *mat = segmented_to_virtual(mat_ab_dl_water_001_layer5);
-
-
-	shift_t_down(mat, 11, PACK_TILESIZE(0, 1));
-	shift_s(mat, 16, PACK_TILESIZE(0, 1));
-
-};
-
-void scroll_gfx_mat_ab_dl__16_f3d_layer5() {
-	Gfx *mat = segmented_to_virtual(mat_ab_dl__16_f3d_layer5);
-
-
-	shift_s(mat, 11, PACK_TILESIZE(0, 2));
-	shift_t_down(mat, 16, PACK_TILESIZE(0, 1));
-
-};
-
-void scroll_gfx_mat_ab_dl__9_f3d() {
-	Gfx *mat = segmented_to_virtual(mat_ab_dl__9_f3d);
-
-	shift_s(mat, 16, PACK_TILESIZE(0, 1));
-
-};
-
 void scroll_ab() {
+	scroll_sts_mat_ab_dl_water_layer5();
+	scroll_sts_mat_ab_dl__16_f3d_layer5();
 	scroll_ab_dl_Plane_001_mesh_layer_1_vtx_20();
+	scroll_sts_mat_ab_dl__9_f3d();
 	scroll_ab_dl_Plane_002_mesh_layer_1_vtx_1();
 	scroll_ab_dl_Plane_003_mesh_layer_1_vtx_1();
 	scroll_ab_dl_Plane_004_mesh_layer_1_vtx_0();
@@ -222,7 +226,4 @@ void scroll_ab() {
 	scroll_ab_dl_zw_mesh_layer_5_vtx_1();
 	scroll_ab_dl_Azure_Abyss2_010_mesh_layer_1_vtx_6();
 	scroll_ab_dl_Plane_005_mesh_layer_1_vtx_0();
-	scroll_gfx_mat_ab_dl_water_001_layer5();
-	scroll_gfx_mat_ab_dl__16_f3d_layer5();
-	scroll_gfx_mat_ab_dl__9_f3d();
-};
+}

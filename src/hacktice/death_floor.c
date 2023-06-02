@@ -19,7 +19,7 @@ void DeathFloor_checkDeathBarrierHook(struct MarioState *m)
     {
         Death_TouchedDeathFloor = true;
     }
-    else if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_FALL_SOUND_PLAYED)) 
+    else
     {
         if (gCurrCourseNum != COURSE_RNG && gCurrCourseNum != COURSE_ROVERT)
         {

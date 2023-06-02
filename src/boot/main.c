@@ -525,13 +525,12 @@ void thread1_idle(UNUSED void *arg) {
             break;
     }
     get_audio_frequency();
-    change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
+    change_vi(&VI, 320, 240);
     osViSetMode(&VI);
     osViBlack(TRUE);
-    osViSetSpecialFeatures(OS_VI_DIVOT_ON);
-    osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
-    // osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF); // off because the performance of this game is lmao
+    osViSetSpecialFeatures(OS_VI_DITHER_FILTER_OFF);
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
+    osViSetSpecialFeatures(OS_VI_DIVOT_OFF);
     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
     create_thread(&gMainThread, THREAD_3_MAIN, thread3_main, NULL, gThread3Stack + THREAD3_STACK, 100);
     osStartThread(&gMainThread);
@@ -542,7 +541,6 @@ void thread1_idle(UNUSED void *arg) {
     while (TRUE) {
         ;
     }
-
 }
 
 // Clear RAM on boot
