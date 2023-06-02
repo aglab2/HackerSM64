@@ -50,23 +50,27 @@ void bhv_shrinkplatform_loop(void)
 	//disappearing
 	switch(o->oAction)
     {
+		case 0:
+			o->header.gfx.scale[0] = 1.3f;
+			o->header.gfx.scale[2] = 1.3f;
+			break;
 		case 1:
 			if (o->oTimer == SHRINK_TIME)
             {
 				o->activeFlags = 0;
-				o->oAction = 2;
+				// o->oAction = 2;
 				return;
 			}
-			o->header.gfx.scale[0] = ((f32)(SHRINK_TIME-o->oTimer)) / SHRINK_TIMEF;
-			o->header.gfx.scale[2] = ((f32)(SHRINK_TIME-o->oTimer)) / SHRINK_TIMEF;
+			o->header.gfx.scale[0] = 1.3f * ((f32)(SHRINK_TIME-o->oTimer)) / SHRINK_TIMEF;
+			o->header.gfx.scale[2] = 1.3f * ((f32)(SHRINK_TIME-o->oTimer)) / SHRINK_TIMEF;
 			break;
 		case 2:
 			cur_obj_hide();
 			if (o->oTimer == (SHRINK_TIME+1))
             {
 				o->oAction = 0;
-				o->header.gfx.scale[0] = 1.0f;
-				o->header.gfx.scale[2] = 1.0f;
+				o->header.gfx.scale[0] = 1.3f;
+				o->header.gfx.scale[2] = 1.3f;
 				cur_obj_unhide();
 			}
 			break;

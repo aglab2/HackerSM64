@@ -84,5 +84,5 @@ uintptr_t Hacktice_start[] = {
 };
 
 #ifndef BINARY
-bool Hacktice_gEnabled = true;
+bool Hacktice_gEnabled = false;
 #endif

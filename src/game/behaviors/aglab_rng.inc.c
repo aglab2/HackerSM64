@@ -78,12 +78,12 @@ static void rng_reroll()
         // pyramid
         case 3:
         {
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 8; i++)
             {
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_PYRAMID, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(-927.f, 1389.f);
                 pyr->oPosY = 3150.f - random_float() * 1200.f;
-                pyr->oPosZ = random_float_ft_biased(-1900.f, 5070.f, i / 12.f);
+                pyr->oPosZ = random_float_ft_biased(-1400.f, 5070.f, i / 8.f);
                 pyr->oBehParams2ndByte = 1;
                 pyr->oFaceAngleYaw = random_u16() & 0xe000;
             }
@@ -98,7 +98,7 @@ static void rng_reroll()
                 int model = random_u16() & 1;
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_CACTUS + model, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(86.f, 2536.f);
-                pyr->oPosZ = random_float_ft_biased(-5200.f, 1800.f, i / 30.f);
+                pyr->oPosZ = random_float_ft_biased(-5200.f, 2000.f, i / 30.f);
                 f32 yr = 4148.f - (4143.f + pyr->oPosZ) / 3.f;
                 pyr->oPosY = yr + random_float() * 1000.f;
                 pyr->oBehParams2ndByte = 6 + model;
@@ -126,13 +126,13 @@ static void rng_reroll()
         // shapes
         case 6:
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 13; i++)
             {
                 int model = random_u16() & 3;
                 struct Object* pyr = spawn_object(o, MODEL_AGLAB_RNG_SHAPE1 + model, bhvAglabRngCollision);
                 pyr->oPosX = random_float_ft(933.f, 3383.f);
                 pyr->oPosY = 2250.f - random_float() * 1300.f;
-                pyr->oPosZ = random_float_ft_biased(-2500.f, 4000.f, i / 15.f);
+                pyr->oPosZ = random_float_ft_biased(-2500.f, 4000.f, i / 13.f);
                 pyr->oBehParams2ndByte = 2 + model;
                 pyr->oFaceAngleYaw = random_u16() & 0xc000;
                 pyr->oFaceAngleRoll = random_u16() & 0xc000;
@@ -169,6 +169,7 @@ static void rng_reroll()
                 if (v > 1)
                 {
                     pyr = spawn_for_mop(bhvNoteblock_MOP, MODEL_AGLAB_RNG_NOTEBLOCK);
+                    obj_scale_xyz(pyr, 1.3f, 1.3f, 1.3f);
                 }
                 else
                 {
@@ -239,6 +240,8 @@ void bhv_aglab_rng_surface_check_loop()
 
 void bhv_aglab_rng_loop()
 {
+    // print_text_fmt_int(20, 20, "%d", (int) gMarioStates->pos[2]);
+
     if (3 == gCurrentArea->index)
     {
         f32 dx = gMarioStates->pos[0] - -3402.f;
