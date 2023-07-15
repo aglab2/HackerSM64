@@ -792,7 +792,7 @@ void pan_ahead_of_player(struct Camera *c) {
     vec3f_get_dist_and_angle(c->pos, sMarioCamState->pos, &dist, &pitch, &yaw);
 
     // The camera will pan ahead up to about 30% of the camera's distance to Mario.
-    pan[2] = sins(0xC00) * dist;
+    pan[2] = sins(0x1200) * dist;
 
     rotate_in_xz(pan, pan, sMarioCamState->faceAngle[1]);
     // rotate in the opposite direction
@@ -871,7 +871,7 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     s16 pitch = look_down_slopes(camYaw);
     f32 posY;
     f32 focusY;
-    f32 yOff = 125.f;
+    f32 yOff = 225.f;
     f32 baseDist = 1000.f;
 
     sAreaYaw = camYaw;
@@ -1149,7 +1149,7 @@ void mode_8_directions_camera(struct Camera *c) {
     }
 #endif
 
-    lakitu_zoom(400.f, 0x900);
+    lakitu_zoom(750.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
