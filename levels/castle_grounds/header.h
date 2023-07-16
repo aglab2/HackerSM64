@@ -62,4 +62,6 @@ extern const LevelScript level_castle_grounds_entry[];
 
 #include "levels/castle_grounds/panel8/geo_header.h"
 
+#include "levels/castle_grounds/panel9/geo_header.h"
+
 #endif

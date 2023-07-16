@@ -29,7 +29,7 @@ void bhv_ctl_init()
         th->oPosY = 1440 - 170 * i;
         th->oPosZ = -2945 + 340 * (j ? -1 : 1);
         th->oFaceAngleYaw = 0x8000;
-        th->oFaceAngleRoll = 0; // 0x8000;
+        th->oFaceAngleRoll = 0x8000;
         th->oFaceAnglePitch = 0x8000;
         SET_BPARAM1(th->oBehParams, i);
         SET_BPARAM2(th->oBehParams, j);
@@ -53,6 +53,8 @@ void bhv_ctl_loop()
     print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
     print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+
+    gCamera->cutscene = CUTSCENE_MAIN_SCENE;
 }
 
 void bhv_ctl_choice_init()

@@ -10347,6 +10347,21 @@ struct Cutscene sCutsceneReadMessage[] = {
     { cutscene_read_message_end, 0 }
 };
 
+void cutscene_main_scene(struct Camera *c)
+{
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->pos[0] = 2000.f;
+    c->pos[1] = 1383.f;
+    c->pos[2] = -2945.f;
+    c->focus[0] = 0.f;
+    c->focus[1] = 1183.f;
+    c->focus[2] = -2945.f;
+}
+
+struct Cutscene sCutsceneMainScene[] = {
+    { cutscene_main_scene, CUTSCENE_LOOP },
+};
+
 /* TODO:
  * The next two arrays are both related to levels, and they look generated.
  * These should be split into their own file.
@@ -10808,6 +10823,8 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_RACE_DIALOG,          sCutsceneDialog)
         CUTSCENE(CUTSCENE_ENTER_PYRAMID_TOP,    sCutsceneEnterPyramidTop)
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE,  sCutscenePyramidTopExplode)
+        
+        CUTSCENE(CUTSCENE_MAIN_SCENE,           sCutsceneMainScene)
     }
 
 #undef CUTSCENE

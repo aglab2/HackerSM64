@@ -43,3 +43,4 @@
 #include "levels/castle_grounds/panel6/model.inc.c"
 #include "levels/castle_grounds/panel7/model.inc.c"
 #include "levels/castle_grounds/panel8/model.inc.c"
+#include "levels/castle_grounds/panel9/model.inc.c"

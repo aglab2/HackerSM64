@@ -30,3 +30,4 @@
 #include "levels/castle_grounds/panel6/geo.inc.c"
 #include "levels/castle_grounds/panel7/geo.inc.c"
 #include "levels/castle_grounds/panel8/geo.inc.c"
+#include "levels/castle_grounds/panel9/geo.inc.c"
