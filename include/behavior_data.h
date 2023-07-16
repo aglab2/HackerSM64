@@ -543,5 +543,6 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 
 extern const BehaviorScript bhvPlayer[];
 extern const BehaviorScript bhvCtl[];
+extern const BehaviorScript bhvCtlChoice[];
 
 #endif // BEHAVIOR_DATA_H

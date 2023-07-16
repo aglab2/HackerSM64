@@ -33,3 +33,13 @@
 #include "levels/castle_grounds/areas/1/movtext.inc.c"
 
 #include "levels/castle_grounds/leveldata.inc.c"
+
+#include "levels/castle_grounds/panel0/model.inc.c"
+#include "levels/castle_grounds/panel1/model.inc.c"
+#include "levels/castle_grounds/panel2/model.inc.c"
+#include "levels/castle_grounds/panel3/model.inc.c"
+#include "levels/castle_grounds/panel4/model.inc.c"
+#include "levels/castle_grounds/panel5/model.inc.c"
+#include "levels/castle_grounds/panel6/model.inc.c"
+#include "levels/castle_grounds/panel7/model.inc.c"
+#include "levels/castle_grounds/panel8/model.inc.c"

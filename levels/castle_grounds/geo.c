@@ -20,3 +20,13 @@
 #include "levels/castle_grounds/areas/1/geo.inc.c"
 
 #include "levels/castle_grounds/geo.inc.c"
+
+#include "levels/castle_grounds/panel0/geo.inc.c"
+#include "levels/castle_grounds/panel1/geo.inc.c"
+#include "levels/castle_grounds/panel2/geo.inc.c"
+#include "levels/castle_grounds/panel3/geo.inc.c"
+#include "levels/castle_grounds/panel4/geo.inc.c"
+#include "levels/castle_grounds/panel5/geo.inc.c"
+#include "levels/castle_grounds/panel6/geo.inc.c"
+#include "levels/castle_grounds/panel7/geo.inc.c"
+#include "levels/castle_grounds/panel8/geo.inc.c"

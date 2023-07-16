@@ -47,6 +47,15 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_VCUTM_GRILL, castle_grounds_geo_00070C), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG, castle_grounds_geo_000660), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724), 
+	LOAD_MODEL_FROM_GEO(0xf0, panel0_geo), 
+	LOAD_MODEL_FROM_GEO(0xf1, panel1_geo), 
+	LOAD_MODEL_FROM_GEO(0xf2, panel2_geo), 
+	LOAD_MODEL_FROM_GEO(0xf3, panel3_geo), 
+	LOAD_MODEL_FROM_GEO(0xf4, panel4_geo), 
+	LOAD_MODEL_FROM_GEO(0xf5, panel5_geo), 
+	LOAD_MODEL_FROM_GEO(0xf6, panel6_geo), 
+	LOAD_MODEL_FROM_GEO(0xf7, panel7_geo), 
+	LOAD_MODEL_FROM_GEO(0xf8, panel8_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -67,6 +76,8 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_GOOMBA, 2429, 405, -4918, 0, 30, 0, (1 << 24) | (4 << 16), bhvPlayer),
 		MARIO_POS(0x01, 0, 2989, 5, -2875),
 		OBJECT(MODEL_NONE, 700, 40, -2965, 0, -91, 0, (1 << 24) | (0 << 16), bhvCtl),
+		OBJECT(MODEL_NONE, 2182, 40, -3937, 0, 24, 0, (1 << 24) | (0 << 16), bhvCtlChoice),
+		OBJECT(MODEL_NONE, 2182, 40, -1604, 0, 24, 0, (0 << 24) | (0 << 16), bhvCtlChoice),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
