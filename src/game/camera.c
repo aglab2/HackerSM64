@@ -1118,12 +1118,15 @@ s32 snap_to_45_degrees(s16 angle) {
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
+extern char sBlockCamera;
 void mode_8_directions_camera(struct Camera *c) {
     Vec3f pos;
     s16 oldAreaYaw = sAreaYaw;
 
     radial_camera_input(c);
 
+    if (!sBlockCamera)
+    {
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
         s8DirModeYawOffset += DEGREES(45);
         play_sound_cbutton_side();
@@ -1147,7 +1150,8 @@ void mode_8_directions_camera(struct Camera *c) {
     else if (gPlayer1Controller->buttonPressed & D_JPAD) {
         s8DirModeYawOffset = snap_to_45_degrees(s8DirModeYawOffset);
     }
-#endif
+#endif   
+    }
 
     lakitu_zoom(750.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
@@ -2880,13 +2884,6 @@ void update_camera(struct Camera *c) {
         && gCurrentArea->camera->mode != CAMERA_MODE_INSIDE_CANNON) {
         // Only process R_TRIG if 'fixed' is not selected in the menu
         if (cam_select_alt_mode(CAM_SELECTION_NONE) == CAM_SELECTION_MARIO) {
-            if (gPlayer1Controller->buttonPressed & R_TRIG) {
-                if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
-                    set_cam_angle(CAM_ANGLE_MARIO);
-                } else {
-                    set_cam_angle(CAM_ANGLE_LAKITU);
-                }
-            }
         }
         play_sound_if_cam_switched_to_lakitu_or_mario();
     }
@@ -3039,33 +3036,6 @@ void update_camera(struct Camera *c) {
 #endif
         // If fixed camera is selected as the alternate mode, then fix the camera as long as the right
         // trigger is held
-        if ((c->cutscene == CUTSCENE_NONE &&
-            (gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)
-            || (gCameraMovementFlags & CAM_MOVE_FIX_IN_PLACE)
-            || (sMarioCamState->action) == ACT_GETTING_BLOWN) {
-
-            // If this is the first frame that R_TRIG is held, play the "click" sound
-            if (c->cutscene == CUTSCENE_NONE && (gPlayer1Controller->buttonPressed & R_TRIG)
-                && cam_select_alt_mode(0) == CAM_SELECTION_FIXED) {
-                sCameraSoundFlags |= CAM_SOUND_FIXED_ACTIVE;
-                play_sound_rbutton_changed();
-            }
-
-            // Fixed mode only prevents Lakitu from moving. The camera pos still updates, so
-            // Lakitu will fly to his next position as normal whenever R_TRIG is released.
-            gLakituState.posHSpeed = 0.f;
-            gLakituState.posVSpeed = 0.f;
-
-            vec3f_get_yaw(gLakituState.focus, gLakituState.pos, &c->nextYaw);
-            c->yaw = c->nextYaw;
-            gCameraMovementFlags &= ~CAM_MOVE_FIX_IN_PLACE;
-        } else {
-            // Play the "click" sound when fixed mode is released
-            if (sCameraSoundFlags & CAM_SOUND_FIXED_ACTIVE) {
-                play_sound_rbutton_changed();
-                sCameraSoundFlags &= ~CAM_SOUND_FIXED_ACTIVE;
-            }
-        }
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
     } else {
         if ((gPlayer1Controller->buttonPressed & R_TRIG) && (cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
@@ -3719,22 +3689,6 @@ s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown
     }
     if (!(buttonsDown & R_CBUTTONS)) {
         currentState &= ~R_CBUTTONS;
-    }
-
-    if (buttonsPressed & U_CBUTTONS) {
-        currentState |= U_CBUTTONS;
-        currentState &= ~D_CBUTTONS;
-    }
-    if (!(buttonsDown & U_CBUTTONS)) {
-        currentState &= ~U_CBUTTONS;
-    }
-
-    if (buttonsPressed & D_CBUTTONS) {
-        currentState |= D_CBUTTONS;
-        currentState &= ~U_CBUTTONS;
-    }
-    if (!(buttonsDown & D_CBUTTONS)) {
-        currentState &= ~D_CBUTTONS;
     }
 
     return currentState;
@@ -4646,27 +4600,6 @@ void radial_camera_input(struct Camera *c) {
                 gCameraMovementFlags |= CAM_MOVE_RETURN_TO_MIDDLE;
                 play_sound_cbutton_up();
             }
-        }
-    }
-
-    // Zoom in / enter C-Up
-    if (gPlayer1Controller->buttonPressed & U_CBUTTONS) {
-        if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
-            gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
-            play_sound_cbutton_up();
-        } else {
-            set_mode_c_up(c);
-        }
-    }
-
-    // Zoom out
-    if (gPlayer1Controller->buttonPressed & D_CBUTTONS) {
-        if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
-            gCameraMovementFlags |= CAM_MOVE_ALREADY_ZOOMED_OUT;
-            play_camera_buzz_if_cdown();
-        } else {
-            gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
-            play_sound_cbutton_down();
         }
     }
 }

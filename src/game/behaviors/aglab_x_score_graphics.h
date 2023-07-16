@@ -1,0 +1,2 @@
+SCORE_GRAPHICS(mat_castle_grounds_dl_X)
+SCORE_GRAPHICS(mat_castle_grounds_dl_Y)

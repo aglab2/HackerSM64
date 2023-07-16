@@ -1900,6 +1900,8 @@ ALIGNED8 static const Texture texture_hud_char_arrow_down[] = {
 #include "textures/segment2/segment2.081D0.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_space[4096] = { };
+
 // Main HUD print table 0x02008250-0x02008337
 const Texture *const main_hud_lut[] = {
     texture_hud_char_0, texture_hud_char_1, texture_hud_char_2, texture_hud_char_3,
@@ -1917,6 +1919,23 @@ const Texture *const main_hud_lut[] = {
     texture_hud_char_multiply, texture_hud_char_coin, texture_hud_char_red_coin, texture_hud_char_silver_coin,
     texture_hud_char_mario_head, texture_hud_char_star, texture_hud_char_decimal_point, texture_hud_char_beta_key,
     texture_hud_char_apostrophe, texture_hud_char_double_quote, texture_hud_char_umlaut,
+};
+
+const Texture *const sLUT[128] = {
+    ['0'] = texture_hud_char_0, ['1'] = texture_hud_char_1, ['2'] = texture_hud_char_2, ['3'] = texture_hud_char_3,
+    ['4'] = texture_hud_char_4, ['5'] = texture_hud_char_5, ['6'] = texture_hud_char_6, ['7'] = texture_hud_char_7,
+    ['8'] = texture_hud_char_8, ['9'] = texture_hud_char_9, ['A'] = texture_hud_char_A, ['B'] = texture_hud_char_B,
+    ['C'] = texture_hud_char_C, ['D'] = texture_hud_char_D, ['E'] = texture_hud_char_E, ['F'] = texture_hud_char_F,
+    ['G'] = texture_hud_char_G, ['H'] = texture_hud_char_H, ['I'] = texture_hud_char_I, ['J'] = texture_hud_char_J,
+    ['K'] = texture_hud_char_K, ['L'] = texture_hud_char_L, ['M'] = texture_hud_char_M, ['N'] = texture_hud_char_N,
+    ['O'] = texture_hud_char_O, ['P'] = texture_hud_char_P, ['Q'] = texture_hud_char_Q, ['R'] = texture_hud_char_R,
+    ['S'] = texture_hud_char_S, ['T'] = texture_hud_char_T, ['U'] = texture_hud_char_U, ['V'] = texture_hud_char_V,
+    ['W'] = texture_hud_char_W, ['X'] = texture_hud_char_X, ['Y'] = texture_hud_char_Y, ['Z'] = texture_hud_char_Z,
+    ['!'] = texture_hud_char_exclamation, ['?'] = texture_hud_char_question, ['&'] = texture_hud_char_ampersand,
+    ['%'] = texture_hud_char_percent, ['-'] = texture_hud_char_minus,
+    ['*'] = texture_hud_char_multiply, ['.'] = texture_hud_char_decimal_point,
+    ['\''] = texture_hud_char_apostrophe, ['"'] = texture_hud_char_double_quote, 
+    [' '] = texture_hud_char_space,
 };
 
 // Main small font print table 0x02008338-0x02008737

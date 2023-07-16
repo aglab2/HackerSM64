@@ -6093,7 +6093,7 @@ const BehaviorScript bhvPlayer[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     DROP_TO_FLOOR(),
-    // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     SET_HOME(),
     CALL_NATIVE(bhv_player_init),
     BEGIN_LOOP(),
@@ -6120,5 +6120,16 @@ const BehaviorScript bhvCtlChoice[] = {
     CALL_NATIVE(bhv_ctl_choice_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_ctl_choice_loop),
+    END_LOOP(),
+};
+
+extern void bhv_panel_init();
+extern void bhv_panel_loop();
+const BehaviorScript bhvPanel[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_panel_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_panel_loop),
     END_LOOP(),
 };

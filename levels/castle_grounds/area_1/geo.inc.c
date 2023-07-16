@@ -26,6 +26,7 @@ const GeoLayout castle_grounds_area_1_geo[] = {
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_grounds_dl_ff_014_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_grounds_dl_ff_015_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, castle_grounds_dl_ff_016_mesh_layer_4),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, castle_grounds_dl_ff_017_mesh_layer_5),
 		GEO_ROTATION_NODE(LAYER_OPAQUE, 90, 0, 0),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
