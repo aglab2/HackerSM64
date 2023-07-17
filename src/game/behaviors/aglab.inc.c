@@ -421,6 +421,11 @@ void handle_monitor()
             }
         }
     }
+
+    if (gPlayer1Controller->buttonPressed & L_CBUTTONS)
+    {
+        play_sound(SOUND_PEACH_BAKE_A_CAKE, gGlobalSoundSource);
+    }
 }
 
 static f32 lerp(f32 l, f32 r, f32 p)
