@@ -6133,3 +6133,13 @@ const BehaviorScript bhvPanel[] = {
         CALL_NATIVE(bhv_panel_loop),
     END_LOOP(),
 };
+
+extern void bhv_static_billboard_loop();
+const BehaviorScript bhvStaticBillboard[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    BILLBOARD(),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_static_billboard_loop),
+    END_LOOP(),
+};

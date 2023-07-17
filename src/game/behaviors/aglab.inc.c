@@ -112,6 +112,14 @@ static f32 sReactionY = 529.f;
 static f32 sLeftBuzzerPos [3] = { 947, 529, -2788 };
 static f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
 
+static void obj_unhide(struct Object* obj) {
+    obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+}
+
+static void obj_hide(struct Object* obj) {
+    obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+}
+
 struct Object *cur_obj_find_with_behavior_with_bparam12(const BehaviorScript *behavior, int bparam1, int bparam2) {
     uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
     struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
@@ -186,6 +194,10 @@ void bhv_player_loop()
 #include "aglab_x_score_graphics.h"
 #undef SCORE_GRAPHICS
 
+#define TEXT_GRAPHICS(i,j, name) extern Gfx name[];
+#include "aglab_x_text_graphics.h"
+#undef TEXT_GRAPHICS
+
 static Gfx* sPanelVisuals[] =
 {
 #define PANEL_GRAPHICS(i, j, name) [i*32 + j] = name, 
@@ -205,6 +217,13 @@ static Gfx* sPendingScoreVisuals[] =
 #define SCORE_GRAPHICS(name) name, 
 #include "aglab_x_score_graphics.h"
 #undef SCORE_GRAPHICS 
+};
+
+static Gfx* sPlayerTextVisuals[] = 
+{
+#define TEXT_GRAPHICS(i,j, name) [i*32 + j] = name,
+#include "aglab_x_text_graphics.h"
+#undef TEXT_GRAPHICS 
 };
 
 extern const Texture *const sLUT[128];
@@ -257,6 +276,33 @@ static void set_panel_text(int panelNumber, char* txt)
     }
 }
 
+#define MAX_PLAYER_TEXT_LEN 24
+static void set_player_text(int side, char* txt)
+{
+    void** luts = segmented_to_virtual(sLUT);
+    int len = strlen(txt);
+    if (len > MAX_PLAYER_TEXT_LEN)
+    {
+        len = MAX_PLAYER_TEXT_LEN;
+    }
+
+    txt[len] = '\0';
+    for (int i = 0; i < MAX_PLAYER_TEXT_LEN; i++)
+    {
+        void** gfx = segmented_to_virtual(sPlayerTextVisuals[32 * side + i]);
+        gfx[13] = luts[' '];
+    }
+
+    int off = (MAX_PLAYER_TEXT_LEN - len) / 2;
+    for (int i = 0; i < len; i++)
+    {
+        void** gfx = segmented_to_virtual(sPlayerTextVisuals[32 * side + off + i]);
+        gfx[13] = luts[(int) txt[i]];
+    }
+}
+
+extern const BehaviorScript bhvStaticBillboard[];
+
 #define MAX_TEAM_TEXT_LEN 11
 void bhv_ctl_init()
 {
@@ -286,6 +332,15 @@ void bhv_ctl_init()
     }
 
     set_total_score(0);
+    
+    for (int k = 0; k < 2; k++)
+    {
+        struct Object* bb = spawn_object(o, 0xfa + k, bhvStaticBillboard);
+        SET_BPARAM1(bb->oBehParams, 0);
+        SET_BPARAM2(bb->oBehParams, k);
+        obj_hide(bb);
+        obj_scale(bb, 0.5f);
+    }
 }
 
 static void spawn_sparkles()
@@ -385,6 +440,7 @@ void bhv_ctl_loop()
         
         struct Object* p1 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, currentRound());
         struct Object* p2 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, currentRound());
+        struct Object* ps[] = { p1, p2 };
 
         if (o->oTimer < 50)
         {
@@ -395,7 +451,7 @@ void bhv_ctl_loop()
             p2->oPosY = lerp(p2->oHomeY, sRightBuzzerPos[1], o->oTimer / 50.f);
             p2->oPosZ = lerp(p2->oHomeZ, sRightBuzzerPos[2], o->oTimer / 50.f);
         }
-        else
+        else if (!sShowMonitor)
         {
             if (gPlayer1Controller->buttonPressed & R_JPAD)
             {
@@ -422,23 +478,31 @@ void bhv_ctl_loop()
                 sCurrentResponder = (1 + currentRound()) % 5;
             }
         }
+
+        for (int k = 0; k < 2; k++)
+        {
+            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, k);
+            obj_unhide(bb);
+            bb->parentObj = ps[k];
+            set_player_text(k, sConfiguration.teams[k].players[currentRound()].name);
+        }
     }
 
     if (sInternalState == AFTER_REACTION)
     {
-        if (o->oTimer < 100)
+        if (o->oTimer < 50)
         {
             struct Object* p1 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, currentRound());
-            p1->oPosX = lerp(sLeftBuzzerPos[0],  p1->oHomeX, o->oTimer / 100.f);
-            p1->oPosY = lerp(sLeftBuzzerPos[1],  p1->oHomeY, o->oTimer / 100.f);
-            p1->oPosZ = lerp(sLeftBuzzerPos[2],  p1->oHomeZ, o->oTimer / 100.f);
+            p1->oPosX = lerp(sLeftBuzzerPos[0],  p1->oHomeX, o->oTimer / 50.f);
+            p1->oPosY = lerp(sLeftBuzzerPos[1],  p1->oHomeY, o->oTimer / 50.f);
+            p1->oPosZ = lerp(sLeftBuzzerPos[2],  p1->oHomeZ, o->oTimer / 50.f);
             struct Object* p2 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, currentRound());
-            p2->oPosX = lerp(sRightBuzzerPos[0], p2->oHomeX, o->oTimer / 100.f);
-            p2->oPosY = lerp(sRightBuzzerPos[1], p2->oHomeY, o->oTimer / 100.f);
-            p2->oPosZ = lerp(sRightBuzzerPos[2], p2->oHomeZ, o->oTimer / 100.f);
+            p2->oPosX = lerp(sRightBuzzerPos[0], p2->oHomeX, o->oTimer / 50.f);
+            p2->oPosY = lerp(sRightBuzzerPos[1], p2->oHomeY, o->oTimer / 50.f);
+            p2->oPosZ = lerp(sRightBuzzerPos[2], p2->oHomeZ, o->oTimer / 50.f);
         }
 
-        if (100 == o->oTimer)
+        if (50 == o->oTimer)
         {
             struct Object* p1 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, currentRound());
             p1->oMoveAngleYaw += 0x8000;
@@ -446,7 +510,6 @@ void bhv_ctl_loop()
             p2->oMoveAngleYaw += 0x8000;
         }
     }
-
 
     if (sShowMonitor)
     {
@@ -474,8 +537,15 @@ void bhv_ctl_choice_loop()
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
-            sInternalState = LEFT + BPARAM1;
+            sInternalState = RIGHT - BPARAM1;
             sBlockCamera = 1;
+            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+            struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
+            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
+            bb->parentObj = p;
+            obj_unhide(bb);
+            obj_scale(bb, 0.8f);
+            set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
         }
     }
 
@@ -485,6 +555,7 @@ void bhv_ctl_choice_loop()
         gMarioStates->pos[1] = o->oPosY;
         gMarioStates->pos[2] = o->oPosZ;
         gMarioStates->faceAngle[1] = 0;
+        s8DirModeYawOffset = 0x4000;
         handle_monitor();
     }
     
@@ -494,7 +565,41 @@ void bhv_ctl_choice_loop()
         gMarioStates->pos[1] = o->oPosY;
         gMarioStates->pos[2] = o->oPosZ;
         gMarioStates->faceAngle[1] = 0x8000;
+        s8DirModeYawOffset = 0x4000;
         handle_monitor();
+    }
+
+    if ((!BPARAM1 && sInternalState == RIGHT) || (BPARAM1 && sInternalState == LEFT))
+    {
+        int update = 0;
+        if (gPlayer1Controller->buttonPressed & L_JPAD)
+        {
+            if (BPARAM1)
+                sCurrentResponder--;
+            else
+                sCurrentResponder++;
+
+            update = 1;
+        }
+        if (gPlayer1Controller->buttonPressed & R_JPAD)
+        {
+            if (BPARAM1)
+                sCurrentResponder++;
+            else
+                sCurrentResponder--;
+
+            update = 1;
+        }
+
+        if (update)
+        {
+            sCurrentResponder += 5;
+            sCurrentResponder %= 5;
+            struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
+            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
+            bb->parentObj = p;
+            set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+        }
     }
 }
 
@@ -554,5 +659,15 @@ void bhv_panel_loop()
     else
     {
         // -
+    }
+}
+
+void bhv_static_billboard_loop()
+{
+    if (o->parentObj)
+    {
+        o->oPosX = o->parentObj->oPosX;
+        o->oPosY = o->parentObj->oPosY + 100.f + 100.f * (*o->header.gfx.scale);
+        o->oPosZ = o->parentObj->oPosZ;
     }
 }
