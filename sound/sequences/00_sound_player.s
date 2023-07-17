@@ -2256,7 +2256,7 @@ chan_end
 
 .layer_D50:
 layer_transpose -2
-layer_note1 43, 0x1e, 105
+layer_note1 39, 0x1e, 105
 layer_end
 
 .sound_mario_on_fire:
@@ -2601,7 +2601,7 @@ chan_setlayer 1, .layer_F37
 chan_end
 
 .layer_F37:
-layer_note1 39, 0xb4, 127
+layer_note1 39, 0x704, 127
 layer_end
 
 .sound_peach_thank_you_mario:
@@ -2634,7 +2634,7 @@ chan_setlayer 1, .layer_F66
 chan_end
 
 .layer_F66:
-layer_note1 39, 0x190, 127
+layer_note1 39, 0x250, 127
 layer_end
 
 .sound_peach_for_mario:
@@ -2645,7 +2645,7 @@ chan_setlayer 1, .layer_F76
 chan_end
 
 .layer_F76:
-layer_note1 39, 0x50, 127
+layer_note1 39, 0x250, 127
 layer_end
 
 .sound_peach_mario2:

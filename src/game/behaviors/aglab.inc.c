@@ -76,6 +76,7 @@ static char sSelectedY = 0;
 
 static char sCurrentResponder = 0;
 static char sPendingScore = 0;
+static char sFailCount = 0;
 
 extern s16 s8DirModeYawOffset;
 
@@ -99,18 +100,17 @@ enum InternalState
     AFTER_REACTION,
     LEFT,
     RIGHT,
+    STEAL,
 };
 
 static char sInternalState = IS_INIT;
 static char sShowMonitor = 0;
 char sBlockCamera = 0;
 
-static f32 sPlayerInitY = 405.f;
-static f32 sGroundY = 5.f;
-static f32 sReactionY = 529.f;
-
 static f32 sLeftBuzzerPos [3] = { 947, 529, -2788 };
 static f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
+
+static char sPlayedBuzzer = 0;
 
 static void obj_unhide(struct Object* obj) {
     obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -306,6 +306,9 @@ extern const BehaviorScript bhvStaticBillboard[];
 #define MAX_TEAM_TEXT_LEN 11
 void bhv_ctl_init()
 {
+    // play_sound(SOUND_PEACH_FOR_MARIO, gGlobalSoundSource); // success finale
+    // play_sound(SOUND_PEACH_BAKE_A_CAKE, gGlobalSoundSource); // success round
+
     void** luts = segmented_to_virtual(sLUT);
     for (int k = 0; k < 2; k++)
     {
@@ -354,12 +357,16 @@ static void spawn_sparkles()
     }
 }
 
+extern const BehaviorScript bhvFailCross[];
 void handle_monitor()
 {
     if (gPlayer1Controller->buttonPressed & R_TRIG)
     {
         sShowMonitor = !sShowMonitor;
     }
+
+    if (!sShowMonitor)
+        return;
 
     if (gPlayer1Controller->buttonPressed & L_JPAD)
     {
@@ -381,6 +388,38 @@ void handle_monitor()
     {
         if (sSelectedY < 4)
             sSelectedY++;
+    }
+
+    if (gPlayer1Controller->buttonPressed & B_BUTTON)
+    {
+        if (sInternalState == REACTION)
+        {
+            struct Object* cross = spawn_object(o, 0xfc, bhvFailCross);
+            cross->oPosX = 200.f;
+            cross->oPosY = 1183.f;
+            cross->oPosZ = -2945.f;
+            cross->oFaceAngleYaw = 0;
+            cross->oFaceAngleRoll = 0;
+            cross->oFaceAnglePitch = 0;
+            cross->oBehParams2ndByte = 0;
+        }
+        else
+        {
+            sFailCount++;
+            sFailCount %= 3;
+            f32 off = (sFailCount - 1) * 300.f;
+            for (int i = 0; i < sFailCount; i++)
+            {
+                struct Object* cross = spawn_object(o, 0xfc, bhvFailCross);
+                cross->oPosX = 200.f;
+                cross->oPosY = 1183.f;
+                cross->oPosZ = -2945.f + 600.f * i - off;
+                cross->oFaceAngleYaw = 0;
+                cross->oFaceAngleRoll = 0;
+                cross->oFaceAnglePitch = 0;
+                cross->oBehParams2ndByte = 0;
+            }
+        }
     }
 }
 
@@ -419,12 +458,16 @@ void bhv_ctl_loop()
 
     if (sInternalState == PRE_REACTION)
     {
+        if (0 == (o->oTimer % 470))    
+            play_sound(SOUND_PEACH_THANKS_TO_YOU, gGlobalSoundSource); // intro
+
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
             sInternalState = REACTION;
             sBlockCamera = 1;
             o->oTimer = 0;
+            play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
         }
     }
 
@@ -455,11 +498,23 @@ void bhv_ctl_loop()
         {
             if (gPlayer1Controller->buttonPressed & R_JPAD)
             {
+                if (!sPlayedBuzzer)
+                {
+                    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
+                    sPlayedBuzzer = 1;
+                }
+
                 p1->oAction = 1;
                 p2->oAction = 2;
             }
             if (gPlayer1Controller->buttonPressed & L_JPAD)
             {
+                if (!sPlayedBuzzer)
+                {
+                    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
+                    sPlayedBuzzer = 1;
+                }
+
                 p1->oAction = 2;
                 p2->oAction = 1;
             }
@@ -511,6 +566,17 @@ void bhv_ctl_loop()
         }
     }
 
+    if (sInternalState == LEFT || sInternalState == RIGHT)
+    {
+        if (gPlayer1Controller->buttonPressed & L_TRIG)
+        {
+            o->oTimer = 0;
+            sInternalState = STEAL;
+            sBlockCamera = 0;
+            sCurrentResponder = 0;
+        }
+    }
+
     if (sShowMonitor)
     {
         gCamera->cutscene = CUTSCENE_MAIN_SCENE;
@@ -527,12 +593,11 @@ void bhv_ctl_loop()
 
 void bhv_ctl_choice_init()
 {
-
 }
 
 void bhv_ctl_choice_loop()
 {
-    if (sInternalState == AFTER_REACTION)
+    if (sInternalState == AFTER_REACTION || sInternalState == STEAL)
     {
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
@@ -630,6 +695,7 @@ void bhv_panel_loop()
             o->oFaceAngleRoll = 0x1000 * sins(0x767 * o->oTimer);
             if (gPlayer1Controller->buttonPressed & A_BUTTON)
             {
+                play_sound(SOUND_PEACH_DEAR_MARIO, gGlobalSoundSource);
                 o->oAction = 1;
                 {
                     struct Round* round = &sConfiguration.rounds[currentRound()];
@@ -669,5 +735,30 @@ void bhv_static_billboard_loop()
         o->oPosX = o->parentObj->oPosX;
         o->oPosY = o->parentObj->oPosY + 100.f + 100.f * (*o->header.gfx.scale);
         o->oPosZ = o->parentObj->oPosZ;
+    }
+}
+
+void bhv_fail_cross_init()
+{
+    obj_scale(o, 0.f);
+    if (0 == o->oBehParams2ndByte)
+        play_sound(SOUND_PEACH_MARIO, gGlobalSoundSource);
+}
+
+void bhv_fail_cross_loop()
+{
+    if (o->oTimer < 10)
+    {
+        obj_scale(o, o->oTimer / 10.f);
+    }
+
+    if (o->oTimer > 30)
+    {
+        obj_scale(o, (40 - o->oTimer) / 10.f); 
+    }
+
+    if (40 == o->oTimer)
+    {
+        o->activeFlags = 0;
     }
 }

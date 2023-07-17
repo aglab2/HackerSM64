@@ -60,6 +60,8 @@ const LevelScript level_castle_grounds_entry[] = {
 	
 	LOAD_MODEL_FROM_GEO(0xfa, textL_geo), 
 	LOAD_MODEL_FROM_GEO(0xfb, textR_geo), 
+	
+	LOAD_MODEL_FROM_GEO(0xfc, cross_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -82,7 +84,7 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_NONE, 2182, 40, -1604, 0, 24, 0, (0 << 24) | (0 << 16), bhvCtlChoice),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, 0),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

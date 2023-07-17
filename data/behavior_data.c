@@ -6104,7 +6104,7 @@ const BehaviorScript bhvPlayer[] = {
 extern void bhv_ctl_init();
 extern void bhv_ctl_loop();
 const BehaviorScript bhvCtl[] = {
-    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN(OBJ_LIST_SPAWNER),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     CALL_NATIVE(bhv_ctl_init),
     BEGIN_LOOP(),
@@ -6115,7 +6115,7 @@ const BehaviorScript bhvCtl[] = {
 extern void bhv_ctl_choice_init();
 extern void bhv_ctl_choice_loop();
 const BehaviorScript bhvCtlChoice[] = {
-    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN(OBJ_LIST_SPAWNER),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     CALL_NATIVE(bhv_ctl_choice_init),
     BEGIN_LOOP(),
@@ -6141,5 +6141,16 @@ const BehaviorScript bhvStaticBillboard[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_static_billboard_loop),
+    END_LOOP(),
+};
+
+extern void bhv_fail_cross_init();
+extern void bhv_fail_cross_loop();
+const BehaviorScript bhvFailCross[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_fail_cross_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fail_cross_loop),
     END_LOOP(),
 };

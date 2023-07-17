@@ -33,3 +33,4 @@
 #include "levels/castle_grounds/panel9/geo.inc.c"
 #include "levels/castle_grounds/textL/geo.inc.c"
 #include "levels/castle_grounds/textR/geo.inc.c"
+#include "levels/castle_grounds/cross/geo.inc.c"
