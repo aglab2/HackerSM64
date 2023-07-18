@@ -286,6 +286,8 @@ enum Cutscenes {
     CUTSCENE_ENTER_POOL,
 
     CUTSCENE_MAIN_SCENE,
+    CUTSCENE_LEFT,
+    CUTSCENE_RIGHT,
 };
 
 /**

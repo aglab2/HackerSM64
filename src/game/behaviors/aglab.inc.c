@@ -11,7 +11,7 @@ struct Score
 struct State
 {
     char curRound[4];
-    char _reserved[4];
+    int internalState;
     struct Score scores[2];
 };
 
@@ -48,7 +48,7 @@ __attribute__((aligned(32))) struct FeudConfig
 } sConfiguration = 
 {
     .header = "THE FAMILY FEUD CONTROL START YE",
-    .state = { "0", "", { "000", "000" } },
+    .state = { "1", 0, { "000", "000" } },
     .teams = { 
         { "TEAM 1", { "T1 PLAYER 1 NAME", "T1 PLAYER 2 NAME", "T1 PLAYER 3 NAME", "T1 PLAYER 4 NAME", "T1 PLAYER 5 NAME", } },
         { "TEAM 2", { "T2 PLAYER 1 NAME", "T2 PLAYER 2 NAME", "T2 PLAYER 3 NAME", "T2 PLAYER 4 NAME", "T2 PLAYER 5 NAME", } },
@@ -77,6 +77,18 @@ static char sSelectedY = 0;
 static char sCurrentResponder = 0;
 static char sPendingScore = 0;
 static char sFailCount = 0;
+static char sAnswerSide = 0;
+
+enum FinalePositions
+{
+    FP_LEFT = -1,
+    FP_NEUTRAL = 0,
+    FP_RIGHT = 1,
+};
+
+static char sNormalFinalePosition = FP_NEUTRAL;
+
+static const char sScoreMultipliers[5] = { 1, 1, 2, 2, 3 };
 
 extern s16 s8DirModeYawOffset;
 
@@ -89,7 +101,7 @@ enum Rounds
 
 static int currentRound()
 {
-    return sConfiguration.state.curRound[0] - '0';
+    return sConfiguration.state.curRound[0] - '1';
 }
 
 enum InternalState
@@ -104,7 +116,8 @@ enum InternalState
     NORMAL_FINALE,
 };
 
-static char sInternalState = IS_INIT;
+#define sInternalState (sConfiguration.state.internalState)
+
 static char sShowMonitor = 0;
 char sBlockCamera = 0;
 
@@ -161,7 +174,7 @@ void bhv_player_loop()
 {
     if (1 == o->oAction)
     {
-        if (o->oPosY > sLeftBuzzerPos[1])
+        if (o->oPosY > o->oPlayerYMin)
         {
             o->oVelY -= 2.f;
             o->oPosY += o->oVelY;
@@ -173,7 +186,7 @@ void bhv_player_loop()
     }
     if (2 == o->oAction)
     {
-        if (o->oPosY < sLeftBuzzerPos[1] + 5.f)
+        if (o->oPosY < o->oPlayerYMin + 5.f)
         {
             o->oVelY = 20.f;
         }
@@ -307,9 +320,6 @@ extern const BehaviorScript bhvStaticBillboard[];
 #define MAX_TEAM_TEXT_LEN 11
 void bhv_ctl_init()
 {
-    // play_sound(SOUND_PEACH_FOR_MARIO, gGlobalSoundSource); // success finale
-    // play_sound(SOUND_PEACH_BAKE_A_CAKE, gGlobalSoundSource); // success round
-
     void** luts = segmented_to_virtual(sLUT);
     for (int k = 0; k < 2; k++)
     {
@@ -361,6 +371,7 @@ static void spawn_sparkles()
 extern const BehaviorScript bhvFailCross[];
 void handle_monitor()
 {
+    print_text_fmt_int(20, 20, "R CAMERA", 0);
     if (gPlayer1Controller->buttonPressed & R_TRIG)
     {
         sShowMonitor = !sShowMonitor;
@@ -369,6 +380,7 @@ void handle_monitor()
     if (!sShowMonitor)
         return;
 
+    print_text_fmt_int(20, 40, "DPAD MOVE", 0);
     if (gPlayer1Controller->buttonPressed & L_JPAD)
     {
         if (sSelectedX == 1)
@@ -391,6 +403,7 @@ void handle_monitor()
             sSelectedY++;
     }
 
+    print_text_fmt_int(230, 20, "B FAIL", 0);
     if (gPlayer1Controller->buttonPressed & B_BUTTON)
     {
         if (sInternalState == REACTION)
@@ -407,7 +420,9 @@ void handle_monitor()
         else
         {
             sFailCount++;
-            sFailCount %= 3;
+            if (sFailCount == 4)
+                sFailCount = 1;
+
             f32 off = (sFailCount - 1) * 300.f;
             for (int i = 0; i < sFailCount; i++)
             {
@@ -423,15 +438,32 @@ void handle_monitor()
         }
     }
 
+    print_text_fmt_int(230, 40, "C SFX", 0);
     if (gPlayer1Controller->buttonPressed & L_CBUTTONS)
     {
         play_sound(SOUND_PEACH_BAKE_A_CAKE, gGlobalSoundSource);
+    }
+    if (gPlayer1Controller->buttonPressed & R_CBUTTONS)
+    {
+        play_sound(SOUND_PEACH_FOR_MARIO, gGlobalSoundSource);
     }
 }
 
 static f32 lerp(f32 l, f32 r, f32 p)
 {
     return l * (1 - p) + r * p;
+}
+
+static void perform_buzzer_action()
+{
+    if (!sPlayedBuzzer)
+    {
+        play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
+        sPlayedBuzzer = 1;
+    }
+
+    o->oSubAction++;
+    sCurrentResponder = currentRound() + o->oSubAction / 2;
 }
 
 extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
@@ -466,12 +498,18 @@ void bhv_ctl_loop()
     if (sInternalState == PRE_REACTION)
     {
         spawn_sparkles();
+        if (o->oDistanceToMario < 200.f)
+            print_text_fmt_int(20, 20, "START", 0);
+
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
             sInternalState = REACTION;
             sBlockCamera = 1;
             o->oTimer = 0;
             seq_player_play_sequence(0, 0, 0);
+            sCurrentResponder = currentRound();
+            o->oSubAction = -1; // first responce will add 1 making this zero as intended
+            sAnswerSide = -1;
             // play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
         }
     }
@@ -489,6 +527,7 @@ void bhv_ctl_loop()
         struct Object* p1 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, currentRound());
         struct Object* p2 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, currentRound());
         struct Object* ps[] = { p1, p2 };
+        struct Object* marked = NULL;
 
         if (o->oTimer < 50)
         {
@@ -501,31 +540,59 @@ void bhv_ctl_loop()
         }
         else if (!sShowMonitor)
         {
-            if (gPlayer1Controller->buttonPressed & R_JPAD)
+            print_text_fmt_int(20, 40, "DPAD BUZZ", 0);
+            if ((gPlayer1Controller->buttonPressed & R_JPAD) && (0 != sAnswerSide))
             {
-                if (!sPlayedBuzzer)
-                {
-                    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
-                    sPlayedBuzzer = 1;
-                }
-
+                perform_buzzer_action();
                 p1->oAction = 1;
-                p2->oAction = 2;
-            }
-            if (gPlayer1Controller->buttonPressed & L_JPAD)
-            {
-                if (!sPlayedBuzzer)
+                // enable jumping only if less than 2 responces
+                if (o->oSubAction < 2)
                 {
-                    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
-                    sPlayedBuzzer = 1;
+                    p2->oAction = 2;
                 }
-
-                p1->oAction = 2;
-                p2->oAction = 1;
+                else
+                {
+                    p2->oAction = 1;
+                    cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, (currentRound() + (o->oSubAction - 1) / 2) % 5)->oAction = 1;
+                    marked = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + o->oSubAction / 2) % 5);
+                    marked->oAction = 2;
+                }
+                sAnswerSide = 0;
             }
+            if ((gPlayer1Controller->buttonPressed & L_JPAD) && (1 != sAnswerSide))
+            {
+                perform_buzzer_action();
+                p2->oAction = 1;
+                if (o->oSubAction < 2)
+                {
+                    p1->oAction = 2;
+                }
+                else
+                {
+                    p1->oAction = 1;
+                    cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + (o->oSubAction - 1) / 2) % 5)->oAction = 1;
+                    marked = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, (currentRound() + o->oSubAction / 2) % 5);
+                    marked->oAction = 2;
+                }
+                sAnswerSide = 1;
+            }
+
+            int stage = o->oSubAction % 10;
+            if (o->oSubAction > 0 && stage != 0 && stage != 1)
+            {
+                sNormalFinalePosition = sAnswerSide ? FP_LEFT : FP_RIGHT;
+            }
+            else
+            {
+                sNormalFinalePosition = FP_NEUTRAL;
+            }
+
+            if (0 != sPendingScore)
+                print_text_fmt_int(20, 60, "L EXIT", 0);
 
             if (0 != sPendingScore && gPlayer1Controller->buttonPressed & L_TRIG)
             {
+                cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + o->oSubAction / 2) % 5)->oAction = 1;
                 o->oTimer = 0;
                 sInternalState = AFTER_REACTION;
                 sBlockCamera = 0;
@@ -535,16 +602,36 @@ void bhv_ctl_loop()
                 p1->oAction = 0;
                 p2->oAction = 0;
 
-                sCurrentResponder = (1 + currentRound()) % 5;
+                sCurrentResponder = (1 + currentRound() + o->oSubAction / 2) % 5;
+                sNormalFinalePosition = FP_NEUTRAL;
             }
         }
 
-        for (int k = 0; k < 2; k++)
+        if (marked)
+            marked->oPlayerYMin = marked->oHomeY;
+
+        p1->oPlayerYMin = sLeftBuzzerPos[1];
+        p2->oPlayerYMin = sLeftBuzzerPos[1];
+
+        if (sNormalFinalePosition == 0)
         {
-            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, k);
+            for (int k = 0; k < 2; k++)
+            {
+                struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, k);
+                obj_unhide(bb);
+                obj_scale(bb, 0.5f);
+                bb->parentObj = ps[k];
+                set_player_text(k, sConfiguration.teams[k].players[currentRound()].name);
+            }
+        }
+        else if (marked)
+        {
+            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
             obj_unhide(bb);
-            bb->parentObj = ps[k];
-            set_player_text(k, sConfiguration.teams[k].players[currentRound()].name);
+            obj_scale(bb, 1.f);
+            bb->parentObj = marked;
+            set_player_text(0, sConfiguration.teams[GET_BPARAM1(marked->oBehParams)].players[GET_BPARAM2(marked->oBehParams)].name);
+            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
         }
     }
 
@@ -571,14 +658,18 @@ void bhv_ctl_loop()
         }
     }
 
-    if (sInternalState == LEFT || sInternalState == RIGHT)
+    if (!sShowMonitor)
     {
-        if (gPlayer1Controller->buttonPressed & L_TRIG)
+        if (sInternalState == LEFT || sInternalState == RIGHT)
         {
-            o->oTimer = 0;
-            sInternalState = STEAL;
-            sBlockCamera = 0;
-            sCurrentResponder = 0;
+            print_text_fmt_int(20, 40, "L EXIT", 0);
+            if (gPlayer1Controller->buttonPressed & L_TRIG)
+            {
+                o->oTimer = 0;
+                sInternalState = STEAL;
+                sBlockCamera = 0;
+                sCurrentResponder = 0;
+            }
         }
     }
 
@@ -588,7 +679,18 @@ void bhv_ctl_loop()
     }
     else
     {
-        gCamera->cutscene = 0;
+        switch (sNormalFinalePosition)
+        {
+            case FP_LEFT:
+                gCamera->cutscene = CUTSCENE_LEFT;
+                break;
+            case FP_RIGHT:
+                gCamera->cutscene = CUTSCENE_RIGHT;
+                break;
+            case FP_NEUTRAL:
+                gCamera->cutscene = 0;
+                break;
+        }
     }
 
     // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
@@ -605,6 +707,9 @@ void bhv_ctl_choice_loop()
     if (sInternalState == AFTER_REACTION || sInternalState == STEAL)
     {
         spawn_sparkles();
+        if (o->oDistanceToMario < 200.f)
+            print_text_fmt_int(20, 20, "START", 0);
+    
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
             sInternalState = RIGHT - BPARAM1;
@@ -639,36 +744,40 @@ void bhv_ctl_choice_loop()
         handle_monitor();
     }
 
-    if ((!BPARAM1 && sInternalState == RIGHT) || (BPARAM1 && sInternalState == LEFT))
+    if (!sShowMonitor)
     {
-        int update = 0;
-        if (gPlayer1Controller->buttonPressed & L_JPAD)
+        if ((!BPARAM1 && sInternalState == RIGHT) || (BPARAM1 && sInternalState == LEFT))
         {
-            if (BPARAM1)
-                sCurrentResponder--;
-            else
-                sCurrentResponder++;
+            print_text_fmt_int(20, 60, "DPAD PLAYER", 0);
+            int update = 0;
+            if (gPlayer1Controller->buttonPressed & L_JPAD)
+            {
+                if (BPARAM1)
+                    sCurrentResponder--;
+                else
+                    sCurrentResponder++;
 
-            update = 1;
-        }
-        if (gPlayer1Controller->buttonPressed & R_JPAD)
-        {
-            if (BPARAM1)
-                sCurrentResponder++;
-            else
-                sCurrentResponder--;
+                update = 1;
+            }
+            if (gPlayer1Controller->buttonPressed & R_JPAD)
+            {
+                if (BPARAM1)
+                    sCurrentResponder++;
+                else
+                    sCurrentResponder--;
 
-            update = 1;
-        }
+                update = 1;
+            }
 
-        if (update)
-        {
-            sCurrentResponder += 5;
-            sCurrentResponder %= 5;
-            struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
-            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
-            bb->parentObj = p;
-            set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+            if (update)
+            {
+                sCurrentResponder += 5;
+                sCurrentResponder %= 5;
+                struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
+                struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
+                bb->parentObj = p;
+                set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+            }
         }
     }
 }
@@ -698,6 +807,7 @@ void bhv_panel_loop()
         if (sSelectedX == BPARAM1 && (sSelectedY - 1) == BPARAM2)
         {
             o->oFaceAngleRoll = 0x1000 * sins(0x767 * o->oTimer);
+            print_text_fmt_int(140, 20, "A OPEN", 0);
             if (gPlayer1Controller->buttonPressed & A_BUTTON)
             {
                 play_sound(SOUND_PEACH_DEAR_MARIO, gGlobalSoundSource);
@@ -705,7 +815,8 @@ void bhv_panel_loop()
                 {
                     struct Round* round = &sConfiguration.rounds[currentRound()];
                     int num = BPARAM2 + 4 * BPARAM1;
-                    sPendingScore += str_to_int(round->answers[num].cost);
+                    if (sInternalState != STEAL)
+                        sPendingScore += str_to_int(round->answers[num].cost);
 
                     set_panel_text (1 + num, round->answers[num].name);
                     set_panel_score(1 + num, round->answers[num].cost);
@@ -777,6 +888,9 @@ void bhv_finale_ctl_loop()
     if (sInternalState == STEAL)
     {
         spawn_sparkles();
+        if (o->oDistanceToMario < 200.f)
+            print_text_fmt_int(20, 40, "START", 0);
+
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
             sInternalState = NORMAL_FINALE;
@@ -793,5 +907,39 @@ void bhv_finale_ctl_loop()
         gMarioStates->pos[2] = o->oPosZ;
         s8DirModeYawOffset = 0x4000;
         handle_monitor();
+
+        if (!sShowMonitor)
+        {
+            print_text_fmt_int(20, 40, "DPAD SELECT TEAM", 0);
+            if (gPlayer1Controller->buttonPressed & L_JPAD)
+            {
+                if (sNormalFinalePosition != FP_RIGHT)
+                {
+                    sNormalFinalePosition--;
+                }
+            }
+            if (gPlayer1Controller->buttonPressed & R_JPAD)
+            {
+                if (sNormalFinalePosition != FP_LEFT)
+                {
+                    sNormalFinalePosition++;
+                }
+            }
+        }
+        else
+        {
+            sNormalFinalePosition = 0;
+        }
+
+        if (sNormalFinalePosition)
+        {
+            print_text_fmt_int(20, 40, "A GIVE POINTS", 0);
+            if (gPlayer1Controller->buttonPressed & A_BUTTON)
+            {
+                char* scoreText = sConfiguration.state.scores[(sNormalFinalePosition + 1) / 2].score;
+                int score = str_to_int(scoreText) + sPendingScore * sScoreMultipliers[currentRound()];
+                sPendingScore = 0;
+            }
+        }
     }
 }
