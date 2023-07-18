@@ -212,6 +212,10 @@ void bhv_player_loop()
 #include "aglab_x_text_graphics.h"
 #undef TEXT_GRAPHICS
 
+#define TEXT_TEAMSCORE_GRAPHICS(i,j, name) extern Gfx name[];
+#include "aglab_x_team_score_graphics.h"
+#undef TEXT_TEAMSCORE_GRAPHICS
+
 static Gfx* sPanelVisuals[] =
 {
 #define PANEL_GRAPHICS(i, j, name) [i*32 + j] = name, 
@@ -240,6 +244,13 @@ static Gfx* sPlayerTextVisuals[] =
 #undef TEXT_GRAPHICS 
 };
 
+static Gfx* sTeamScoreTextVisuals[] = 
+{
+#define TEXT_TEAMSCORE_GRAPHICS(i,j, name) [i*4 + j] = name,
+#include "aglab_x_team_score_graphics.h"
+#undef TEXT_TEAMSCORE_GRAPHICS 
+};
+
 extern const Texture *const sLUT[128];
 
 static void set_panel_score(int panelNumber, char* txt)
@@ -260,6 +271,18 @@ static void set_total_score(int score)
     for (int i = 0; i < 2; i++)
     {
         void** gfx = segmented_to_virtual(sPendingScoreVisuals[i]);
+        gfx[13] = luts[(int) ('0' + nums[i])];
+    }
+}
+
+static void set_team_score(int team, int score)
+{
+    void** luts = segmented_to_virtual(sLUT);
+
+    char nums[] = { (score / 100) % 10,  (score / 10) % 10, score % 10 };
+    for (int i = 0; i < 3; i++)
+    {
+        void** gfx = segmented_to_virtual(sTeamScoreTextVisuals[4*team + i]);
         gfx[13] = luts[(int) ('0' + nums[i])];
     }
 }
@@ -320,6 +343,8 @@ extern const BehaviorScript bhvStaticBillboard[];
 #define MAX_TEAM_TEXT_LEN 11
 void bhv_ctl_init()
 {
+    set_team_score(0, 0);
+    set_team_score(1, 0);
     void** luts = segmented_to_virtual(sLUT);
     for (int k = 0; k < 2; k++)
     {
@@ -531,7 +556,7 @@ void bhv_ctl_loop()
         struct Object* ps[] = { p1, p2 };
         struct Object* marked = NULL;
 
-        if (o->oTimer < 50)
+        if (o->oTimer <= 50)
         {
             p1->oPosX = lerp(p1->oHomeX, sLeftBuzzerPos[0],  o->oTimer / 50.f);
             p1->oPosY = lerp(p1->oHomeY, sLeftBuzzerPos[1],  o->oTimer / 50.f);
@@ -640,7 +665,7 @@ void bhv_ctl_loop()
 
     if (sInternalState == AFTER_REACTION)
     {
-        if (o->oTimer < 50)
+        if (o->oTimer <= 50)
         {
             struct Object* p1 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, currentRound());
             p1->oPosX = lerp(sLeftBuzzerPos[0],  p1->oHomeX, o->oTimer / 50.f);
@@ -942,8 +967,10 @@ void bhv_finale_ctl_loop()
             print_text_fmt_int(20, 60, "A GIVE POINTS", 0);
             if (gPlayer1Controller->buttonPressed & A_BUTTON)
             {
-                char* scoreText = sConfiguration.state.scores[(sNormalFinalePosition + 1) / 2].score;
+                int team = 1 - (sNormalFinalePosition + 1) / 2;
+                char* scoreText = sConfiguration.state.scores[team].score;
                 int score = str_to_int(scoreText) + sPendingScore * sScoreMultipliers[currentRound()];
+                set_team_score(team, score);
                 sPendingScore = 0;
             }
         }
