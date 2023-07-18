@@ -121,8 +121,8 @@ enum InternalState
 static char sShowMonitor = 0;
 char sBlockCamera = 0;
 
-static f32 sLeftBuzzerPos [3] = { 947, 529, -2788 };
-static f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
+static const f32 sLeftBuzzerPos [3] = { 947, 529, -2788 };
+static const f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
 
 static char sPlayedBuzzer = 0;
 
@@ -499,18 +499,19 @@ void bhv_ctl_loop()
     {
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f)
-            print_text_fmt_int(20, 20, "START", 0);
-
-        if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
-            sInternalState = REACTION;
-            sBlockCamera = 1;
-            o->oTimer = 0;
-            seq_player_play_sequence(0, 0, 0);
-            sCurrentResponder = currentRound();
-            o->oSubAction = -1; // first responce will add 1 making this zero as intended
-            sAnswerSide = -1;
-            // play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
+            print_text_fmt_int(20, 20, "START", 0);
+            if (gPlayer1Controller->buttonPressed & START_BUTTON)
+            {
+                sInternalState = REACTION;
+                sBlockCamera = 1;
+                o->oTimer = 0;
+                seq_player_play_sequence(0, 0, 0);
+                sCurrentResponder = currentRound();
+                o->oSubAction = -1; // first responce will add 1 making this zero as intended
+                sAnswerSide = -1;
+                // play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
+            }
         }
     }
 
@@ -522,8 +523,9 @@ void bhv_ctl_loop()
         gMarioStates->faceAngle[1] = 0x4000;
         s8DirModeYawOffset = 0x4000;
         obj_scale_xyz(gMarioObject, 2.0f, 5.5f, 2.f);
-        handle_monitor();
-        
+        if (sPlayedBuzzer)
+            handle_monitor();
+
         struct Object* p1 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 0, currentRound());
         struct Object* p2 = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, currentRound());
         struct Object* ps[] = { p1, p2 };
@@ -588,22 +590,23 @@ void bhv_ctl_loop()
             }
 
             if (0 != sPendingScore)
-                print_text_fmt_int(20, 60, "L EXIT", 0);
-
-            if (0 != sPendingScore && gPlayer1Controller->buttonPressed & L_TRIG)
             {
-                cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + o->oSubAction / 2) % 5)->oAction = 1;
-                o->oTimer = 0;
-                sInternalState = AFTER_REACTION;
-                sBlockCamera = 0;
-                
-                p1->oMoveAngleYaw += 0x8000;
-                p2->oMoveAngleYaw += 0x8000;
-                p1->oAction = 0;
-                p2->oAction = 0;
+                print_text_fmt_int(20, 60, "L EXIT", 0);
+                if (gPlayer1Controller->buttonPressed & L_TRIG)
+                {
+                    cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + o->oSubAction / 2) % 5)->oAction = 1;
+                    o->oTimer = 0;
+                    sInternalState = AFTER_REACTION;
+                    sBlockCamera = 0;
+                    
+                    p1->oMoveAngleYaw += 0x8000;
+                    p2->oMoveAngleYaw += 0x8000;
+                    p1->oAction = 0;
+                    p2->oAction = 0;
 
-                sCurrentResponder = (1 + currentRound() + o->oSubAction / 2) % 5;
-                sNormalFinalePosition = FP_NEUTRAL;
+                    sCurrentResponder = (1 + currentRound() + o->oSubAction / 2) % 5;
+                    sNormalFinalePosition = FP_NEUTRAL;
+                }
             }
         }
 
@@ -708,19 +711,20 @@ void bhv_ctl_choice_loop()
     {
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f)
-            print_text_fmt_int(20, 20, "START", 0);
-    
-        if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
-            sInternalState = RIGHT - BPARAM1;
-            sBlockCamera = 1;
-            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
-            struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
-            struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
-            bb->parentObj = p;
-            obj_unhide(bb);
-            obj_scale(bb, 0.8f);
-            set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+            print_text_fmt_int(20, 20, "START", 0);
+            if (gPlayer1Controller->buttonPressed & START_BUTTON)
+            {
+                sInternalState = RIGHT - BPARAM1;
+                sBlockCamera = 1;
+                obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+                struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
+                struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
+                bb->parentObj = p;
+                obj_unhide(bb);
+                obj_scale(bb, 0.8f);
+                set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+            }
         }
     }
 
@@ -815,7 +819,7 @@ void bhv_panel_loop()
                 {
                     struct Round* round = &sConfiguration.rounds[currentRound()];
                     int num = BPARAM2 + 4 * BPARAM1;
-                    if (sInternalState != STEAL)
+                    if (sInternalState < STEAL)
                         sPendingScore += str_to_int(round->answers[num].cost);
 
                     set_panel_text (1 + num, round->answers[num].name);
@@ -889,14 +893,15 @@ void bhv_finale_ctl_loop()
     {
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f)
-            print_text_fmt_int(20, 40, "START", 0);
-
-        if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
-            sInternalState = NORMAL_FINALE;
-            sBlockCamera = 1;
-            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
-            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+            print_text_fmt_int(20, 40, "START", 0);
+            if (gPlayer1Controller->buttonPressed & START_BUTTON)
+            {
+                sInternalState = NORMAL_FINALE;
+                sBlockCamera = 1;
+                obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
+                obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+            }
         }
     }
 
@@ -906,6 +911,7 @@ void bhv_finale_ctl_loop()
         gMarioStates->pos[1] = o->oPosY;
         gMarioStates->pos[2] = o->oPosZ;
         s8DirModeYawOffset = 0x4000;
+        gMarioStates->faceAngle[1] = 0x4000;
         handle_monitor();
 
         if (!sShowMonitor)
@@ -913,14 +919,14 @@ void bhv_finale_ctl_loop()
             print_text_fmt_int(20, 40, "DPAD SELECT TEAM", 0);
             if (gPlayer1Controller->buttonPressed & L_JPAD)
             {
-                if (sNormalFinalePosition != FP_RIGHT)
+                if (sNormalFinalePosition != FP_LEFT)
                 {
                     sNormalFinalePosition--;
                 }
             }
             if (gPlayer1Controller->buttonPressed & R_JPAD)
             {
-                if (sNormalFinalePosition != FP_LEFT)
+                if (sNormalFinalePosition != FP_RIGHT)
                 {
                     sNormalFinalePosition++;
                 }
@@ -931,14 +937,51 @@ void bhv_finale_ctl_loop()
             sNormalFinalePosition = 0;
         }
 
-        if (sNormalFinalePosition)
+        if (sPendingScore && sNormalFinalePosition)
         {
-            print_text_fmt_int(20, 40, "A GIVE POINTS", 0);
+            print_text_fmt_int(20, 60, "A GIVE POINTS", 0);
             if (gPlayer1Controller->buttonPressed & A_BUTTON)
             {
                 char* scoreText = sConfiguration.state.scores[(sNormalFinalePosition + 1) / 2].score;
                 int score = str_to_int(scoreText) + sPendingScore * sScoreMultipliers[currentRound()];
                 sPendingScore = 0;
+            }
+        }
+
+        if (0 == sPendingScore && 0 == sNormalFinalePosition && !sShowMonitor)
+        {
+            print_text_fmt_int(20, 60, "L NEXT ROUND", 0);
+            if (gPlayer1Controller->buttonPressed & L_TRIG)
+            {
+                sInternalState = 0;
+                
+                sSelectedX = 0;
+                sSelectedY = 0;
+
+                sCurrentResponder = 0;
+                sFailCount = 0;
+                sAnswerSide = 0;
+                sShowMonitor = 0;
+                sBlockCamera = 0;
+                sPlayedBuzzer = 0;
+                sConfiguration.state.curRound[0]++;
+
+                {
+                    uintptr_t *behaviorAddr = segmented_to_virtual(bhvPanel);
+                    struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+                    struct Object *obj = (struct Object *) listHead->next;
+
+                    while (obj != (struct Object *) listHead) {
+                        if (obj->behavior == behaviorAddr
+                            && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+                            && obj != o
+                        ) {
+                            obj->activeFlags = 0;
+                        }
+
+                        obj = (struct Object *) obj->header.next;
+                    }
+                }
             }
         }
     }
