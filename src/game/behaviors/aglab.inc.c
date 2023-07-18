@@ -101,6 +101,7 @@ enum InternalState
     LEFT,
     RIGHT,
     STEAL,
+    NORMAL_FINALE,
 };
 
 static char sInternalState = IS_INIT;
@@ -433,6 +434,7 @@ static f32 lerp(f32 l, f32 r, f32 p)
     return l * (1 - p) + r * p;
 }
 
+extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 extern BehaviorScript bhvPanel[];
 void bhv_ctl_loop()
 {
@@ -463,16 +465,14 @@ void bhv_ctl_loop()
 
     if (sInternalState == PRE_REACTION)
     {
-        if (0 == (o->oTimer % 470))    
-            play_sound(SOUND_PEACH_THANKS_TO_YOU, gGlobalSoundSource); // intro
-
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
         {
             sInternalState = REACTION;
             sBlockCamera = 1;
             o->oTimer = 0;
-            play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
+            seq_player_play_sequence(0, 0, 0);
+            // play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
         }
     }
 
@@ -591,9 +591,9 @@ void bhv_ctl_loop()
         gCamera->cutscene = 0;
     }
 
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
 }
 
 void bhv_ctl_choice_init()
@@ -765,5 +765,33 @@ void bhv_fail_cross_loop()
     if (40 == o->oTimer)
     {
         o->activeFlags = 0;
+    }
+}
+
+void bhv_finale_ctl_init()
+{
+}
+
+void bhv_finale_ctl_loop()
+{
+    if (sInternalState == STEAL)
+    {
+        spawn_sparkles();
+        if (o->oDistanceToMario < 200.f && (gPlayer1Controller->buttonPressed & START_BUTTON))
+        {
+            sInternalState = NORMAL_FINALE;
+            sBlockCamera = 1;
+            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
+            obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+        }
+    }
+
+    if (sInternalState == NORMAL_FINALE)
+    {
+        gMarioStates->pos[0] = o->oPosX;
+        gMarioStates->pos[1] = o->oPosY;
+        gMarioStates->pos[2] = o->oPosZ;
+        s8DirModeYawOffset = 0x4000;
+        handle_monitor();
     }
 }

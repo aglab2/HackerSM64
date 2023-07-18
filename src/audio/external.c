@@ -259,48 +259,6 @@ u16 sLevelAcousticReaches[LEVEL_COUNT] = {
 #define VOLUME_RANGE_UNK2 0.8f
 #endif
 
-// Default volume for background music sequences (playing on player 0).
-u8 sBackgroundMusicDefaultVolume[] = {
-    127, // SEQ_SOUND_PLAYER
-    80,  // SEQ_EVENT_CUTSCENE_COLLECT_STAR
-    80,  // SEQ_MENU_TITLE_SCREEN
-    75,  // SEQ_LEVEL_GRASS
-    70,  // SEQ_LEVEL_INSIDE_CASTLE
-    75,  // SEQ_LEVEL_WATER
-    75,  // SEQ_LEVEL_HOT
-    75,  // SEQ_LEVEL_BOSS_KOOPA
-    70,  // SEQ_LEVEL_SNOW
-    65,  // SEQ_LEVEL_SLIDE
-    80,  // SEQ_LEVEL_SPOOKY
-    65,  // SEQ_EVENT_PIRANHA_PLANT
-    85,  // SEQ_LEVEL_UNDERGROUND
-    75,  // SEQ_MENU_STAR_SELECT
-    65,  // SEQ_EVENT_POWERUP
-    70,  // SEQ_EVENT_METAL_CAP
-    65,  // SEQ_EVENT_KOOPA_MESSAGE
-    70,  // SEQ_LEVEL_KOOPA_ROAD
-    70,  // SEQ_EVENT_HIGH_SCORE
-    65,  // SEQ_EVENT_MERRY_GO_ROUND
-    80,  // SEQ_EVENT_RACE
-    70,  // SEQ_EVENT_CUTSCENE_STAR_SPAWN
-    85,  // SEQ_EVENT_BOSS
-    75,  // SEQ_EVENT_CUTSCENE_COLLECT_KEY
-    75,  // SEQ_EVENT_ENDLESS_STAIRS
-    85,  // SEQ_LEVEL_BOSS_KOOPA_FINAL
-    70,  // SEQ_EVENT_CUTSCENE_CREDITS
-    80,  // SEQ_EVENT_SOLVE_PUZZLE
-    80,  // SEQ_EVENT_TOAD_MESSAGE
-    70,  // SEQ_EVENT_PEACH_MESSAGE
-    75,  // SEQ_EVENT_CUTSCENE_INTRO
-    80,  // SEQ_EVENT_CUTSCENE_VICTORY
-    70,  // SEQ_EVENT_CUTSCENE_ENDING
-    65,  // SEQ_MENU_FILE_SELECT
-    0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
-};
-
-STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
-              "change this array if you are adding sequences");
-
 u8 sCurrentBackgroundMusicSeqId = SEQUENCE_NONE;
 u8 sMusicDynamicDelay = 0;
 u8 sSoundBankUsedListBack[SOUND_BANK_COUNT] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -1533,7 +1491,7 @@ static void update_game_sound(void) {
 /**
  * Called from threads: thread4_sound, thread5_game_loop
  */
-static void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2) {
+void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2) {
     u8 targetVolume;
     u8 i;
 
@@ -1893,10 +1851,6 @@ static u8 begin_background_music_fade(u16 fadeDuration) {
         if (targetVolume != 0xff) {
             seq_player_fade_to_target_volume(SEQ_PLAYER_LEVEL, fadeDuration, targetVolume);
         } else {
-#if defined(VERSION_JP) || defined(VERSION_US)
-            gSequencePlayers[SEQ_PLAYER_LEVEL].volume =
-                sBackgroundMusicDefaultVolume[sCurrentBackgroundMusicSeqId] / 127.0f;
-#endif
             seq_player_fade_to_normal_volume(SEQ_PLAYER_LEVEL, fadeDuration);
         }
     }

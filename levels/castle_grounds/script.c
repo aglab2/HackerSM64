@@ -57,10 +57,8 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(0xf7, panel7_geo), 
 	LOAD_MODEL_FROM_GEO(0xf8, panel8_geo), 
 	LOAD_MODEL_FROM_GEO(0xf9, panel9_geo), 
-	
 	LOAD_MODEL_FROM_GEO(0xfa, textL_geo), 
 	LOAD_MODEL_FROM_GEO(0xfb, textR_geo), 
-	
 	LOAD_MODEL_FROM_GEO(0xfc, cross_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
@@ -78,13 +76,14 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_GOOMBA, 2139, 405, -4784, 0, 24, 0, (1 << 24) | (2 << 16), bhvPlayer),
 		OBJECT(MODEL_GOOMBA, 2282, 405, -4852, 0, 24, 0, (1 << 24) | (3 << 16), bhvPlayer),
 		OBJECT(MODEL_GOOMBA, 2429, 405, -4918, 0, 30, 0, (1 << 24) | (4 << 16), bhvPlayer),
+		OBJECT(MODEL_NONE, 2991, 5, -2875, 0, -91, 0, 0x00000000, bhvFinaleCtl),
 		MARIO_POS(0x01, 0, 2989, 5, -2875),
 		OBJECT(MODEL_NONE, 700, 40, -2965, 0, -91, 0, (1 << 24) | (0 << 16), bhvCtl),
 		OBJECT(MODEL_NONE, 2182, 40, -3937, 0, 24, 0, (1 << 24) | (0 << 16), bhvCtlChoice),
 		OBJECT(MODEL_NONE, 2182, 40, -1604, 0, 24, 0, (0 << 24) | (0 << 16), bhvCtlChoice),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, 0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_FEUD),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
