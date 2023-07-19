@@ -1900,6 +1900,110 @@ ALIGNED8 static const Texture texture_hud_char_arrow_down[] = {
 #include "textures/segment2/segment2.081D0.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_la[] = {
+#include "textures/segment2/a.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lb[] = {
+#include "textures/segment2/b.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lc[] = {
+#include "textures/segment2/c.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_ld[] = {
+#include "textures/segment2/d.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_le[] = {
+#include "textures/segment2/e.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lf[] = {
+#include "textures/segment2/f.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lg[] = {
+#include "textures/segment2/g.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lh[] = {
+#include "textures/segment2/h.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_li[] = {
+#include "textures/segment2/i.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lj[] = {
+#include "textures/segment2/j.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lk[] = {
+#include "textures/segment2/k.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_ll[] = {
+#include "textures/segment2/l.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lm[] = {
+#include "textures/segment2/m.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_ln[] = {
+#include "textures/segment2/n.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lo[] = {
+#include "textures/segment2/o.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lp[] = {
+#include "textures/segment2/p.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lq[] = {
+#include "textures/segment2/q.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lr[] = {
+#include "textures/segment2/r.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_ls[] = {
+#include "textures/segment2/s.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lt[] = {
+#include "textures/segment2/t.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lu[] = {
+#include "textures/segment2/u.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lv[] = {
+#include "textures/segment2/v.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lw[] = {
+#include "textures/segment2/w.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lx[] = {
+#include "textures/segment2/x.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_ly[] = {
+#include "textures/segment2/y.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_lz[] = {
+#include "textures/segment2/z.rgba16.inc.c"
+};
+
 ALIGNED8 static const Texture texture_hud_char_space[4096] = { };
 
 // Main HUD print table 0x02008250-0x02008337
@@ -1936,6 +2040,33 @@ const Texture *const sLUT[128] = {
     ['*'] = texture_hud_char_multiply, ['.'] = texture_hud_char_decimal_point,
     ['\''] = texture_hud_char_apostrophe, ['"'] = texture_hud_char_double_quote, 
     [' '] = texture_hud_char_space,
+    
+    ['a'] = texture_hud_char_la,
+    ['b'] = texture_hud_char_lb,
+    ['c'] = texture_hud_char_lc,
+    ['d'] = texture_hud_char_ld,
+    ['e'] = texture_hud_char_le,
+    ['f'] = texture_hud_char_lf,
+    ['g'] = texture_hud_char_lg,
+    ['h'] = texture_hud_char_lh,
+    ['i'] = texture_hud_char_li,
+    ['j'] = texture_hud_char_lj,
+    ['k'] = texture_hud_char_lk,
+    ['l'] = texture_hud_char_ll,
+    ['m'] = texture_hud_char_lm,
+    ['n'] = texture_hud_char_ln,
+    ['o'] = texture_hud_char_lo,
+    ['p'] = texture_hud_char_lp,
+    ['q'] = texture_hud_char_lq,
+    ['r'] = texture_hud_char_lr,
+    ['s'] = texture_hud_char_ls,
+    ['t'] = texture_hud_char_lt,
+    ['u'] = texture_hud_char_lu,
+    ['v'] = texture_hud_char_lv,
+    ['w'] = texture_hud_char_lw,
+    ['x'] = texture_hud_char_lx,
+    ['y'] = texture_hud_char_ly,
+    ['z'] = texture_hud_char_lz,
 };
 
 // Main small font print table 0x02008338-0x02008737
