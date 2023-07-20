@@ -2004,6 +2004,26 @@ ALIGNED8 static const Texture texture_hud_char_lz[] = {
 #include "textures/segment2/z.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_plus[] = {
+#include "textures/segment2/plus.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_slash[] = {
+#include "textures/segment2/slash.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_equal[] = {
+#include "textures/segment2/equal.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_colon[] = {
+#include "textures/segment2/colon.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_comma[] = {
+#include "textures/segment2/comma.rgba16.inc.c"
+};
+
 ALIGNED8 static const Texture texture_hud_char_space[4096] = { };
 
 // Main HUD print table 0x02008250-0x02008337
@@ -2039,6 +2059,13 @@ const Texture *const sLUT[128] = {
     ['%'] = texture_hud_char_percent, ['-'] = texture_hud_char_minus,
     ['*'] = texture_hud_char_multiply, ['.'] = texture_hud_char_decimal_point,
     ['\''] = texture_hud_char_apostrophe, ['"'] = texture_hud_char_double_quote, 
+
+    ['+'] = texture_hud_char_plus,
+    ['/'] = texture_hud_char_slash,
+    ['='] = texture_hud_char_equal,
+    [':'] = texture_hud_char_colon,
+    [','] = texture_hud_char_comma,
+
     [' '] = texture_hud_char_space,
     
     ['a'] = texture_hud_char_la,

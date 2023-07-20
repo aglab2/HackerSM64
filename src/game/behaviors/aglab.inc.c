@@ -1,3 +1,7 @@
+#include <string.h>
+
+#include "game/print.h"
+
 struct Player
 {
     char name[32];
@@ -75,9 +79,10 @@ static char sSelectedX = 0;
 static char sSelectedY = 0;
 
 static char sCurrentResponder = 0;
-static char sPendingScore = 0;
 static char sFailCount = 0;
 static char sAnswerSide = 0;
+
+static int sPendingScore = 0;
 
 enum FinalePositions
 {
@@ -126,6 +131,11 @@ static const f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
 
 static char sPlayedBuzzer = 0;
 
+static void controls_print(int x, int y, const char* name)
+{
+    print_text_fmt_int(x, y, name, 0);
+}
+
 static void obj_unhide(struct Object* obj) {
     obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
 }
@@ -159,11 +169,11 @@ void bhv_player_init()
 {
     if (0 == BPARAM1)
     {
-        o->oAnimations = bobomb_seg8_anims_0802396C;
+        o->oAnimations = (struct Animation**) bobomb_seg8_anims_0802396C;
     }
     else
     {
-        o->oAnimations = goomba_seg8_anims_0801DA4C;
+        o->oAnimations = (struct Animation**) goomba_seg8_anims_0801DA4C;
         obj_scale(o, 1.5f);
     }
 
@@ -266,12 +276,34 @@ static void set_panel_score(int panelNumber, char* txt)
 static void set_total_score(int score)
 {
     void** luts = segmented_to_virtual(sLUT);
-
-    char nums[] = { (score / 10) % 10, score % 10 };
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 5; i++)
     {
         void** gfx = segmented_to_virtual(sPendingScoreVisuals[i]);
-        gfx[13] = luts[(int) ('0' + nums[i])];
+        gfx[13] = luts[(int) (' ')];
+    }
+
+    if (score < 10)
+    {
+        void** gfx = segmented_to_virtual(sPendingScoreVisuals[3]);
+        gfx[13] = luts[(int) ('0' + score)];
+    }
+    else if (score < 100)
+    {
+        char nums[] = { (score / 10) % 10, score % 10 };
+        for (int i = 0; i < 2; i++)
+        {
+            void** gfx = segmented_to_virtual(sPendingScoreVisuals[i]);
+            gfx[13] = luts[(int) ('0' + nums[i])];
+        }
+    }
+    else if (score < 1000)
+    {
+        char nums[] = { (score / 100) % 10,  (score / 10) % 10, score % 10 };
+        for (int i = 2; i < 5; i++)
+        {
+            void** gfx = segmented_to_virtual(sPendingScoreVisuals[i]);
+            gfx[13] = luts[(int) ('0' + nums[i - 2])];
+        }
     }
 }
 
@@ -396,7 +428,7 @@ static void spawn_sparkles()
 extern const BehaviorScript bhvFailCross[];
 void handle_monitor()
 {
-    print_text_fmt_int(20, 20, "R CAMERA", 0);
+    controls_print(20, 20, "R CAMERA");
     if (gPlayer1Controller->buttonPressed & R_TRIG)
     {
         sShowMonitor = !sShowMonitor;
@@ -405,7 +437,7 @@ void handle_monitor()
     if (!sShowMonitor)
         return;
 
-    print_text_fmt_int(20, 40, "DPAD MOVE", 0);
+    controls_print(20, 40, "DPAD MOVE");
     if (gPlayer1Controller->buttonPressed & L_JPAD)
     {
         if (sSelectedX == 1)
@@ -428,7 +460,7 @@ void handle_monitor()
             sSelectedY++;
     }
 
-    print_text_fmt_int(230, 20, "B FAIL", 0);
+    controls_print(230, 20, "B FAIL");
     if (gPlayer1Controller->buttonPressed & B_BUTTON)
     {
         if (sInternalState == REACTION)
@@ -463,7 +495,7 @@ void handle_monitor()
         }
     }
 
-    print_text_fmt_int(230, 40, "C SFX", 0);
+    controls_print(230, 40, "C SFX");
     if (gPlayer1Controller->buttonPressed & L_CBUTTONS)
     {
         play_sound(SOUND_PEACH_BAKE_A_CAKE, gGlobalSoundSource);
@@ -506,6 +538,7 @@ void bhv_ctl_loop()
             if ('\0' == round->answers[num].name[0])
                 break;
 
+            set_panel_text(num, "");
             struct Object* th = spawn_object(o, 0xf1 + num, bhvPanel);
             th->oPosX = 107;
             th->oPosY = 1510 - 200 * i;
@@ -525,7 +558,7 @@ void bhv_ctl_loop()
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f)
         {
-            print_text_fmt_int(20, 20, "START", 0);
+            controls_print(20, 20, "START");
             if (gPlayer1Controller->buttonPressed & START_BUTTON)
             {
                 sInternalState = REACTION;
@@ -567,7 +600,7 @@ void bhv_ctl_loop()
         }
         else if (!sShowMonitor)
         {
-            print_text_fmt_int(20, 40, "DPAD BUZZ", 0);
+            controls_print(20, 40, "DPAD BUZZ");
             if ((gPlayer1Controller->buttonPressed & R_JPAD) && (0 != sAnswerSide))
             {
                 perform_buzzer_action();
@@ -616,7 +649,7 @@ void bhv_ctl_loop()
 
             if (0 != sPendingScore)
             {
-                print_text_fmt_int(20, 60, "L EXIT", 0);
+                controls_print(20, 60, "L EXIT");
                 if (gPlayer1Controller->buttonPressed & L_TRIG)
                 {
                     cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + o->oSubAction / 2) % 5)->oAction = 1;
@@ -690,7 +723,7 @@ void bhv_ctl_loop()
     {
         if (sInternalState == LEFT || sInternalState == RIGHT)
         {
-            print_text_fmt_int(20, 40, "L EXIT", 0);
+            controls_print(20, 40, "L EXIT");
             if (gPlayer1Controller->buttonPressed & L_TRIG)
             {
                 o->oTimer = 0;
@@ -737,7 +770,7 @@ void bhv_ctl_choice_loop()
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f)
         {
-            print_text_fmt_int(20, 20, "START", 0);
+            controls_print(20, 20, "START");
             if (gPlayer1Controller->buttonPressed & START_BUTTON)
             {
                 sInternalState = RIGHT - BPARAM1;
@@ -748,7 +781,7 @@ void bhv_ctl_choice_loop()
                 bb->parentObj = p;
                 obj_unhide(bb);
                 obj_scale(bb, 0.8f);
-                set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+                set_player_text(0, sConfiguration.teams[BPARAM1].players[(int) sCurrentResponder].name);
             }
         }
     }
@@ -777,7 +810,7 @@ void bhv_ctl_choice_loop()
     {
         if ((!BPARAM1 && sInternalState == RIGHT) || (BPARAM1 && sInternalState == LEFT))
         {
-            print_text_fmt_int(20, 60, "DPAD PLAYER", 0);
+            controls_print(20, 60, "DPAD PLAYER");
             int update = 0;
             if (gPlayer1Controller->buttonPressed & L_JPAD)
             {
@@ -805,7 +838,7 @@ void bhv_ctl_choice_loop()
                 struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
                 struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
                 bb->parentObj = p;
-                set_player_text(0, sConfiguration.teams[BPARAM1].players[sCurrentResponder].name);
+                set_player_text(0, sConfiguration.teams[BPARAM1].players[(int) sCurrentResponder].name);
             }
         }
     }
@@ -836,7 +869,7 @@ void bhv_panel_loop()
         if (sSelectedX == BPARAM1 && (sSelectedY - 1) == BPARAM2)
         {
             o->oFaceAngleRoll = 0x1000 * sins(0x767 * o->oTimer);
-            print_text_fmt_int(140, 20, "A OPEN", 0);
+            controls_print(140, 20, "A OPEN");
             if (gPlayer1Controller->buttonPressed & A_BUTTON)
             {
                 play_sound(SOUND_PEACH_DEAR_MARIO, gGlobalSoundSource);
@@ -919,7 +952,7 @@ void bhv_finale_ctl_loop()
         spawn_sparkles();
         if (o->oDistanceToMario < 200.f)
         {
-            print_text_fmt_int(20, 40, "START", 0);
+            controls_print(20, 40, "START");
             if (gPlayer1Controller->buttonPressed & START_BUTTON)
             {
                 sInternalState = NORMAL_FINALE;
@@ -941,7 +974,7 @@ void bhv_finale_ctl_loop()
 
         if (!sShowMonitor)
         {
-            print_text_fmt_int(20, 40, "DPAD SELECT TEAM", 0);
+            controls_print(20, 40, "DPAD SELECT TEAM");
             if (gPlayer1Controller->buttonPressed & L_JPAD)
             {
                 if (sNormalFinalePosition != FP_LEFT)
@@ -964,7 +997,7 @@ void bhv_finale_ctl_loop()
 
         if (sPendingScore && sNormalFinalePosition)
         {
-            print_text_fmt_int(20, 60, "A GIVE POINTS", 0);
+            controls_print(20, 60, "A GIVE POINTS");
             if (gPlayer1Controller->buttonPressed & A_BUTTON)
             {
                 int team = 1 - (sNormalFinalePosition + 1) / 2;
@@ -977,7 +1010,7 @@ void bhv_finale_ctl_loop()
 
         if (0 == sPendingScore && 0 == sNormalFinalePosition && !sShowMonitor)
         {
-            print_text_fmt_int(20, 60, "L NEXT ROUND", 0);
+            controls_print(20, 60, "L NEXT ROUND");
             if (gPlayer1Controller->buttonPressed & L_TRIG)
             {
                 sInternalState = 0;

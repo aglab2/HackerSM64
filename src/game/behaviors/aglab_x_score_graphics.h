@@ -1,2 +1,6 @@
 SCORE_GRAPHICS(mat_castle_grounds_dl_X)
 SCORE_GRAPHICS(mat_castle_grounds_dl_Y)
+
+SCORE_GRAPHICS(mat_castle_grounds_dl__6)
+SCORE_GRAPHICS(mat_castle_grounds_dl__7)
+SCORE_GRAPHICS(mat_castle_grounds_dl__8)
