@@ -52,7 +52,11 @@ __attribute__((aligned(32))) struct FeudConfig
 } sConfiguration = 
 {
     .header = "THE FAMILY FEUD CONTROL START YE",
+#if 0
     .state = { "1", 0, { "000", "000" } },
+#else
+    .state = { "6", 0, { "140", "044" } },
+#endif
     .teams = { 
         { "Team 1", { "T1 Player 1 Name", "T1 Player 2 Name", "T1 Player 3 Name", "T1 Player 4 Name", "T1 Player 5 Name", } },
         { "Team 2", { "T2 Player 1 Name", "T2 Player 2 Name", "T2 Player 3 Name", "T2 Player 4 Name", "T2 Player 5 Name", } },
@@ -83,6 +87,7 @@ static char sFailCount = 0;
 static char sAnswerSide = 0;
 
 static int sPendingScore = 0;
+static int sCountdown = 0;
 
 enum FinalePositions
 {
@@ -119,6 +124,10 @@ enum InternalState
     RIGHT,
     STEAL,
     NORMAL_FINALE,
+
+    PRE_FINAL,
+    FINAL_PICK1,
+    FINAL_ANSWER1,
 };
 
 #define sInternalState (sConfiguration.state.internalState)
@@ -226,6 +235,10 @@ void bhv_player_loop()
 #include "aglab_x_team_score_graphics.h"
 #undef TEXT_TEAMSCORE_GRAPHICS
 
+#define PANEL_BG_GRAPHICS(name) extern Gfx name[];
+#include "aglab_x_panel_bg.h"
+#undef PANEL_BG_GRAPHICS
+
 static Gfx* sPanelVisuals[] =
 {
 #define PANEL_GRAPHICS(i, j, name) [i*32 + j] = name, 
@@ -259,6 +272,13 @@ static Gfx* sTeamScoreTextVisuals[] =
 #define TEXT_TEAMSCORE_GRAPHICS(i,j, name) [i*4 + j] = name,
 #include "aglab_x_team_score_graphics.h"
 #undef TEXT_TEAMSCORE_GRAPHICS 
+};
+
+static Gfx* sPanelBgVisual[] = 
+{
+#define PANEL_BG_GRAPHICS(name) name,
+#include "aglab_x_panel_bg.h"
+#undef PANEL_BG_GRAPHICS 
 };
 
 extern const Texture *const sLUT[128];
@@ -307,15 +327,14 @@ static void set_total_score(int score)
     }
 }
 
-static void set_team_score(int team, int score)
+static void set_team_score(int team, const char* text)
 {
     void** luts = segmented_to_virtual(sLUT);
 
-    char nums[] = { (score / 100) % 10,  (score / 10) % 10, score % 10 };
     for (int i = 0; i < 3; i++)
     {
         void** gfx = segmented_to_virtual(sTeamScoreTextVisuals[4*team + i]);
-        gfx[13] = luts[(int) ('0' + nums[i])];
+        gfx[13] = luts[(int) (text[i])];
     }
 }
 
@@ -342,6 +361,44 @@ static void set_panel_text(int panelNumber, char* txt)
     {
         void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + 2 + off + i]);
         gfx[13] = luts[(int) txt[i]];
+    }
+}
+
+extern u8 panel0__6_rgba16[];
+extern u8 castle_grounds_dl__5_rgba16[];
+
+static void set_panel_text_from_start(int panelNumber, char* txt, int limit)
+{
+    int i;
+    void** luts = segmented_to_virtual(sLUT);
+    for (i = 0; i < MAX_PANEL_TEXT_LEN; i++)
+    {
+        void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + 2 + i]);
+        gfx[13] = luts[' '];
+    }
+
+    for (i = 0; i < MAX_PANEL_TEXT_LEN; i++)
+    {
+        if (txt[i] == '\0')
+            break;
+
+        void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + 2 + i]);
+        gfx[13] = luts[(int) txt[i]];
+    }
+
+    if (txt[i] != '\0')
+    {
+        void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + 2 + i]);
+        gfx[13] = castle_grounds_dl__5_rgba16;
+    }
+}
+
+static void change_panel_visuals()
+{
+    for (int i = 0; i <= 9; i++)
+    {
+        void** gfx = segmented_to_virtual(sPanelBgVisual[i]);
+        gfx[13] = (void*) castle_grounds_dl__5_rgba16;
     }
 }
 
@@ -375,8 +432,6 @@ extern const BehaviorScript bhvStaticBillboard[];
 #define MAX_TEAM_TEXT_LEN 11
 void bhv_ctl_init()
 {
-    set_team_score(0, 0);
-    set_team_score(1, 0);
     void** luts = segmented_to_virtual(sLUT);
     for (int k = 0; k < 2; k++)
     {
@@ -527,30 +582,60 @@ extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 extern BehaviorScript bhvPanel[];
 void bhv_ctl_loop()
 {
+    for (int i = 0; i < 2; i++)
+        set_team_score(i, sConfiguration.state.scores[i].score);
+
     if (sInternalState == IS_INIT)
     {
-        struct Round* round = &sConfiguration.rounds[currentRound()];
-
-        for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 2; j++)
+        if (currentRound() < 5)
         {
-            int num = i + 4*j;
-            if ('\0' == round->answers[num].name[0])
-                break;
+            struct Round* round = &sConfiguration.rounds[currentRound()];
 
-            set_panel_text(num, "");
-            struct Object* th = spawn_object(o, 0xf1 + num, bhvPanel);
-            th->oPosX = 107;
-            th->oPosY = 1510 - 200 * i;
-            th->oPosZ = -2935 + 520 * (j ? -1 : 1);
-            th->oFaceAngleYaw = 0x8000;
-            th->oFaceAngleRoll = 0;
-            th->oFaceAnglePitch = 0x8000;
-            SET_BPARAM2(th->oBehParams, i);
-            SET_BPARAM1(th->oBehParams, j);
-            obj_scale_xyz(th, 1.f, 1.f, 1.03f);
+            for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 2; j++)
+            {
+                int num = i + 4*j;
+                if ('\0' == round->answers[num].name[0])
+                    break;
+
+                set_panel_text(num, "");
+                set_panel_score(num, "  ");
+                struct Object* th = spawn_object(o, 0xf1 + num, bhvPanel);
+                th->oPosX = 107;
+                th->oPosY = 1510 - 200 * i;
+                th->oPosZ = -2935 + 520 * (j ? -1 : 1);
+                th->oFaceAngleYaw = 0x8000;
+                th->oFaceAngleRoll = 0;
+                th->oFaceAnglePitch = 0x8000;
+                SET_BPARAM2(th->oBehParams, i);
+                SET_BPARAM1(th->oBehParams, j);
+                obj_scale_xyz(th, 1.f, 1.f, 1.03f);
+            }
+            sInternalState = PRE_REACTION;
         }
-        sInternalState = PRE_REACTION;
+        else
+        {
+            for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 2; j++)
+            {
+                int num = i + 5*j;
+                set_panel_text(num, "");
+                set_panel_score(num, "  ");
+                struct Object* th = spawn_object(o, 0xf0 + num, bhvPanel);
+                th->oPosX = 107;
+                th->oPosY = 1510 - 150 * i;
+                th->oPosZ = -2935 + 520 * (j ? -1 : 1);
+                th->oFaceAngleYaw = 0x8000;
+                th->oFaceAngleRoll = 0x8000;
+                th->oFaceAnglePitch = 0x8000;
+                th->oAction = 2;
+                SET_BPARAM2(th->oBehParams, i);
+                SET_BPARAM1(th->oBehParams, j);
+                obj_scale_xyz(th, 1.f, 1.f, 1.03f);
+            }
+            change_panel_visuals();
+            sInternalState = PRE_FINAL;
+        }
     }
 
     if (sInternalState == PRE_REACTION)
@@ -763,6 +848,37 @@ void bhv_ctl_choice_init()
 {
 }
 
+static void control_selected_player()
+{
+    controls_print(20, 60, "DPAD PLAYER");
+    int update = 0;
+    if (gPlayer1Controller->buttonPressed & L_JPAD)
+    {
+        if (BPARAM1)
+            sCurrentResponder--;
+        else
+            sCurrentResponder++;
+
+        update = 1;
+    }
+    if (gPlayer1Controller->buttonPressed & R_JPAD)
+    {
+        if (BPARAM1)
+            sCurrentResponder++;
+        else
+            sCurrentResponder--;
+
+        update = 1;
+    }
+
+    sCurrentResponder += 5;
+    sCurrentResponder %= 5;
+    struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
+    struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
+    bb->parentObj = p;
+    set_player_text(0, sConfiguration.teams[BPARAM1].players[(int) sCurrentResponder].name);
+}
+
 void bhv_ctl_choice_loop()
 {
     if (sInternalState == AFTER_REACTION || sInternalState == STEAL)
@@ -810,36 +926,7 @@ void bhv_ctl_choice_loop()
     {
         if ((!BPARAM1 && sInternalState == RIGHT) || (BPARAM1 && sInternalState == LEFT))
         {
-            controls_print(20, 60, "DPAD PLAYER");
-            int update = 0;
-            if (gPlayer1Controller->buttonPressed & L_JPAD)
-            {
-                if (BPARAM1)
-                    sCurrentResponder--;
-                else
-                    sCurrentResponder++;
-
-                update = 1;
-            }
-            if (gPlayer1Controller->buttonPressed & R_JPAD)
-            {
-                if (BPARAM1)
-                    sCurrentResponder++;
-                else
-                    sCurrentResponder--;
-
-                update = 1;
-            }
-
-            if (update)
-            {
-                sCurrentResponder += 5;
-                sCurrentResponder %= 5;
-                struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
-                struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
-                bb->parentObj = p;
-                set_player_text(0, sConfiguration.teams[BPARAM1].players[(int) sCurrentResponder].name);
-            }
+            control_selected_player();
         }
     }
 }
@@ -1003,7 +1090,7 @@ void bhv_finale_ctl_loop()
                 int team = 1 - (sNormalFinalePosition + 1) / 2;
                 char* scoreText = sConfiguration.state.scores[team].score;
                 int score = str_to_int(scoreText) + sPendingScore * sScoreMultipliers[currentRound()];
-                set_team_score(team, score);
+                sprintf(scoreText, "%03d", score);
                 sPendingScore = 0;
             }
         }
@@ -1043,6 +1130,71 @@ void bhv_finale_ctl_loop()
                     }
                 }
             }
+        }
+    }
+
+    if (sInternalState == PRE_FINAL)
+    {
+        spawn_sparkles();
+        if (o->oDistanceToMario < 200.f)
+        {
+            controls_print(20, 40, "START");
+            if (gPlayer1Controller->buttonPressed & START_BUTTON)
+            {
+                sInternalState = FINAL_PICK1;
+                sBlockCamera = 1;
+                obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
+                obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+                sCurrentResponder = 0;
+                struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
+                obj_scale(bb, 0.8f);
+                obj_unhide(bb);
+                struct Object* bb1 = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1);
+                obj_hide(bb1);
+            }
+        }
+    }
+
+    if (sInternalState > PRE_FINAL)
+    {
+        gMarioStates->pos[0] = o->oPosX;
+        gMarioStates->pos[1] = o->oPosY;
+        gMarioStates->pos[2] = o->oPosZ;
+        s8DirModeYawOffset = 0x4000;
+        gMarioStates->faceAngle[1] = 0x4000;
+    }
+
+    if (sInternalState == FINAL_PICK1)
+    {
+        if (str_to_int(sConfiguration.state.scores[0].score) > str_to_int(sConfiguration.state.scores[1].score))
+        {
+            SET_BPARAM1(o->oBehParams, 1);
+            sNormalFinalePosition = 1;
+        }
+        else
+        {
+            SET_BPARAM1(o->oBehParams, 0);
+            sNormalFinalePosition = -1;
+        }
+
+        control_selected_player();
+        controls_print(20, 40, "DPAD PLAYER");
+        if (gPlayer1Controller->buttonPressed & A_BUTTON)
+        {
+            sInternalState = FINAL_ANSWER1;
+            o->oTimer = 0;
+            sNormalFinalePosition = 0;
+        }
+    }
+
+    if (sInternalState == FINAL_ANSWER1)
+    {
+        struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
+        if (o->oTimer <= 50)
+        {
+            p->oPosX = lerp(p->oHomeX, o->oPosX,  o->oTimer / 50.f);
+            p->oPosY = lerp(p->oHomeY, o->oPosY,  o->oTimer / 50.f);
+            p->oPosZ = lerp(p->oHomeZ, o->oPosZ - 500.f * (BPARAM1 - 0.5f),  o->oTimer / 50.f);
         }
     }
 }
