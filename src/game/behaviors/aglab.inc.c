@@ -646,6 +646,7 @@ void bhv_ctl_loop()
                     && obj != o
                 ) {
                     obj->activeFlags = 0;
+                    obj->oAction = 10;
                 }
 
                 obj = (struct Object *) obj->header.next;
@@ -1070,7 +1071,7 @@ void bhv_panel_loop()
 {
     if (0 == o->oAction)
     {
-        if (sSelectedX == BPARAM1 && (sSelectedY - 1) == BPARAM2)
+        if (sShowMonitor && sSelectedX == BPARAM1 && (sSelectedY - 1) == BPARAM2)
         {
             o->oFaceAngleRoll = 0x1000 * sins(0x767 * o->oTimer);
             controls_print(140, 20, "A OPEN");
