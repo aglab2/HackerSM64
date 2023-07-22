@@ -416,7 +416,10 @@ void render_textrect(s32 x, s32 y, s32 pos) {
  * Renders the text in sTextLabels on screen at the proper locations by iterating
  * a for loop.
  */
+extern void controls_seal_print();
 void render_text_labels(void) {
+    controls_seal_print();
+
     s32 i;
     s32 j;
     s8 glyphIndex;

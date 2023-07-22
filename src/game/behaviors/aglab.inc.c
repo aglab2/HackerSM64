@@ -17,6 +17,8 @@ struct State
     char curRound[4];
     int internalState;
     struct Score scores[2];
+    int pendingScore;
+    const char* prints[11];
 };
 
 struct Team
@@ -87,7 +89,8 @@ static char sPickedResponder = 0;
 static char sFailCount = 0;
 static char sAnswerSide = 0;
 
-static int sPendingScore = 0;
+#define sPendingScore (sConfiguration.state.pendingScore)
+
 static int sCountdown = 0;
 
 enum FinalePositions
@@ -144,9 +147,25 @@ static const f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
 
 static char sPlayedBuzzer = 0;
 
+int sCurrentControlsPos = 0;
+void controls_seal_print()
+{
+    for (int i = sCurrentControlsPos; i < sizeof(sConfiguration.state.prints) / sizeof(*sConfiguration.state.prints); i++)
+    {
+        sConfiguration.state.prints[i] = NULL;
+    }
+
+    sCurrentControlsPos = 0;
+}
+
 static void controls_print(int x, int y, const char* name)
 {
+#if 0
     print_text_fmt_int(x, y, name, 0);
+#else
+    (void) x; (void) y;
+    sConfiguration.state.prints[sCurrentControlsPos++] = name;
+#endif
 }
 
 static void obj_unhide(struct Object* obj) {
@@ -573,6 +592,8 @@ extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 extern BehaviorScript bhvPanel[];
 void bhv_ctl_loop()
 {
+    set_total_score(sPendingScore);
+
     {  
         void** luts = segmented_to_virtual(sLUT);
         for (int k = 0; k < 2; k++)
@@ -815,7 +836,7 @@ void bhv_ctl_loop()
                 controls_print(20, 60, "L EXIT");
                 if (gPlayer1Controller->buttonPressed & L_TRIG)
                 {
-                    cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1, (currentRound() + o->oSubAction / 2) % 5)->oAction = 1;
+                    cur_obj_find_with_behavior_with_bparam12(bhvPlayer, 1 - sAnswerSide, (currentRound() + o->oSubAction / 2) % 5)->oAction = 1;
                     o->oTimer = 0;
                     sInternalState = AFTER_REACTION;
                     sBlockCamera = 0;
@@ -1060,11 +1081,6 @@ void bhv_panel_loop()
                 {
                     struct Round* round = &sConfiguration.rounds[currentRound()];
                     o->oPanelRound = (struct Object*) round;
-                    int num = BPARAM2 + 4 * BPARAM1;
-                    if (sInternalState < STEAL)
-                        sPendingScore += str_to_int(round->answers[num].cost);
-
-                    set_panel_score(1 + num, round->answers[num].cost);
                 }
             }
         }
@@ -1078,10 +1094,12 @@ void bhv_panel_loop()
         struct Round* round = (struct Round*) o->oPanelRound;
         int num = BPARAM2 + 4 * BPARAM1;
         set_panel_text (1 + num, round->answers[num].name);
+        set_panel_score(1 + num, round->answers[num].cost);
         if (o->oTimer == 25)
         {
             o->oAction = 2;
-            set_total_score(sPendingScore);
+            if (sInternalState < STEAL)
+                sPendingScore += str_to_int(round->answers[num].cost);
         }
 
         o->oFaceAngleRoll = 0x8000 / 25 * o->oTimer;
@@ -1091,6 +1109,7 @@ void bhv_panel_loop()
         struct Round* round = (struct Round*) o->oPanelRound;
         int num = BPARAM2 + 4 * BPARAM1;
         set_panel_text (1 + num, round->answers[num].name);
+        set_panel_score(1 + num, round->answers[num].cost);
     }
     else
     {
@@ -1354,7 +1373,6 @@ void bhv_finale_ctl_loop()
                     play_sound(SOUND_PEACH_MARIO, gGlobalSoundSource); 
                 }
                 sPendingScore += cost;
-                set_total_score(sPendingScore);
 
                 o->oAction++;
                 o->oSubAction = 0;
