@@ -1336,6 +1336,9 @@ os16112*/
 #define /*0x112*/ os16112                                       OBJECT_FIELD_S16(0x22, 1)
 
 #define /*0x0F4*/ oPlayerYMin                                      OBJECT_FIELD_F32(0x1B)
+#define /*0x0F4*/ oFinaleDrawingProgress                           OBJECT_FIELD_S32(0x1B)
+#define /*0x0F4*/ oFinaleCountdownLength                           OBJECT_FIELD_S32(0x1C)
+#define /*0x0F4*/ oPanelRound                                      OBJECT_FIELD_OBJ(0x1C)
 
 
 #endif // OBJECT_FIELDS_H

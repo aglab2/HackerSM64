@@ -52,7 +52,7 @@ __attribute__((aligned(32))) struct FeudConfig
 } sConfiguration = 
 {
     .header = "THE FAMILY FEUD CONTROL START YE",
-#if 0
+#if 1
     .state = { "1", 0, { "000", "000" } },
 #else
     .state = { "6", 0, { "140", "044" } },
@@ -83,6 +83,7 @@ static char sSelectedX = 0;
 static char sSelectedY = 0;
 
 static char sCurrentResponder = 0;
+static char sPickedResponder = 0;
 static char sFailCount = 0;
 static char sAnswerSide = 0;
 
@@ -126,8 +127,11 @@ enum InternalState
     NORMAL_FINALE,
 
     PRE_FINAL,
-    FINAL_PICK1,
-    FINAL_ANSWER1,
+    FINAL_PICK,
+    FINAL_ANSWER,
+    FINAL_SHOW_ANSWERS,
+
+    CLEAR,
 };
 
 #define sInternalState (sConfiguration.state.internalState)
@@ -349,7 +353,6 @@ static void set_panel_text(int panelNumber, char* txt)
         len = MAX_PANEL_TEXT_LEN;
     }
 
-    txt[len] = '\0';
     for (int i = 0; i < MAX_PANEL_TEXT_LEN; i++)
     {
         void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + 2 + i]);
@@ -367,7 +370,7 @@ static void set_panel_text(int panelNumber, char* txt)
 extern u8 panel0__6_rgba16[];
 extern u8 castle_grounds_dl__5_rgba16[];
 
-static void set_panel_text_from_start(int panelNumber, char* txt, int limit)
+static int set_panel_text_from_start(int panelNumber, char* txt, int limit)
 {
     int i;
     void** luts = segmented_to_virtual(sLUT);
@@ -377,7 +380,7 @@ static void set_panel_text_from_start(int panelNumber, char* txt, int limit)
         gfx[13] = luts[' '];
     }
 
-    for (i = 0; i < MAX_PANEL_TEXT_LEN; i++)
+    for (i = 0; i < limit; i++)
     {
         if (txt[i] == '\0')
             break;
@@ -389,8 +392,20 @@ static void set_panel_text_from_start(int panelNumber, char* txt, int limit)
     if (txt[i] != '\0')
     {
         void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + 2 + i]);
-        gfx[13] = castle_grounds_dl__5_rgba16;
+        gfx[13] = panel0__6_rgba16;
+        return 1;
     }
+    else
+    {
+        return 0;
+    }
+}
+
+static void set_panel_pending_draw(int panelNumber, int forScore)
+{
+    void** luts = segmented_to_virtual(sLUT);
+    void** gfx = segmented_to_virtual(sPanelVisuals[32 * panelNumber + (forScore ? 0 : 2)]);
+    gfx[13] = ((gGlobalTimer / 5) & 1) ? panel0__6_rgba16 : luts[' '];
 }
 
 static void change_panel_visuals()
@@ -412,7 +427,6 @@ static void set_player_text(int side, char* txt)
         len = MAX_PLAYER_TEXT_LEN;
     }
 
-    txt[len] = '\0';
     for (int i = 0; i < MAX_PLAYER_TEXT_LEN; i++)
     {
         void** gfx = segmented_to_virtual(sPlayerTextVisuals[32 * side + i]);
@@ -432,31 +446,8 @@ extern const BehaviorScript bhvStaticBillboard[];
 #define MAX_TEAM_TEXT_LEN 11
 void bhv_ctl_init()
 {
-    void** luts = segmented_to_virtual(sLUT);
-    for (int k = 0; k < 2; k++)
-    {
-        char* txt = sConfiguration.teams[k].teamName;
-        int len = strlen(txt);
-        if (len > MAX_TEAM_TEXT_LEN)
-        {
-            len = MAX_TEAM_TEXT_LEN;
-        }
-
-        txt[len] = '\0';
-        for (int i = 0; i < MAX_TEAM_TEXT_LEN; i++)
-        {
-            void** gfx = segmented_to_virtual(sTeamsVisuals[16 * k + i]);
-            gfx[13] = luts[' '];
-        }
-
-        int off = (MAX_TEAM_TEXT_LEN - len) / 2;
-        for (int i = 0; i < len; i++)
-        {
-            void** gfx = segmented_to_virtual(sTeamsVisuals[16 * k + off + i]);
-            gfx[13] = luts[(int) txt[i]];
-        }
-    }
-
+    sInternalState = 0;
+    sPendingScore = 0;
     set_total_score(0);
     
     for (int k = 0; k < 2; k++)
@@ -582,11 +573,98 @@ extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 extern BehaviorScript bhvPanel[];
 void bhv_ctl_loop()
 {
+    {  
+        void** luts = segmented_to_virtual(sLUT);
+        for (int k = 0; k < 2; k++)
+        {
+            char* txt = sConfiguration.teams[k].teamName;
+            int len = strlen(txt);
+            if (len > MAX_TEAM_TEXT_LEN)
+            {
+                len = MAX_TEAM_TEXT_LEN;
+            }
+
+            for (int i = 0; i < MAX_TEAM_TEXT_LEN; i++)
+            {
+                void** gfx = segmented_to_virtual(sTeamsVisuals[16 * k + i]);
+                gfx[13] = luts[' '];
+            }
+
+            int off = (MAX_TEAM_TEXT_LEN - len) / 2;
+            for (int i = 0; i < len; i++)
+            {
+                void** gfx = segmented_to_virtual(sTeamsVisuals[16 * k + off + i]);
+                gfx[13] = luts[(int) txt[i]];
+            }
+        }
+    }
     for (int i = 0; i < 2; i++)
         set_team_score(i, sConfiguration.state.scores[i].score);
 
-    if (sInternalState == IS_INIT)
+    if (o->oTimer > 1 && sInternalState == IS_INIT)
     {
+        sSelectedX = 0;
+        sSelectedY = 0;
+
+        sCurrentResponder = 0;
+        sFailCount = 0;
+        sAnswerSide = 0;
+        sShowMonitor = 0;
+        sBlockCamera = 0;
+        sPlayedBuzzer = 0;
+        sNormalFinalePosition = 0;
+
+        {
+            uintptr_t *behaviorAddr = segmented_to_virtual(bhvPanel);
+            struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+            struct Object *obj = (struct Object *) listHead->next;
+
+            while (obj != (struct Object *) listHead) {
+                if (obj->behavior == behaviorAddr
+                    && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+                    && obj != o
+                ) {
+                    obj->activeFlags = 0;
+                }
+
+                obj = (struct Object *) obj->header.next;
+            }
+        }
+        {
+            uintptr_t *behaviorAddr = segmented_to_virtual(bhvPlayer);
+            struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+            struct Object *obj = (struct Object *) listHead->next;
+
+            while (obj != (struct Object *) listHead) {
+                if (obj->behavior == behaviorAddr
+                    && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+                    && obj != o
+                ) {
+                    obj->oPosX = obj->oHomeX;
+                    obj->oPosY = obj->oHomeY;
+                    obj->oPosZ = obj->oHomeZ;
+                }
+
+                obj = (struct Object *) obj->header.next;
+            }
+        }
+        {
+            uintptr_t *behaviorAddr = segmented_to_virtual(bhvStaticBillboard);
+            struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+            struct Object *obj = (struct Object *) listHead->next;
+
+            while (obj != (struct Object *) listHead) {
+                if (obj->behavior == behaviorAddr
+                    && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
+                    && obj != o
+                ) {
+                    obj_hide(obj);
+                }
+
+                obj = (struct Object *) obj->header.next;
+            }
+        }
+
         if (currentRound() < 5)
         {
             struct Round* round = &sConfiguration.rounds[currentRound()];
@@ -628,7 +706,7 @@ void bhv_ctl_loop()
                 th->oFaceAngleYaw = 0x8000;
                 th->oFaceAngleRoll = 0x8000;
                 th->oFaceAnglePitch = 0x8000;
-                th->oAction = 2;
+                th->oAction = 3;
                 SET_BPARAM2(th->oBehParams, i);
                 SET_BPARAM1(th->oBehParams, j);
                 obj_scale_xyz(th, 1.f, 1.f, 1.03f);
@@ -848,31 +926,49 @@ void bhv_ctl_choice_init()
 {
 }
 
-static void control_selected_player()
+static void advance_selected_player(int amt, int forbidPicked)
+{
+    sCurrentResponder += amt;
+    sCurrentResponder += 5;
+    sCurrentResponder %= 5;
+
+    if (forbidPicked && sCurrentResponder == sPickedResponder)
+    {
+        sCurrentResponder += amt;
+        sCurrentResponder += 5;
+        sCurrentResponder %= 5;
+    }
+}
+
+static void control_selected_player(int forbidPicked)
 {
     controls_print(20, 60, "DPAD PLAYER");
-    int update = 0;
     if (gPlayer1Controller->buttonPressed & L_JPAD)
     {
         if (BPARAM1)
-            sCurrentResponder--;
+        {
+            advance_selected_player(-1, forbidPicked);
+        }
         else
-            sCurrentResponder++;
-
-        update = 1;
+        {
+            advance_selected_player(1, forbidPicked);
+        }
     }
     if (gPlayer1Controller->buttonPressed & R_JPAD)
     {
         if (BPARAM1)
-            sCurrentResponder++;
+        {
+            advance_selected_player(1, forbidPicked);
+        }
         else
-            sCurrentResponder--;
+        {
+            advance_selected_player(-1, forbidPicked);
+        }
 
-        update = 1;
+        sCurrentResponder += 5;
+        sCurrentResponder %= 5;
     }
 
-    sCurrentResponder += 5;
-    sCurrentResponder %= 5;
     struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
     struct Object* bb = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0);
     bb->parentObj = p;
@@ -926,7 +1022,7 @@ void bhv_ctl_choice_loop()
     {
         if ((!BPARAM1 && sInternalState == RIGHT) || (BPARAM1 && sInternalState == LEFT))
         {
-            control_selected_player();
+            control_selected_player(0);
         }
     }
 }
@@ -963,11 +1059,11 @@ void bhv_panel_loop()
                 o->oAction = 1;
                 {
                     struct Round* round = &sConfiguration.rounds[currentRound()];
+                    o->oPanelRound = (struct Object*) round;
                     int num = BPARAM2 + 4 * BPARAM1;
                     if (sInternalState < STEAL)
                         sPendingScore += str_to_int(round->answers[num].cost);
 
-                    set_panel_text (1 + num, round->answers[num].name);
                     set_panel_score(1 + num, round->answers[num].cost);
                 }
             }
@@ -979,6 +1075,9 @@ void bhv_panel_loop()
     }
     else if (1 == o->oAction)
     {
+        struct Round* round = (struct Round*) o->oPanelRound;
+        int num = BPARAM2 + 4 * BPARAM1;
+        set_panel_text (1 + num, round->answers[num].name);
         if (o->oTimer == 25)
         {
             o->oAction = 2;
@@ -986,6 +1085,12 @@ void bhv_panel_loop()
         }
 
         o->oFaceAngleRoll = 0x8000 / 25 * o->oTimer;
+    }
+    else if (o->oAction == 2)
+    {
+        struct Round* round = (struct Round*) o->oPanelRound;
+        int num = BPARAM2 + 4 * BPARAM1;
+        set_panel_text (1 + num, round->answers[num].name);
     }
     else
     {
@@ -1100,35 +1205,8 @@ void bhv_finale_ctl_loop()
             controls_print(20, 60, "L NEXT ROUND");
             if (gPlayer1Controller->buttonPressed & L_TRIG)
             {
-                sInternalState = 0;
-                
-                sSelectedX = 0;
-                sSelectedY = 0;
-
-                sCurrentResponder = 0;
-                sFailCount = 0;
-                sAnswerSide = 0;
-                sShowMonitor = 0;
-                sBlockCamera = 0;
-                sPlayedBuzzer = 0;
                 sConfiguration.state.curRound[0]++;
-
-                {
-                    uintptr_t *behaviorAddr = segmented_to_virtual(bhvPanel);
-                    struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
-                    struct Object *obj = (struct Object *) listHead->next;
-
-                    while (obj != (struct Object *) listHead) {
-                        if (obj->behavior == behaviorAddr
-                            && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED
-                            && obj != o
-                        ) {
-                            obj->activeFlags = 0;
-                        }
-
-                        obj = (struct Object *) obj->header.next;
-                    }
-                }
+                sInternalState = 0;
             }
         }
     }
@@ -1141,7 +1219,8 @@ void bhv_finale_ctl_loop()
             controls_print(20, 40, "START");
             if (gPlayer1Controller->buttonPressed & START_BUTTON)
             {
-                sInternalState = FINAL_PICK1;
+                seq_player_play_sequence(0, 0, 0);
+                sInternalState = FINAL_PICK;
                 sBlockCamera = 1;
                 obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
                 obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
@@ -1151,6 +1230,9 @@ void bhv_finale_ctl_loop()
                 obj_unhide(bb);
                 struct Object* bb1 = cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1);
                 obj_hide(bb1);
+                o->oSubAction = 0;
+                o->oAction = 0;
+                o->oFinaleCountdownLength = 20 * 30;
             }
         }
     }
@@ -1164,7 +1246,7 @@ void bhv_finale_ctl_loop()
         gMarioStates->faceAngle[1] = 0x4000;
     }
 
-    if (sInternalState == FINAL_PICK1)
+    if (sInternalState == FINAL_PICK)
     {
         if (str_to_int(sConfiguration.state.scores[0].score) > str_to_int(sConfiguration.state.scores[1].score))
         {
@@ -1177,24 +1259,134 @@ void bhv_finale_ctl_loop()
             sNormalFinalePosition = -1;
         }
 
-        control_selected_player();
-        controls_print(20, 40, "DPAD PLAYER");
+        control_selected_player(o->oAction); // greater than 5 also works
+        controls_print(20, 40, "A SELECT");
         if (gPlayer1Controller->buttonPressed & A_BUTTON)
         {
-            sInternalState = FINAL_ANSWER1;
+            sInternalState = FINAL_ANSWER;
             o->oTimer = 0;
+            o->oSubAction = 0;
             sNormalFinalePosition = 0;
+            sCountdown = o->oFinaleCountdownLength;
+            sPickedResponder = sCurrentResponder;
         }
     }
 
-    if (sInternalState == FINAL_ANSWER1)
+    if (sInternalState == FINAL_ANSWER)
     {
         struct Object* p = cur_obj_find_with_behavior_with_bparam12(bhvPlayer, BPARAM1, sCurrentResponder);
         if (o->oTimer <= 50)
         {
-            p->oPosX = lerp(p->oHomeX, o->oPosX,  o->oTimer / 50.f);
+            p->oPosX = lerp(p->oHomeX, o->oPosX + (o->oAction ? 500.f : 0.f),  o->oTimer / 50.f);
             p->oPosY = lerp(p->oHomeY, o->oPosY,  o->oTimer / 50.f);
             p->oPosZ = lerp(p->oHomeZ, o->oPosZ - 500.f * (BPARAM1 - 0.5f),  o->oTimer / 50.f);
         }
+        else
+        {
+            if (sCountdown > 29)
+                print_text_fmt_int(160 - 16, 130, "%d", sCountdown / 30);
+
+            if (0 == o->oSubAction)
+            {
+                controls_print(20, 20, "A START");
+                if (gPlayer1Controller->buttonPressed & A_BUTTON)
+                {
+                    o->oSubAction = 1;
+                }
+            }
+            else
+            {
+                if (sCountdown > 28)
+                    sCountdown--;
+                else
+                    sCountdown = 0;
+   
+                if (0 == sCountdown)
+                {
+                    if (!sShowMonitor)
+                    {
+                        controls_print(20, 20, "A SHOW ANSWERS");
+                        if (gPlayer1Controller->buttonPressed & A_BUTTON)
+                        {
+                            sShowMonitor = 1;
+                            sInternalState = FINAL_SHOW_ANSWERS;
+                            o->oSubAction = 0;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (sInternalState == FINAL_SHOW_ANSWERS)
+    {
+        if (0 == o->oSubAction)
+        {
+            set_panel_pending_draw(o->oAction, 0);
+            controls_print(20, 20, "A SHOW ANSWER");
+            if (gPlayer1Controller->buttonPressed & A_BUTTON)
+            {
+                o->oSubAction = 1;
+                o->oFinaleDrawingProgress = 0;
+                play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); 
+            }
+        }
+        else if (1 == o->oSubAction)
+        {
+            o->oFinaleDrawingProgress++;
+            int keepGoing = set_panel_text_from_start(o->oAction, sConfiguration.final.answersInit[o->oAction].name, o->oFinaleDrawingProgress);
+            if (!keepGoing)
+            {
+                o->oSubAction = 2;
+            }
+        }
+        else
+        {
+            set_panel_pending_draw(o->oAction, 1);
+            controls_print(20, 20, "A SHOW SCORE");
+            if (gPlayer1Controller->buttonPressed & A_BUTTON)
+            {
+                set_panel_score(o->oAction, sConfiguration.final.answersInit[o->oAction].cost);
+                int cost = str_to_int(sConfiguration.final.answersInit[o->oAction].cost);
+                if (0 == cost)
+                {
+                    play_sound(SOUND_PEACH_MARIO, gGlobalSoundSource); 
+                }
+                sPendingScore += cost;
+                set_total_score(sPendingScore);
+
+                o->oAction++;
+                o->oSubAction = 0;
+                if (5 == o->oAction)
+                {
+                    o->oFinaleCountdownLength = 30 * 25;
+                    sInternalState = FINAL_PICK;
+                    sShowMonitor = 0;
+                    sCurrentResponder++;
+                    sCurrentResponder %= 5;
+                    return;
+                }
+                
+                if (10 == o->oAction)
+                {
+                    sInternalState = CLEAR;
+                    obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
+                    obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
+                    seq_player_play_sequence(0, SEQ_FEUD, 0);
+                    return;
+                }
+            }
+        }
+    }
+    
+    if (sInternalState == CLEAR)
+    {
+        sShowMonitor = 0;
+        char line[128];
+        sprintf(line, "WINNERS: %s", sConfiguration.teams[BPARAM1].teamName);
+        print_text_centered(160, 170, line);
+        sprintf(line, "TOTAL PRIZE MONEY %d", sPendingScore >= 150 ? 10000 : sPendingScore * 20);
+        print_text_centered(160, 130, line);
     }
 }
