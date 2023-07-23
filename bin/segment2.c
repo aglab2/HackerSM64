@@ -1900,6 +1900,10 @@ ALIGNED8 static const Texture texture_hud_char_arrow_down[] = {
 #include "textures/segment2/segment2.081D0.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_l_[] = {
+#include "textures/segment2/_.rgba16.inc.c"
+};
+
 ALIGNED8 static const Texture texture_hud_char_la[] = {
 #include "textures/segment2/a.rgba16.inc.c"
 };
@@ -2068,6 +2072,8 @@ const Texture *const sLUT[128] = {
 
     [' '] = texture_hud_char_space,
     
+    ['_'] = texture_hud_char_l_,
+
     ['a'] = texture_hud_char_la,
     ['b'] = texture_hud_char_lb,
     ['c'] = texture_hud_char_lc,

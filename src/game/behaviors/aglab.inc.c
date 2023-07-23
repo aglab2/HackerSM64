@@ -429,7 +429,7 @@ static void set_panel_pending_draw(int panelNumber, int forScore)
 
 static void change_panel_visuals()
 {
-    for (int i = 0; i <= 9; i++)
+    for (int i = 0; i <= sizeof(sPanelBgVisual) / sizeof(*sPanelBgVisual); i++)
     {
         void** gfx = segmented_to_virtual(sPanelBgVisual[i]);
         gfx[13] = (void*) castle_grounds_dl__5_rgba16;
@@ -1112,9 +1112,16 @@ void bhv_panel_loop()
         set_panel_text (1 + num, round->answers[num].name);
         set_panel_score(1 + num, round->answers[num].cost);
     }
-    else
+    else if (o->oAction == 3)
     {
-        // -
+        if (sShowMonitor)
+        {
+            o->oFaceAngleRoll = 0x8000;
+        }
+        else
+        {
+            o->oFaceAngleRoll = 0;
+        }
     }
 }
 
@@ -1181,7 +1188,6 @@ void bhv_finale_ctl_loop()
         gMarioStates->pos[1] = o->oPosY;
         gMarioStates->pos[2] = o->oPosZ;
         s8DirModeYawOffset = 0x4000;
-        gMarioStates->faceAngle[1] = 0x4000;
         handle_monitor();
 
         if (!sShowMonitor)
@@ -1263,7 +1269,6 @@ void bhv_finale_ctl_loop()
         gMarioStates->pos[1] = o->oPosY;
         gMarioStates->pos[2] = o->oPosZ;
         s8DirModeYawOffset = 0x4000;
-        gMarioStates->faceAngle[1] = 0x4000;
     }
 
     if (sInternalState == FINAL_PICK)
