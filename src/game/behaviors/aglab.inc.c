@@ -2,6 +2,8 @@
 
 #include "game/print.h"
 
+#define FEUD_VERSION_LINE "VERSION 4"
+
 struct Player
 {
     char name[32];
@@ -777,6 +779,10 @@ void bhv_ctl_loop()
                 sAnswerSide = -1;
                 // play_sound(SOUND_PEACH_POWER_OF_THE_STARS, gGlobalSoundSource); // intro
             }
+        }
+        else
+        {
+            controls_print(20, 20, FEUD_VERSION_LINE);
         }
     }
 
