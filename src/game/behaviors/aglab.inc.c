@@ -141,12 +141,12 @@ enum InternalState
 #define sInternalState (sConfiguration.state.internalState)
 
 static char sShowMonitor = 0;
+static char sPlayedBuzzer = 0;
 char sBlockCamera = 0;
+char sIsStealing = 0;
 
 static const f32 sLeftBuzzerPos [3] = { 947, 529, -2788 };
 static const f32 sRightBuzzerPos[3] = { 947, 529, -3153 };
-
-static char sPlayedBuzzer = 0;
 
 int sCurrentControlsPos = 0;
 void controls_seal_print()
@@ -653,7 +653,9 @@ void bhv_ctl_loop()
         sShowMonitor = 0;
         sBlockCamera = 0;
         sPlayedBuzzer = 0;
+        sIsStealing = 0;
         sNormalFinalePosition = 0;
+        sPendingScore = 0;
 
         {
             uintptr_t *behaviorAddr = segmented_to_virtual(bhvPanel);
@@ -935,6 +937,7 @@ void bhv_ctl_loop()
                 sInternalState = STEAL;
                 sBlockCamera = 0;
                 sCurrentResponder = 0;
+                sIsStealing = 1;
             }
         }
     }
@@ -1119,8 +1122,8 @@ void bhv_panel_loop()
         if (o->oTimer == 25)
         {
             o->oAction = 2;
-            if (sInternalState < STEAL)
-                sPendingScore += str_to_int(round->answers[num].cost);
+            if (!sIsStealing)
+                sPendingScore += sScoreMultipliers[currentRound()] * str_to_int(round->answers[num].cost);
         }
 
         o->oFaceAngleRoll = 0x8000 / 25 * o->oTimer;
@@ -1240,7 +1243,7 @@ void bhv_finale_ctl_loop()
             {
                 int team = 1 - (sNormalFinalePosition + 1) / 2;
                 char* scoreText = sConfiguration.state.scores[team].score;
-                int score = str_to_int(scoreText) + sPendingScore * sScoreMultipliers[currentRound()];
+                int score = str_to_int(scoreText) + sPendingScore;
                 sprintf(scoreText, "%03d", score);
                 sPendingScore = 0;
             }
