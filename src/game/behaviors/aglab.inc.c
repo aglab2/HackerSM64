@@ -133,6 +133,7 @@ enum InternalState
     FINAL_PICK,
     FINAL_ANSWER,
     FINAL_SHOW_ANSWERS,
+    FINAL_DONE,
 
     CLEAR,
 };
@@ -150,7 +151,7 @@ static char sPlayedBuzzer = 0;
 int sCurrentControlsPos = 0;
 void controls_seal_print()
 {
-    for (int i = sCurrentControlsPos; i < sizeof(sConfiguration.state.prints) / sizeof(*sConfiguration.state.prints); i++)
+    for (int i = sCurrentControlsPos; i < (int) (sizeof(sConfiguration.state.prints) / sizeof(*sConfiguration.state.prints)); i++)
     {
         sConfiguration.state.prints[i] = NULL;
     }
@@ -262,6 +263,10 @@ void bhv_player_loop()
 #include "aglab_x_panel_bg.h"
 #undef PANEL_BG_GRAPHICS
 
+#define PANEL_NUMBER_GRAPHICS(name) extern Gfx name[];
+#include "aglab_x_panel_number_graphics.h"
+#undef PANEL_NUMBER_GRAPHICS 
+
 static Gfx* sPanelVisuals[] =
 {
 #define PANEL_GRAPHICS(i, j, name) [i*32 + j] = name, 
@@ -302,6 +307,13 @@ static Gfx* sPanelBgVisual[] =
 #define PANEL_BG_GRAPHICS(name) name,
 #include "aglab_x_panel_bg.h"
 #undef PANEL_BG_GRAPHICS 
+};
+
+static Gfx* sPanelNumberVisual[] = 
+{
+#define PANEL_NUMBER_GRAPHICS(name) name,
+#include "aglab_x_panel_number_graphics.h"
+#undef PANEL_NUMBER_GRAPHICS 
 };
 
 extern const Texture *const sLUT[128];
@@ -427,12 +439,20 @@ static void set_panel_pending_draw(int panelNumber, int forScore)
     gfx[13] = ((gGlobalTimer / 5) & 1) ? panel0__6_rgba16 : luts[' '];
 }
 
+extern Gfx mat_castle_grounds_dl_question[];
 static void change_panel_visuals()
 {
-    for (int i = 0; i <= sizeof(sPanelBgVisual) / sizeof(*sPanelBgVisual); i++)
+    for (int i = 0; i < (int) (sizeof(sPanelBgVisual) / sizeof(*sPanelBgVisual)); i++)
     {
         void** gfx = segmented_to_virtual(sPanelBgVisual[i]);
         gfx[13] = (void*) castle_grounds_dl__5_rgba16;
+    }
+
+    void* data = segmented_to_virtual(mat_castle_grounds_dl_question);
+    for (int i = 0; i < (int) (sizeof(sPanelNumberVisual) / sizeof(*sPanelNumberVisual)); i++)
+    {
+        void** gfx = segmented_to_virtual(sPanelNumberVisual[i]);
+        memcpy(gfx, data, 128);
     }
 }
 
@@ -1294,6 +1314,7 @@ void bhv_finale_ctl_loop()
             sNormalFinalePosition = 0;
             sCountdown = o->oFinaleCountdownLength;
             sPickedResponder = sCurrentResponder;
+            return;
         }
     }
 
@@ -1385,8 +1406,7 @@ void bhv_finale_ctl_loop()
                 if (5 == o->oAction)
                 {
                     o->oFinaleCountdownLength = 30 * 25;
-                    sInternalState = FINAL_PICK;
-                    sShowMonitor = 0;
+                    sInternalState = FINAL_DONE;
                     sCurrentResponder++;
                     sCurrentResponder %= 5;
                     return;
@@ -1394,13 +1414,23 @@ void bhv_finale_ctl_loop()
                 
                 if (10 == o->oAction)
                 {
-                    sInternalState = CLEAR;
+                    sInternalState = FINAL_DONE;
                     obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 0));
                     obj_hide(cur_obj_find_with_behavior_with_bparam12(bhvStaticBillboard, 0, 1));
                     seq_player_play_sequence(0, SEQ_FEUD, 0);
                     return;
                 }
             }
+        }
+    }
+
+    if (sInternalState == FINAL_DONE)
+    {
+        controls_print(20, 20, "START ADVANCE");
+        if (gPlayer1Controller->buttonPressed & START_BUTTON)
+        {
+            sShowMonitor = 0;
+            sInternalState = 5 == o->oAction ? FINAL_PICK : CLEAR;
         }
     }
     
