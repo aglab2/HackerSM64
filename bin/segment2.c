@@ -2028,6 +2028,10 @@ ALIGNED8 static const Texture texture_hud_char_comma[] = {
 #include "textures/segment2/comma.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_dot[] = {
+#include "textures/segment2/dot.rgba16.inc.c"
+};
+
 ALIGNED8 static const Texture texture_hud_char_space[4096] = { };
 
 // Main HUD print table 0x02008250-0x02008337
@@ -2069,6 +2073,7 @@ const Texture *const sLUT[128] = {
     ['='] = texture_hud_char_equal,
     [':'] = texture_hud_char_colon,
     [','] = texture_hud_char_comma,
+    ['.'] = texture_hud_char_dot,
 
     [' '] = texture_hud_char_space,
     
