@@ -2032,6 +2032,14 @@ ALIGNED8 static const Texture texture_hud_char_dot[] = {
 #include "textures/segment2/dot.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_lbracket[] = {
+#include "textures/segment2/lbracket.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_hud_char_rbracket[] = {
+#include "textures/segment2/rbracket.rgba16.inc.c"
+};
+
 ALIGNED8 static const Texture texture_hud_char_space[4096] = { };
 
 // Main HUD print table 0x02008250-0x02008337
@@ -2065,7 +2073,7 @@ const Texture *const sLUT[128] = {
     ['W'] = texture_hud_char_W, ['X'] = texture_hud_char_X, ['Y'] = texture_hud_char_Y, ['Z'] = texture_hud_char_Z,
     ['!'] = texture_hud_char_exclamation, ['?'] = texture_hud_char_question, ['&'] = texture_hud_char_ampersand,
     ['%'] = texture_hud_char_percent, ['-'] = texture_hud_char_minus,
-    ['*'] = texture_hud_char_multiply, ['.'] = texture_hud_char_decimal_point,
+    ['*'] = texture_hud_char_multiply,
     ['\''] = texture_hud_char_apostrophe, ['"'] = texture_hud_char_double_quote, 
 
     ['+'] = texture_hud_char_plus,
@@ -2105,6 +2113,9 @@ const Texture *const sLUT[128] = {
     ['x'] = texture_hud_char_lx,
     ['y'] = texture_hud_char_ly,
     ['z'] = texture_hud_char_lz,
+    
+    ['('] = texture_hud_char_lbracket,
+    [')'] = texture_hud_char_rbracket,
 };
 
 // Main small font print table 0x02008338-0x02008737
