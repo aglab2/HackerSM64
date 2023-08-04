@@ -2,7 +2,7 @@
 
 #include "game/print.h"
 
-#define FEUD_VERSION_LINE "VERSION 5"
+#define FEUD_VERSION_LINE "VERSION 6"
 
 struct Player
 {
