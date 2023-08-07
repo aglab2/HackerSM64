@@ -588,7 +588,7 @@ struct Camera {
      *          be. It's effectively the opposite of the camera's actual yaw. Use
      *          vec3f_get_dist_and_angle() if you need the camera's yaw.
      */
-    /*0x02*/ s16 yaw;
+    /*0x02*/ s16 yaw; s16 roll;
     /*0x04*/ Vec3f focus;
     /*0x10*/ Vec3f pos;
     /*0x1C*/ Vec3f unusedVec1;

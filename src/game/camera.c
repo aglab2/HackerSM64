@@ -1647,6 +1647,7 @@ void mode_fixed_camera(struct Camera *c) {
 #endif
     c->nextYaw = update_fixed_camera(c, c->focus, c->pos);
     c->yaw = c->nextYaw;
+    c->roll = gLakituState.roll;
     pan_ahead_of_player(c);
     vec3_zero(sCastleEntranceOffset);
 }
@@ -2077,6 +2078,7 @@ s16 update_default_camera(struct Camera *c) {
 
     if (-16 < gPlayer1Controller->stickY) {
         c->yaw = yaw;
+        c->roll = gLakituState.roll;
     }
 
     calc_y_to_curr_floor(&posHeight, 1, 200, &focHeight, 0.9f, 200);
@@ -2918,6 +2920,7 @@ void update_camera(struct Camera *c) {
     vec3f_copy(c->focus, gLakituState.goalFocus);
 
     c->yaw = gLakituState.yaw;
+    c->roll = gLakituState.roll;
     c->nextYaw = gLakituState.nextYaw;
     c->mode = gLakituState.mode;
     c->defMode = gLakituState.defMode;
@@ -3306,6 +3309,7 @@ void init_camera(struct Camera *c) {
     gLakituState.yaw = calculate_yaw(c->focus, c->pos);
     gLakituState.nextYaw = gLakituState.yaw;
     c->yaw = gLakituState.yaw;
+    c->roll = gLakituState.roll;
     c->nextYaw = gLakituState.yaw;
 #ifdef PUPPYCAM
     puppycam_init();
@@ -3381,6 +3385,7 @@ void create_camera(struct GraphNodeCamera *gc, struct AllocOnlyPool *pool) {
     c->areaCenY = gc->focus[1];
     c->areaCenZ = gc->focus[2];
     c->yaw = 0;
+    c->roll = 0;
     vec3f_copy(c->pos, gc->pos);
     vec3f_copy(c->focus, gc->focus);
 }
@@ -3659,7 +3664,7 @@ void shake_camera_handheld(Vec3f pos, Vec3f focus) {
 
     approach_s16_asymptotic_bool(&sHandheldShakePitch, shakeOffset[0], 0x08);
     approach_s16_asymptotic_bool(&sHandheldShakeYaw, shakeOffset[1], 0x08);
-    approach_s16_asymptotic_bool(&sHandheldShakeRoll, shakeOffset[2], 0x08);
+    // approach_s16_asymptotic_bool(&sHandheldShakeRoll, shakeOffset[2], 0x08);
 
     if (sHandheldShakePitch | sHandheldShakeYaw) {
         vec3f_get_dist_and_angle(pos, focus, &dist, &pitch, &yaw);
@@ -6595,6 +6600,7 @@ s16 cutscene_object(u8 cutscene, struct Object *obj) {
 void update_camera_yaw(struct Camera *c) {
     c->nextYaw = calculate_yaw(c->focus, c->pos);
     c->yaw = c->nextYaw;
+    c->roll = gLakituState.roll;
 }
 
 void cutscene_reset_spline(void) {
@@ -7394,6 +7400,7 @@ void star_dance_bound_yaw(struct Camera *c, s16 absYaw, s16 yawMax) {
         yaw = absYaw;
         c->nextYaw = yaw;
         c->yaw = yaw;
+        c->roll = gLakituState.roll;
     }
 }
 
@@ -7516,6 +7523,7 @@ void cutscene_dance_fly_away_start(struct Camera *c) {
         vec3f_set(areaCenter, c->areaCenX, c->areaCenY, c->areaCenZ);
         c->yaw = calculate_yaw(areaCenter, c->pos);
         c->nextYaw = c->yaw;
+        c->roll = gLakituState.roll;
     }
 
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
@@ -9920,6 +9928,7 @@ void cutscene_door_mode(struct Camera *c) {
 #endif
 
     c->yaw = c->nextYaw;
+    c->roll = gLakituState.roll;
 
     // Loop until Mario is no longer using the door
     if (sMarioCamState->action != ACT_ENTERING_STAR_DOOR &&
