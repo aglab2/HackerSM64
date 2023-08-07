@@ -1124,6 +1124,7 @@ void mode_8_directions_camera(struct Camera *c) {
 
     radial_camera_input(c);
 
+/*
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
         s8DirModeYawOffset += DEGREES(45);
         play_sound_cbutton_side();
@@ -1148,6 +1149,7 @@ void mode_8_directions_camera(struct Camera *c) {
         s8DirModeYawOffset = snap_to_45_degrees(s8DirModeYawOffset);
     }
 #endif
+*/
 
     lakitu_zoom(400.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
@@ -2880,7 +2882,7 @@ void update_camera(struct Camera *c) {
         && gCurrentArea->camera->mode != CAMERA_MODE_INSIDE_CANNON) {
         // Only process R_TRIG if 'fixed' is not selected in the menu
         if (cam_select_alt_mode(CAM_SELECTION_NONE) == CAM_SELECTION_MARIO) {
-            if (gPlayer1Controller->buttonPressed & R_TRIG) {
+            if (0) {
                 if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
                     set_cam_angle(CAM_ANGLE_MARIO);
                 } else {
@@ -3039,33 +3041,6 @@ void update_camera(struct Camera *c) {
 #endif
         // If fixed camera is selected as the alternate mode, then fix the camera as long as the right
         // trigger is held
-        if ((c->cutscene == CUTSCENE_NONE &&
-            (gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)
-            || (gCameraMovementFlags & CAM_MOVE_FIX_IN_PLACE)
-            || (sMarioCamState->action) == ACT_GETTING_BLOWN) {
-
-            // If this is the first frame that R_TRIG is held, play the "click" sound
-            if (c->cutscene == CUTSCENE_NONE && (gPlayer1Controller->buttonPressed & R_TRIG)
-                && cam_select_alt_mode(0) == CAM_SELECTION_FIXED) {
-                sCameraSoundFlags |= CAM_SOUND_FIXED_ACTIVE;
-                play_sound_rbutton_changed();
-            }
-
-            // Fixed mode only prevents Lakitu from moving. The camera pos still updates, so
-            // Lakitu will fly to his next position as normal whenever R_TRIG is released.
-            gLakituState.posHSpeed = 0.f;
-            gLakituState.posVSpeed = 0.f;
-
-            vec3f_get_yaw(gLakituState.focus, gLakituState.pos, &c->nextYaw);
-            c->yaw = c->nextYaw;
-            gCameraMovementFlags &= ~CAM_MOVE_FIX_IN_PLACE;
-        } else {
-            // Play the "click" sound when fixed mode is released
-            if (sCameraSoundFlags & CAM_SOUND_FIXED_ACTIVE) {
-                play_sound_rbutton_changed();
-                sCameraSoundFlags &= ~CAM_SOUND_FIXED_ACTIVE;
-            }
-        }
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
     } else {
         if ((gPlayer1Controller->buttonPressed & R_TRIG) && (cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
@@ -3702,6 +3677,8 @@ void shake_camera_handheld(Vec3f pos, Vec3f focus) {
  * Updates C Button input state and stores it in `currentState`
  */
 s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown) {
+    return currentState;
+
     buttonsPressed &= CBUTTON_MASK;
     buttonsDown &= CBUTTON_MASK;
 
@@ -4649,6 +4626,7 @@ void radial_camera_input(struct Camera *c) {
         }
     }
 
+    return;
     // Zoom in / enter C-Up
     if (gPlayer1Controller->buttonPressed & U_CBUTTONS) {
         if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
@@ -4682,6 +4660,7 @@ void trigger_cutscene_dialog(s32 trigger) {
  * Updates the camera based on which C buttons are pressed this frame
  */
 void handle_c_button_movement(struct Camera *c) {
+    return;
     s16 cSideYaw;
 
     // Zoom in
@@ -6058,6 +6037,12 @@ struct CameraTrigger sCamBBH[] = {
  *
  * Each table is terminated with NULL_TRIGGER
  */
+struct CameraTrigger sCamCastleGrounds[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamCastleCourtyard[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"
@@ -10393,26 +10378,26 @@ u8 sDanceCutsceneIndexTable[][4] = {
  * and if the result is non-zero, the camera will zoom out.
  */
 u8 sZoomOutAreaMasks[] = {
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // Unused         | Unused
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // Unused         | Unused
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // BBH            | CCM
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // CASTLE_INSIDE  | HMC
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // SSL            | BOB
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // SL             | WDW
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,1,0,0), // JRB            | THI
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // TTC            | RR
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // CASTLE_GROUNDS | BITDW
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // VCUTM          | BITFS
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // SA             | BITS
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // LLL            | DDD
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // WF             | ENDING
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // COURTYARD      | PSS
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // COTMC          | TOTWC
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // BOWSER_1       | WMOTR
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // Unused         | BOWSER_2
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // BOWSER_3       | Unused
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // TTM            | Unused
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // BBH            | CCM
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // LLL            | DDD
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // COURTYARD      | PSS
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // COTMC          | TOTWC
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // BOWSER_1       | WMOTR
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // Unused         | BOWSER_2
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // BOWSER_3       | Unused
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // TTM            | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");

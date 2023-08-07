@@ -559,7 +559,7 @@ void render_hud(void) {
 #endif
 
         if (gCurrentArea != NULL && gCurrentArea->camera->mode == CAMERA_MODE_INSIDE_CANNON) {
-            render_hud_cannon_reticle();
+            // render_hud_cannon_reticle();
         }
 
 #ifndef DISABLE_LIVES
@@ -569,15 +569,15 @@ void render_hud(void) {
 #endif
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
-            render_hud_coins();
+            // render_hud_coins();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
+            // render_hud_stars();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
-            render_hud_keys();
+            // render_hud_keys();
         }
 
 #ifdef BREATH_METER
@@ -596,7 +596,7 @@ void render_hud(void) {
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
-            render_hud_timer();
+            // render_hud_timer();
         }
 
         if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES) print_text(10, 40, "SURFACE POOL FULL");
