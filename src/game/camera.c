@@ -866,17 +866,17 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
 /**
  * Update the camera during 8 directional mode
  */
+f32 gBaseDist = 1000.f;
 s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     s16 camYaw = s8DirModeBaseYaw + s8DirModeYawOffset;
     s16 pitch = look_down_slopes(camYaw);
     f32 posY;
     f32 focusY;
     f32 yOff = 125.f;
-    f32 baseDist = 1000.f;
 
     sAreaYaw = camYaw;
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
-    focus_on_mario(focus, pos, posY + yOff, focusY + yOff, sLakituDist + baseDist, pitch, camYaw);
+    focus_on_mario(focus, pos, posY + yOff, focusY + yOff, sLakituDist + gBaseDist, pitch, camYaw);
     pan_ahead_of_player(c);
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
     if (gCurrLevelArea == AREA_DDD_SUB) {
@@ -1118,6 +1118,8 @@ s32 snap_to_45_degrees(s16 angle) {
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
+f32 gRangeDist = 400.f;
+s16 gRangePitch = 0x900;
 void mode_8_directions_camera(struct Camera *c) {
     Vec3f pos;
     s16 oldAreaYaw = sAreaYaw;
@@ -1151,7 +1153,7 @@ void mode_8_directions_camera(struct Camera *c) {
 #endif
 */
 
-    lakitu_zoom(400.f, 0x900);
+    lakitu_zoom(gRangeDist, gRangePitch);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
@@ -1381,9 +1383,9 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
     f32 focusFloorOff;
     f32 goalHeight;
     f32 ceilHeight;
-    f32 heightOffset;
+    f32 heightOffset = 0.f;
     f32 distCamToFocus;
-    f32 scaleToMario = 0.5f;
+    f32 scaleToMario = 0.f;
     s16 pitch;
     s16 yaw;
     Vec3s faceAngle;
@@ -3559,22 +3561,22 @@ s32 set_cam_angle(s32 mode) {
     // Switch to Mario mode
     if (mode == CAM_ANGLE_MARIO && !(sSelectionFlags & CAM_MODE_MARIO_ACTIVE)) {
         sSelectionFlags |= CAM_MODE_MARIO_ACTIVE;
-        if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
-            sSelectionFlags |= CAM_MODE_LAKITU_WAS_ZOOMED_OUT;
-            gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
-        }
+        // if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
+        //     sSelectionFlags |= CAM_MODE_LAKITU_WAS_ZOOMED_OUT;
+        //     gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
+        // }
         sCameraSoundFlags |= CAM_SOUND_MARIO_ACTIVE;
     }
 
     // Switch back to normal mode
     if (mode == CAM_ANGLE_LAKITU && (sSelectionFlags & CAM_MODE_MARIO_ACTIVE)) {
         sSelectionFlags &= ~CAM_MODE_MARIO_ACTIVE;
-        if (sSelectionFlags & CAM_MODE_LAKITU_WAS_ZOOMED_OUT) {
-            sSelectionFlags &= ~CAM_MODE_LAKITU_WAS_ZOOMED_OUT;
-            gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
-        } else {
-            gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
-        }
+        // if (sSelectionFlags & CAM_MODE_LAKITU_WAS_ZOOMED_OUT) {
+        //     sSelectionFlags &= ~CAM_MODE_LAKITU_WAS_ZOOMED_OUT;
+        //     gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
+        // } else {
+        //     gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
+        // }
         sCameraSoundFlags |= CAM_SOUND_NORMAL_ACTIVE;
     }
     if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
@@ -3729,7 +3731,7 @@ s32 update_camera_hud_status(struct Camera *c) {
     s16 status = CAM_STATUS_NONE;
 
     if (c->cutscene != CUTSCENE_NONE
-        || ((gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
+        || (0 && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
         status |= CAM_STATUS_FIXED;
     } else if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
         status |= CAM_STATUS_MARIO;
