@@ -385,6 +385,15 @@ void ctl_loop()
         }
     }
 
+    if (18 == o->oAction)
+    {
+        if (gTatums > 55760)
+        {
+            o->oAction = 17;
+            return;
+        }
+    }
+
     print_text_fmt_int(20, 80, "R %d", sHandheldShakeRoll);
 }
 
