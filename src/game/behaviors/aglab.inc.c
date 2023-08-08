@@ -38,6 +38,8 @@ extern f32 gBaseDist;
 extern f32 gRangeDist;
 extern s16 gRangePitch;
 extern Vec3f sFixedModeBasePosition;
+extern f32 sAspectRatio;
+extern struct CameraFOVStatus sFOVState;
 
 void ctl_reset()
 {
@@ -47,6 +49,7 @@ void ctl_reset()
     gBaseDist = 1000.f;
     gRangeDist = 400.f;
     gRangePitch = 0x900;
+    sAspectRatio = 4.f / 3.f;
 }
 
 void ctl_init()
@@ -61,7 +64,7 @@ void ctl_init()
         bat->oVelZ = random_u16() & 1 ? 32.f : 40.f;
     }
 
-    // o->oAction = 100;
+    // o->oAction = 17;
 }
 
 void ctl_loop()
@@ -333,11 +336,51 @@ void ctl_loop()
 
     if (13 == o->oAction)
     {
-        if (gTatums > 47800)
+        if (gTatums > 47000)
         {
             gRangeDist = 400.f;
             gRangePitch = 0x900;
-            o->oAction = 13;
+            o->oAction = 14;
+            return;
+        }
+    }
+
+    if (14 == o->oAction)
+    {
+        if (gTatums > 48940)
+        {
+            o->oAction = 15;
+            return;
+        }
+    }
+
+    if (15 == o->oAction)
+    {
+        s8DirModeBaseYaw += 0x8000 / 60;
+        sAspectRatio = 2.0f + 1.6f * sins(-759 * o->oTimer - DEGREES(0.42978f / 3.1415926f * 180.f));
+        if (gTatums > 50716)
+        {
+            o->oAction = 16;
+            return;
+        }
+    }
+
+    if (16 == o->oAction)
+    {
+        if (gTatums > 52352)
+        {
+            o->oAction = 17;
+            return;
+        }
+    }
+
+    if (17 == o->oAction)
+    {
+        s8DirModeBaseYaw += 0x8000 / 150;
+        sFOVState.fov = 50.f + 25.f * sins(999 * o->oTimer - DEGREES(0.20136f / 3.1415926f * 180.f));
+        if (gTatums > 54016)
+        {
+            o->oAction = 18;
             return;
         }
     }

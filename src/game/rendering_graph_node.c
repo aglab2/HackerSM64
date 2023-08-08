@@ -49,7 +49,7 @@
 s16 gMatStackIndex;
 ALIGNED16 Mat4 gMatStack[32];
 ALIGNED16 Mtx *gMatStackFixed[32];
-f32 sAspectRatio;
+f32 sAspectRatio = 4.0f / 3.0f;
 
 /**
  * Animation nodes have state in global variables, so this struct captures
@@ -491,16 +491,6 @@ void geo_process_perspective(struct GraphNodePerspective *node) {
     if (node->fnNode.node.children != NULL) {
         u16 perspNorm;
         Mtx *mtx = alloc_display_list(sizeof(*mtx));
-#ifdef WIDE
-        if (gConfig.widescreen && gCurrLevelNum != 0x01){
-            sAspectRatio = 16.0f / 9.0f; // 1.775f
-        } else {
-            sAspectRatio = 4.0f / 3.0f; // 1.33333f
-        }
-#else
-        sAspectRatio = 4.0f / 3.0f; // 1.33333f
-#endif
-
         guPerspective(mtx, &perspNorm, node->fov, sAspectRatio, node->near / (f32)WORLD_SCALE, node->far / (f32)WORLD_SCALE, 1.0f);
         gSPPerspNormalize(gDisplayListHead++, perspNorm);
 
