@@ -750,10 +750,11 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
 /**
  * Pitch the camera down when the camera is facing down a slope
  */
+s16 gPitch = 0x05B0;
 s16 look_down_slopes(s16 camYaw) {
     struct Surface *floor;
     // Default pitch
-    s16 pitch = 0x05B0;
+    s16 pitch = gPitch;
     // x and z offsets towards the camera
     f32 xOff = sMarioCamState->pos[0] + sins(camYaw) * 40.f;
     f32 zOff = sMarioCamState->pos[2] + coss(camYaw) * 40.f;
@@ -763,7 +764,7 @@ s16 look_down_slopes(s16 camYaw) {
     if (floor != NULL) {
         if (floor->type != SURFACE_WALL_MISC && floorDY > 0) {
             if (floor->normal.z == 0.f && floorDY < 100.f) {
-                pitch = 0x05B0;
+                pitch = gPitch;
             } else {
                 // Add the slope's angle of declination to the pitch
                 pitch += atan2s(40.f, floorDY);
@@ -10928,7 +10929,7 @@ void fov_default(struct MarioState *m) {
         camera_approach_f32_symmetric_bool(&sFOVState.fov, 30.f, (30.f - sFOVState.fov) / 30.f);
         sStatusFlags |= CAM_FLAG_SLEEPING;
     } else {
-        camera_approach_f32_symmetric_bool(&sFOVState.fov, 45.f, (45.f - sFOVState.fov) / 30.f);
+        // camera_approach_f32_symmetric_bool(&sFOVState.fov, 45.f, (45.f - sFOVState.fov) / 30.f);
         sFOVState.unusedIsSleeping = 0;
     }
     if (m->area->camera->cutscene == CUTSCENE_0F_UNUSED) {

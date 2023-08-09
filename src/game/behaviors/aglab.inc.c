@@ -40,6 +40,10 @@ extern s16 gRangePitch;
 extern Vec3f sFixedModeBasePosition;
 extern f32 sAspectRatio;
 extern struct CameraFOVStatus sFOVState;
+extern s16 gPitch;
+
+s8 sBatsJump;
+s8 sBatsWarp;
 
 void ctl_reset()
 {
@@ -50,6 +54,10 @@ void ctl_reset()
     gRangeDist = 400.f;
     gRangePitch = 0x900;
     sAspectRatio = 4.f / 3.f;
+    sFOVState.fov = 45;
+    gPitch = 0x05B0;
+    sBatsJump = 0;
+    sBatsWarp = 0;
 }
 
 void ctl_init()
@@ -69,22 +77,31 @@ void ctl_init()
 
 void ctl_loop()
 {
+#if 0
     print_text_fmt_int(20, 20, "M %d", gTatums);
     print_text_fmt_int(20, 40, "T %d", o->oTimer);
     print_text_fmt_int(20, 60, "A %d", o->oAction);
+    print_text_fmt_int(20, 80, "R %d", s8DirModeBaseYaw);
+    print_text_fmt_int(20, 100, "P %d", gPitch);
+    print_text_fmt_int(20, 120, "F %d", (int) (sFOVState.fov * 10));
+    print_text_fmt_int(20, 140, "W %d", (int) (sAspectRatio * 100));
+#endif
 
     sHandheldShakeRoll = 0;
     gMarioStates->pos[2] = 0.f;
 
-    sTimer++;
-    s32 spawn = gTatums > 6400 ? (0 == (sTimer % 3)) : (0 == (sTimer % 2));
-    if (spawn)
+    if (gTatums < 67000)
     {
-        struct Object* bat = spawn_object(o, MODEL_SWOOP, bhvBat);
-        bat->oPosX = random_f32_around_zero(5000.f);
-        bat->oPosY = 30.f;
-        bat->oPosZ = -5000.f;
-        bat->oVelZ = random_u16() & 1 ? 32.f : 40.f;
+        sTimer++;
+        s32 spawn = (6400 < gTatums && gTatums < 60000) ? (0 == (sTimer % 3)) : (0 == (sTimer % 2));
+        if (spawn)
+        {
+            struct Object* bat = spawn_object(o, MODEL_SWOOP, bhvBat);
+            bat->oPosX = random_f32_around_zero(5000.f);
+            bat->oPosY = 30.f;
+            bat->oPosZ = -5000.f;
+            bat->oVelZ = random_u16() & 1 ? 32.f : 40.f;
+        }
     }
 
     if (0 == o->oAction)
@@ -394,7 +411,79 @@ void ctl_loop()
         }
     }
 
-    print_text_fmt_int(20, 80, "R %d", sHandheldShakeRoll);
+    if (19 == o->oAction)
+    {
+        s8DirModeBaseYaw -= 0x8000 / 160;
+        gPitch += 100;
+        gBaseDist += 15.f;
+        if (gTatums > 57360)
+        {
+            o->oAction = 20;
+            return;
+        }
+    }
+
+    if (20 == o->oAction)
+    {
+        if (gTatums > 59030)
+        {
+            o->oAction = 21;
+            return;
+        }
+    }
+
+    if (21 == o->oAction)
+    {
+        if (s8DirModeBaseYaw < 0)
+            s8DirModeBaseYaw -= 0x8000 / 90;
+        else
+            s8DirModeBaseYaw = 0x7fff;
+        
+        sFOVState.fov += (45.f    - sFOVState.fov) * 0.07f;
+        sAspectRatio  += (4.f/3.f - sAspectRatio ) * 0.05f;
+
+        if (gTatums > 60750)
+        {
+            o->oAction = 22;
+            return;
+        }
+    }
+
+    if (22 == o->oAction)
+    {
+        s8DirModeBaseYaw = 0x7fff;
+        sFOVState.fov = 45;
+        sAspectRatio = 4.f / 3.f;
+
+        if (gTatums > 62430)
+        {
+            o->oAction = 23;
+            return;
+        }
+    }
+
+    if (23 == o->oAction)
+    {
+        gPitch = 0x05B0;
+        if (gTatums > 64128)
+        {
+            o->oAction = 24;
+            return;
+        }
+    }
+
+    if (24 == o->oAction)
+    {
+        s8DirModeBaseYaw = 0;
+        gBaseDist = 1000.f;
+
+        if (gTatums > 68000)
+        {
+            gMarioStates->usedObj = o;
+            level_trigger_warp(gMarioStates, WARP_OP_TELEPORT);
+            o->oAction = 25;
+        }
+    }
 }
 
 void bat_init()
@@ -404,6 +493,11 @@ void bat_init()
 
 void bat_loop()
 {
+    if (gTatums > 65600)
+    {
+        o->oVelZ += 2.f;
+    }
+
     cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
     o->oPosZ += o->oVelZ;
     if (o->oPosZ > 5000.f)
@@ -422,5 +516,11 @@ void bat_loop()
             spawn_mist_particles();
             o->activeFlags = 0;
         }
+    }
+
+    if (gTatums > 66900)
+    {
+        spawn_mist_particles();
+        o->activeFlags = 0;
     }
 }
