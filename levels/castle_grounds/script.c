@@ -61,6 +61,8 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_THI_WARP_PIPE, 633, 0, -665, 0, 0, 0, (0xa << 16), bhvWarpPipe),
 		OBJECT(MODEL_THI_WARP_PIPE, -692, 0, -665, 0, 0, 0, (0xb << 16), bhvWarpPipe),
 		OBJECT(MODEL_NONE, 13, 0, -780, 0, 0, 0, 0x00000000, bhvReset),
+		OBJECT(MODEL_WOODEN_SIGNPOST, -684, 0, -443, 0, 0, 0, 0x00000000, bhvMessagePanel),
+		OBJECT(MODEL_WOODEN_SIGNPOST, 621, 0, -430, 0, 0, 0, (8 << 24) | (8 << 16), bhvMessagePanel),
 		TERRAIN(castle_grounds_area_1_collision),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),

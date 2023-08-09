@@ -533,7 +533,7 @@ static int interval_intersect(f32 s1, f32 e1, f32 s2, f32 e2)
 static void bat_dmg()
 {
     cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
-    if (interval_intersect(gMarioStates->pos[1], gMarioStates->pos[1] + 140.f, o->oPosY - 50.f, o->oPosY + 50.f))
+    if (interval_intersect(gMarioStates->pos[1] + 20.f, gMarioStates->pos[1] + 140.f, o->oPosY - 50.f, o->oPosY + 50.f))
     {
         f32 dx = gMarioStates->pos[0] - o->oPosX;
         f32 dz = gMarioStates->pos[2] - o->oPosZ;
