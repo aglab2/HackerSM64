@@ -268,7 +268,7 @@ void ctl_loop()
     if (7 == o->oAction)
     {
         set_camera_mode_fixed(gCamera, sFixedModeBasePosition[0], sFixedModeBasePosition[1], sFixedModeBasePosition[2] + 32.f);
-        if (gTatums > 31680)
+        if (gTatums > 31630)
         {
             o->oAction = 8;
             set_camera_mode_fixed(gCamera, gCamera->pos[0], gCamera->pos[1], -5000.f);
@@ -279,7 +279,7 @@ void ctl_loop()
     if (8 == o->oAction)
     {
         set_camera_mode_fixed(gCamera, sFixedModeBasePosition[0], sFixedModeBasePosition[1], sFixedModeBasePosition[2] + 32.f);
-        if (gTatums > 33380)
+        if (gTatums > 33270)
         {
             o->oAction = 9;
             set_camera_mode_fixed(gCamera, gCamera->pos[0], gCamera->pos[1], 4500.f);
@@ -290,7 +290,7 @@ void ctl_loop()
     if (9 == o->oAction)
     {
         set_camera_mode_fixed(gCamera, sFixedModeBasePosition[0], sFixedModeBasePosition[1], sFixedModeBasePosition[2] - 32.f);
-        if (gTatums > 35088)
+        if (gTatums > 35050)
         {
             o->oAction = 10;
             set_cam_angle(CAM_ANGLE_MARIO);
@@ -301,7 +301,7 @@ void ctl_loop()
 
     if (10 == o->oAction)
     {
-        if (gTatums > 36816)
+        if (gTatums > 36736)
         {
             o->oAction = 11;
             set_cam_angle(CAM_ANGLE_LAKITU);
@@ -347,7 +347,7 @@ void ctl_loop()
 
     if (14 == o->oAction)
     {
-        if (gTatums > 48940)
+        if (gTatums > 48850)
         {
             o->oAction = 15;
             return;
@@ -356,9 +356,9 @@ void ctl_loop()
 
     if (15 == o->oAction)
     {
-        s8DirModeBaseYaw += 0x8000 / 60;
-        sAspectRatio = 2.0f + 1.6f * sins(-759 * o->oTimer - DEGREES(0.42978f / 3.1415926f * 180.f));
-        if (gTatums > 50716)
+        s8DirModeBaseYaw += 0x8000 / 55;
+        sAspectRatio = 2.0f + 1.6f * sins(-709 * o->oTimer - DEGREES(0.42978f / 3.1415926f * 180.f));
+        if (gTatums > 50480)
         {
             o->oAction = 16;
             return;
@@ -367,7 +367,7 @@ void ctl_loop()
 
     if (16 == o->oAction)
     {
-        if (gTatums > 52352)
+        if (gTatums > 52300)
         {
             o->oAction = 17;
             return;
@@ -376,9 +376,9 @@ void ctl_loop()
 
     if (17 == o->oAction)
     {
-        s8DirModeBaseYaw += 0x8000 / 150;
-        sFOVState.fov = 50.f + 25.f * sins(999 * o->oTimer - DEGREES(0.20136f / 3.1415926f * 180.f));
-        if (gTatums > 54016)
+        s8DirModeBaseYaw += 0x8000 / 160;
+        sFOVState.fov = 1.1f * 50.f + 1.1f * 25.f * sins(849 * o->oTimer - DEGREES(0.20136f / 3.1415926f * 180.f));
+        if (gTatums > 53936)
         {
             o->oAction = 18;
             return;
@@ -387,9 +387,9 @@ void ctl_loop()
 
     if (18 == o->oAction)
     {
-        if (gTatums > 55760)
+        if (gTatums > 55600)
         {
-            o->oAction = 17;
+            o->oAction = 19;
             return;
         }
     }
