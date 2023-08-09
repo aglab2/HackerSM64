@@ -6104,6 +6104,7 @@ const BehaviorScript bhvBat[] = {
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, swoop_seg6_anims_060070D0),
     CALL_NATIVE(bat_init),
+    SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bat_loop),
     END_LOOP(),

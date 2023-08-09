@@ -44,7 +44,6 @@ extern struct CameraFOVStatus sFOVState;
 extern s16 gPitch;
 
 s8 sBatsJump;
-s8 sBatsWarp;
 
 void ctl_reset()
 {
@@ -58,7 +57,6 @@ void ctl_reset()
     sFOVState.fov = 45;
     gPitch = 0x05B0;
     sBatsJump = 0;
-    sBatsWarp = 0;
 }
 
 void reset_init()
@@ -224,6 +222,16 @@ void ctl_loop()
                 o->oSubAction += 0x10;
         }
 
+        if (gTatums > 15700 && 0 == sBatsJump)
+        {
+            sBatsJump = 1;
+            return;
+        }
+        if (1 == sBatsJump)
+        {
+            sBatsJump = 2;
+        }
+
         if (gTatums > 17300)
         {
             o->oAction = 3;
@@ -364,12 +372,34 @@ void ctl_loop()
             gRangeDist = 0.f;
             gRangePitch = -100;
             o->oAction = 12;
+            sBatsJump = 0;
             return;
         }
     }
     
     if (12 == o->oAction)
     {
+        if (gTatums > 38300 && 0 == sBatsJump)
+        {
+            sBatsJump = 1;
+            return;
+        }
+        if (1 == sBatsJump)
+        {
+            sBatsJump = 2;
+            return;
+        }
+
+        if (gTatums > 39600 && 2 == sBatsJump)
+        {
+            sBatsJump = 3;
+            return;
+        }
+        if (3 == sBatsJump)
+        {
+            sBatsJump = 4;
+        }
+
         if (gTatums > 44600)
         {
             gRangeDist = 2500.f;
@@ -519,20 +549,27 @@ void bat_init()
 
 }
 
+static int interval_intersect(f32 s1, f32 e1, f32 s2, f32 e2) 
+{
+    return !(e1 < s2 || e2 < s1);
+}
+
 static void bat_dmg()
 {
     cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
-    if (gMarioStates->pos[1] < 140.f)
+    if (interval_intersect(gMarioStates->pos[1], gMarioStates->pos[1] + 140.f, o->oPosY - 50.f, o->oPosY + 50.f))
     {
         f32 dx = gMarioStates->pos[0] - o->oPosX;
         f32 dz = gMarioStates->pos[2] - o->oPosZ;
         f32 d = dx*dx/2.f + dz*dz;
         if (d < 5000.f && gMarioStates->health > 0x80)
         {
+#if 1
             if (sWarpDest.nodeId == 11)
                 gMarioStates->health -= 0x200;
             else
                 gMarioStates->health = 0x80;
+#endif
 
             spawn_mist_particles();
             o->activeFlags = 0;
@@ -548,7 +585,24 @@ void bat_loop()
     }
 
     cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
+
+    if (1 == sBatsJump || 3 == sBatsJump)
+    {
+        o->oVelY = 30.f;
+    }
+
     o->oPosZ += o->oVelZ;
+    o->oPosY += o->oVelY;
+    if (o->oPosY < o->oHomeY - 5.f)
+    {
+        o->oVelY = 0;
+        o->oPosY = o->oHomeY;
+    }
+    else
+    {
+        o->oVelY -= 2.f;
+    }
+
     if (o->oPosZ > 5000.f)
     {
         o->activeFlags = 0;
