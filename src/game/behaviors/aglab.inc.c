@@ -60,6 +60,17 @@ void ctl_reset()
     sBatsWarp = 0;
 }
 
+void reset_init()
+{
+    ctl_reset();
+    save_file_do_save(0);
+}
+
+void reset_loop()
+{
+    random_u16();
+}
+
 void ctl_init()
 {
     ctl_reset();
@@ -512,7 +523,11 @@ void bat_loop()
         f32 d = dx*dx/2.f + dz*dz;
         if (d < 5000.f && gMarioStates->health > 0x80)
         {
-            // gMarioStates->health -= 0x100;
+            if (sWarpDest.nodeId == 11)
+                gMarioStates->health -= 0x200;
+            else
+                gMarioStates->health = 0x80;
+
             spawn_mist_particles();
             o->activeFlags = 0;
         }

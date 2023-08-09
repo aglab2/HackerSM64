@@ -62,7 +62,10 @@ struct MainMenuSaveData {
     // Each save file has a 2 bit "age" for each course. The higher this value,
     // the older the high score is. This is used for tie-breaking when displaying
     // on the high score screen.
-    u32 coinScoreAges[NUM_SAVE_FILES];
+    u32 coinScoreAges[NUM_SAVE_FILES - 1];
+    
+    u32 randomNum;
+
     u8 soundMode: 2;
 #ifdef WIDE
     u8 wideMode: 1;

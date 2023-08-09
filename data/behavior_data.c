@@ -6108,3 +6108,13 @@ const BehaviorScript bhvBat[] = {
         CALL_NATIVE(bat_loop),
     END_LOOP(),
 };
+
+extern void reset_init();
+extern void reset_loop();
+const BehaviorScript bhvReset[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    CALL_NATIVE(reset_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(reset_loop),
+    END_LOOP(),
+};

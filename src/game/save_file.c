@@ -206,6 +206,7 @@ static void add_save_block_signature(void *buffer, s32 size, u16 magic) {
 }
 
 static void save_main_menu_data(void) {
+    gSaveBuffer.menuData.randomNum = tinymt32_generate_u32(&gGlobalRandomState);
     if (gMainMenuDataModified) {
         // Compute checksum
         add_save_block_signature(&gSaveBuffer.menuData, sizeof(gSaveBuffer.menuData), MENU_DATA_MAGIC);
@@ -358,6 +359,8 @@ void save_file_load_all(void) {
                 break;
         }
     }
+
+    tinymt32_init(&gGlobalRandomState, gSaveBuffer.menuData.randomNum);
 }
 
 #ifdef PUPPYCAM
