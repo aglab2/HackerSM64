@@ -1,29 +1,5 @@
-// 2048 - first beep
-// 6350 - second beep
-// 7100 - turn 1
-// 8200 - turn 2
-// 9200 - turn 3
-// 10100 - turn 3
-// 14000 - drop
-// 17200 - go closer
-// 20730 : 22000 - go far
-// 24000 - go
-// 27500 - go
-// 31000 - ?
-// 31800 - bam rotate
-// 33360 - bam rotate
-// 35000 - bam rotate
-// 37000 - bam rotate
-// 37900 - bam rotate
-// 38500 - cam down
-
-// 48000 - drop
-// 50600 - stop
-// 52400 : 54100 - swoosh
-// 55800 : 57400 - swoosh
-// 59000 : 60700 - swoosh
-// 62600 - slight turn
-// 64300 - slight turn
+// #define NO_HP
+// #define PRINT_DEBUG
 
 extern s32 set_camera_mode_fixed(struct Camera *c, s16 x, s16 y, s16 z);
 
@@ -103,7 +79,7 @@ void ctl_init()
 
 void ctl_loop()
 {
-#if 0
+#ifdef PRINT_DEBUG
     print_text_fmt_int(20, 20, "M %d", gTatums);
     print_text_fmt_int(20, 40, "T %d", o->oTimer);
     print_text_fmt_int(20, 60, "A %d", o->oAction);
@@ -222,7 +198,7 @@ void ctl_loop()
                 o->oSubAction += 0x10;
         }
 
-        if (gTatums > 15700 && 0 == sBatsJump)
+        if (gTatums > 15600 && 0 == sBatsJump)
         {
             sBatsJump = 1;
             return;
@@ -379,7 +355,7 @@ void ctl_loop()
     
     if (12 == o->oAction)
     {
-        if (gTatums > 38300 && 0 == sBatsJump)
+        if (gTatums > 38150 && 0 == sBatsJump)
         {
             sBatsJump = 1;
             return;
@@ -390,7 +366,7 @@ void ctl_loop()
             return;
         }
 
-        if (gTatums > 39600 && 2 == sBatsJump)
+        if (gTatums > 39500 && 2 == sBatsJump)
         {
             sBatsJump = 3;
             return;
@@ -564,7 +540,7 @@ static void bat_dmg()
         f32 d = dx*dx/2.f + dz*dz;
         if (d < 5000.f && gMarioStates->health > 0x80)
         {
-#if 1
+#ifndef NO_HP
             if (sWarpDest.nodeId == 11)
                 gMarioStates->health -= 0x200;
             else
