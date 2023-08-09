@@ -31,6 +31,7 @@ extern s16 s8DirModeBaseYaw;
 extern s32 gTatums;
 extern s16 sHandheldShakeRoll;
 extern const BehaviorScript bhvBat[];
+extern const BehaviorScript bhvBatStatic[];
 extern Gfx mat_castle_courtyard_dl_f3dlite_material_layer1_area1[];
 
 static int sTimer;
@@ -62,8 +63,24 @@ void ctl_reset()
 
 void reset_init()
 {
+    save_file_load_all();
     ctl_reset();
+    gSaveFileModified = 1;
+    gMainMenuDataModified = 1;
     save_file_do_save(0);
+
+    for (int i = 0; i < 10; i++)
+    {
+        struct Object* bat = spawn_object(o, MODEL_SWOOP, bhvBatStatic);
+        bat->oPosX = random_f32_around_zero(1000.f);
+        bat->oPosY = 30.f;
+        bat->oPosZ = random_f32_around_zero(1000.f);
+        f32 dx = bat->oPosX - 11.f;
+        f32 dz = bat->oPosZ - 741.f;
+        f32 d = dx*dx + dz*dz;
+        if (d < 1000.f)
+            bat->activeFlags = 0;
+    }
 }
 
 void reset_loop()
@@ -502,6 +519,27 @@ void bat_init()
 
 }
 
+static void bat_dmg()
+{
+    cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
+    if (gMarioStates->pos[1] < 140.f)
+    {
+        f32 dx = gMarioStates->pos[0] - o->oPosX;
+        f32 dz = gMarioStates->pos[2] - o->oPosZ;
+        f32 d = dx*dx/2.f + dz*dz;
+        if (d < 5000.f && gMarioStates->health > 0x80)
+        {
+            if (sWarpDest.nodeId == 11)
+                gMarioStates->health -= 0x200;
+            else
+                gMarioStates->health = 0x80;
+
+            spawn_mist_particles();
+            o->activeFlags = 0;
+        }
+    }
+}
+
 void bat_loop()
 {
     if (gTatums > 65600)
@@ -515,27 +553,17 @@ void bat_loop()
     {
         o->activeFlags = 0;
     }
+
+    bat_dmg();
     
-    if (gMarioStates->pos[1] < 140.f)
-    {
-        f32 dx = gMarioStates->pos[0] - o->oPosX;
-        f32 dz = o->oPosZ;
-        f32 d = dx*dx/2.f + dz*dz;
-        if (d < 5000.f && gMarioStates->health > 0x80)
-        {
-            if (sWarpDest.nodeId == 11)
-                gMarioStates->health -= 0x200;
-            else
-                gMarioStates->health = 0x80;
-
-            spawn_mist_particles();
-            o->activeFlags = 0;
-        }
-    }
-
     if (gTatums > 66900)
     {
         spawn_mist_particles();
         o->activeFlags = 0;
     }
+}
+
+void bat_static_loop()
+{
+    bat_dmg();
 }

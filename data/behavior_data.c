@@ -6109,6 +6109,18 @@ const BehaviorScript bhvBat[] = {
     END_LOOP(),
 };
 
+extern void bat_init();
+extern void bat_static_loop();
+const BehaviorScript bhvBatStatic[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, swoop_seg6_anims_060070D0),
+    CALL_NATIVE(bat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bat_static_loop),
+    END_LOOP(),
+};
+
 extern void reset_init();
 extern void reset_loop();
 const BehaviorScript bhvReset[] = {
