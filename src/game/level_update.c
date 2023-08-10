@@ -1344,7 +1344,10 @@ s32 lvl_set_current_level(UNUSED s16 initOrUpdate, s32 levelNum) {
 /**
  * Play the "thank you so much for to playing my game" sound.
  */
+extern u8 gNotWorthy;
 s32 lvl_play_the_end_screen_sound(UNUSED s16 initOrUpdate, UNUSED s32 levelNum) {
-    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
+    if (!gNotWorthy)
+        play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
+
     return TRUE;
 }

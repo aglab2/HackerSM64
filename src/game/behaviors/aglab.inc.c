@@ -18,6 +18,8 @@ extern Vec3f sFixedModeBasePosition;
 extern f32 sAspectRatio;
 extern struct CameraFOVStatus sFOVState;
 extern s16 gPitch;
+extern u8 gNotWorthy;
+extern u8 gWantFixed;
 
 s8 sBatsJump;
 
@@ -33,6 +35,8 @@ void ctl_reset()
     sFOVState.fov = 45;
     gPitch = 0x05B0;
     sBatsJump = 0;
+    gNotWorthy = 0;
+    gWantFixed = 0;
 }
 
 void reset_init()
@@ -288,6 +292,8 @@ void ctl_loop()
         if (gTatums > 31000)
         {
             o->oAction = 7;
+            gWantFixed = 1;
+            sCameraSoundFlags |= CAM_SOUND_MARIO_ACTIVE;
             set_camera_mode_fixed(gCamera, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
             gLakituState.mode = CAMERA_MODE_FIXED;
             return;
@@ -322,6 +328,7 @@ void ctl_loop()
         if (gTatums > 35050)
         {
             o->oAction = 10;
+            gWantFixed = 0;
             set_cam_angle(CAM_ANGLE_MARIO);
             // gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
             return;
@@ -533,13 +540,14 @@ static int interval_intersect(f32 s1, f32 e1, f32 s2, f32 e2)
 static void bat_dmg()
 {
     cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
-    if (interval_intersect(gMarioStates->pos[1] + 20.f, gMarioStates->pos[1] + 140.f, o->oPosY - 50.f, o->oPosY + 50.f))
+    if (interval_intersect(gMarioStates->pos[1] + 21.f, gMarioStates->pos[1] + 140.f, o->oPosY - 50.f, o->oPosY + 50.f))
     {
         f32 dx = gMarioStates->pos[0] - o->oPosX;
         f32 dz = gMarioStates->pos[2] - o->oPosZ;
-        f32 d = dx*dx/2.f + dz*dz;
+        f32 d = dx*dx/1.8f + dz*dz;
         if (d < 5000.f && gMarioStates->health > 0x80)
         {
+            gNotWorthy = 1;
 #ifndef NO_HP
             if (sWarpDest.nodeId == 11)
                 gMarioStates->health -= 0x200;

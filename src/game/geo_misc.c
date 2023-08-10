@@ -180,6 +180,7 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
 /**
  * Create a display list for the end screen with Peach's delicious cake.
  */
+u8 gNotWorthy = 1;
 Gfx *geo_exec_cake_end_screen(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx) {
     struct GraphNodeGenerated *generatedNode = (struct GraphNodeGenerated *) node;
     Gfx *displayList = NULL;
@@ -189,6 +190,8 @@ Gfx *geo_exec_cake_end_screen(s32 callContext, struct GraphNode *node, UNUSED Ma
         displayList = alloc_display_list(3 * sizeof(*displayList));
         displayListHead = displayList;
 
+        if (!gNotWorthy)
+        {
         SET_GRAPH_NODE_LAYER(generatedNode->fnNode.node.flags, LAYER_OPAQUE);
 #if MULTILANG
         gSPDisplayList(displayListHead++, dl_cake_end_screen);
@@ -213,7 +216,8 @@ Gfx *geo_exec_cake_end_screen(s32 callContext, struct GraphNode *node, UNUSED Ma
 #endif
 #else
         gSPDisplayList(displayListHead++, dl_cake_end_screen);
-#endif
+#endif   
+        }
         gSPEndDisplayList(displayListHead);
     }
 
