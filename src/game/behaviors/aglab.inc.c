@@ -101,7 +101,7 @@ void ctl_loop()
             struct Object* bat = spawn_object(o, MODEL_SWOOP, bhvBat);
             bat->oPosX = random_f32_around_zero(5000.f);
             bat->oPosY = 30.f;
-            bat->oPosZ = -5000.f;
+            bat->oPosZ = -6000.f;
             bat->oVelZ = random_u16() & 1 ? 32.f : 40.f;
         }
     }
@@ -557,7 +557,7 @@ void bat_loop()
 {
     if (gTatums > 65600)
     {
-        o->oVelZ += 2.f;
+        o->oVelZ += 1.7f;
     }
 
     cur_obj_init_animation_with_accel_and_sound(0, 2.0f);

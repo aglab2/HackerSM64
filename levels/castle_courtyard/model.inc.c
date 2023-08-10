@@ -477,7 +477,7 @@ Gfx mat_castle_courtyard_dl_f3dlite_material_layer1_area1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
 	gsDPSetFogColor(0, 0, 0, 255),
-	gsSPFogPosition(900, 990),
+	gsSPFogPosition(900, 993),
 	gsSPGeometryMode(0, G_FOG),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetCycleType(G_CYC_2CYCLE),
