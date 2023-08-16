@@ -21,7 +21,9 @@ enum SkyBackgroundParams {
     BACKGROUND_HAUNTED,
     BACKGROUND_GREEN_SKY,
     BACKGROUND_ABOVE_CLOUDS,
-    BACKGROUND_PURPLE_SKY
+    BACKGROUND_PURPLE_SKY,
+
+    BACKGROUND_OW,
 };
 
 enum GeoLayoutCommands {

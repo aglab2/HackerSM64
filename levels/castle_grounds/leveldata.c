@@ -31,3 +31,30 @@
 #include "levels/castle_grounds/areas/1/7/collision.inc.c"
 #include "levels/castle_grounds/areas/1/8/collision.inc.c"
 #include "levels/castle_grounds/areas/1/movtext.inc.c"
+
+// 0x07078E14 - 0x07078E80
+const Collision ow1_star_door_coll[] = {
+    COL_INIT(),
+    COL_VERTEX_INIT(0x8),
+    COL_VERTEX(-80, 0, -20),
+    COL_VERTEX(-80, 256, 20),
+    COL_VERTEX(-80, 256, -20),
+    COL_VERTEX(80, 256, 20),
+    COL_VERTEX(80, 256, -20),
+    COL_VERTEX(80, 0, -20),
+    COL_VERTEX(-80, 0, 20),
+    COL_VERTEX(80, 0, 20),
+    COL_TRI_INIT(SURFACE_DEFAULT, 8),
+    COL_TRI(2, 3, 4),
+    COL_TRI(2, 1, 3),
+    COL_TRI(5, 2, 4),
+    COL_TRI(5, 0, 2),
+    COL_TRI(6, 3, 1),
+    COL_TRI(6, 7, 3),
+    COL_TRI(5, 6, 0),
+    COL_TRI(5, 7, 6),
+    COL_TRI_STOP(),
+    COL_END(),
+};
+
+#include "levels/castle_grounds/leveldata.inc.c"
