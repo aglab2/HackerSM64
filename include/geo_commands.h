@@ -58,7 +58,7 @@ enum GeoLayoutCommands {
     /*0x1C*/ GEO_CMD_NODE_HELD_OBJ,
     /*0x1D*/ GEO_CMD_NODE_SCALE,
     /*0x1E*/ GEO_CMD_NOP_1E,
-    /*0x1F*/ GEO_CMD_NOP_1F,
+    /*0x1F*/ GEO_CMD_NODE_CULL,
     /*0x20*/ GEO_CMD_NODE_CULLING_RADIUS,
     /*0x21*/ GEO_CMD_NODE_COIN,
 };
@@ -457,11 +457,11 @@ enum GeoLayoutCommands {
 /**
  * 0x1F: No operation
  */
-#define GEO_NOP_1F() \
-    CMD_BBH(GEO_CMD_NOP_1F, 0x00, 0x0000), \
-    CMD_HH(0x0000, 0x0000), \
-    CMD_HH(0x0000, 0x0000), \
-    CMD_HH(0x0000, 0x0000)
+#define GEO_CULL(x0, x1, y0, y1, z0, z1, style) \
+    CMD_BBH(GEO_CMD_NODE_CULL, 0x00, style), \
+    CMD_HH(x0, x1), \
+    CMD_HH(y0, y1), \
+    CMD_HH(z0, z1)
 
 /**
  * 0x20: Create a scene graph node that specifies for an object the radius that
