@@ -409,24 +409,6 @@ const BehaviorScript bhvStarDoor[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvStarDoorOW[] = {
-    BEGIN(OBJ_LIST_SURFACE),
-    SET_INT(oInteractType, INTERACT_DOOR),
-    LOAD_COLLISION_DATA(ow1_star_door_coll),
-    SET_INT(oInteractionSubtype, INT_SUBTYPE_STAR_DOOR),
-    OR_INT(oFlags, (OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
-    SET_HOME(),
-    SET_FLOAT(oDrawingDistance, 20000),
-    CALL_NATIVE(bhv_door_init),
-    SET_INT(oIntangibleTimer, 0),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_star_door_loop),
-        CALL_NATIVE(load_object_collision_model),
-        CALL_NATIVE(bhv_door_rendering_loop),
-    END_LOOP(),
-};
-
 const BehaviorScript bhvMrI[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

@@ -1,4 +1,5 @@
 // 0x0E000F00
+extern const Gfx inside_castle_seg7_dl_0703BFA8[];
 const GeoLayout castle_geo_000F00[] = {
    GEO_CULLING_RADIUS(400),
    GEO_OPEN_NODE(),

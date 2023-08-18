@@ -36,9 +36,24 @@ static const Vtx inside_castle_seg7_vertex_0703BE80[] = {
     {{{   -76,      0,    -15}, 0, {   990,   2012}, {0x00, 0x00, 0x81, 0xff}}},
 };
 
+// 0x07003800 - 0x07004800
+ALIGNED8 static const Texture _inside_castle_seg7_texture_07003800[] = {
+#include "actors/star_door/5.rgba16.inc.c"
+};
+
+// 0x07004800 - 0x07005800
+ALIGNED8 static const Texture _inside_castle_seg7_texture_07004800[] = {
+#include "actors/star_door/6.rgba16.inc.c"
+};
+
+// 0x07005800 - 0x07006000
+ALIGNED8 static const Texture _inside_castle_seg7_texture_07005800[] = {
+#include "actors/star_door/7.rgba16.inc.c"
+};
+
 // 0x0703BEC0 - 0x0703BF38
 static const Gfx inside_castle_seg7_dl_0703BEC0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07005800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _inside_castle_seg7_texture_07005800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -53,7 +68,7 @@ static const Gfx inside_castle_seg7_dl_0703BEC0[] = {
 
 // 0x0703BF38 - 0x0703BF70
 static const Gfx inside_castle_seg7_dl_0703BF38[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07003800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _inside_castle_seg7_texture_07003800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(inside_castle_seg7_vertex_0703BE40, 4, 0),
@@ -63,7 +78,7 @@ static const Gfx inside_castle_seg7_dl_0703BF38[] = {
 
 // 0x0703BF70 - 0x0703BFA8
 static const Gfx inside_castle_seg7_dl_0703BF70[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07004800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _inside_castle_seg7_texture_07004800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(inside_castle_seg7_vertex_0703BE80, 4, 0),
