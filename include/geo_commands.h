@@ -24,6 +24,7 @@ enum SkyBackgroundParams {
     BACKGROUND_PURPLE_SKY,
 
     BACKGROUND_OW,
+    BACKGROUND_C4,
 };
 
 enum GeoLayoutCommands {
