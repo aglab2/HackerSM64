@@ -20,6 +20,7 @@ const GeoLayout wf_area_1_geo[] = {
 		GEO_ASM(20480, geo_movtex_draw_water_regions),
 		GEO_ASM(0, geo_cannon_circle_base),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, wf_dl_z_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, wf_dl_z_001_mesh_layer_5),
 		GEO_ROTATION_NODE(LAYER_OPAQUE, 90, 0, 0),
 		GEO_OPEN_NODE(),
 			GEO_CULL(-1000, 32000, -32000, 32000, -32000, 32000, 0),

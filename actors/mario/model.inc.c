@@ -5730,6 +5730,7 @@ Gfx mat_mario_metal_v4_001[] = {
 
 Gfx mat_revert_mario_metal_v4_001[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsSPGeometryMode(G_TEXTURE_GEN, 0),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
@@ -5765,6 +5766,7 @@ Gfx mat_mario_button_v4[] = {
 
 Gfx mat_revert_mario_button_v4[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -5823,6 +5825,7 @@ Gfx mat_mario_logo_002[] = {
 
 Gfx mat_revert_mario_logo_002[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -5895,6 +5898,7 @@ Gfx mat_mario_wing_combined[] = {
 
 Gfx mat_revert_mario_wing_combined[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsSPEndDisplayList(),
 };
@@ -5938,6 +5942,7 @@ Gfx mat_mario_shoes_v4_001[] = {
 
 Gfx mat_revert_mario_shoes_v4_001[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6532,6 +6537,7 @@ Gfx mario_000_displaylist_005_mesh_layer_1[] = {
 	gsSPDisplayList(mat_mario_shoes_v4_001),
 	gsSPDisplayList(mario_000_displaylist_005_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_mario_shoes_v4_001),
+	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 

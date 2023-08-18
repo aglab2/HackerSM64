@@ -15,6 +15,7 @@ extern Lights1 bob_dl_SM64_DL_bob_1_0xe026980_F3D_Mat_11_001_lights __attribute_
 extern Lights1 bob_dl_SM64_DL_bob_1_0xe026980_F3D_Mat_2_001_lights __attribute__((section(".data")));
 extern Lights1 bob_dl_SM64_DL_bob_1_0xe026980_F3D_Mat_6_001_lights __attribute__((section(".data")));
 extern Lights1 bob_dl_SM64_DL_bob_1_0xe026980_F3D_Mat_8_001_lights __attribute__((section(".data")));
+extern Lights1 bob_dl_f3dlite_material_lights __attribute__((section(".data")));
 extern Lights1 bob_dl_SM64_DL_bob_1_0xe039640_F3D_Mat_0_001_lights __attribute__((section(".data")));
 extern Lights1 bob_dl_SM64_DL_bob_1_0xe026980_F3D_Mat_7_001_lights __attribute__((section(".data")));
 extern Lights1 bob_dl_SM64_DL_bob_1_0xe026980_F3D_Mat_0_001_lights __attribute__((section(".data")));
@@ -31,6 +32,8 @@ extern u8 bob_dl_bob_1_0xe002010_custom_rgba16_rgba16[] __attribute__((section("
 extern u8 bob_dl_bob_1_0xe008010_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 bob_dl_bob_1_0xe004810_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 bob_dl_bob_1_0xe003810_custom_rgba16_rgba16[] __attribute__((section(".data")));
+extern u8 bob_dl_segment2_11C58_rgba16_ci8[] __attribute__((section(".data")));
+extern u8 bob_dl_segment2_11C58_rgba16_pal_rgba16[] __attribute__((section(".data")));
 extern u8 bob_dl_bob_1_0xe007010_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 bob_dl_bob_1_0xe004010_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 bob_dl_bob_1_0xe000810_custom_rgba16_rgba16[] __attribute__((section(".data")));
@@ -53,6 +56,8 @@ extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_1_vtx_1[83] __attribute__((s
 extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_1_vtx_2[72] __attribute__((section(".data")));
 extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_1_vtx_3[262] __attribute__((section(".data")));
 extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_1_vtx_4[310] __attribute__((section(".data")));
+extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_5_vtx_cull[8] __attribute__((section(".data")));
+extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_5_vtx_0[16] __attribute__((section(".data")));
 extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_005_mesh_layer_1_vtx_cull[8] __attribute__((section(".data")));
 extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_005_mesh_layer_1_vtx_0[80] __attribute__((section(".data")));
 extern Vtx bob_dl_DL_bob_1_0xe026980_Obj_005_mesh_layer_1_vtx_1[41] __attribute__((section(".data")));
@@ -68,6 +73,7 @@ extern Gfx bob_dl_a_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx bob_dl_b_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx bob_dl_d_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_1[] __attribute__((section(".data")));
+extern Gfx bob_dl_DL_bob_1_0xe026980_Obj_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx bob_dl_DL_bob_1_0xe026980_Obj_005_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx bob_dl_DL_bob_1_0xe039640_Obj_mesh_layer_4[] __attribute__((section(".data")));
 extern Gfx bob_dl_y_mesh_layer_1[] __attribute__((section(".data")));
