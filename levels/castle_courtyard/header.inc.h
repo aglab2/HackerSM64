@@ -30,6 +30,7 @@ extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe037880_F3D_Mat_
 extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe037880_F3D_Mat_25_lights __attribute__((section(".data")));
 extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe037880_F3D_Mat_26_lights __attribute__((section(".data")));
 extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe037880_F3D_Mat_27_lights __attribute__((section(".data")));
+extern Lights1 castle_courtyard_dl_f3dlite_material_lights __attribute__((section(".data")));
 extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe0532c0_F3D_Mat_0_lights __attribute__((section(".data")));
 extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe0532c0_F3D_Mat_1_lights __attribute__((section(".data")));
 extern Lights1 castle_courtyard_dl_SM64_DL_castle_courtyard_1_0xe0532c0_F3D_Mat_2_lights __attribute__((section(".data")));
@@ -62,6 +63,8 @@ extern u8 castle_courtyard_dl_castle_courtyard_1_0xe001010_custom_rgba16_rgba16[
 extern u8 castle_courtyard_dl_castle_courtyard_1_0xe000810_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 castle_courtyard_dl_castle_courtyard_1_0xe000010_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 castle_courtyard_dl_castle_courtyard_1_0x9007000_custom_rgba16_rgba16[] __attribute__((section(".data")));
+extern u8 castle_courtyard_dl_segment2_11C58_rgba16_ci8[] __attribute__((section(".data")));
+extern u8 castle_courtyard_dl_segment2_11C58_rgba16_pal_rgba16[] __attribute__((section(".data")));
 extern u8 castle_courtyard_dl_castle_courtyard_1_0xe00d010_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 castle_courtyard_dl_castle_courtyard_1_0xe010810_custom_rgba16_rgba16[] __attribute__((section(".data")));
 extern u8 castle_courtyard_dl_castle_courtyard_1_0xe00b810_custom_rgba16_rgba16[] __attribute__((section(".data")));
@@ -95,6 +98,8 @@ extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_1_
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_1_vtx_25[141] __attribute__((section(".data")));
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_1_vtx_26[108] __attribute__((section(".data")));
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_1_vtx_27[28] __attribute__((section(".data")));
+extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_5_vtx_cull[8] __attribute__((section(".data")));
+extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_5_vtx_0[4] __attribute__((section(".data")));
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4_vtx_cull[8] __attribute__((section(".data")));
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4_vtx_0[5] __attribute__((section(".data")));
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4_vtx_1[16] __attribute__((section(".data")));
@@ -102,4 +107,5 @@ extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4_
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4_vtx_3[14] __attribute__((section(".data")));
 extern Vtx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4_vtx_4[4] __attribute__((section(".data")));
 extern Gfx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_1[] __attribute__((section(".data")));
+extern Gfx castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4[] __attribute__((section(".data")));
