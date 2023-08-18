@@ -1,22 +1,23 @@
 #include "src/game/envfx_snow.h"
 
-const GeoLayout castle_courtyard_area_1_geo[] = {
+const GeoLayout ddd_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, castle_courtyard_dl_DL_castle_courtyard_1_0xe037880_Obj_mesh_layer_1),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, castle_courtyard_dl_DL_castle_courtyard_1_0xe0532c0_Obj_mesh_layer_4),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, ddd_dl_DL_ddd_1_0xe02c100_Obj_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, ddd_dl_DL_ddd_1_0xe03e480_Obj_mesh_layer_4),
 		GEO_ASM(0, geo_cannon_circle_base),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout castle_courtyard_area_1[] = {
+const GeoLayout ddd_area_1[] = {
 	GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
 	GEO_OPEN_NODE(),
 		GEO_ZBUFFER(0),
 		GEO_OPEN_NODE(),
 			GEO_NODE_ORTHO(100.0000),
 			GEO_OPEN_NODE(),
-				GEO_BACKGROUND(BACKGROUND_FLAMING_SKY, geo_skybox_main),
+				GEO_BACKGROUND(BACKGROUND_OCEAN_SKY, geo_skybox_main),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_ZBUFFER(1),
@@ -25,9 +26,9 @@ const GeoLayout castle_courtyard_area_1[] = {
 			GEO_OPEN_NODE(),
 				GEO_CAMERA(1, 0, 0, 0, 0, -100, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
-					GEO_BRANCH(1, castle_courtyard_area_1_geo),
+					GEO_BRANCH(1, ddd_area_1_geo),
 					GEO_RENDER_OBJ(),
-					GEO_ASM(ENVFX_LAVA_BUBBLES, geo_envfx_main),
+					GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
