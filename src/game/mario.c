@@ -1256,7 +1256,14 @@ void update_mario_joystick_inputs(struct MarioState *m) {
     }
 
     if (m->intendedMag > 0.0f) {
-        m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
+        if (gCamera->cutscene == CUTSCENE_C7)
+        {
+            m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + 0x8000;
+        }
+        else
+        {
+            m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
+        }
         m->input |= INPUT_NONZERO_ANALOG;
     } else {
         m->intendedYaw = m->faceAngle[1];
@@ -1741,6 +1748,23 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         // If Mario is OOB, stop executing actions.
         if (gMarioState->floor == NULL) {
             return ACTIVE_PARTICLE_NONE;
+        }
+
+        // AGLAB
+        if (gCurrCourseNum == COURSE_LLL)
+        {
+            if (-3000.f < gMarioStates->pos[1] && gMarioStates->pos[1] < -1700.f)
+            {
+                gCamera->cutscene = CUTSCENE_C7;
+            }
+            else
+            {
+                if (gCamera->cutscene == CUTSCENE_C7)
+                {
+                    gCamera->cutscene = 0;
+                    reset_camera(gCamera);
+                }
+            }
         }
 
         // The function can loop through many action shifts in one frame,

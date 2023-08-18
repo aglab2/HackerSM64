@@ -8200,6 +8200,16 @@ void cutscene_death_stomach(struct Camera *c) {
     set_handheld_shake(HAND_CAM_SHAKE_CUTSCENE);
 }
 
+void cutscene_c7(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->pos[0] = -2856.f;
+    c->pos[1] = 9542.f;
+    c->pos[2] = -6000.f;
+    c->focus[0] = -2856.f;
+    c->focus[1] = -1542.f;
+    c->focus[2] = -6000.f;
+}
+
 void cutscene_bbh_death_start(struct Camera *c) {
     Vec3f dir = { 0, 40.f, 60.f };
 
@@ -10138,6 +10148,10 @@ struct Cutscene sCutsceneEnterPool[] = {
     { cutscene_exit_to_castle_grounds_end, 0 }
 };
 
+struct Cutscene sCutsceneC7[] = {
+    { cutscene_c7, CUTSCENE_LOOP },
+};
+
 /**
  * Cutscene that plays when Mario dies on his stomach.
  */
@@ -10751,6 +10765,8 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_RACE_DIALOG,          sCutsceneDialog)
         CUTSCENE(CUTSCENE_ENTER_PYRAMID_TOP,    sCutsceneEnterPyramidTop)
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE,  sCutscenePyramidTopExplode)
+        
+        CUTSCENE(CUTSCENE_C7, sCutsceneC7)
     }
 
 #undef CUTSCENE
