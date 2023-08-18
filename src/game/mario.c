@@ -1767,6 +1767,17 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
 
+        if (gCurrCourseNum == COURSE_DDD)
+        {
+            if (gEnvironmentRegions[6] > -1000.f)
+            {
+                if (gMarioStates->pos[1] < -1100.f)
+                {
+                    gMarioStates->pos[1] = -1100.f;
+                }
+            }
+        }
+
         // The function can loop through many action shifts in one frame,
         // which can lead to unexpected sub-frame behavior. Could potentially hang
         // if a loop of actions were found, but there has not been a situation found.

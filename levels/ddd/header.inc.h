@@ -70,7 +70,7 @@ extern Vtx ddd_dl_DL_ddd_1_0xe02c100_Obj_mesh_layer_1_vtx_16[156] __attribute__(
 extern Vtx ddd_dl_DL_ddd_1_0xe02c100_Obj_mesh_layer_1_vtx_17[164] __attribute__((section(".data")));
 extern Vtx ddd_dl_DL_ddd_1_0xe02c100_Obj_mesh_layer_1_vtx_18[68] __attribute__((section(".data")));
 extern Vtx ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5_vtx_cull[8] __attribute__((section(".data")));
-extern Vtx ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5_vtx_0[9] __attribute__((section(".data")));
+extern Vtx ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5_vtx_0[13] __attribute__((section(".data")));
 extern Vtx ddd_dl_DL_ddd_1_0xe03e480_Obj_mesh_layer_4_vtx_cull[8] __attribute__((section(".data")));
 extern Vtx ddd_dl_DL_ddd_1_0xe03e480_Obj_mesh_layer_4_vtx_0[73] __attribute__((section(".data")));
 extern Vtx ddd_dl_DL_ddd_1_0xe03e480_Obj_mesh_layer_4_vtx_1[94] __attribute__((section(".data")));

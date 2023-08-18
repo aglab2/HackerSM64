@@ -1,6 +1,6 @@
 void scroll_ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 9;
+	int count = 13;
 	int width = 32 * 0x20;
 
 	static int currentX = 0;

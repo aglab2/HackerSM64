@@ -4,7 +4,7 @@ const GeoLayout ddd_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, ddd_dl_DL_ddd_1_0xe02c100_Obj_mesh_layer_1),
-		GEO_ROTATION_NODE_WITH_DL(LAYER_TRANSPARENT, 90, 0, 0, ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 0, -1003, 0, 90, 0, 0, ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_ALPHA, 90, 0, 0, ddd_dl_DL_ddd_1_0xe03e480_Obj_mesh_layer_4),
 		GEO_ASM(0, geo_cannon_circle_base),
 	GEO_CLOSE_NODE(),

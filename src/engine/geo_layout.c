@@ -392,6 +392,9 @@ void geo_layout_cmd_node_camera(void) {
     gGeoLayoutCommand += 0x14 << CMD_SIZE_SHIFT;
 }
 
+extern Gfx ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5[];
+struct GraphNodeTranslationRotation *gWaterNode = 0;
+
 /*
   0x10: Create translation & rotation scene graph node with optional display list
    cmd+0x01: u8 params
@@ -470,6 +473,12 @@ void geo_layout_cmd_node_translation_rotation(void) {
 
     graphNode = init_graph_node_translation_rotation(TRUE, NULL, drawingLayer, displayList,
                                                      translation, rotation);
+
+    if (displayList == ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5)
+    {
+        gWaterNode = graphNode;
+    }
+
     register_scene_graph_node(&graphNode->node);
 
     gGeoLayoutCommand = (u8 *) cmdPos;
@@ -504,6 +513,11 @@ void geo_layout_cmd_node_translation(void) {
     }
 
     graphNode = init_graph_node_translation(TRUE, NULL, drawingLayer, displayList, translation);
+
+    if (displayList == ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5)
+    {
+        gWaterNode = graphNode;
+    }
 
     register_scene_graph_node(&graphNode->node);
 
