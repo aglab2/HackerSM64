@@ -1,4 +1,5 @@
 // 0x0E000BC8
+extern const Gfx lll_seg7_dl_07019C08[];
 const GeoLayout lll_geo_000BC8[] = {
    GEO_CULLING_RADIUS(1400),
    GEO_OPEN_NODE(),

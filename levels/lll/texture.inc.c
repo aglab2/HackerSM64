@@ -3,11 +3,6 @@ ALIGNED8 static const Texture lll_seg7_texture_07000000[] = {
 #include "levels/lll/0.rgba16.inc.c"
 };
 
-// 0x07000800 - 0x07001000
-ALIGNED8 static const Texture lll_seg7_texture_07000800[] = {
-#include "levels/lll/1.rgba16.inc.c"
-};
-
 // 0x07001000 - 0x07001800
 ALIGNED8 static const Texture lll_seg7_texture_07001000[] = {
 #include "levels/lll/2.rgba16.inc.c"
@@ -28,29 +23,14 @@ ALIGNED8 static const Texture lll_seg7_texture_07002800[] = {
 #include "levels/lll/5.rgba16.inc.c"
 };
 
-// 0x07003000 - 0x07003800
-ALIGNED8 static const Texture lll_seg7_texture_07003000[] = {
-#include "levels/lll/6.rgba16.inc.c"
-};
-
 // 0x07003800 - 0x07004000
 UNUSED ALIGNED8 static const Texture lll_seg7_texture_07003800[] = {
 #include "levels/lll/7.rgba16.inc.c"
 };
 
-// 0x07004000 - 0x07004800
-ALIGNED8 static const Texture lll_seg7_texture_07004000[] = {
-#include "levels/lll/8.rgba16.inc.c"
-};
-
 // 0x07004800 - 0x07005000
 ALIGNED8 static const Texture lll_seg7_texture_07004800[] = {
 #include "levels/lll/9.rgba16.inc.c"
-};
-
-// 0x07005000 - 0x07005800
-ALIGNED8 static const Texture lll_seg7_texture_07005000[] = {
-#include "levels/lll/10.rgba16.inc.c"
 };
 
 // 0x07005800 - 0x07006000

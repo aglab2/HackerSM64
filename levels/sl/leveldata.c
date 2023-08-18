@@ -33,3 +33,16 @@
 #include "levels/sl/areas/1/movtext.inc.c"
 
 #include "levels/sl/leveldata.inc.c"
+
+#include "levels/sl/drawbridge_part/model.inc.c"
+#include "levels/sl/rotating_block_fire_bars/model.inc.c"
+#include "levels/sl/rotating_hexagonal_ring/model.inc.c"
+#include "levels/sl/sinking_rectangular_platform/model.inc.c"
+#include "levels/sl/sinking_square_platform/model.inc.c"
+#include "levels/sl/tilting_square_platform/model.inc.c"
+#include "levels/sl/drawbridge_part/collision.inc.c"
+#include "levels/sl/rotating_block_fire_bars/collision.inc.c"
+#include "levels/sl/rotating_hexagonal_ring/collision.inc.c"
+#include "levels/sl/sinking_rectangular_platform/collision.inc.c"
+#include "levels/sl/sinking_square_platform/collision.inc.c"
+#include "levels/sl/tilting_square_platform/collision.inc.c"

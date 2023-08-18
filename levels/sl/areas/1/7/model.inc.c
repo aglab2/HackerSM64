@@ -357,7 +357,7 @@ static const Vtx sl_seg7_vertex_07009E80[] = {
 
 // 0x07009F30 - 0x07009FE0
 static const Gfx sl_seg7_dl_07009F30[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snow_09003000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, fire_09003000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -376,7 +376,7 @@ static const Gfx sl_seg7_dl_07009F30[] = {
 
 // 0x07009FE0 - 0x0700A058
 static const Gfx sl_seg7_dl_07009FE0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snow_09006000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, fire_09006000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(sl_seg7_vertex_07008F40, 14, 0),
@@ -390,7 +390,7 @@ static const Gfx sl_seg7_dl_07009FE0[] = {
 
 // 0x0700A058 - 0x0700A418
 static const Gfx sl_seg7_dl_0700A058[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snow_09002000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, fire_09002000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(sl_seg7_vertex_07009020, 16, 0),

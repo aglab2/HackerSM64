@@ -34,6 +34,13 @@ extern const Collision sl_seg7_area_2_collision[];
 extern const MacroObject sl_seg7_area_2_macro_objs[];
 extern const struct MovtexQuadCollection sl_movtex_water[];
 
+extern const GeoLayout lll_geo_000B20[];
+extern const GeoLayout lll_geo_000B38[];
+extern const GeoLayout lll_geo_000BB0[];
+extern const GeoLayout lll_geo_000BC8[];
+extern const GeoLayout lll_geo_000BE0[];
+extern const GeoLayout lll_geo_000BF8[];
+
 // script
 extern const LevelScript level_sl_entry[];
 

@@ -20,3 +20,10 @@
 #include "levels/sl/areas/2/geo.inc.c"
 
 #include "levels/sl/geo.inc.c"
+
+#include "levels/sl/drawbridge_part/geo.inc.c"
+#include "levels/sl/rotating_block_fire_bars/geo.inc.c"
+#include "levels/sl/rotating_hexagonal_ring/geo.inc.c"
+#include "levels/sl/sinking_rectangular_platform/geo.inc.c"
+#include "levels/sl/sinking_square_platform/geo.inc.c"
+#include "levels/sl/tilting_square_platform/geo.inc.c"
