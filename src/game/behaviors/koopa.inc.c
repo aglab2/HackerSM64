@@ -57,6 +57,11 @@ struct KoopaTheQuickProperties {
     Vec3s starPos;
 };
 
+#define TRAJECTORY_POS(trajId, x, y, z) \
+    trajId, x, y, z
+#define TRAJECTORY_END() \
+    -1
+
 static const Trajectory sTraj[] = {
 TRAJECTORY_POS(0x0000, 0x12DF, 0xF7E5 - 0x10000, 0xFA88 - 0x10000),
 TRAJECTORY_POS(0x0001, 0x12DF, 0xF7E5 - 0x10000, 0xFCF7 - 0x10000),
@@ -71,7 +76,7 @@ TRAJECTORY_POS(0x0009, 0x11E5, 0xFBFF - 0x10000, 0xEA8A - 0x10000),
 TRAJECTORY_POS(0x000A, 0x1309, 0xFBFF - 0x10000, 0xEBA5 - 0x10000),
 TRAJECTORY_POS(0x000B, 0x1309, 0xFBFF - 0x10000, 0xEF98 - 0x10000),
 TRAJECTORY_END(),
-}
+};
 
 /**
  * Properties for the BoB race and the THI race.
