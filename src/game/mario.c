@@ -1799,6 +1799,39 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
 
+        if (gCurrLevelNum != LEVEL_BOWSER_1 || gCurrLevelNum != LEVEL_BOWSER_2 || gCurrLevelNum != LEVEL_BOWSER_3)
+        {
+            int starCount = 7;
+            if (gCurrCourseNum == COURSE_BITDW)
+                starCount = 3;
+            if (gCurrCourseNum == COURSE_BITFS || gCurrCourseNum == COURSE_BITS)
+                starCount = 4;
+            if (gCurrCourseNum == COURSE_NONE)
+                starCount = 3;
+            if (gCurrCourseNum == COURSE_TOTWC)
+                starCount = 2;
+            if (gCurrCourseNum == COURSE_COTMC)
+                starCount = 3;
+            if (gCurrCourseNum == COURSE_SA)
+                starCount = 2;
+            if (gCurrCourseNum == COURSE_PSS)
+                starCount = 4;
+
+            int mask = save_file_get_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1);
+            for (int i = 0; i < starCount; i++)
+            {
+                int bit = 1 << i;
+                if (bit & mask)
+                {
+                    print_text_centered(20 + 7*i, 20, "^");
+                }
+                else
+                {
+                    print_text_centered(20 + 7*i, 20, "*");
+                }
+            }
+        }
+
         // The function can loop through many action shifts in one frame,
         // which can lead to unexpected sub-frame behavior. Could potentially hang
         // if a loop of actions were found, but there has not been a situation found.
