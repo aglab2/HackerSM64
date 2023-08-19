@@ -284,7 +284,7 @@ void coin_inside_boo_act_carried(void) {
     struct Object *parent = o->parentObj;
 
     cur_obj_become_intangible();
-    if (o->oTimer == 0 && GET_BPARAM1(parent->oBehParams) != COIN_INSIDE_BOO_BP_YELLOW_COIN) {
+    if (o->oTimer == 0) {
         cur_obj_set_model(MODEL_BLUE_COIN);
         cur_obj_scale(0.7f);
     }
