@@ -895,6 +895,14 @@ const BehaviorScript bhvWarpPipe[] = {
     END_LOOP(),
 };
 
+extern void bhv_sparkler_loop();
+const BehaviorScript bhvSparkler[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sparkler_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvWhitePuffExplosion[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),

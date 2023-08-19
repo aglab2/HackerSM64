@@ -198,3 +198,14 @@ void bhv_yoshi_loop(void) {
 
     curr_obj_random_blink(&o->oYoshiBlinkTimer);
 }
+
+void bhv_sparkler_loop()
+{
+    if (0 == (o->oTimer % 8))
+    {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX += random_f32_around_zero(500.f);
+        spark->oPosY += random_f32_around_zero(500.f);
+        spark->oPosZ += random_f32_around_zero(500.f);
+    }
+}
