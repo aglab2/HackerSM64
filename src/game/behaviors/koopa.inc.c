@@ -57,12 +57,28 @@ struct KoopaTheQuickProperties {
     Vec3s starPos;
 };
 
+static const Trajectory sTraj[] = {
+TRAJECTORY_POS(0x0000, 0x12DF, 0xF7E5 - 0x10000, 0xFA88 - 0x10000),
+TRAJECTORY_POS(0x0001, 0x12DF, 0xF7E5 - 0x10000, 0xFCF7 - 0x10000),
+TRAJECTORY_POS(0x0002, 0x0FD4, 0xF7E5 - 0x10000, 0xFFC7 - 0x10000),
+TRAJECTORY_POS(0x0003, 0x0B72, 0xF7E5 - 0x10000, 0xFFC7 - 0x10000),
+TRAJECTORY_POS(0x0004, 0x0902, 0xF7E5 - 0x10000, 0xFCC5 - 0x10000),
+TRAJECTORY_POS(0x0005, 0x0902, 0xF7E5 - 0x10000, 0xF00C - 0x10000),
+TRAJECTORY_POS(0x0006, 0x0902, 0xF974 - 0x10000, 0xEB43 - 0x10000),
+TRAJECTORY_POS(0x0007, 0x0973, 0xF974 - 0x10000, 0xEA8A - 0x10000),
+TRAJECTORY_POS(0x0008, 0x0A04, 0xF974 - 0x10000, 0xEA8A - 0x10000),
+TRAJECTORY_POS(0x0009, 0x11E5, 0xFBFF - 0x10000, 0xEA8A - 0x10000),
+TRAJECTORY_POS(0x000A, 0x1309, 0xFBFF - 0x10000, 0xEBA5 - 0x10000),
+TRAJECTORY_POS(0x000B, 0x1309, 0xFBFF - 0x10000, 0xEF98 - 0x10000),
+TRAJECTORY_END(),
+}
+
 /**
  * Properties for the BoB race and the THI race.
  */
-static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
-    { DIALOG_005, DIALOG_007, bob_seg7_trajectory_koopa, { 3030, 4500, -4600 } },
-    { DIALOG_009, DIALOG_031, thi_seg7_trajectory_koopa, { 7100, -1300, -6000 } },
+static const struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
+    { DIALOG_005, DIALOG_007, sTraj, { 4920, -625, -5115 } },
+    { DIALOG_009, DIALOG_031, sTraj, { 4920, -625, -5115 } },
 };
 
 /**

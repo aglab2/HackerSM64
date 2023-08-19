@@ -1096,8 +1096,9 @@ s32 play_mode_paused(void) {
             set_play_mode(PLAY_MODE_NORMAL);
             level_trigger_warp(gMarioState, WARP_OP_DEATH);
 #else
-            initiate_warp(EXIT_COURSE_LEVEL, EXIT_COURSE_AREA, EXIT_COURSE_NODE, WARP_FLAG_EXIT_COURSE);
-            fade_into_special_warp(WARP_SPECIAL_NONE, 0);
+            struct ObjectWarpNode* warpNode = area_get_warp_node(0xf1);
+            initiate_warp(warpNode->node.destLevel, warpNode->node.destArea, warpNode->node.destNode, 0);
+            fade_into_special_warp(0, 0);
             gSavedCourseNum = COURSE_NONE;
 #endif
         }

@@ -185,7 +185,7 @@ void bhv_hidden_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case HIDDEN_STAR_ACT_INACTIVE:
-            if (o->oHiddenStarTriggerCounter == o->oHiddenStarTriggerTotal) {
+            if (o->oHiddenStarTriggerCounter == o->oHiddenStarTriggerTotal - 2) {
                 o->oAction = HIDDEN_STAR_ACT_ACTIVE;
             }
             break;
