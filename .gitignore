@@ -182,13 +182,10 @@ actors/door/hmc_mural_door.rgba16.png
 actors/door/hmc_mural_door_overlay.rgba16.png
 actors/door/metal_door.rgba16.png
 actors/door/metal_door_overlay.rgba16.png
-actors/door/one_star_door_sign.rgba16.png
 actors/door/polished_wooden_door.rgba16.png
 actors/door/polished_wooden_door_overlay.rgba16.png
 actors/door/rough_wooden_door.rgba16.png
 actors/door/rough_wooden_door_overlay.rgba16.png
-actors/door/three_star_door_sign.rgba16.png
-actors/door/zero_star_door_sign.rgba16.png
 actors/dorrie/dorrie_eye.rgba16.png
 actors/dorrie/dorrie_skin.rgba16.png
 actors/dorrie/dorrie_tongue.rgba16.png
@@ -429,7 +426,6 @@ actors/spindrift/spindrift_petal.rgba16.png
 actors/springboard/springboard_base_unused.rgba16.png
 actors/springboard/springboard_top_unused.rgba16.png
 actors/star/star_eye.rgba16.png
-actors/star/star_surface.rgba16.png
 actors/sushi/sushi_eye.rgba16.png
 actors/sushi/sushi_snout.rgba16.png
 actors/sushi/sushi_tooth.rgba16.png
