@@ -32,11 +32,14 @@ const LevelScript level_rr_entry[] = {
 	LOAD_YAY0(0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd), 
 	LOAD_RAW(0x0F, _common0_geoSegmentRomStart, _common0_geoSegmentRomEnd), 
 	LOAD_MIO0(0x7, _rr_segment_7SegmentRomStart, _rr_segment_7SegmentRomEnd), 
-	LOAD_MIO0(0xa, _water_skybox_mio0SegmentRomStart, _water_skybox_mio0SegmentRomEnd), 
+	LOAD_MIO0(0xa, _c15_skybox_mio0SegmentRomStart, _c15_skybox_mio0SegmentRomEnd), 
+	LOAD_MIO0(0x6, _group17_mio0SegmentRomStart, _group17_mio0SegmentRomEnd), 
+	LOAD_RAW(0xd, _group17_geoSegmentRomStart, _group17_geoSegmentRomEnd), 
 	ALLOC_LEVEL_POOL(),
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
-	JUMP_LINK(script_func_global_12), 
 	JUMP_LINK(script_func_global_1), 
+	JUMP_LINK(script_func_global_12), 
+	JUMP_LINK(script_func_global_18), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, rr_geo_000660), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_04, rr_geo_000678), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_05, rr_geo_000690), 
@@ -73,6 +76,7 @@ const LevelScript level_rr_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RR_TRICKY_TRIANGLES_FRAME2, rr_geo_000988), 
 	LOAD_MODEL_FROM_GEO(MODEL_RR_TRICKY_TRIANGLES_FRAME3, rr_geo_0009A0), 
 	LOAD_MODEL_FROM_GEO(MODEL_RR_TRICKY_TRIANGLES_FRAME4, rr_geo_0009B8), 
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_WARP_PIPE, warp_pipe_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
