@@ -368,16 +368,6 @@ actors/pokey/pokey_face.rgba16.png
 actors/pokey/pokey_face_blink.rgba16.png
 actors/poundable_pole/poundable_pole_side.rgba16.png
 actors/poundable_pole/poundable_pole_top.rgba16.png
-actors/power_meter/power_meter_five_segments.rgba16.png
-actors/power_meter/power_meter_four_segments.rgba16.png
-actors/power_meter/power_meter_full.rgba16.png
-actors/power_meter/power_meter_left_side.rgba16.png
-actors/power_meter/power_meter_one_segment.rgba16.png
-actors/power_meter/power_meter_right_side.rgba16.png
-actors/power_meter/power_meter_seven_segments.rgba16.png
-actors/power_meter/power_meter_six_segments.rgba16.png
-actors/power_meter/power_meter_three_segments.rgba16.png
-actors/power_meter/power_meter_two_segments.rgba16.png
 actors/purple_switch/purple_switch_base.rgba16.png
 actors/purple_switch/purple_switch_exclamation_point.rgba16.png
 actors/sand/sand_particle.rgba16.png
@@ -1822,7 +1812,6 @@ textures/segment2/segment2.05400.rgba16.png
 textures/segment2/segment2.05600.rgba16.png
 textures/segment2/segment2.05800.rgba16.png
 textures/segment2/segment2.05A00.rgba16.png
-textures/segment2/segment2.05C00.rgba16.png
 textures/segment2/segment2.05E00.rgba16.png
 textures/segment2/segment2.06000.rgba16.png
 textures/segment2/segment2.06200.rgba16.png
