@@ -15,19 +15,52 @@ static Collision const *sPlatformOnTrackCollisionModels[] = {
     /* PLATFORM_ON_TRACK_TYPE_GRATE     */ bitfs_seg7_collision_platform_on_track,
 };
 
+static const Trajectory sPlatform1[] = {
+    TRAJECTORY_POS(0x0000, -0x10000+0xEFBD, -0x10000+0xF949, -0x10000+0xEB5E),
+    TRAJECTORY_POS(0x0001, -0x10000+0xF2A9, -0x10000+0xF9EC, -0x10000+0xEB5E),
+    TRAJECTORY_POS(0x0002, -0x10000+0xF8C3, -0x10000+0xF9EC, -0x10000+0xEF07),
+    TRAJECTORY_POS(0x0003, -0x10000+0xFE30, -0x10000+0xF9EC, -0x10000+0xFB7B),
+    TRAJECTORY_POS(0x0004, -0x10000+0xFE30, -0x10000+0xFC4E, 0x0C5B),
+    TRAJECTORY_POS(0x0005, -0x10000+0xFA9F, -0x10000+0xFC4E, 0x0DAF),
+    TRAJECTORY_POS(0x0006, -0x10000+0xF3B5, -0x10000+0xFC4E, 0x0DAF),
+    TRAJECTORY_POS(0x0007, -0x10000+0xEF5A, -0x10000+0xFEC9, 0x08A7),
+    TRAJECTORY_POS(0x0008, -0x10000+0xEF5A, 0x05CC         , -0x10000+0xFB50),
+    TRAJECTORY_POS(0x0009, -0x10000+0xEF5A, 0x05CC         , -0x10000+0xF92D),
+    TRAJECTORY_POS(0x000A, -0x10000+0xEF5A, 0x05CC         , -0x10000+0xF704),
+    TRAJECTORY_POS(0x000B, -0x10000+0xEF5A, 0x07A4         , -0x10000+0xF5D1),
+    TRAJECTORY_POS(0x000C, -0x10000+0xF385, 0x0A1E         , -0x10000+0xF010),
+    TRAJECTORY_POS(0x000D, -0x10000+0xF894, 0x0A1E         , -0x10000+0xF010),
+    TRAJECTORY_POS(0x000E, -0x10000+0xFE34, 0x0DE7         , -0x10000+0xF010),
+    TRAJECTORY_POS(0x000F, 0x048B         , 0x0DE7         , -0x10000+0xF010),
+    TRAJECTORY_POS(0x0010, 0x0814         , 0x0DE7         , -0x10000+0xED13),
+    TRAJECTORY_POS(0x0011, 0x0814         , 0x0DE7         , -0x10000+0xE9F3),
+    TRAJECTORY_POS(0x0012, 0x051F         , 0x0DE7         , -0x10000+0xE7E6),
+    TRAJECTORY_POS(0x0013, -0x10000+0xFB1E, 0x1580         , -0x10000+0xE7E6),
+    TRAJECTORY_END(),
+};
+
+static const Trajectory sPlatform2[] = {
+    TRAJECTORY_POS(0x0000, -0x10000+0xF3D5, -0x10000+0xEF5D, -0x10000+0xEB3B),
+    TRAJECTORY_POS(0x0001, -0x10000+0xF06D, -0x10000+0xEF91, -0x10000+0xEB17),
+    TRAJECTORY_POS(0x0002, -0x10000+0xEA9A, -0x10000+0xF19A, -0x10000+0xECF4),
+    TRAJECTORY_POS(0x0003, -0x10000+0xE993, -0x10000+0xF36F, -0x10000+0xF2CE),
+    TRAJECTORY_POS(0x0004, -0x10000+0xEBC1, -0x10000+0xF54C, -0x10000+0xF4FD),
+    TRAJECTORY_POS(0x0005, -0x10000+0xEE00, -0x10000+0xF67C, -0x10000+0xF58F),
+    TRAJECTORY_POS(0x0006, -0x10000+0xF165, -0x10000+0xF74C, -0x10000+0xF4A7),
+    TRAJECTORY_POS(0x0007, -0x10000+0xF526, -0x10000+0xF473, -0x10000+0xF0A3),
+    TRAJECTORY_END(),
+};
+
 /**
  * Paths for the different instances of these platforms.
  */
 static Trajectory const *sPlatformOnTrackPaths[] = {
-    rr_seg7_trajectory_0702EC3C,
-    rr_seg7_trajectory_0702ECC0,
-    ccm_seg7_trajectory_ropeway_lift,
-    bitfs_seg7_trajectory_070159AC,
-    hmc_seg7_trajectory_checkerboard_platform,
-    lll_seg7_trajectory_0702856C,
-    lll_seg7_trajectory_07028660,
-    rr_seg7_trajectory_0702ED9C,
-    rr_seg7_trajectory_0702EEE0,
+    sPlatform1,
+    sPlatform2,
+    sPlatform2,
+    sPlatform2,
+    sPlatform2,
+    sPlatform2,
 };
 
 static void platform_on_track_update_pos_or_spawn_ball(s32 ballIndex, Vec3f pos) {
@@ -145,7 +178,7 @@ void bhv_platform_on_track_init(void) {
         o->collisionData =
             segmented_to_virtual(sPlatformOnTrackCollisionModels[o->oPlatformOnTrackType]);
 
-        o->oPlatformOnTrackStartWaypoint = segmented_to_virtual(sPlatformOnTrackPaths[pathIndex]);
+        o->oPlatformOnTrackStartWaypoint = sPlatformOnTrackPaths[pathIndex];
 
         o->oPlatformOnTrackIsNotHMC = pathIndex - 4;
 
