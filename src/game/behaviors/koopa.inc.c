@@ -531,8 +531,7 @@ static void koopa_the_quick_act_show_init_text(void) {
         o->oForwardVel = 0.0f;
 
         o->parentObj = cur_obj_nearest_object_with_behavior(bhvKoopaRaceEndpoint);
-        o->oPathedStartWaypoint = o->oPathedPrevWaypoint =
-            segmented_to_virtual(sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].path);
+        o->oPathedStartWaypoint = o->oPathedPrevWaypoint = sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].path;
 
         o->oKoopaTurningAwayFromWall = FALSE;
         o->oFlags |= OBJ_FLAG_ACTIVE_FROM_AFAR;
