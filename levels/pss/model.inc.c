@@ -1,29 +1,110 @@
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_0_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_1_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_2_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_3_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_4_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_5_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_6_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_7_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_8_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_9_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_10_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_11_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_12_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_13_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_14_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_15_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_16_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_17_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_18_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_19_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_20_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_21_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_22_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_23_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_24_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_25_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
+Lights1 pss_dl_SM64_DL_pss_1_0xe03d8a0_F3D_Mat_3_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
 Gfx pss_dl_pss_1_0xe00d010_custom_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 pss_dl_pss_1_0xe00d010_custom_rgba16_rgba16[] = {
@@ -11941,8 +12022,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_CD_MAGICSQ | G_AD_NOISE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
 	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_0_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe00d010_custom_rgba16_rgba16),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
@@ -11953,8 +12033,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(6, 7, 8, 0, 7, 6, 9, 0),
 	gsSP2Triangles(10, 11, 12, 0, 11, 10, 13, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_1_lights),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_1 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 0, 3, 0),
 	gsSP2Triangles(3, 0, 4, 0, 4, 0, 5, 0),
@@ -12157,8 +12236,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_1 + 751, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 0, 3, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_2_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe00c810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_2 + 0, 29, 0),
@@ -12172,8 +12250,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(23, 24, 25, 0, 26, 3, 27, 0),
 	gsSP2Triangles(27, 3, 5, 0, 28, 21, 26, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_3_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe00c010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_3 + 0, 30, 0),
@@ -12250,8 +12327,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_3 + 248, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 0, 3, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_4_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe00b810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_4 + 0, 32, 0),
@@ -12268,8 +12344,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(4, 5, 6, 0, 5, 4, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 9, 8, 11, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_5_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe00b010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_5 + 0, 31, 0),
@@ -12288,8 +12363,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(17, 18, 19, 0, 20, 21, 22, 0),
 	gsSP2Triangles(23, 24, 25, 0, 26, 20, 27, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_6_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe00a810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_6 + 0, 32, 0),
@@ -12335,8 +12409,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(25, 24, 27, 0, 28, 29, 30, 0),
 	gsSP1Triangle(29, 28, 31, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_7_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe009810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_7 + 0, 30, 0),
@@ -12375,8 +12448,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(20, 19, 22, 0, 23, 24, 25, 0),
 	gsSP2Triangles(24, 23, 26, 0, 27, 28, 29, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_8_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe009010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_8 + 0, 31, 0),
@@ -12440,8 +12512,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_8 + 187, 6, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_9_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe008810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_9 + 0, 30, 0),
@@ -12469,8 +12540,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(14, 13, 16, 0, 17, 5, 18, 0),
 	gsSP2Triangles(5, 17, 19, 0, 5, 19, 20, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_10_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe008010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_10 + 0, 32, 0),
@@ -12616,8 +12686,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(25, 24, 27, 0, 28, 29, 30, 0),
 	gsSP1Triangle(18, 23, 22, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_11_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe007010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_11 + 0, 31, 0),
@@ -12666,8 +12735,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(14, 15, 16, 0, 15, 14, 17, 0),
 	gsSP2Triangles(18, 19, 20, 0, 20, 19, 21, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_12_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe006810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_12 + 0, 32, 0),
@@ -12702,8 +12770,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(9, 6, 10, 0, 9, 10, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 13, 12, 15, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_13_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe006010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_13 + 0, 32, 0),
@@ -12936,8 +13003,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(24, 23, 26, 0, 27, 28, 29, 0),
 	gsSP1Triangle(28, 27, 30, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_14_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe005010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_14 + 0, 32, 0),
@@ -13034,8 +13100,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP1Triangle(6, 7, 8, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_15_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe004810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_15 + 0, 30, 0),
@@ -13073,16 +13138,14 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(22, 23, 24, 0, 23, 22, 25, 0),
 	gsSP2Triangles(26, 27, 28, 0, 27, 26, 29, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_16_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe004010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_16 + 0, 6, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 0, 3, 0),
 	gsSP2Triangles(3, 0, 4, 0, 4, 0, 5, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_17_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe003810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_17 + 0, 32, 0),
@@ -13099,8 +13162,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(4, 5, 6, 0, 5, 4, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 11, 12, 13, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_18_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe003010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_18 + 0, 32, 0),
@@ -13127,8 +13189,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(6, 5, 8, 0, 9, 10, 11, 0),
 	gsSP1Triangle(10, 9, 12, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_19_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe002810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_19 + 0, 32, 0),
@@ -13340,15 +13401,13 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(8, 9, 10, 0, 9, 8, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 13, 12, 15, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_20_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe002010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_20 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 0, 3, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_21_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe001810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_21 + 0, 30, 0),
@@ -13387,8 +13446,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(20, 21, 22, 0, 21, 20, 23, 0),
 	gsSP2Triangles(24, 25, 26, 0, 25, 24, 27, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_22_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe001010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_22 + 0, 32, 0),
@@ -13439,8 +13497,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(21, 22, 23, 0, 17, 24, 25, 0),
 	gsSP2Triangles(26, 27, 28, 0, 27, 26, 29, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_23_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe000810_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_23 + 0, 21, 0),
@@ -13452,8 +13509,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(12, 9, 16, 0, 17, 18, 19, 0),
 	gsSP2Triangles(18, 17, 20, 0, 18, 20, 10, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_24_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe000010_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_24 + 0, 32, 0),
@@ -13511,8 +13567,7 @@ Gfx pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1[] = {
 	gsSP2Triangles(18, 19, 20, 0, 19, 18, 21, 0),
 	gsSP2Triangles(22, 23, 24, 0, 23, 22, 25, 0),
 	gsDPPipeSync(),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe02b540_F3D_Mat_25_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0x9004800_custom_rgba16_rgba16),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsSPVertex(pss_dl_DL_pss_1_0xe02b540_Obj_mesh_layer_1_vtx_25 + 0, 31, 0),
@@ -13547,8 +13602,7 @@ Gfx pss_dl_DL_pss_1_0xe03d8a0_Obj_mesh_layer_4[] = {
 	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_CD_MAGICSQ | G_AD_NOISE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
 	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-    gsSPLightColor(LIGHT_1, 0xffffffff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPSetLights1(pss_dl_SM64_DL_pss_1_0xe03d8a0_F3D_Mat_3_lights),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, pss_dl_pss_1_0xe005810_custom_rgba16_rgba16),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadBlock(7, 0, 0, 1023, 256),

@@ -206,7 +206,11 @@ void spawn_coin_in_formation(s32 index, s32 shape) {
             break;
         case COIN_FORMATION_BP_SHAPE_ARROW:
             pos[0] = sCoinArrowPositions[index][0];
-            pos[2] = sCoinArrowPositions[index][1];
+            if (!(shape & COIN_FORMATION_BP_FLYING))
+                pos[2] = sCoinArrowPositions[index][1];
+            else
+                pos[1] = -sCoinArrowPositions[index][1];
+
             break;
     }
 

@@ -99,6 +99,7 @@ const LevelScript level_pss_entry[] = {
 		OBJECT(215, 4800, -4545, 8680, 0, 0, 0, 0x0, bhvRedCoin),
 		OBJECT(215, 6088, -3145, 7899, 0, 0, 0, 0x0, bhvRedCoin),
 		OBJECT(0, -8966, 6648, 12562, 0, 90, 0, 0xa0000, bhvSpinAirborneWarp),
+		OBJECT(0, -8699, 6494, 13663, 0, 90, 0, (0x14 << 16), bhvCoinFormation),
 		OBJECT(122, -4246, -829, -11473, 0, 0, 0, 0x3000000, bhvStar),
 		OBJECT(122, -8735, -1525, 13124, 0, 0, 0, 0x2000000, bhvStar),
 		OBJECT(116, -1423, 5100, 12515, 0, 0, 0, 0x0, bhvYellowCoin),
