@@ -151,7 +151,7 @@ const LevelScript level_ddd_entry[] = {
 		OBJECT(116, -6924, 288, 5685, 0, 0, 0, 0x0, bhvYellowCoin),
 		TERRAIN(ddd_area_1_collision),
 		MACRO_OBJECTS(ddd_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, 35),
+		SET_BACKGROUND_MUSIC(0x00, 0x31),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

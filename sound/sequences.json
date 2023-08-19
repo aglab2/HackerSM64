@@ -48,5 +48,6 @@
 	"2D_Seq_gs_custom": ["25"],
 	"2E_Seq_gs_custom": ["19"],
 	"2F_Seq_gs_custom": ["25"],
-	"30_Seq_gs_custom": ["25"]
+	"30_Seq_gs_custom": ["25"],
+	"31_xd": ["0C_extended_bank"]
 }
