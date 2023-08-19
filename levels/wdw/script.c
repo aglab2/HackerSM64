@@ -129,7 +129,7 @@ const LevelScript level_wdw_entry[] = {
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -60, -5625, 1296, 0, 0, 0, 0x0, bhvWaterLevelDiamond),
 		OBJECT_WITH_ACTS(MODEL_WDW_WATER_LEVEL_DIAMOND, -658, -885, 962, 0, 32, 0, 0x0, bhvWaterLevelDiamond, ACT_1 | ACT_4 | ACT_5),
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -1402, 2315, 3311, 0, -170, 0, 0x0, bhvWaterLevelDiamond),
-		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -246, 6480, 1530, 90, 0, 0, 0x0, bhvWaterLevelDiamond),
+		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, -246, 6480, 1530, 0, 0, 0, 0x0, bhvWaterLevelDiamond),
 		OBJECT_WITH_ACTS(MODEL_WDW_WATER_LEVEL_DIAMOND, 1086, -690, -520, 0, 0, 0, 0x0, bhvWaterLevelDiamond, ACT_4),
 		OBJECT(87, -2003, -6354, 401, 0, 0, 0, 0x0, bhvWhirlpool),
 		OBJECT(116, -2583, -1771, 766, 0, 0, 0, 0x0, bhvYellowCoin),
