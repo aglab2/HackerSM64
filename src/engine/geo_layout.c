@@ -393,6 +393,7 @@ void geo_layout_cmd_node_camera(void) {
 }
 
 extern Gfx ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5[];
+extern Gfx wdw_dl_water_mesh_layer_5[];
 struct GraphNodeTranslationRotation *gWaterNode = 0;
 
 /*
@@ -474,7 +475,7 @@ void geo_layout_cmd_node_translation_rotation(void) {
     graphNode = init_graph_node_translation_rotation(TRUE, NULL, drawingLayer, displayList,
                                                      translation, rotation);
 
-    if (displayList == ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5)
+    if (displayList == ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5 || displayList == wdw_dl_water_mesh_layer_5)
     {
         gWaterNode = graphNode;
     }
@@ -514,7 +515,7 @@ void geo_layout_cmd_node_translation(void) {
 
     graphNode = init_graph_node_translation(TRUE, NULL, drawingLayer, displayList, translation);
 
-    if (displayList == ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5)
+    if (displayList == ddd_dl_DL_ddd_1_0xe02c100_Obj_001_mesh_layer_5 || displayList == wdw_dl_water_mesh_layer_5)
     {
         gWaterNode = graphNode;
     }
