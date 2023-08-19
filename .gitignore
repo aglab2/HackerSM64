@@ -533,9 +533,6 @@ levels/bob/2.rgba16.png
 levels/bob/3.rgba16.png
 levels/bob/4.rgba16.png
 levels/bowser_2/0.rgba16.png
-levels/bowser_3/0.rgba16.png
-levels/bowser_3/1.rgba16.png
-levels/bowser_3/2.rgba16.png
 levels/castle_grounds/0.rgba16.png
 levels/castle_grounds/1.rgba16.png
 levels/castle_grounds/2.rgba16.png
@@ -1205,7 +1202,6 @@ sound/sequences/eu/15_cutscene_star_spawn.m64
 sound/sequences/eu/16_event_boss.m64
 sound/sequences/eu/17_cutscene_collect_key.m64
 sound/sequences/eu/18_event_endless_stairs.m64
-sound/sequences/eu/19_level_boss_koopa_final.m64
 sound/sequences/eu/1A_cutscene_credits.m64
 sound/sequences/eu/1B_event_solve_puzzle.m64
 sound/sequences/eu/1C_event_toad_message.m64
@@ -1238,7 +1234,6 @@ sound/sequences/jp/15_cutscene_star_spawn.m64
 sound/sequences/jp/16_event_boss.m64
 sound/sequences/jp/17_cutscene_collect_key.m64
 sound/sequences/jp/18_event_endless_stairs.m64
-sound/sequences/jp/19_level_boss_koopa_final.m64
 sound/sequences/jp/1A_cutscene_credits.m64
 sound/sequences/jp/1B_event_solve_puzzle.m64
 sound/sequences/jp/1C_event_toad_message.m64
@@ -1270,7 +1265,6 @@ sound/sequences/sh/15_cutscene_star_spawn.m64
 sound/sequences/sh/16_event_boss.m64
 sound/sequences/sh/17_cutscene_collect_key.m64
 sound/sequences/sh/18_event_endless_stairs.m64
-sound/sequences/sh/19_level_boss_koopa_final.m64
 sound/sequences/sh/1A_cutscene_credits.m64
 sound/sequences/sh/1B_event_solve_puzzle.m64
 sound/sequences/sh/1C_event_toad_message.m64
@@ -1303,7 +1297,6 @@ sound/sequences/us/15_cutscene_star_spawn.m64
 sound/sequences/us/16_event_boss.m64
 sound/sequences/us/17_cutscene_collect_key.m64
 sound/sequences/us/18_event_endless_stairs.m64
-sound/sequences/us/19_level_boss_koopa_final.m64
 sound/sequences/us/1A_cutscene_credits.m64
 sound/sequences/us/1B_event_solve_puzzle.m64
 sound/sequences/us/1C_event_toad_message.m64
