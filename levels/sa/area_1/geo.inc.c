@@ -5,7 +5,7 @@ const GeoLayout sa_area_1_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_4),
 		GEO_ASM(0, geo_envfx_main),
 		GEO_ASM(0, geo_cannon_circle_base),
 	GEO_CLOSE_NODE(),

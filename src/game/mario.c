@@ -1590,6 +1590,7 @@ u32 update_and_return_cap_flags(struct MarioState *m) {
     u32 action;
 
     if (m->capTimer > 0) {
+        print_text_fmt_int(270, 40, "%d", m->capTimer / 30);
         action = m->action;
 
         if ((m->capTimer <= 60)

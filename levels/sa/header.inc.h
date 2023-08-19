@@ -30,9 +30,9 @@ extern Vtx sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_4_vtx_5[259] __attribute__((se
 extern Vtx sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_4_vtx_6[4] __attribute__((section(".data")));
 extern Vtx sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_1_vtx_cull[8] __attribute__((section(".data")));
 extern Vtx sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_1_vtx_0[491] __attribute__((section(".data")));
-extern Vtx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_6_vtx_cull[8] __attribute__((section(".data")));
-extern Vtx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_6_vtx_0[4] __attribute__((section(".data")));
-extern Vtx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_6_vtx_1[4] __attribute__((section(".data")));
+extern Vtx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_4_vtx_cull[8] __attribute__((section(".data")));
+extern Vtx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_4_vtx_0[4] __attribute__((section(".data")));
+extern Vtx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_4_vtx_1[4] __attribute__((section(".data")));
 extern Gfx sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_4[] __attribute__((section(".data")));
 extern Gfx sa_dl_DL_sa_1_0xe010c00_Obj_mesh_layer_1[] __attribute__((section(".data")));
-extern Gfx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_6[] __attribute__((section(".data")));
+extern Gfx sa_dl_DL_sa_1_0xe017a40_Obj_mesh_layer_4[] __attribute__((section(".data")));
