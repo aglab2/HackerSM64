@@ -771,7 +771,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     u32 noExit = TRUE;
  #endif
 #else // !NON_STOP_STARS
-    u32 noExit = (obj->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
+    u32 noExit = gCurrLevelNum == LEVEL_BITDW || gCurrLevelNum == LEVEL_BITFS || gCurrLevelNum == LEVEL_BITS || (obj->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
 #endif // !NON_STOP_STARS
     u32 grandStar = (obj->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
 
