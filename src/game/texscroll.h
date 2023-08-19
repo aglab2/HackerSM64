@@ -9,6 +9,7 @@
 #include "src/game/texscroll/ddd_texscroll.inc.h"
 #include "src/game/texscroll/castle_courtyard_texscroll.inc.h"
 #include "src/game/texscroll/wdw_texscroll.inc.h"
+#include "src/game/texscroll/cotmc_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif

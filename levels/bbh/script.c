@@ -94,7 +94,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(0, -2807, -2124, 1661, 0, 0, 0, 0x0, bhvCheckerboardElevatorGroup),
 		OBJECT(0, -5397, -730, -4058, 0, -90, 0, 0x0, bhvCheckerboardElevatorGroup),
 		OBJECT(223, -5065, -1026, -984, 0, 0, 0, 0x0, bhvChuckya),
-		OBJECT(0, 2550, -1600, -3950, 0, -180, 0, 0x40000, bhvCoinFormation),
+		OBJECT(0, 2550, -519, -3690, 0, -180, 0, 0x40000, bhvCoinFormation),
 		OBJECT(0, -301, 37, 850, 0, 90, 0, 0x0, bhvCoinFormation),
 		OBJECT(0, 829, -170, -113, 20, 90, 0, 0x0, bhvCoinFormation),
 		OBJECT(0, 4530, -2013, 1438, 0, 0, 0, 0x0, bhvCoinFormation),
