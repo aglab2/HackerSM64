@@ -286,6 +286,7 @@ enum Cutscenes {
     CUTSCENE_ENTER_POOL,
 
     CUTSCENE_C7,
+    CUTSCENE_TEMPLE,
 };
 
 /**

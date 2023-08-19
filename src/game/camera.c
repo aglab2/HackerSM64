@@ -5964,6 +5964,12 @@ struct CameraTrigger sCamTotWC[] = {
 struct CameraTrigger sCamPSS[] = {
 	NULL_TRIGGER
 };
+struct CameraTrigger sCamWMOtR[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamSA[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"
@@ -8170,6 +8176,18 @@ void cutscene_c7(struct Camera *c) {
     c->focus[2] = -6000.f;
 }
 
+void cutscene_temple(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    c->pos[0] = 0;
+    c->pos[1] = 13000.f;
+    c->pos[2] = 5.f;
+    c->focus[0] = 10.f;
+    c->focus[1] = 0.f;
+    c->focus[2] = 5.f;
+    c->nextYaw = 0x4000;
+    c->yaw = 0x4000;
+}
+
 void cutscene_bbh_death_start(struct Camera *c) {
     Vec3f dir = { 0, 40.f, 60.f };
 
@@ -10112,6 +10130,10 @@ struct Cutscene sCutsceneC7[] = {
     { cutscene_c7, CUTSCENE_LOOP },
 };
 
+struct Cutscene sCutsceneTemple[] = {
+    { cutscene_temple, CUTSCENE_LOOP },
+};
+
 /**
  * Cutscene that plays when Mario dies on his stomach.
  */
@@ -10323,7 +10345,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // LLL            | DDD
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // COURTYARD      | PSS
@@ -10727,6 +10749,7 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE,  sCutscenePyramidTopExplode)
         
         CUTSCENE(CUTSCENE_C7, sCutsceneC7)
+        CUTSCENE(CUTSCENE_TEMPLE, sCutsceneTemple)
     }
 
 #undef CUTSCENE

@@ -1260,6 +1260,10 @@ void update_mario_joystick_inputs(struct MarioState *m) {
         {
             m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + 0x8000;
         }
+        else if (gCamera->cutscene == CUTSCENE_TEMPLE)
+        {
+            m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + 0xc000;
+        }
         else
         {
             m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
@@ -1760,6 +1764,22 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             else
             {
                 if (gCamera->cutscene == CUTSCENE_C7)
+                {
+                    gCamera->cutscene = 0;
+                    reset_camera(gCamera);
+                }
+            }
+        }
+        
+        if (gCurrCourseNum == COURSE_SA)
+        {
+            if (gMarioStates->pos[0] > -3000.f)
+            {
+                gCamera->cutscene = CUTSCENE_TEMPLE;
+            }
+            else
+            {
+                if (gCamera->cutscene == CUTSCENE_TEMPLE)
                 {
                     gCamera->cutscene = 0;
                     reset_camera(gCamera);
