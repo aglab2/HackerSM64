@@ -864,8 +864,6 @@
 "levels/menu/main_menu_seg7.0CC48.ia8.png": [8,8,64,{"jp":[2770736,52296],"sh":[2625456,52296]}],
 "levels/menu/main_menu_seg7.0CC88.ia8.png": [8,8,64,{"jp":[2770736,52360],"sh":[2625456,52360]}],
 "levels/menu/main_menu_seg7.0CCC8.ia8.png": [8,8,64,{"jp":[2770736,52424],"sh":[2625456,52424]}],
-"levels/menu/main_menu_seg7.0D1A8.rgba16.png": [64,32,4096,{"jp":[2770736,53672],"us":[2778544,48352],"sh":[2625456,53672]}],
-"levels/menu/main_menu_seg7.0E1A8.rgba16.png": [64,32,4096,{"jp":[2770736,57768],"us":[2778544,52448],"sh":[2625456,57768]}],
 "levels/menu/main_menu_seg7_eu.0AF80.ia8.png": [8,8,64,{"eu":[2647072,44928]}],
 "levels/menu/main_menu_seg7_eu.0B640.ia8.png": [8,8,64,{"eu":[2647072,46656]}],
 "levels/menu/main_menu_seg7_eu.0B680.ia8.png": [8,8,64,{"eu":[2647072,46720]}],
