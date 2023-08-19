@@ -77,6 +77,7 @@ extern SkyboxTexture wdw_skybox_ptrlist;
 extern SkyboxTexture ow_skybox_ptrlist;
 extern SkyboxTexture c4_skybox_ptrlist;
 extern SkyboxTexture c15_skybox_ptrlist;
+extern SkyboxTexture slide_skybox_ptrlist;
 
 SkyboxTexture *sSkyboxTextures[] = {
     &water_skybox_ptrlist,
@@ -93,6 +94,7 @@ SkyboxTexture *sSkyboxTextures[] = {
     &ow_skybox_ptrlist,
     &c4_skybox_ptrlist,
     &c15_skybox_ptrlist,
+    &slide_skybox_ptrlist,
 };
 
 /**
