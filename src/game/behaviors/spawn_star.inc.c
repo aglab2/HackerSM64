@@ -26,6 +26,15 @@ void bhv_collect_star_init(void) {
         o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
     }
 
+    if (gCurrCourseNum == COURSE_SA && o->oBehParams == 0)
+    {
+        obj_scale(o, 3.f);
+    }
+    if (gCurrCourseNum == COURSE_LLL && o->oPosY < -3000.f)
+    {
+        obj_scale(o, 2.f);
+    }
+
     obj_set_hitbox(o, &sCollectStarHitbox);
 }
 

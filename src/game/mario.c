@@ -1837,6 +1837,13 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
         play_infinite_stairs_music();
         gMarioState->marioObj->oInteractStatus = INT_STATUS_NONE;
+        if (gCurrCourseNum == COURSE_SA)
+        {
+            if (gCamera->cutscene == CUTSCENE_TEMPLE)
+                obj_scale(gMarioState->marioObj, 3.f);
+            else
+                obj_scale(gMarioState->marioObj, 1.f);
+        }
 #if ENABLE_RUMBLE
         queue_rumble_particles(gMarioState);
 #endif
