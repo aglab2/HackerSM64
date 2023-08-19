@@ -532,9 +532,6 @@ levels/bob/1.rgba16.png
 levels/bob/2.rgba16.png
 levels/bob/3.rgba16.png
 levels/bob/4.rgba16.png
-levels/bowser_1/0.rgba16.png
-levels/bowser_1/1.rgba16.png
-levels/bowser_1/2.rgba16.png
 levels/bowser_2/0.rgba16.png
 levels/bowser_3/0.rgba16.png
 levels/bowser_3/1.rgba16.png
@@ -1191,7 +1188,6 @@ sound/sequences/eu/03_level_grass.m64
 sound/sequences/eu/04_level_inside_castle.m64
 sound/sequences/eu/05_level_water.m64
 sound/sequences/eu/06_level_hot.m64
-sound/sequences/eu/07_level_boss_koopa.m64
 sound/sequences/eu/08_level_snow.m64
 sound/sequences/eu/09_level_slide.m64
 sound/sequences/eu/0A_level_spooky.m64
@@ -1225,7 +1221,6 @@ sound/sequences/jp/03_level_grass.m64
 sound/sequences/jp/04_level_inside_castle.m64
 sound/sequences/jp/05_level_water.m64
 sound/sequences/jp/06_level_hot.m64
-sound/sequences/jp/07_level_boss_koopa.m64
 sound/sequences/jp/08_level_snow.m64
 sound/sequences/jp/09_level_slide.m64
 sound/sequences/jp/0A_level_spooky.m64
@@ -1258,7 +1253,6 @@ sound/sequences/sh/03_level_grass.m64
 sound/sequences/sh/04_level_inside_castle.m64
 sound/sequences/sh/05_level_water.m64
 sound/sequences/sh/06_level_hot.m64
-sound/sequences/sh/07_level_boss_koopa.m64
 sound/sequences/sh/08_level_snow.m64
 sound/sequences/sh/09_level_slide.m64
 sound/sequences/sh/0A_level_spooky.m64
@@ -1292,7 +1286,6 @@ sound/sequences/us/03_level_grass.m64
 sound/sequences/us/04_level_inside_castle.m64
 sound/sequences/us/05_level_water.m64
 sound/sequences/us/06_level_hot.m64
-sound/sequences/us/07_level_boss_koopa.m64
 sound/sequences/us/08_level_snow.m64
 sound/sequences/us/09_level_slide.m64
 sound/sequences/us/0A_level_spooky.m64

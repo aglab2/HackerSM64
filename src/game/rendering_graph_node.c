@@ -1243,6 +1243,9 @@ void geo_process_shadow(struct GraphNodeShadow *node) {
  * Since (0,0,0) is unaffected by rotation, columns 0, 1 and 2 are ignored.
  */
 s32 obj_is_in_view(struct GraphNodeObject *node) {
+    if (gCurrLevelNum == LEVEL_BOWSER_2)
+        return TRUE;
+
     struct GraphNode *geo = node->sharedChild;
 
     s16 cullingRadius;

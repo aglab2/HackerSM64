@@ -17,10 +17,10 @@
 
 static const LevelScript script_func_local_1[] = {
     OBJECT(/*model*/ MODEL_BOWSER_2_TILTING_ARENA, /*pos*/     0,    0,     0, /*angle*/ 0, 90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvTiltingBowserLavaPlatform),
-    OBJECT(/*model*/ MODEL_BOWSER_BOMB,            /*pos*/     4, 1329,  3598, /*angle*/ 0, 90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
-    OBJECT(/*model*/ MODEL_BOWSER_BOMB,            /*pos*/  3584, 1329,     0, /*angle*/ 0, 90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
-    OBJECT(/*model*/ MODEL_BOWSER_BOMB,            /*pos*/     0, 1329, -3583, /*angle*/ 0, 90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
-    OBJECT(/*model*/ MODEL_BOWSER_BOMB,            /*pos*/ -3583, 1329,     0, /*angle*/ 0, 90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
+    OBJECT(/*model*/ MODEL_BOWSER_BOMB,            /*pos*/     0, 2129,  3598, /*angle*/ 0, 90, 0, /*behParam*/ 0x00000000, /*beh*/ bhvBowserBomb),
+    OBJECT(/*model*/ 0,            /*pos*/  0, 1279, 2755, /*angle*/ 0, 180, 0, /*behParam*/ 0x00000000, /*beh*/ bhvFlamethrower),
+    OBJECT(/*model*/ 0,            /*pos*/ 750, 1279, 2698, /*angle*/ 0, 225, 0, /*behParam*/ 0x00000000, /*beh*/ bhvFlamethrower),
+    OBJECT(/*model*/ 0,            /*pos*/ -750, 1279, 2698, /*angle*/ 0, 135, 0, /*behParam*/ 0x00000000, /*beh*/ bhvFlamethrower),
     RETURN(),
 };
 
@@ -40,8 +40,8 @@ const LevelScript level_bowser_2_entry[] = {
     AREA(/*index*/ 1, bowser_2_geo_000188),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/ 0, 2229, 0, /*angle*/ 0, 180, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvSpinAirborneCircleWarp),
         WARP_NODE(/*id*/ 0x0A, /*destLevel*/ LEVEL_BOWSER_2, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x03, /*destNode*/ 0x36, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_BITFS, /*destArea*/ 0x01, /*destNode*/ 0x0C, /*flags*/ WARP_NO_CHECKPOINT),
+        WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE_COURTYARD, /*destArea*/ 1, /*destNode*/ 240, /*flags*/ WARP_NO_CHECKPOINT),
+        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_BITFS, /*destArea*/ 0x01, /*destNode*/ 1, /*flags*/ WARP_NO_CHECKPOINT),
         JUMP_LINK(script_func_local_1),
         TERRAIN(/*terrainData*/ bowser_2_seg7_collision_lava),
         SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0002, /*seq*/ SEQ_LEVEL_BOSS_KOOPA),
