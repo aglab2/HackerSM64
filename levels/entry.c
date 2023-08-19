@@ -15,7 +15,7 @@ const LevelScript level_script_entry[] = {
     SLEEP(/*frames*/ 2),
     BLACKOUT(/*active*/ FALSE),
 #ifdef TEST_LEVEL
-    SET_REG(/*value*/ LEVEL_BITDW), // TEST_LEVEL
+    SET_REG(/*value*/ LEVEL_BITFS), // TEST_LEVEL
     EXECUTE(/*seg*/ SEGMENT_GLOBAL_LEVEL_SCRIPT, /*script*/ _scriptsSegmentRomStart, /*scriptEnd*/ _scriptsSegmentRomEnd, /*entry*/ level_main_scripts_entry),
 #else
     SET_REG(/*value*/ 0),
