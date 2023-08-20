@@ -2677,7 +2677,7 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_EXIT_LAND_SAVE_DIALOG:      cancel = act_exit_land_save_dialog(m);      break;
         case ACT_DEATH_EXIT:                 cancel = act_death_exit(m);                 break;
         case ACT_UNUSED_DEATH_EXIT:          cancel = act_unused_death_exit(m);          break;
-        case ACT_FALLING_DEATH_EXIT:         cancel = act_falling_death_exit(m);         break;
+        case ACT_FALLING_DEATH_EXIT:         cancel = act_unused_death_exit(m);         break;
         case ACT_SPECIAL_EXIT_AIRBORNE:      cancel = act_special_exit_airborne(m);      break;
         case ACT_SPECIAL_DEATH_EXIT:         cancel = act_special_death_exit(m);         break;
         case ACT_FALLING_EXIT_AIRBORNE:      cancel = act_falling_exit_airborne(m);      break;
