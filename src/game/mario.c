@@ -1799,6 +1799,17 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
 
+        if (gCurrCourseNum == COURSE_RR)
+        {
+            if (gMarioState->flags & MARIO_WING_CAP)
+            {
+                if (gMarioState->pos[1] > -3000.f)
+                {
+                    gMarioState->pos[1] = -3000.f;
+                }
+            }
+        }
+
         if (gCurrLevelNum != LEVEL_WMOTR && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3)
         {
             int starCount = 7;
