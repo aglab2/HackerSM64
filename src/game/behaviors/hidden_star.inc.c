@@ -29,7 +29,20 @@ void bhv_hidden_star_loop(void) {
     }
 }
 
+void bhv_hidden_star_trigger_init()
+{
+    if (!obj_has_model(o, MODEL_BETA_BOO_KEY))
+    {
+        gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+    }
+}
+
 void bhv_hidden_star_trigger_loop(void) {
+    if (obj_has_model(o, MODEL_BETA_BOO_KEY))
+    {
+        o->oFaceAngleYaw += 0xa8;
+    }
+
     if (0 == (o->oTimer % 8))
     {
         struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
