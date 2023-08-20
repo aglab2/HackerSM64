@@ -1799,7 +1799,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
 
-        if (gCurrLevelNum != LEVEL_BOWSER_1 || gCurrLevelNum != LEVEL_BOWSER_2 || gCurrLevelNum != LEVEL_BOWSER_3)
+        if (gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3)
         {
             int starCount = 7;
             if (gCurrCourseNum == COURSE_BITDW)
