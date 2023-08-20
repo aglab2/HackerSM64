@@ -1479,6 +1479,7 @@ void shade_screen(void) {
 }
 
 void print_animated_red_coin(s16 x, s16 y) {
+    print_text_centered(x, y + 25, "@");
 }
 
 void render_pause_red_coins(void) {
