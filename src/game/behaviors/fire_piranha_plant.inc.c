@@ -114,6 +114,7 @@ static void fire_piranha_plant_act_grow(void) {
 }
 
 void bhv_fire_piranha_plant_update(void) {
+    if (gCurrCourseNum != COURSE_WF)
     if (0 == (o->oTimer % 8))
     {
         struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
