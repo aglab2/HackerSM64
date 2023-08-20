@@ -171,7 +171,9 @@ extern Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_0[] __
 extern Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_2[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_DL_castle_inside_1_0xe02daa0_Obj_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_DL_castle_inside_1_0xe02daa0_Obj_001_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_DL_castle_inside_1_0xe03c280_Obj_mesh_layer_4[] __attribute__((section(".data")));

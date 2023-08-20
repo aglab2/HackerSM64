@@ -15753,6 +15753,7 @@ Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_2[] = {
 Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
     gsSPLightColor(LIGHT_1, 0xffffffff),
     gsSPLightColor(LIGHT_2, 0x7f7f7fff),
@@ -15764,9 +15765,16 @@ Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_revert_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
     gsSPLightColor(LIGHT_1, 0xffffffff),
     gsSPLightColor(LIGHT_2, 0x7f7f7fff),
@@ -15775,6 +15783,12 @@ Gfx mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5[] = {
 	gsDPLoadBlock(7, 0, 0, 2047, 128),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 1008, 496),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
 	gsSPEndDisplayList(),
 };
 
@@ -15874,8 +15888,10 @@ Gfx castle_inside_dl_DL_castle_inside_1_0xe03c280_Obj_mesh_layer_4[] = {
 	gsSPDisplayList(castle_inside_dl_DL_castle_inside_1_0xe03c280_Obj_mesh_layer_4_tri_2),
 	gsSPDisplayList(mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3),
 	gsSPDisplayList(castle_inside_dl_DL_castle_inside_1_0xe03c280_Obj_mesh_layer_4_tri_3),
+	gsSPDisplayList(mat_revert_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_3),
 	gsSPDisplayList(mat_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5),
 	gsSPDisplayList(castle_inside_dl_DL_castle_inside_1_0xe03c280_Obj_mesh_layer_4_tri_4),
+	gsSPDisplayList(mat_revert_castle_inside_dl_SM64_DL_castle_inside_1_0xe03c280_F3D_Mat_5),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
