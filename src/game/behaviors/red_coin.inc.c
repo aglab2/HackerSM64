@@ -53,12 +53,12 @@ void bhv_red_coin_loop(void) {
             if (o->parentObj->oHiddenStarTriggerCounter != o->parentObj->oHiddenStarTriggerTotal) {
                 // Cap visible count to 99
                 if (o->parentObj->oHiddenStarTriggerCounter > 99) {
-                    spawn_orange_number(9, 28, 0, 0);
-                    spawn_orange_number(9, -28, 0, 0);
+                    // spawn_orange_number(9, 28, 0, 0);
+                    // spawn_orange_number(9, -28, 0, 0);
                 }
                 else if (o->parentObj->oHiddenStarTriggerCounter >= 10) {
-                    spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter % 10, 28, 0, 0);
-                    spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter / 10, -28, 0, 0);
+                    // spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter % 10, 28, 0, 0);
+                    // spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter / 10, -28, 0, 0);
                 }
                 else {
                     spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
