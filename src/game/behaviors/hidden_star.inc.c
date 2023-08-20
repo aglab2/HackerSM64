@@ -14,7 +14,7 @@ void bhv_hidden_star_init(void) {
 void bhv_hidden_star_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter == 5) {
+            if (o->oHiddenStarTriggerCounter == 4) {
                 o->oAction = 1;
             }
             break;
@@ -30,6 +30,14 @@ void bhv_hidden_star_loop(void) {
 }
 
 void bhv_hidden_star_trigger_loop(void) {
+    if (0 == (o->oTimer % 8))
+    {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX += random_f32_around_zero(500.f);
+        spark->oPosY += random_f32_around_zero(500.f);
+        spark->oPosZ += random_f32_around_zero(500.f);
+    }
+
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
         struct Object *hiddenStar = cur_obj_nearest_object_with_behavior(bhvHiddenStar);
 
@@ -64,7 +72,7 @@ void bhv_bowser_course_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter == o->oHiddenStarTriggerTotal) {
+            if (o->oHiddenStarTriggerCounter == o->oHiddenStarTriggerTotal - 2) {
                 o->oAction = 1;
             }
             break;

@@ -16,7 +16,7 @@ extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_10_layer1_area1_lights __a
 extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_11_layer1_area1_lights __attribute__((section(".data")));
 extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_12_layer1_area1_lights __attribute__((section(".data")));
 extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_13_layer1_area1_lights __attribute__((section(".data")));
-extern Lights1 ccm_dl_f3dlite_material_lights __attribute__((section(".data")));
+extern Lights1 ccm_dl_f3dlite_material_layer5_area1_lights __attribute__((section(".data")));
 extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe0473f0_F3D_Mat_0_layer4_area1_lights __attribute__((section(".data")));
 extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe0473f0_F3D_Mat_1_layer4_area1_lights __attribute__((section(".data")));
 extern Lights1 ccm_dl_SM64_DL_ccm_1_0xe0473f0_F3D_Mat_2_layer4_area1_lights __attribute__((section(".data")));
@@ -71,7 +71,7 @@ extern Gfx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_mesh_layer_1_tri_12[] __attribute__((se
 extern Vtx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_mesh_layer_1_vtx_13[34] __attribute__((section(".data")));
 extern Gfx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_mesh_layer_1_tri_13[] __attribute__((section(".data")));
 extern Vtx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_001_mesh_layer_5_vtx_cull[8] __attribute__((section(".data")));
-extern Vtx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_001_mesh_layer_5_vtx_0[12] __attribute__((section(".data")));
+extern Vtx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_001_mesh_layer_5_vtx_0[24] __attribute__((section(".data")));
 extern Gfx ccm_dl_DL_ccm_1_0xe02f1e0_Obj_001_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx ccm_dl_DL_ccm_1_0xe0473f0_Obj_mesh_layer_4_vtx_cull[8] __attribute__((section(".data")));
 extern Vtx ccm_dl_DL_ccm_1_0xe0473f0_Obj_mesh_layer_4_vtx_0[4] __attribute__((section(".data")));
@@ -112,8 +112,8 @@ extern Gfx mat_ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_12_layer1_area1[] __attrib
 extern Gfx mat_revert_ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_12_layer1_area1[] __attribute__((section(".data")));
 extern Gfx mat_ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_13_layer1_area1[] __attribute__((section(".data")));
 extern Gfx mat_revert_ccm_dl_SM64_DL_ccm_1_0xe02f1e0_F3D_Mat_13_layer1_area1[] __attribute__((section(".data")));
-extern Gfx mat_ccm_dl_f3dlite_material[] __attribute__((section(".data")));
-extern Gfx mat_revert_ccm_dl_f3dlite_material[] __attribute__((section(".data")));
+extern Gfx mat_ccm_dl_f3dlite_material_layer5_area1[] __attribute__((section(".data")));
+extern Gfx mat_revert_ccm_dl_f3dlite_material_layer5_area1[] __attribute__((section(".data")));
 extern Gfx mat_ccm_dl_SM64_DL_ccm_1_0xe0473f0_F3D_Mat_0_layer4_area1[] __attribute__((section(".data")));
 extern Gfx mat_revert_ccm_dl_SM64_DL_ccm_1_0xe0473f0_F3D_Mat_0_layer4_area1[] __attribute__((section(".data")));
 extern Gfx mat_ccm_dl_SM64_DL_ccm_1_0xe0473f0_F3D_Mat_1_layer4_area1[] __attribute__((section(".data")));

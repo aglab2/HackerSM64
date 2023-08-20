@@ -53,6 +53,8 @@ const LevelScript level_castle_grounds_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_50_STARS, castle_geo_000F00), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_70_STARS, castle_geo_000F00), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo), 
+	LOAD_MODEL_FROM_GEO(29, wooden_door_geo), 
+	LOAD_MODEL_FROM_GEO(31, metal_door_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -196,9 +198,9 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(0, 856, -233, 285, 0, 0, 0, 0x640000, bhvDeathWarp),
 		OBJECT(0, 906, -350, 2607, 0, 0, 0, 0x650000, bhvDeathWarp),
 		OBJECT(0, 4732, 1709, 5781, 0, 90, 0, 0x660000, bhvDeathWarp),
-		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 955, 1319, 2294, 0, -180, 0, 0x0, bhvDoor),
-		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 810, 1319, 2294, 0, 0, 0, 0x0, bhvDoor),
-		OBJECT(MODEL_CASTLE_GROUNDS_METAL_DOOR, 4005, -773, 1659, 0, 0, 0, 0x40a0000, bhvDoor),
+		OBJECT(29, 955, 1319, 2294, 0, -180, 0, 0x0, bhvDoor),
+		OBJECT(29, 810, 1319, 2294, 0, 0, 0, 0x0, bhvDoor),
+		OBJECT(31, 4005, -773, 1659, 0, 0, 0, 0x40a0000, bhvDoor),
 		OBJECT(37, -4102, -41, 275, 0, -90, 0, 0x2140000, bhvDoorWarp),
 		OBJECT(37, -4102, -41, 425, 0, 90, 0, 0x2140000, bhvDoorWarp),
 		OBJECT(137, 272, -208, -2659, 0, 0, 0, 0x40000, bhvExclamationBox),

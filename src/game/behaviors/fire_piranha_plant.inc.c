@@ -114,6 +114,14 @@ static void fire_piranha_plant_act_grow(void) {
 }
 
 void bhv_fire_piranha_plant_update(void) {
+    if (0 == (o->oTimer % 8))
+    {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX += random_f32_around_zero(500.f);
+        spark->oPosY += random_f32_around_zero(500.f);
+        spark->oPosZ += random_f32_around_zero(500.f);
+    }
+
     cur_obj_scale(o->oFirePiranhaPlantScale);
 
     switch (o->oAction) {
