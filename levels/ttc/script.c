@@ -103,6 +103,7 @@ const LevelScript level_ttc_entry[] = {
 		OBJECT(0, -1938, -2075, 2415, 0, 0, 0, 0x20000, bhvCoinFormation),
 		OBJECT(0, 6175, 549, -2772, 0, 0, 0, 0x20000, bhvCoinFormation),
 		OBJECT(0, -759, 2922, 2400, 90, 0, 0, 0x130000, bhvCoinFormation),
+		OBJECT(0, 2511, 2782, 1847, 90, -62, 0, (20 << 16), bhvCoinFormation),
 		OBJECT(34, -4958, -500, 4138, 0, -90, 0, 0x0, bhvDoor),
 		OBJECT(34, -2472, -2075, 1941, 0, 90, 0, 0x0, bhvDoor),
 		OBJECT(137, -4558, -365, 5271, 0, 0, 0, 0x4080000, bhvExclamationBox),

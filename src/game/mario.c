@@ -1823,11 +1823,11 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 int bit = 1 << i;
                 if (bit & mask)
                 {
-                    print_text_centered(20 + 7*i, 20, "^");
+                    print_text_centered(20 + 8*i, 20, "^");
                 }
                 else
                 {
-                    print_text_centered(20 + 7*i, 20, "*");
+                    print_text_centered(20 + 8*i, 20, "*");
                 }
             }
         }

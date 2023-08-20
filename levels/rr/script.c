@@ -118,7 +118,7 @@ const LevelScript level_rr_entry[] = {
 		OBJECT(0, -503, -2402, -1442, 0, 115, 0, 0x0, bhvCoinFormation),
 		OBJECT(0, 13200, 2680, 8700, 0, 90, 0, 0x0, bhvCoinFormation),
 		OBJECT(0, 7088, -409, 9129, 0, 90, 0, 0x0, bhvCoinFormation),
-		OBJECT(0, -5057, -871, 6268, 0, 0, 0, 0x0, bhvCoinFormation),
+		OBJECT(0, -5057, -699, 6268, 0, 0, 0, (4 << 16), bhvCoinFormation),
 		OBJECT(0, -4945, -809, -11, 0, 0, 0, 0x20000, bhvCoinFormation),
 		OBJECT(0, 2512, -1701, -1680, 0, 0, 0, 0x20000, bhvCoinFormation),
 		OBJECT(0, 6533, 685, 7020, 0, 0, 0, 0x20000, bhvCoinFormation),
