@@ -564,7 +564,7 @@ he left it up on the\n\
 tower over there.\n\
 Good luck getting to it!"))
 
-DEFINE_DIALOG(DIALOG_064,1,6,30,200, _("See the heart in front\n\
+DEFINE_DIALOG(DIALOG_064,1,6,30,200, _("See the switch in front\n\
 of you? When you touch\n\
 it, the water level\n\
 will rise or fall,\n\

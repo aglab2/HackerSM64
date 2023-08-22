@@ -189,6 +189,8 @@ const LevelScript level_rr_entry[] = {
 		OBJECT(116, 1659, -2058, -1502, 0, 0, 0, 0x0, bhvYellowCoin),
 		OBJECT(116, 10825, 6060, 7343, 0, 0, 0, 0x0, bhvYellowCoin),
 		OBJECT(116, 6100, 125, 7780, 0, 0, 0, 0x0, bhvYellowCoin),
+		OBJECT(0, -5181, 0, -9881, 0, 0, 0, 0, bhvSparkler),
+		OBJECT(0, -5181, -2070, -9881, 0, 0, 0, 0, bhvSparkler),
 		TERRAIN(rr_area_1_collision),
 		MACRO_OBJECTS(rr_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, 44),
