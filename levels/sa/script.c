@@ -69,7 +69,7 @@ const LevelScript level_sa_entry[] = {
 		OBJECT(0, 1980, 768, 6618, 0, -151, 0, 0xe0000, bhvFadingWarp),
 		OBJECT(192, -1402, -333, 5986, 0, 0, 0, 0x0, bhvGoomba),
 		OBJECT(0, -4764, -363, 216, 0, 0, 0, 0x0, bhvGoombaTripletSpawner),
-		OBJECT(124, -3465, -360, -770, 0, -45, 0, 0x7d0000, bhvMessagePanel),
+		// OBJECT(124, -3465, -360, -770, 0, -45, 0, 0x7d0000, bhvMessagePanel),
 		OBJECT(0, -3270, -259, 900, 0, -90, 0, 0x220000, bhvSignOnWall),
 		OBJECT(0, -6200, -363, 203, 0, 90, 0, 0xa0000, bhvSpinAirborneWarp),
 		OBJECT(122, -4425, 100, 6670, 0, 0, 0, 0x1000000, bhvStar),

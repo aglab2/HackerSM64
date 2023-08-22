@@ -101,10 +101,13 @@ Have fun playing!\n\
 \n\
 ~Kampel125\n\
 \n\
-Version 3.0 by\n\
-FrostyZako, Pyro Jay\n\
-aglab2, Kaze, ZenonX\n\
-and other tweakers!"))
+Version 2 by Kaze.\n\
+Version 3 by FrostyZako,\n\
+Pyro Jay and ZenonX.\n\
+\n\
+Ported to N64\n\
+by aglab2 using\n\
+HackerSM64.\n"))
 
 DEFINE_DIALOG(DIALOG_009,1,3,30,200, _("HEYYY MARIO!!\n\
 What brings you here \n\

@@ -1810,6 +1810,16 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
 
+        if (gCurrCourseNum == COURSE_JRB)
+        {
+            struct Surface* ceil = NULL;
+            f32 h = find_ceil(gMarioStates->pos[0], gMarioStates->floorHeight, gMarioStates->pos[2], &ceil);
+            if (gMarioStates->pos[1] > h && (gMarioState->action & ACT_FLAG_SWIMMING))
+            {
+                gMarioStates->pos[1] = h;
+            }
+        }
+
         if (gCurrLevelNum != LEVEL_WMOTR && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3)
         {
             int starCount = 7;
