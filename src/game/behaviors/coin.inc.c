@@ -210,6 +210,12 @@ void spawn_coin_in_formation(s32 index, s32 shape) {
                 pos[2] = sCoinArrowPositions[index][1];
             else
                 pos[1] = -sCoinArrowPositions[index][1];
+                
+            if (gCurrCourseNum == COURSE_DDD)
+            {
+                pos[2] = sCoinArrowPositions[index][1];
+                pos[1] = 0;
+            }
 
             break;
     }
