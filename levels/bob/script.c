@@ -121,7 +121,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(215, -681, -1041, 645, 0, 0, 0, 0x0, bhvRedCoin),
 		OBJECT(215, -3240, -749, 4200, 0, 0, 0, 0x0, bhvRedCoin),
 		OBJECT(215, -4884, -749, -3208, 0, 0, 0, 0x0, bhvRedCoin),
-		OBJECT(215, 3081, -749, -4491, 0, 0, 0, 0x0, bhvRedCoin),
+		OBJECT(215, 3081, -749 + 30, -4491, 0, 0, 0, 0x0, bhvRedCoin),
 		OBJECT(0, 5285, -749, -515, 0, -90, 0, 0xa0000, bhvSpinAirborneWarp),
 		OBJECT_WITH_ACTS(122, -3220, 2783, 2560, 0, 0, 0, 0x1000000, bhvStar, ACT_1 | ACT_2 | ACT_3 | ACT_4 | ACT_5),
 		OBJECT(122, 1711, -489, 2808, 0, 0, 0, 0x2000000, bhvStar),

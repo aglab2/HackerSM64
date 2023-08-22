@@ -208,20 +208,7 @@ Gfx *geo_switch_peach_eyes(s32 callContext, struct GraphNode *node, UNUSED s32 c
  * numStars has reached a milestone and prevNumStarsForDialog has not reached it.
  */
 s32 get_star_collection_dialog(struct MarioState *m) {
-    s32 i;
-    s32 dialogID = 0;
-    s32 numStarsRequired;
-
-    for (i = 0; i < ARRAY_COUNT(sStarsNeededForDialog); i++) {
-        numStarsRequired = sStarsNeededForDialog[i];
-        if (m->prevNumStarsForDialog < numStarsRequired && m->numStars >= numStarsRequired) {
-            dialogID = i + DIALOG_141;
-            break;
-        }
-    }
-
-    m->prevNumStarsForDialog = m->numStars;
-    return dialogID;
+    return 0;
 }
 
 // save menu handler
