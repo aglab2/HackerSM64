@@ -66,7 +66,7 @@ const LevelScript level_wmotr_entry[] = {
 		OBJECT(0, 4300, -29, 0, 0, -90, 0, 0xc0000, bhvFadingWarp),
 		OBJECT(120, -3300, -1440, -200, 0, 90, 0, 0x0, bhvRecoveryHeart),
 		OBJECT(0, -6895, -1709, 0, 0, 90, 0, 0xa0000, bhvSpinAirborneWarp),
-		OBJECT(122, -1800, -336, 0, 0, 0, 0, 0x08000000, bhvStar),
+		OBJECT(122, -1800, -336, 0, 0, 0, 0, 0, bhvStar),
 		OBJECT(221, -3187, -771, -226, 0, -30, 0, 0x58000000, bhvToadMessage),
 		OBJECT(221, -2964, -771, -318, 0, -30, 0, 0x56000000, bhvToadMessage),
 		OBJECT(221, -2098, -771, 380, 0, -140, 0, 0x59000000, bhvToadMessage),
