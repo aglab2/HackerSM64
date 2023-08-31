@@ -569,6 +569,12 @@ s32 act_ledge_grab(struct MarioState *m) {
         return let_go_of_ledge(m);
     }
     if (m->input & (INPUT_Z_PRESSED | INPUT_OFF_FLOOR)) {
+        if (gCurrCourseNum == COURSE_NONE && 1 == m->actionTimer)
+        {
+            m->faceAngle[1] += 0x8000;
+            m->pos[0] -= sins(m->faceAngle[1]) * 40.f;
+            m->pos[2] -= coss(m->faceAngle[1]) * 40.f;
+        }
         return let_go_of_ledge(m);
     }
 

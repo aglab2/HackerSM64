@@ -194,7 +194,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(0, -347, 1875, -2028, 0, 135, 0, 0x740000, bhvDeathWarp),
 		OBJECT(0, 2422, 1771, 22, 0, 90, 0, 0x750000, bhvDeathWarp),
 		OBJECT(29, -763, 1555, 1670, 0, -135, 0, 0x0, bhvDoor),
-		OBJECT(34, -51, 1556, 32, 0, -90, 0, 0x50000000, bhvDoor),
+		OBJECT(34, -51, 1556, -70+32, 0, -90, 0, 0x50000000, bhvStarDoor),
 		OBJECT(35, 600, -1845, 2275, 0, -180, 0, 0x32000000, bhvDoor),
 		OBJECT(36, -761, 1556, -1601, 0, -45, 0, 0x41000000, bhvDoor),
 		OBJECT(28, -6212, 1262, -45, 0, -90, 0, 0x140000, bhvDoorWarp),
