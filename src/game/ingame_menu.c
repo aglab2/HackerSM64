@@ -29,7 +29,7 @@
 
 #include "hacktice/main.h"
 
-#define STARS_TO_ENABLE_HACKTICE 121
+#define STARS_TO_ENABLE_HACKTICE 131
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
