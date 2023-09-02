@@ -40,8 +40,13 @@ static void resetTransition()
         sTransitionColorFadeCount[i] = 0;
 }
 
+extern u8 g100CoinStarSpawned;
+extern s8  gRedCoinsCollected;
+
 static void miniResetCommon()
 {
+    g100CoinStarSpawned = FALSE;
+    gRedCoinsCollected = 0;
     gMarioStates->health = 0x880;
     gHudDisplay.coins = 0;
     gMarioStates->numCoins = 0;
