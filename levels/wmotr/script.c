@@ -72,7 +72,7 @@ const LevelScript level_wmotr_entry[] = {
 		OBJECT(221, -2098, -771, 380, 0, -140, 0, 0x59000000, bhvToadMessage),
 		OBJECT(221, -2900, -771, 288, 0, -180, 0, 0x57000000, bhvToadMessage),
 		OBJECT(221, -6616, -1709, -321, 0, -45, 0, 0x55000000, bhvToadMessage),
-		OBJECT(22, -3300, -1500, 200, 0, 0, 0, 0x0, bhvWarpPipe),
+		OBJECT(212, -3300, -1500, 200, 0, 0, 0, 0x0, bhv1Up),
 		TERRAIN(wmotr_area_1_collision),
 		MACRO_OBJECTS(wmotr_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, 42),
