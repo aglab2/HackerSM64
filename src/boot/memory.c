@@ -587,7 +587,7 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
         bzero(dest, ((u8*)0x80800000) - dest);
         osWritebackDCacheAll();
         dma_read(dest, srcStart, srcEnd);
-        osInvalICache(dest, destSize);
+        // osInvalICache(dest, destSize);
         osInvalDCache(dest, destSize);
     } else {
         DEBUG_ASSERT("Fixed addr is not be loaded");

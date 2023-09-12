@@ -71,7 +71,7 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
     f32 margin_radius = radius - 1.0f;
 
     // Stay in this loop until out of walls.
-    int limiter = 8192;
+    int limiter = 4096;
     while (surfaceNode != NULL && (limiter--)) {
         surf        = surfaceNode->surface;
         surfaceNode = surfaceNode->next;
@@ -304,7 +304,7 @@ static struct Surface *find_ceil_from_list(struct SurfaceNode *surfaceNode, s32 
     SurfaceType type = SURFACE_DEFAULT;
     *pheight = CELL_HEIGHT_LIMIT;
     // Stay in this loop until out of ceilings.
-    int limiter = 8192;
+    int limiter = 4096;
     while (surfaceNode != NULL && (limiter--)) {
         surf = surfaceNode->surface;
         surfaceNode = surfaceNode->next;
@@ -439,7 +439,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
     register s32 bufferY = y + FIND_FLOOR_BUFFER;
 
     // Iterate through the list of floors until there are no more floors.
-    int limiter = 8192;
+    int limiter = 4096;
     while (surfaceNode != NULL && (limiter--)) {
         surf = surfaceNode->surface;
         surfaceNode = surfaceNode->next;
