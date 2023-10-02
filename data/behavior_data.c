@@ -6079,4 +6079,10 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
-
+extern void bhv_books_ctl();
+const BehaviorScript bhvBooksCtl[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_books_ctl),
+    END_LOOP(),
+};

@@ -151,6 +151,9 @@ extern const Trajectory *const inside_castle_seg7_trajectory_mips[];
 extern const struct MovtexQuadCollection inside_castle_movtex_green_room_water[];
 extern const struct MovtexQuadCollection inside_castle_movtex_moat_water[];
 
+extern const GeoLayout hmc_geo_0005A0[];
+extern const GeoLayout hmc_geo_0005B8[];
+
 // script
 extern const LevelScript level_castle_inside_entry[];
 

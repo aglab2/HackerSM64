@@ -77,7 +77,7 @@ void tweester_act_chase(void) {
     o->oAngleToHome = cur_obj_angle_to_home();
     cur_obj_play_sound_1(SOUND_ENV_WIND1);
 
-    if (cur_obj_lateral_dist_from_mario_to_home() < activationRadius
+    if (cur_obj_lateral_dist_from_mario_to_home() < 100.f
         && o->oSubAction == TWEESTER_SUB_ACT_CHASE_MARIO) {
 
         o->oForwardVel = 20.0f;
@@ -121,12 +121,7 @@ void tweester_act_hide(void) {
         tweester_scale_and_move(shrinkTimer / 60.0f);
     } else {
         cur_obj_become_intangible();
-        if (cur_obj_lateral_dist_from_mario_to_home() > 2500.0f) {
-            o->oAction = TWEESTER_ACT_IDLE;
-        }
-        if (o->oTimer > 360) {
-            o->oAction = TWEESTER_ACT_IDLE;
-        }
+        o->oAction = TWEESTER_ACT_IDLE;
     }
 }
 

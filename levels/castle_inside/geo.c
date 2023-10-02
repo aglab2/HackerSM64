@@ -22,5 +22,7 @@
 #include "levels/castle_inside/areas/2/geo.inc.c"
 #include "levels/castle_inside/water_level_pillar/geo.inc.c"
 #include "levels/castle_inside/areas/3/geo.inc.c"
+#include "levels/castle_inside/arrow_platform/geo.inc.c"
+#include "levels/castle_inside/arrow_platform_button/geo.inc.c"
 
 #include "levels/castle_inside/geo.inc.c"

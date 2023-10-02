@@ -30,9 +30,14 @@ static const Vtx hmc_seg7_vertex_07022EE8[] = {
     {{{   -37,     11,     38}, 0, {     0,      0}, {0x00, 0x60, 0x52, 0xff}}},
 };
 
+// 0x07004000 - 0x07004800
+ALIGNED8 static const Texture _hmc_seg7_texture_07003800[] = {
+#include "levels/castle_inside/hmc4.rgba16.inc.c"
+};
+
 // 0x07022FE8 - 0x07023030
 static const Gfx hmc_seg7_dl_07022FE8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hmc_seg7_texture_07003800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _hmc_seg7_texture_07003800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),

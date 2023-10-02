@@ -1,4 +1,5 @@
 // 0x0E0005B8
+extern const Gfx hmc_seg7_dl_07023090[];
 const GeoLayout hmc_geo_0005B8[] = {
    GEO_CULLING_RADIUS(200),
    GEO_OPEN_NODE(),

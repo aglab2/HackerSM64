@@ -92,8 +92,8 @@
 #define MODEL_CASTLE_CLOCK_PENDULUM            0x39        // castle_geo_001518
 
 // hmc
-#define MODEL_HMC_METAL_PLATFORM               0x36        // hmc_geo_0005A0
-#define MODEL_HMC_METAL_ARROW_PLATFORM         0x37        // hmc_geo_0005B8
+#define MODEL_HMC_METAL_PLATFORM               0xf1        // hmc_geo_0005A0
+#define MODEL_HMC_METAL_ARROW_PLATFORM         0xf2        // hmc_geo_0005B8
 #define MODEL_HMC_ELEVATOR_PLATFORM            0x38        // hmc_geo_0005D0
 #define MODEL_HMC_ROLLING_ROCK                 0x39        // hmc_geo_000548
 #define MODEL_HMC_ROCK_PIECE                   0x3A        // hmc_geo_000570 - unused
@@ -355,7 +355,7 @@
 #define MODEL_SPINDRIFT                   0x54        // spindrift_geo
 #define MODEL_MR_BLIZZARD_HIDDEN          0x55        // mr_blizzard_hidden_geo
 #define MODEL_MR_BLIZZARD                 0x56        // mr_blizzard_geo
-#define MODEL_PENGUIN                     0x57        // penguin_geo
+#define MODEL_PENGUIN                     0xf0        // penguin_geo
 
 // group 8
 #define MODEL_CAP_SWITCH_EXCLAMATION      0x54        // cap_switch_exclamation_seg5_dl_05002E00

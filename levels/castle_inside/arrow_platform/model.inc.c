@@ -32,9 +32,14 @@ static const Vtx hmc_seg7_vertex_07022C60[] = {
     {{{   307,     51,    307}, 0, {  1982,   1980}, {0x00, 0x7f, 0x00, 0xff}}},
 };
 
+// 0x07004000 - 0x07004800
+ALIGNED8 static const Texture _hmc_seg7_texture_07004000[] = {
+#include "levels/castle_inside/hmc5.rgba16.inc.c"
+};
+
 // 0x07022CE0 - 0x07022D58
 static const Gfx hmc_seg7_dl_07022CE0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hmc_seg7_texture_07004000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _hmc_seg7_texture_07004000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -45,6 +50,11 @@ static const Gfx hmc_seg7_dl_07022CE0[] = {
     gsSP2Triangles( 8,  9, 10, 0x0,  8, 10, 11, 0x0),
     gsSP2Triangles(12, 13, 14, 0x0, 12, 14, 15, 0x0),
     gsSPEndDisplayList(),
+};
+
+// 0x07004000 - 0x07004800
+ALIGNED8 static const Texture hmc_seg7_texture_07003000[] = {
+#include "levels/castle_inside/hmc3.rgba16.inc.c"
 };
 
 // 0x07022D58 - 0x07022DA0
