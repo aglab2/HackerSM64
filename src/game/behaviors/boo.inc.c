@@ -658,6 +658,11 @@ void bhv_big_boo_loop(void) {
 
     boo_approach_target_opacity_and_update_scale();
     o->oInteractStatus = INT_STATUS_NONE;
+    
+    if (o->oPosX < 3050.f)
+    {
+        o->oPosX = 3050.f;
+    }
 }
 
 static void boo_with_cage_act_0(void) {

@@ -5,7 +5,6 @@
 #include "game/moving_texture.h"
 
 // geo
-extern const GeoLayout wdw_geo_000580[];
 extern const GeoLayout wdw_geo_000598[];
 extern const GeoLayout wdw_geo_0005C0[];
 extern const GeoLayout wdw_geo_0005E8[];

@@ -89,4 +89,7 @@
 #include "levels/castle_inside/arrow_platform/collision.inc.c"
 #include "levels/castle_inside/arrow_platform_button/collision.inc.c"
 
+#include "levels/castle_inside/square_floating_platform/model.inc.c"
+#include "levels/castle_inside/square_floating_platform/collision.inc.c"
+
 #include "levels/castle_inside/leveldata.inc.c"

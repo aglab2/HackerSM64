@@ -56,8 +56,9 @@ const LevelScript level_castle_inside_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_8_STARS, castle_geo_000F00), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_50_STARS, castle_geo_000F00), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_70_STARS, castle_geo_000F00), 
-    LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_PLATFORM,       hmc_geo_0005A0),
-    LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM, hmc_geo_0005B8),
+	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_PLATFORM, hmc_geo_0005A0), 
+	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM, hmc_geo_0005B8), 
+    LOAD_MODEL_FROM_GEO(MODEL_WDW_SQUARE_FLOATING_PLATFORM,      wdw_geo_000580),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -82,6 +83,8 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_STAR, 606, 1753, -3836, 0, 0, 0, (8 << 24), bhvStar),
 		OBJECT(MODEL_NONE, -15, 0, -782, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_PENGUIN, -2163, 780, 19, 0, 0, 0, (9 << 24), bhvTuxiesMother),
+		OBJECT(MODEL_WDW_SQUARE_FLOATING_PLATFORM, -3008, 79, 336, 0, 0, 0, 0x00000000, bhvWdwSquareFloatingPlatform),
+		OBJECT(MODEL_WDW_SQUARE_FLOATING_PLATFORM, -3008, 79, -352, 0, 0, 0, 0x00000000, bhvWdwSquareFloatingPlatform),
 		TERRAIN(castle_inside_area_1_collision),
 		MACRO_OBJECTS(castle_inside_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),

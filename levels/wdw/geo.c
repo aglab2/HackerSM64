@@ -13,7 +13,6 @@
 
 #include "levels/wdw/header.h"
 
-#include "levels/wdw/square_floating_platform/geo.inc.c"
 #include "levels/wdw/arrow_lift/geo.inc.c"
 #include "levels/wdw/water_level_diamond/geo.inc.c"
 #include "levels/wdw/hidden_platform/geo.inc.c"

@@ -157,6 +157,7 @@ extern const GeoLayout hmc_geo_0005B8[];
 // script
 extern const LevelScript level_castle_inside_entry[];
 
+extern const GeoLayout wdw_geo_000580[];
 
 #include "levels/castle_inside/header.inc.h"
 

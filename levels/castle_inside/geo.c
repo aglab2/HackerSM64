@@ -25,4 +25,6 @@
 #include "levels/castle_inside/arrow_platform/geo.inc.c"
 #include "levels/castle_inside/arrow_platform_button/geo.inc.c"
 
+#include "levels/castle_inside/square_floating_platform/geo.inc.c"
+
 #include "levels/castle_inside/geo.inc.c"

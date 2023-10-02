@@ -118,7 +118,7 @@
 #define MODEL_SL_CRACKED_ICE_CHUNK             0x38        // sl_geo_000378 - unused
 
 // wdw
-#define MODEL_WDW_SQUARE_FLOATING_PLATFORM        0x36        // wdw_geo_000580
+#define MODEL_WDW_SQUARE_FLOATING_PLATFORM        0xf3        // wdw_geo_000580
 #define MODEL_WDW_ARROW_LIFT                      0x37        // wdw_geo_000598
 #define MODEL_WDW_WATER_LEVEL_DIAMOND             0x38        // wdw_geo_0005C0
 #define MODEL_WDW_HIDDEN_PLATFORM                 0x39        // wdw_geo_0005E8
