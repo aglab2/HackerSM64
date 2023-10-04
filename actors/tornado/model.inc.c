@@ -1,10 +1,5 @@
 // Tornado
 
-// 0x05013128
-ALIGNED8 static const Texture tornado_seg5_texture_05013128[] = {
-#include "actors/tornado/tornado.ia16.inc.c"
-};
-
 // 0x05014128
 
 // 0x05014140

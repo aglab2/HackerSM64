@@ -10,7 +10,7 @@ struct VertexGroupDesc
 
 const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_0),
-  ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_1),
+  // ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_2),
@@ -57,16 +57,17 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_43),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_44),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_45),
+  ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_46),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_2),
-  ARR_SIZE(castle_inside_dl_tower_001_mesh_layer_5_vtx_0),
-  ARR_SIZE(castle_inside_dl_tower_002_mesh_layer_5_vtx_0),
+  ARR_SIZE(castle_inside_dl_water_mesh_layer_5_vtx_0),
+  ARR_SIZE(castle_inside_dl_waterbox2_mesh_layer_5_vtx_0),
 };
 
 void bhv_books_ctl_init()
 {
-    o->oF4 = 1600;
+    o->oF4 = 3600;
 }
 
 void bhv_books_ctl_loop()
@@ -83,6 +84,63 @@ void bhv_books_ctl_loop()
         {
             s16 y = vtx[j].v.ob[1];
             vtx[j].v.cn[3] = 255 - CLAMP(y, 0, o->oF4) * 255 / o->oF4;
+        }
+    }
+}
+
+void bhv_pokey_ctl_init()
+{
+    o->oObjF4 = spawn_object(o, MODEL_NONE, bhvPokey);
+    o->oObjF4->oPosX -= 500.f;
+    o->oObjF4->oHomeX -= 500.f;
+    o->oObjF8 = spawn_object(o, MODEL_NONE, bhvPokey);
+    o->oObjF8->oPosX += 500.f;
+    o->oObjF8->oHomeX += 500.f;
+}
+
+void bhv_pokey_ctl_loop()
+{
+    if (0 == o->oAction)
+    {
+        if (4 == o->oObjF4->oPokeyNumAliveBodyParts && 2 == o->oObjF8->oPokeyNumAliveBodyParts)
+        {
+            o->oAction = 1;
+            cur_obj_spawn_star_at_y_offset(o->oPosX, o->oPosY, o->oPosZ, 200.0f);
+        }
+    }
+
+    if (gMarioStates->action == ACT_TWIRLING)
+    {
+        if (1600.f < gMarioStates->pos[1] && gMarioStates->pos[1] < 3000.f && gMarioStates->pos[2] < -3800.f)
+        {
+            Vtx* vtxs = segmented_to_virtual(castle_inside_dl_tower_mesh_layer_5_vtx_1);
+            f32 minDist = 10000.f;
+            Vtx* minVtx = NULL;
+            for (int i = 0; i < sizeof(castle_inside_dl_tower_mesh_layer_5_vtx_1) / sizeof(*castle_inside_dl_tower_mesh_layer_5_vtx_1); i++)
+            {
+                Vtx* vtx = &vtxs[i];
+                f32 dx = vtx->v.ob[0] - gMarioStates->pos[0];
+                f32 dy = vtx->v.ob[1] - gMarioStates->pos[1];
+                f32 d = dx*dx + dy*dy;
+                if (d < minDist)
+                {
+                    minDist = d;
+                    minVtx = vtx;
+                }
+            }
+
+            if (minVtx)
+            {
+                for (int i = 0; i < sizeof(castle_inside_dl_tower_mesh_layer_5_vtx_1) / sizeof(*castle_inside_dl_tower_mesh_layer_5_vtx_1); i++)
+                {
+                    Vtx* vtx = &vtxs[i];
+                    if (vtx->v.ob[0] == minVtx->v.ob[0] && vtx->v.ob[1] == minVtx->v.ob[1] && vtx->v.ob[2] == minVtx->v.ob[2])
+                    {
+                        if (vtx->v.cn[3] >= 17)
+                            vtx->v.cn[3] -= 17;
+                    }
+                }
+            }
         }
     }
 }

@@ -37,3 +37,11 @@ UNUSED static const u64 binid_6 = 6;
 #include "penguin/anims/data.inc.c"
 #include "penguin/anims/table.inc.c"
 #include "penguin/collision.inc.c"
+
+// 0x05013128
+ALIGNED8 static const Texture tornado_seg5_texture_05013128[] = {
+#include "actors/tornado/tornado.ia16.inc.c"
+};
+
+#include "pokey/model.inc.c"
+#include "tornado/model.inc.c"

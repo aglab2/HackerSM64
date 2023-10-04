@@ -338,9 +338,9 @@
 #define MODEL_CLAM_SHELL                  0x58        // clam_shell_geo
 
 // group 5
-#define MODEL_POKEY_HEAD                  0x54        // pokey_head_geo
-#define MODEL_POKEY_BODY_PART             0x55        // pokey_body_part_geo
-#define MODEL_TWEESTER                    0x56        // tweester_geo
+#define MODEL_POKEY_HEAD                  0xf6        // pokey_head_geo
+#define MODEL_POKEY_BODY_PART             0xf5        // pokey_body_part_geo
+#define MODEL_TWEESTER                    0xf4        // tweester_geo
 #define MODEL_KLEPTO                      0x57        // klepto_geo
 #define MODEL_EYEROK_LEFT_HAND            0x58        // eyerok_left_hand_geo
 #define MODEL_EYEROK_RIGHT_HAND           0x59        // eyerok_right_hand_geo

@@ -6088,3 +6088,13 @@ const BehaviorScript bhvBooksCtl[] = {
         CALL_NATIVE(bhv_books_ctl_loop),
     END_LOOP(),
 };
+
+extern void bhv_pokey_ctl_init();
+extern void bhv_pokey_ctl_loop();
+const BehaviorScript bhvPokeyCtl[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    CALL_NATIVE(bhv_pokey_ctl_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pokey_ctl_loop),
+    END_LOOP(),
+};

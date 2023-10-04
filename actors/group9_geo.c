@@ -16,3 +16,5 @@
 #include "haunted_cage/geo.inc.c"
 
 #include "penguin/geo.inc.c"
+#include "tornado/geo.inc.c"
+#include "pokey/geo.inc.c"

@@ -100,7 +100,7 @@ void bhv_pokey_body_part_update(void) {
             // If the body part was attacked, then die. If the head was killed,
             // then die after a delay.
 
-            if (obj_handle_attacks(&sPokeyBodyPartHitbox, o->oAction, sPokeyBodyPartAttackHandlers)) {
+            if (o->oBehParams2ndByte != POKEY_PART_BP_HEAD && obj_handle_attacks(&sPokeyBodyPartHitbox, o->oAction, sPokeyBodyPartAttackHandlers)) {
                 o->parentObj->oPokeyNumAliveBodyParts--;
                 if (o->oBehParams2ndByte == POKEY_PART_BP_HEAD) {
                     o->parentObj->oPokeyHeadWasKilled = TRUE;
@@ -188,7 +188,7 @@ static void pokey_act_wander(void) {
 
             // If a body part is missing, replenish it after 100 frames
             if (o->oPokeyNumAliveBodyParts < POKEY_NUM_SEGMENTS) {
-                if (o->oTimer > 100) {
+                if (o->oTimer > 500 || 1 == o->oPokeyNumAliveBodyParts) {
                     // Because the body parts shift index whenever a body part
                     // is killed, the new part's index is equal to the number
                     // of living body parts
@@ -206,7 +206,7 @@ static void pokey_act_wander(void) {
                         obj_scale(bodyPart, 0.0f);
                     }
 
-                    o->oTimer = 0;
+                    o->oTimer = 470;
                 }
             } else {
                 o->oTimer = 0;
@@ -293,4 +293,5 @@ void bhv_pokey_update(void) {
             pokey_act_unload_parts();
             break;
     }
+    cur_obj_set_pos_to_home();
 }
