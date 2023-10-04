@@ -1788,12 +1788,14 @@ const BehaviorScript bhvHiddenObject[] = {
     END_LOOP(),
 };
 
+extern void bhv_breakable_box_init(void);
 const BehaviorScript bhvBreakableBox[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(breakable_box_seg8_collision),
-    SET_FLOAT(oCollisionDistance, 1000),
+    SET_FLOAT(oCollisionDistance, 2000),
     CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_breakable_box_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_breakable_box_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -2525,6 +2527,7 @@ const BehaviorScript bhvSmallPenguinReturned[] = {
     BREAK(),
 };
 
+extern void bhv_small_penguin_init();
 const BehaviorScript bhvSmallPenguin[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -2537,6 +2540,7 @@ const BehaviorScript bhvSmallPenguin[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_HITBOX(/*Radius*/ 40, /*Height*/ 40),
     SET_HOME(),
+    CALL_NATIVE(bhv_small_penguin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_small_penguin_loop),
     END_LOOP(),

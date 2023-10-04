@@ -259,6 +259,19 @@ void small_penguin_free_actions(void) {
     cur_obj_call_action_function(sSmallPenguinActions);
     cur_obj_move_standard(-78);
     play_penguin_walking_sound(PENGUIN_SOUND_WALK_BABY);
+
+    if (o->oPosY < -50.f)
+    {
+        o->oPosX = o->oHomeX;
+        o->oPosY = o->oHomeY;
+        o->oPosZ = o->oHomeZ;
+    }
+}
+
+void bhv_small_penguin_init(void) {
+    // o->oGravity = 2.5f;
+    // o->oFriction = 0.8f;
+    // o->oBuoyancy = 1.3f;
 }
 
 void bhv_small_penguin_loop(void) {

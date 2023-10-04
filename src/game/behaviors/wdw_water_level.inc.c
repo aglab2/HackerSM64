@@ -3,7 +3,7 @@
 extern Vtx castle_inside_dl_water_mesh_layer_5_vtx_0[12];
 extern Vtx castle_inside_dl_waterbox2_mesh_layer_5_vtx_0[12];
 
-static const sWDWIndices[] = { 0, 1, 2, 3, 6, 7, 9, 11 };
+static const int sWDWIndices[] = { 0, 1, 2, 3, 6, 7, 9, 11 };
 
 // called when WDW is loaded.
 void bhv_init_changing_water_level_loop(void) {

@@ -69,7 +69,6 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(0xf1, LEVEL_CASTLE, 0x01, 0xf1, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0b, LEVEL_CASTLE, 0x01, 0x0c, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0c, LEVEL_CASTLE, 0x01, 0x0b, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_BLACK_BOBOMB, -2406, 0, 783, 0, 0, 0, 0x00000000, bhvBobomb),
 		OBJECT(MODEL_BREAKABLE_BOX, -3017, -338, 333, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_NONE, -29, -431, -3, 0, 0, 0, (0xb << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 796, 219, -93, 0, 0, 0, (0xc << 16), bhvFadingWarp),
