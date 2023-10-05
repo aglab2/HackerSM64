@@ -67,7 +67,7 @@ const struct VertexGroupDesc sVertices[] = {
 
 void bhv_books_ctl_init()
 {
-    o->oF4 = 3600;
+    o->oF4 = 6100;
 }
 
 void bhv_books_ctl_loop()

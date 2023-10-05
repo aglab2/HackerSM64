@@ -96,7 +96,7 @@ extern u8 castle_inside_dl__20_ci4[] __attribute__((section(".data")));
 extern u8 castle_inside_dl__20_pal_rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_ki_mizu_ci8[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_ki_mizu_pal_rgba16[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_0[8] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_0[46] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_1[125] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_5_tri_1[] __attribute__((section(".data")));
