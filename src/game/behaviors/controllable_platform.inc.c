@@ -10,6 +10,8 @@ void controllable_platform_act_1(void) {
     }
 }
 
+static const int sWhenActives[4] = { 1, 3, 6, 10 };
+
 void controllable_platform_act_2(void) {
     if (o->oBehParams2ndByte == sControllablePlatformDirectionState) {
         return;
@@ -23,27 +25,35 @@ void controllable_platform_act_2(void) {
 }
 
 void bhv_controllable_platform_sub_loop(void) {
-    switch (o->oAction) {
-        case 0:
-            if (o->oTimer < 30) {
+    if (gMarioStates->numStars >= sWhenActives[o->oBehParams2ndByte - 1])
+    {
+        switch (o->oAction) {
+            case 0:
+                if (o->oTimer < 30) {
+                    break;
+                }
+
+                if (gMarioObject->platform == o) {
+                    sControllablePlatformDirectionState = o->oBehParams2ndByte;
+                    o->parentObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                    o->oAction = 1;
+                    cur_obj_play_sound_2(SOUND_GENERAL_MOVING_PLATFORM_SWITCH);
+                }
                 break;
-            }
 
-            if (gMarioObject->platform == o) {
-                sControllablePlatformDirectionState = o->oBehParams2ndByte;
-                o->parentObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-                o->oAction = 1;
-                cur_obj_play_sound_2(SOUND_GENERAL_MOVING_PLATFORM_SWITCH);
-            }
-            break;
+            case 1:
+                controllable_platform_act_1();
+                break;
 
-        case 1:
-            controllable_platform_act_1();
-            break;
-
-        case 2:
-            controllable_platform_act_2();
-            break;
+            case 2:
+                controllable_platform_act_2();
+                break;
+        }
+        cur_obj_unhide();
+    }
+    else
+    {
+        cur_obj_hide();
     }
 
     o->oVelY = o->parentObj->oVelY;
