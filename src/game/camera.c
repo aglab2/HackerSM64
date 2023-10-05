@@ -8224,6 +8224,110 @@ void cutscene_death_stomach(struct Camera *c) {
     set_handheld_shake(HAND_CAM_SHAKE_CUTSCENE);
 }
 
+struct CutsceneSplinePoint gCSAglab1Pos[] = {
+    { 0, 0,  { 0 + 2000, 2800, 2000 - 2000 } },
+    { 1, 0,  { 0       , 2800, 2000 } },
+    { 2, 0,  { 0       , 2800, 2000 } },
+    { 3, 0,  { 0 - 2000, 2800, 2000 - 2000 } },
+    { -1, 0, { 0 - 2000, 2800, 2000 - 2000 } },
+};
+
+struct CutsceneSplinePoint gCSAglab1Focus[] = {
+    { 0, 100,  { 0, 2200, -1000 } }, 
+    { 1, 100,  { 0, 2200, -1000 } }, 
+    { 2, 100,  { 0, 2200, -1000 } }, 
+    { 3, 100,  { 0, 2200, -1000 } }, 
+    { -1, 100, { 0, 2200, -1000 } }, 
+};
+
+void cutscene_f1(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    if (sCutsceneSplineSegmentProgress > 0.9f)
+    {
+        sCutsceneSplineSegmentProgress = 0.9f;
+    }
+    move_point_along_spline(c->pos, gCSAglab1Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab1Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+struct CutsceneSplinePoint gCSAglab2Pos[] = {
+    { 0, 0,  { 2000 - 2000, 2800 + 1600, 0 + 2000 } },
+    { 1, 0,  { 2000       , 2800 + 1600, 0 } },
+    { 2, 0,  { 2000       , 2800 + 1600, 0 } },
+    { 3, 0,  { 2000 - 2000, 2800 + 1600, 0 - 2000 } },
+    { -1, 0, { 2000 - 2000, 2800 + 1600, 0 - 2000 } },
+};
+
+struct CutsceneSplinePoint gCSAglab2Focus[] = {
+    { 0, 100,  { -1000, 2200 + 1600, 0 } }, 
+    { 1, 100,  { -1000, 2200 + 1600, 0 } }, 
+    { 2, 100,  { -1000, 2200 + 1600, 0 } }, 
+    { 3, 100,  { -1000, 2200 + 1600, 0 } }, 
+    { -1, 100, { -1000, 2200 + 1600, 0 } }, 
+};
+
+void cutscene_f2(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    if (sCutsceneSplineSegmentProgress > 0.9f)
+    {
+        sCutsceneSplineSegmentProgress = 0.9f;
+    }
+    move_point_along_spline(c->pos, gCSAglab2Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab2Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+struct CutsceneSplinePoint gCSAglab3Pos[] = {
+    { 0, 0,  { 0 - 2000, 2800 + 3200, -2000 + 2000 } },
+    { 1, 0,  { 0       , 2800 + 3200, -2000 } },
+    { 2, 0,  { 0       , 2800 + 3200, -2000 } },
+    { 3, 0,  { 0 + 2000, 2800 + 3200, -2000 + 2000 } },
+    { -1, 0, { 0 + 2000, 2800 + 3200, -2000 + 2000 } },
+};
+
+struct CutsceneSplinePoint gCSAglab3Focus[] = {
+    { 0, 100,  { 0, 2200 + 3200, 1000 } }, 
+    { 1, 100,  { 0, 2200 + 3200, 1000 } }, 
+    { 2, 100,  { 0, 2200 + 3200, 1000 } }, 
+    { 3, 100,  { 0, 2200 + 3200, 1000 } }, 
+    { -1, 100, { 0, 2200 + 3200, 1000 } }, 
+};
+
+void cutscene_f3(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    if (sCutsceneSplineSegmentProgress > 0.9f)
+    {
+        sCutsceneSplineSegmentProgress = 0.9f;
+    }
+    move_point_along_spline(c->pos, gCSAglab3Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab3Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+struct CutsceneSplinePoint gCSAglab4Pos[] = {
+    { 0, 0,  { -2000 + 2000, 2800 + 3*1600, 0 - 2000 } },
+    { 1, 0,  { -2000       , 2800 + 3*1600, 0 } },
+    { 2, 0,  { -2000       , 2800 + 3*1600, 0 } },
+    { 3, 0,  { -2000 + 2000, 2800 + 3*1600, 0 + 2000 } },
+    { -1, 0, { -2000 + 2000, 2800 + 3*1600, 0 + 2000 } },
+};
+
+struct CutsceneSplinePoint gCSAglab4Focus[] = {
+    { 0, 100,  { 1000, 2200 + 3*1600, 0 } }, 
+    { 1, 100,  { 1000, 2200 + 3*1600, 0 } }, 
+    { 2, 100,  { 1000, 2200 + 3*1600, 0 } }, 
+    { 3, 100,  { 1000, 2200 + 3*1600, 0 } }, 
+    { -1, 100, { 1000, 2200 + 3*1600, 0 } }, 
+};
+
+void cutscene_f4(struct Camera *c) {
+    cutscene_event(cutscene_reset_spline, c, 0, 0);
+    if (sCutsceneSplineSegmentProgress > 0.9f)
+    {
+        sCutsceneSplineSegmentProgress = 0.9f;
+    }
+    move_point_along_spline(c->pos, gCSAglab4Pos, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, gCSAglab4Focus, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
 void cutscene_bbh_death_start(struct Camera *c) {
     Vec3f dir = { 0, 40.f, 60.f };
 
@@ -10162,6 +10266,22 @@ struct Cutscene sCutsceneEnterPool[] = {
     { cutscene_exit_to_castle_grounds_end, 0 }
 };
 
+struct Cutscene sCutsceneF1[] = {
+    { cutscene_f1, CUTSCENE_LOOP },
+};
+
+struct Cutscene sCutsceneF2[] = {
+    { cutscene_f2, CUTSCENE_LOOP },
+};
+
+struct Cutscene sCutsceneF3[] = {
+    { cutscene_f3, CUTSCENE_LOOP },
+};
+
+struct Cutscene sCutsceneF4[] = {
+    { cutscene_f4, CUTSCENE_LOOP },
+};
+
 /**
  * Cutscene that plays when Mario dies on his stomach.
  */
@@ -10775,6 +10895,11 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_RACE_DIALOG,          sCutsceneDialog)
         CUTSCENE(CUTSCENE_ENTER_PYRAMID_TOP,    sCutsceneEnterPyramidTop)
         CUTSCENE(CUTSCENE_SSL_PYRAMID_EXPLODE,  sCutscenePyramidTopExplode)
+        
+        CUTSCENE(CUTSCENE_F1, sCutsceneF1)
+        CUTSCENE(CUTSCENE_F2, sCutsceneF2)
+        CUTSCENE(CUTSCENE_F3, sCutsceneF3)
+        CUTSCENE(CUTSCENE_F4, sCutsceneF4)
     }
 
 #undef CUTSCENE

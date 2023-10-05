@@ -65,17 +65,15 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_waterbox2_mesh_layer_5_vtx_0),
 };
 
+f32 gFromY = 0;
+
 void bhv_books_ctl_init()
 {
-    o->oF4 = 6100;
+    gFromY = -200.f;
 }
 
-void bhv_books_ctl_loop()
+void set_room_colors()
 {
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
-
     for (int i = 0; i < sizeof(sVertices) / sizeof(*sVertices); i++)
     {
         const struct VertexGroupDesc* desc = &sVertices[i];
@@ -83,9 +81,26 @@ void bhv_books_ctl_loop()
         for (int j = 0; j < desc->size; j++)
         {
             s16 y = vtx[j].v.ob[1];
-            vtx[j].v.cn[3] = 255 - CLAMP(y, 0, o->oF4) * 255 / o->oF4;
+            const f32 limit = 1600.f;
+            vtx[j].v.cn[3] = 255 - CLAMP(y - gFromY, 0, 1600.f) * 255 / 1600.f;
         }
     }
+}
+
+void bhv_books_ctl_loop()
+{
+#if 0
+    gCamera->cutscene = CUTSCENE_F4;
+    if (gFromY < 6400.f)
+    {
+        gFromY += 20.f;
+    }
+#endif
+
+    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    set_room_colors();
 }
 
 void bhv_pokey_ctl_init()

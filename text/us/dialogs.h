@@ -1706,79 +1706,27 @@ Left: Black Hole\n\
 ///Elevator 1\n\
 Arrow: You are here"))
 
-DEFINE_DIALOG(DIALOG_141, 1, 5, 150, 200, _("\
-You've recovered one of\n\
-the stolen Power Stars!\n\
-Now you can open some of\n\
-the sealed doors in the\n\
-castle.\n\
-Try the Princess's room\n\
-on the second floor and\n\
-the room with the\n\
-painting of Whomp's\n\
-Fortress on Floor 1.\n\
-Bowser's troops are still\n\
-gaining power, so you\n\
-can't give up. Save us,\n\
-Mario! Keep searching for\n\
-Stars!"))
+DEFINE_DIALOG(DIALOG_141, 1, 2, 150, 200, _("\
+With powers of the stars,\n\
+next floor is unlocked..."))
 
-DEFINE_DIALOG(DIALOG_142, 1, 5, 150, 200, _("\
-You've recovered three\n\
-Power Stars! Now you can\n\
-open any door with a 3\n\
-on its star.\n\
-\n\
-You can come and go from\n\
-the open courses as you\n\
-please. The enemies ahead\n\
-are even meaner, so be\n\
-careful!"))
+DEFINE_DIALOG(DIALOG_142, 1, 2, 150, 200, _("\
+With powers of the star,\n\
+next floor is unlocked..."))
 
-DEFINE_DIALOG(DIALOG_143, 1, 6, 150, 200, _("\
-You've recovered eight of\n\
-the Power Stars! Now you\n\
-can open the door with\n\
-the big Star! But Bowser\n\
-is just ahead...can you\n\
-hear the Princess calling?"))
+DEFINE_DIALOG(DIALOG_143, 1, 2, 150, 200, _("\
+With powers of the stars,\n\
+next floor is unlocked..."))
 
-DEFINE_DIALOG(DIALOG_144, 1, 6, 150, 200, _("\
-You've recovered 30\n\
-Power Stars! Now you can\n\
-open the door with the\n\
-big Star! But before you\n\
-move on, how's it going\n\
-otherwise?\n\
-Did you pound the two\n\
-columns down? You didn't\n\
-lose your hat, did you?\n\
-If you did, you'll have to\n\
-stomp on the condor to\n\
-get it back!\n\
-They say that Bowser has\n\
-sneaked out of the sea\n\
-and into the underground.\n\
-Have you finally\n\
-cornered him?"))
+DEFINE_DIALOG(DIALOG_144, 1, 2, 150, 200, _("\
+With powers of the stars,\n\
+next floor is unlocked..."))
 
-DEFINE_DIALOG(DIALOG_145, 1, 6, 150, 200, _("\
-You've recovered 50\n\
-Power Stars! Now you can\n\
-open the Star Door on the\n\
-third floor. Bowser's\n\
-there, you know.\n\
-\n\
-Oh! You've found all of\n\
-the Cap Switches, haven't\n\
-you? Red, green and blue?\n\
-The Caps you get from the\n\
-colored blocks are really\n\
-helpful.\n\
-Hurry along, now. The\n\
-third floor is just ahead."))
+DEFINE_DIALOG(DIALOG_145, 1, 2, 150, 200, _("\
+With all stars are collected,\n\
+last floor is unlocked..."))
 
-DEFINE_DIALOG(DIALOG_146, 1, 6, 150, 200, _("\
+DEFINE_DIALOG(DIALOG_146, 1, 2, 150, 200, _("\
 You've found 70 Power\n\
 Stars! The mystery of the\n\
 endless stairs is solved,\n\

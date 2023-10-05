@@ -50,7 +50,7 @@ static s8 sPeachManualBlinkTime = 0;
 static s8 sPeachIsBlinking = FALSE;
 static s8 sPeachBlinkTimes[7] = { 2, 3, 2, 1, 2, 3, 2 };
 
-static u8 sStarsNeededForDialog[] = { 1, 3, 8, 30, 50, 70 };
+static u8 sStarsNeededForDialog[] = { 1, 3, 6, 10, 15, 70 };
 
 /**
  * Data for the jumbo star cutscene. It specifies the flight path after triple
@@ -418,6 +418,7 @@ s32 act_disappeared(struct MarioState *m) {
     return FALSE;
 }
 
+extern f32 gFromY;
 s32 act_reading_automatic_dialog(struct MarioState *m) {
     u32 actionArg;
 
@@ -442,8 +443,21 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
         }
         // wait until dialog is done
         else if (m->actionState == 10) {
-            if (get_dialog_id() >= 0) {
+            static s32 LastValidDialogId;
+            s32 dialogId = get_dialog_id();
+            gCamera->cutscene = CUTSCENE_F1 + dialogId - DIALOG_141;
+            set_room_colors();
+            if (gFromY < (1600.f * (dialogId - DIALOG_141 + 1)))
+            {
+                gFromY += 20.f;
+            }
+            if (dialogId >= 0) {
+                LastValidDialogId = dialogId;
                 m->actionState--;
+            }
+            else
+            {
+                gFromY = 1600.f * (LastValidDialogId - DIALOG_141 + 1);
             }
         }
         // look back down
@@ -453,10 +467,6 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
         // finished action
         else if (m->actionState == 25) {
             disable_time_stop();
-            if (gNeverEnteredCastle) {
-                gNeverEnteredCastle = FALSE;
-                play_cutscene_music(SEQUENCE_ARGS(0, SEQ_LEVEL_INSIDE_CASTLE));
-            }
             if (m->prevAction == ACT_STAR_DANCE_WATER) {
                 set_mario_action(m, ACT_WATER_IDLE, 0); // 100c star?
             } else {
