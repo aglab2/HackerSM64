@@ -63,13 +63,14 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_2),
   ARR_SIZE(castle_inside_dl_water_mesh_layer_5_vtx_0),
   ARR_SIZE(castle_inside_dl_waterbox2_mesh_layer_5_vtx_0),
+  ARR_SIZE(castle_inside_dl_tower_002_mesh_layer_4_vtx_0),
 };
 
 f32 gFromY = 0;
 
 void bhv_books_ctl_init()
 {
-    gFromY = -200.f;
+    gFromY = 5000.f; // -200.f;
 }
 
 void set_room_colors()
@@ -126,7 +127,7 @@ void bhv_pokey_ctl_loop()
 
     if (gMarioStates->action == ACT_TWIRLING)
     {
-        if (1600.f < gMarioStates->pos[1] && gMarioStates->pos[1] < 3000.f && gMarioStates->pos[2] < -3800.f)
+        if (1600.f < gMarioStates->pos[1] && gMarioStates->pos[1] < 3000.f && gMarioStates->pos[2] < -3700.f)
         {
             Vtx* vtxs = segmented_to_virtual(castle_inside_dl_tower_mesh_layer_5_vtx_1);
             f32 minDist = 10000.f;
