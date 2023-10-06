@@ -6102,3 +6102,13 @@ const BehaviorScript bhvPokeyCtl[] = {
         CALL_NATIVE(bhv_pokey_ctl_loop),
     END_LOOP(),
 };
+
+extern void bhv_box_spawner_init();
+extern void bhv_box_spawner_loop();
+const BehaviorScript bhvBoxSpawner[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    CALL_NATIVE(bhv_box_spawner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_box_spawner_loop),
+    END_LOOP(),
+};

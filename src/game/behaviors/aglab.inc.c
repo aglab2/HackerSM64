@@ -160,3 +160,38 @@ void bhv_pokey_ctl_loop()
         }
     }
 }
+
+void bhv_box_spawner_init()
+{
+    f32 d;
+    o->oObjF4 = cur_obj_find_nearest_object_with_behavior(bhvFloorSwitchAnimatesObject, &d);
+}
+
+void bhv_box_spawner_loop()
+{
+    if (1 == o->oObjF4->oAction)
+    {
+        if (cur_obj_find_nearby_held_actor(bhvBreakableBoxSmall, 100000.0f) != NULL)
+        {
+            print_text_fmt_int(20, 20, "%d", __LINE__);
+            return;
+        }
+
+        f32 d;
+        struct Object* otherBox = cur_obj_find_nearest_object_with_behavior(bhvBreakableBoxSmall, &d);
+        if (otherBox)
+        {
+            if (4500.f < otherBox->oPosY && otherBox->oPosY < 7000.f && otherBox->oPosZ > 1300.f)
+            {
+                print_text_fmt_int(20, 20, "%d", __LINE__);
+                return;
+            }
+
+            otherBox->activeFlags = 0;
+        }
+        
+        print_text_fmt_int(20, 20, "%d", __LINE__);
+        spawn_mist_particles_variable(0, 0, 46.0f);
+        spawn_object(o, MODEL_BREAKABLE_BOX, bhvBreakableBoxSmall);
+    }
+}

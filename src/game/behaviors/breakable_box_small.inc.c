@@ -116,6 +116,9 @@ void breakable_box_small_get_thrown(void) {
 }
 
 void bhv_breakable_box_small_loop(void) {
+    if (0 == o->activeFlags)
+        spawn_mist_particles_variable(0, 0, 46.0f);
+
     switch (o->oHeldState) {
         case HELD_FREE:
             breakable_box_small_idle_loop();

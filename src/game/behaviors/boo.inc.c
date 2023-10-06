@@ -5,8 +5,8 @@
 static struct ObjectHitbox sBooGivingStarHitbox = {
     /* interactType:      */ 0,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 3,
-    /* health:            */ 3,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 1,
     /* numLootCoins:      */ 0,
     /* radius:            */ 140,
     /* height:            */ 80,
@@ -512,7 +512,7 @@ static void big_boo_act_0(void) {
 
         o->oBooTargetOpacity = 255;
         o->oBooBaseScale = 3.0f;
-        o->oHealth = 3;
+        o->oHealth = 1;
 
         cur_obj_scale(3.0f);
         cur_obj_become_tangible();
@@ -565,17 +565,17 @@ static void big_boo_act_2(void) {
 }
 
 static void big_boo_spawn_ghost_hunt_star(void) {
-    spawn_default_star(980.0f, 1100.0f, 250.0f);
+    spawn_default_star(2117.0f, 320.0f, 0.0f);
 }
 
 static void big_boo_spawn_balcony_star(void) {
-    spawn_default_star(700.0f, 3200.0f, 1900.0f);
+    spawn_default_star(2117.0f, 320.0f, 0.0f);
 }
 
 static void big_boo_spawn_merry_go_round_star(void) {
     struct Object *merryGoRound;
 
-    spawn_default_star(-1600.0f, -2100.0f, 205.0f);
+    spawn_default_star(2117.0f, 320.0f, 0.0f);
 
     merryGoRound = cur_obj_nearest_object_with_behavior(bhvMerryGoRound);
 
