@@ -1237,6 +1237,24 @@ const BehaviorScript bhvFlame[] = {
     END_LOOP(),
 };
 
+extern void bhv_flame_burning_down(void);
+const BehaviorScript bhvFlameBurningDown[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 700),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_init_room),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_flame_burning_down),
+        SET_INT(oInteractStatus, INT_STATUS_NONE),
+        ANIMATE_TEXTURE(oAnimState, 2),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvAnotherElavator[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -6088,6 +6106,7 @@ extern void bhv_books_ctl_loop();
 const BehaviorScript bhvBooksCtl[] = {
     BEGIN(OBJ_LIST_SPAWNER),
     CALL_NATIVE(bhv_books_ctl_init),
+    SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_books_ctl_loop),
     END_LOOP(),

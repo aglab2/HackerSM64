@@ -68,11 +68,6 @@ const struct VertexGroupDesc sVertices[] = {
 
 f32 gFromY = 0;
 
-void bhv_books_ctl_init()
-{
-    gFromY = 5000.f; // -200.f;
-}
-
 void set_room_colors()
 {
     for (int i = 0; i < sizeof(sVertices) / sizeof(*sVertices); i++)
@@ -88,6 +83,12 @@ void set_room_colors()
     }
 }
 
+void bhv_books_ctl_init()
+{
+    gFromY = 5000.f; // -200.f;
+    set_room_colors();
+}
+
 void bhv_books_ctl_loop()
 {
 #if 0
@@ -101,7 +102,131 @@ void bhv_books_ctl_loop()
     print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
     print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
-    set_room_colors();
+
+    if (0 == o->oAction)
+    {
+        if (15 == o->oF8)
+        {
+            spawn_default_star(o->oHomeX, o->oHomeY, o->oHomeZ);
+            o->activeFlags = 0;
+            return;
+        }
+
+        f32 d;
+        struct Object* of = cur_obj_find_nearest_object_with_behavior(bhvMovingFlame, &d);
+        if (of)
+        {
+            if (!(o->oF8 & 1) && 1882.f < of->oPosX && of->oPosX < 2317.f && of->oPosZ > 850.f)
+            {
+                o->oPosX = of->oPosX;
+                o->oPosY = of->oPosY;
+                o->oPosZ = of->oPosZ;
+                o->oAction = 1;
+                o->oF4 = 1;
+                o->oF8 |= 1;
+            }
+            
+            if (!(o->oF8 & 2) && 414.f < of->oPosZ && of->oPosZ < 847.f && 1460.f < of->oPosX && of->oPosX < 1660.f)
+            {
+                o->oPosX = of->oPosX;
+                o->oPosY = of->oPosY;
+                o->oPosZ = of->oPosZ;
+                o->oAction = 1;
+                o->oF4 = 2;
+                o->oF8 |= 2;
+            }
+            
+            if (!(o->oF8 & 4) && -847.f < of->oPosZ && of->oPosZ < -414.f && 1460.f < of->oPosX && of->oPosX < 1660.f)
+            {
+                o->oPosX = of->oPosX;
+                o->oPosY = of->oPosY;
+                o->oPosZ = of->oPosZ;
+                o->oAction = 1;
+                o->oF4 = 3;
+                o->oF8 |= 4;
+            }
+            
+            if (!(o->oF8 & 8) && 1882.f < of->oPosX && of->oPosX < 2317.f && of->oPosZ < -850.f)
+            {
+                o->oPosX = of->oPosX;
+                o->oPosY = of->oPosY;
+                o->oPosZ = of->oPosZ;
+                o->oAction = 1;
+                o->oF4 = 4;
+                o->oF8 |= 8;
+            }
+        }
+    }
+    else if (1 == o->oAction)
+    {
+        Vtx* vtxs = segmented_to_virtual(castle_inside_dl_tower_003_mesh_layer_1_vtx_0);
+        f32 burnDist = o->oTimer * 20.f;
+        print_text_fmt_int(100, 100, "%d", o->oTimer);
+        for (int i = 0; i < sizeof(castle_inside_dl_tower_003_mesh_layer_1_vtx_0) / sizeof(*castle_inside_dl_tower_003_mesh_layer_1_vtx_0); i++)
+        {
+            Vtx* vtx = &vtxs[i];
+            int allowed = 0;
+            switch (o->oF4)
+            {
+                case 1:
+                    allowed = 1882.f < vtx->v.ob[0] && vtx->v.ob[0] < 2317.f && vtx->v.ob[2] > 850.f;
+                break;
+                case 2:
+                    allowed = 414.f < vtx->v.ob[2] && vtx->v.ob[2] < 847.f && 1460.f < vtx->v.ob[0] && vtx->v.ob[0] < 1660.f;
+                break;
+                case 3:
+                    allowed = -847.f < vtx->v.ob[2] && vtx->v.ob[2] < -414.f && 1460.f < vtx->v.ob[0] && vtx->v.ob[0] < 1660.f;
+                break;
+                case 4:
+                    allowed = 1882.f < vtx->v.ob[0] && vtx->v.ob[0] < 2317.f && vtx->v.ob[2] < -850.f;
+                break;
+            }
+
+            if (!allowed)
+                continue;
+            
+            f32 dx = vtx->v.ob[0] - o->oPosX;
+            f32 dy = vtx->v.ob[1] - o->oPosY;
+            f32 dz = vtx->v.ob[2] - o->oPosZ;
+
+            f32 d = sqrtf(dx*dx + dy*dy + dz*dz);
+            if (d < burnDist)
+            {
+                if (vtx->v.cn[0] > 10)
+                {
+                    vtx->v.cn[0] -= 10;
+                    vtx->v.cn[1] -= 10;
+                    vtx->v.cn[2] -= 10;
+                    if (0 == (random_u16() % 16))
+                    {
+                        struct Object* flame = spawn_object(o, MODEL_RED_FLAME, bhvFlameBurningDown);
+                        flame->oPosX = vtx->v.ob[0];
+                        flame->oPosY = vtx->v.ob[1];
+                        flame->oPosZ = vtx->v.ob[2];
+                    }
+                }
+                else
+                {
+                    vtx->v.cn[0] = vtx->v.cn[1] = vtx->v.cn[2] = 0;
+                }
+            }
+        }
+
+        if (80 == o->oTimer)
+        {
+            o->oAction = 0;
+        }
+    }
+}
+
+void bhv_flame_burning_down(void)
+{
+    if (9 == o->oTimer)
+    {
+        o->activeFlags = 0;
+    }
+    
+    obj_scale(o, 10.f - o->oTimer);
 }
 
 void bhv_pokey_ctl_init()
@@ -195,3 +320,5 @@ void bhv_box_spawner_loop()
         spawn_object(o, MODEL_BREAKABLE_BOX, bhvBreakableBoxSmall);
     }
 }
+
+// castle_inside_dl_tower_003_mesh_layer_1_vtx_0

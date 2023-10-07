@@ -543,5 +543,6 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvBooksCtl[];
 extern const BehaviorScript bhvPokeyCtl[];
 extern const BehaviorScript bhvBoxSpawner[];
+extern const BehaviorScript bhvFlameBurningDown[];
 
 #endif // BEHAVIOR_DATA_H
