@@ -346,7 +346,7 @@ void bhv_warrow_loop(void)
         // -2650, 1800, 324
         // -2950, 1800, 544
         f32 xok = -2950.f < gMarioStates->pos[0] && gMarioStates->pos[0] < -2650.f;
-        f32 yok =  1800.f < gMarioStates->pos[1] && gMarioStates->pos[1] <  2200.f;
+        f32 yok =  1700.f < gMarioStates->pos[1] && gMarioStates->pos[1] <  2200.f;
         f32 zok = (-544.f < gMarioStates->pos[2] && gMarioStates->pos[2] <  -324.f)
                || ( 324.f < gMarioStates->pos[2] && gMarioStates->pos[2] <   544.f);
 
