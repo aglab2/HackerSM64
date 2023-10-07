@@ -96,3 +96,8 @@
 
 #include "levels/castle_inside/warrow/model.inc.c"
 #include "levels/castle_inside/warrow/collision.inc.c"
+
+#include "levels/castle_inside/arrow_lift/model.inc.c"
+#include "levels/castle_inside/water_level_diamond/model.inc.c"
+#include "levels/castle_inside/arrow_lift/collision.inc.c"
+#include "levels/castle_inside/water_level_diamond/collision.inc.c" // Unused

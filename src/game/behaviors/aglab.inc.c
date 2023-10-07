@@ -371,3 +371,13 @@ void bhv_warrow_loop(void)
         }
     }
 }
+
+void bhv_wdw_ctl_init()
+{
+
+}
+
+void bhv_wdw_ctl_loop()
+{
+
+}

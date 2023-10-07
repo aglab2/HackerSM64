@@ -1,4 +1,5 @@
 // 0x0E0005C0
+extern const Gfx wdw_seg7_dl_070131B8[];
 const GeoLayout wdw_geo_0005C0[] = {
    GEO_CULLING_RADIUS(200),
    GEO_OPEN_NODE(),

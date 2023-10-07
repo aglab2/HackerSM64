@@ -6145,3 +6145,13 @@ const BehaviorScript bhvBoxSpawner[] = {
         CALL_NATIVE(bhv_box_spawner_loop),
     END_LOOP(),
 };
+
+extern void bhv_wdw_ctl_init();
+extern void bhv_wdw_ctl_loop();
+const BehaviorScript bhvWDWCtl[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    CALL_NATIVE(bhv_wdw_ctl_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wdw_ctl_loop),
+    END_LOOP(),
+};

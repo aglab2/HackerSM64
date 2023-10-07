@@ -38,9 +38,14 @@ static const Vtx wdw_seg7_vertex_07012D50[] = {
     {{{    63,      0,    -60}, 0, {     0,      0}, {0x00, 0x81, 0x00, 0xff}}},
 };
 
+// 0x07001800 - 0x07002000
+ALIGNED8 static const Texture _wdw_seg7_texture_07001800[] = {
+#include "levels/castle_inside/wdw3.rgba16.inc.c"
+};
+
 // 0x07012DC0 - 0x07012E08
 static const Gfx wdw_seg7_dl_07012DC0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wdw_seg7_texture_07001800),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _wdw_seg7_texture_07001800),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -50,9 +55,14 @@ static const Gfx wdw_seg7_dl_07012DC0[] = {
     gsSPEndDisplayList(),
 };
 
+// 0x09004000
+ALIGNED8 const Texture _grass_09004000[] = {
+#include "levels/castle_inside/wf_textures.04000.rgba16.inc.c"
+};
+
 // 0x07012E08 - 0x07012E88
 static const Gfx wdw_seg7_dl_07012E08[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, grass_09004000),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, _grass_09004000),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
     gsSPVertex(wdw_seg7_vertex_07012C60, 15, 0),

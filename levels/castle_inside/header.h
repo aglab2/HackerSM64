@@ -157,6 +157,9 @@ extern const GeoLayout hmc_geo_0005B8_2[];
 extern const GeoLayout hmc_geo_0005B8_3[];
 extern const GeoLayout hmc_geo_0005B8_4[];
 
+extern const GeoLayout wdw_geo_000598[];
+extern const GeoLayout wdw_geo_0005C0[];
+
 // script
 extern const LevelScript level_castle_inside_entry[];
 

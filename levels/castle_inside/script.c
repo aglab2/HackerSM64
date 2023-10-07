@@ -63,6 +63,8 @@ const LevelScript level_castle_inside_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM4, hmc_geo_0005B8_4), 
 	LOAD_MODEL_FROM_GEO(MODEL_WDW_SQUARE_FLOATING_PLATFORM, wdw_geo_000580), 
 	LOAD_MODEL_FROM_GEO(MODEL_WARROW, warrow_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_WDW_ARROW_LIFT, wdw_geo_000598), 
+	LOAD_MODEL_FROM_GEO(MODEL_WDW_WATER_LEVEL_DIAMOND, wdw_geo_0005C0), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -75,6 +77,7 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(0x0c, LEVEL_CASTLE, 0x01, 0x0b, WARP_NO_CHECKPOINT),
 		WARP_NODE(20, LEVEL_CASTLE, 0x01, 21, WARP_NO_CHECKPOINT),
 		WARP_NODE(21, LEVEL_CASTLE, 0x01, 20, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_WDW_ARROW_LIFT, 618, 4800, 3495, 0, 0, 0, 0x00000000, bhvArrowLift),
 		OBJECT(MODEL_NONE, 22, 4800, 2749, 0, 0, 0, 0x00000000, bhvBoxSpawner),
 		OBJECT(MODEL_BREAKABLE_BOX, -3125, 2911, 7, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_PURPLE_SWITCH, -377, 4800, 2100, 0, 0, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
@@ -101,7 +104,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_NONE, 796, 219, -93, 0, 0, 0, (0xc << 16), bhvFadingWarp),
 		OBJECT(MODEL_BOWLING_BALL, 2799, 78, 0, 0, 0, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_HMC_METAL_PLATFORM, 0, 0, 0, 0, 0, 0, 0x00000000, bhvControllablePlatform),
-		MARIO_POS(0x01, 0, -2040, 1800, 478),
+		MARIO_POS(0x01, 0, -33, 4800, 1392),
 		OBJECT(MODEL_PENGUIN, -2149, -63, -9, 0, 0, 0, (14 << 24), bhvSmallPenguin),
 		OBJECT(MODEL_NONE, -307, -136, 3196, 0, 0, 0, (EXCLAMATION_BOX_BP_STAR_1 << 16), bhvExclamationBox),
 		OBJECT(MODEL_STAR, -8, 184, -3579, 0, 0, 0, (1 << 24), bhvStar),
@@ -109,7 +112,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_STAR, -3015, -338, 333, 0, 0, 0, (3 << 24), bhvStar),
 		OBJECT(MODEL_BOO, 2997, 182, 0, 0, 0, 0, (4 << 24), bhvBalconyBigBoo),
 		OBJECT(MODEL_NONE, 1915, 312, 0, 0, 0, 0, (5 << 24), bhvBooksCtl),
-		OBJECT(MODEL_STAR, -781, 222, 2412, 0, 0, 0, (6 << 24), bhvStar),
+		OBJECT(MODEL_NONE, -6, 5132, 3113, 0, 0, 0, (6 << 24), bhvWDWCtl),
 		OBJECT(MODEL_STAR, -3125, 2484, 7, 0, 0, 0, (7 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 1, 2171, -3699, 0, 0, 0, (8 << 24), bhvPokeyCtl),
 		OBJECT(MODEL_NONE, -15, 0, -782, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
@@ -131,7 +134,7 @@ const LevelScript level_castle_inside_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, -2040, 1800, 478),
+	MARIO_POS(0x01, 0, -33, 4800, 1392),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
