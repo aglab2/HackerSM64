@@ -54,11 +54,6 @@ void floating_platform_act_move_to_home(void) {
 }
 
 void bhv_floating_platform_loop(void) {
-    if (0 == o->oTimer)
-    {
-        obj_scale(o, 1.1f);
-    }
-
     o->oHomeY = floating_platform_find_home_y();
 
     // o->oAction = o->oFloatingPlatformIsOnFloor;

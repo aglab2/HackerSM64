@@ -366,6 +366,7 @@ void bhv_warrow_loop(void)
         if (o->oTimer == (0x8000 / spd))
         {
             gWaterNumber = !gWaterNumber;
+            gEnvironmentLevels[0] = gEnvironmentRegions[6 + 6 * gWaterNumber];
             o->oAction = 0;
         }
         else
