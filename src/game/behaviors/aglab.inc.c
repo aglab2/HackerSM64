@@ -255,8 +255,16 @@ void bhv_pokey_ctl_loop()
     {
         if (4 == o->oObjF4->oPokeyNumAliveBodyParts && 2 == o->oObjF8->oPokeyNumAliveBodyParts)
         {
-            o->oAction = 1;
-            cur_obj_spawn_star_at_y_offset(o->oPosX, o->oPosY, o->oPosZ, 200.0f);
+            o->oSubAction++;
+            if (30 == o->oSubAction)
+            {
+                cur_obj_spawn_star_at_y_offset(o->oPosX, o->oPosY, o->oPosZ, 200.0f);
+                o->oAction = 1;
+            }
+        }
+        else
+        {
+            o->oSubAction = 0;
         }
     }
 
@@ -351,7 +359,7 @@ void bhv_warrow_loop(void)
                || ( 324.f < gMarioStates->pos[2] && gMarioStates->pos[2] <   544.f);
 
         s16 ad = abs_angle_diff(0x8000 + o->oFaceAngleYaw, gMarioStates->faceAngle[1]);
-        if (zok && yok && zok && ad < 2000 && (gMarioStates->action == ACT_JUMP_KICK || gMarioStates->action == ACT_PUNCHING || gMarioStates->action == ACT_MOVE_PUNCHING) && (gMarioStates->particleFlags & PARTICLE_TRIANGLE))
+        if (xok && yok && zok && ad < 2000 && (gMarioStates->action == ACT_JUMP_KICK || gMarioStates->action == ACT_PUNCHING || gMarioStates->action == ACT_MOVE_PUNCHING) && (gMarioStates->particleFlags & PARTICLE_TRIANGLE))
         {
             o->oAction = 1;
         }
