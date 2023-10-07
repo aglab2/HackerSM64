@@ -1145,9 +1145,17 @@ void visualise_object_hitbox(struct Object *node) {
 /**
  * Process an object node.
  */
+extern f32 gFromY;
 void geo_process_object(struct Object *node) {
     if (node->header.gfx.areaIndex == gCurGraphNodeRoot->areaIndex) {
         s32 isInvisible = (node->header.gfx.node.flags & GRAPH_RENDER_INVISIBLE);
+        if (!obj_has_behavior(node, bhvMario))
+        {
+            if (gFromY < -1000.f || node->oPosY > gFromY + 1800.f)
+            {
+                isInvisible = 1;
+            }
+        }
         s32 noThrowMatrix = (node->header.gfx.throwMatrix == NULL);
 
         // If the throw matrix is null and the object is invisible, there is no need

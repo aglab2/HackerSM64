@@ -11,6 +11,7 @@ struct VertexGroupDesc
 const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_0),
   // ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_1),
+  ARR_SIZE(castle_inside_dl_tower_003_mesh_layer_1_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_2),
@@ -87,7 +88,9 @@ void set_room_colors()
 extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 void bhv_books_ctl_init()
 {
-    gFromY = -200.f;
+    gFromY = -200.f - 3000.f;
+    if (gMarioState->numStars >= 1)
+        gFromY += 3000.f;
     if (gMarioState->numStars >= 2)
         gFromY += 1600.f;
     if (gMarioState->numStars >= 4)

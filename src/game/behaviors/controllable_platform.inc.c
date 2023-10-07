@@ -10,7 +10,7 @@ void controllable_platform_act_1(void) {
     }
 }
 
-static const int sWhenActives[4] = { 1, 3, 6, 10 };
+static const int sWhenActives[4] = { 2, 4, 7, 10, 15 };
 
 void controllable_platform_act_2(void) {
     if (o->oBehParams2ndByte == sControllablePlatformDirectionState) {
