@@ -104,7 +104,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_NONE, 796, 219, -93, 0, 0, 0, (0xc << 16), bhvFadingWarp),
 		OBJECT(MODEL_BOWLING_BALL, 2799, 78, 0, 0, 0, 0, 0x00000000, bhvFireSpitter),
 		OBJECT(MODEL_HMC_METAL_PLATFORM, 0, 0, 0, 0, 0, 0, 0x00000000, bhvControllablePlatform),
-		MARIO_POS(0x01, 0, 993, 0, 134),
+		MARIO_POS(0x01, 0, 17, 112, 8),
 		OBJECT(MODEL_PENGUIN, -2149, -63, -9, 0, 0, 0, (14 << 24), bhvSmallPenguin),
 		OBJECT(MODEL_NONE, -307, -136, 3196, 0, 0, 0, (EXCLAMATION_BOX_BP_STAR_1 << 16), bhvExclamationBox),
 		OBJECT(MODEL_STAR, -8, 184, -3579, 0, 0, 0, (1 << 24), bhvStar),
@@ -116,6 +116,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_STAR, -3125, 2484, 7, 0, 0, 0, (7 << 24), bhvStar),
 		OBJECT(MODEL_NONE, 1, 2171, -3699, 0, 0, 0, (8 << 24), bhvPokeyCtl),
 		OBJECT(MODEL_NONE, -15, 0, -782, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
+		OBJECT(MODEL_NONE, -843, 457, 841, 0, 0, 0, 0x00000000, bhvLightSwitch),
 		OBJECT(MODEL_PENGUIN, -1969, 780, 19, 0, 0, 0, (9 << 24), bhvTuxiesMother),
 		OBJECT(MODEL_TWEESTER, 11, 1515, -2760, 0, 0, 0, 0x00000000, bhvTweester),
 		OBJECT(MODEL_WARROW, -2815, 1800, -11, 0, 0, 0, 0x00000000, bhvWArrow),
@@ -127,14 +128,14 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_WDW_SQUARE_FLOATING_PLATFORM, -3008, 79, -352, 0, 0, 0, 0x00000000, bhvWdwSquareFloatingPlatform),
 		TERRAIN(castle_inside_area_1_collision),
 		MACRO_OBJECTS(castle_inside_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LW),
+		SET_BACKGROUND_MUSIC(0x00, 0),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, 993, 0, 134),
+	MARIO_POS(0x01, 0, 17, 112, 8),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

@@ -1149,7 +1149,7 @@ extern f32 gFromY;
 void geo_process_object(struct Object *node) {
     if (node->header.gfx.areaIndex == gCurGraphNodeRoot->areaIndex) {
         s32 isInvisible = (node->header.gfx.node.flags & GRAPH_RENDER_INVISIBLE);
-        if (!obj_has_behavior(node, bhvMario))
+        if (!obj_has_behavior(node, bhvMario) && !obj_has_behavior(node, bhvSparkle))
         {
             if (gFromY < -1000.f || node->oPosY > gFromY + 1800.f)
             {

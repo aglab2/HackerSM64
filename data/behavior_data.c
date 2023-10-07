@@ -6155,3 +6155,14 @@ const BehaviorScript bhvWDWCtl[] = {
         CALL_NATIVE(bhv_wdw_ctl_loop),
     END_LOOP(),
 };
+
+extern void bhv_light_switch_init();
+extern void bhv_light_switch_loop();
+const BehaviorScript bhvLightSwitch[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    CALL_NATIVE(bhv_light_switch_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_light_switch_loop),
+    END_LOOP(),
+};

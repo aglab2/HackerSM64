@@ -66,6 +66,8 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_water_mesh_layer_5_vtx_0),
   ARR_SIZE(castle_inside_dl_waterbox2_mesh_layer_5_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_002_mesh_layer_4_vtx_0),
+  ARR_SIZE(castle_inside_dl_wtch_mesh_layer_1_vtx_0),
+  ARR_SIZE(castle_inside_dl_wtch_mesh_layer_1_vtx_1),
 };
 
 f32 gFromY = 0;
@@ -104,7 +106,7 @@ void bhv_books_ctl_init()
     {
         seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_TR, 0);
     }
-    else if (gMarioState->numStars != 0)
+    else if (gMarioState->numStars > 0)
     {
         seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
     }
@@ -401,4 +403,45 @@ void bhv_wdw_ctl_init()
 void bhv_wdw_ctl_loop()
 {
 
+}
+
+void bhv_light_switch_init()
+{
+
+}
+
+void bhv_light_switch_loop()
+{
+    if (0 == gMarioStates->numStars)
+    {
+        f32 dist = sqrtf(gMarioStates->pos[0] * gMarioStates->pos[0] + gMarioStates->pos[2] * gMarioStates->pos[2]);
+        if (dist > 1100.f)
+        {
+            f32 mult = sqrtf(dist / 1100.f);
+            gMarioStates->pos[0] /= mult;
+            gMarioStates->pos[2] /= mult;
+        }
+
+        if (0 == (o->oTimer % 16))
+        {
+            struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+            spark->oPosX += random_f32_around_zero(100.f);
+            spark->oPosY += random_f32_around_zero(100.f);
+            spark->oPosZ += random_f32_around_zero(100.f);
+        }
+
+        if (o->oDistanceToMario < 100.f)
+        {
+            spawn_default_star(-600.f, 300.f, 600.f);
+            o->activeFlags = 0;
+            gFromY += 3000.f;
+            play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+            seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
+            set_room_colors();
+        }
+    }
+    else
+    {
+        o->activeFlags = 0;
+    }
 }

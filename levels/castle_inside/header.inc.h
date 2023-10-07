@@ -26,6 +26,8 @@ extern Lights1 castle_inside_dl__20_f3d_layer1_lights __attribute__((section(".d
 extern Lights1 castle_inside_dl_FrontColor_f3d_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl_f3dlite_material_001_layer4_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl_f3dlite_material_layer5_lights __attribute__((section(".data")));
+extern Lights1 castle_inside_dl__52_f3d_layer1_lights __attribute__((section(".data")));
+extern Lights1 castle_inside_dl__51_f3d_layer1_lights __attribute__((section(".data")));
 extern u8 castle_inside_dl__18_ia8[] __attribute__((section(".data")));
 extern u8 castle_inside_dl__26_rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl__19_ci4[] __attribute__((section(".data")));
@@ -102,6 +104,9 @@ extern u8 castle_inside_dl_omm_texture_hud_arrow_pal_rgba16[] __attribute__((sec
 extern u8 castle_inside_dl__33_rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_ki_mizu_ci8[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_ki_mizu_pal_rgba16[] __attribute__((section(".data")));
+extern u8 castle_inside_dl__52_rgba16[] __attribute__((section(".data")));
+extern u8 castle_inside_dl__51_ci4[] __attribute__((section(".data")));
+extern u8 castle_inside_dl__51_pal_rgba16[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_0[50] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_1[125] __attribute__((section(".data")));
@@ -216,6 +221,11 @@ extern Vtx castle_inside_dl_water_mesh_layer_5_vtx_0[12] __attribute__((section(
 extern Gfx castle_inside_dl_water_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_waterbox2_mesh_layer_5_vtx_0[12] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_waterbox2_mesh_layer_5_tri_0[] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_wtch_mesh_layer_1_vtx_cull[8] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_wtch_mesh_layer_1_vtx_0[20] __attribute__((section(".data")));
+extern Gfx castle_inside_dl_wtch_mesh_layer_1_tri_0[] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_wtch_mesh_layer_1_vtx_1[46] __attribute__((section(".data")));
+extern Gfx castle_inside_dl_wtch_mesh_layer_1_tri_1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl__18_f3d_layer5[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl__18_f3d_layer5[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl__26_f3d_layer1[] __attribute__((section(".data")));
@@ -326,6 +336,10 @@ extern Gfx mat_castle_inside_dl__33_f3d_layer1[] __attribute__((section(".data")
 extern Gfx mat_revert_castle_inside_dl__33_f3d_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_layer5[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_layer5[] __attribute__((section(".data")));
+extern Gfx mat_castle_inside_dl__52_f3d_layer1[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl__52_f3d_layer1[] __attribute__((section(".data")));
+extern Gfx mat_castle_inside_dl__51_f3d_layer1[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl__51_f3d_layer1[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_4[] __attribute__((section(".data")));
@@ -333,3 +347,4 @@ extern Gfx castle_inside_dl_tower_002_mesh_layer_4[] __attribute__((section(".da
 extern Gfx castle_inside_dl_tower_003_mesh_layer_1[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_water_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_waterbox2_mesh_layer_5[] __attribute__((section(".data")));
+extern Gfx castle_inside_dl_wtch_mesh_layer_1[] __attribute__((section(".data")));
