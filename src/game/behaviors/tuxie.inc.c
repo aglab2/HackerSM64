@@ -1,6 +1,7 @@
 // tuxie.inc.c
 
 void play_penguin_walking_sound(s32 walk) {
+    return;
     if (o->oSoundStateID == PENGUIN_ANIM_WALK) {
         set_obj_anim_with_accel_and_sound(
             1,
