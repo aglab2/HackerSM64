@@ -260,7 +260,7 @@ void small_penguin_free_actions(void) {
     cur_obj_move_standard(-78);
     play_penguin_walking_sound(PENGUIN_SOUND_WALK_BABY);
 
-    if (o->oPosY < -50.f)
+    if (o->oPosY < -66.f)
     {
         o->oPosX = o->oHomeX;
         o->oPosY = o->oHomeY;

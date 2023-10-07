@@ -102,6 +102,7 @@ void bhv_books_ctl_loop()
     print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
     print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
     print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 80, "A %d", (int) gMarioStates->faceAngle[1]);
 
     if (0 == o->oAction)
     {
@@ -321,4 +322,45 @@ void bhv_box_spawner_loop()
     }
 }
 
-// castle_inside_dl_tower_003_mesh_layer_1_vtx_0
+int gWaterNumber = 0;
+void bhv_warrow_init(void)
+{
+    o->oFaceAngleYaw = -0x4000;
+    obj_scale(o, 0.6f);
+    gWaterNumber = 0;
+}
+
+void bhv_warrow_loop(void)
+{
+    if (0 == o->oAction)
+    {
+        // -2650, 1800, -354
+        // -2950, 1800, -309
+        
+        // -2650, 1800, 324
+        // -2950, 1800, 544
+        f32 xok = -2950.f < gMarioStates->pos[0] && gMarioStates->pos[0] < -2650.f;
+        f32 yok =  1800.f < gMarioStates->pos[1] && gMarioStates->pos[1] <  2200.f;
+        f32 zok = (-544.f < gMarioStates->pos[2] && gMarioStates->pos[2] <  -324.f)
+               || ( 324.f < gMarioStates->pos[2] && gMarioStates->pos[2] <   544.f);
+
+        s16 ad = abs_angle_diff(0x8000 + o->oFaceAngleYaw, gMarioStates->faceAngle[1]);
+        if (zok && yok && zok && ad < 2000 && (gMarioStates->action == ACT_JUMP_KICK || gMarioStates->action == ACT_PUNCHING || gMarioStates->action == ACT_MOVE_PUNCHING) && (gMarioStates->particleFlags & PARTICLE_TRIANGLE))
+        {
+            o->oAction = 1;
+        }
+    }
+    else if (1 == o->oAction)
+    {
+        const s16 spd = 0x400;
+        if (o->oTimer == (0x8000 / spd))
+        {
+            gWaterNumber = !gWaterNumber;
+            o->oAction = 0;
+        }
+        else
+        {
+            o->oFaceAngleYaw += spd;
+        }
+    }
+}

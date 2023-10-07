@@ -93,3 +93,6 @@
 #include "levels/castle_inside/square_floating_platform/collision.inc.c"
 
 #include "levels/castle_inside/leveldata.inc.c"
+
+#include "levels/castle_inside/warrow/model.inc.c"
+#include "levels/castle_inside/warrow/collision.inc.c"

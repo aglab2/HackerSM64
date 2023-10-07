@@ -5,6 +5,8 @@ extern Vtx castle_inside_dl_waterbox2_mesh_layer_5_vtx_0[12];
 
 static const int sWDWIndices[] = { 0, 1, 2, 3, 6, 7, 9, 11 };
 
+extern int gWaterNumber;
+
 // called when WDW is loaded.
 void bhv_init_changing_water_level_loop(void) {
     if (o->oAction == WATER_LEVEL_ACT_INIT) {
@@ -12,10 +14,10 @@ void bhv_init_changing_water_level_loop(void) {
             o->oAction++; // WATER_LEVEL_ACT_IDLE
         }
     } else if (o->oTimer < 10) {
-        gEnvironmentLevels[0] = gEnvironmentRegions[6];
+        gEnvironmentLevels[0] = gEnvironmentRegions[6 + 6 * gWaterNumber];
     } else {
-        gEnvironmentRegions[6] = gEnvironmentLevels[0];
-        Vtx* ptr = segmented_to_virtual(castle_inside_dl_water_mesh_layer_5_vtx_0);
+        gEnvironmentRegions[6 + 6 * gWaterNumber] = gEnvironmentLevels[0];
+        Vtx* ptr = segmented_to_virtual(gWaterNumber ? castle_inside_dl_waterbox2_mesh_layer_5_vtx_0 : castle_inside_dl_water_mesh_layer_5_vtx_0);
         for (int i = 0; i < sizeof(sWDWIndices) / sizeof(*sWDWIndices); i++)
         {
             ptr[sWDWIndices[i]].v.ob[1] = gEnvironmentLevels[0];

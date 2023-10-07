@@ -2924,6 +2924,19 @@ const BehaviorScript bhvTweester[] = {
     END_LOOP(),
 };
 
+extern void bhv_warrow_init(void);
+extern void bhv_warrow_loop(void);
+const BehaviorScript bhvWArrow[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(warrow_collision),
+    CALL_NATIVE(bhv_warrow_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_warrow_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvMerryGoRoundBooManager[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

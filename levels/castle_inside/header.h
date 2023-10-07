@@ -164,4 +164,8 @@ extern const GeoLayout wdw_geo_000580[];
 
 #include "levels/castle_inside/header.inc.h"
 
+#include "levels/castle_inside/warrow/geo_header.h"
+
+#include "levels/castle_inside/warrow/collision_header.h"
+
 #endif

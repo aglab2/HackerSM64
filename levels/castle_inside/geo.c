@@ -28,3 +28,5 @@
 #include "levels/castle_inside/square_floating_platform/geo.inc.c"
 
 #include "levels/castle_inside/geo.inc.c"
+
+#include "levels/castle_inside/warrow/geo.inc.c"
