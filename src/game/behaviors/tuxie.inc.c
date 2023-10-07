@@ -250,6 +250,8 @@ ObjActionFunc sSmallPenguinActions[] = {
     small_penguin_act_near_mother,
 };
 
+static s32 gPenguinStarSpawned = 0;
+
 void small_penguin_free_actions(void) {
     if (o->oSmallPenguinReturnedToMother) {
         o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
@@ -262,6 +264,11 @@ void small_penguin_free_actions(void) {
 
     if (o->oPosY < -66.f)
     {
+        if (o->oFloor && o->oFloor->type == SURFACE_BURNING && !gPenguinStarSpawned)
+        {
+            gPenguinStarSpawned = 1;
+            spawn_default_star(0.f, 300.f, 0.f);
+        }
         o->oPosX = o->oHomeX;
         o->oPosY = o->oHomeY;
         o->oPosZ = o->oHomeZ;
@@ -269,6 +276,7 @@ void small_penguin_free_actions(void) {
 }
 
 void bhv_small_penguin_init(void) {
+    gPenguinStarSpawned = 0;
     // o->oGravity = 2.5f;
     // o->oFriction = 0.8f;
     // o->oBuoyancy = 1.3f;

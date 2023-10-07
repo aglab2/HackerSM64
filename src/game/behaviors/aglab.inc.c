@@ -172,7 +172,6 @@ void bhv_books_ctl_loop()
     {
         Vtx* vtxs = segmented_to_virtual(castle_inside_dl_tower_003_mesh_layer_1_vtx_0);
         f32 burnDist = o->oTimer * 20.f;
-        print_text_fmt_int(100, 100, "%d", o->oTimer);
         for (int i = 0; i < sizeof(castle_inside_dl_tower_003_mesh_layer_1_vtx_0) / sizeof(*castle_inside_dl_tower_003_mesh_layer_1_vtx_0); i++)
         {
             Vtx* vtx = &vtxs[i];
@@ -203,7 +202,7 @@ void bhv_books_ctl_loop()
             f32 d = sqrtf(dx*dx + dy*dy + dz*dz);
             if (d < burnDist)
             {
-                if (vtx->v.cn[0] > 10)
+                if (vtx->v.cn[0] > 30)
                 {
                     vtx->v.cn[0] -= 10;
                     vtx->v.cn[1] -= 10;
@@ -218,7 +217,7 @@ void bhv_books_ctl_loop()
                 }
                 else
                 {
-                    vtx->v.cn[0] = vtx->v.cn[1] = vtx->v.cn[2] = 0;
+                    // vtx->v.cn[0] = vtx->v.cn[1] = vtx->v.cn[2] = 0;
                 }
             }
         }
@@ -309,7 +308,6 @@ void bhv_box_spawner_loop()
     {
         if (cur_obj_find_nearby_held_actor(bhvBreakableBoxSmall, 100000.0f) != NULL)
         {
-            print_text_fmt_int(20, 20, "%d", __LINE__);
             return;
         }
 
@@ -319,14 +317,12 @@ void bhv_box_spawner_loop()
         {
             if (4500.f < otherBox->oPosY && otherBox->oPosY < 7000.f && otherBox->oPosZ > 1300.f)
             {
-                print_text_fmt_int(20, 20, "%d", __LINE__);
                 return;
             }
 
             otherBox->activeFlags = 0;
         }
         
-        print_text_fmt_int(20, 20, "%d", __LINE__);
         spawn_mist_particles_variable(0, 0, 46.0f);
         spawn_object(o, MODEL_BREAKABLE_BOX, bhvBreakableBoxSmall);
     }
