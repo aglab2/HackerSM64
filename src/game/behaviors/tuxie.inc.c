@@ -250,7 +250,7 @@ ObjActionFunc sSmallPenguinActions[] = {
     small_penguin_act_near_mother,
 };
 
-static s32 gPenguinStarSpawned = 0;
+s32 gPenguinStarSpawned = 0;
 
 void small_penguin_free_actions(void) {
     if (o->oSmallPenguinReturnedToMother) {
@@ -264,10 +264,11 @@ void small_penguin_free_actions(void) {
 
     if (o->oPosY < -66.f)
     {
-        if (o->oFloor && o->oFloor->type == SURFACE_BURNING && !gPenguinStarSpawned)
+        if (o->oFloor && o->oFloor->type == SURFACE_BURNING)
         {
-            gPenguinStarSpawned = 1;
-            spawn_default_star(0.f, 300.f, 0.f);
+            spawn_object(o, MODEL_BOWSER_FLAMES, bhvBowserBombExplosion);
+            create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
+            set_camera_shake_from_point(SHAKE_POS_LARGE, o->oPosX, o->oPosY, o->oPosZ);
         }
         o->oPosX = o->oHomeX;
         o->oPosY = o->oHomeY;

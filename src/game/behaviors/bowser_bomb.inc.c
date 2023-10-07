@@ -17,6 +17,7 @@ void bhv_bowser_bomb_loop(void) {
     set_object_visibility(o, 7000);
 }
 
+extern s32 gPenguinStarSpawned;
 void bhv_bowser_bomb_explosion_loop(void) {
     cur_obj_scale((f32) o->oTimer / 14.0f * 9.0f + 1.0f);
 
@@ -33,6 +34,11 @@ void bhv_bowser_bomb_explosion_loop(void) {
 
     if (o->oTimer == 28) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+        if (!gPenguinStarSpawned)
+        {
+            gPenguinStarSpawned = 1;
+            spawn_default_star(0.f, 300.f, 0.f);
+        }
     }
 }
 
