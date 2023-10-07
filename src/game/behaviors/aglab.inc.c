@@ -84,17 +84,27 @@ void set_room_colors()
     }
 }
 
+extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 void bhv_books_ctl_init()
 {
     gFromY = -200.f;
-    if (gMarioState->numStars >= 1)
+    if (gMarioState->numStars >= 2)
         gFromY += 1600.f;
-    if (gMarioState->numStars >= 3)
+    if (gMarioState->numStars >= 4)
         gFromY += 1600.f;
-    if (gMarioState->numStars >= 6)
+    if (gMarioState->numStars >= 7)
         gFromY += 1600.f;
     if (gMarioState->numStars >= 10)
         gFromY += 1600.f;
+
+    if (gMarioState->numStars >= 10)
+    {
+        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_TR, 0);
+    }
+    else if (gMarioState->numStars != 0)
+    {
+        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
+    }
 
     set_room_colors();
 }
