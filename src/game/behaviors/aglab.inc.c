@@ -58,6 +58,7 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_44),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_45),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_46),
+  ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_47),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_2),
@@ -85,7 +86,16 @@ void set_room_colors()
 
 void bhv_books_ctl_init()
 {
-    gFromY = 5000.f; // -200.f;
+    gFromY = -200.f;
+    if (gMarioState->numStars >= 1)
+        gFromY += 1600.f;
+    if (gMarioState->numStars >= 3)
+        gFromY += 1600.f;
+    if (gMarioState->numStars >= 6)
+        gFromY += 1600.f;
+    if (gMarioState->numStars >= 10)
+        gFromY += 1600.f;
+
     set_room_colors();
 }
 

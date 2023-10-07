@@ -447,7 +447,7 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
             s32 dialogId = get_dialog_id();
             gCamera->cutscene = CUTSCENE_F1 + dialogId - DIALOG_141;
             set_room_colors();
-            if (gFromY < (1600.f * (dialogId - DIALOG_141 + 1)))
+            if (gFromY < (-200.f + 1600.f * (dialogId - DIALOG_141 + 1)))
             {
                 gFromY += 20.f;
             }
@@ -457,7 +457,8 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
             }
             else
             {
-                gFromY = 1600.f * (LastValidDialogId - DIALOG_141 + 1);
+                gFromY = -200.f + 1600.f * (LastValidDialogId - DIALOG_141 + 1);
+                reset_camera(gCamera);
             }
         }
         // look back down
