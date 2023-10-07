@@ -20,8 +20,8 @@ void floating_platform_act_move_to_home(void) {
         f32 dz = gMarioObject->header.gfx.pos[2] - o->oPosZ;
         f32 cy = coss(-o->oMoveAngleYaw);
         f32 sy = sins(-o->oMoveAngleYaw);
-        o->oFaceAnglePitch = ((dz * cy) + (dx * sy)) * 2;
-        o->oFaceAngleRoll = -((dx * cy) + (dz * sy)) * 2;
+        // o->oFaceAnglePitch = ((dz * cy) + (dx * sy)) * 2;
+        // o->oFaceAngleRoll = -((dx * cy) + (dz * sy)) * 2;
         o->oVelY -= 1.0f;
         if (o->oVelY < 0.0f) {
             o->oVelY = 0.0f;
@@ -32,8 +32,8 @@ void floating_platform_act_move_to_home(void) {
             o->oFloatingPlatformMarioWeightWobbleOffset = 90.0f;
         }
     } else {
-        o->oFaceAnglePitch /= 2;
-        o->oFaceAngleRoll /= 2;
+        // o->oFaceAnglePitch /= 2;
+        // o->oFaceAngleRoll /= 2;
         o->oFloatingPlatformMarioWeightWobbleOffset -= 5.0f;
 
         o->oVelY = 10.0f;
