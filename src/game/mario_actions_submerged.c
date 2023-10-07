@@ -1494,7 +1494,7 @@ static s32 act_hold_metal_water_fall_land(struct MarioState *m) {
 static s32 check_common_submerged_cancels(struct MarioState *m) {
     s16 waterHeight = m->waterLevel - 80;
     if (m->pos[1] > waterHeight) {
-        if (waterHeight > m->floorHeight) {
+        if (1) {
             if (m->pos[1] - waterHeight < 50) {
                 m->pos[1] = waterHeight; // lock mario to top if the falloff isn't big enough
             } else {

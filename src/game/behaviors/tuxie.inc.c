@@ -114,7 +114,7 @@ void tuxies_mother_act_idle(void) {
     }
 
     if (cur_obj_check_anim_frame(1)) {
-        cur_obj_play_sound_2(SOUND_OBJ_BIG_PENGUIN_YELL);
+        // cur_obj_play_sound_2(SOUND_OBJ_BIG_PENGUIN_YELL);
     }
 }
 
@@ -266,7 +266,8 @@ void small_penguin_free_actions(void) {
     {
         if (o->oFloor && o->oFloor->type == SURFACE_BURNING)
         {
-            spawn_object(o, MODEL_BOWSER_FLAMES, bhvBowserBombExplosion);
+            struct Object* expl = spawn_object(o, MODEL_BOWSER_FLAMES, bhvBowserBombExplosion);
+            expl->oBehParams = o->oBehParams;
             create_sound_spawner(SOUND_GENERAL_BOWSER_BOMB_EXPLOSION);
             set_camera_shake_from_point(SHAKE_POS_LARGE, o->oPosX, o->oPosY, o->oPosZ);
         }
@@ -295,7 +296,7 @@ void bhv_small_penguin_loop(void) {
             }
             obj_copy_pos(o, gMarioObject);
             if (!(gGlobalTimer & 0x1F)) {
-                play_sound(SOUND_OBJ2_BABY_PENGUIN_YELL, gMarioObject->header.gfx.cameraToObject);
+                // play_sound(SOUND_OBJ2_BABY_PENGUIN_YELL, gMarioObject->header.gfx.cameraToObject);
             }
             break;
         case HELD_THROWN:

@@ -4849,9 +4849,10 @@ const BehaviorScript bhvSnowMoundSpawn[] = {
 
 const BehaviorScript bhvWdwSquareFloatingPlatform[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_LONG(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(wdw_seg7_collision_square_floating_platform),
     SET_FLOAT(oFloatingPlatformHeightOffset, 64),
+    SET_FLOAT(oCollisionDistance, 450),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_floating_platform_loop),
