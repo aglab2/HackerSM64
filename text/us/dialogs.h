@@ -1716,7 +1716,7 @@ With powers of the stars,\n\
 next floor is unlocked..."))
 
 DEFINE_DIALOG(DIALOG_145, 1, 2, 150, 200, _("\
-With all stars are collected,\n\
+All stars are collected,\n\
 last floor is unlocked..."))
 
 DEFINE_DIALOG(DIALOG_146, 1, 2, 150, 200, _("\

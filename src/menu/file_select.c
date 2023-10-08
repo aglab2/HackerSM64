@@ -1926,6 +1926,7 @@ void print_score_file_star_score(s8 fileIndex, s16 courseIndex, s16 x, s16 y) {
  * Prints save file score strings that shows when a save file is chosen inside the score menu.
  */
 void print_save_file_scores(s8 fileIndex) {
+    return;
     u32 i;
     unsigned char textMario[] = { TEXT_MARIO };
     unsigned char textHiScore[] = { TEXT_HI_SCORE };
