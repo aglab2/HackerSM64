@@ -72,6 +72,7 @@ void bhv_blue_coin_switch_init(void)
 /**
  * Update function for bhvBlueCoinSwitch.
  */
+extern void notify_escape_event(int ev);
 void bhv_blue_coin_switch_loop(void) {
     // The switch's model is 1/3 size.
     cur_obj_scale(3.0f);
@@ -84,6 +85,7 @@ void bhv_blue_coin_switch_loop(void) {
             if (gMarioObject->platform == o) {
                 if (gMarioStates[0].action == ACT_GROUND_POUND_LAND) {
                     // Set to BLUE_COIN_SWITCH_ACT_RECEDING
+                    notify_escape_event(1);
                     o->oAction = BLUE_COIN_SWITCH_ACT_RECEDING;
 #ifdef BLUE_COIN_SWITCH_RETRY
                     // Recede at a rate of 16 units/frame.

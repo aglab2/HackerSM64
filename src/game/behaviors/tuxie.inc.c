@@ -285,12 +285,14 @@ void bhv_small_penguin_init(void) {
     // o->oBuoyancy = 1.3f;
 }
 
+extern void notify_escape_event(int ev);
 void bhv_small_penguin_loop(void) {
     switch (o->oHeldState) {
         case HELD_FREE:
             small_penguin_free_actions();
             break;
         case HELD_HELD:
+            notify_escape_event(2);
             cur_obj_unrender_set_action_and_anim(PENGUIN_ANIM_WALK, SMALL_PENGUIN_ACT_WALKING);
             if (cur_obj_has_behavior(bhvPenguinBaby)) {
                 obj_set_behavior(o, bhvSmallPenguin);

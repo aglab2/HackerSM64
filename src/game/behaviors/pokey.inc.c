@@ -39,6 +39,7 @@ static u8 sPokeyBodyPartAttackHandlers[] = {
  * The behavior parameter is the body part's index from POKEY_PART_BP_HEAD to POKEY_PART_BP_LOWEST,
  * with POKEY_PART_BP_HEAD at the top.
  */
+extern void notify_escape_event(int ev);
 void bhv_pokey_body_part_update(void) {
     // PARTIAL_UPDATE
 
@@ -102,6 +103,7 @@ void bhv_pokey_body_part_update(void) {
 
             if (o->oBehParams2ndByte != POKEY_PART_BP_HEAD && obj_handle_attacks(&sPokeyBodyPartHitbox, o->oAction, sPokeyBodyPartAttackHandlers)) {
                 o->parentObj->oPokeyNumAliveBodyParts--;
+                notify_escape_event(0);
                 if (o->oBehParams2ndByte == POKEY_PART_BP_HEAD) {
                     o->parentObj->oPokeyHeadWasKilled = TRUE;
                     // Last minute change to blue coins - not sure why they didn't

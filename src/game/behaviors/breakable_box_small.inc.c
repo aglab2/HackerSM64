@@ -125,6 +125,7 @@ void bhv_breakable_box_small_loop(void) {
             break;
 
         case HELD_HELD:
+            notify_escape_event(3);
             cur_obj_disable_rendering();
             cur_obj_become_intangible();
             break;

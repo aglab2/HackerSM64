@@ -150,7 +150,9 @@ static void goomba_begin_jump(void) {
  * this goomba died. This prevents it from spawning again when mario leaves and
  * comes back.
  */
+extern void notify_escape_event(int ev);
 static void mark_goomba_as_dead(void) {
+    notify_escape_event(4);
     if (o->parentObj != o) {
         set_object_respawn_info_bits(
             o->parentObj, (o->oBehParams2ndByte & GOOMBA_BP_TRIPLET_FLAG_MASK) >> 2);

@@ -3,12 +3,17 @@
 struct VertexGroupDesc
 {
     const Vtx* vtx;
-    const u32 size;
+    const int size;
 };
 
 #define ARR_SIZE(x) { x, sizeof(x) / sizeof(*(x)) }
 
 const struct VertexGroupDesc sVertices[] = {
+  ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_0),
+  ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_1),
+  ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_2),
+  ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_3),
+  ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_4),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_0),
   // ARR_SIZE(castle_inside_dl_tower_mesh_layer_5_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_003_mesh_layer_1_vtx_0),
@@ -80,14 +85,13 @@ f32 gFromY = 0;
 
 void set_room_colors()
 {
-    for (int i = 0; i < sizeof(sVertices) / sizeof(*sVertices); i++)
+    for (u32 i = 0; i < sizeof(sVertices) / sizeof(*sVertices); i++)
     {
         const struct VertexGroupDesc* desc = &sVertices[i];
         Vtx* vtx = segmented_to_virtual(desc->vtx);
         for (int j = 0; j < desc->size; j++)
         {
             s16 y = vtx[j].v.ob[1];
-            const f32 limit = 1600.f;
             vtx[j].v.cn[3] = 255 - CLAMP(y - gFromY, 0, 1600.f) * 255 / 1600.f;
         }
     }
@@ -193,7 +197,7 @@ void bhv_books_ctl_loop()
     {
         Vtx* vtxs = segmented_to_virtual(castle_inside_dl_tower_003_mesh_layer_1_vtx_0);
         f32 burnDist = o->oTimer * 20.f;
-        for (int i = 0; i < sizeof(castle_inside_dl_tower_003_mesh_layer_1_vtx_0) / sizeof(*castle_inside_dl_tower_003_mesh_layer_1_vtx_0); i++)
+        for (u32 i = 0; i < sizeof(castle_inside_dl_tower_003_mesh_layer_1_vtx_0) / sizeof(*castle_inside_dl_tower_003_mesh_layer_1_vtx_0); i++)
         {
             Vtx* vtx = &vtxs[i];
             int allowed = 0;
@@ -219,7 +223,6 @@ void bhv_books_ctl_loop()
             f32 dx = vtx->v.ob[0] - o->oPosX;
             f32 dy = vtx->v.ob[1] - o->oPosY;
             f32 dz = vtx->v.ob[2] - o->oPosZ;
-
             f32 d = sqrtf(dx*dx + dy*dy + dz*dz);
             if (d < burnDist)
             {
@@ -296,7 +299,7 @@ void bhv_pokey_ctl_loop()
             Vtx* vtxs = segmented_to_virtual(castle_inside_dl_tower_mesh_layer_5_vtx_1);
             f32 minDist = 10000.f;
             Vtx* minVtx = NULL;
-            for (int i = 0; i < sizeof(castle_inside_dl_tower_mesh_layer_5_vtx_1) / sizeof(*castle_inside_dl_tower_mesh_layer_5_vtx_1); i++)
+            for (u32 i = 0; i < sizeof(castle_inside_dl_tower_mesh_layer_5_vtx_1) / sizeof(*castle_inside_dl_tower_mesh_layer_5_vtx_1); i++)
             {
                 Vtx* vtx = &vtxs[i];
                 f32 dx = vtx->v.ob[0] - gMarioStates->pos[0];
@@ -311,7 +314,7 @@ void bhv_pokey_ctl_loop()
 
             if (minVtx)
             {
-                for (int i = 0; i < sizeof(castle_inside_dl_tower_mesh_layer_5_vtx_1) / sizeof(*castle_inside_dl_tower_mesh_layer_5_vtx_1); i++)
+                for (u32 i = 0; i < sizeof(castle_inside_dl_tower_mesh_layer_5_vtx_1) / sizeof(*castle_inside_dl_tower_mesh_layer_5_vtx_1); i++)
                 {
                     Vtx* vtx = &vtxs[i];
                     if (vtx->v.ob[0] == minVtx->v.ob[0] && vtx->v.ob[1] == minVtx->v.ob[1] && vtx->v.ob[2] == minVtx->v.ob[2])
@@ -401,16 +404,6 @@ void bhv_warrow_loop(void)
     }
 }
 
-void bhv_scavenger_init()
-{
-
-}
-
-void bhv_scavenger_loop()
-{
-
-}
-
 void bhv_light_switch_init()
 {
 
@@ -450,4 +443,154 @@ void bhv_light_switch_loop()
     {
         o->activeFlags = 0;
     }
+}
+
+enum EscapeEvents
+{
+    EE_POKEY,
+    EE_SWITCH,
+    EE_PENGUIN,
+    EE_BOX,
+    EE_GOOMBA,
+};
+
+static const struct VertexGroupDesc sEdgeMap[] = {
+    { NULL, 0 }, ARR_SIZE(castle_inside_dl_diag_pokey_switch_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_pokey_penguin_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_pokey_box_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_goomba_pokey_mesh_layer_1_vtx_0),
+    ARR_SIZE(castle_inside_dl_diag_pokey_switch_mesh_layer_1_vtx_0), { NULL, 0 }, ARR_SIZE(castle_inside_dl_diag_switch_penguin_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_switch_box_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_goomba_switch_mesh_layer_1_vtx_0),
+    ARR_SIZE(castle_inside_dl_diag_pokey_penguin_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_switch_penguin_mesh_layer_1_vtx_0), { NULL, 0 }, ARR_SIZE(castle_inside_dl_diag_box_penguin_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_goomba_penguin_mesh_layer_1_vtx_0),
+    ARR_SIZE(castle_inside_dl_diag_pokey_box_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_switch_box_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_box_penguin_mesh_layer_1_vtx_0), { NULL, 0 }, ARR_SIZE(castle_inside_dl_diag_goomba_box_mesh_layer_1_vtx_0),
+    ARR_SIZE(castle_inside_dl_diag_goomba_pokey_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_goomba_switch_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_goomba_penguin_mesh_layer_1_vtx_0), ARR_SIZE(castle_inside_dl_diag_goomba_box_mesh_layer_1_vtx_0), { NULL, 0 },
+};
+
+static const Vec3f sVertMap[] = {
+    { 3539.f, 6975.f, 0.f },
+    { 3539.f, 6752.f, 330.f },
+    { 3539.f, 6367.f, 204.f },
+    { 3539.f, 6367.f, -204.f },
+    { 3539.f, 6752.f, -330.f },
+};
+
+static s8 sScavengerReacted[] = { -1, -1, -1, -1, -1, -1 };
+
+static s8 sScavengerCorrectEdges[] = {
+    0, 0, 1, 1, 0,
+    0, 0, 0, 1, 1,
+    1, 0, 0, 0, 1,
+    1, 1, 0, 0, 0,
+    0, 1, 1, 0, 0,
+};
+
+static void process_scavenger_edges()
+{
+    // reset all vtx colours
+    for (u32 i = 0; i < sizeof(sEdgeMap) / sizeof(*sEdgeMap); i++)
+    {
+        const struct VertexGroupDesc* edge = &sEdgeMap[i];
+        if (!edge->vtx)
+            continue;
+
+        Vtx* vtxs = segmented_to_virtual(edge->vtx);
+        for (int k = 0; k < edge->size; k++)
+        {
+            Vtx* vtx = &vtxs[k];
+            vtx->v.cn[3] = 255;
+        }
+    }
+
+    // set correct colors
+    for (u32 i = 0; i < sizeof(sScavengerReacted) / sizeof(*sScavengerReacted); i++)
+    {
+        int event = sScavengerReacted[i];
+        if (-1 == event)
+            break;
+
+        const f32* pos = sVertMap[event];
+        if (i == 0)
+        {
+            // light up all directions
+            for (int j = 0; j < 5; j++)
+            {
+                const struct VertexGroupDesc* edge = &sEdgeMap[5*event + j];
+                if (!edge->vtx)
+                    continue;
+
+                Vtx* vtxs = segmented_to_virtual(edge->vtx);
+                for (int k = 0; k < edge->size; k++)
+                {
+                    Vtx* vtx = &vtxs[k];
+                    f32 dx = vtx->v.ob[0] - pos[0];
+                    f32 dy = vtx->v.ob[1] - pos[1];
+                    f32 dz = vtx->v.ob[2] - pos[2];
+                    f32 d = sqrtf(dx*dx + dy*dy + dz*dz);
+                    if (d < 130.f)
+                    {
+                        vtx->v.cn[3] = 0;
+                    }
+                }
+            }
+        }
+        else
+        {
+            // light up a single direction
+            int prevEvent = sScavengerReacted[i - 1];
+            const struct VertexGroupDesc* edge = &sEdgeMap[5*event + prevEvent];
+            if (!edge->vtx)
+                continue;
+
+            Vtx* vtxs = segmented_to_virtual(edge->vtx);
+            for (int k = 0; k < edge->size; k++)
+            {
+                Vtx* vtx = &vtxs[k];
+                vtx->v.cn[3] = 0;
+            }
+        }
+    }
+}
+
+void bhv_scavenger_init()
+{
+    // process_scavenger_edges();
+    o->oPosX = 3220.f; 
+    o->oPosY = 6640.f;
+    o->oPosZ = 0.f;
+}
+
+void bhv_scavenger_loop()
+{
+#if 0
+    for (u32 i = 0; i < sizeof(sScavengerReacted) / sizeof(*sScavengerReacted); i++)
+        print_text_fmt_int(120, 20 + 20 * i, "%d", sScavengerReacted[i]);
+#endif
+
+    // all events should be pushed
+    if (-1 == sScavengerReacted[5])
+        return;
+
+    // check that edges make a well formed star
+    if (sScavengerReacted[0] != sScavengerReacted[5])
+        return;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (!sScavengerCorrectEdges[sScavengerReacted[i] + 5*sScavengerReacted[i + 1]])
+            return;
+    }
+
+    spawn_default_star(3220.f, 6640.f, 0);
+    o->activeFlags = 0;
+}
+
+void notify_escape_event(int ev)
+{
+    if (sScavengerReacted[0] == ev)
+        return;
+
+    // push new event
+    for (u32 i = 0; i < sizeof(sScavengerReacted) / sizeof(*sScavengerReacted) - 1; i++)
+    {
+        sScavengerReacted[sizeof(sScavengerReacted) / sizeof(*sScavengerReacted) - 1 - i] = sScavengerReacted[sizeof(sScavengerReacted) / sizeof(*sScavengerReacted) - 2 - i];
+    }
+    sScavengerReacted[0] = ev;
+
+    process_scavenger_edges();
 }
