@@ -2845,10 +2845,12 @@ const BehaviorScript bhvPurpleSwitchHiddenBoxes[] = {
     GOTO(bhvFloorSwitchHardcodedModel + 1),
 };
 
+extern void bhv_blue_coin_switch_init(void);
 const BehaviorScript bhvBlueCoinSwitch[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(blue_coin_switch_seg8_collision_08000E98),
+    CALL_NATIVE(bhv_blue_coin_switch_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blue_coin_switch_loop),
     END_LOOP(),

@@ -32,6 +32,7 @@ void bhv_hidden_blue_coin_loop(void) {
 
             if (blueCoinSwitch->oAction == BLUE_COIN_SWITCH_ACT_TICKING) {
                 o->oAction = HIDDEN_BLUE_COIN_ACT_ACTIVE;
+                o->oHiddenBlueCoinGoomba = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
             }
 
 #ifdef BLUE_COIN_SWITCH_PREVIEW
@@ -45,19 +46,9 @@ void bhv_hidden_blue_coin_loop(void) {
             break;
 
         case HIDDEN_BLUE_COIN_ACT_ACTIVE:
-            // Become tangible
-            cur_obj_enable_rendering();
-            cur_obj_become_tangible();
-
-            // Delete the coin once collected
-            if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-                spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner);
-                obj_mark_for_deletion(o);
-            }
-
             // After 200 frames of waiting and 20 2-frame blinks (for 240 frames total),
             // delete the object.
-            if (cur_obj_wait_then_blink(200, 20)) {
+            if (cur_obj_wait_then_blink(160, 20)) {
 #ifdef BLUE_COIN_SWITCH_RETRY
                 o->oAction = HIDDEN_BLUE_COIN_ACT_INACTIVE;
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -72,12 +63,19 @@ void bhv_hidden_blue_coin_loop(void) {
     o->oInteractStatus = INT_STATUS_NONE;
 }
 
+static s32 sHasGoombaStarSpawned = 0;
+void bhv_blue_coin_switch_init(void)
+{
+    sHasGoombaStarSpawned = 0;
+}
+
 /**
  * Update function for bhvBlueCoinSwitch.
  */
 void bhv_blue_coin_switch_loop(void) {
     // The switch's model is 1/3 size.
     cur_obj_scale(3.0f);
+    s32 noGoombas;
 
     switch (o->oAction) {
         case BLUE_COIN_SWITCH_ACT_IDLE:
@@ -140,17 +138,21 @@ void bhv_blue_coin_switch_loop(void) {
 
         case BLUE_COIN_SWITCH_ACT_TICKING:
             // Tick faster when the blue coins start blinking
-            if (o->oTimer < 200) {
+            if (o->oTimer < 160) {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
             } else {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
             }
 #ifdef BLUE_COIN_SWITCH_RETRY
-            if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL) {
-                spawn_mist_particles_variable(0, 0, 46.0f);
-                obj_mark_for_deletion(o);
             // Set to BLUE_COIN_SWITCH_ACT_EXTENDING after the coins unload after the 240-frame timer expires.
-            } else if (o->oTimer > 240) {
+            noGoombas = !cur_obj_nearest_object_with_behavior(bhvGoomba);
+            if (noGoombas && !sHasGoombaStarSpawned)
+            {
+                sHasGoombaStarSpawned = 1;
+                spawn_default_star(o->oPosX, o->oPosY + 400.f, o->oPosZ);
+            }
+
+            if (o->oTimer > 200 || noGoombas) {
                 o->oAction  = BLUE_COIN_SWITCH_ACT_EXTENDING;
                 o->oVelY    = 16.0f;
                 o->oGravity =  0.0f;

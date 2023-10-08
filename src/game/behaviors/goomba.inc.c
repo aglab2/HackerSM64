@@ -320,6 +320,7 @@ void bhv_goomba_update(void) {
         if (o->parentObj != o) {
             if (o->parentObj->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
                 obj_mark_for_deletion(o);
+                spawn_mist_particles_variable(0, 0, 46.0f);
             }
         }
 

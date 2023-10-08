@@ -1,11 +1,11 @@
-void scroll_castle_inside_dl_tower_mesh_layer_1_vtx_27() {
+void scroll_castle_inside_dl_tower_mesh_layer_1_vtx_26() {
 	int i = 0;
 	int count = 8;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(castle_inside_dl_tower_mesh_layer_1_vtx_27);
+	Vtx *vertices = segmented_to_virtual(castle_inside_dl_tower_mesh_layer_1_vtx_26);
 
 	deltaY = (int)(0.25 * 0x20) % height;
 
@@ -62,7 +62,7 @@ void scroll_castle_inside_dl_waterbox2_mesh_layer_5_vtx_0() {
 }
 
 void scroll_castle_inside() {
-	scroll_castle_inside_dl_tower_mesh_layer_1_vtx_27();
+	scroll_castle_inside_dl_tower_mesh_layer_1_vtx_26();
 	scroll_castle_inside_dl_water_mesh_layer_5_vtx_0();
 	scroll_castle_inside_dl_waterbox2_mesh_layer_5_vtx_0();
 };

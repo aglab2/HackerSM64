@@ -22,7 +22,7 @@
 /**
  * Allows for retries on collecting the remaining blue coins from a blue coin switch.
  */
-// #define BLUE_COIN_SWITCH_RETRY
+#define BLUE_COIN_SWITCH_RETRY
 
 /**
  * Allow previewing blue coin locations from a blue coin switch when Mario is standing on the blue coin switch.

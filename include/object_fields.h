@@ -250,6 +250,7 @@
 
 /* Hidden Blue Coin */
 #define /*0x0F8*/ oHiddenBlueCoinSwitch OBJECT_FIELD_OBJ(0x1C)
+#define /*0x0F8*/ oHiddenBlueCoinGoomba OBJECT_FIELD_OBJ(0x1D)
 
 /* Bob-omb */
 #define /*0x0F4*/ oBobombBlinkTimer OBJECT_FIELD_S32(0x1B)
