@@ -440,6 +440,8 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
             } else {
                 create_dialog_box_with_var(GET_HIGH_U16_OF_32(actionArg), GET_LOW_U16_OF_32(actionArg));
             }
+            if (actionArg == 144)
+                seq_player_fade_out(0, 100);
         }
         // wait until dialog is done
         else if (m->actionState == 10) {
@@ -459,6 +461,8 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
             {
                 gFromY = -200.f + 1600.f * (LastValidDialogId - DIALOG_141 + 1);
                 reset_camera(gCamera);
+                if (LastValidDialogId == 144)
+                    seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_TR, 0);
             }
         }
         // look back down

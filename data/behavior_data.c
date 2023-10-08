@@ -6146,13 +6146,13 @@ const BehaviorScript bhvBoxSpawner[] = {
     END_LOOP(),
 };
 
-extern void bhv_wdw_ctl_init();
-extern void bhv_wdw_ctl_loop();
-const BehaviorScript bhvWDWCtl[] = {
+extern void bhv_scavenger_init();
+extern void bhv_scavenger_loop();
+const BehaviorScript bhvScanvenger[] = {
     BEGIN(OBJ_LIST_SPAWNER),
-    CALL_NATIVE(bhv_wdw_ctl_init),
+    CALL_NATIVE(bhv_scavenger_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_wdw_ctl_loop),
+        CALL_NATIVE(bhv_scavenger_loop),
     END_LOOP(),
 };
 

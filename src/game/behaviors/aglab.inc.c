@@ -73,6 +73,7 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_2),
+  ARR_SIZE(castle_inside_dl_tower_005_mesh_layer_1_vtx_0),
 };
 
 f32 gFromY = 0;
@@ -400,12 +401,12 @@ void bhv_warrow_loop(void)
     }
 }
 
-void bhv_wdw_ctl_init()
+void bhv_scavenger_init()
 {
 
 }
 
-void bhv_wdw_ctl_loop()
+void bhv_scavenger_loop()
 {
 
 }
