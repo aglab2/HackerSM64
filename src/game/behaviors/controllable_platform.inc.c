@@ -10,7 +10,7 @@ void controllable_platform_act_1(void) {
     }
 }
 
-static const int sWhenActives[4] = { 2, 4, 7, 10, 15 };
+static const int sWhenActives[5] = { 2, 4, 7, 10, 15 };
 
 void controllable_platform_act_2(void) {
     if (o->oBehParams2ndByte == sControllablePlatformDirectionState) {
@@ -66,17 +66,17 @@ void bhv_controllable_platform_sub_loop(void) {
 void bhv_controllable_platform_init(void) {
     struct Object *sp34;
 
-    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM1, bhvControllablePlatformSub, 0,
-                                     51, 204, 0, 0, 0);
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM1, bhvControllablePlatformSub,
+                                      0, 51, -204, 0, -0x8000, 0);
     sp34->oBehParams2ndByte = 1;
-    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM2, bhvControllablePlatformSub, 0,
-                                     51, -204, 0, -0x8000, 0);
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM2, bhvControllablePlatformSub,
+                                     -204, 51, 0, 0, -0x4000, 0);
     sp34->oBehParams2ndByte = 2;
-    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM3, bhvControllablePlatformSub, 204,
-                                     51, 0, 0, 0x4000, 0);
+    sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM3, bhvControllablePlatformSub,
+                                     0, 51, 204, 0, 0, 0);
     sp34->oBehParams2ndByte = 3;
     sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM4, bhvControllablePlatformSub,
-                                     -204, 51, 0, 0, -0x4000, 0);
+                                      204, 51, 0, 0, 0x4000, 0);
     sp34->oBehParams2ndByte = 4;
 
     sControllablePlatformDirectionState = 0;
@@ -182,7 +182,7 @@ void bhv_controllable_platform_loop(void) {
 
         case 4:
             controllable_platform_check_walls();
-            if (o->oPosY > 6000.f)
+            if (o->oPosY > 6400.f)
             {
                 sControllablePlatformDirectionState = 5;
             }
@@ -199,6 +199,8 @@ void bhv_controllable_platform_loop(void) {
         case 6:
             if (o->oPosY > 0)
                 o->oVelY = -60.f;
+            else
+                o->oPosY = 0;
 
             break;
     }

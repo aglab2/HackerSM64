@@ -50,14 +50,8 @@ void tuxies_mother_act_receiving_baby(void) {
                 s32 motherParam = GET_BPARAM2(o->oBehParams);
                 s32 babyParam   = GET_BPARAM2(o->prevObj->oBehParams);
                 s32 dialogID = ((motherParam == babyParam) ? DIALOG_058 : DIALOG_059);
-
-                if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, 
-                        DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, dialogID)) {
-                    o->oSubAction = dialogID == DIALOG_058
-                        ? MOTHER_PENGUIN_SUB_ACT_CORRECT_BABY
-                        : MOTHER_PENGUIN_SUB_ACT_WRONG_BABY;
-                    o->prevObj->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
-                }
+                o->oSubAction = MOTHER_PENGUIN_SUB_ACT_CORRECT_BABY;
+                o->prevObj->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
             } else {
                 cur_obj_init_animation_with_sound(PENGUIN_ANIM_WALK);
             }
@@ -101,10 +95,7 @@ void tuxies_mother_act_idle(void) {
                 }
                 break;
             case MOTHER_PENGUIN_SUB_ACT_ASK_FOR_BABY:
-                if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
-                    DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_057)) {
-                    o->oSubAction++; // MOTHER_PENGUIN_SUB_ACT_ALREADY_ASKED
-                }
+                o->oSubAction++; // MOTHER_PENGUIN_SUB_ACT_ALREADY_ASKED
                 break;
             case MOTHER_PENGUIN_SUB_ACT_ALREADY_ASKED:
                 if (o->oDistanceToMario > 450.0f) {

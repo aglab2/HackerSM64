@@ -127,7 +127,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_STAR, -1332, 5900, 5, 0, 0, 0, (13 << 24), bhvStar),
 		OBJECT(MODEL_NONE, -15, 0, -782, 0, 0, 0, (0xf1 << 16), bhvDeathWarp),
 		OBJECT(MODEL_NONE, -843, 457, 841, 0, 0, 0, 0x00000000, bhvLightSwitch),
-		OBJECT(MODEL_PENGUIN, -1969, 780, 19, 0, 0, 0, (8 << 24), bhvTuxiesMother),
+		OBJECT(MODEL_PENGUIN, -1969, 780, -30, 0, -90, 0, (8 << 24), bhvTuxiesMother),
 		OBJECT(MODEL_TWEESTER, 11, 1515, -2760, 0, 0, 0, 0x00000000, bhvTweester),
 		OBJECT(MODEL_WARROW, -2815, 1800, -11, 0, 0, 0, 0x00000000, bhvWArrow),
 		OBJECT(MODEL_WDW_WATER_LEVEL_DIAMOND, 2469, 113, -520, 0, 0, 0, 0x00000000, bhvWaterLevelDiamond),

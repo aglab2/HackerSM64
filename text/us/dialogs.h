@@ -203,21 +203,14 @@ Would you like to Save?\n\
 \n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
-You've collected 100\n\
-coins! Mario gains more\n\
-power from the castle.\n\
+DEFINE_DIALOG(DIALOG_013, 1, 2, 30, 200, _("\
 Do you want to Save?\n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
-Wow! Another Power Star!\n\
-Mario gains more courage\n\
-from the power of the\n\
-castle.\n\
+DEFINE_DIALOG(DIALOG_014, 1, 2, 30, 200, _("\
 Do you want to Save?\n\
-\n\
-//You Bet//Not Now"))
+//Yes////No"))
+
 
 DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
 You can punch enemies to\n\
