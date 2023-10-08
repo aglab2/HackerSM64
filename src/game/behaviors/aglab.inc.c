@@ -60,6 +60,8 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_45),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_46),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_47),
+  ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_48),
+  ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_49),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_2),
@@ -68,6 +70,9 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_002_mesh_layer_4_vtx_0),
   ARR_SIZE(castle_inside_dl_wtch_mesh_layer_1_vtx_0),
   ARR_SIZE(castle_inside_dl_wtch_mesh_layer_1_vtx_1),
+  ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_0),
+  ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_1),
+  ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_2),
 };
 
 f32 gFromY = 0;
