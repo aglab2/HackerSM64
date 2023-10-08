@@ -590,7 +590,7 @@ void notify_escape_event(int ev)
         return;
 
 
-    if (gMarioStates->numStars == 14)
+    if (gMarioStates->numStars == 14 && !save_file_is_collected_star_or_key(14))
         play_sound(SOUND_MENU_COLLECT_SECRET, gGlobalSoundSource);
 
     // push new event

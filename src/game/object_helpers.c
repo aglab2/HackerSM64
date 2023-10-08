@@ -27,6 +27,7 @@
 #include "spawn_object.h"
 #include "spawn_sound.h"
 #include "puppylights.h"
+#include "emutest.h"
 
 static s32 clear_move_flag(u32 *bitSet, s32 flag);
 
