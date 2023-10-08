@@ -505,6 +505,14 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
     }
 }
 
+s32 save_file_is_collected_star_or_key(s16 starIndex) {
+    s32 fileIndex = gCurrSaveFileNum - 1;
+    s32 courseIndex = COURSE_NUM_TO_INDEX(gCurrCourseNum);
+    s32 starByte = COURSE_NUM_TO_INDEX(starIndex / 7);
+    s32 starFlag = 1 << (starIndex % 7);
+    return save_file_get_star_flags(fileIndex, starByte) & starFlag;
+}
+
 s32 save_file_exists(s32 fileIndex) {
     return (gSaveBuffer.files[fileIndex][0].flags & SAVE_FLAG_FILE_EXISTS) != 0;
 }

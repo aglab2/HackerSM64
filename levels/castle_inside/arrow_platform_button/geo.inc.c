@@ -34,3 +34,12 @@ const GeoLayout hmc_geo_0005B8_4[] = {
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
+
+extern const Gfx hmc_seg7_dl_07023090_5[];
+const GeoLayout hmc_geo_0005B8_5[] = {
+   GEO_CULLING_RADIUS(200),
+   GEO_OPEN_NODE(),
+      GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_seg7_dl_07023090_5),
+   GEO_CLOSE_NODE(),
+   GEO_END(),
+};

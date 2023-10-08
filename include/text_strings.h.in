@@ -86,6 +86,81 @@
 #define TEXT_HUD_PRESS_L _("PRESS L TO SWITCH")
 #endif
 
+#define TEXT_CURRENT_HINT _("Current Hints:")
+#define TEXT_PAY_5 _("Press B to pay 5 coins to unlock the next hint")
+
+#define TEXT_HINT_1_0 _("Touch the switch!")
+
+#define TEXT_HINT_2_0 _("Star under the Wet platform")
+#define TEXT_HINT_2_1 _("Explore Boo & Penguin room")
+#define TEXT_HINT_2_2 _("Raise the water in Boo room")
+#define TEXT_HINT_2_3 _("Dive under risen platform in the Penguin room")
+
+#define TEXT_HINT_3_0 _("Get rid of those bookshelves")
+#define TEXT_HINT_3_1 _("Explore Boo room")
+#define TEXT_HINT_3_2 _("Burn down 4 bookshelves")
+#define TEXT_HINT_3_3 _("Lure flame from flamespitter in a bookshelf")
+
+#define TEXT_HINT_4_0 _("An asymmetric incoherency")
+#define TEXT_HINT_4_1 _("Explore Lava room")
+#define TEXT_HINT_4_2 _("Groundpound the incorrect platform")
+#define TEXT_HINT_4_3 _("Out of 4 hexagons find the different one")
+
+#define TEXT_HINT_5_0 _("Loud creature demise")
+#define TEXT_HINT_5_1 _("Explore Penguin & Lava room")
+#define TEXT_HINT_5_2 _("Penguin is the creature in question")
+#define TEXT_HINT_5_3 _("Drop penguin in lava")
+
+#define TEXT_HINT_6_0 _("An unreachable star")
+#define TEXT_HINT_6_1 _("Explore Floor 1 & Starting area")
+#define TEXT_HINT_6_2 _("Use tornado to escape from Floor 1")
+#define TEXT_HINT_6_3 _("Twirle from Floor 1 into a star")
+
+#define TEXT_HINT_7_0 _("2 suspicious Pokeys")
+#define TEXT_HINT_7_1 _("Explore Floor 1")
+#define TEXT_HINT_7_2 _("Try twirling into a wall behind pokeys")
+#define TEXT_HINT_7_3 _("Make pokeys have height written on the wall")
+
+#define TEXT_HINT_8_0 _("Haunted elevator endeavour")
+#define TEXT_HINT_8_1 _("Explore Starting area")
+#define TEXT_HINT_8_2 _("Try raising lift to at least Floor 2")
+#define TEXT_HINT_8_3 _("Drop down from a lift when it is stopped")
+
+#define TEXT_HINT_9_0 _("Mother's errand")
+#define TEXT_HINT_9_1 _("Explore Floor 2, Boo and Penguin room")
+#define TEXT_HINT_9_2 _("Arrow on Floor 2 changes which platform is risen by water changer")
+#define TEXT_HINT_9_3 _("Platforms in Penguin room should be at High and Medium levels")
+
+#define TEXT_HINT_10_0 _("A weird star above the star")
+#define TEXT_HINT_10_1 _("Explore Floor 3 and 2")
+#define TEXT_HINT_10_2 _("Red star on Floor 2 is a fading warp. How to stand on it?")
+#define TEXT_HINT_10_3 _("Break some spawned boxes and stand still to engage the fading warp")
+
+#define TEXT_HINT_11_0 _("Wreck unwelcome visitor")
+#define TEXT_HINT_11_1 _("Explore Floor 3 and Boo room")
+#define TEXT_HINT_11_2 _("Thrown and sliding cork boxes can hurt Big Boo")
+#define TEXT_HINT_11_3 _("Throw cork box from distance to have time to not look at Big Boo")
+
+#define TEXT_HINT_12_0 _("The path of fakes")
+#define TEXT_HINT_12_1 _("Explore Floor 3")
+#define TEXT_HINT_12_2 _("Follow the path given by a path solution")
+#define TEXT_HINT_12_3 _("Real platforms are marked as checkboxes on wall behind Floor 3")
+
+#define TEXT_HINT_13_0 _("A switch bait")
+#define TEXT_HINT_13_1 _("Explore Floor 4")
+#define TEXT_HINT_13_2 _("Hit the blue coin switch")
+#define TEXT_HINT_13_3 _("Kill all spawned goombas before time runs out")
+
+#define TEXT_HINT_14_0 _("Living in your walls")
+#define TEXT_HINT_14_1 _("Explore area near Floor 4")
+#define TEXT_HINT_14_2 _("Part of the tower wall is shaded differently")
+#define TEXT_HINT_14_3 _("Longjump to the dark shaded wall - it is fake")
+
+#define TEXT_HINT_15_0 _("The grand scavenger hunt")
+#define TEXT_HINT_15_1 _("Explore Floor 1, 3, 4, Penguin Room")
+#define TEXT_HINT_15_2 _("Make yellow line painting on Floor 4 be star shaped")
+#define TEXT_HINT_15_3 _("Yellow line connects objects Mario interacted now and previously")
+
 #if defined(VERSION_JP) || defined(VERSION_SH)
 
 /**

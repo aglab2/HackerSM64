@@ -81,7 +81,7 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_005_mesh_layer_1_vtx_0),
 };
 
-f32 gFromY = 0;
+f32 gFromY = 10000.f;
 
 void set_room_colors()
 {
@@ -111,6 +111,8 @@ void bhv_books_ctl_init()
         gFromY += 1600.f;
     if (gMarioState->numStars >= 10)
         gFromY += 1600.f;
+    if (gMarioState->numStars >= 15)
+        gFromY += 1600.f;
 
     if (gMarioState->numStars >= 10)
     {
@@ -136,9 +138,9 @@ void bhv_books_ctl_loop()
     }
 #endif
 
-    print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
-    print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
-    print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
+    // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
+    // print_text_fmt_int(20, 40, "Y %d", (int) gMarioStates->pos[1]);
+    // print_text_fmt_int(20, 20, "Z %d", (int) gMarioStates->pos[2]);
     // print_text_fmt_int(20, 80, "A %d", (int) gMarioStates->faceAngle[1]);
 
     if (0 == o->oAction)
@@ -387,6 +389,7 @@ void bhv_warrow_loop(void)
         s16 ad = abs_angle_diff(0x8000 + o->oFaceAngleYaw, gMarioStates->faceAngle[1]);
         if (xok && yok && zok && ad < 2000 && (gMarioStates->action == ACT_JUMP_KICK || gMarioStates->action == ACT_PUNCHING || gMarioStates->action == ACT_MOVE_PUNCHING) && (gMarioStates->particleFlags & PARTICLE_TRIANGLE))
         {
+            cur_obj_play_sound_2(SOUND_GENERAL2_SPINDEL_ROLL);
             o->oAction = 1;
         }
     }
@@ -436,10 +439,13 @@ void bhv_light_switch_loop()
     {
         spawn_default_star(-600.f, 300.f, 600.f);
         o->activeFlags = 0;
-        gFromY += 3000.f;
-        play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
-        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
-        set_room_colors();
+        if (0 == gMarioStates->numStars)
+        {
+            gFromY += 3000.f;
+            play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+            seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
+            set_room_colors();
+        }
     }
 }
 
@@ -582,6 +588,10 @@ void notify_escape_event(int ev)
 {
     if (sScavengerReacted[0] == ev)
         return;
+
+
+    if (gMarioStates->numStars == 14)
+        play_sound(SOUND_MENU_COLLECT_SECRET, gGlobalSoundSource);
 
     // push new event
     for (u32 i = 0; i < sizeof(sScavengerReacted) / sizeof(*sScavengerReacted) - 1; i++)

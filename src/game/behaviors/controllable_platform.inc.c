@@ -25,6 +25,11 @@ void controllable_platform_act_2(void) {
 }
 
 void bhv_controllable_platform_sub_loop(void) {
+    if (gMarioStates->numStars == 15)
+    {
+        obj_set_model(o, MODEL_HMC_METAL_ARROW_PLATFORM5);
+    }
+
     if (gMarioStates->numStars >= sWhenActives[o->oBehParams2ndByte - 1])
     {
         switch (o->oAction) {
@@ -146,7 +151,7 @@ void bhv_controllable_platform_loop(void) {
 
         case 1:
             controllable_platform_check_walls();
-            if (o->oPosY > 1600.f)
+            if (o->oPosY > (gMarioStates->numStars == 15 ? 8000.f : 1600.f))
             {
                 sControllablePlatformDirectionState = 5;
             }
@@ -158,7 +163,7 @@ void bhv_controllable_platform_loop(void) {
 
         case 2:
             controllable_platform_check_walls();
-            if (o->oPosY > 3200.f)
+            if (o->oPosY > (gMarioStates->numStars == 15 ? 8000.f : 3200.f))
             {
                 sControllablePlatformDirectionState = 5;
             }
@@ -170,7 +175,7 @@ void bhv_controllable_platform_loop(void) {
 
         case 3:
             controllable_platform_check_walls();
-            if (o->oPosY > 4800.f)
+            if (o->oPosY > (gMarioStates->numStars == 15 ? 8000.f : 4800.f))
             {
                 sControllablePlatformDirectionState = 5;
             }
@@ -182,7 +187,7 @@ void bhv_controllable_platform_loop(void) {
 
         case 4:
             controllable_platform_check_walls();
-            if (o->oPosY > 6400.f)
+            if (o->oPosY > (gMarioStates->numStars == 15 ? 8000.f : 6400.f))
             {
                 sControllablePlatformDirectionState = 5;
             }

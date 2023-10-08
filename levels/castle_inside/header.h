@@ -156,6 +156,7 @@ extern const GeoLayout hmc_geo_0005B8_1[];
 extern const GeoLayout hmc_geo_0005B8_2[];
 extern const GeoLayout hmc_geo_0005B8_3[];
 extern const GeoLayout hmc_geo_0005B8_4[];
+extern const GeoLayout hmc_geo_0005B8_5[];
 
 extern const GeoLayout wdw_geo_000598[];
 extern const GeoLayout wdw_geo_0005C0[];

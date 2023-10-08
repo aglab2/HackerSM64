@@ -61,10 +61,12 @@ const LevelScript level_castle_inside_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM2, hmc_geo_0005B8_2), 
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM3, hmc_geo_0005B8_3), 
 	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM4, hmc_geo_0005B8_4), 
+	LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM5, hmc_geo_0005B8_5), 
 	LOAD_MODEL_FROM_GEO(MODEL_WDW_SQUARE_FLOATING_PLATFORM, wdw_geo_000580), 
 	LOAD_MODEL_FROM_GEO(MODEL_WARROW, warrow_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_WDW_ARROW_LIFT, wdw_geo_000598), 
 	LOAD_MODEL_FROM_GEO(MODEL_WDW_WATER_LEVEL_DIAMOND, wdw_geo_0005C0), 
+	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -77,6 +79,7 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(0x0c, LEVEL_CASTLE, 0x01, 0x0b, WARP_NO_CHECKPOINT),
 		WARP_NODE(20, LEVEL_CASTLE, 0x01, 21, WARP_NO_CHECKPOINT),
 		WARP_NODE(21, LEVEL_CASTLE, 0x01, 20, WARP_NO_CHECKPOINT),
+		WARP_NODE(50, LEVEL_ENDING, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 22, 4800, 2892, 0, 0, 0, 0x00000000, bhvBoxSpawner),
 		OBJECT(MODEL_BREAKABLE_BOX, -3125, 2911, 7, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_PURPLE_SWITCH, -377, 4800, 2100, 0, 0, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
@@ -97,6 +100,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_NONE, -1742, 2636, -17, 0, 90, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -1750, 3036, 594, 0, 90, 0, (17 << 16), bhvCoinFormation),
 		OBJECT(MODEL_NONE, -2140, 2175, -6, 0, 90, 0, (2 << 16), bhvCoinFormation),
+		OBJECT(MODEL_NONE, 3134, 5993, -10, 0, -180, 0, 0x00000000, bhvCoinFormation),
 		OBJECT(139, -3125, 3112, -23, 90, 0, 0, (21 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -3125, 2485, 7, 0, 0, 0, (20 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -29, -431, -3, 0, 0, 0, (0xb << 16), bhvFadingWarp),
@@ -113,6 +117,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_HMC_METAL_PLATFORM, 0, 0, 0, 0, 0, 0, 0x00000000, bhvControllablePlatform),
 		MARIO_POS(0x01, 0, 4, 0, -4),
 		OBJECT(MODEL_PENGUIN, -2149, -63, -9, 0, 0, 0, (4 << 24), bhvSmallPenguin),
+		OBJECT(MODEL_THI_WARP_PIPE, -881, 8000, -5, 0, 0, 0, (50 << 16), bhvWarpPipe),
 		OBJECT(MODEL_NONE, 2970, 7329, 28, 0, 0, 0, (14 << 24), bhvScanvenger),
 		OBJECT(MODEL_NONE, -307, -136, 3196, 0, 0, 0, (EXCLAMATION_BOX_BP_STAR_4 << 16), bhvExclamationBox),
 		OBJECT(MODEL_STAR, -8, 184, -3579, 0, 0, 0, (5 << 24), bhvStar),

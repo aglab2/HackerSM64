@@ -1801,49 +1801,106 @@ void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseInd
     print_generic_string(x + 14, y + 13, str);
 }
 
+static const u8 textCurrentHint[] = { TEXT_CURRENT_HINT };
+static const u8 textPay5[] = { TEXT_PAY_5 };
+static int sUnlockHintsCount = 0;
+static int sUnlockHintsCountForStar = 0;
+static int sLastStarNeedHint = 0;
+
+static const u8 sText1[] = { TEXT_HINT_1_0 }; 
+
+#define HINTS_FOR_NUM(x) \
+static const u8 sText##x##_0[] = { TEXT_HINT_##x##_0 }; \
+static const u8 sText##x##_1[] = { TEXT_HINT_##x##_1 }; \
+static const u8 sText##x##_2[] = { TEXT_HINT_##x##_2 }; \
+static const u8 sText##x##_3[] = { TEXT_HINT_##x##_3 }; \
+static const u8* sTexts##x[] = { sText##x##_0, sText##x##_1, sText##x##_2, sText##x##_3 }; \
+
+HINTS_FOR_NUM(2)
+HINTS_FOR_NUM(3)
+HINTS_FOR_NUM(4)
+HINTS_FOR_NUM(5)
+HINTS_FOR_NUM(6)
+HINTS_FOR_NUM(7)
+HINTS_FOR_NUM(8)
+HINTS_FOR_NUM(9)
+HINTS_FOR_NUM(10)
+HINTS_FOR_NUM(11)
+HINTS_FOR_NUM(12)
+HINTS_FOR_NUM(13)
+HINTS_FOR_NUM(14)
+HINTS_FOR_NUM(15)
+
+static const u8** sTexts[] = {
+    sTexts2,
+    sTexts3,
+    sTexts4,
+    sTexts5,
+    sTexts6,
+    sTexts7,
+    sTexts8,
+    sTexts9,
+    sTexts10,
+    sTexts11,
+    sTexts12,
+    sTexts13,
+    sTexts14,
+    sTexts15,
+};
+
 void render_pause_castle_main_strings(s16 x, s16 y) {
-    void **courseNameTbl = segmented_to_virtual(languageTable[gInGameLanguage][1]);
-
-    u8 textCoin[] = { TEXT_COIN_X };
-
-    void *courseName;
-
-    u8 strVal[8];
-    s16 prevCourseIndex = gDialogLineNum;
-
-
-    handle_menu_scrolling(
-        MENU_SCROLL_VERTICAL, &gDialogLineNum,
-        COURSE_NUM_TO_INDEX(COURSE_MIN) - 1, COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES) + 1
-    );
-
-    if (gDialogLineNum == COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES) + 1) {
-        gDialogLineNum = COURSE_NUM_TO_INDEX(COURSE_MIN); // Exceeded max, set to min
+    for (; sLastStarNeedHint < 15; sLastStarNeedHint++)
+    {
+        if (!save_file_is_collected_star_or_key(sLastStarNeedHint))
+            break;
     }
 
-    if (gDialogLineNum == COURSE_NUM_TO_INDEX(COURSE_MIN) - 1) {
-        gDialogLineNum = COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES); // Exceeded min, set to max
-    }
-
-    if (gDialogLineNum != COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES)) {
-        while (save_file_get_course_star_count(gCurrSaveFileNum - 1, gDialogLineNum) == 0) {
-            if (gDialogLineNum >= prevCourseIndex) {
-                gDialogLineNum++;
-            } else {
-                gDialogLineNum--;
-            }
-
-            if (gDialogLineNum == COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX) + 1
-             || gDialogLineNum == COURSE_NUM_TO_INDEX(COURSE_MIN) - 1) {
-                gDialogLineNum = COURSE_NUM_TO_INDEX(COURSE_BONUS_STAGES);
-                break;
-            }
-        }
-    }
+    if (sLastStarNeedHint == 15)
+        return;
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
+    print_generic_string(x, y, textCurrentHint);
+    if (0 == sLastStarNeedHint)
+    {
+        print_generic_string(x + 20, y - 16, sText1);
+    }
+    else
+    {
+        if (sUnlockHintsCountForStar != sLastStarNeedHint)
+        {
+            sUnlockHintsCountForStar = sLastStarNeedHint;
+            sUnlockHintsCount = 0;
+        }
+
+        for (int i = 0; i < sUnlockHintsCount; i++)
+        {
+            print_generic_string(x + 20, y - 16 - 16 * i, sTexts[sLastStarNeedHint - 1][i]);
+        }
+
+        if (sUnlockHintsCount <= 3)
+        {
+            gDPSetEnvColor(gDisplayListHead++, 0xfa, 0xfa, 0x33, gDialogTextAlpha);
+            print_generic_string(x + 20, y - 16 - 16 * sUnlockHintsCount, textPay5);
+            if (gPlayer1Controller->buttonPressed & B_BUTTON)
+            {
+                if (gMarioStates->numCoins >= 5)
+                {
+                    gMarioStates->numCoins -= 5;
+                    gHudDisplay.coins = gMarioStates->numCoins;
+                    sUnlockHintsCount++;
+                    play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
+                }
+                else
+                {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                }
+            }
+        }
+    }
+
+#if 0
     if (gDialogLineNum <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) { // Main courses
         courseName = segmented_to_virtual(courseNameTbl[gDialogLineNum]);
         render_pause_castle_course_stars(x, y, gCurrSaveFileNum - 1, gDialogLineNum);
@@ -1862,6 +1919,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     }
 
     print_generic_string(x - 9, y + 30, courseName);
+#endif
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
@@ -1928,9 +1986,7 @@ s32 render_pause_courses_and_castle(void) {
 
         case DIALOG_STATE_HORIZONTAL:
             shade_screen();
-            print_hud_pause_colorful_str();
-            render_pause_castle_menu_box(160, 143);
-            render_pause_castle_main_strings(104, 60);
+            render_pause_castle_main_strings(34, 180);
 
             if (gPlayer1Controller->buttonPressed & (A_BUTTON | START_BUTTON | Z_TRIG)) {
                 level_set_transition(0, NULL);
