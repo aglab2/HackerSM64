@@ -126,6 +126,8 @@ void bhv_books_ctl_init()
 
 void bhv_books_ctl_loop()
 {
+    gMarioState->health = 0x880;
+
 #if 0
     gCamera->cutscene = CUTSCENE_F4;
     if (gFromY < 6400.f)
@@ -420,28 +422,24 @@ void bhv_light_switch_loop()
             gMarioStates->pos[0] /= mult;
             gMarioStates->pos[2] /= mult;
         }
-
-        if (0 == (o->oTimer % 16))
-        {
-            struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-            spark->oPosX += random_f32_around_zero(100.f);
-            spark->oPosY += random_f32_around_zero(100.f);
-            spark->oPosZ += random_f32_around_zero(100.f);
-        }
-
-        if (o->oDistanceToMario < 100.f)
-        {
-            spawn_default_star(-600.f, 300.f, 600.f);
-            o->activeFlags = 0;
-            gFromY += 3000.f;
-            play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
-            seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
-            set_room_colors();
-        }
     }
-    else
+
+    if (0 == (o->oTimer % 16))
     {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX += random_f32_around_zero(100.f);
+        spark->oPosY += random_f32_around_zero(100.f);
+        spark->oPosZ += random_f32_around_zero(100.f);
+    }
+
+    if (o->oDistanceToMario < 200.f)
+    {
+        spawn_default_star(-600.f, 300.f, 600.f);
         o->activeFlags = 0;
+        gFromY += 3000.f;
+        play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+        seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
+        set_room_colors();
     }
 }
 

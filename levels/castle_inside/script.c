@@ -111,7 +111,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_GOOMBA, 1854, 6400, 280, 0, 0, 0, (12 << 24), bhvHiddenBlueCoin),
 		OBJECT(MODEL_GOOMBA, 2414, 6400, 280, 0, 0, 0, (12 << 24), bhvHiddenBlueCoin),
 		OBJECT(MODEL_HMC_METAL_PLATFORM, 0, 0, 0, 0, 0, 0, 0x00000000, bhvControllablePlatform),
-		MARIO_POS(0x01, 0, 2416, 6489, 441),
+		MARIO_POS(0x01, 0, 4, 0, -4),
 		OBJECT(MODEL_PENGUIN, -2149, -63, -9, 0, 0, 0, (4 << 24), bhvSmallPenguin),
 		OBJECT(MODEL_NONE, 2970, 7329, 28, 0, 0, 0, (14 << 24), bhvScanvenger),
 		OBJECT(MODEL_NONE, -307, -136, 3196, 0, 0, 0, (EXCLAMATION_BOX_BP_STAR_4 << 16), bhvExclamationBox),
@@ -145,7 +145,7 @@ const LevelScript level_castle_inside_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, 2416, 6489, 441),
+	MARIO_POS(0x01, 0, 4, 0, -4),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
