@@ -111,7 +111,7 @@
 #define TEXT_HINT_5_2 _("Penguin is the creature in question")
 #define TEXT_HINT_5_3 _("Drop penguin in lava")
 
-#define TEXT_HINT_6_0 _("An unreachable star")
+#define TEXT_HINT_6_0 _("An unreachable star across the pit")
 #define TEXT_HINT_6_1 _("Explore Floor 1 & Starting area")
 #define TEXT_HINT_6_2 _("Use tornado to escape from Floor 1")
 #define TEXT_HINT_6_3 _("Twirle from Floor 1 into a star")
