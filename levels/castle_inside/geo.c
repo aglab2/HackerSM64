@@ -32,3 +32,5 @@
 #include "levels/castle_inside/warrow/geo.inc.c"
 #include "levels/castle_inside/arrow_lift/geo.inc.c"
 #include "levels/castle_inside/water_level_diamond/geo.inc.c"
+
+#include "levels/castle_inside/wdroplet/geo.inc.c"

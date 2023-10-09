@@ -101,3 +101,5 @@
 #include "levels/castle_inside/water_level_diamond/model.inc.c"
 #include "levels/castle_inside/arrow_lift/collision.inc.c"
 #include "levels/castle_inside/water_level_diamond/collision.inc.c" // Unused
+
+#include "levels/castle_inside/wdroplet/model.inc.c"

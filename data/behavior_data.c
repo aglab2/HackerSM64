@@ -3334,6 +3334,19 @@ const BehaviorScript bhvWaterDropletSplash[] = {
     DEACTIVATE(),
 };
 
+// Droplets of water that spawn as a result of various water splashes.
+extern void bhv_wdroplet_init();
+extern void bhv_wdroplet_loop();
+const BehaviorScript bhvWDroplet[] = {
+    BEGIN(OBJ_LIST_UNIMPORTANT),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_wdroplet_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wdroplet_loop),
+    END_LOOP(),
+};
+
 // The splash created when an air bubble hits the surface of the water.
 const BehaviorScript bhvBubbleSplash[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),

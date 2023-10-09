@@ -79,6 +79,7 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_2),
   ARR_SIZE(castle_inside_dl_tower_005_mesh_layer_1_vtx_0),
+  ARR_SIZE(castle_inside_dl_tower_006_mesh_layer_5_vtx_0),
 };
 
 f32 gFromY = 10000.f;
@@ -372,8 +373,33 @@ void bhv_warrow_init(void)
     gWaterNumber = 0;
 }
 
+void bhv_wdroplet_init()
+{
+    obj_scale(o, 0.07f);
+}
+
+void bhv_wdroplet_loop()
+{
+    o->oPosY -= 10.f;
+    if (o->oPosY < 1800.f)
+    {
+        o->oPosY = 1800.f;
+        spawn_object(o, MODEL_SMALL_WATER_SPLASH, bhvWaterDropletSplash);
+        o->activeFlags = 0;
+    }
+}
+
+extern const BehaviorScript bhvWDroplet[];
 void bhv_warrow_loop(void)
 {
+    if (0 == (o->oTimer % 32))
+    {
+        struct Object* splash = spawn_object(o, MODEL_WDROPLET, bhvWDroplet);
+        splash->oPosX -= 430.f * coss(0x8000 + o->oFaceAngleYaw) + random_f32_around_zero(20.f);
+        splash->oPosZ += 430.f * sins(0x8000 + o->oFaceAngleYaw) + random_f32_around_zero(120.f);
+        splash->oPosY += 150.f;
+    }
+
     if (0 == o->oAction)
     {
         // -2650, 1800, -354
