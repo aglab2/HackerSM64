@@ -351,7 +351,7 @@ void bhv_box_spawner_loop()
         struct Object* otherBox = cur_obj_find_nearest_object_with_behavior(bhvBreakableBoxSmall, &d);
         if (otherBox)
         {
-            if (4500.f < otherBox->oPosY && otherBox->oPosY < 7000.f && otherBox->oPosZ > 1300.f)
+            if (d < 1000.f)
             {
                 return;
             }
