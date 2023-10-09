@@ -147,7 +147,7 @@ void small_penguin_act_walking_away_from_mario(void) {
     }
     small_penguin_dive_with_mario();
     if (nearMother) {
-        o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
+        // o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
     }
 }
 
@@ -205,7 +205,7 @@ void small_penguin_act_walking(void) {
         o->oAction = SMALL_PENGUIN_ACT_WALKING_AWAY_FROM_MARIO;
     }
     if (nearMother) {
-        o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
+        // o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
     }
     if (cur_obj_mario_far_away()) {
         cur_obj_set_pos_to_home();
@@ -246,7 +246,7 @@ s32 gPenguinStarSpawned = 0;
 
 void small_penguin_free_actions(void) {
     if (o->oSmallPenguinReturnedToMother) {
-        o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
+        // o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
         o->oSmallPenguinReturnedToMother = FALSE;
     }
     cur_obj_update_floor_and_walls();
