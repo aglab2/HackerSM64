@@ -79,6 +79,8 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_004_mesh_layer_1_vtx_2),
   ARR_SIZE(castle_inside_dl_tower_005_mesh_layer_1_vtx_0),
+  // ARR_SIZE(castle_inside_dl_tower_005_mesh_layer_4_vtx_0),
+  ARR_SIZE(castle_inside_dl_tower_005_mesh_layer_7_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_006_mesh_layer_5_vtx_0),
 };
 
@@ -96,10 +98,19 @@ void set_room_colors()
             vtx[j].v.cn[3] = 255 - CLAMP(y - gFromY, 0, 1600.f) * 255 / 1600.f;
         }
     }
+
+    u32* redHint = (u32*) segmented_to_virtual(mat_castle_inside_dl_red_hint_layer4);
+    if (gMarioStates->numStars >= 2)
+    {
+        redHint[7*2 + 1] = gFromY > 0.f ? 0 : ~0;
+    }
+    else
+    {
+        redHint[7*2 + 1] = 0;
+    }
 }
 
-extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
-void bhv_books_ctl_init()
+static void calculate_from_y()
 {
     gFromY = -200.f - 3000.f;
     if (gMarioState->numStars >= 1)
@@ -114,6 +125,12 @@ void bhv_books_ctl_init()
         gFromY += 1600.f;
     if (gMarioState->numStars >= 15)
         gFromY += 1600.f;
+}
+
+extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
+void bhv_books_ctl_init()
+{
+    calculate_from_y();
 
     if (gMarioState->numStars >= 10)
     {
@@ -331,6 +348,23 @@ void bhv_pokey_ctl_loop()
             }
         }
     }
+
+    u32* fakeWall = (u32*) segmented_to_virtual(mat_castle_inside_dl_fake_wall_layer7);
+    u32* fakeWallColor = &fakeWall[7*2 + 1];
+    if (gMarioStates->floor && gMarioStates->floor->type == SURFACE_HARD)
+    {
+        if (*fakeWallColor > 17)
+            *fakeWallColor -= 17;
+        else
+            *fakeWallColor = 0;
+    }
+    else
+    {
+        if (*fakeWallColor < (255 - 17))
+            *fakeWallColor += 17;
+        else
+            *fakeWallColor = 255;
+    }
 }
 
 void bhv_box_spawner_init()
@@ -437,12 +471,20 @@ void bhv_warrow_loop(void)
 
 void bhv_light_switch_init()
 {
-
+    o->oF4 = save_file_is_collected_star_or_key(0);
 }
 
 void bhv_light_switch_loop()
 {
-    if (0 == gMarioStates->numStars)
+    if (0 == (o->oTimer % 16))
+    {
+        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        spark->oPosX += random_f32_around_zero(100.f);
+        spark->oPosY += random_f32_around_zero(100.f);
+        spark->oPosZ += random_f32_around_zero(100.f);
+    }
+
+    if (gFromY < -1800.f)
     {
         f32 dist = sqrtf(gMarioStates->pos[0] * gMarioStates->pos[0] + gMarioStates->pos[2] * gMarioStates->pos[2]);
         if (dist > 1100.f)
@@ -453,24 +495,48 @@ void bhv_light_switch_loop()
         }
     }
 
-    if (0 == (o->oTimer % 16))
+    if (0 == o->oAction)
     {
-        struct Object* spark = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
-        spark->oPosX += random_f32_around_zero(100.f);
-        spark->oPosY += random_f32_around_zero(100.f);
-        spark->oPosZ += random_f32_around_zero(100.f);
-    }
-
-    if (o->oDistanceToMario < 200.f)
-    {
-        spawn_default_star(-600.f, 300.f, 600.f);
-        o->activeFlags = 0;
-        if (0 == gMarioStates->numStars)
+        if (o->oDistanceToMario < 200.f)
         {
-            gFromY += 3000.f;
+            if (0 == o->oF4)
+            {
+                spawn_default_star(-600.f, 300.f, 600.f);
+                o->oF4 = 1;
+            }
+
             play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
-            seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
+            if (gFromY < -1000.f)
+            {
+                if (0 == gMarioStates->numStars)
+                {
+                    gFromY += 3000.f;
+                }
+                else
+                {
+                    calculate_from_y();
+                }
+            }
+            else
+            {
+                gFromY = -3200.f;
+            }
             set_room_colors();
+
+            if (0 == gMarioStates->numStars && 0 == o->oF8)
+            {
+                o->oF8 = 1;
+                seq_player_play_sequence(SEQ_PLAYER_LEVEL, SEQ_LW, 0);
+            }
+
+            o->oAction = 1;
+        }
+    }
+    else
+    {
+        if (o->oDistanceToMario > 300.f)
+        {
+            o->oAction = 0;
         }
     }
 }
