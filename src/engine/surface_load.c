@@ -716,8 +716,7 @@ void load_object_collision_model(void) {
     }
     
     s32 inColRadius = (
-           (sqrLateralDist < sqr(o->oCollisionDistance))
-        && (verticalMarioDiff > 0 || verticalMarioDiff > -o->oCollisionDistance)
+           (verticalMarioDiff > 0 || verticalMarioDiff > -o->oCollisionDistance)
         && (verticalMarioDiff < 0 || verticalMarioDiff < o->oCollisionDistance + 2000.f)
     );
 
