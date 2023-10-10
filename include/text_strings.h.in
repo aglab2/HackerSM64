@@ -106,9 +106,9 @@
 #define TEXT_HINT_4_2 _("Groundpound the incorrect platform")
 #define TEXT_HINT_4_3 _("Out of 4 hexagons find the different one")
 
-#define TEXT_HINT_5_0 _("Loud creature demise")
+#define TEXT_HINT_5_0 _("Grant the mad lad wish")
 #define TEXT_HINT_5_1 _("Explore Penguin & Lava room")
-#define TEXT_HINT_5_2 _("Penguin is the creature in question")
+#define TEXT_HINT_5_2 _("Try talking to bob-omb in Lava room")
 #define TEXT_HINT_5_3 _("Drop penguin in lava")
 
 #define TEXT_HINT_6_0 _("An unreachable star across the pit")
