@@ -524,6 +524,7 @@ static void process_scavenger_edges()
         {
             Vtx* vtx = &vtxs[k];
             vtx->v.cn[3] = 255;
+            vtx->v.ob[0] = 3584;
         }
     }
 
@@ -555,6 +556,7 @@ static void process_scavenger_edges()
                     if (d < 130.f)
                     {
                         vtx->v.cn[3] = 0;
+                        vtx->v.ob[0] = 3574;
                     }
                 }
             }
@@ -572,6 +574,7 @@ static void process_scavenger_edges()
             {
                 Vtx* vtx = &vtxs[k];
                 vtx->v.cn[3] = 0;
+                vtx->v.ob[0] = 3574;
             }
         }
     }
