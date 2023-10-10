@@ -24172,6 +24172,46 @@ Gfx mat_revert_castle_inside_dl__5_f3d_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_castle_inside_dl_f3dlite_material_012_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT, COMBINED, ENVIRONMENT, SHADE_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 13, 13, 13, 255),
+	gsDPSetEnvColor(211, 189, 47, 255),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_castle_inside_dl_f3dlite_material_012_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_castle_inside_dl_f3dlite_material_010_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT, COMBINED, ENVIRONMENT, SHADE_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 13, 13, 13, 255),
+	gsDPSetEnvColor(211, 189, 47, 255),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_castle_inside_dl_f3dlite_material_010_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_castle_inside_dl___f3d_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(NOISE, 0, PRIMITIVE, 0, ENVIRONMENT, 0, SHADE, 0, COMBINED, ENVIRONMENT, SHADE_ALPHA, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0),
@@ -24185,6 +24225,66 @@ Gfx mat_castle_inside_dl___f3d_layer1[] = {
 };
 
 Gfx mat_revert_castle_inside_dl___f3d_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_castle_inside_dl_f3dlite_material_008_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT, COMBINED, ENVIRONMENT, SHADE_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 13, 13, 13, 255),
+	gsDPSetEnvColor(211, 189, 47, 255),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_castle_inside_dl_f3dlite_material_008_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_castle_inside_dl_f3dlite_material_009_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT, COMBINED, ENVIRONMENT, SHADE_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 13, 13, 13, 255),
+	gsDPSetEnvColor(211, 189, 47, 255),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_castle_inside_dl_f3dlite_material_009_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_castle_inside_dl_f3dlite_material_011_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT, COMBINED, ENVIRONMENT, SHADE_ALPHA, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 13, 13, 13, 255),
+	gsDPSetEnvColor(211, 189, 47, 255),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_castle_inside_dl_f3dlite_material_011_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -25769,16 +25869,16 @@ Gfx castle_inside_dl_diag_mesh_layer_1[] = {
 };
 
 Gfx castle_inside_dl_diag_box_penguin_mesh_layer_1[] = {
-	gsSPDisplayList(mat_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_012_layer1),
 	gsSPDisplayList(castle_inside_dl_diag_box_penguin_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_012_layer1),
 	gsSPEndDisplayList(),
 };
 
 Gfx castle_inside_dl_diag_goomba_box_mesh_layer_1[] = {
-	gsSPDisplayList(mat_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_010_layer1),
 	gsSPDisplayList(castle_inside_dl_diag_goomba_box_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_010_layer1),
 	gsSPEndDisplayList(),
 };
 
@@ -25790,9 +25890,9 @@ Gfx castle_inside_dl_diag_goomba_penguin_mesh_layer_1[] = {
 };
 
 Gfx castle_inside_dl_diag_goomba_pokey_mesh_layer_1[] = {
-	gsSPDisplayList(mat_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_008_layer1),
 	gsSPDisplayList(castle_inside_dl_diag_goomba_pokey_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_008_layer1),
 	gsSPEndDisplayList(),
 };
 
@@ -25818,9 +25918,9 @@ Gfx castle_inside_dl_diag_pokey_penguin_mesh_layer_1[] = {
 };
 
 Gfx castle_inside_dl_diag_pokey_switch_mesh_layer_1[] = {
-	gsSPDisplayList(mat_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_009_layer1),
 	gsSPDisplayList(castle_inside_dl_diag_pokey_switch_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_009_layer1),
 	gsSPEndDisplayList(),
 };
 
@@ -25832,9 +25932,9 @@ Gfx castle_inside_dl_diag_switch_box_mesh_layer_1[] = {
 };
 
 Gfx castle_inside_dl_diag_switch_penguin_mesh_layer_1[] = {
-	gsSPDisplayList(mat_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_011_layer1),
 	gsSPDisplayList(castle_inside_dl_diag_switch_penguin_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_castle_inside_dl___f3d_layer1),
+	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_011_layer1),
 	gsSPEndDisplayList(),
 };
 
