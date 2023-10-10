@@ -174,4 +174,6 @@ extern const GeoLayout wdw_geo_000580[];
 
 #include "levels/castle_inside/wdroplet/geo_header.h"
 
+#include "levels/castle_inside/death_penguin/geo_header.h"
+
 #endif

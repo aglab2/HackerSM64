@@ -577,6 +577,7 @@
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
 #define MODEL_WDROPLET 0xef
+#define MODEL_PENGUIN_DEATH 0xee
 
 #define MODEL_WARROW 0xe8
 

@@ -68,6 +68,7 @@ const LevelScript level_castle_inside_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_WDW_WATER_LEVEL_DIAMOND, wdw_geo_0005C0), 
 	LOAD_MODEL_FROM_GEO(MODEL_THI_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_WDROPLET, wdroplet_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PENGUIN_DEATH, death_penguin_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -81,6 +82,8 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(20, LEVEL_CASTLE, 0x01, 21, WARP_NO_CHECKPOINT),
 		WARP_NODE(21, LEVEL_CASTLE, 0x01, 20, WARP_NO_CHECKPOINT),
 		WARP_NODE(50, LEVEL_ENDING, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_PENGUIN_DEATH, 311, 211, 3190, 0, 90, 0, 0x00000000, bhvPenguinDeath),
+		OBJECT(MODEL_BOBOMB_BUDDY, 316, -51, 3190, 0, 90, 0, 0x00000000, bhvBobombBuddy),
 		OBJECT(MODEL_NONE, 22, 4800, 2892, 0, 0, 0, 0x00000000, bhvBoxSpawner),
 		OBJECT(MODEL_BREAKABLE_BOX, -3125, 2911, 7, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_PURPLE_SWITCH, -377, 4800, 2100, 0, 0, 0, 0x00000000, bhvFloorSwitchHiddenObjects),

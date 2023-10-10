@@ -34,3 +34,4 @@
 #include "levels/castle_inside/water_level_diamond/geo.inc.c"
 
 #include "levels/castle_inside/wdroplet/geo.inc.c"
+#include "levels/castle_inside/death_penguin/geo.inc.c"

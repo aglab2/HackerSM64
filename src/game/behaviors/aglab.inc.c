@@ -628,3 +628,40 @@ void notify_escape_event(int ev)
 
     process_scavenger_edges();
 }
+
+void bhv_penguin_death_init(void)
+{
+    obj_scale(o, 0.3f);
+    f32 d;
+    o->oObjF4 = cur_obj_find_nearest_object_with_behavior(bhvBobombBuddy, &d);
+    o->oOpacity = 0;
+    o->oPosX = o->oObjF4->oPosX;
+    o->oPosY = o->oObjF4->oPosY;
+    o->oPosZ = o->oObjF4->oPosZ;
+}
+
+void bhv_penguin_death_loop(void)
+{
+    if (o->oDistanceToMario < 500.f)
+    {
+        if (o->oOpacity < 245)
+        {
+            o->oOpacity += 10;
+        }
+        else
+        {
+            o->oOpacity = 255;
+        }
+    }
+    else
+    {
+        if (o->oOpacity > 10)
+        {
+            o->oOpacity -= 10;
+        }
+        else
+        {
+            o->oOpacity = 0;
+        }
+    }
+}

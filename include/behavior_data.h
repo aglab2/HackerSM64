@@ -547,5 +547,6 @@ extern const BehaviorScript bhvFlameBurningDown[];
 extern const BehaviorScript bhvWArrow[];
 extern const BehaviorScript bhvScanvenger[];
 extern const BehaviorScript bhvLightSwitch[];
+extern const BehaviorScript bhvPenguinDeath[];
 
 #endif // BEHAVIOR_DATA_H

@@ -2939,6 +2939,18 @@ const BehaviorScript bhvWArrow[] = {
     END_LOOP(),
 };
 
+extern void bhv_penguin_death_init();
+extern void bhv_penguin_death_loop();
+const BehaviorScript bhvPenguinDeath[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_penguin_death_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_penguin_death_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvMerryGoRoundBooManager[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
