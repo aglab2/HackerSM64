@@ -5,6 +5,8 @@
  * you press a blue coin switch (a.k.a. bhvBlueCoinSwitch).
  */
 
+#define BLUE_COIN_TIMER 210
+
 /**
  * Update function for bhvHiddenBlueCoin.
  */
@@ -48,7 +50,7 @@ void bhv_hidden_blue_coin_loop(void) {
         case HIDDEN_BLUE_COIN_ACT_ACTIVE:
             // After 200 frames of waiting and 20 2-frame blinks (for 240 frames total),
             // delete the object.
-            if (cur_obj_wait_then_blink(160, 20)) {
+            if (cur_obj_wait_then_blink(BLUE_COIN_TIMER, 20)) {
 #ifdef BLUE_COIN_SWITCH_RETRY
                 o->oAction = HIDDEN_BLUE_COIN_ACT_INACTIVE;
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -140,7 +142,7 @@ void bhv_blue_coin_switch_loop(void) {
 
         case BLUE_COIN_SWITCH_ACT_TICKING:
             // Tick faster when the blue coins start blinking
-            if (o->oTimer < 160) {
+            if (o->oTimer < BLUE_COIN_TIMER) {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
             } else {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
@@ -154,7 +156,7 @@ void bhv_blue_coin_switch_loop(void) {
                 spawn_default_star(o->oPosX, o->oPosY + 400.f, o->oPosZ);
             }
 
-            if (o->oTimer > 200 || noGoombas) {
+            if (o->oTimer > (BLUE_COIN_TIMER + 40) || noGoombas) {
                 o->oAction  = BLUE_COIN_SWITCH_ACT_EXTENDING;
                 o->oVelY    = 16.0f;
                 o->oGravity =  0.0f;
