@@ -255,6 +255,10 @@ void bhv_books_ctl_loop()
                     vtx->v.cn[2] -= 10;
                     if (0 == (random_u16() % 16))
                     {
+                        static s32 sCounter = 0;
+                        if (0 == ((sCounter++) % 4))
+                            cur_obj_play_sound_2(SOUND_MOVING_LAVA_BURN);
+
                         struct Object* flame = spawn_object(o, MODEL_RED_FLAME, bhvFlameBurningDown);
                         flame->oPosX = vtx->v.ob[0];
                         flame->oPosY = vtx->v.ob[1];
