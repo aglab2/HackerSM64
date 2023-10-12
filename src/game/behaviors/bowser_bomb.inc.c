@@ -37,7 +37,7 @@ void bhv_bowser_bomb_explosion_loop(void) {
         if (!gPenguinStarSpawned)
         {
             gPenguinStarSpawned = 1;
-            spawn_default_star(0.f, 300.f, 0.f);
+            spawn_default_star(0.f, 300.f, 1400.f);
         }
     }
 }
