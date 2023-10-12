@@ -118,6 +118,7 @@ extern u8 castle_inside_dl_yes_pal_rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl__0E01BF00_ci4[] __attribute__((section(".data")));
 extern u8 castle_inside_dl__0E01BF00_pal_rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_water_damage_rgba16[] __attribute__((section(".data")));
+extern u8 castle_inside_dl___rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_ki_mizu_ci8[] __attribute__((section(".data")));
 extern u8 castle_inside_dl_ki_mizu_pal_rgba16[] __attribute__((section(".data")));
 extern u8 castle_inside_dl__52_rgba16[] __attribute__((section(".data")));
@@ -281,6 +282,8 @@ extern Vtx castle_inside_dl_tower_005_mesh_layer_7_vtx_0[4] __attribute__((secti
 extern Gfx castle_inside_dl_tower_005_mesh_layer_7_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_006_mesh_layer_5_vtx_0[14] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_006_mesh_layer_5_tri_0[] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_007_mesh_layer_5_vtx_0[5] __attribute__((section(".data")));
+extern Gfx castle_inside_dl_tower_007_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_water_mesh_layer_5_vtx_0[12] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_water_mesh_layer_5_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_waterbox2_mesh_layer_5_vtx_0[12] __attribute__((section(".data")));
@@ -304,8 +307,8 @@ extern Gfx mat_castle_inside_dl_f3dlite_material_012_layer1[] __attribute__((sec
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_012_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_010_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_010_layer1[] __attribute__((section(".data")));
-extern Gfx mat_castle_inside_dl___f3d_layer1[] __attribute__((section(".data")));
-extern Gfx mat_revert_castle_inside_dl___f3d_layer1[] __attribute__((section(".data")));
+extern Gfx mat_castle_inside_dl___f3d_003_layer1[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl___f3d_003_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_008_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_008_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_009_layer1[] __attribute__((section(".data")));
@@ -434,6 +437,8 @@ extern Gfx mat_castle_inside_dl_fake_wall_layer7[] __attribute__((section(".data
 extern Gfx mat_revert_castle_inside_dl_fake_wall_layer7[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_005_layer5[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_005_layer5[] __attribute__((section(".data")));
+extern Gfx mat_castle_inside_dl___f3d[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl___f3d[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_layer5[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_layer5[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl__52_f3d_layer1[] __attribute__((section(".data")));
@@ -462,6 +467,7 @@ extern Gfx castle_inside_dl_tower_005_mesh_layer_1[] __attribute__((section(".da
 extern Gfx castle_inside_dl_tower_005_mesh_layer_4[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_005_mesh_layer_7[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_006_mesh_layer_5[] __attribute__((section(".data")));
+extern Gfx castle_inside_dl_tower_007_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_water_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_waterbox2_mesh_layer_5[] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_wtch_mesh_layer_1[] __attribute__((section(".data")));
