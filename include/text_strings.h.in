@@ -116,7 +116,7 @@
 #define TEXT_HINT_6_2 _("Use tornado to escape from Floor 1")
 #define TEXT_HINT_6_3 _("Twirle from Floor 1 into a star")
 
-#define TEXT_HINT_7_0 _("2 suspicious Pokeys")
+#define TEXT_HINT_7_0 _("3 suspicious Pokeys")
 #define TEXT_HINT_7_1 _("Explore Floor 1")
 #define TEXT_HINT_7_2 _("Try twirling into a wall behind pokeys")
 #define TEXT_HINT_7_3 _("Make pokeys have height written on the wall")
