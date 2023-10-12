@@ -14,6 +14,7 @@ const GeoLayout castle_inside_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_diag_pokey_switch_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_diag_switch_box_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_diag_switch_penguin_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_g_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, castle_inside_dl_tower_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_tower_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_tower_mesh_layer_4),
