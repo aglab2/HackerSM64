@@ -25619,11 +25619,13 @@ Gfx mat_revert_castle_inside_dl_f3dlite_material_002_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_castle_inside_dl___001_f3d[] = {
+Gfx mat_castle_inside_dl___001_f3d_layer1[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, COMBINED, 0, SHADE_ALPHA, 0, ENVIRONMENT, 0, SHADE, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPSetTextureLUT(G_TT_RGBA16),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, castle_inside_dl___pal_rgba16_copy),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
@@ -25636,10 +25638,12 @@ Gfx mat_castle_inside_dl___001_f3d[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_castle_inside_dl___001_f3d[] = {
+Gfx mat_revert_castle_inside_dl___001_f3d_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 
@@ -26224,9 +26228,9 @@ Gfx castle_inside_dl_tower_mesh_layer_1[] = {
 	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_002_layer1),
 	gsSPDisplayList(castle_inside_dl_tower_mesh_layer_1_tri_42),
 	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_002_layer1),
-	gsSPDisplayList(mat_castle_inside_dl___001_f3d),
+	gsSPDisplayList(mat_castle_inside_dl___001_f3d_layer1),
 	gsSPDisplayList(castle_inside_dl_tower_mesh_layer_1_tri_43),
-	gsSPDisplayList(mat_revert_castle_inside_dl___001_f3d),
+	gsSPDisplayList(mat_revert_castle_inside_dl___001_f3d_layer1),
 	gsSPDisplayList(mat_castle_inside_dl_f3dlite_material_003_layer1),
 	gsSPDisplayList(castle_inside_dl_tower_mesh_layer_1_tri_44),
 	gsSPDisplayList(mat_revert_castle_inside_dl_f3dlite_material_003_layer1),

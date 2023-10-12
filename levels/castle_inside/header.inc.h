@@ -413,8 +413,8 @@ extern Gfx mat_revert_castle_inside_dl__20_f3d_layer1[] __attribute__((section("
 extern Gfx mat_castle_inside_dl__3_f3d_001[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_002_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_002_layer1[] __attribute__((section(".data")));
-extern Gfx mat_castle_inside_dl___001_f3d[] __attribute__((section(".data")));
-extern Gfx mat_revert_castle_inside_dl___001_f3d[] __attribute__((section(".data")));
+extern Gfx mat_castle_inside_dl___001_f3d_layer1[] __attribute__((section(".data")));
+extern Gfx mat_revert_castle_inside_dl___001_f3d_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_003_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_003_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_004_layer1[] __attribute__((section(".data")));
