@@ -122,6 +122,7 @@ void tweester_act_hide(void) {
     } else {
         cur_obj_become_intangible();
         o->oAction = TWEESTER_ACT_IDLE;
+        o->oTweesterScaleTimer = 0;
     }
 }
 

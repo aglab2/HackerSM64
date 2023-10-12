@@ -158,8 +158,8 @@
 
 #define TEXT_HINT_15_0 _("The grand scavenger hunt")
 #define TEXT_HINT_15_1 _("Explore Floor 1, 3, 4, Penguin Room")
-#define TEXT_HINT_15_2 _("Make yellow line painting on Floor 4 be star shaped")
-#define TEXT_HINT_15_3 _("Yellow line connects objects Mario interacted now and previously")
+#define TEXT_HINT_15_2 _("Yellow line connects objects Mario interacted now and previously")
+#define TEXT_HINT_15_3 _("Make yellow line painting on Floor 4 be star shaped")
 
 #if defined(VERSION_JP) || defined(VERSION_SH)
 
