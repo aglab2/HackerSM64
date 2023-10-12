@@ -103,6 +103,7 @@ void bhv_pokey_body_part_update(void) {
 
             if (o->oBehParams2ndByte != POKEY_PART_BP_HEAD && obj_handle_attacks(&sPokeyBodyPartHitbox, o->oAction, sPokeyBodyPartAttackHandlers)) {
                 o->parentObj->oPokeyNumAliveBodyParts--;
+                o->parentObj->oTimer = 0;
                 notify_escape_event(0);
                 if (o->oBehParams2ndByte == POKEY_PART_BP_HEAD) {
                     o->parentObj->oPokeyHeadWasKilled = TRUE;
@@ -118,6 +119,7 @@ void bhv_pokey_body_part_update(void) {
 
                 if (--o->oPokeyBodyPartDeathDelayAfterHeadKilled < 0) {
                     o->parentObj->oPokeyNumAliveBodyParts--;
+                    o->parentObj->oTimer = 0;
                     obj_die_if_health_non_positive();
                 }
             } else {
@@ -208,7 +210,7 @@ static void pokey_act_wander(void) {
                         obj_scale(bodyPart, 0.0f);
                     }
 
-                    o->oTimer = 470;
+                    o->oTimer = 490;
                 }
             } else {
                 o->oTimer = 0;

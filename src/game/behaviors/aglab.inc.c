@@ -297,18 +297,21 @@ void bhv_pokey_ctl_init()
     o->oObjF8 = spawn_object(o, MODEL_NONE, bhvPokey);
     o->oObjF8->oPosX += 500.f;
     o->oObjF8->oHomeX += 500.f;
+    o->oObjFC = spawn_object(o, MODEL_NONE, bhvPokey);
 }
 
 void bhv_pokey_ctl_loop()
 {
     if (0 == o->oAction)
     {
-        if (4 == o->oObjF4->oPokeyNumAliveBodyParts && 2 == o->oObjF8->oPokeyNumAliveBodyParts)
+        if (4 == o->oObjF4->oPokeyNumAliveBodyParts
+         && 2 == o->oObjFC->oPokeyNumAliveBodyParts
+         && 3 == o->oObjF8->oPokeyNumAliveBodyParts)
         {
             o->oSubAction++;
             if (30 == o->oSubAction)
             {
-                cur_obj_spawn_star_at_y_offset(o->oPosX, o->oPosY, o->oPosZ, 200.0f);
+                cur_obj_spawn_star_at_y_offset(o->oPosX, o->oPosY, -1925.f, 200.0f);
                 o->oAction = 1;
             }
         }

@@ -19,8 +19,8 @@ extern Lights1 castle_inside_dl__43_f3d_layer1_lights __attribute__((section(".d
 extern Lights1 castle_inside_dl__6_f3d_layer1_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl__15_f3d_layer1_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl__20_f3d_layer1_lights __attribute__((section(".data")));
-extern Lights1 castle_inside_dl_FrontColor_f3d_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl_f3dlite_material_004_layer1_lights __attribute__((section(".data")));
+extern Lights1 castle_inside_dl_FrontColor_f3d_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl_f3dlite_material_001_layer4_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl_no_layer1_lights __attribute__((section(".data")));
 extern Lights1 castle_inside_dl_yes_layer1_lights __attribute__((section(".data")));
@@ -155,7 +155,7 @@ extern Vtx castle_inside_dl_diag_switch_penguin_mesh_layer_1_vtx_0[10] __attribu
 extern Gfx castle_inside_dl_diag_switch_penguin_mesh_layer_1_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_0[50] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_5_tri_0[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_1[125] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_5_vtx_1[104] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_5_tri_1[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_0[96] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_0[] __attribute__((section(".data")));
@@ -175,7 +175,7 @@ extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_7[39] __attribute__((section(
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_7[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_8[10] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_8[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_9[277] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_9[275] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_9[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_10[53] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_10[] __attribute__((section(".data")));
@@ -247,15 +247,15 @@ extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_43[6] __attribute__((section(
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_43[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_44[16] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_44[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_45[28] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_45[24] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_45[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_46[24] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_46[14] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_46[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_47[14] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_47[16] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_47[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_48[16] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_48[48] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_48[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_49[48] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_mesh_layer_1_vtx_49[53] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_1_tri_49[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_mesh_layer_4_vtx_0[49] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_mesh_layer_4_tri_0[] __attribute__((section(".data")));
@@ -411,7 +411,6 @@ extern Gfx mat_revert_castle_inside_dl__22_f3d_layer1[] __attribute__((section("
 extern Gfx mat_castle_inside_dl__20_f3d_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl__20_f3d_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl__3_f3d_001[] __attribute__((section(".data")));
-extern Gfx mat_castle_inside_dl_FrontColor_f3d[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_002_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_002_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl___001_f3d[] __attribute__((section(".data")));
@@ -420,6 +419,7 @@ extern Gfx mat_castle_inside_dl_f3dlite_material_003_layer1[] __attribute__((sec
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_003_layer1[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_004_layer1[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_004_layer1[] __attribute__((section(".data")));
+extern Gfx mat_castle_inside_dl_FrontColor_f3d[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl_f3dlite_material_001_layer4[] __attribute__((section(".data")));
 extern Gfx mat_revert_castle_inside_dl_f3dlite_material_001_layer4[] __attribute__((section(".data")));
 extern Gfx mat_castle_inside_dl__33_f3d_layer1[] __attribute__((section(".data")));
