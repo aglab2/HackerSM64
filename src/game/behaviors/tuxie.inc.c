@@ -52,7 +52,7 @@ void tuxies_mother_act_receiving_baby(void) {
                 s32 dialogID = ((motherParam == babyParam) ? DIALOG_058 : DIALOG_059);
                 o->oSubAction = MOTHER_PENGUIN_SUB_ACT_CORRECT_BABY;
                 o->prevObj->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
-                set_mario_action(gMarioStates, ACT_HOLD_IDLE, 0);
+                set_mario_action(gMarioStates, gMarioStates->heldObj == NULL ? ACT_IDLE : ACT_HOLD_IDLE, 0);
             } else {
                 cur_obj_init_animation_with_sound(PENGUIN_ANIM_WALK);
             }
