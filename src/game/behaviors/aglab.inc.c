@@ -508,7 +508,7 @@ void bhv_light_switch_loop()
         {
             if (0 == o->oF4)
             {
-                spawn_default_star(-600.f, 300.f, 600.f);
+                spawn_default_star(gMarioStates->pos[0], gMarioStates->pos[1], gMarioStates->pos[2]);
                 o->oF4 = 1;
             }
 
