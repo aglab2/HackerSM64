@@ -131,9 +131,9 @@
 #define TEXT_HINT_9_2 _("Arrow on Floor 2 changes which platform is risen")
 #define TEXT_HINT_9_3 _("Platforms should be at High and Medium levels")
 
-#define TEXT_HINT_10_0 _("A weird star above the star")
+#define TEXT_HINT_10_0 _("A warp and a star")
 #define TEXT_HINT_10_1 _("Explore Floor 3 and 2")
-#define TEXT_HINT_10_2 _("How to stand still on a fading warp in Floor 2?")
+#define TEXT_HINT_10_2 _("How to stand still on a fading warp on Floor 2?")
 #define TEXT_HINT_10_3 _("Break some spawned boxes and engage the warp")
 
 #define TEXT_HINT_11_0 _("Wreck unwelcome visitor")
