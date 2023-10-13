@@ -204,6 +204,8 @@ void bhv_controllable_platform_loop(void) {
             break;
 
         case 6:
+            o->oFaceAnglePitch = 0;
+            o->oFaceAngleRoll  = 0;
             if (o->oPosY > 0)
                 o->oVelY = -60.f;
             else
