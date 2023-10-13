@@ -128,8 +128,8 @@
 
 #define TEXT_HINT_9_0 _("Mother's errand")
 #define TEXT_HINT_9_1 _("Explore Floor 2, Boo and Penguin room")
-#define TEXT_HINT_9_2 _("Arrow on Floor 2 changes which platform is risen by water changer")
-#define TEXT_HINT_9_3 _("Platforms in Penguin room should be at High and Medium levels")
+#define TEXT_HINT_9_2 _("Arrow on Floor 2 changes which platform is risen")
+#define TEXT_HINT_9_3 _("Platforms should be at High and Medium levels")
 
 #define TEXT_HINT_10_0 _("A weird star above the star")
 #define TEXT_HINT_10_1 _("Explore Floor 3 and 2")
