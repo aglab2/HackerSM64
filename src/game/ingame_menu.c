@@ -1775,7 +1775,7 @@ void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseInd
 
 static const u8 textCurrentHint[] = { TEXT_CURRENT_HINT };
 static const u8 textPay5[] = { TEXT_PAY_5 };
-static int sUnlockHintsCount = 0;
+static int sUnlockHintsCount = 4;
 static int sUnlockHintsCountForStar = 0;
 static int sLastStarNeedHint = 0;
 
@@ -1836,7 +1836,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
     print_generic_string(x, y, textCurrentHint);
     if (0 == sLastStarNeedHint)
     {
-        print_generic_string(x + 20, y - 16, sText1);
+        print_generic_string(x + 10, y - 16, sText1);
     }
     else
     {
@@ -1848,13 +1848,13 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
 
         for (int i = 0; i < sUnlockHintsCount; i++)
         {
-            print_generic_string(x + 20, y - 16 - 16 * i, sTexts[sLastStarNeedHint - 1][i]);
+            print_generic_string(x + 10, y - 16 - 16 * i, sTexts[sLastStarNeedHint - 1][i]);
         }
 
         if (sUnlockHintsCount <= 3)
         {
             gDPSetEnvColor(gDisplayListHead++, 0xfa, 0xfa, 0x33, gDialogTextAlpha);
-            print_generic_string(x + 20, y - 16 - 16 * sUnlockHintsCount, textPay5);
+            print_generic_string(x + 10, y - 16 - 16 * sUnlockHintsCount, textPay5);
             if (gPlayer1Controller->buttonPressed & B_BUTTON)
             {
                 if (gMarioStates->numCoins >= 5)

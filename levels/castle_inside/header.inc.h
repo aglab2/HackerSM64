@@ -276,7 +276,7 @@ extern Vtx castle_inside_dl_tower_004_mesh_layer_1_vtx_2[40] __attribute__((sect
 extern Gfx castle_inside_dl_tower_004_mesh_layer_1_tri_2[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_005_mesh_layer_1_vtx_0[18] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_005_mesh_layer_1_tri_0[] __attribute__((section(".data")));
-extern Vtx castle_inside_dl_tower_005_mesh_layer_4_vtx_0[12] __attribute__((section(".data")));
+extern Vtx castle_inside_dl_tower_005_mesh_layer_4_vtx_0[15] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_005_mesh_layer_4_tri_0[] __attribute__((section(".data")));
 extern Vtx castle_inside_dl_tower_005_mesh_layer_7_vtx_0[4] __attribute__((section(".data")));
 extern Gfx castle_inside_dl_tower_005_mesh_layer_7_tri_0[] __attribute__((section(".data")));

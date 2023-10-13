@@ -133,18 +133,18 @@
 
 #define TEXT_HINT_10_0 _("A weird star above the star")
 #define TEXT_HINT_10_1 _("Explore Floor 3 and 2")
-#define TEXT_HINT_10_2 _("Red star on Floor 2 is a fading warp. How to stand on it?")
-#define TEXT_HINT_10_3 _("Break some spawned boxes and stand still to engage the fading warp")
+#define TEXT_HINT_10_2 _("How to stand still on a fading warp in Floor 2?")
+#define TEXT_HINT_10_3 _("Break some spawned boxes and engage the warp")
 
 #define TEXT_HINT_11_0 _("Wreck unwelcome visitor")
 #define TEXT_HINT_11_1 _("Explore Floor 3 and Boo room")
 #define TEXT_HINT_11_2 _("Thrown and sliding cork boxes can hurt Big Boo")
-#define TEXT_HINT_11_3 _("Throw cork box from distance to have time to not look at Big Boo")
+#define TEXT_HINT_11_3 _("Throw from distance to have time not to look at Boo")
 
 #define TEXT_HINT_12_0 _("The path of fakes")
 #define TEXT_HINT_12_1 _("Explore Floor 3")
-#define TEXT_HINT_12_2 _("Follow the path given by a path solution")
-#define TEXT_HINT_12_3 _("Real platforms are marked as checkboxes on wall behind Floor 3")
+#define TEXT_HINT_12_2 _("Follow the path given by a map")
+#define TEXT_HINT_12_3 _("Solution is shown on wall behind Floor 3")
 
 #define TEXT_HINT_13_0 _("A switch bait")
 #define TEXT_HINT_13_1 _("Explore Floor 4")
@@ -158,7 +158,7 @@
 
 #define TEXT_HINT_15_0 _("The grand scavenger hunt")
 #define TEXT_HINT_15_1 _("Explore Floor 1, 3, 4, Penguin Room")
-#define TEXT_HINT_15_2 _("Yellow line connects objects Mario interacted now and previously")
+#define TEXT_HINT_15_2 _("Line connects objects interacted now and previously")
 #define TEXT_HINT_15_3 _("Make yellow line painting on Floor 4 be star shaped")
 
 #if defined(VERSION_JP) || defined(VERSION_SH)
