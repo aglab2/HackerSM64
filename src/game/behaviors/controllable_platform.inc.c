@@ -12,8 +12,6 @@ void controllable_platform_act_1(void) {
 
 extern f32 gFromY;
 
-static const int sWhenActives[5] = { 2, 4, 7, 10, 15 };
-
 void controllable_platform_act_2(void) {
     if (o->oBehParams2ndByte == sControllablePlatformDirectionState) {
         return;
@@ -32,7 +30,7 @@ void bhv_controllable_platform_sub_loop(void) {
         obj_set_model(o, MODEL_HMC_METAL_ARROW_PLATFORM5);
     }
 
-    if (gMarioStates->numStars >= sWhenActives[o->oBehParams2ndByte - 1] && gFromY > -1000.f)
+    if (gFromY >= (o->oBehParams2ndByte - 1) * 1600.f)
     {
         switch (o->oAction) {
             case 0:
