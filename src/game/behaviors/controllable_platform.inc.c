@@ -103,7 +103,7 @@ void controllable_platform_hit_wall(s8 nextDirection) {
 }
 
 void controllable_platform_check_walls() {
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500)) {
         sControllablePlatformDirectionState = 6;
         o->oControllablePlatformIsFarFromMario = 1;
         o->oTimer = 0;
@@ -111,7 +111,7 @@ void controllable_platform_check_walls() {
 }
 
 void controllable_platform_shake_on_wall_hit(void) {
-    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 400)) {
+    if (!is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 500)) {
         sControllablePlatformDirectionState = 6;
         o->oTimer = 0;
     }
