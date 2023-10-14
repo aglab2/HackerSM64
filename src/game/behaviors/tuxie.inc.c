@@ -270,7 +270,6 @@ void small_penguin_free_actions(void) {
         o->oPosX = o->oHomeX;
         o->oPosY = o->oHomeY;
         o->oPosZ = o->oHomeZ;
-        sWantCoordinatesReset = 1;
     }
 }
 
