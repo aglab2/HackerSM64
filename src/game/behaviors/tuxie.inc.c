@@ -208,9 +208,6 @@ void small_penguin_act_walking(void) {
     if (nearMother) {
         // o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
     }
-    if (o->oDistanceToMario > 2000.0f) {
-        cur_obj_set_pos_to_home();
-    }
 }
 
 void small_penguin_act_near_mother(void) {
@@ -267,6 +264,13 @@ void small_penguin_free_actions(void) {
         o->oPosX = o->oHomeX;
         o->oPosY = o->oHomeY;
         o->oPosZ = o->oHomeZ;
+    }
+
+    if (o->oDistanceToMario > 2000.0f) {
+        o->oPosX = o->oHomeX;
+        o->oPosY = o->oHomeY;
+        o->oPosZ = o->oHomeZ;
+        sWantCoordinatesReset = 1;
     }
 }
 
