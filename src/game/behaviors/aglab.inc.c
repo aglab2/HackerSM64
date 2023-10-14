@@ -583,8 +583,12 @@ static s8 sScavengerCorrectEdges[] = {
     0, 1, 1, 0, 0,
 };
 
+static s32 sKeepProcessingEdges = 1;
 static void process_scavenger_edges()
 {
+    if (!sKeepProcessingEdges)
+        return;
+
     // reset all vtx colours
     for (u32 i = 0; i < sizeof(sEdgeMap) / sizeof(*sEdgeMap); i++)
     {
@@ -659,6 +663,7 @@ void bhv_scavenger_init()
     o->oPosX = 3220.f; 
     o->oPosY = 6640.f;
     o->oPosZ = 0.f;
+    sKeepProcessingEdges = 1;
 }
 
 void bhv_scavenger_loop()
@@ -684,6 +689,30 @@ void bhv_scavenger_loop()
 
     spawn_default_star(3220.f, 6640.f, 0);
     o->activeFlags = 0;
+    sKeepProcessingEdges = 0;
+
+    for (u32 i = 0; i < sizeof(sEdgeMap) / sizeof(*sEdgeMap); i++)
+    {
+        const struct VertexGroupDesc* edge = &sEdgeMap[i];
+        if (!edge->vtx)
+            continue;
+
+        Vtx* vtxs = segmented_to_virtual(edge->vtx);
+        for (int k = 0; k < edge->size; k++)
+        {
+            Vtx* vtx = &vtxs[k];
+            if (sScavengerCorrectEdges[i])
+            {
+                vtx->v.cn[3] = 0;
+                vtx->v.ob[0] = 3574;
+            }
+            else
+            {
+                vtx->v.cn[3] = 255;
+                vtx->v.ob[0] = 3584;
+            }
+        }
+    }
 }
 
 void notify_escape_event(int ev)
