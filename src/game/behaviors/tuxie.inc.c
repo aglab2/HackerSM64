@@ -208,7 +208,7 @@ void small_penguin_act_walking(void) {
     if (nearMother) {
         // o->oAction = SMALL_PENGUIN_ACT_NEAR_MOTHER;
     }
-    if (cur_obj_mario_far_away()) {
+    if (o->oDistanceToMario > 2000.0f) {
         cur_obj_set_pos_to_home();
     }
 }

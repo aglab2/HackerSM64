@@ -86,7 +86,7 @@
 #define TEXT_HUD_PRESS_L _("PRESS L TO SWITCH")
 #endif
 
-#define TEXT_CURRENT_HINT _("Current Hints:")
+#define TEXT_CURRENT_HINT _("Hints for uncollected star:")
 #define TEXT_PAY_5 _("Press B to pay 5 coins to unlock the next hint")
 
 #define TEXT_HINT_1_0 _("Touch the switch!")
@@ -114,7 +114,7 @@
 #define TEXT_HINT_6_0 _("An unreachable star across the pit")
 #define TEXT_HINT_6_1 _("Explore Floor 1 & Starting area")
 #define TEXT_HINT_6_2 _("Use tornado to escape from Floor 1")
-#define TEXT_HINT_6_3 _("Twirle from Floor 1 into a star")
+#define TEXT_HINT_6_3 _("Twirl from Floor 1 into a star")
 
 #define TEXT_HINT_7_0 _("3 suspicious Pokeys")
 #define TEXT_HINT_7_1 _("Explore Floor 1")
