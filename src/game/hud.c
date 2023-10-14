@@ -579,6 +579,7 @@ void render_hud(void) {
 #endif
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
+            gMarioState->health = 0x880;
             // render_hud_power_meter();
 #ifdef PUPPYCAM
             if (!gPuppyCam.enabled) {
