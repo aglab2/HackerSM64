@@ -155,12 +155,14 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
 /**
  * Create a display list for the end screen with Peach's delicious cake.
  */
+extern s32 gRenderingCakePicture;
 Gfx *geo_exec_cake_end_screen(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx) {
     struct GraphNodeGenerated *generatedNode = (struct GraphNodeGenerated *) node;
     Gfx *displayList = NULL;
     Gfx *displayListHead = NULL;
 
     if (callContext == GEO_CONTEXT_RENDER) {
+        gRenderingCakePicture = 1;
         displayList = alloc_display_list(3 * sizeof(*displayList));
         displayListHead = displayList;
 

@@ -577,6 +577,22 @@ void adjust_analog_stick(struct Controller *controller) {
     }
 }
 
+void kill_inputs()
+{
+#define ALLOWED_BUTTONS A_BUTTON
+    if (gControllers[0].controllerData != NULL) {
+        gControllers[0].controllerData->stick_x = 0;
+        gControllers[0].controllerData->stick_y = 0;
+        gControllers[0].controllerData->button &= ALLOWED_BUTTONS;
+    }
+    if (gControllers[1].controllerData != NULL) {
+        gControllers[1].controllerData->stick_x = 0;
+        gControllers[1].controllerData->stick_y = 0;
+        gControllers[1].controllerData->button &= ALLOWED_BUTTONS;
+    }
+#undef ALLOWED_BUTTONS
+}
+
 /**
  * Update the controller struct with available inputs if present.
  */
@@ -594,6 +610,10 @@ void read_controller_inputs(s32 threadID) {
 #if !defined(DISABLE_DEMO) && defined(KEEP_MARIO_HEAD)
     run_demo_inputs();
 #endif
+    if (gCurrLevelNum == LEVEL_CASTLE_COURTYARD)
+    {
+        kill_inputs();
+    }
 
     for (s32 cont = 0; cont < MAX_NUM_PLAYERS; cont++) {
         struct Controller* controller = &gControllers[cont];

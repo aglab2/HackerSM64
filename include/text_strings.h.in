@@ -161,6 +161,29 @@
 #define TEXT_HINT_15_2 _("Line connects objects interacted now and previously")
 #define TEXT_HINT_15_3 _("Make yellow line painting on Floor 4 be star shaped")
 
+#define TEXT_CREDITS_0 _("Hey! Thank you for playing this little hack!")
+
+#define TEXT_CREDITS_1_0 _("Sorry for a bit of an abrupt ending, but")
+#define TEXT_CREDITS_1_1 _("due to real life ordeals I could not make a proper finale.")
+
+#define TEXT_CREDITS_2_0 _("I must concentrate on real life goals at the moment")
+#define TEXT_CREDITS_2_1 _("so I am taking a well deserved break.")
+
+#define TEXT_CREDITS_3_0 _("I enjoyed the great memories I made")
+#define TEXT_CREDITS_3_1 _("with SM64 romhacks lads and as no one really")
+#define TEXT_CREDITS_3_2 _("can quit Mario, I'll be back eventually :)")
+
+#define TEXT_CREDITS_4 _("Thank you so much for playing my hacks!")
+
+#define TEXT_CREDITS_5 _("Hack tested by ChrisLink, Mushie64, ZenonX. Thanks mens!")
+
+#define TEXT_CREDITS_6 _("Hey Beverly, does this count as a LORE?")
+#define TEXT_CREDITS_7 _("And I mean Mario can't jump here either???")
+#define TEXT_CREDITS_8 _("And tower elevator is kinda mechanical???")
+#define TEXT_CREDITS_9 _("I got it all covered!")
+
+#define TEXT_NEXT_LINE _("[A]")
+
 #if defined(VERSION_JP) || defined(VERSION_SH)
 
 /**

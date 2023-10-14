@@ -30,6 +30,8 @@
 #include "s2d_engine/init.h"
 #endif
 
+#include "text_strings.h"
+
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *gGraphNodePointers[MODEL_ID_COUNT];
 struct Area gAreaData[AREA_COUNT];
@@ -392,6 +394,130 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
+static const u8 sTextNextLine[] = { TEXT_NEXT_LINE };
+
+static const u8 sTextCredits0[] = { TEXT_CREDITS_0 };
+static const u8 sTextCredits1_0[] = { TEXT_CREDITS_1_0 };
+static const u8 sTextCredits1_1[] = { TEXT_CREDITS_1_1 };
+static const u8 sTextCredits2_0[] = { TEXT_CREDITS_2_0 };
+static const u8 sTextCredits2_1[] = { TEXT_CREDITS_2_1 };
+static const u8 sTextCredits3_0[] = { TEXT_CREDITS_3_0 };
+static const u8 sTextCredits3_1[] = { TEXT_CREDITS_3_1 };
+static const u8 sTextCredits3_2[] = { TEXT_CREDITS_3_2 };
+static const u8 sTextCredits4[] = { TEXT_CREDITS_4 };
+static const u8 sTextCredits5[] = { TEXT_CREDITS_5 };
+static const u8 sTextCredits6[] = { TEXT_CREDITS_6 };
+static const u8 sTextCredits7[] = { TEXT_CREDITS_7 };
+static const u8 sTextCredits8[] = { TEXT_CREDITS_8 };
+static const u8 sTextCredits9[] = { TEXT_CREDITS_9 };
+
+static const u8* sTextCreditsList0[] = { sTextCredits0, NULL };
+static const u8* sTextCreditsList1[] = { sTextCredits1_0, sTextCredits1_1, NULL };
+static const u8* sTextCreditsList2[] = { sTextCredits2_0, sTextCredits2_1, NULL };
+static const u8* sTextCreditsList3[] = { sTextCredits3_0, sTextCredits3_1, sTextCredits3_2, NULL };
+static const u8* sTextCreditsList4[] = { sTextCredits4, NULL };
+static const u8* sTextCreditsList5[] = { sTextCredits5, NULL };
+static const u8* sTextCreditsList6[] = { sTextCredits6, NULL };
+static const u8* sTextCreditsList7[] = { sTextCredits7, NULL };
+static const u8* sTextCreditsList8[] = { sTextCredits8, NULL };
+static const u8* sTextCreditsList9[] = { sTextCredits9, NULL };
+
+static const u8** sTextCredits[] = {
+    sTextCreditsList0,
+    sTextCreditsList1,
+    sTextCreditsList2,
+    sTextCreditsList3,
+    sTextCreditsList4,
+    sTextCreditsList5,
+    sTextCreditsList6,
+    sTextCreditsList7,
+    sTextCreditsList8,
+    sTextCreditsList9,
+};
+
+static u8 sCreditsCurrentAlpha = 0;
+static u8 sCreditsWarpTriggered = 0;
+static s32 sCreditsCurrentNote = 0;
+static s32 sCreditsBlinkTimer = 0;
+
+s32 gRenderingCakePicture = 0;
+
+void print_credits()
+{
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    int xPos = 210;
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+    int currLine;
+    for (currLine = 0; currLine < sCreditsCurrentNote; currLine++)
+    {
+        const u8** creditsLine = sTextCredits[currLine];
+        while (*creditsLine)
+        {
+            if (currLine < 6)
+            {
+                s32 lvlNameX = get_str_x_pos_from_center(160, *creditsLine, 10.0f);
+                print_generic_string(lvlNameX, xPos, *creditsLine);
+            }
+            xPos -= 14;
+            creditsLine++;
+        }
+        if (currLine == 2)
+            xPos -= 40;
+
+        xPos -= 6;
+    }
+
+    if (currLine > 5)
+        xPos = 124;
+
+    if (sCreditsCurrentAlpha < 255)
+    {
+        sCreditsCurrentAlpha += 17;
+    }
+    if (currLine > 5)
+    {
+        gDPSetEnvColor(gDisplayListHead++, 0x9c, 0x16, 0x63, sCreditsCurrentAlpha);
+    }
+    else
+    {
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCreditsCurrentAlpha);
+    }
+    {
+        const u8** creditsLine = sTextCredits[sCreditsCurrentNote];
+        while (*creditsLine)
+        {
+            s32 lvlNameX = get_str_x_pos_from_center(160, *creditsLine, 10.0f);
+            print_generic_string(lvlNameX, xPos, *creditsLine);
+            xPos -= 14;
+            creditsLine++;
+        }
+    }
+
+    if (sCreditsCurrentAlpha == 255 && !sCreditsWarpTriggered)
+    {
+        sCreditsBlinkTimer++;
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, (1 + sins(sCreditsBlinkTimer * 0x456)) * 127);
+        print_generic_string(310, 10, sTextNextLine);
+        if (gPlayer1Controller->buttonPressed & A_BUTTON)
+        {
+            if (sCreditsCurrentNote < 9)
+            {
+                sCreditsBlinkTimer = 0;
+                sCreditsCurrentAlpha = 0;
+                sCreditsCurrentNote++;
+            }
+            else
+            {
+                level_trigger_warp(gMarioState, WARP_OP_CREDITS_END);
+                sCreditsWarpTriggered = 1;
+            }
+        }
+
+    }
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
 void render_game(void) {
     PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
@@ -406,7 +532,8 @@ void render_game(void) {
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
                       SCREEN_HEIGHT - gBorderHeight);
-        render_hud();
+        if (gCurrLevelNum != LEVEL_CASTLE_COURTYARD)
+            render_hud();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
@@ -418,6 +545,8 @@ void render_game(void) {
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
                       SCREEN_HEIGHT - gBorderHeight);
         gMenuOptSelectIndex = render_menus_and_dialogs();
+        if (!gRenderingCakePicture && gCurrLevelNum == LEVEL_CASTLE_COURTYARD)
+            print_credits();
 
         if (gMenuOptSelectIndex != 0) {
             gSaveOptSelectIndex = gMenuOptSelectIndex;
