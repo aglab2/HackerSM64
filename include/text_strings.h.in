@@ -177,7 +177,7 @@
 
 #define TEXT_CREDITS_5 _("Hack tested by ChrisLink, Mushie64, ZenonX. Thanks mens!")
 
-#define TEXT_CREDITS_6 _("Hey Beverly, does this count as a LORE?")
+#define TEXT_CREDITS_6 _("Hey Beverly, does this text count as a LORE?")
 #define TEXT_CREDITS_7 _("And I mean Mario can't jump here either???")
 #define TEXT_CREDITS_8 _("And tower elevator is kinda mechanical???")
 #define TEXT_CREDITS_9 _("I got it all covered!")
