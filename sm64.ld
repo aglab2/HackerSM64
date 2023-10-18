@@ -108,7 +108,7 @@ SECTIONS
    }
    END_NOLOAD(zbuffer)
 
-   . = _zbufferSegmentBssEnd;
+   . = 0x80100000;
    BEGIN_NOLOAD(buffers)
    {
       BUILD_DIR/src/buffers/buffers.o(.bss*);
@@ -274,15 +274,23 @@ SECTIONS
    }
    END_NOLOAD(engine)
 
+   . = 0x803DA800;
+   BEGIN_NOLOAD(framebuffer0)
+   {
+      BUILD_DIR/src/buffers/framebuffer0.o(.bss*);
+   }
+   END_NOLOAD(framebuffer0)
+
    . = _engineSegmentBssEnd;
 #ifndef USE_EXT_RAM
    . = 0x8028f800;
 #else
-   . = 0x8048f800;
+   . = 0x804DA800;
 #endif
    BEGIN_NOLOAD(framebuffers)
    {
-      BUILD_DIR/src/buffers/framebuffers.o(.bss*);
+      BUILD_DIR/src/buffers/framebuffer1.o(.bss*);
+      BUILD_DIR/src/buffers/framebuffer2.o(.bss*);
    }
    END_NOLOAD(framebuffers)
 
