@@ -9,6 +9,11 @@ struct VertexGroupDesc
 #define ARR_SIZE(x) { x, sizeof(x) / sizeof(*(x)) }
 
 const struct VertexGroupDesc sVertices[] = {
+  ARR_SIZE(castle_inside_dl_d_mesh_layer_1_vtx_0),
+  ARR_SIZE(castle_inside_dl_d_mesh_layer_1_vtx_1),
+  ARR_SIZE(castle_inside_dl_d_mesh_layer_1_vtx_2),
+  ARR_SIZE(castle_inside_dl_d_mesh_layer_1_vtx_3),
+  ARR_SIZE(castle_inside_dl_d_mesh_layer_1_vtx_4),
   ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_0),
   ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_1),
   ARR_SIZE(castle_inside_dl_diag_mesh_layer_1_vtx_2),
@@ -66,7 +71,7 @@ const struct VertexGroupDesc sVertices[] = {
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_43),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_44),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_45),
-  ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_46),
+  // ARR_SIZE(castle_inside_dl_tower_mesh_layer_1_vtx_46),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_0),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_1),
   ARR_SIZE(castle_inside_dl_tower_mesh_layer_4_vtx_2),

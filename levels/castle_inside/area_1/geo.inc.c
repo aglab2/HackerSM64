@@ -3,6 +3,7 @@
 const GeoLayout castle_inside_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_d_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_diag_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_diag_box_penguin_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_diag_goomba_box_mesh_layer_1),
