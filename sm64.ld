@@ -108,7 +108,7 @@ SECTIONS
    }
    END_NOLOAD(zbuffer)
 
-   . = 0x80100000;
+   . = 0x80100000-0x271a0;
    BEGIN_NOLOAD(buffers)
    {
       BUILD_DIR/src/buffers/buffers.o(.bss*);
