@@ -349,6 +349,10 @@ void thread3_main(UNUSED void *arg) {
     setup_mesg_queues();
     alloc_pool();
     load_engine_code_segment();
+#ifdef PUPPYPRINT_DEBUG
+    puppyprint_calculate_ram_usage_static();
+    puppyprint_calculate_ram_usage_dynamic();
+#endif
     detect_emulator();
 #ifndef UNF
     crash_screen_init();
