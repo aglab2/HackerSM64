@@ -1233,12 +1233,93 @@ s32 check_wall_kick(struct MarioState *m) {
 
     return FALSE;
 }
+
+static s32 _bonk_or_hit_lava_wall(struct MarioState *m, struct WallCollisionData *wallData) {
+    s16 i;
+    s16 wallDYaw;
+    s32 oldWallDYaw;
+    s32 result = AIR_STEP_NONE;
+
+    if (m->wall != NULL) {
+        oldWallDYaw = abs_angle_diff(m->wallYaw, m->faceAngle[1]);
+    } else {
+        oldWallDYaw = 0x0;
+    }
+
+    for (i = 0; i < wallData->numWalls; i++) {
+        if (wallData->walls[i] != NULL) {
+            // Update wall reference (bonked wall) only if the new wall has a better facing angle
+            wallDYaw = abs_angle_diff(SURFACE_YAW(wallData->walls[i]), m->faceAngle[1]);
+            if (wallDYaw > oldWallDYaw) {
+                oldWallDYaw = wallDYaw;
+                set_mario_wall(m, wallData->walls[i]);
+            }
+        }
+    }
+
+    return result;
+}
+
+static void filterStickyWalls(struct WallCollisionData *wallData)
+{
+    struct Surface *walls[MAX_REFERENCED_WALLS];
+    int wallWriteCnt = 0;
+    for (int i = 0; i < wallData->numWalls; i++)
+    {
+        struct Surface* curWall = wallData->walls[i];
+        if (curWall->type == SURFACE_STICKY)
+        {
+            walls[wallWriteCnt++] = curWall;
+        }
+    }
+
+    for (int i = 0; i < wallWriteCnt; i++)
+    {
+        wallData->walls[i] = walls[i];
+    }
+    wallData->numWalls = wallWriteCnt;
+}
+
+static s32 _perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepArg) {
+    set_mario_wall(m, NULL);
+    s16 i;
+    s32 stepResult = AIR_STEP_NONE;
+
+    Vec3f nextPos, ledgePos;
+    struct WallCollisionData upperWall, lowerWall;
+    struct Surface *ceil, *floor, *ledgeFloor;
+    struct Surface *grabbedWall = NULL;
+
+    vec3f_copy(nextPos, intendedPos);
+
+    resolve_and_return_wall_collisions(nextPos, 150.0f, 100.0f, &upperWall);
+    resolve_and_return_wall_collisions(nextPos, 30.0f, 100.0f, &lowerWall);
+    filterStickyWalls(&upperWall);
+    filterStickyWalls(&lowerWall);
+
+    f32 floorHeight = find_floor(nextPos[0], nextPos[1], nextPos[2], &floor);
+    f32 ceilHeight = find_mario_ceil(nextPos, floorHeight, &ceil);
+
+    set_mario_floor(m, floor, floorHeight);
+    if (upperWall.numWalls > 0) {
+        stepResult  = _bonk_or_hit_lava_wall(m, &upperWall);
+        if (stepResult != AIR_STEP_NONE) {
+            return stepResult;
+        }
+    }
+
+    return (lowerWall.numWalls > 0) ? _bonk_or_hit_lava_wall(m, &lowerWall) : AIR_STEP_NONE;
+}
+
 static s32 manage_sticky_wall(struct MarioState *m){
 	if( (gPlayer1Controller->buttonPressed&Z_TRIG) || m->wall == NULL){
 		return set_mario_action(m, ACT_FREEFALL, 0);
 	}
 	vec3f_copy_with_gravity_switch(m->marioObj->header.gfx.pos, m->pos);
 	m->marioObj->header.gfx.angle[1] = m->faceAngle[1]+0x8000;
+    m->faceAngle[1] = m->faceAngle[1]+0x8000;
+    _perform_air_quarter_step(m, m->pos, 0);
+    m->faceAngle[1] = m->faceAngle[1]+0x8000;
 	return FALSE;
 }
 
