@@ -21,46 +21,40 @@
 #endif
 #include "game/puppyprint.h"
 
-// #define MAIN_POOL_USE_BEST_FIT
-// #define MAIN_POOL_DEBUG_CORRUPTION_SIZE
+#include "memory_layout.h"
 
-#define MAIN_POOL_CORRUPTED() main_pool_corrupted(__LINE__, __func__)
-
-__attribute__ ((noinline)) static void main_pool_corrupted(int line, const char* fn) {
-#ifdef CRASH_SCREEN_INCLUDED
-    do { if (!(exp)) _n64_assert(fn, line, "Main Pool is corrupted", 1); } while (0)
-#else
-    while (1) {}
-#endif
-}
-
-#ifdef MAIN_POOL_DEBUG_CORRUPTION_SIZE
-#define MAIN_POOL_DEBUG_CORRUPTION_SIZE_CHECK(reg) do{ if ((reg)->size > 0x800000) MAIN_POOL_CORRUPTED(); } while(0)
-#else
-#define MAIN_POOL_DEBUG_CORRUPTION_SIZE_CHECK(reg)
+#if MEMORY_FRAGMENTATION_NO_FRAGMENTATION == MEMORY_FRAGMENTATION_LEVEL
+// One giant region encompassing all of the ram. Memory layout follows vanilla implementation
+// -zbuffer-|-game/engine data-|-framebuffers-|-main pool region-
+#define MAIN_POOL_REGIONS_COUNT 1
 #endif
 
-// round up to the next multiple
-#define ALIGN4(val) (((val) + 0x3) & ~0x3)
-#define ALIGN8(val) (((val) + 0x7) & ~0x7)
-#define ALIGN16(val) (((val) + 0xF) & ~0xF)
+#if MEMORY_FRAGMENTATION_ZBUFFER_AND_FRAMEBUFFERS == MEMORY_FRAGMENTATION_LEVEL
+// Region before zbuffer and region after the framebuffer2
+// -game/engine data-|-main pool region 0-|-zbuffer-|-framebuffers-|-main pool region 1-
+//                                                  ^
+//                                       0x80300000 or 0x80700000
+#define MAIN_POOL_REGIONS_COUNT 2
+#endif
 
-#define	DOWN(s, align)	(((u32)(s)) & ~((align)-1))
-#define DOWN4(s) DOWN(s, 4)
-
-struct MainPoolRegion {
-    u8* start;
-    u32 size;
-};
-
+#if MEMORY_FRAGMENTATION_ZBUFFER_AND_FRAMEBUFFERS_SPLIT == MEMORY_FRAGMENTATION_LEVEL
+// Region after 0x80600000, before zbuffer, after the framebuffer2
+// -game/engine data-|-main pool region 1-|-zbuffer-|-framebuffers-|-main pool region 1-|-main pool region 0-
+//                                                  ^                                   ^
+//                                             0x80500000                          0x80600000
 #define MAIN_POOL_REGIONS_COUNT 3
+#endif
+
+#if MEMORY_FRAGMENTATION_ZBUFFER_AND_EACH_FRAMEBUFFER == MEMORY_FRAGMENTATION_LEVEL
+// Region before zbuffer, between fb0/fb1, after fb2
+// -game/engine data-|-main pool region 0-|-zb-|-fb0-|-main pool region 1-|-fb1-|-fb2-|-main pool region 2-
+//                                             ^                                ^
+//                                        0x80500000                       0x80700000
+#define MAIN_POOL_REGIONS_COUNT 3
+#endif
 
 struct MainPoolContext {
     struct MainPoolRegion regions[MAIN_POOL_REGIONS_COUNT];
-    u32 freeSpace;
-#ifdef MAIN_POOL_USE_BEST_FIT
-    u8 regionIds[MAIN_POOL_REGIONS_COUNT];
-#endif
 };
 
 struct MainPoolState {
@@ -104,7 +98,12 @@ struct MemoryPool *gEffectsMemoryPool;
 
 uintptr_t sSegmentTable[32];
 uintptr_t sSegmentROMTable[32];
+#ifndef MAIN_POOL_SINGLE_REGION
 static struct MainPoolContext sMainPool;
+struct MainPoolRegion* gMainPoolCurrentRegion;
+#else
+struct MainPoolContext sMainPool;
+#endif
 
 static struct MainPoolState *gMainPoolState = NULL;
 
@@ -119,7 +118,7 @@ UNUSED void *get_segment_base_addr(s32 segment) {
 
 #ifndef NO_SEGMENTED_MEMORY
 void *segmented_to_virtual(const void *addr) {
-    size_t segment = (((uintptr_t) addr) >> 24)&0x7F;
+    size_t segment = ((uintptr_t) addr >> 24);
     size_t offset  = ((uintptr_t) addr & 0x00FFFFFF);
 
     return (void *) ((sSegmentTable[segment] + offset) | 0x80000000);
@@ -151,69 +150,13 @@ void move_segment_table_to_dmem(void) {
 }
 #endif
 
-static void main_pool_calculate_size(void) {
-    sMainPool.freeSpace = 0;
-    for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
-        sMainPool.freeSpace += sMainPool.regions[i].size;
-    }
-}
-
-#ifdef MAIN_POOL_USE_BEST_FIT
-static void main_pool_region_swap(struct MainPoolRegion* r1, struct MainPoolRegion* r2) {
-    struct MainPoolRegion tmp = *r1;
-    *r1 = *r2;
-    *r2 = tmp;
-}
-
-static void u8_swap(u8* r1, u8* r2) {
-    u8 tmp = *r1;
-    *r1 = *r2;
-    *r2 = tmp;
-}
-
-// sort the 'sMainPool.regions' by size - from lowest size to biggest
-#define COMPARE(l, r) do{ \
-    if (sMainPool.regions[l].size > sMainPool.regions[r].size) { \
-        main_pool_region_swap(&sMainPool.regions[l], &sMainPool.regions[r]); \
-        u8_swap(&sMainPool.regionIds[l], &sMainPool.regionIds[r]); \
-    } \
-} while(0)
-
-#define COMPARE_BREAK(l, r) do{ \
-    if (sMainPool.regions[l].size > sMainPool.regions[r].size) { \
-        main_pool_region_swap(&sMainPool.regions[l], &sMainPool.regions[r]); \
-        u8_swap(&sMainPool.regionIds[l], &sMainPool.regionIds[r]); \
-    } else { \
-        break; \
-    } \
-} while(0)
-
-static void main_pool_sort() {
-    COMPARE(0, 1);
-    COMPARE(1, 2);
-    COMPARE(0, 1);
-}
-
-static void main_pool_sort_down(int from) {
-    // If 'from' region was changed, we just need to bubble sort it to the bottom
-    // Whenever the first time condition for 'COMPARE' fails, break away as all other conditions will fail
-    for (int i = from; i > 0; i--)
-        COMPARE_BREAK(i - 1, i);
-}
-
-static void main_pool_sort_up(int from) {
-    for (int i = from + 1; i < MAIN_POOL_REGIONS_COUNT; i++)
-        COMPARE_BREAK(i - 1, i);
-}
-#undef COMPARE
-#undef COMPARE_BREAK
-#endif
-
-extern u8 _framebuffersSegmentBssStart[];
-// extern u8 _framebuffersSegmentBssEnd[];
-// extern u8 _zbufferSegmentBssStart[];
-extern u8 _zbufferSegmentBssEnd[];
+extern u8 _framebuffer2SegmentBssEnd[];
 extern u8 _goddardSegmentStart[];
+
+#define ZBUFFER_END ZBUFFER_START + RENDER_BUFFER_BUFFER_SIZE
+#define FRAMEBUFFER0_END FRAMEBUFFER0_START + RENDER_BUFFER_BUFFER_SIZE
+#define FRAMEBUFFER1_END FRAMEBUFFER1_START + RENDER_BUFFER_BUFFER_SIZE
+#define FRAMEBUFFER2_END FRAMEBUFFER2_START + RENDER_BUFFER_BUFFER_SIZE
 
 /**
  * Initialize the main memory pool. This pool is conceptually regions
@@ -221,84 +164,80 @@ extern u8 _goddardSegmentStart[];
  * freeing the object that was most recently allocated from a side.
  */
 void main_pool_init() {
-#ifdef USE_EXT_RAM
-    sMainPool.regions[0].start = (u8 *) 0x80600000;
-    sMainPool.regions[0].size = (u8 *) DOWN4(_goddardSegmentStart) - sMainPool.regions[0].start;
-    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
-    sMainPool.regions[1].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[1].start;
-    sMainPool.regions[2].start = (u8 *) ALIGN4((uintptr_t)_zbufferSegmentBssEnd);
-    sMainPool.regions[2].size = (u8*) 0x80600000 - sMainPool.regions[2].start;
-#else
-    sMainPool.regions[0].start = (u8 *) ALIGN4((uintptr_t)_zbufferSegmentBssEnd);
-    sMainPool.regions[0].size = (u8*) DOWN4(_goddardSegmentStart) - sMainPool.regions[0].start;
-    sMainPool.regions[1].start = (u8 *) ALIGN4((uintptr_t)_engineSegmentBssEnd);
-    sMainPool.regions[2].size = (u8 *) DOWN4((uintptr_t)_framebuffersSegmentBssStart) - sMainPool.regions[1].start;
-    sMainPool.regions[2].start = NULL;
-    sMainPool.regions[2].size = 0;
-#endif
-    
-#ifdef MAIN_POOL_USE_BEST_FIT
-    sMainPool.regionIds[1] = 1;
-    sMainPool.regionIds[0] = 0;
-    sMainPool.regionIds[2] = 2;
-    main_pool_sort();
+#define SET_REGION(id, bufStart, bufEnd) \
+    sMainPool.regions[id].start = (u8 *) ALIGN4((uintptr_t)(bufStart)); \
+    sMainPool.regions[id].end = (u8 *) DOWN4((uintptr_t)(bufEnd));
+
+#if MEMORY_FRAGMENTATION_NO_FRAGMENTATION == MEMORY_FRAGMENTATION_LEVEL
+    // One giant region encompassing all of the ram
+    SET_REGION(0, _framebuffer2SegmentBssEnd, _goddardSegmentStart);
 #endif
 
-    main_pool_calculate_size();
+#if MEMORY_FRAGMENTATION_ZBUFFER_AND_FRAMEBUFFERS == MEMORY_FRAGMENTATION_LEVEL
+    // Region before zbuffer and region after the framebuffer2
+    SET_REGION(0, _engineSegmentBssEnd, ZBUFFER_START);
+    SET_REGION(1, FRAMEBUFFER2_END, _goddardSegmentStart);
+#endif
 
-#if PUPPYPRINT_DEBUG
-    mempool = sPoolFreeSpace;
+#if MEMORY_FRAGMENTATION_ZBUFFER_AND_FRAMEBUFFERS_SPLIT == MEMORY_FRAGMENTATION_LEVEL
+    // Regions before zbuffer, after the framebuffer2, between zbuffer and framebuffer0
+    SET_REGION(0, 0x80600000, _goddardSegmentStart);
+    SET_REGION(1, _engineSegmentBssEnd, ZBUFFER_START);
+    SET_REGION(2, FRAMEBUFFER2_END, 0x80600000);
+#endif
+
+#if MEMORY_FRAGMENTATION_ZBUFFER_AND_EACH_FRAMEBUFFER == MEMORY_FRAGMENTATION_LEVEL
+    // Region before zbuffer, between fb0/fb1, after fb2
+    SET_REGION(0, _engineSegmentBssEnd, ZBUFFER_START);
+    SET_REGION(1, FRAMEBUFFER0_END, FRAMEBUFFER1_START);
+    SET_REGION(2, FRAMEBUFFER2_END, _goddardSegmentStart);
+#endif
+
+#undef SET_REGION
+
+#ifndef MAIN_POOL_SINGLE_REGION
+    gMainPoolCurrentRegion = &sMainPool.regions[0];
+#endif
+
+#ifdef PUPPYPRINT_DEBUG
+    mempool = main_pool_available();
 #endif
 }
 
 // all 'try_alloc' functions expect size to be ALIGN4
 
-// takes the first 'size' bytes from 'region'
-static void* main_pool_region_try_alloc_from_start(struct MainPoolRegion* region, u32 size) {
-    if (region->size < size)
-        return NULL;
-
-    void* ret = region->start;
-    region->start += size;
-    region->size -= size;
-    sMainPool.freeSpace -= size;
-    return ret;
-}
-
 // takes the at least first 'size' bytes from 'region' and return pointer aligned on 'alignment'
 static void* main_pool_region_try_alloc_from_start_aligned(struct MainPoolRegion* region, u32 size, u32 alignment) {
     u8* ret = (u8*) ALIGN(region->start, alignment);
     u8* newStart = ret + size;
-    u8* regionEnd = region->start + region->size;
+    u8* regionEnd = region->end;
     if (newStart > regionEnd)
         return NULL;
 
     size = newStart - region->start;
     region->start = newStart;
-    region->size -= size;
-    sMainPool.freeSpace -= size;
     return ret;
 }
 
 static void* main_pool_region_try_alloc_from_end_freeable(struct MainPoolRegion* region, u8 id, u32 sizeWithHeader) {
-    if (region->size < sizeWithHeader)
+    u32 size = region->end - region->start;
+    if (size < sizeWithHeader)
         return NULL;
 
-    u8* regionEnd = region->start + region->size;
+    u8* regionEnd = region->end;
 
     struct MainPoolFreeableHeader* header = (struct MainPoolFreeableHeader*) (regionEnd - sizeWithHeader);
     header->magic = MAIN_POOL_FREEABLE_HEADER_MAGIC_RIGHT;
     header->id = id;
     header->ptr = regionEnd;
 
-    region->size -= sizeWithHeader;
-    sMainPool.freeSpace -= sizeWithHeader;
+    region->end -= sizeWithHeader;
 
     return header->data;
 }
 
 static void* main_pool_region_try_alloc_from_end_aligned_freeable(struct MainPoolRegion* region, u8 id, u32 size, u32 alignment) {
-    u8* region_end = region->start + region->size;
+    u8* region_end = region->end;
     u8* new_end = (u8*) DOWN(region_end - size, alignment) - sizeof(struct MainPoolFreeableHeader);
     if (new_end < region->start)
         return NULL;
@@ -310,28 +249,27 @@ static void* main_pool_region_try_alloc_from_end_aligned_freeable(struct MainPoo
     header->id = id;
     header->ptr = region_end;
 
-    region->size -= size;
-    sMainPool.freeSpace -= size;
+    region->end -= size;
 
     return header->data;
 }
 
-void *main_pool_alloc(u32 size) {
-    size = ALIGN4(size);
+void *main_pool_alloc_slow(u32 size) {
+#ifndef MAIN_POOL_SINGLE_REGION
+    gMainPoolCurrentRegion = NULL;
+#endif
+
     for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
         struct MainPoolRegion* region = &sMainPool.regions[i];
-        void* ret = main_pool_region_try_alloc_from_start(region, size);
-        if (!ret)
-            continue;
-
-#ifdef MAIN_POOL_USE_BEST_FIT
-        // There is only a point in re-sorting if 2 conditions occur
-        // 1) It is not the first region, it is already the smallest
-        // 2) Final region size is smaller than size. If this is not true,
-        //    'regions[i-1]->size < size <= regions[i]->size' satisfies
-        if (i && region->size < size)
-            main_pool_sort_down(i);
+#ifndef MAIN_POOL_SINGLE_REGION
+        // Find region that has at least 'MAIN_POOL_SMALL_ALLOC_LIMIT' bytes left
+        if (!gMainPoolCurrentRegion && region->end - region->start >= MAIN_POOL_SMALL_ALLOC_LIMIT)
+            gMainPoolCurrentRegion = region;
 #endif
+
+        void* ret = main_pool_region_try_alloc_from_start(region, size);
+        if (__builtin_expect(!ret, 0))
+            continue;
 
         return ret;
     }
@@ -351,12 +289,6 @@ void *main_pool_alloc_aligned(u32 size, u32 alignment) {
         if (!ret)
             continue;
 
-#ifdef MAIN_POOL_USE_BEST_FIT
-        // Performing +(2 * alignment) check here to give some flexibility to ALIGN that could have caused some changes
-        if (i && region->size < size + 2 * alignment)
-            main_pool_sort_down(i);
-#endif
-
         return ret;
     }
 
@@ -368,19 +300,9 @@ void *main_pool_alloc_freeable(u32 size) {
     size = ALIGN4(size) + sizeof(struct MainPoolFreeableHeader);
     for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
         struct MainPoolRegion* region = &sMainPool.regions[i];
-#ifdef MAIN_POOL_USE_BEST_FIT
-        u8 regionId = sMainPool.regionIds[i];
-#else
-        u8 regionId = (u8) i;
-#endif
-        void* ret = main_pool_region_try_alloc_from_end_freeable(region, regionId, size);
+        void* ret = main_pool_region_try_alloc_from_end_freeable(region, i, size);
         if (!ret)
             continue;
-
-#ifdef MAIN_POOL_USE_BEST_FIT
-        if (i && region->size < size)
-            main_pool_sort_down(i);
-#endif
 
         return ret;
     }
@@ -396,19 +318,9 @@ void *main_pool_alloc_aligned_freeable(u32 size, u32 alignment) {
     size = ALIGN4(size);
     for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
         struct MainPoolRegion* region = &sMainPool.regions[i];
-#ifdef MAIN_POOL_USE_BEST_FIT
-        u8 regionId = sMainPool.regionIds[i];
-#else
-        u8 regionId = (u8) i;
-#endif
-        void* ret = main_pool_region_try_alloc_from_end_aligned_freeable(region, regionId, size, alignment);
+        void* ret = main_pool_region_try_alloc_from_end_aligned_freeable(region, i, size, alignment);
         if (!ret)
             continue;
-
-#ifdef MAIN_POOL_USE_BEST_FIT
-        if (i && region->size < size + sizeof(struct MainPoolFreeableHeader) + 2 * alignment)
-            main_pool_sort_down(i);
-#endif
 
         return ret;
     }
@@ -425,20 +337,8 @@ void *main_pool_alloc_aligned_freeable(u32 size, u32 alignment) {
 void main_pool_free(void *addr) {
     const struct MainPoolFreeableHeader* header = (struct MainPoolFreeableHeader*) ((u8*) addr - sizeof(struct MainPoolFreeableHeader));
     if (header->magic == MAIN_POOL_FREEABLE_HEADER_MAGIC_RIGHT) {
-#ifdef MAIN_POOL_USE_BEST_FIT
-        for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
-            if (header->id == sMainPool.regionIds[i]) {
-                struct MainPoolRegion* region = &sMainPool.regions[i];
-                region->size = header->ptr - region->start;
-                MAIN_POOL_DEBUG_CORRUPTION_SIZE_CHECK(region); 
-                main_pool_sort_up(i);      
-                break;
-            }
-        }
-#else
-    struct MainPoolRegion* region = &sMainPool.regions[header->id];
-    region->size = header->ptr - region->start;
-#endif
+        struct MainPoolRegion* region = &sMainPool.regions[header->id];
+        region->end = header->ptr;
     } else {
         DEBUG_ASSERT("Incorrect magic for free");
     }
@@ -449,7 +349,13 @@ void main_pool_free(void *addr) {
  * pool.
  */
 u32 main_pool_available(void) {
-    return sMainPool.freeSpace;
+    s32 size = 0;
+    for (int i = 0; i < MAIN_POOL_REGIONS_COUNT; i++) {
+        struct MainPoolRegion* region = &sMainPool.regions[i];
+        size += region->end - region->start;
+    }
+
+    return size;
 }
 
 /**
@@ -566,8 +472,9 @@ void *load_segment(s32 segment, u8 *srcStart, u8 *srcEnd, u8 *bssStart, u8 *bssE
             set_segment_base_addr(segment, addr); sSegmentROMTable[segment] = (uintptr_t) srcStart;
         }
     }
-#if PUPPYPRINT_DEBUG
-    ramsizeSegment[(segment + nameTable) - 2] = ((s32)srcEnd - (s32)srcStart);
+#ifdef PUPPYPRINT_DEBUG
+    u32 ppSize = ALIGN16(srcEnd - srcStart);
+    set_segment_memory_printout(segment, ppSize);
 #endif
     return addr;
 }
@@ -583,7 +490,11 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
     u32 srcSize = ALIGN16(srcEnd - srcStart);
     u32 destSize = (u8*) RAM_END - srcStart;
     if (srcSize <= destSize) {
+#ifdef USE_EXT_RAM
         bzero(dest, ((u8*)0x80800000) - dest);
+#else
+        bzero(dest, ((u8*)0x80400000) - dest);
+#endif
         osWritebackDCacheAll();
         dma_read(dest, srcStart, srcEnd);
         osInvalICache(dest, destSize);
@@ -641,46 +552,11 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             main_pool_free(compressed);
         }
     }
-#if PUPPYPRINT_DEBUG
-    ramsizeSegment[(segment + nameTable) - 2] = (s32)srcEnd - (s32)srcStart;
+#ifdef PUPPYPRINT_DEBUG
+    u32 ppSize = ALIGN16((u32)*size);
+    set_segment_memory_printout(segment, ppSize);
 #endif
     return dest;
-}
-
-void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
-    UNUSED void *dest = NULL;
-
-#ifdef GZIP
-    u32 compSize = (srcEnd - 4 - srcStart);
-#else
-    u32 compSize = ALIGN16(srcEnd - srcStart);
-#endif
-    u8 *compressed = main_pool_alloc_aligned_freeable(compSize, 0);
-#ifdef GZIP
-    // Decompressed size from end of gzip
-    u32 *size = (u32 *) (compressed + compSize);
-#endif
-    if (compressed != NULL) {
-#ifdef UNCOMPRESSED
-        dma_read(gDecompressionHeap, srcStart, srcEnd);
-#else
-        dma_read(compressed, srcStart, srcEnd);
-#endif
-#ifdef GZIP
-        expand_gzip(compressed, gDecompressionHeap, compSize, (u32)size);
-#elif RNC1
-        Propack_UnpackM1(compressed, gDecompressionHeap);
-#elif RNC2
-        Propack_UnpackM2(compressed, gDecompressionHeap);
-#elif YAY0
-        slidstart(compressed, gDecompressionHeap);
-#elif MIO0
-        decompress(compressed, gDecompressionHeap);
-#endif
-        set_segment_base_addr(segment, gDecompressionHeap); sSegmentROMTable[segment] = (uintptr_t) srcStart;
-        main_pool_free(compressed);
-    }
-    return gDecompressionHeap;
 }
 
 void load_engine_code_segment(void) {
@@ -719,6 +595,9 @@ struct MemoryPool *mem_pool_init(u32 size) {
         block->next = NULL;
         block->size = pool->totalSpace;
     }
+#ifdef PUPPYPRINT_DEBUG
+    gPoolMem += ALIGN16(size) + 16;
+#endif
     return pool;
 }
 

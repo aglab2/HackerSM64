@@ -217,6 +217,7 @@ void bhv_ab_clam_ctl_loop()
 extern Gfx mat_ab_dl_tf[];
 void bhv_ab_troll_loop()
 {
+#if 0
     u8* env = (u8*) segmented_to_virtual(mat_ab_dl_tf) + 19 * 8 + 7;
     if (gMarioStates->pos[1] < 520.f || o->oDistanceToMario > 500.f)
     {
@@ -232,6 +233,7 @@ void bhv_ab_troll_loop()
     {
         *env = 255;
     }
+#endif
 }
 
 #include "audio/load.h"

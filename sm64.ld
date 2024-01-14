@@ -290,28 +290,35 @@ SECTIONS
       . = ALIGN(0x40);
    }
    END_NOLOAD(engine)
-#ifndef USE_EXT_RAM
-   . = 0x8028f800;
-#else
-   . = 0x8048f800;
-#endif
-   BEGIN_NOLOAD(framebuffers)
-   {
-      BUILD_DIR/src/buffers/framebuffers.o(.bss*);
-   }
-   END_NOLOAD(framebuffers)
-#ifndef USE_EXT_RAM
-   . = 0x80300000;
-#else
-   . = 0x80500000;
-#endif
+   . = _engineSegmentBssEnd;
+
+   . = ZBUFFER_START;
    BEGIN_NOLOAD(zbuffer)
    {
       BUILD_DIR/src/buffers/zbuffer.o(.bss*);
    }
    END_NOLOAD(zbuffer)
 
-   . = _engineSegmentBssEnd;
+   . = FRAMEBUFFER0_START;
+   BEGIN_NOLOAD(framebuffer0)
+   {
+      BUILD_DIR/src/buffers/framebuffer0.o(.bss*);
+   }
+   END_NOLOAD(framebuffer0)
+
+   . = FRAMEBUFFER1_START;
+   BEGIN_NOLOAD(framebuffer1)
+   {
+      BUILD_DIR/src/buffers/framebuffer1.o(.bss*);
+   }
+   END_NOLOAD(framebuffer1)
+
+   . = FRAMEBUFFER2_START;
+   BEGIN_NOLOAD(framebuffer2)
+   {
+      BUILD_DIR/src/buffers/framebuffer2.o(.bss*);
+   }
+   END_NOLOAD(framebuffer2)
 
    __mainPoolStart = .;
    __mainPoolSize  = (RAM_END - .);
@@ -427,7 +434,6 @@ SECTIONS
 #ifdef PRELIMINARY
       GODDARD_SIZE = SIZEOF(.goddard) + SIZEOF(.goddard.noload);
 #else
-      ASSERT((. <= (SEG_POOL_START + POOL_SIZE)), "Error: extended past pool end.")
 #endif
 
    /* 0x268020 0x268020-0 [0] */
