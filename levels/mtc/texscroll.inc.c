@@ -1,38 +1,24 @@
-void scroll_sts_mat_mtc_dl_LAVAFALL_f3d() {
-	Gfx *mat = segmented_to_virtual(mat_mtc_dl_LAVAFALL_f3d);
-	shift_t(mat, 17, PACK_TILESIZE(0, 2));
+void scroll_gfx_mtc_dl_Course_13_mesh_layer_1() {
+	Gfx *mat = segmented_to_virtual(mtc_dl_Course_13_mesh_layer_1);
+
+
+
+
+	shift_t(mat, 847, PACK_TILESIZE(0, 2));
+	shift_t(mat, 1134, PACK_TILESIZE(0, 1));
+	shift_t(mat, 2543, PACK_TILESIZE(0, 1));
+	shift_t(mat, 3336, PACK_TILESIZE(0, 1));
+
 };
 
-void scroll_sts_mat_mtc_dl__4_f3d_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_mtc_dl__4_f3d_layer1);
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
-};
+void scroll_gfx_mtc_dl_Course_13_007_mesh_layer_1() {
+	Gfx *mat = segmented_to_virtual(mtc_dl_Course_13_007_mesh_layer_1);
 
-void scroll_sts_mat_mtc_dl__10_f3d_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_mtc_dl__10_f3d_layer1);
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
-};
+	shift_t(mat, 19, PACK_TILESIZE(0, 1));
 
-void scroll_sts_mat_mtc_dl_lava_f3d() {
-	Gfx *mat = segmented_to_virtual(mat_mtc_dl_lava_f3d);
-	shift_t(mat, 11, PACK_TILESIZE(0, 1));
-};
-
-void scroll_sts_mat_mtc_dl_DICDKS_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_mtc_dl_DICDKS_layer1);
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
-};
-
-void scroll_sts_mat_mtc_dl_laval_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_mtc_dl_laval_layer1);
-	shift_t(mat, 13, PACK_TILESIZE(0, 1));
 };
 
 void scroll_mtc() {
-	scroll_sts_mat_mtc_dl_LAVAFALL_f3d();
-	scroll_sts_mat_mtc_dl__4_f3d_layer1();
-	scroll_sts_mat_mtc_dl__10_f3d_layer1();
-	scroll_sts_mat_mtc_dl_lava_f3d();
-	scroll_sts_mat_mtc_dl_DICDKS_layer1();
-	scroll_sts_mat_mtc_dl_laval_layer1();
-}
+	scroll_gfx_mtc_dl_Course_13_mesh_layer_1();
+	scroll_gfx_mtc_dl_Course_13_007_mesh_layer_1();
+};
