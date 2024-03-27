@@ -124,6 +124,7 @@ void check_ledge_climb_down(struct MarioState *m) {
 void slide_bonk(struct MarioState *m, u32 fastAction, u32 slowAction) {
     if (m->forwardVel > 16.0f) {
         mario_bonk_reflection(m, TRUE);
+        m->faceAngle[1] += 0x8000;
         drop_and_set_mario_action(m, fastAction, 0);
     } else {
         mario_set_forward_vel(m, 0.0f);
@@ -1055,7 +1056,7 @@ s32 act_braking(struct MarioState *m) {
             break;
 
         case GROUND_STEP_HIT_WALL:
-            slide_bonk(m, ACT_BACKWARD_GROUND_KB, ACT_BRAKING_STOP);
+            slide_bonk(m, ACT_DIVE_SLIDE, ACT_BRAKING_STOP);
             break;
     }
 
@@ -1379,7 +1380,7 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
                 if (m->forwardVel > 16.0f) {
                     m->particleFlags |= PARTICLE_VERTICAL_STAR;
                 }
-                slide_bonk(m, ACT_GROUND_BONK, endAction);
+                slide_bonk(m, ACT_DIVE_SLIDE, endAction);
             } else if (m->wall != NULL) {
                 s16 wallAngle = m->wallYaw;
                 f32 slideSpeed = sqrtf(sqr(m->slideVelX) + sqr(m->slideVelZ)) * 0.9f;
@@ -1564,7 +1565,7 @@ s32 act_dive_slide(struct MarioState *m) {
     // mario_check_object_grab, and so will end up in the regular picking action,
     // rather than the picking up after dive action.
 
-    if (update_sliding(m, 8.0f) && is_anim_at_end(m)) {
+    if (update_sliding(m, 12.0f) && is_anim_at_end(m)) {
         mario_set_forward_vel(m, 0.0f);
         set_mario_action(m, ACT_STOMACH_SLIDE_STOP, 0);
     }

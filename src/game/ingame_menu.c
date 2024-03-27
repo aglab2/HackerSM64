@@ -2195,10 +2195,80 @@ s32 render_course_complete_screen(void) {
     return MENU_OPT_NONE;
 }
 
+extern int gCurrentHole;
+extern unsigned char gTutorialTransparencies[8];
+
+static void fancy_print(int y, const u8* line, int tr)
+{
+    int xoff = get_str_x_pos_from_center(160, line, 1.f);
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, tr);
+    print_generic_string(xoff, y, line);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, tr);
+    print_generic_string(xoff + 2, y + 2, line);
+}
+
+static void render_tutorial()
+{
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    for (int i = 0; i < 8; i++)
+    {
+        if (!gTutorialTransparencies[i])
+            continue;
+
+        const int Base = 210;
+        const int Dist = 20;
+        const int LineDist = 15;
+
+        int off = Base;
+        if (0 == i)
+        {
+            static const u8 welcome[] = { 0x20, 0x0E, 0x15, 0x0C, 0x18, 0x16, 0x0E, 0x9E, 0x1D, 0x18, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x10, 0x18, 0x15, 0x0F, 0x9E, 0x0C, 0x18, 0x1E, 0x1B, 0x1C, 0x0E, 0xf2, 0xFF };
+            fancy_print(off, welcome, gTutorialTransparencies[i]);
+        }
+
+        off -= Dist;
+        if (1 == i)
+        {
+            static const u8 cam1[] = { 0x0C, 0x18, 0x17, 0x1D, 0x1B, 0x18, 0x15, 0x9E, 0x0C, 0x0A, 0x16, 0x0E, 0x1B, 0x0A, 0x9E, 0x20, 0x12, 0x1D, 0x11, 0x9E, 0x0C, 0x9E, 0x1C, 0x1D, 0x12, 0x0C, 0x14, 0x9E, 0x0A, 0x17, 0x0D, 0xFF };
+            fancy_print(off, cam1, gTutorialTransparencies[i]);
+            static const u8 cam2[] = { 0X0D, 0x19, 0x0A, 0x0D, 0x9E, 0x1D, 0x18, 0x9E, 0x0C, 0x11, 0x0A, 0x17, 0x10, 0x0E, 0x9E, 0x16, 0x0A, 0x1B, 0x12, 0x18, 0x9E, 0x0A, 0x17, 0x10, 0x15, 0x0E, 0xFF };
+            off -= LineDist;
+            fancy_print(off, cam2, gTutorialTransparencies[i]);
+        }
+        else
+        {
+            off -= LineDist;
+        }
+
+        off -= Dist;
+        if (2 == i)
+        {
+            static const u8 pow[] = { 0X0C, 0x11, 0x0A, 0x17, 0x10, 0x0E, 0x9E, 0x19, 0x18, 0x20, 0x0E, 0x1B, 0x9E, 0x20, 0x12, 0x1D, 0x11, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x0C, 0x18, 0x17, 0x1D, 0x1B, 0x18, 0x15, 0x9E, 0x1C, 0x1D, 0x12, 0x0C, 0x14, 0xFF };
+            fancy_print(off, pow, gTutorialTransparencies[i]);
+        }
+
+        if (3 == i)
+        {
+            static const u8 shoot[] = { 0X19, 0x1B, 0x0E, 0x1C, 0x1C, 0x9E, 0x23, 0x9E, 0x1D, 0x1B, 0x12, 0x10, 0x10, 0x0E, 0x1B, 0x9E, 0x1D, 0x18, 0x9E, 0x1C, 0x11, 0x18, 0x18, 0x1D, 0xFF };
+            fancy_print(Base, shoot, gTutorialTransparencies[i]);
+        }
+    }
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
 s32 render_menus_and_dialogs(void) {
     s32 mode = MENU_OPT_NONE;
 
     create_dl_ortho_matrix();
+
+    if (0 != gCurrentHole)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            gTutorialTransparencies[i] = CLAMP(gTutorialTransparencies[i] - 0x10, 0, 255);
+        }
+    }
+    render_tutorial();
 
     if (gMenuMode != MENU_MODE_NONE) {
         switch (gMenuMode) {
