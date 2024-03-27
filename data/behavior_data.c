@@ -6078,4 +6078,35 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+extern void bhv_hole_init();
+extern void bhv_hole_loop();
+const BehaviorScript bhvHole[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    CALL_NATIVE(bhv_hole_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hole_loop),
+    END_LOOP(),
+};
 
+extern void bhv_start_init();
+extern void bhv_start_loop();
+const BehaviorScript bhvInit[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    CALL_NATIVE(bhv_start_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_start_loop),
+    END_LOOP(),
+};
+
+extern void bhv_ctl_init();
+extern void bhv_ctl_loop();
+const BehaviorScript bhvCtl[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    CALL_NATIVE(bhv_ctl_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ctl_loop),
+    END_LOOP(),
+};

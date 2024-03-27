@@ -116,9 +116,9 @@ s32 act_idle(struct MarioState *m) {
         return set_mario_action(m, ACT_PANTING, 0);
     }
 
-    if (check_common_idle_cancels(m)) {
-        return TRUE;
-    }
+    //if (check_common_idle_cancels(m)) {
+    //    return TRUE;
+    //}
 
     if (m->actionState == ACT_STATE_IDLE_RESET_OR_SLEEP) {
 #ifndef NO_SLEEP
