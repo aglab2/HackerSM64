@@ -6082,7 +6082,7 @@ extern void bhv_hole_init();
 extern void bhv_hole_loop();
 const BehaviorScript bhvHole[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     CALL_NATIVE(bhv_hole_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hole_loop),
@@ -6093,7 +6093,6 @@ extern void bhv_start_init();
 extern void bhv_start_loop();
 const BehaviorScript bhvInit[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
     CALL_NATIVE(bhv_start_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_start_loop),

@@ -1,6 +1,6 @@
 #include <game/print.h>
 
-#define MAX_POWER 120
+#define MAX_POWER 160
 #define MIN_POWER 20
 
 #define Y_PROBE_LENGTH 40.f
@@ -9,17 +9,23 @@
 
 #define CTL_SHOOT 0
 #define CTL_WAIT_FOR_SHOOTING 1
+#define CTL_NEXT_HOLE 2
 
 #define TUT_INIT 0
 #define TUT_MOVE_CAMERA 1
 #define TUT_MOVE_POWER 2
 #define TUT_SHOOT 3
 
-int gCurrentHole = 0;
+static const int kParShots[] = { 2, 2, 1, 1, 1, 1, 1, 1, 1 };
+
+int gCurrentHoleNum = 0;
 unsigned char gTutorialTransparencies[8] = { 255, 0 };
 static int gPower = (MAX_POWER + MIN_POWER) / 2;
 static int gAmountOfShots = 0;
 static int gTutorialProgress = 0;
+
+extern s16 s8DirModeBaseYaw;
+extern s16 s8DirModeYawOffset;
 
 void bhv_hole_init()
 {
@@ -67,7 +73,6 @@ static struct Object* find_object_with_bparam2(const BehaviorScript *behavior, i
     uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
     struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
     struct Object *obj = (struct Object *) listHead->next;
-    struct Object *closestObj = NULL;
 
     while (obj != (struct Object *) listHead) {
         if (obj->behavior == behaviorAddr
@@ -88,11 +93,16 @@ static struct Object* find_hole_object_with_bparam2(int bparam2)
     return find_object_with_bparam2(bhvHole, bparam2);
 }
 
+static struct Object* find_init_object_with_bparam2(int bparam2)
+{
+    return find_object_with_bparam2(bhvInit, bparam2);
+}
+
 static void handle_tutorial(int x, int y, int pressedButtons)
 {
     if (pressedButtons & Z_TRIG)
     {
-        gCurrentHole = 1;
+        gCurrentHoleNum = 1;
         return;
     }
 
@@ -134,13 +144,22 @@ static void handle_tutorial(int x, int y, int pressedButtons)
 
 static void handle_content(int x, int y, int pressedButtons)
 {
-    if (o->oAction <= CTL_WAIT_FOR_SHOOTING)
-    {
-        struct Object* hole = find_hole_object_with_bparam2(gCurrentHole);
-    }
+    print_text_fmt_int(20, 60, "ACT %x", gMarioStates->action);
+    print_text_fmt_int(20, 80, "P %d", gMarioStates->forwardVel);
 
+    print_text_fmt_int(20, 40, "PAR %d", kParShots[gCurrentHoleNum]);
+    print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots + 1);
     if (CTL_SHOOT == o->oAction)
     {
+        struct Object* hole = find_hole_object_with_bparam2(gCurrentHoleNum);
+        if (hole)
+        {
+            if (gMarioStates->pos[1] < hole->oPosY && hole->oDistanceToMario < 100.f)
+            {
+                o->oAction = CTL_NEXT_HOLE;
+            }
+        }
+
         o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         o->oPosX = gMarioStates->pos[0];
         o->oPosY = gMarioStates->pos[1];
@@ -189,13 +208,27 @@ static void handle_content(int x, int y, int pressedButtons)
         if (gMarioStates->action == ACT_STOMACH_SLIDE_STOP
         || gMarioStates->action == ACT_IDLE)
         {
+            gAmountOfShots++;
             o->oAction = 0;
         }
     }
+    else if (CTL_NEXT_HOLE == o->oAction)
+    {
+        gCurrentHoleNum++;
+        struct Object* init = find_init_object_with_bparam2(gCurrentHoleNum);
+        if (init)
+        {
+            gMarioStates->pos[0] = init->oPosX;
+            gMarioStates->pos[1] = init->oPosY;
+            gMarioStates->pos[2] = init->oPosZ;
+            s8DirModeYawOffset = init->oFaceAngleYaw;
+        }
+
+        gAmountOfShots = 0;
+        o->oAction = 0;
+    }
 }
 
-extern s16 s8DirModeBaseYaw;
-extern s16 s8DirModeYawOffset;
 void bhv_ctl_loop()
 {
     // print_text_fmt_int(20, 20, "A %x", gMarioStates->action);
@@ -214,7 +247,7 @@ void bhv_ctl_loop()
     gMarioStates->controller->buttonPressed &= allowedButtons;
     gMarioStates->health = 0x880;
 
-    if (0 == gCurrentHole)
+    if (0 == gCurrentHoleNum)
     {
         handle_tutorial(x, y, buttonPressed);
     }

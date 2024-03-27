@@ -192,7 +192,7 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
 
     //! Speed is capped a frame late (butt slide HSG)
     m->forwardVel = sqrtf(sqr(m->slideVelX) + sqr(m->slideVelZ));
-    if (m->forwardVel > 100.0f) {
+    if (m->forwardVel > 200.0f) {
         m->slideVelX = m->slideVelX * 100.0f / m->forwardVel;
         m->slideVelZ = m->slideVelZ * 100.0f / m->forwardVel;
     }

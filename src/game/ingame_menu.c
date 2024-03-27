@@ -2195,7 +2195,7 @@ s32 render_course_complete_screen(void) {
     return MENU_OPT_NONE;
 }
 
-extern int gCurrentHole;
+extern int gCurrentHoleNum;
 extern unsigned char gTutorialTransparencies[8];
 
 static void fancy_print(int y, const u8* line, int tr)
@@ -2261,7 +2261,7 @@ s32 render_menus_and_dialogs(void) {
 
     create_dl_ortho_matrix();
 
-    if (0 != gCurrentHole)
+    if (0 != gCurrentHoleNum)
     {
         for (int i = 0; i < 8; i++)
         {
