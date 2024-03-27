@@ -18,6 +18,7 @@
 #include "rumble_init.h"
 
 s32 check_common_idle_cancels(struct MarioState *m) {
+    return FALSE;
     mario_drop_held_object(m);
     if (m->floor->normal.y < COS73) {
         return mario_push_off_steep_floor(m, ACT_FREEFALL, 0);
@@ -116,9 +117,9 @@ s32 act_idle(struct MarioState *m) {
         return set_mario_action(m, ACT_PANTING, 0);
     }
 
-    //if (check_common_idle_cancels(m)) {
-    //    return TRUE;
-    //}
+    if (check_common_idle_cancels(m)) {
+        return TRUE;
+    }
 
     if (m->actionState == ACT_STATE_IDLE_RESET_OR_SLEEP) {
 #ifndef NO_SLEEP

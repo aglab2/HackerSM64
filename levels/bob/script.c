@@ -44,12 +44,13 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_CHAIN_CHOMP_GATE, bob_geo_000440), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM, bob_geo_000458), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, bob_geo_000470), 
+	LOAD_MODEL_FROM_DL(0xf0, powerbar_Plane_mesh, LAYER_ALPHA),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, bob_area_1),
-		OBJECT(MODEL_NONE, -9004, -436, 2038, 0, 0, 0, 0x00000000, bhvCtl),
+		OBJECT(0xf0, -9004, -436, 2038, 0, 0, 0, 0x00000000, bhvCtl),
 		OBJECT(MODEL_NONE, -9000, -593, -1264, 0, 0, 0, (1 << 16), bhvHole),
 		OBJECT(MODEL_NONE, -1797, -1581, -1264, 0, 0, 0, (2 << 16), bhvHole),
 		OBJECT(MODEL_NONE, -9597, -267, -12902, 0, 0, 0, (3 << 16), bhvHole),

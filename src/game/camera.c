@@ -1140,10 +1140,10 @@ void mode_8_directions_camera(struct Camera *c) {
         s8DirModeYawOffset = gMarioState->faceAngle[1] - 0x8000;
     }
     else if (gPlayer1Controller->buttonDown & L_JPAD) {
-        s8DirModeYawOffset -= DEGREES(2);
+        s8DirModeYawOffset -= DEGREES(0.5);
     }
     else if (gPlayer1Controller->buttonDown & R_JPAD) {
-        s8DirModeYawOffset += DEGREES(2);
+        s8DirModeYawOffset += DEGREES(0.5);
     }
     else if (gPlayer1Controller->buttonPressed & D_JPAD) {
         s8DirModeYawOffset = snap_to_45_degrees(s8DirModeYawOffset);
@@ -3581,22 +3581,14 @@ s32 set_cam_angle(s32 mode) {
     // Switch to Mario mode
     if (mode == CAM_ANGLE_MARIO && !(sSelectionFlags & CAM_MODE_MARIO_ACTIVE)) {
         sSelectionFlags |= CAM_MODE_MARIO_ACTIVE;
-        if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
-            sSelectionFlags |= CAM_MODE_LAKITU_WAS_ZOOMED_OUT;
-            gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
-        }
+        gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
         sCameraSoundFlags |= CAM_SOUND_MARIO_ACTIVE;
     }
 
     // Switch back to normal mode
     if (mode == CAM_ANGLE_LAKITU && (sSelectionFlags & CAM_MODE_MARIO_ACTIVE)) {
         sSelectionFlags &= ~CAM_MODE_MARIO_ACTIVE;
-        if (sSelectionFlags & CAM_MODE_LAKITU_WAS_ZOOMED_OUT) {
-            sSelectionFlags &= ~CAM_MODE_LAKITU_WAS_ZOOMED_OUT;
-            gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
-        } else {
-            gCameraMovementFlags &= ~CAM_MOVE_ZOOMED_OUT;
-        }
+        gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
         sCameraSoundFlags |= CAM_SOUND_NORMAL_ACTIVE;
     }
     if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {

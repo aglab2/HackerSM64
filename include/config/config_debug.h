@@ -35,12 +35,12 @@
 /**
  * Enables debug level select. Hold L while the game boots to turn it on.
  */
-#define DEBUG_LEVEL_SELECT
+// #define DEBUG_LEVEL_SELECT
 
 /**
  * Enables debug free move (D-pad up to enter, A to exit).
  */
-#define ENABLE_DEBUG_FREE_MOVE
+// #define ENABLE_DEBUG_FREE_MOVE
 
 /**
  * Enables a custom, enhanced performance profiler. (Enables PUPPYPRINT by default in config_safeguards).

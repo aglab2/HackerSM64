@@ -34,4 +34,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/header.inc.h"
 
+#include "levels/bob/powerbar/header.h"
+
 #endif
