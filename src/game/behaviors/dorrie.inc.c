@@ -55,7 +55,7 @@ void dorrie_act_move(void) {
     o->oAngleVelYaw = o->oMoveAngleYaw - startYaw;
     o->oPosX = o->oHomeX;
     o->oPosY = o->oHomeY - 80.f;
-    o->oPosZ = o->oHomeZ + sins(gGlobalTimer * 290) * 1500.f;
+    o->oPosZ = o->oHomeZ + sins(gGlobalTimer * 290) * 1700.f;
 }
 
 void dorrie_begin_head_raise(s32 liftingMario) {
