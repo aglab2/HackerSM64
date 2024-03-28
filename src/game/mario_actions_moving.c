@@ -144,7 +144,23 @@ s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 a
     return FALSE;
 }
 
+static f32 calculateLoss(f32 vel, f32 loss)
+{
+    f32 newVel = vel - vel * loss;
+    if (newVel > 0)
+    {
+        newVel = CLAMP(newVel, 0.1f, 1.f);
+    }
+    else
+    {
+        newVel = CLAMP(newVel, -1.f, -0.1f);
+    }
+    return newVel;
+}
+
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
+    print_text_fmt_int(20, 200, "A %d", (int) (accel * 1000));
+    print_text_fmt_int(20, 180, "LF %d", (int) (lossFactor * 1000));
     s32 newFacingDYaw;
     s16 facingDYaw;
 
@@ -155,8 +171,8 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     m->slideVelX += accel * steepness * sins(slopeAngle);
     m->slideVelZ += accel * steepness * coss(slopeAngle);
 
-    m->slideVelX *= lossFactor;
-    m->slideVelZ *= lossFactor;
+    m->slideVelX -= calculateLoss(m->slideVelX, lossFactor);
+    m->slideVelZ -= calculateLoss(m->slideVelZ, lossFactor);
 
     m->slideYaw = atan2s(m->slideVelZ, m->slideVelX);
 
@@ -1565,7 +1581,7 @@ s32 act_dive_slide(struct MarioState *m) {
     // mario_check_object_grab, and so will end up in the regular picking action,
     // rather than the picking up after dive action.
 
-    if (update_sliding(m, 12.0f) && is_anim_at_end(m)) {
+    if (update_sliding(m, 4.0f) && is_anim_at_end(m)) {
         mario_set_forward_vel(m, 0.0f);
         set_mario_action(m, ACT_STOMACH_SLIDE_STOP, 0);
     }
@@ -1736,7 +1752,7 @@ u32 common_landing_action(struct MarioState *m, s16 animation, u32 airAction) {
     play_mario_landing_sound_once(m, SOUND_ACTION_TERRAIN_LANDING);
 
     if (m->floor->type >= SURFACE_SHALLOW_QUICKSAND && m->floor->type <= SURFACE_MOVING_QUICKSAND) {
-        m->quicksandDepth += (4 - m->actionTimer) * 3.5f - 0.5f;
+        m->quicksandDepth = 0;
     }
 
     return stepResult;

@@ -16,6 +16,8 @@
 #define TUT_MOVE_POWER 2
 #define TUT_SHOOT 3
 
+#define TEST_SET_HOLE 3
+
 static const int kParShots[] = { 2, 2, 1, 1, 1, 1, 1, 1, 1 };
 
 int gCurrentHoleNum = 0;
@@ -214,7 +216,11 @@ static void handle_content(int x, int y, int pressedButtons)
     }
     else if (CTL_NEXT_HOLE == o->oAction)
     {
+#ifdef TEST_SET_HOLE
+        gCurrentHoleNum = TEST_SET_HOLE;
+#else
         gCurrentHoleNum++;
+#endif
         struct Object* init = find_init_object_with_bparam2(gCurrentHoleNum);
         if (init)
         {

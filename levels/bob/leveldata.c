@@ -29,3 +29,5 @@
 #include "levels/bob/leveldata.inc.c"
 
 #include "levels/bob/powerbar/model.inc.c"
+#include "levels/bob/rolllog/collision.inc.c"
+#include "levels/bob/rolllog/model.inc.c"

@@ -6109,3 +6109,14 @@ const BehaviorScript bhvCtl[] = {
         CALL_NATIVE(bhv_ctl_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvRollLog[] =
+{
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(rolllog_collision),
+    BEGIN_LOOP(),
+        ADD_INT(oFaceAngleRoll, 0x100),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

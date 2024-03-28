@@ -45,6 +45,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM, bob_geo_000458), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, bob_geo_000470), 
 	LOAD_MODEL_FROM_DL(0xf0, powerbar_Plane_mesh, LAYER_ALPHA), 
+	LOAD_MODEL_FROM_GEO(0xf1, rolllog_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -69,6 +70,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, 2081, -1160, 14618, 0, 0, 0, (8 << 16), bhvInit),
 		OBJECT(MODEL_NONE, 10496, -1347, 15221, 0, 0, 0, (9 << 16), bhvInit),
 		MARIO_POS(0x01, 0, -9002, -436, 2044),
+		OBJECT(0xf1, -9606, 170, -11108, 0, 0, 0, 0x00000000, bhvRollLog),
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
