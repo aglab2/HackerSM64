@@ -19,6 +19,13 @@ void scroll_bob_dl_golfer_mesh_layer_1_vtx_18() {
 	currentX += deltaX;
 }
 
+void scroll_gfx_mat_bob_dl__53_f3d() {
+	Gfx *mat = segmented_to_virtual(mat_bob_dl__53_f3d);
+
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
+
+};
+
 void scroll_gfx_mat_bob_dl__17_f3d() {
 	Gfx *mat = segmented_to_virtual(mat_bob_dl__17_f3d);
 
@@ -40,17 +47,34 @@ void scroll_gfx_mat_bob_dl__50_f3d() {
 
 };
 
+void scroll_gfx_mat_bob_dl__8_f3d() {
+	Gfx *mat = segmented_to_virtual(mat_bob_dl__8_f3d);
+
+	shift_t_down(mat, 11, PACK_TILESIZE(0, 6));
+
+};
+
+void scroll_gfx_mat_bob_dl_move2() {
+	Gfx *mat = segmented_to_virtual(mat_bob_dl_move2);
+
+	shift_t_down(mat, 11, PACK_TILESIZE(0, 6));
+
+};
+
 void scroll_gfx_mat_bob_dl_move() {
 	Gfx *mat = segmented_to_virtual(mat_bob_dl_move);
 
-	shift_t(mat, 11, PACK_TILESIZE(0, 2));
+	shift_t_down(mat, 11, PACK_TILESIZE(0, 4));
 
 };
 
 void scroll_bob() {
 	scroll_bob_dl_golfer_mesh_layer_1_vtx_18();
+	scroll_gfx_mat_bob_dl__53_f3d();
 	scroll_gfx_mat_bob_dl__17_f3d();
 	scroll_gfx_mat_bob_dl__29_f3d();
 	scroll_gfx_mat_bob_dl__50_f3d();
+	scroll_gfx_mat_bob_dl__8_f3d();
+	scroll_gfx_mat_bob_dl_move2();
 	scroll_gfx_mat_bob_dl_move();
 };

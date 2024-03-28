@@ -5648,7 +5648,7 @@ const BehaviorScript bhvUnagiSubobject[] = {
 const BehaviorScript bhvDorrie[] = {
     BEGIN(OBJ_LIST_SURFACE),
     LOAD_COLLISION_DATA(dorrie_seg6_collision_0600F644),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_ANIMATIONS(oAnimations, dorrie_seg6_anims_0600F638),
     SET_HOME(),
     SET_FLOAT(oCollisionDistance, 30000),
@@ -6110,13 +6110,16 @@ const BehaviorScript bhvCtl[] = {
     END_LOOP(),
 };
 
+extern void bhv_roll_log_init();
+extern void bhv_roll_log_loop();
 const BehaviorScript bhvRollLog[] =
 {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(rolllog_collision),
+    CALL_NATIVE(bhv_roll_log_init),
     BEGIN_LOOP(),
         ADD_INT(oFaceAngleRoll, 0x100),
-        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_roll_log_loop),
     END_LOOP(),
 };

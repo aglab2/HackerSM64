@@ -12,7 +12,7 @@
 
 #include "config.h"
 
-static s16 sMovingSandSpeeds[] = { 50, 8, 4, 0 };
+static s16 sMovingSandSpeeds[] = { 10, 8, 4, 0 };
 
 struct Surface gWaterSurfacePseudoFloor = {
     SURFACE_VERY_SLIPPERY,      // type
@@ -193,11 +193,17 @@ u32 mario_update_moving_sand(struct MarioState *m) {
         s16 pushAngle = floor->force << 8;
         f32 pushSpeed = sMovingSandSpeeds[floor->force >> 8];
 
-        m->vel[0] += pushSpeed * sins(pushAngle);
-        m->vel[2] += pushSpeed * coss(pushAngle);
+        f32 fvel = sqrtf(m->vel[0]*m->vel[0] + m->vel[2]*m->vel[2]);
+        if (fvel < 100.0f) {
+            m->vel[0] += pushSpeed * sins(pushAngle);
+            m->vel[2] += pushSpeed * coss(pushAngle);
+        }
         
-        m->slideVelX += pushSpeed * sins(pushAngle);
-        m->slideVelZ += pushSpeed * coss(pushAngle);
+        f32 sfvel = sqrtf(m->slideVelX*m->slideVelX + m->slideVelZ*m->slideVelZ);
+        if (sfvel < 100.0f) {
+            m->slideVelX += pushSpeed * sins(pushAngle);
+            m->slideVelZ += pushSpeed * coss(pushAngle);
+        }
 
         m->faceAngle[1] = approach_angle(m->faceAngle[1], pushAngle, 0xA00);
 

@@ -17,6 +17,7 @@ void dorrie_raise_head(void) {
 }
 
 void dorrie_act_move(void) {
+    o->oDrawingDistance = 10000.f;
     s16 startYaw = o->oMoveAngleYaw;
     s16 targetYaw;
     s16 targetSpeed;
@@ -47,10 +48,14 @@ void dorrie_act_move(void) {
         obj_forward_vel_approach(targetSpeed, 0.5f);
         o->oDorrieYawVel =
             approach_s16_symmetric(o->oDorrieYawVel, (s16)(targetYaw - o->oMoveAngleYaw) / 50, 5);
-        o->oMoveAngleYaw += o->oDorrieYawVel;
+        o->collisionData = segmented_to_virtual(dorrie_seg6_collision_0600F644);
+        o->oMoveAngleYaw += 0x390;
     }
 
     o->oAngleVelYaw = o->oMoveAngleYaw - startYaw;
+    o->oPosX = o->oHomeX;
+    o->oPosY = o->oHomeY - 80.f;
+    o->oPosZ = o->oHomeZ + sins(gGlobalTimer * 290) * 1500.f;
 }
 
 void dorrie_begin_head_raise(s32 liftingMario) {

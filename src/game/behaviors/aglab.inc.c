@@ -17,7 +17,10 @@
 #define TUT_MOVE_POWER 2
 #define TUT_SHOOT 3
 
-#define TEST_SET_HOLE 8
+#define MAX_FREEROAM_FRAMES 2000
+#define MAX_NO_SPEED_FRAMES 200
+
+#define TEST_SET_HOLE 9
 
 static const int kParShots[] = { 2, 2, 1, 1, 1, 1, 1, 1, 1 };
 
@@ -209,12 +212,24 @@ static void handle_content(int x, int y, int pressedButtons)
     }
     else if (CTL_WAIT_FOR_SHOOTING == o->oAction)
     {
+        if (gMarioStates->forwardVel == 0)
+        {
+            o->oSubAction++;
+        }
+        else
+        {
+            o->oSubAction = 0;
+        }
+
+        int freeroaming = o->oTimer > MAX_FREEROAM_FRAMES;
+        int nospdframes = o->oSubAction > MAX_NO_SPEED_FRAMES;
         if (gMarioStates->action == ACT_STOMACH_SLIDE_STOP
-        || gMarioStates->action == ACT_IDLE)
+         || gMarioStates->action == ACT_IDLE
+         || freeroaming || nospdframes)
         {
             gAmountOfShots++;
             struct Surface* floor = gMarioStates->floor;
-            if (floor && floor->type != SURFACE_VERY_SLIPPERY)
+            if (freeroaming || nospdframes || (floor && floor->type != SURFACE_VERY_SLIPPERY && floor->type != SURFACE_NO_CAM_COLLISION && floor->type != SURFACE_SWITCH))
             {
                 gSpoofedWarpRequester = o;
                 gMarioStates->usedObj = o;
@@ -286,4 +301,23 @@ void bhv_ctl_loop()
     }
 
     handle_content(x, y, buttonPressed);
+}
+
+void bhv_roll_log_init()
+{
+    obj_scale_xyz(o, 1.2f, 1.2f, 1.f);
+    o->oPosY += 10.f;
+}
+
+void bhv_roll_log_loop()
+{
+    if (gMarioStates->pos[1] < -700.f)
+    {
+        o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    }
+    else
+    {
+        o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+        load_object_collision_model();
+    }
 }
