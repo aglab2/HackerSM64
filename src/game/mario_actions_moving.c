@@ -145,8 +145,6 @@ s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 a
 }
 
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
-    print_text_fmt_int(20, 200, "A %d", (int) (accel * 1000));
-    print_text_fmt_int(20, 180, "LF %d", (int) (lossFactor * 1000));
     s32 newFacingDYaw;
     s16 facingDYaw;
 

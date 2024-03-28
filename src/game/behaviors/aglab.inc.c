@@ -151,11 +151,14 @@ static void handle_tutorial(int x, int y, int pressedButtons)
 extern struct Object* gSpoofedWarpRequester;
 static void handle_content(int x, int y, int pressedButtons)
 {
+#if 0
     print_text_fmt_int(20, 60, "ACT %x", gMarioStates->action);
     print_text_fmt_int(20, 80, "P %d", gMarioStates->forwardVel);
 
     print_text_fmt_int(20, 40, "PAR %d", kParShots[gCurrentHoleNum]);
     print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots + 1);
+#endif
+
     if (CTL_SHOOT == o->oAction)
     {
         struct Object* hole = find_hole_object_with_bparam2(gCurrentHoleNum);
