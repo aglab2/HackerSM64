@@ -225,6 +225,9 @@ static void handle_content(int x, int y, int pressedButtons)
             }
             else
             {
+                o->oHomeX = gMarioStates->pos[0];
+                o->oHomeY = gMarioStates->pos[1];
+                o->oHomeZ = gMarioStates->pos[2];
                 o->oAction = CTL_SHOOT;
             }
         }

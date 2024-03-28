@@ -70,7 +70,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, 2081, -1160, 14618, 0, 0, 0, (8 << 16), bhvInit),
 		OBJECT(MODEL_NONE, 10496, -1347, 15221, 0, 0, 0, (9 << 16), bhvInit),
 		MARIO_POS(0x01, 0, -9002, -436, 2044),
-		OBJECT(MODEL_NONE, 7363, -1479, 338, 0, 0, 0, (1 << 24) | (1 << 16), bhvPokey),
+		OBJECT(MODEL_NONE, 7275, -1479, 338, 0, 0, 0, (1 << 24) | (1 << 16), bhvPokey),
 		OBJECT(MODEL_NONE, 9204, -1557, 610, 0, 0, 0, 0x00000000, bhvPokey),
 		OBJECT(MODEL_NONE, 6818, -1528, 678, 0, 0, 0, (2 << 24) | (1 << 16), bhvPokey),
 		OBJECT(MODEL_NONE, 6822, -1529, -20, 0, 0, 0, (3 << 24) | (1 << 16), bhvPokey),
