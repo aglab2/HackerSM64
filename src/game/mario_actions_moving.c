@@ -144,20 +144,6 @@ s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 a
     return FALSE;
 }
 
-static f32 calculateLoss(f32 vel, f32 loss)
-{
-    f32 newVel = vel - vel * loss;
-    if (newVel > 0)
-    {
-        newVel = CLAMP(newVel, 0.1f, 1.f);
-    }
-    else
-    {
-        newVel = CLAMP(newVel, -1.f, -0.1f);
-    }
-    return newVel;
-}
-
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     print_text_fmt_int(20, 200, "A %d", (int) (accel * 1000));
     print_text_fmt_int(20, 180, "LF %d", (int) (lossFactor * 1000));
@@ -171,8 +157,25 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     m->slideVelX += accel * steepness * sins(slopeAngle);
     m->slideVelZ += accel * steepness * coss(slopeAngle);
 
-    m->slideVelX -= calculateLoss(m->slideVelX, lossFactor);
-    m->slideVelZ -= calculateLoss(m->slideVelZ, lossFactor);
+    f32 lossX = m->slideVelX * lossFactor;
+    f32 lossZ = m->slideVelZ * lossFactor;
+    f32 lossLen = sqrtf(lossX * lossX + lossZ * lossZ);
+    if (lossLen > 1.f)
+    {
+        lossX /= lossLen;
+        lossZ /= lossLen;
+    }
+
+    if (lossLen < 0.1f)
+    {
+        lossX /= lossLen;
+        lossX *= 0.1f;
+        lossZ /= lossLen;
+        lossZ *= 0.1f;
+    }
+
+    m->slideVelX -= lossX;
+    m->slideVelZ -= lossZ;
 
     m->slideYaw = atan2s(m->slideVelZ, m->slideVelX);
 
