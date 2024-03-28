@@ -122,7 +122,7 @@ void check_ledge_climb_down(struct MarioState *m) {
 }
 
 void slide_bonk(struct MarioState *m, u32 fastAction, u32 slowAction) {
-    if (m->forwardVel > 16.0f) {
+    if (m->forwardVel > 4.0f) {
         mario_bonk_reflection(m, TRUE);
         m->faceAngle[1] += 0x8000;
         drop_and_set_mario_action(m, fastAction, 0);

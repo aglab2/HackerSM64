@@ -147,7 +147,28 @@ u32 get_mario_spawn_type(struct Object *obj) {
     return MARIO_SPAWN_NONE;
 }
 
+struct Object* gSpoofedWarpRequester;
+static struct Object sSpoofedWarpObject = { };
 struct ObjectWarpNode *area_get_warp_node(u8 id) {
+    if (id == 0xf4)
+    {
+        static struct ObjectWarpNode sSpoofedWarpNode = { };
+        sSpoofedWarpNode.node.id = 0xf4;
+        sSpoofedWarpNode.node.destLevel = gCurrLevelNum;
+        sSpoofedWarpNode.node.destArea = gCurrAreaIndex;
+        sSpoofedWarpNode.node.destNode = 0xf4;
+        sSpoofedWarpNode.object = gSpoofedWarpRequester;
+        sSpoofedWarpNode.next = NULL;
+        sSpoofedWarpObject.oPosX = gSpoofedWarpRequester->oPosX;
+        sSpoofedWarpObject.oPosY = gSpoofedWarpRequester->oPosY;
+        sSpoofedWarpObject.oPosZ = gSpoofedWarpRequester->oPosZ;
+        sSpoofedWarpObject.oFaceAngleYaw = gSpoofedWarpRequester->oFaceAngleYaw;
+        sSpoofedWarpObject.oMoveAngleYaw = gSpoofedWarpRequester->oMoveAngleYaw;
+        sSpoofedWarpObject.behavior = (const BehaviorScript*) segmented_to_virtual((const BehaviorScript*) 0x13002f60);
+        
+        return &sSpoofedWarpNode;
+    }
+
     struct ObjectWarpNode *node = NULL;
 
     for (node = gCurrentArea->warpNodes; node != NULL; node = node->next) {

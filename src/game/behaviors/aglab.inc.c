@@ -10,6 +10,7 @@
 #define CTL_SHOOT 0
 #define CTL_WAIT_FOR_SHOOTING 1
 #define CTL_NEXT_HOLE 2
+#define CTL_WAIT_FOR_RESPAWN 3
 
 #define TUT_INIT 0
 #define TUT_MOVE_CAMERA 1
@@ -144,6 +145,7 @@ static void handle_tutorial(int x, int y, int pressedButtons)
     }
 }
 
+extern struct Object* gSpoofedWarpRequester;
 static void handle_content(int x, int y, int pressedButtons)
 {
     print_text_fmt_int(20, 60, "ACT %x", gMarioStates->action);
@@ -211,7 +213,20 @@ static void handle_content(int x, int y, int pressedButtons)
         || gMarioStates->action == ACT_IDLE)
         {
             gAmountOfShots++;
-            o->oAction = 0;
+            struct Surface* floor = gMarioStates->floor;
+            if (floor && floor->type != SURFACE_VERY_SLIPPERY)
+            {
+                gSpoofedWarpRequester = o;
+                gMarioStates->usedObj = o;
+                o->oBehParams = 0xf4 << 16;
+                o->oBehParams2ndByte = 0xf4;
+                o->oAction = CTL_WAIT_FOR_RESPAWN;
+                level_trigger_warp(gMarioStates, WARP_OP_WARP_DOOR);
+            }
+            else
+            {
+                o->oAction = CTL_SHOOT;
+            }
         }
     }
     else if (CTL_NEXT_HOLE == o->oAction)
@@ -232,6 +247,13 @@ static void handle_content(int x, int y, int pressedButtons)
 
         gAmountOfShots = 0;
         o->oAction = 0;
+    }
+    else if (CTL_WAIT_FOR_RESPAWN == o->oAction)
+    {
+        if (o->oTimer > 30)
+        {
+            o->oAction = CTL_SHOOT;
+        }
     }
 }
 

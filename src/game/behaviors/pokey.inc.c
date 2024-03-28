@@ -11,27 +11,27 @@
  * Hitbox for a single pokey body part.
  */
 static struct ObjectHitbox sPokeyBodyPartHitbox = {
-    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 10,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 40,
-    /* height:            */ 20,
-    /* hurtboxRadius:     */ 20,
-    /* hurtboxHeight:     */ 20,
+    /* radius:            */ 80,
+    /* height:            */ 40,
+    /* hurtboxRadius:     */ 40,
+    /* hurtboxHeight:     */ 40,
 };
 
 /**
  * Attack handlers for pokey body part.
  */
 static u8 sPokeyBodyPartAttackHandlers[] = {
-    /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
-    /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
-    /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SQUISHED,
-    /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED,
-    /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
-    /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_NOP,
+    /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_NOP,
+    /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_NOP,
+    /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_NOP,
+    /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_NOP,
+    /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_NOP,
 };
 
 /**
@@ -140,7 +140,7 @@ void bhv_pokey_body_part_update(void) {
 static void pokey_act_uninitialized(void) {
     struct Object *bodyPart;
 
-    if (o->oDistanceToMario < o->oDrawingDistance) {
+    //if (o->oDistanceToMario < o->oDrawingDistance) {
         ModelID16 partModel = MODEL_POKEY_HEAD;
         s32 i;
 
@@ -160,7 +160,7 @@ static void pokey_act_uninitialized(void) {
         o->oPokeyNumAliveBodyParts = POKEY_NUM_SEGMENTS;
         o->oPokeyBottomBodyPartSize = 1.0f;
         o->oAction = POKEY_ACT_WANDER;
-    }
+    //}
 }
 
 /**
@@ -174,7 +174,7 @@ static void pokey_act_wander(void) {
 
     if (o->oPokeyNumAliveBodyParts == POKEY_PART_BP_HEAD) {
         obj_mark_for_deletion(o);
-    } else if (o->oDistanceToMario > o->oDrawingDistance + 500.0f) {
+    } else if (0) {
         o->oAction = POKEY_ACT_UNLOAD_PARTS;
         o->oForwardVel = 0.0f;
     } else {
@@ -188,7 +188,7 @@ static void pokey_act_wander(void) {
 
             // If a body part is missing, replenish it after 100 frames
             if (o->oPokeyNumAliveBodyParts < POKEY_NUM_SEGMENTS) {
-                if (o->oTimer > 100) {
+                if (o->oTimer > 5) {
                     // Because the body parts shift index whenever a body part
                     // is killed, the new part's index is equal to the number
                     // of living body parts
@@ -260,7 +260,24 @@ static void pokey_act_wander(void) {
             }
         }
 
-        cur_obj_move_standard(-78);
+        int time = gGlobalTimer * 590 + GET_BPARAM1(o->oBehParams) * 0x4000;
+        int positive = (time >> 16) % 2;
+        int xoff = 200.f * sins(time);
+        int zoff = 150.f * coss(time) - 150.f;
+        if (!positive)
+            zoff = -zoff;
+
+        if (o->oBehParams2ndByte)
+        {
+            f32 other = zoff;
+            zoff = xoff;
+            xoff = other;
+        }
+
+        o->oPosX = o->oHomeX + xoff;
+        o->oPosZ = o->oHomeZ + zoff;
+        o->oPosY = find_floor_height(o->oPosX, o->oPosY + 100.f, o->oPosZ);
+        // cur_obj_move_standard(-78);
     }
 }
 
