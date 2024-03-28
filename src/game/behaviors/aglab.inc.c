@@ -17,7 +17,7 @@
 #define TUT_MOVE_POWER 2
 #define TUT_SHOOT 3
 
-#define TEST_SET_HOLE 5
+#define TEST_SET_HOLE 7
 
 static const int kParShots[] = { 2, 2, 1, 1, 1, 1, 1, 1, 1 };
 

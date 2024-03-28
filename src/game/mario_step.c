@@ -335,7 +335,7 @@ static s32 perform_ground_quarter_step(struct MarioState *m, Vec3f nextPos) {
             set_mario_wall(m, upperWall.walls[i]);
         }
 
-        if (wallDYaw >= DEGREES(60) && wallDYaw <= DEGREES(120)) {
+        if (wallDYaw >= DEGREES(85) && wallDYaw <= DEGREES(95)) {
             continue;
         }
 
