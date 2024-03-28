@@ -8,6 +8,8 @@ const GeoLayout bob_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_golfer_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_golfer_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_golfer_003_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_golfer_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_golfer_005_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

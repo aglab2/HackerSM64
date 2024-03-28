@@ -159,9 +159,9 @@ struct ObjectWarpNode *area_get_warp_node(u8 id) {
         sSpoofedWarpNode.node.destNode = 0xf4;
         sSpoofedWarpNode.object = gSpoofedWarpRequester;
         sSpoofedWarpNode.next = NULL;
-        sSpoofedWarpObject.oPosX = gSpoofedWarpRequester->oPosX;
-        sSpoofedWarpObject.oPosY = gSpoofedWarpRequester->oPosY;
-        sSpoofedWarpObject.oPosZ = gSpoofedWarpRequester->oPosZ;
+        sSpoofedWarpObject.oPosX = gSpoofedWarpRequester->oHomeX;
+        sSpoofedWarpObject.oPosY = gSpoofedWarpRequester->oHomeY;
+        sSpoofedWarpObject.oPosZ = gSpoofedWarpRequester->oHomeZ;
         sSpoofedWarpObject.oFaceAngleYaw = gSpoofedWarpRequester->oFaceAngleYaw;
         sSpoofedWarpObject.oMoveAngleYaw = gSpoofedWarpRequester->oMoveAngleYaw;
         sSpoofedWarpObject.behavior = (const BehaviorScript*) segmented_to_virtual((const BehaviorScript*) 0x13002f60);

@@ -17,7 +17,7 @@
 #define TUT_MOVE_POWER 2
 #define TUT_SHOOT 3
 
-#define TEST_SET_HOLE 4
+#define TEST_SET_HOLE 5
 
 static const int kParShots[] = { 2, 2, 1, 1, 1, 1, 1, 1, 1 };
 
@@ -256,6 +256,8 @@ static void handle_content(int x, int y, int pressedButtons)
         if (o->oTimer > 30)
         {
             o->oAction = CTL_SHOOT;
+            s8DirModeYawOffset = 0x8000 + o->oFaceAngleYaw;
+            gMarioStates->faceAngle[1] = o->oFaceAngleYaw;
         }
     }
 }
