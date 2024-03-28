@@ -3,8 +3,6 @@
 void bhv_lll_rotating_hex_flame_loop(void) {
     cur_obj_set_pos_relative(o->parentObj, o->oLllRotatingHexFlameRelativePosX, o->oLllRotatingHexFlameRelativePosY, o->oLllRotatingHexFlameRelativePosZ);
 
-    o->oPosY = o->parentObj->oPosY + 100.0f;
-
     if (o->parentObj->oAction == LLL_FIRE_BAR_ACT_REMOVE_FLAMES) {
         obj_mark_for_deletion(o);
     }
@@ -15,17 +13,11 @@ void fire_bar_spawn_flames(s16 yaw) {
     s32 i;
     f32 xOffset = sins(yaw) * 200.0f;
     f32 zOffset = coss(yaw) * 200.0f;
-    s32 amt = o->oBehParams2ndByte; // Amount of flames to spawn
-
-    // Use the vanilla default value if the bparam is 0
-    if (amt == 0) {
-        amt = 4;
-    }
-
+    s32 amt = 3;
     for (i = 0; i < amt; i++) {
         flameObj = spawn_object(o, MODEL_RED_FLAME, bhvLllRotatingHexFlame);
         flameObj->oLllRotatingHexFlameRelativePosX += xOffset;
-        flameObj->oLllRotatingHexFlameRelativePosY = o->oPosY - 200.0f;
+        flameObj->oLllRotatingHexFlameRelativePosY = 30.f + i * 50.f;
         flameObj->oLllRotatingHexFlameRelativePosZ += zOffset;
         obj_scale(flameObj, 6.0f);
         xOffset += sins(yaw) * 150.0f;
@@ -40,8 +32,8 @@ void fire_bar_act_inactive(void) {
 }
 
 void fire_bar_act_spawn_flames(void) {
-    fire_bar_spawn_flames(0);
-    fire_bar_spawn_flames(-0x8000);
+    fire_bar_spawn_flames(0 + 0x10000 / 3 * o->oBehParams2ndByte);
+    fire_bar_spawn_flames(-0x8000 + 0x10000 / 3 * o->oBehParams2ndByte);
     o->oAngleVelYaw = 0;
     o->oMoveAngleYaw = 0;
     o->oAction = LLL_FIRE_BAR_ACT_ACTIVE;

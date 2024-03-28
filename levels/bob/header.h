@@ -40,4 +40,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/rolllog/geo_header.h"
 
+#include "levels/bob/blackspin/geo_header.h"
+
+#include "levels/bob/blackspin/collision_header.h"
+
 #endif

@@ -21,3 +21,4 @@
 #include "levels/bob/geo.inc.c"
 
 #include "levels/bob/rolllog/geo.inc.c"
+#include "levels/bob/blackspin/geo.inc.c"

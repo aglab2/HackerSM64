@@ -43,7 +43,7 @@ void scroll_gfx_mat_bob_dl__50_f3d() {
 void scroll_gfx_mat_bob_dl_move() {
 	Gfx *mat = segmented_to_virtual(mat_bob_dl_move);
 
-	shift_s(mat, 11, PACK_TILESIZE(0, 1));
+	shift_t(mat, 11, PACK_TILESIZE(0, 2));
 
 };
 

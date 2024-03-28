@@ -1150,7 +1150,7 @@ u32 interact_strong_wind(struct MarioState *m, UNUSED u32 interactType, struct O
 }
 
 u32 interact_flame(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
-    u32 burningAction = ACT_BURNING_JUMP;
+    u32 burningAction = ACT_LAVA_BOOST;
 
     if (!sInvulnerable && !(m->flags & MARIO_METAL_CAP) && !(m->flags & MARIO_VANISH_CAP)
         && !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
@@ -1169,7 +1169,7 @@ u32 interact_flame(struct MarioState *m, UNUSED u32 interactType, struct Object 
             play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);
 
             if ((m->action & ACT_FLAG_AIR) && m->vel[1] <= 0.0f) {
-                burningAction = ACT_BURNING_FALL;
+                burningAction = ACT_LAVA_BOOST;
             }
 
             return drop_and_set_mario_action(m, burningAction, 1);
