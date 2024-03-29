@@ -6073,6 +6073,7 @@ Gfx mat_mario_metal[] = {
 
 Gfx mat_revert_mario_metal[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsSPGeometryMode(G_TEXTURE_GEN, 0),
 	gsSPEndDisplayList(),
 };
@@ -6127,6 +6128,7 @@ Gfx mat_mario_eye_open[] = {
 
 Gfx mat_revert_mario_eye_open[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6161,6 +6163,7 @@ Gfx mat_mario_logo[] = {
 
 Gfx mat_revert_mario_logo[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6185,6 +6188,7 @@ Gfx mat_mario_eye_half_closed[] = {
 
 Gfx mat_revert_mario_eye_half_closed[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6209,6 +6213,7 @@ Gfx mat_mario_eye_closed[] = {
 
 Gfx mat_revert_mario_eye_closed[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6233,6 +6238,7 @@ Gfx mat_mario_eye_weak__look_left_[] = {
 
 Gfx mat_revert_mario_eye_weak__look_left_[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6257,6 +6263,7 @@ Gfx mat_mario_eye_hurt__look_right_[] = {
 
 Gfx mat_revert_mario_eye_hurt__look_right_[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6281,6 +6288,7 @@ Gfx mat_mario_eye_up[] = {
 
 Gfx mat_revert_mario_eye_up[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6305,6 +6313,7 @@ Gfx mat_mario_eye_down[] = {
 
 Gfx mat_revert_mario_eye_down[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6329,6 +6338,7 @@ Gfx mat_mario_eye_x[] = {
 
 Gfx mat_revert_mario_eye_x[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -6349,6 +6359,7 @@ Gfx mat_mario_wing_combined[] = {
 
 Gfx mat_revert_mario_wing_combined[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsSPEndDisplayList(),
 };
@@ -6393,6 +6404,7 @@ Gfx mat_mario_shoes[] = {
 
 Gfx mat_revert_mario_shoes[] = {
 	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
