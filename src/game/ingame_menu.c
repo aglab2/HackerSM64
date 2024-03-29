@@ -2358,7 +2358,7 @@ static void printFancy(int yoff, const char* str, int renderLimit)
 
     int symbolLen = 11;
     int halfLen = len / 2;
-    int x = 160 - halfLen * symbolLen;
+    int x = 160 - len * 11 / 2;
     for (int i = 0; i < len; i++)
     {
         if ((renderLimit -= FRAMES_PER_LETTER) < 0)
@@ -2411,7 +2411,7 @@ static void render_credits()
         const s16 ShowScoreForFrames = 20;
         Timeline = MIN(Timeline + 1, ShowScoreForFrames * 11);
 
-        const int LocationY = 160;
+        const int LocationY = 157;
         const int LocationX = 14;
         const int LocationXHoles = 66;
         const int DistBetweenLines = 20;
@@ -2460,7 +2460,7 @@ static void render_credits()
             totalPar += par;
             totalStrokes += strokes;
 
-            u8 line[3];
+            u8 line[10];
             int_to_str(hole, line);
             fancy_print_uncentered(LocationXHoles + i * 20, LocationY - 0 * DistBetweenLines, line, 0xFF);
             int_to_str(par, line);
@@ -2508,7 +2508,7 @@ static void render_credits()
                 fancy_print_uncentered(LocationXHoles + 10 * 20 + 10, LocationY - 0 * DistBetweenLines, line, 0xFF);
             }
             
-            u8 line[3];
+            u8 line[10];
             int_to_str(totalPar, line);
             fancy_print_uncentered(LocationXHoles + 10 * 20 + 10, LocationY - 1 * DistBetweenLines, line, 0xFF);
             int_to_str(totalStrokes, line);
@@ -2617,7 +2617,7 @@ static void render_credits()
         }
         if (!perfectScore)
         {
-            printFancy(20, winLine, Timeline);
+            printFancy(25, winLine, Timeline);
         }
         else
         {

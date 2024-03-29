@@ -21,7 +21,8 @@
 #define MAX_FREEROAM_FRAMES 2000
 #define MAX_NO_SPEED_FRAMES 200
 
-// #define TEST_SET_HOLE 10
+// #define DEBUG_INFO
+// #define TEST_SET_HOLE 8
 // #define TEST_CREDITS
 
 const int kParShots[] = { 0, 3, 2, 3, 3, 5, 4, 3, 3, 3, 1 };
@@ -170,12 +171,12 @@ static void handle_content(int x, int y, int pressedButtons)
         }
     }
 
-#if 1
+#ifdef DEBUG_INFO
     print_text_fmt_int(20, 100, "HOLE %d", gCurrentHoleNum);
     print_text_fmt_int(20, 60, "ACT %x", gMarioStates->action);
     print_text_fmt_int(20, 80, "P %d", gMarioStates->forwardVel);
 #endif
-    if (gCurrentHoleNum < 10)
+    if (gCurrentHoleNum <= 10)
     {
         print_text_fmt_int(20, 40, "PAR %d", kParShots[gCurrentHoleNum ? gCurrentHoleNum : 1]);
         print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots);
@@ -304,7 +305,12 @@ static void handle_content(int x, int y, int pressedButtons)
             gMarioStates->pos[2] = init->oPosZ;
             if (gCurrentHoleNum == 10)
             {
+                if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
+                    set_cam_angle(CAM_ANGLE_LAKITU);
+                }
                 reset_camera(gCamera);
+                // tournament credits song
+                seq_player_play_sequence(0, 4, 0);
             }
             s8DirModeYawOffset = init->oFaceAngleYaw;
         }
@@ -333,6 +339,7 @@ static void handle_content(int x, int y, int pressedButtons)
     }
 }
 
+extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 void bhv_ctl_loop()
 {
     // print_text_fmt_int(20, 20, "A %x", gMarioStates->action);
@@ -358,6 +365,8 @@ void bhv_ctl_loop()
 #ifdef TEST_CREDITS
     o->oAction = CTL_CREDITS;
     gCurrentHoleNum = 11;
+    if (0 == o->oTimer)
+        seq_player_play_sequence(0, 4, 0);
 #endif
 
     if (0 == gCurrentHoleNum)

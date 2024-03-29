@@ -18,8 +18,15 @@ void dorrie_raise_head(void) {
 
 extern int gCurrentHoleNum;
 void dorrie_act_move(void) {
-    if (gCurrentHoleNum >= 10)
+    if (gCurrentHoleNum >= 9)
+    {
         o->oDrawingDistance = 30000.f;
+        o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    }
+    else
+    {
+        o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    }
 
     s16 startYaw = o->oMoveAngleYaw;
     s16 targetYaw;

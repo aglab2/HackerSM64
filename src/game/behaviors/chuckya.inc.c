@@ -179,6 +179,13 @@ void bhv_chuckya_loop(void) {
     if (gCurrentHoleNum >= 9)
         o->oDrawingDistance = 30000.f;
 
+    if (o->oPosY < -1314.f)
+    {
+        o->oPosX = o->oHomeX;
+        o->oPosY = o->oHomeY;
+        o->oPosZ = o->oHomeZ;
+    }
+
     cur_obj_scale(2.0f);
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 
