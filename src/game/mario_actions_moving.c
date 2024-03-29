@@ -169,7 +169,7 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
         lossZ /= lossLen;
     }
 
-    if (lossLen < 0.1f)
+    if (0.001f < lossLen && lossLen < 0.1f)
     {
         lossX /= lossLen;
         lossX *= 0.1f;
