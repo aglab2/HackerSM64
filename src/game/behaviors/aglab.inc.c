@@ -281,7 +281,7 @@ static void handle_content(int x, int y, int pressedButtons)
          || freeroaming || nospdframes || veryFar)
         {
             struct Surface* floor = gMarioStates->floor;
-            if (freeroaming || nospdframes || (floor && floor->type != SURFACE_MOVING_QUICKSAND && floor->type != SURFACE_VERY_SLIPPERY && floor->type != SURFACE_NO_CAM_COLLISION && floor->type != SURFACE_SWITCH))
+            if (freeroaming || nospdframes || veryFar || (floor && floor->type != SURFACE_MOVING_QUICKSAND && floor->type != SURFACE_VERY_SLIPPERY && floor->type != SURFACE_NO_CAM_COLLISION && floor->type != SURFACE_SWITCH))
             {
                 gSpoofedWarpRequester = o;
                 gMarioStates->usedObj = o;
