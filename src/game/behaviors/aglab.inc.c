@@ -260,12 +260,25 @@ static void handle_content(int x, int y, int pressedButtons)
         {
             o->oSubAction = 0;
         }
+        
+        f32 distToHole;
+        struct Object* hole = find_hole_object_with_bparam2(gCurrentHoleNum);
+        if (gMarioObject && hole)
+        {
+            distToHole = dist_between_objects(gMarioObject, hole);
+        }
+        else
+        {
+            distToHole = 0.f;
+        }
 
+        print_text_fmt_int(20, 100, "DIST %d", (int)distToHole);
+        int veryFar = gCurrentHoleNum > 9 ? 0 : distToHole > 8100.f;
         int freeroaming = o->oTimer > MAX_FREEROAM_FRAMES;
         int nospdframes = o->oSubAction > MAX_NO_SPEED_FRAMES;
         if (gMarioStates->action == ACT_STOMACH_SLIDE_STOP
          || gMarioStates->action == ACT_IDLE
-         || freeroaming || nospdframes)
+         || freeroaming || nospdframes || veryFar)
         {
             struct Surface* floor = gMarioStates->floor;
             if (freeroaming || nospdframes || (floor && floor->type != SURFACE_MOVING_QUICKSAND && floor->type != SURFACE_VERY_SLIPPERY && floor->type != SURFACE_NO_CAM_COLLISION && floor->type != SURFACE_SWITCH))
