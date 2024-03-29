@@ -272,7 +272,10 @@ static void handle_content(int x, int y, int pressedButtons)
             distToHole = 0.f;
         }
 
+#ifdef DEBUG_INFO
         print_text_fmt_int(20, 100, "DIST %d", (int)distToHole);
+#endif
+
         int veryFar = gCurrentHoleNum > 9 ? 0 : distToHole > 8100.f;
         int freeroaming = o->oTimer > MAX_FREEROAM_FRAMES;
         int nospdframes = o->oSubAction > MAX_NO_SPEED_FRAMES;
