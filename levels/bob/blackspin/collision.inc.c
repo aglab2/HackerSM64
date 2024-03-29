@@ -1,7 +1,7 @@
 const Collision blackspin_collision[] = {
 	COL_INIT(),
 	COL_VERTEX_INIT(13),
-	COL_VERTEX(0, 64, 0),
+	COL_VERTEX(0, 114, 0),
 	COL_VERTEX(-103, 64, 60),
 	COL_VERTEX(0, 64, 119),
 	COL_VERTEX(-103, 64, -60),
