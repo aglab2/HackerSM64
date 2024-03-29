@@ -2597,11 +2597,11 @@ static void render_credits()
         }
         else if (totalScore >= 20)
         {
-            winLine = "DECENT PLAY";
+            winLine = "DO BE GOOD";
         }
         else if (totalScore >= 15)
         {
-            winLine = "COULD BE BETTER";
+            winLine = "CRUSTY GAMING";
         }
         else if (totalScore >= 10)
         {
