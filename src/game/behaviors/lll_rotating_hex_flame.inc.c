@@ -58,7 +58,13 @@ ObjActionFunc sRotatingCwFireBarsActions[] = {
     fire_bar_act_remove_flames,
 };
 
+extern int gCurrentHoleNum;
 void bhv_lll_rotating_block_fire_bars_loop(void) {
+    if (gCurrentHoleNum > 7)
+    {
+        o->oDrawingDistance = 50000.f;
+    }
+
     cur_obj_call_action_function(sRotatingCwFireBarsActions);
     load_object_collision_model();
 }

@@ -583,6 +583,8 @@ s32 mario_floor_is_slope(struct MarioState *m) {
  */
 s32 mario_floor_is_steep(struct MarioState *m) {
     f32 normY;
+    if (m->floor->object)
+        return TRUE;
     if (m->floor->type == SURFACE_SUPER_SLIPPERY)
         return TRUE;
 
@@ -1307,7 +1309,7 @@ void update_mario_geometry_inputs(struct MarioState *m) {
             ceilToFloorDist = m->ceilHeight - m->floorHeight;
 
             if ((0.0f <= ceilToFloorDist) && (ceilToFloorDist <= 150.0f)) {
-                m->input |= INPUT_SQUISHED;
+                // m->input |= INPUT_SQUISHED;
             }
         }
 

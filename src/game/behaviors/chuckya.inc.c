@@ -174,7 +174,11 @@ void chuckya_move(void) {
     }
 }
 
+extern int gCurrentHoleNum;
 void bhv_chuckya_loop(void) {
+    if (gCurrentHoleNum >= 9)
+        o->oDrawingDistance = 30000.f;
+
     cur_obj_scale(2.0f);
     o->oInteractionSubtype |= INT_SUBTYPE_GRABS_MARIO;
 

@@ -3,7 +3,7 @@
 const GeoLayout bob_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, -242, 2011, 90, 0, 0, bob_dl_flameboost_001_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 3533, -360, -2362, 90, 0, 0, bob_dl_flameboost_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_golfer_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bob_dl_golfer_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_golfer_mesh_layer_4),

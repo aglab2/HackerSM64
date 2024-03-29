@@ -16,8 +16,11 @@ void dorrie_raise_head(void) {
     );
 }
 
+extern int gCurrentHoleNum;
 void dorrie_act_move(void) {
-    o->oDrawingDistance = 10000.f;
+    if (gCurrentHoleNum >= 10)
+        o->oDrawingDistance = 30000.f;
+
     s16 startYaw = o->oMoveAngleYaw;
     s16 targetYaw;
     s16 targetSpeed;

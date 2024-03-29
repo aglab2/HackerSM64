@@ -125,6 +125,11 @@ void slide_bonk(struct MarioState *m, u32 fastAction, u32 slowAction) {
     if (m->forwardVel > 4.0f) {
         mario_bonk_reflection(m, TRUE);
         m->faceAngle[1] += 0x8000;
+        if (m->floor && m->floor->object)
+        {
+            m->pos[0] += 20.0f * sins(m->faceAngle[1]);
+            m->pos[2] += 20.0f * coss(m->faceAngle[1]);
+        }
         drop_and_set_mario_action(m, fastAction, 0);
     } else {
         mario_set_forward_vel(m, 0.0f);
@@ -1393,7 +1398,7 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
             break;
 
         case GROUND_STEP_HIT_WALL:
-            if (!mario_floor_is_slippery(m)) {
+            if (1) {
                 if (m->forwardVel > 16.0f) {
                     m->particleFlags |= PARTICLE_VERTICAL_STAR;
                 }

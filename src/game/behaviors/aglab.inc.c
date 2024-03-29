@@ -11,6 +11,7 @@
 #define CTL_WAIT_FOR_SHOOTING 1
 #define CTL_NEXT_HOLE 2
 #define CTL_WAIT_FOR_RESPAWN 3
+#define CTL_CREDITS 4
 
 #define TUT_INIT 0
 #define TUT_MOVE_CAMERA 1
@@ -20,12 +21,16 @@
 #define MAX_FREEROAM_FRAMES 2000
 #define MAX_NO_SPEED_FRAMES 200
 
-#define TEST_SET_HOLE 9
+// #define TEST_SET_HOLE 10
+// #define TEST_CREDITS
 
-static const int kParShots[] = { 2, 2, 1, 1, 1, 1, 1, 1, 1 };
+const int kParShots[] = { 0, 3, 2, 3, 3, 5, 4, 3, 3, 3, 1 };
+int gScoreboard[16] = { 0 };
 
 int gCurrentHoleNum = 0;
 unsigned char gTutorialTransparencies[8] = { 255, 0 };
+u8 gRollCredits = 0;
+u8 gHideHoleName = 0;
 static int gPower = (MAX_POWER + MIN_POWER) / 2;
 static int gAmountOfShots = 0;
 static int gTutorialProgress = 0;
@@ -151,13 +156,35 @@ static void handle_tutorial(int x, int y, int pressedButtons)
 extern struct Object* gSpoofedWarpRequester;
 static void handle_content(int x, int y, int pressedButtons)
 {
-#if 0
+    {
+        struct Surface* floor = gMarioStates->floor;
+        if (floor && floor->type == SURFACE_HARD_VERY_SLIPPERY)
+        {
+            gMarioStates->forwardVel = 70.f;
+            f32 slideVelLen = sqrtf(gMarioStates->slideVelZ * gMarioStates->slideVelZ + gMarioStates->slideVelX * gMarioStates->slideVelX);
+            if (slideVelLen > 1.f)
+            {
+                gMarioStates->slideVelX = gMarioStates->slideVelX / slideVelLen * 70.f;
+                gMarioStates->slideVelZ = gMarioStates->slideVelZ / slideVelLen * 70.f;
+            }
+        }
+    }
+
+#if 1
+    print_text_fmt_int(20, 100, "HOLE %d", gCurrentHoleNum);
     print_text_fmt_int(20, 60, "ACT %x", gMarioStates->action);
     print_text_fmt_int(20, 80, "P %d", gMarioStates->forwardVel);
-
-    print_text_fmt_int(20, 40, "PAR %d", kParShots[gCurrentHoleNum]);
-    print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots + 1);
 #endif
+    if (gCurrentHoleNum < 10)
+    {
+        print_text_fmt_int(20, 40, "PAR %d", kParShots[gCurrentHoleNum ? gCurrentHoleNum : 1]);
+        print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots);
+    }
+    
+    if (gMarioStates->pos[1] > 5000.f)
+    {
+        x = 0; y = 0; gPower = 160;
+    }
 
     if (CTL_SHOOT == o->oAction)
     {
@@ -166,8 +193,15 @@ static void handle_content(int x, int y, int pressedButtons)
         {
             if (gMarioStates->pos[1] < hole->oPosY && hole->oDistanceToMario < 100.f)
             {
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
                 o->oAction = CTL_NEXT_HOLE;
+                return;
             }
+        }
+
+        if (0 == o->oTimer)
+        {
+            gAmountOfShots++;
         }
 
         o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -207,6 +241,7 @@ static void handle_content(int x, int y, int pressedButtons)
 
         if (pressedButtons & Z_TRIG)
         {
+            gHideHoleName = 1;
             o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
             o->oAction = 1;
             set_mario_action(gMarioStates, ACT_DIVE, 0);
@@ -230,9 +265,8 @@ static void handle_content(int x, int y, int pressedButtons)
          || gMarioStates->action == ACT_IDLE
          || freeroaming || nospdframes)
         {
-            gAmountOfShots++;
             struct Surface* floor = gMarioStates->floor;
-            if (freeroaming || nospdframes || (floor && floor->type != SURFACE_VERY_SLIPPERY && floor->type != SURFACE_NO_CAM_COLLISION && floor->type != SURFACE_SWITCH))
+            if (freeroaming || nospdframes || (floor && floor->type != SURFACE_MOVING_QUICKSAND && floor->type != SURFACE_VERY_SLIPPERY && floor->type != SURFACE_NO_CAM_COLLISION && floor->type != SURFACE_SWITCH))
             {
                 gSpoofedWarpRequester = o;
                 gMarioStates->usedObj = o;
@@ -240,6 +274,7 @@ static void handle_content(int x, int y, int pressedButtons)
                 o->oBehParams2ndByte = 0xf4;
                 o->oAction = CTL_WAIT_FOR_RESPAWN;
                 level_trigger_warp(gMarioStates, WARP_OP_WARP_DOOR);
+                play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
             }
             else
             {
@@ -252,6 +287,10 @@ static void handle_content(int x, int y, int pressedButtons)
     }
     else if (CTL_NEXT_HOLE == o->oAction)
     {
+        gScoreboard[gCurrentHoleNum] = gAmountOfShots;
+        gAmountOfShots = 0;
+        gHideHoleName = 0;
+
 #ifdef TEST_SET_HOLE
         gCurrentHoleNum = TEST_SET_HOLE;
 #else
@@ -263,20 +302,34 @@ static void handle_content(int x, int y, int pressedButtons)
             gMarioStates->pos[0] = init->oPosX;
             gMarioStates->pos[1] = init->oPosY;
             gMarioStates->pos[2] = init->oPosZ;
+            if (gCurrentHoleNum == 10)
+            {
+                reset_camera(gCamera);
+            }
             s8DirModeYawOffset = init->oFaceAngleYaw;
         }
 
-        gAmountOfShots = 0;
+        if (gCurrentHoleNum == 11)
+        {
+            gRollCredits = 1;
+            gCamera->cutscene = CUTSCENE_GG;
+            o->oAction = CTL_CREDITS;
+        }
         o->oAction = 0;
     }
     else if (CTL_WAIT_FOR_RESPAWN == o->oAction)
     {
-        if (o->oTimer > 30)
+        if (o->oTimer > 25)
         {
             o->oAction = CTL_SHOOT;
             s8DirModeYawOffset = 0x8000 + o->oFaceAngleYaw;
             gMarioStates->faceAngle[1] = o->oFaceAngleYaw;
         }
+    }
+    else if (CTL_CREDITS == o->oAction)
+    {
+        gRollCredits = 1;
+        gCamera->cutscene = CUTSCENE_GG;
     }
 }
 
@@ -284,6 +337,10 @@ void bhv_ctl_loop()
 {
     // print_text_fmt_int(20, 20, "A %x", gMarioStates->action);
     int allowedButtons = L_CBUTTONS | R_CBUTTONS | JPAD_BUTTONS | R_TRIG;
+    if (gMarioStates->pos[1] > 5000.f && CTL_SHOOT == o->oAction)
+    {
+        allowedButtons = Z_TRIG;
+    }
     int buttonPressed = gMarioStates->controller->buttonPressed;
     int x = gMarioStates->controller->stickX;
     int y = gMarioStates->controller->stickY;
@@ -297,6 +354,11 @@ void bhv_ctl_loop()
     gMarioStates->controller->buttonDown &= allowedButtons;
     gMarioStates->controller->buttonPressed &= allowedButtons;
     gMarioStates->health = 0x880;
+
+#ifdef TEST_CREDITS
+    o->oAction = CTL_CREDITS;
+    gCurrentHoleNum = 11;
+#endif
 
     if (0 == gCurrentHoleNum)
     {
@@ -314,6 +376,9 @@ void bhv_roll_log_init()
 
 void bhv_roll_log_loop()
 {
+    if (gCurrentHoleNum >= 4)
+        o->oDrawingDistance = 30000.f;
+
     if (gMarioStates->pos[1] < -700.f)
     {
         o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;

@@ -39,8 +39,11 @@ static u8 sPokeyBodyPartAttackHandlers[] = {
  * The behavior parameter is the body part's index from POKEY_PART_BP_HEAD to POKEY_PART_BP_LOWEST,
  * with POKEY_PART_BP_HEAD at the top.
  */
+extern int gCurrentHoleNum;
 void bhv_pokey_body_part_update(void) {
     // PARTIAL_UPDATE
+    if (gCurrentHoleNum >= 4)
+        o->oDrawingDistance = 30000.f;
 
     if (obj_update_standard_actions(3.0f)) {
         if (o->parentObj->oAction == POKEY_ACT_UNLOAD_PARTS) {

@@ -10,6 +10,7 @@
 #include "eu_translation.h"
 #include "segment_symbols.h"
 #include "game_init.h"
+#include "geo_misc.h"
 #include "gfx_dimensions.h"
 #include "ingame_menu.h"
 #include "level_update.h"
@@ -2196,15 +2197,32 @@ s32 render_course_complete_screen(void) {
 }
 
 extern int gCurrentHoleNum;
+extern u8 gRollCredits;
+extern u8 gHideHoleName;
 extern unsigned char gTutorialTransparencies[8];
+
+static void fancy_print_uncentered_colored(int align, int xoff, int y, const u8* line, u8 r, u8 g, u8 b, u8 a)
+{
+    int x = align ? get_str_x_pos_from_center(xoff, line, 1.f) : xoff;
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, a);
+    print_generic_string(x, y, line);
+    gDPSetEnvColor(gDisplayListHead++, r, g, b, a);
+    print_generic_string(x + 2, y + 2, line);
+}
+
+static void fancy_print_uncentered(int x, int y, const u8* line, u8 a)
+{
+    return fancy_print_uncentered_colored(1, x, y, line, 255, 255, 255, a);
+}
+
+static void fancy_print_uncentered_unaligned(int x, int y, const u8* line, u8 a)
+{
+    return fancy_print_uncentered_colored(0, x, y, line, 255, 255, 255, a);
+}
 
 static void fancy_print(int y, const u8* line, int tr)
 {
-    int xoff = get_str_x_pos_from_center(160, line, 1.f);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, tr);
-    print_generic_string(xoff, y, line);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, tr);
-    print_generic_string(xoff + 2, y + 2, line);
+    fancy_print_uncentered(160, y, line, tr);
 }
 
 static void render_tutorial()
@@ -2256,6 +2274,364 @@ static void render_tutorial()
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
+static void render_hole_name()
+{
+    static u8 sBrightnesses[16] = { 0 };
+    static u8 sState[16] = { 0 };
+    static const u8 Hole2[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x02, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x0B, 0x18, 0x1E, 0x17, 0x0C, 0x0E, 0x1B, 0x1C, 0xFF };
+    static const u8 Hole3[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x03, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x15, 0x18, 0x10, 0x10, 0x0E, 0x1B, 0x1C, 0xFF };
+    static const u8 Hole4[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x04, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x1C, 0x11, 0x16, 0x18, 0x18, 0x1F, 0x0E, 0x1B, 0x1C, 0xFF };
+    static const u8 Hole5[] = { 0X11, 0x18, 0x15, 0x0E, 0x9E, 0x05, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x20, 0x0A, 0x15, 0x15, 0x14, 0x12, 0x0C, 0x14, 0x1C, 0xFF };
+    static const u8 Hole6[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x06, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x0A, 0x1B, 0x0C, 0x11, 0x0E, 0x1C, 0xFF };
+    static const u8 Hole7[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x07, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x0F, 0x15, 0x0A, 0x16, 0x0E, 0x1C, 0xFF };
+    static const u8 Hole8[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x08, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x1C, 0x0C, 0x0A, 0x16, 0x19, 0xFF };
+    static const u8 Hole9[] = { 0X11, 0x18, 0x15, 0x0E, 0x9E, 0x09, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x0B, 0x0E, 0x0A, 0x1C, 0x1D, 0xFF };
+    static const u8 HoleFinal[] = { 0x11, 0x18, 0x15, 0x0E, 0x9E, 0x01, 0x00, 0xE6, 0x9E, 0x1D, 0x11, 0x0E, 0x9E, 0x0F, 0x12, 0x17, 0x0A, 0x15, 0x0E, 0xFF };
+    static const u8* Holes[] = { NULL, NULL, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, HoleFinal };
+    static int Wait = 0;
+    if (sState[gCurrentHoleNum] != 3)
+    {
+        if (sState[gCurrentHoleNum] == 0)
+        {
+            sBrightnesses[gCurrentHoleNum] = MIN(sBrightnesses[gCurrentHoleNum] + 0x10, 0xFF);
+            if (sBrightnesses[gCurrentHoleNum] == 0xFF)
+                sState[gCurrentHoleNum] = 1;
+            
+            Wait = 0;
+        }
+        if (sState[gCurrentHoleNum] == 1)
+        {
+            if (++Wait == 300 || gHideHoleName)
+            {
+                sState[gCurrentHoleNum] = 2;
+            }
+        }
+        if (sState[gCurrentHoleNum] == 2)
+        {
+            sBrightnesses[gCurrentHoleNum] = MAX(sBrightnesses[gCurrentHoleNum] - 0x10, 0);
+            if (sBrightnesses[gCurrentHoleNum] == 0)
+                sState[gCurrentHoleNum] = 3;
+        }
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        fancy_print(10, Holes[gCurrentHoleNum], sBrightnesses[gCurrentHoleNum]);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    }
+}
+
+static Vtx *vertex_transition_color(int x0, int y0, int x1, int y1) {
+    Vtx *verts = alloc_display_list(4 * sizeof(Vtx));
+
+    if (verts != NULL) {
+        make_simple_vertex(verts, 0, x0, y0, -1, 0, 0);
+        make_simple_vertex(verts, 1, x1, y0, -1, 0, 0);
+        make_simple_vertex(verts, 2, x1, y1, -1, 0, 0);
+        make_simple_vertex(verts, 3, x0, y1, -1, 0, 0);
+    }
+    return verts;
+}
+
+static void dl_transition_color(int x0, int y0, int x1, int y1, u8 r, u8 g, u8 b, u8 a) {
+    Vtx *verts = vertex_transition_color(x0, y0, x1, y1);
+
+    if (verts != NULL) {
+        Gfx *tempGfxHead = gDisplayListHead;
+        gDPSetPrimColor(tempGfxHead++, 0, 0, r, g, b, a);
+        gSPDisplayList(tempGfxHead++, dl_proj_mtx_fullscreen);
+        gDPSetCombineMode(tempGfxHead++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+        gDPSetRenderMode(tempGfxHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+        gSPVertex(tempGfxHead++, VIRTUAL_TO_PHYSICAL(verts), 4, 0);
+        gSPDisplayList(tempGfxHead++, dl_draw_quad_verts_0123);
+        gSPDisplayList(tempGfxHead++, dl_screen_transition_end);
+
+        gDisplayListHead = tempGfxHead;
+    }
+}
+
+#define FRAMES_PER_LETTER 2
+static void printFancy(int yoff, const char* str, int renderLimit)
+{
+    int len = 0;
+    while (str[len] != '\0')
+    {
+        len++;
+    }
+
+    int symbolLen = 11;
+    int halfLen = len / 2;
+    int x = 160 - halfLen * symbolLen;
+    for (int i = 0; i < len; i++)
+    {
+        if ((renderLimit -= FRAMES_PER_LETTER) < 0)
+            break;
+
+        int yoff2 = sins(gGlobalTimer * 0x400 + i * 0x700) * 5;
+
+        if (' ' == str[i])
+        {
+            continue;
+        }
+
+        add_glyph_texture(char_to_glyph_index(str[i]));
+        render_textrect(x + i * symbolLen, yoff + yoff2, 0);
+    }
+}
+
+extern const int kParShots[];
+extern int gScoreboard[16];
+static void render_credits()
+{
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    {
+        static const u8 ThxForPlayingText[] = { 0x1D, 0x11, 0x0A, 0x17, 0x14, 0x9E, 0x22, 0x18, 0x1E, 0x9E, 0x0F, 0x18, 0x1B, 0x9E, 0x19, 0x15, 0x0A, 0x22, 0x12, 0x17, 0x10, 0xF2, 0xFF };
+        static u8 Tr = 0;
+        static u8 Timeline = 0;
+        Timeline = MIN(Timeline + 1, 50);
+        if (Tr < 0xFF) Tr = MIN(Tr + 0x8, 0xFF);
+        fancy_print(210, ThxForPlayingText, Tr);
+        if (Timeline < 50)
+            goto end;
+    }
+    {
+        static const u8 HereIsYourScore[] = { 0X11, 0x0E, 0x1B, 0x0E, 0x9E, 0x12, 0x1C, 0x9E, 0x22, 0x18, 0x1E, 0x1B, 0x9E, 0x1C, 0x0C, 0x18, 0x1B, 0x0E, 0x0C, 0x0A, 0x1B, 0x0D, 0xFF };
+        static u8 Tr = 0;
+        static u8 Timeline = 0;
+        Timeline = MIN(Timeline + 1, 50);
+        if (Tr < 0xFF) Tr = MIN(Tr + 0x8, 0xFF);
+        fancy_print(190, HereIsYourScore, Tr);
+        if (Timeline < 50)
+            goto end;
+    }
+
+    int totalPar = 0;
+    int totalStrokes = 0;
+    int totalScore = 0;
+    int perfectScore = 1;
+    {
+        static u8 Timeline = 0;
+        const s16 ShowScoreForFrames = 20;
+        Timeline = MIN(Timeline + 1, ShowScoreForFrames * 11);
+
+        const int LocationY = 160;
+        const int LocationX = 14;
+        const int LocationXHoles = 66;
+        const int DistBetweenLines = 20;
+
+        {
+            // hole
+            static const u8 line[] = { 0x11, 0x18, 0x15, 0x0E, 0xFF };
+            fancy_print_uncentered_unaligned(LocationX, LocationY - 0 * DistBetweenLines, line, 0xFF);
+        }
+        {
+            // par
+            static const u8 line[] = { 0x19, 0x0A, 0x1B, 0xFF };
+            fancy_print_uncentered_unaligned(LocationX, LocationY - 1 * DistBetweenLines, line, 0xFF);
+        }
+        {
+            // strokes
+            static const u8 line[] = { 0x1C, 0x1D, 0x1B, 0x18, 0x14, 0x0E, 0x1C, 0xFF };
+            fancy_print_uncentered_unaligned(LocationX, LocationY - 2 * DistBetweenLines, line, 0xFF);
+        }
+        {
+            // score
+            static const u8 line[] = { 0x1C, 0x0C, 0x18, 0x1B, 0x0E, 0xFF };
+            fancy_print_uncentered_unaligned(LocationX, LocationY - 3 * DistBetweenLines, line, 0xFF);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (Timeline < ShowScoreForFrames * i)
+                break;
+
+            if (Timeline == (1 + ShowScoreForFrames * i))
+            {
+                int redOff = CLAMP(9 - i, 0, 7);
+                play_sound(SOUND_MENU_COLLECT_RED_COIN + (((u8) 7 - redOff) << 16), gGlobalSoundSource);
+            }
+            
+            int hole = i + 1;
+            int par = kParShots[hole];
+            int strokes = CLAMP(gScoreboard[hole], 0, 99);
+            int score = CLAMP(par - strokes + 2, 0, 5);
+            if (par != 1 && score < 3)
+            {
+                perfectScore = 0;
+            }
+            totalScore += score;
+            totalPar += par;
+            totalStrokes += strokes;
+
+            u8 line[3];
+            int_to_str(hole, line);
+            fancy_print_uncentered(LocationXHoles + i * 20, LocationY - 0 * DistBetweenLines, line, 0xFF);
+            int_to_str(par, line);
+            fancy_print_uncentered(LocationXHoles + i * 20, LocationY - 1 * DistBetweenLines, line, 0xFF);
+
+
+            u8 r = 255, g = 255, b = 255;
+            if (score > 2)
+            {
+                // gold color
+                r = 255; g = 215; b = 0;
+            }
+            if (score == 2)
+            {
+                // light green color
+                r = 127; g = 235; b = 127;
+            }
+            if (score == 1)
+            {
+                // light red color
+                r = 255; g = 127; b = 127;
+            }
+            if (score == 0)
+            {
+                // dark red color
+                r = 245; g = 80; b = 80;
+            }
+
+            int_to_str(strokes, line);
+            fancy_print_uncentered_colored(1, LocationXHoles + i * 20, LocationY - 2 * DistBetweenLines, line, r, g, b, 0xFF);
+            int_to_str(score, line);
+            fancy_print_uncentered_colored(1, LocationXHoles + i * 20, LocationY - 3 * DistBetweenLines, line, r, g, b, 0xFF);
+        }
+
+        if (Timeline > ShowScoreForFrames * 10)
+        {
+            if (Timeline == (1 + ShowScoreForFrames * 10))
+            {
+                play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
+            }
+
+            {
+                // total
+                static const u8 line[] = { 0x1D, 0x18, 0x1D, 0x0A, 0x15, 0xFF };
+                fancy_print_uncentered(LocationXHoles + 10 * 20 + 10, LocationY - 0 * DistBetweenLines, line, 0xFF);
+            }
+            
+            u8 line[3];
+            int_to_str(totalPar, line);
+            fancy_print_uncentered(LocationXHoles + 10 * 20 + 10, LocationY - 1 * DistBetweenLines, line, 0xFF);
+            int_to_str(totalStrokes, line);
+            fancy_print_uncentered(LocationXHoles + 10 * 20 + 10, LocationY - 2 * DistBetweenLines, line, 0xFF);
+            int_to_str(totalScore, line);
+            fancy_print_uncentered(LocationXHoles + 10 * 20 + 10, LocationY - 3 * DistBetweenLines, line, 0xFF);
+        }
+
+        if (Timeline < ShowScoreForFrames * 11)
+            goto end;
+    }
+
+    {
+        static const u8 YourRankIs[] = { 0x22, 0x18, 0x1E, 0x1B, 0x9E, 0x1B, 0x0A, 0x17, 0x14, 0x9E, 0x12, 0x1C, 0xE6, 0xFF };
+        static u8 Tr = 0;
+        static u8 Timeline = 0;
+
+        if (Timeline > 30 && (0 == (Timeline % 3)))
+        {
+            play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+        }
+
+        Timeline = MIN(Timeline + 1, 100);
+        if (Tr < 0xFF) Tr = MIN(Tr + 0x8, 0xFF);
+        fancy_print_uncentered(150, 65, YourRankIs, Tr);
+        if (Timeline < 100)
+            goto end;
+    }
+
+    {
+        static u8 Timeline = 0;
+        if (0 == Timeline)
+        {
+            play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+        }
+        Timeline = MIN(Timeline + 1, 30);
+        u8 line[] = { 0x0, 0xff };
+        if (totalScore >= 29)
+        {
+            line[0] = 0xf;
+        }
+        else if (totalScore >= 25)
+        {
+            line[0] = 0xe;
+        }
+        else if (totalScore >= 20)
+        {
+            line[0] = 0xd;
+        }
+        else if (totalScore >= 15)
+        {
+            line[0] = 0xc;
+        }
+        else if (totalScore >= 10)
+        {
+            line[0] = 0xb;
+        }
+        else if (totalScore >= 5)
+        {
+            line[0] = 0xa;
+        }
+        else
+        {
+            line[0] = 0x1c;
+        }
+
+        fancy_print_uncentered_colored(1, 200, 65, line, 255, 251, 0, 0xff);
+        if (Timeline < 30)
+            goto end;
+    }
+
+    {
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+        gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+
+        static u8 Timeline = 0;
+        Timeline = MIN(Timeline + 1, 200);
+        const char* winLine;
+        if (totalScore >= 29)
+        {
+            winLine = "FANTASTIC PERFORMANCE";
+        }
+        else if (totalScore >= 25)
+        {
+            winLine = "EXTREME CONTENT";
+        }
+        else if (totalScore >= 20)
+        {
+            winLine = "DECENT PLAY";
+        }
+        else if (totalScore >= 15)
+        {
+            winLine = "COULD BE BETTER";
+        }
+        else if (totalScore >= 10)
+        {
+            winLine = "BRUH MOMENT";
+        }
+        else if (totalScore >= 5)
+        {
+            winLine = "AW MAN";
+        }
+        else
+        {
+            winLine = "SKILL ISSUE";
+        }
+        if (!perfectScore)
+        {
+            printFancy(20, winLine, Timeline);
+        }
+        else
+        {
+            printFancy(35, winLine, Timeline);
+            printFancy(10, "AND A PERFECT SCORE", Timeline - 70);
+        }
+
+        gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    }
+end:
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
 s32 render_menus_and_dialogs(void) {
     s32 mode = MENU_OPT_NONE;
 
@@ -2268,7 +2644,29 @@ s32 render_menus_and_dialogs(void) {
             gTutorialTransparencies[i] = CLAMP(gTutorialTransparencies[i] - 0x10, 0, 255);
         }
     }
+
+
+
+    u8 maxTr = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        maxTr = MAX(maxTr, gTutorialTransparencies[i]);
+    }
+    if (maxTr)
+    {
+        dl_transition_color(50, 150, SCREEN_WIDTH - 50, SCREEN_HEIGHT - 10, 0, 0, 0, maxTr / 2);
+    }
+
     render_tutorial();
+
+    if (1 < gCurrentHoleNum && gCurrentHoleNum < 11)
+        render_hole_name();
+    
+    if (gRollCredits)
+    {
+        dl_transition_color(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 0, 0x80);
+        render_credits();
+    }
 
     if (gMenuMode != MENU_MODE_NONE) {
         switch (gMenuMode) {
