@@ -24,7 +24,7 @@
 // Each framebuffer and zbuffer are moved to separate 1MB banks around 2 pivot points 0x80700000 and 0x80500000 in 4 separate banks. This allows for roughly 3MB max contig alloc
 #define MEMORY_FRAGMENTATION_ZBUFFER_AND_EACH_FRAMEBUFFER 3
 
-#define MEMORY_FRAGMENTATION_LEVEL MEMORY_FRAGMENTATION_NO_FRAGMENTATION
+#define MEMORY_FRAGMENTATION_LEVEL MEMORY_FRAGMENTATION_ZBUFFER_AND_EACH_FRAMEBUFFER
 
 // For nerds here are the results of measurements
 

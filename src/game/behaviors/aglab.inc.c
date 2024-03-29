@@ -1,4 +1,5 @@
 #include <game/print.h>
+#include <game/emutest.h>
 
 #define MAX_POWER 160
 #define MIN_POWER 20
@@ -73,7 +74,7 @@ static void applyPowerToVisuals()
 extern struct LakituState gLakituState;
 void bhv_ctl_init()
 {
-    obj_scale(o, 0.02f);
+    obj_scale_xyz(o, gIsConsole ? 0.04f : 0.02f, 0.02f, 0.02f);
     applyPowerToVisuals();
     gMarioStates->faceAngle[1] = gLakituState.yaw + 0x8000;
     o->oFaceAngleYaw = gLakituState.yaw + 0x8000;
