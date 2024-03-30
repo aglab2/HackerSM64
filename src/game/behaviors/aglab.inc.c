@@ -23,7 +23,7 @@
 #define MAX_NO_SPEED_FRAMES 200
 
 // #define DEBUG_INFO
-#define TEST_SET_HOLE 6
+#define TEST_SET_HOLE 8
 // #define TEST_CREDITS
 
 const int kParShots[] = { 0, 3, 2, 3, 3, 5, 4, 3, 3, 3, 1 };

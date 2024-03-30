@@ -16,6 +16,23 @@ void dorrie_raise_head(void) {
     );
 }
 
+static float getY()
+{
+    const int LoopTime = 200;
+    int time = gGlobalTimer % LoopTime;
+    f32 val;
+    if (time < LoopTime / 2)
+    {
+        val = (LoopTime / 2) - time;
+    }
+    else
+    {
+        val = time - (LoopTime / 2);
+    }
+
+    return (val / (float) (LoopTime / 2)) - 0.5f;
+}
+
 extern int gCurrentHoleNum;
 void dorrie_act_move(void) {
     if (gCurrentHoleNum >= 9)
@@ -65,7 +82,7 @@ void dorrie_act_move(void) {
     o->oAngleVelYaw = o->oMoveAngleYaw - startYaw;
     o->oPosX = o->oHomeX;
     o->oPosY = o->oHomeY - 80.f;
-    o->oPosZ = o->oHomeZ + sins(gGlobalTimer * 290) * 1700.f;
+    o->oPosZ = o->oHomeZ + getY() * 3600.f;
 }
 
 void dorrie_begin_head_raise(s32 liftingMario) {

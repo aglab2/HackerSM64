@@ -557,7 +557,7 @@ u32 mario_floor_is_slippery(struct MarioState *m) {
 s32 mario_floor_is_slope(struct MarioState *m) {
     f32 normY;
 
-    if (m->floor->object)
+    if (m->floor->object && m->floor->type == SURFACE_VERY_SLIPPERY)
         return TRUE;
     
     if (SURFACE_IS_QUICKSAND(m->floor->type))
@@ -574,6 +574,9 @@ s32 mario_floor_is_slope(struct MarioState *m) {
         default:                          normY = COS15; break;
         case SURFACE_CLASS_NOT_SLIPPERY:  normY = COS20; break;
     }
+    
+    if (m->floor->object)
+        normY = COS1;
 
     return m->floor->normal.y <= normY;
 }
@@ -583,8 +586,9 @@ s32 mario_floor_is_slope(struct MarioState *m) {
  */
 s32 mario_floor_is_steep(struct MarioState *m) {
     f32 normY;
-    if (m->floor->object)
+    if (m->floor->object && m->floor->type == SURFACE_VERY_SLIPPERY)
         return TRUE;
+
     if (m->floor->type == SURFACE_SUPER_SLIPPERY)
         return TRUE;
 
@@ -605,6 +609,9 @@ s32 mario_floor_is_steep(struct MarioState *m) {
             default:                          normY = COS30; break;
             case SURFACE_CLASS_NOT_SLIPPERY:  normY = COS30; break;
         }
+            
+        if (m->floor->object)
+            normY = COS1;
 
         return m->floor->normal.y <= normY;
     }
