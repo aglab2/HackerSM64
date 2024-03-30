@@ -23,7 +23,7 @@
 #define MAX_NO_SPEED_FRAMES 200
 
 // #define DEBUG_INFO
-// #define TEST_SET_HOLE 8
+#define TEST_SET_HOLE 6
 // #define TEST_CREDITS
 
 const int kParShots[] = { 0, 3, 2, 3, 3, 5, 4, 3, 3, 3, 1 };
@@ -79,6 +79,10 @@ void bhv_ctl_init()
     gMarioStates->faceAngle[1] = gLakituState.yaw + 0x8000;
     o->oFaceAngleYaw = gLakituState.yaw + 0x8000;
 
+#ifdef TEST_SET_HOLE
+    gCurrentHoleNum = TEST_SET_HOLE;
+    o->oAction = CTL_NEXT_HOLE;
+#endif
 }
 
 static struct Object* find_object_with_bparam2(const BehaviorScript *behavior, int bparam2)
@@ -309,11 +313,7 @@ static void handle_content(int x, int y, int pressedButtons)
         gAmountOfShots = 0;
         gHideHoleName = 0;
 
-#ifdef TEST_SET_HOLE
-        gCurrentHoleNum = TEST_SET_HOLE;
-#else
         gCurrentHoleNum++;
-#endif
         struct Object* init = find_init_object_with_bparam2(gCurrentHoleNum);
         if (init)
         {
