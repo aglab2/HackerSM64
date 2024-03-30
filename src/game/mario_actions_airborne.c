@@ -1473,7 +1473,7 @@ s32 act_lava_boost(struct MarioState *m) {
 #endif
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        m->forwardVel = approach_f32(m->forwardVel, 0.0f, 0.35f, 0.35f);
+        m->forwardVel = approach_f32(m->forwardVel, 0.0f, 1.f, 1.f);
     }
 
     update_lava_boost_or_twirling(m);
