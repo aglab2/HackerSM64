@@ -17,7 +17,7 @@ void fire_bar_spawn_flames(s16 yaw) {
     for (i = 0; i < amt; i++) {
         flameObj = spawn_object(o, MODEL_RED_FLAME, bhvLllRotatingHexFlame);
         flameObj->oLllRotatingHexFlameRelativePosX += xOffset;
-        flameObj->oLllRotatingHexFlameRelativePosY = 30.f + i * 50.f;
+        flameObj->oLllRotatingHexFlameRelativePosY = 15.f + i * 50.f;
         flameObj->oLllRotatingHexFlameRelativePosZ += zOffset;
         obj_scale(flameObj, 6.0f);
         xOffset += sins(yaw) * 150.0f;
