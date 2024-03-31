@@ -18,7 +18,7 @@ void dorrie_raise_head(void) {
 
 static float getY()
 {
-    const int LoopTime = 200;
+    const int LoopTime = 140;
     int time = gGlobalTimer % LoopTime;
     f32 val;
     if (time < LoopTime / 2)
@@ -81,7 +81,7 @@ void dorrie_act_move(void) {
 
     o->oAngleVelYaw = o->oMoveAngleYaw - startYaw;
     o->oPosX = o->oHomeX;
-    o->oPosY = o->oHomeY - 80.f;
+    o->oPosY = o->oHomeY - 60.f;
     o->oPosZ = o->oHomeZ + getY() * 3600.f;
 }
 

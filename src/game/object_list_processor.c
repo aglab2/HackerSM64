@@ -260,12 +260,36 @@ void spawn_particle(u32 activeParticleFlag, ModelID16 model, const BehaviorScrip
 /**
  * Mario's primary behavior update function.
  */
+extern int gCurrentHoleNum;
 void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
     particleFlags = execute_mario_action(gCurrentObject);
     gCurrentObject->oMarioParticleFlags = particleFlags;
+    if (9 == gCurrentHoleNum)
+    {
+        struct Surface* aFloor = NULL;
+#if 0
+        for (int i = 0; i < 10; i++)
+        {
+            f32 y = find_floor(gMarioStates->pos[0], gMarioStates->pos[1] + 170.f + i * 10, gMarioStates->pos[2], &aFloor);
+            print_text_fmt_int(180, 200 - i * 20, "%d", i);
+            print_text_fmt_int(200, 200 - i * 20, "D %d", (int) y);
+        }
+#endif
+        f32 y = find_floor(gMarioStates->pos[0], gMarioStates->pos[1] + 160.f, gMarioStates->pos[2], &aFloor);
+#if 0
+        print_text_fmt_int(20, 200, "D %d", (int) y);
+        print_text_fmt_int(20, 180, "C %d", (int) gMarioStates->pos[1]);
+#endif
+        if (aFloor && aFloor->object && aFloor->object->behavior == segmented_to_virtual(bhvDorrie)) {
+            gMarioState->floor = aFloor;
+            gMarioState->floorHeight = y;
+            gMarioStates->pos[1] = y;
+            // print_text_fmt_int(20, 160, "U %d", (int) y);
+        }
+    }
 
     // Mario code updates MarioState's versions of position etc, so we need
     // to sync it with the Mario object

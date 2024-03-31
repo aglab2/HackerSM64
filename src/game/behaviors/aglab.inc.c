@@ -4,7 +4,7 @@
 #define MAX_POWER 160
 #define MIN_POWER 20
 
-#define Y_PROBE_LENGTH 40.f
+#define Y_PROBE_LENGTH 50.f
 #define Y_PROBE_COUNT 12
 #define Y_PROBE_HEIGHT 200.f
 
@@ -13,6 +13,7 @@
 #define CTL_NEXT_HOLE 2
 #define CTL_WAIT_FOR_RESPAWN 3
 #define CTL_CREDITS 4
+#define CTL_HOLE_CLEAR 5
 
 #define TUT_INIT 0
 #define TUT_MOVE_CAMERA 1
@@ -23,7 +24,7 @@
 #define MAX_NO_SPEED_FRAMES 200
 
 // #define DEBUG_INFO
-#define TEST_SET_HOLE 8
+// #define TEST_SET_HOLE 7
 // #define TEST_CREDITS
 
 const int kParShots[] = { 0, 3, 2, 3, 3, 5, 4, 3, 3, 3, 1 };
@@ -159,6 +160,35 @@ static void handle_tutorial(int x, int y, int pressedButtons)
     }
 }
 
+#define FRAMES_PER_LETTER 2
+// this is not the same as other printFancy, this one uses deferred printing
+static void printFancy(int yoff, const char* str, int renderLimit)
+{
+    int len = 0;
+    while (str[len] != '\0')
+    {
+        len++;
+    }
+
+    int symbolLen = 11;
+    int x = 160 - len * symbolLen / 2;
+    for (int i = 0; i < len; i++)
+    {
+        if ((renderLimit -= FRAMES_PER_LETTER) < 0)
+            break;
+
+        int yoff2 = sins(gGlobalTimer * 0x400 + i * 0x700) * 5;
+
+        if (' ' == str[i])
+        {
+            continue;
+        }
+
+        char strProcessed[2] = { str[i], '\0' };
+        print_text_centered(x + i * symbolLen, 200 + yoff2 - (yoff ? 20 : 0), strProcessed);
+    }
+}
+
 extern struct Object* gSpoofedWarpRequester;
 static void handle_content(int x, int y, int pressedButtons)
 {
@@ -184,7 +214,7 @@ static void handle_content(int x, int y, int pressedButtons)
     if (gCurrentHoleNum <= 10)
     {
         print_text_fmt_int(20, 40, "PAR %d", kParShots[gCurrentHoleNum ? gCurrentHoleNum : 1]);
-        print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots);
+        print_text_fmt_int(20, 20, "SHOT %d", gAmountOfShots ?: 1);
     }
     
     if (gMarioStates->pos[1] > 5000.f)
@@ -194,13 +224,17 @@ static void handle_content(int x, int y, int pressedButtons)
 
     if (CTL_SHOOT == o->oAction)
     {
+        o->oPosX = gMarioStates->pos[0];
+        o->oPosY = gMarioStates->pos[1];
+        o->oPosZ = gMarioStates->pos[2];
+
         struct Object* hole = find_hole_object_with_bparam2(gCurrentHoleNum);
         if (hole)
         {
             if (gMarioStates->pos[1] < hole->oPosY && hole->oDistanceToMario < 100.f)
             {
                 play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
-                o->oAction = CTL_NEXT_HOLE;
+                o->oAction = CTL_HOLE_CLEAR;
                 return;
             }
         }
@@ -211,10 +245,7 @@ static void handle_content(int x, int y, int pressedButtons)
         }
 
         o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-        o->oPosX = gMarioStates->pos[0];
-        o->oPosY = gMarioStates->pos[1];
-        o->oPosZ = gMarioStates->pos[2];
-        
+
         gMarioStates->faceAngle[1] = gLakituState.yaw + 0x8000;
         o->oFaceAngleYaw = gLakituState.yaw + 0x8000;
 
@@ -277,11 +308,12 @@ static void handle_content(int x, int y, int pressedButtons)
         }
 
 #ifdef DEBUG_INFO
-        print_text_fmt_int(20, 100, "DIST %d", (int)distToHole);
+        print_text_fmt_int(20, 120, "DIST %d", (int)distToHole);
 #endif
 
         int veryFar = gCurrentHoleNum > 9 ? 0 : distToHole > 8100.f;
-        int freeroaming = o->oTimer > MAX_FREEROAM_FRAMES;
+        int maxFreeroam = gCurrentHoleNum == 9 ? 1200 : MAX_FREEROAM_FRAMES;
+        int freeroaming = o->oTimer > maxFreeroam;
         int nospdframes = o->oSubAction > MAX_NO_SPEED_FRAMES;
         if (gMarioStates->action == ACT_STOMACH_SLIDE_STOP
          || gMarioStates->action == ACT_IDLE
@@ -342,17 +374,85 @@ static void handle_content(int x, int y, int pressedButtons)
     }
     else if (CTL_WAIT_FOR_RESPAWN == o->oAction)
     {
-        if (o->oTimer > 25)
+        if (o->oTimer > 20)
         {
             o->oAction = CTL_SHOOT;
             s8DirModeYawOffset = 0x8000 + o->oFaceAngleYaw;
             gMarioStates->faceAngle[1] = o->oFaceAngleYaw;
+            gMarioStates->pos[1] = find_floor_height(gMarioStates->pos[0], gMarioStates->pos[1], gMarioStates->pos[2]);
         }
     }
     else if (CTL_CREDITS == o->oAction)
     {
         gRollCredits = 1;
         gCamera->cutscene = CUTSCENE_GG;
+    }
+    else if (CTL_HOLE_CLEAR == o->oAction)
+    {
+        {
+            const char* text;
+            if (1 == gAmountOfShots)
+            {
+                text = "HOLE IN ONE";
+            }
+            else
+            {
+                char line[30];
+                int diff = CLAMP(3 + kParShots[gCurrentHoleNum] - gAmountOfShots, 0, 6);
+                if (0 == diff)
+                {
+                    sprintf(line, "%d STROKES", gAmountOfShots);
+                    text = line;
+                }
+                else
+                {
+                    static const char* sTexts[] = {
+                        "",
+                        "DOUBLE BOGEY",
+                        "BOGEY",
+                        "PAR",
+                        "BIRDIE",
+                        "EAGLE",
+                        "ALBATROSS",
+                    };
+                    text = sTexts[diff];
+                }
+            }
+            printFancy(0, text, o->oTimer);
+        }
+        {
+            char line[30];
+            int rawDiff = gAmountOfShots - kParShots[gCurrentHoleNum];
+            if (rawDiff > 0)
+            {
+                sprintf(line, "%d OVER PAR", rawDiff);
+            }
+            else
+            {
+                sprintf(line, "%d UNDER PAR", -rawDiff);
+            }
+
+            if (rawDiff)
+                printFancy(1, line, o->oTimer);
+        }
+        if (o->oTimer >= 50)
+        {
+            int canWarp = TRUE;
+            {
+                f32 d;
+                struct Object* chuckyaAnchor = cur_obj_find_nearest_object_with_behavior(bhvChuckya, &d);
+                if (chuckyaAnchor)
+                {
+                    canWarp = 0 == chuckyaAnchor->oCommonAnchorAction;
+                }
+            }
+
+            if (canWarp)
+            {
+                play_sound(SOUND_MENU_ENTER_HOLE, gMarioStates->marioObj->header.gfx.cameraToObject);
+                o->oAction = CTL_NEXT_HOLE;
+            }
+        }
     }
 }
 
