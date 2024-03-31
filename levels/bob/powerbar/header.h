@@ -1,9 +1,14 @@
 extern Lights1 powerbar_f3dlite_material_001_lights;
+extern Lights1 powerbar_f3dlite_material_006_lights;
 extern u8 powerbar_colorbars_ci8[];
 extern u8 powerbar_colorbars_pal_rgba16[];
 extern Vtx powerbar_Plane_mesh_vtx_cull[8];
 extern Vtx powerbar_Plane_mesh_vtx_0[4];
 extern Gfx powerbar_Plane_mesh_tri_0[];
+extern Vtx powerbar_Plane_mesh_vtx_1[4];
+extern Gfx powerbar_Plane_mesh_tri_1[];
 extern Gfx mat_powerbar_f3dlite_material_001[];
 extern Gfx mat_revert_powerbar_f3dlite_material_001[];
+extern Gfx mat_powerbar_f3dlite_material_006[];
+extern Gfx mat_revert_powerbar_f3dlite_material_006[];
 extern Gfx powerbar_Plane_mesh[];

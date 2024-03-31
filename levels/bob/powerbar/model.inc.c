@@ -1,4 +1,5 @@
 
+
 Gfx powerbar_colorbars_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 powerbar_colorbars_ci8[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -274,14 +275,14 @@ u8 powerbar_colorbars_pal_rgba16[] = {
 };
 
 Vtx powerbar_Plane_mesh_vtx_cull[8] = {
-	{{ {-300, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {-300, 164, 23205}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {-300, 164, 23205}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {-300, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {300, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {300, 164, 23205}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {300, 164, 23205}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {300, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {-1269, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {-1269, 164, 25184}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {-1269, 164, 25184}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {-1269, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {1269, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {1269, 164, 25184}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {1269, 164, 25184}, 0, {0, 0}, {0, 0, 0, 0} }},
+	{{ {1269, 164, 4005}, 0, {0, 0}, {0, 0, 0, 0} }},
 };
 
 Vtx powerbar_Plane_mesh_vtx_0[4] = {
@@ -297,10 +298,22 @@ Gfx powerbar_Plane_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx powerbar_Plane_mesh_vtx_1[4] = {
+	{{ {0, 164, 25184}, 0, {112, 4080}, {0, 127, 0, 255} }},
+	{{ {1269, 164, 22889}, 0, {240, -16}, {0, 127, 0, 255} }},
+	{{ {0, 164, 23524}, 0, {112, -16}, {0, 127, 0, 255} }},
+	{{ {-1269, 164, 22889}, 0, {-16, 4080}, {0, 127, 0, 255} }},
+};
+
+Gfx powerbar_Plane_mesh_tri_1[] = {
+	gsSPVertex(powerbar_Plane_mesh_vtx_1 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_powerbar_f3dlite_material_001[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, SHADE, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, SHADE, 0, ENVIRONMENT, 0),
-	gsSPGeometryMode(G_CULL_BACK, 0),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsSPTexture(65535, 65535, 0, 0, 1),
     gsSPLightColor(LIGHT_1, 0xffffffff),
@@ -318,7 +331,30 @@ Gfx mat_powerbar_f3dlite_material_001[] = {
 
 Gfx mat_revert_powerbar_f3dlite_material_001[] = {
 	gsDPPipeSync(),
-	gsSPGeometryMode(0, G_CULL_BACK),
+	gsDPSetTextureLUT(G_TT_NONE),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_powerbar_f3dlite_material_006[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetTextureLUT(G_TT_RGBA16),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, powerbar_colorbars_pal_rgba16),
+	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadTLUTCmd(5, 32),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 1, powerbar_colorbars_ci8),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 1023, 2048),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 8, 0, G_TX_WRAP | G_TX_NOMIRROR, 3, 0),
+	gsDPSetTileSize(0, 0, 0, 28, 1020),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_powerbar_f3dlite_material_006[] = {
+	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -331,6 +367,9 @@ Gfx powerbar_Plane_mesh[] = {
 	gsSPDisplayList(mat_powerbar_f3dlite_material_001),
 	gsSPDisplayList(powerbar_Plane_mesh_tri_0),
 	gsSPDisplayList(mat_revert_powerbar_f3dlite_material_001),
+	gsSPDisplayList(mat_powerbar_f3dlite_material_006),
+	gsSPDisplayList(powerbar_Plane_mesh_tri_1),
+	gsSPDisplayList(mat_revert_powerbar_f3dlite_material_006),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),

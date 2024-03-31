@@ -6,7 +6,7 @@
 
 #define Y_PROBE_LENGTH 50.f
 #define Y_PROBE_COUNT 12
-#define Y_PROBE_HEIGHT 200.f
+#define Y_PROBE_HEIGHT 250.f
 
 #define CTL_SHOOT 0
 #define CTL_WAIT_FOR_SHOOTING 1
@@ -62,14 +62,28 @@ void bhv_start_loop()
 }
 
 extern Vtx powerbar_Plane_mesh_vtx_0[4];
+extern Vtx powerbar_Plane_mesh_vtx_1[4];
 static void applyPowerToVisuals()
 {
-    Vtx* vtx = segmented_to_virtual(powerbar_Plane_mesh_vtx_0);
-    vtx[0].v.ob[2] = 4005 + (23205 - 4005) * gPower / MAX_POWER;
-    vtx[3].v.ob[2] = 4005 + (23205 - 4005) * gPower / MAX_POWER;
-    
-    vtx[0].v.tc[1] = 8176 + (-16 - 8176) * gPower / MAX_POWER;
-    vtx[3].v.tc[1] = 8176 + (-16 - 8176) * gPower / MAX_POWER;
+    // change positions and UVs scaled by gPower
+    {
+        Vtx* vtx = segmented_to_virtual(powerbar_Plane_mesh_vtx_0);
+        vtx[0].v.ob[2] = 4005 + (23205 - 4005) * gPower / MAX_POWER;
+        vtx[3].v.ob[2] = 4005 + (23205 - 4005) * gPower / MAX_POWER;
+        
+        vtx[0].v.tc[1] = 8176 + (-16 - 8176) * gPower / MAX_POWER;
+        vtx[3].v.tc[1] = 8176 + (-16 - 8176) * gPower / MAX_POWER;
+    }
+    {
+        Vtx* vtx = segmented_to_virtual(powerbar_Plane_mesh_vtx_1);
+        vtx[0].v.ob[2] = 3184 + (4005 + (23205 - 4005) * gPower / MAX_POWER);
+        vtx[1].v.ob[2] = 889 + (4005 + (23205 - 4005) * gPower / MAX_POWER);
+        vtx[2].v.ob[2] = 1524 + (4005 + (23205 - 4005) * gPower / MAX_POWER);
+        vtx[3].v.ob[2] = 889 + (4005 + (23205 - 4005) * gPower / MAX_POWER);
+
+        for (int i = 0; i < 4; i++)
+            vtx[i].v.tc[1] = 8176 + 40 + (-16 - 8176) * gPower / MAX_POWER;
+    }
 }
 
 extern struct LakituState gLakituState;
@@ -264,7 +278,7 @@ static void handle_content(int x, int y, int pressedButtons)
             spark->oPosZ = o->oPosZ + (1 + i) * Y_PROBE_LENGTH * coss(o->oFaceAngleYaw);
 #endif
 
-            y += 10.f;
+            y += (gCurrentHoleNum == 3 ? 30.f : 10.f);
             if (y > baseY)
             {
                 baseY = y;
