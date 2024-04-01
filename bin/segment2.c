@@ -337,7 +337,7 @@ ALIGNED8 static const Texture texture_hud_char_double_quote[] = {
 #include "textures/segment2/segment2.04A00.rgba16.inc.c"
 };
 
-#if defined(VERSION_EU) || defined(COMPLETE_EN_US_SEGMENT2)
+#if defined(VERSION_EU)
 ALIGNED8 static const Texture texture_hud_char_umlaut[] = {
 #include "textures/segment2/segment2.umlaut.rgba16.inc.c"// EU ¨
 };
@@ -347,7 +347,7 @@ ALIGNED8 static const Texture texture_hud_char_umlaut[] = {
 };
 #endif
 
-#if defined(VERSION_JP) || defined(VERSION_SH) || defined(COMPLETE_EN_US_SEGMENT2)
+#if defined(VERSION_JP) || defined(VERSION_SH)
 ALIGNED8 static const Texture texture_hud_char_exclamation[] = {
 #include "textures/segment2/segment2.04C00.rgba16.inc.c"// JP !
 };
@@ -418,7 +418,7 @@ ALIGNED8 static const Texture texture_hud_char_star[] = {
 #include "textures/segment2/segment2.05C00.rgba16.inc.c"
 };
 
-#if defined(VERSION_JP) || defined(VERSION_SH) || defined(COMPLETE_EN_US_SEGMENT2)
+#if defined(VERSION_JP) || defined(VERSION_SH)
 ALIGNED8 static const Texture texture_hud_char_decimal_point[] = {
 #include "textures/segment2/segment2.05E00.rgba16.inc.c"
 };
