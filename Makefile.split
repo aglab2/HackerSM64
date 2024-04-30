@@ -281,12 +281,12 @@ CRASH_TEXTURE_C_FILES       := $(addprefix $(BUILD_DIR)/,$(patsubst %.png,%.inc.
 # Vanilla Objects Rules
 # --------------------------------------
 
-VANILLA_BOB_TEXTURES := $(wildcard actors_vanilla/bob/*.png)
-
-$(BUILD_DIR)/actors_vanilla/bob/data.o: $(KOOPA_LOG_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)
-
-$(BUILD_DIR)/actors_vanilla/bob/data.elf:  SEGMENT_ADDRESS := 0x0e000000
-
-VANILLA_ACTORS_bob_SEG7_FILES := $(patsubst %.png,%.inc.c,$(wildcard actors_vanilla/bob/*.png))
-$(BUILD_DIR)/actors_vanilla/bob/data.o: $(addprefix $(BUILD_DIR)/,$(VANILLA_ACTORS_bob_SEG7_FILES))
+VANILLA_ACTORS_bob_TEXTURE_FILES := $(patsubst %.png,%.inc.c,$(wildcard actors_vanilla/bob/*.png))
+$(BUILD_DIR)/actors_vanilla/bob/data.o: $(addprefix $(BUILD_DIR)/,$(VANILLA_ACTORS_bob_TEXTURE_FILES))
+$(BUILD_DIR)/actors_vanilla/bob/data.elf: SEGMENT_ADDRESS := 0x0e000000
 $(BUILD_DIR)/actors_vanilla/bob/data.elf: TEXTURE_BIN := generic
+
+VANILLA_ACTORS_wf_TEXTURE_FILES := $(patsubst %.png,%.inc.c,$(wildcard actors_vanilla/wf/*.png))
+$(BUILD_DIR)/actors_vanilla/wf/data.o: $(addprefix $(BUILD_DIR)/,$(VANILLA_ACTORS_wf_TEXTURE_FILES))
+$(BUILD_DIR)/actors_vanilla/wf/data.elf: SEGMENT_ADDRESS := 0x0e000000
+$(BUILD_DIR)/actors_vanilla/wf/data.elf: TEXTURE_BIN := grass

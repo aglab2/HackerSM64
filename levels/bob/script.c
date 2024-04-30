@@ -71,7 +71,7 @@ const LevelScript level_bob_entry[] = {
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_4),
     JUMP_LINK(script_func_global_15),
-    JUMP_LINK(vo_script_func_bob),
+    JUMP_LINK(script_func_vo_bob),
     LOAD_MODEL_FROM_GEO(MODEL_BOB_BUBBLY_TREE,      bubbly_tree_geo),
 
     AREA(/*index*/ 1, bob_geo_000488),

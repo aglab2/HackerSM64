@@ -362,6 +362,7 @@ SECTIONS
    STANDARD_OBJECTS(common1, 0x03000000, 0x16000000)
 
    VANILLA_OBJECTS(bob, 0x0E000000, 0x1B000000)
+   VANILLA_OBJECTS(wf, 0x0E000000, 0x1B000000)
 
    /* use segmented addressing for behaviors */
    BEGIN_SEG(behavior, 0x13000000)
