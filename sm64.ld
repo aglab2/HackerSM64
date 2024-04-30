@@ -90,6 +90,28 @@ OUTPUT_ARCH (mips)
    _##name##_mio0SegmentRomStart = _##name##_yay0SegmentRomStart; \
    _##name##_mio0SegmentRomEnd = _##name##_yay0SegmentRomEnd;
 
+#define VANILLA_OBJECTS(name, segAddr, geoAddr) \
+   BEGIN_SEG(vo_##name##_yay0, segAddr) \
+   { \
+      KEEP(BUILD_DIR/actors_vanilla/name/data.szp.o(.data*)); \
+      . = ALIGN(0x10); \
+   } \
+   END_SEG(vo_##name##_yay0) \
+   BEGIN_SEG(vo_##name##_geo, geoAddr) \
+   { \
+      KEEP(BUILD_DIR/actors_vanilla/name/geo.o(.*data*)); \
+      KEEP(BUILD_DIR/actors_vanilla/name/geo.o(.rodata*)); \
+      KEEP(BUILD_DIR/actors_vanilla/name/geo.o(.text*)); \
+   } \
+   END_SEG(vo_##name##_geo) \
+   BEGIN_NOLOAD(vo_##name##_geo) \
+   { \
+      KEEP(BUILD_DIR/actors_vanilla/name/geo.o(.bss*)); \
+   } \
+   END_NOLOAD(vo_##name##_geo) \
+   _vo_##name##_mio0SegmentRomStart = _vo_##name##_yay0SegmentRomStart; \
+   _vo_##name##_mio0SegmentRomEnd = _vo_##name##_yay0SegmentRomEnd;
+
 SECTIONS
 {
    __romPos = 0;
@@ -338,6 +360,8 @@ SECTIONS
    /* load the common actor groups */
    STANDARD_OBJECTS(common0, 0x08000000, 0x0F000000)
    STANDARD_OBJECTS(common1, 0x03000000, 0x16000000)
+
+   VANILLA_OBJECTS(bob, 0x0E000000, 0x1B000000)
 
    /* use segmented addressing for behaviors */
    BEGIN_SEG(behavior, 0x13000000)

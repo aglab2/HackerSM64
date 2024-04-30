@@ -11,6 +11,8 @@
 
 #include "make_const_nonconst.h"
 
-#include "levels/bob/header.h"
+#include "actors_vanilla/bob/header.h"
 
-#include "levels/bob/areas/1/geo.inc.c"
+#include "actors_vanilla/bob/chain_chomp_gate/geo.inc.c"
+#include "actors_vanilla/bob/seesaw_platform/geo.inc.c"
+#include "actors_vanilla/bob/grate_door/geo.inc.c"

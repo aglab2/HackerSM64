@@ -8,6 +8,7 @@
 
 #include "segment_symbols.h"
 
+#include "actors_vanilla/bob/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
@@ -352,4 +353,10 @@ const LevelScript script_func_global_18[] = {
     LOAD_MODEL_FROM_GEO(MODEL_DORRIE,                  dorrie_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
     RETURN(),
+};
+
+const LevelScript vo_script_func_bob[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_CHAIN_CHOMP_GATE, bob_geo_000440),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM,  bob_geo_000458),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS,      bob_geo_000470),
 };

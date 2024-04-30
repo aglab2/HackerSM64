@@ -16,6 +16,12 @@
     DECLARE_SEGMENT(name##_geo) \
     DECLARE_NOLOAD(name##_geo)
 
+#define DECLARE_VANILLA_ACTOR_SEGMENT(name) \
+    DECLARE_SEGMENT(vo_##name##_mio0) \
+    DECLARE_SEGMENT(vo_##name##_yay0) \
+    DECLARE_SEGMENT(vo_##name##_geo) \
+    DECLARE_NOLOAD(vo_##name##_geo)
+
 #define DECLARE_LEVEL_SEGMENT(name) \
     DECLARE_SEGMENT(name) \
     DECLARE_NOLOAD(name) \
@@ -41,6 +47,8 @@ DECLARE_ACTOR_SEGMENT(group14)
 DECLARE_ACTOR_SEGMENT(group15)
 DECLARE_ACTOR_SEGMENT(group16)
 DECLARE_ACTOR_SEGMENT(group17)
+
+DECLARE_VANILLA_ACTOR_SEGMENT(bob)
 
 DECLARE_SEGMENT(entry)
 DECLARE_SEGMENT(engine)
