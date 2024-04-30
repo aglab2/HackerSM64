@@ -25,3 +25,5 @@
 #include "actors_vanilla/wf/breakable_wall_left/geo.inc.c"
 #include "actors_vanilla/wf/kickable_board/geo.inc.c"
 #include "actors_vanilla/wf/tower_door/geo.inc.c"
+#include "actors_vanilla/wf/giant_pole/geo.inc.c"
+#include "actors_vanilla/wf/rotating_platform/geo.inc.c"

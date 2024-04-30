@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include "actors_vanilla/bob/header.h"
+#include "actors_vanilla/wf/header.h"
 #include "actors/common1.h"
 #include "actors/group12.h"
 #include "actors/group13.h"

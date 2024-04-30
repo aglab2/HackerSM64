@@ -24,8 +24,6 @@
 #include "levels/wf/areas/1/13/geo.inc.c"
 #include "levels/wf/areas/1/15/geo.inc.c"
 #include "levels/wf/areas/1/16/geo.inc.c"
-#include "levels/wf/areas/1/17/geo.inc.c"
 #include "levels/wf/areas/1/18/geo.inc.c"
 #include "levels/wf/areas/1/19/geo.inc.c"
-#include "levels/wf/areas/1/14/geo.inc.c"
 #include "levels/wf/areas/1/geo.inc.c"
