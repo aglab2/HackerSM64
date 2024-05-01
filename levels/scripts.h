@@ -29,5 +29,6 @@ extern const LevelScript script_func_vo_bob[];
 extern const LevelScript script_func_vo_wf[];
 extern const LevelScript script_func_vo_jrb[];
 extern const LevelScript script_func_vo_ccm[];
+extern const LevelScript script_func_vo_bbh[];
 
 #endif

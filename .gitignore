@@ -528,12 +528,13 @@ assets/demos/pss.bin
 assets/demos/unused.bin
 assets/demos/wf.bin
 levels/bbh/0.rgba16.png
+actors_vanilla/bbh/0.rgba16.png
 levels/bbh/1.rgba16.png
 levels/bbh/2.rgba16.png
 levels/bbh/3.rgba16.png
-levels/bbh/4.rgba16.png
-levels/bbh/5.rgba16.png
-levels/bbh/6.rgba16.png
+actors_vanilla/bbh/4.rgba16.png
+actors_vanilla/bbh/5.rgba16.png
+actors_vanilla/bbh/6.rgba16.png
 levels/bitdw/0.rgba16.png
 levels/bitdw/1.rgba16.png
 levels/bitdw/2.rgba16.png

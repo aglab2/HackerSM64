@@ -16,6 +16,7 @@
 #include "actors_vanilla/bob/header.h"
 #include "actors_vanilla/jrb/header.h"
 #include "actors_vanilla/wf/header.h"
+#include "actors_vanilla/bbh/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
