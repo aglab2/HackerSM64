@@ -291,3 +291,4 @@ endef
 $(eval $(call vanilla_objects_rules,bob,generic))
 $(eval $(call vanilla_objects_rules,wf,grass))
 $(eval $(call vanilla_objects_rules,jrb,water))
+$(eval $(call vanilla_objects_rules,ccm,snow))
