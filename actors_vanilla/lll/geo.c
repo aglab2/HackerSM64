@@ -1,0 +1,30 @@
+#include <ultra64.h>
+#include "sm64.h"
+#include "geo_commands.h"
+
+#include "game/level_geo.h"
+#include "game/geo_misc.h"
+#include "game/camera.h"
+#include "game/moving_texture.h"
+#include "game/screen_transition.h"
+#include "game/paintings.h"
+
+#include "make_const_nonconst.h"
+
+#include "actors_vanilla/lll/header.h"
+
+#include "actors_vanilla/lll/moving_octagonal_mesh_platform/geo.inc.c"
+#include "actors_vanilla/lll/drawbridge_part/geo.inc.c"
+#include "actors_vanilla/lll/rotating_block_fire_bars/geo.inc.c"
+#include "actors_vanilla/lll/wooden_float_small/geo.inc.c"
+#include "actors_vanilla/lll/wooden_float_large/geo.inc.c"
+#include "actors_vanilla/lll/collapsing_wooden_platform/geo.inc.c"
+#include "actors_vanilla/lll/long_wooden_bridge/geo.inc.c"
+#include "actors_vanilla/lll/rotating_hexagonal_ring/geo.inc.c"
+#include "actors_vanilla/lll/sinking_rectangular_platform/geo.inc.c"
+#include "actors_vanilla/lll/sinking_square_platform/geo.inc.c"
+#include "actors_vanilla/lll/tilting_square_platform/geo.inc.c"
+#include "actors_vanilla/lll/puzzle_piece/geo.inc.c"
+#include "actors_vanilla/lll/sinking_rock_block/geo.inc.c"
+#include "actors_vanilla/lll/rolling_log/geo.inc.c"
+#include "actors_vanilla/lll/volcano_falling_trap/geo.inc.c"
