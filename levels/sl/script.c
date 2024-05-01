@@ -44,23 +44,10 @@ static const LevelScript script_func_local_4[] = {
 
 const LevelScript level_sl_entry[] = {
     INIT_LEVEL(),
-    LOAD_YAY0(        /*seg*/ 0x07, _sl_segment_7SegmentRomStart, _sl_segment_7SegmentRomEnd),
-    LOAD_VANILLA_OBJECTS(sl, snow),
-    LOAD_YAY0(        /*seg*/ 0x0B, _effect_yay0SegmentRomStart, _effect_yay0SegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x0A, _ccm_skybox_yay0SegmentRomStart, _ccm_skybox_yay0SegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x05, _group7_yay0SegmentRomStart, _group7_yay0SegmentRomEnd),
-    LOAD_RAW(         /*seg*/ 0x0C, _group7_geoSegmentRomStart,  _group7_geoSegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x06, _group16_yay0SegmentRomStart, _group16_yay0SegmentRomEnd),
-    LOAD_RAW(         /*seg*/ 0x0D, _group16_geoSegmentRomStart,  _group16_geoSegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd),
-    LOAD_RAW(         /*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
+#include "levels/sl/areas/script_vanilla_load.inc.c"
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
-    JUMP_LINK(script_func_global_1),
-    JUMP_LINK(script_func_global_8),
-    JUMP_LINK(script_func_global_17),
-    JUMP_LINK(script_func_vo_sl),
-    LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TREE,          snow_tree_geo),
+#include "levels/sl/areas/script_vanilla.inc.c"
 
     AREA(/*index*/ 1, sl_geo_0003A8),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/  5541, 2024,   443, /*angle*/ 0, 270, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvSpinAirborneWarp),
