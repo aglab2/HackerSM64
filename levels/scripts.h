@@ -40,5 +40,6 @@ extern const LevelScript script_func_vo_ttm[];
 extern const LevelScript script_func_vo_thi[];
 extern const LevelScript script_func_vo_ttc[];
 extern const LevelScript script_func_vo_rr[];
+extern const LevelScript script_func_vo_bitdw[];
 
 #endif
