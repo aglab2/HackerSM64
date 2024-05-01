@@ -17,8 +17,6 @@ extern const Gfx castle_grounds_seg7_dl_0700B1D0[];
 extern const Gfx castle_grounds_seg7_dl_0700BA20[];
 extern const Gfx castle_grounds_seg7_dl_0700C210[];
 extern const Gfx castle_grounds_seg7_dl_0700C430[];
-extern const Gfx castle_grounds_seg7_dl_0700EA58[];
-extern const Gfx castle_grounds_seg7_us_dl_0700F2E8[];
 extern const Collision castle_grounds_seg7_collision_level[];
 extern const MacroObject castle_grounds_seg7_macro_objs[];
 extern const Collision castle_grounds_seg7_collision_moat_grills[];

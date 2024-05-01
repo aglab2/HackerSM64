@@ -18,6 +18,8 @@
 #include "actors_vanilla/castle_inside/clock_minute_hand/model.inc.c"
 #include "actors_vanilla/castle_inside/clock_hour_hand/model.inc.c"
 #include "actors_vanilla/castle_inside/water_level_pillar/model.inc.c"
+#include "actors_vanilla/castle_inside/wing_cap_light/model.inc.c"
 #include "actors_vanilla/castle_inside/trap_door/collision.inc.c"
 #include "actors_vanilla/castle_inside/star_door/collision.inc.c"
 #include "actors_vanilla/castle_inside/water_level_pillar/collision.inc.c"
+#include "actors_vanilla/castle_inside/ddd_warp/collision.inc.c"

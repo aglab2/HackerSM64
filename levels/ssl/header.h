@@ -28,8 +28,6 @@ extern const Gfx ssl_seg7_dl_0700BC18[];
 extern const Gfx ssl_seg7_dl_0700BD00[];
 extern const Collision ssl_seg7_area_1_collision[];
 extern const MacroObject ssl_seg7_area_1_macro_objs[];
-extern const Collision ssl_seg7_collision_pyramid_top[];
-extern const Collision ssl_seg7_collision_tox_box[];
 extern const struct MovtexQuadCollection ssl_movtex_puddle_water[];
 extern const struct MovtexQuadCollection ssl_movtex_toxbox_quicksand_mist[];
 extern const Gfx ssl_dl_quicksand_begin[];

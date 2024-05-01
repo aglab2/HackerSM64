@@ -12,3 +12,7 @@ ALIGNED8 static const Texture inside_castle_seg7_texture_07004800[] = {
 ALIGNED8 static const Texture inside_castle_seg7_texture_07005800[] = {
 #include "actors_vanilla/castle_inside/7.rgba16.inc.c"
 };
+
+ALIGNED8 static const Texture texture_castle_light[] = {
+#include "actors_vanilla/castle_inside/castle_light.ia16.inc.c"
+};

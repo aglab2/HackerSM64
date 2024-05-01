@@ -36,7 +36,10 @@ extern const Gfx inside_castle_seg7_dl_070512F8[];
 extern const Gfx inside_castle_seg7_dl_07058950[];
 extern const Gfx inside_castle_seg7_dl_07059190[];
 extern const Gfx inside_castle_seg7_dl_07068B10[];
+extern const Gfx dl_castle_lobby_wing_cap_light[];
 
 extern const Collision inside_castle_seg7_collision_floor_trap[];
 extern const Collision inside_castle_seg7_collision_star_door[];
 extern const Collision inside_castle_seg7_collision_water_level_pillar[];
+extern const Collision inside_castle_seg7_collision_ddd_warp[];
+extern const Collision inside_castle_seg7_collision_ddd_warp_2[];

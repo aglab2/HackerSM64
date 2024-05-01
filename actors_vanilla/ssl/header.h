@@ -27,3 +27,5 @@ extern const Collision ssl_seg7_collision_07028274[];
 extern const Collision ssl_seg7_collision_070282F8[];
 extern const Collision ssl_seg7_collision_07028370[];
 extern const Collision ssl_seg7_collision_070284B0[];
+extern const Collision ssl_seg7_collision_pyramid_top[];
+extern const Collision ssl_seg7_collision_tox_box[];

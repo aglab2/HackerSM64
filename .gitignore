@@ -564,9 +564,9 @@ levels/bowser_3/2.rgba16.png
 levels/castle_grounds/0.rgba16.png
 levels/castle_grounds/1.rgba16.png
 levels/castle_grounds/2.rgba16.png
-levels/castle_grounds/3.rgba16.png
-levels/castle_grounds/4.rgba16.png
-levels/castle_grounds/5.ia8.png
+actors_vanilla/castle_grounds/3.rgba16.png
+actors_vanilla/castle_grounds/4.rgba16.png
+actors_vanilla/castle_grounds/5.ia8.png
 levels/castle_inside/1.rgba16.png
 levels/castle_inside/10.rgba16.png
 levels/castle_inside/11.rgba16.png
@@ -609,6 +609,7 @@ actors_vanilla/castle_inside/6.rgba16.png
 actors_vanilla/castle_inside/7.rgba16.png
 levels/castle_inside/8.rgba16.png
 levels/castle_inside/9.rgba16.png
+actors_vanilla/castle_inside/castle_light.ia16.png
 levels/castle_inside/castle_light.ia16.png
 levels/ccm/0.rgba16.png
 levels/ccm/1.rgba16.png

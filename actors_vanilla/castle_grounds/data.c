@@ -13,6 +13,10 @@
 #include "actors_vanilla/castle_grounds/7/model.inc.c"
 #include "actors_vanilla/castle_grounds/8/model.inc.c"
 #include "actors_vanilla/castle_grounds/11/model.inc.c"
+#include "actors_vanilla/castle_grounds/12/model.inc.c"
+#ifndef VERSION_JP
+#include "actors_vanilla/castle_grounds/13/model.inc.c"
+#endif
 #include "actors_vanilla/castle_grounds/11/anim.inc.c"
 #include "actors_vanilla/castle_grounds/7/collision.inc.c"
 #include "actors_vanilla/castle_grounds/8/collision.inc.c"

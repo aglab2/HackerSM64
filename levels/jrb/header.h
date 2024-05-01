@@ -18,8 +18,6 @@ extern const Gfx jrb_seg7_dl_07007570[];
 extern const Gfx jrb_seg7_dl_07007718[];
 extern const Collision jrb_seg7_area_1_collision[];
 extern const MacroObject jrb_seg7_area_1_macro_objs[];
-extern const Trajectory jrb_seg7_trajectory_unagi_1[];
-extern const Trajectory jrb_seg7_trajectory_unagi_2[];
 extern const struct MovtexQuadCollection jrb_movtex_water[];
 extern const struct MovtexQuadCollection jrb_movtex_initial_mist[];
 extern const Gfx jrb_seg7_dl_0700EF00[];
