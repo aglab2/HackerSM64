@@ -13,4 +13,4 @@
 
 #include "levels/hmc/header.h"
 
-#include "levels/hmc/areas/1/geo.inc.c"
+#include "levels/hmc/geo.inc.c"
