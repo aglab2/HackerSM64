@@ -13,4 +13,4 @@
 
 #include "levels/ttc/header.h"
 
-#include "levels/ttc/areas/1/geo.inc.c"
+#include "levels/ttc/geo.inc.c"
