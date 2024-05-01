@@ -14,6 +14,7 @@
 #include "engine/surface_load.h"
 
 #include "actors_vanilla/bob/header.h"
+#include "actors_vanilla/jrb/header.h"
 #include "actors_vanilla/wf/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"

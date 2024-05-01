@@ -27,5 +27,6 @@ extern const LevelScript script_func_global_18[];
 
 extern const LevelScript script_func_vo_bob[];
 extern const LevelScript script_func_vo_wf[];
+extern const LevelScript script_func_vo_jrb[];
 
 #endif
