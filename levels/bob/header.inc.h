@@ -1,5 +1,3 @@
-#define VANILLA
-
 // geo
 extern const GeoLayout bob_geo_000488[];
 

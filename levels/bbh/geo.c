@@ -13,4 +13,4 @@
 
 #include "levels/bbh/header.h"
 
-#include "levels/bbh/areas/1/geo.inc.c"
+#include "levels/bbh/geo.inc.c"
