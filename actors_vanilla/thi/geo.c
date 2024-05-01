@@ -11,9 +11,6 @@
 
 #include "make_const_nonconst.h"
 
-#include "levels/thi/header.h"
+#include "actors_vanilla/thi/header.h"
 
-#include "levels/thi/areas/1/7/geo.inc.c"
-#include "levels/thi/areas/1/geo.inc.c"
-#include "levels/thi/areas/2/geo.inc.c"
-#include "levels/thi/areas/3/geo.inc.c"
+#include "actors_vanilla/thi/thi_tops/geo.inc.c"

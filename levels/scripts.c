@@ -20,6 +20,7 @@
 #include "actors_vanilla/sl/header.h"
 #include "actors_vanilla/wdw/header.h"
 #include "actors_vanilla/ttm/header.h"
+#include "actors_vanilla/thi/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
@@ -515,5 +516,11 @@ const LevelScript script_func_vo_ttm[] = {
     LOAD_MODEL_FROM_GEO(MODEL_TTM_YELLOW_SMILEY,     ttm_geo_000D4C),
     LOAD_MODEL_FROM_GEO(MODEL_TTM_STAR_SMILEY,       ttm_geo_000D84),
     LOAD_MODEL_FROM_GEO(MODEL_TTM_MOON_SMILEY,       ttm_geo_000DBC),
+    RETURN(),
+};
+
+const LevelScript script_func_vo_thi[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_THI_HUGE_ISLAND_TOP, thi_geo_0005B0),
+    LOAD_MODEL_FROM_GEO(MODEL_THI_TINY_ISLAND_TOP, thi_geo_0005C8),
     RETURN(),
 };
