@@ -27,6 +27,8 @@
 #include "actors_vanilla/wf/tower_door/geo.inc.c"
 #include "actors_vanilla/wf/giant_pole/geo.inc.c"
 #include "actors_vanilla/wf/rotating_platform/geo.inc.c"
+#include "actors_vanilla/wf/10/geo.inc.c"
+#include "actors_vanilla/wf/11/geo.inc.c"
 
 #include "level_commands.h"
 
@@ -48,5 +50,7 @@ const LevelScript script_func_vo_wf[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WF_KICKABLE_BOARD_FELLED,         wf_geo_000BC8),
     LOAD_MODEL_FROM_GEO(MODEL_WF_GIANT_POLE,                    wf_geo_000AE0),
     LOAD_MODEL_FROM_GEO(MODEL_WF_ROTATING_PLATFORM,             wf_geo_0009B8),
+    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_08,                wf_geo_0008A8),
+    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_09,                wf_geo_0008E8),
     RETURN(),
 };

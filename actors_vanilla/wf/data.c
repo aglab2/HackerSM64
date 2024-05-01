@@ -28,6 +28,9 @@
 #include "actors_vanilla/wf/breakable_wall_left/model.inc.c"
 #include "actors_vanilla/wf/giant_pole/model.inc.c"
 #include "actors_vanilla/wf/rotating_platform/model.inc.c"
+#include "actors_vanilla/wf/10/1.inc.c"
+#include "actors_vanilla/wf/10/2.inc.c"
+#include "actors_vanilla/wf/11/model.inc.c"
 
 #include "actors_vanilla/wf/kickable_board/1.inc.c"
 #include "actors_vanilla/wf/kickable_board/2.inc.c"
@@ -44,3 +47,5 @@
 #include "actors_vanilla/wf/kickable_board/collision.inc.c"
 #include "actors_vanilla/wf/tower_door/collision.inc.c"
 #include "actors_vanilla/wf/rotating_platform/collision.inc.c"
+#include "actors_vanilla/wf/10/collision.inc.c"
+#include "actors_vanilla/wf/11/collision.inc.c"

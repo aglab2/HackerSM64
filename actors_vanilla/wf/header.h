@@ -20,6 +20,9 @@ extern const Gfx wf_seg7_dl_0700E0F0[];
 extern const Gfx wf_seg7_dl_0700E3D0[];
 extern const Gfx wf_seg7_dl_0700E760[];
 extern const Gfx wf_seg7_dl_0700BF50[];
+extern const Gfx wf_seg7_dl_07008FE8[];
+extern const Gfx wf_seg7_dl_07009278[];
+extern const Gfx wf_seg7_dl_070087B0[];
 
 extern const GeoLayout wf_geo_000A00[];
 extern const GeoLayout wf_geo_000A40[];
