@@ -626,11 +626,12 @@ levels/cotmc/1.rgba16.png
 levels/cotmc/2.rgba16.png
 levels/cotmc/3.rgba16.png
 levels/cotmc/4.rgba16.png
-levels/ddd/0.rgba16.png
+actors_vanilla/ddd/0.rgba16.png
 levels/ddd/1.rgba16.png
 levels/ddd/2.rgba16.png
+actors_vanilla/ddd/2.rgba16.png
 levels/ddd/3.rgba16.png
-levels/ddd/4.rgba16.png
+actors_vanilla/ddd/4.rgba16.png
 levels/ending/cake.png
 levels/ending/cake_eu.png
 levels/ending/eu_023000.rgba16.png
@@ -930,7 +931,7 @@ levels/rr/2.rgba16.png
 levels/rr/quarter_flying_carpet.rgba16.png
 levels/sl/0.rgba16.png
 levels/sl/1.rgba16.png
-levels/sl/2.rgba16.png
+actors_vanilla/sl/2.rgba16.png
 levels/sl/3.rgba16.png
 levels/sl/4.rgba16.png
 levels/ssl/0.rgba16.png

@@ -11,7 +11,8 @@
 
 #include "make_const_nonconst.h"
 
-#include "levels/ddd/header.h"
+#include "actors_vanilla/ddd/header.h"
 
-#include "levels/ddd/areas/1/geo.inc.c"
-#include "levels/ddd/areas/2/geo.inc.c"
+#include "actors_vanilla/ddd/pole/geo.inc.c"
+#include "actors_vanilla/ddd/sub_door/geo.inc.c"
+#include "actors_vanilla/ddd/submarine/geo.inc.c"

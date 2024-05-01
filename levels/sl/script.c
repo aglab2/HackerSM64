@@ -45,7 +45,7 @@ static const LevelScript script_func_local_4[] = {
 const LevelScript level_sl_entry[] = {
     INIT_LEVEL(),
     LOAD_YAY0(        /*seg*/ 0x07, _sl_segment_7SegmentRomStart, _sl_segment_7SegmentRomEnd),
-    LOAD_YAY0_TEXTURE(/*seg*/ 0x09, _snow_yay0SegmentRomStart, _snow_yay0SegmentRomEnd),
+    LOAD_VANILLA_OBJECTS(sl, snow),
     LOAD_YAY0(        /*seg*/ 0x0B, _effect_yay0SegmentRomStart, _effect_yay0SegmentRomEnd),
     LOAD_YAY0(        /*seg*/ 0x0A, _ccm_skybox_yay0SegmentRomStart, _ccm_skybox_yay0SegmentRomEnd),
     LOAD_YAY0(        /*seg*/ 0x05, _group7_yay0SegmentRomStart, _group7_yay0SegmentRomEnd),
@@ -59,9 +59,7 @@ const LevelScript level_sl_entry[] = {
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_8),
     JUMP_LINK(script_func_global_17),
-    LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TRIANGLE,      sl_geo_000390),
-    LOAD_MODEL_FROM_GEO(MODEL_SL_CRACKED_ICE,        sl_geo_000360),
-    LOAD_MODEL_FROM_GEO(MODEL_SL_CRACKED_ICE_CHUNK,  sl_geo_000378),
+    JUMP_LINK(script_func_vo_sl),
     LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TREE,          snow_tree_geo),
 
     AREA(/*index*/ 1, sl_geo_0003A8),

@@ -11,7 +11,8 @@
 
 #include "make_const_nonconst.h"
 
-#include "levels/ddd/header.h"
+#include "actors_vanilla/sl/header.h"
 
-#include "levels/ddd/areas/1/geo.inc.c"
-#include "levels/ddd/areas/2/geo.inc.c"
+#include "actors_vanilla/sl/unused_cracked_ice/geo.inc.c"
+#include "actors_vanilla/sl/unused_ice_shard/geo.inc.c"
+#include "actors_vanilla/sl/snow_mound/geo.inc.c"

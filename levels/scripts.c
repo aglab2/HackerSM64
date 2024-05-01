@@ -16,6 +16,8 @@
 #include "actors_vanilla/hmc/header.h"
 #include "actors_vanilla/lll/header.h"
 #include "actors_vanilla/ssl/header.h"
+#include "actors_vanilla/ddd/header.h"
+#include "actors_vanilla/sl/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
@@ -475,5 +477,19 @@ const LevelScript script_func_vo_ssl[] = {
     LOAD_MODEL_FROM_GEO(MODEL_SSL_MOVING_PYRAMID_WALL, ssl_geo_000794),
     LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_ELEVATOR,    ssl_geo_0007AC),
     LOAD_MODEL_FROM_GEO(MODEL_SSL_TOX_BOX,             ssl_geo_000630),
+    RETURN(),
+};
+
+const LevelScript script_func_vo_ddd[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_DDD_BOWSER_SUB_DOOR, ddd_geo_000478),
+    LOAD_MODEL_FROM_GEO(MODEL_DDD_BOWSER_SUB,      ddd_geo_0004A0),
+    LOAD_MODEL_FROM_GEO(MODEL_DDD_POLE,            ddd_geo_000450),
+    RETURN(),
+};
+
+const LevelScript script_func_vo_sl[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TRIANGLE,      sl_geo_000390),
+    LOAD_MODEL_FROM_GEO(MODEL_SL_CRACKED_ICE,        sl_geo_000360),
+    LOAD_MODEL_FROM_GEO(MODEL_SL_CRACKED_ICE_CHUNK,  sl_geo_000378),
     RETURN(),
 };
