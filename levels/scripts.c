@@ -28,6 +28,7 @@
 #include "actors_vanilla/bits/header.h"
 #include "actors_vanilla/vcutm/header.h"
 #include "actors_vanilla/castle_inside/header.h"
+#include "actors_vanilla/castle_grounds/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
@@ -635,5 +636,12 @@ const LevelScript script_func_vo_castle_inside[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_8_STARS,  castle_geo_000F00),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_50_STARS, castle_geo_000F00),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_70_STARS, castle_geo_000F00),
+    RETURN(),
+};
+
+const LevelScript script_func_vo_castle_grounds[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_VCUTM_GRILL,  castle_grounds_geo_00070C),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG,         castle_grounds_geo_000660),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724),
     RETURN(),
 };

@@ -381,6 +381,7 @@ SECTIONS
    VANILLA_OBJECTS(bits, 0x0E000000, 0x1B000000)
    VANILLA_OBJECTS(vcutm, 0x0E000000, 0x1B000000)
    VANILLA_OBJECTS(castle_inside, 0x0E000000, 0x1B000000)
+   VANILLA_OBJECTS(castle_grounds, 0x0E000000, 0x1B000000)
 
    /* use segmented addressing for behaviors */
    BEGIN_SEG(behavior, 0x13000000)

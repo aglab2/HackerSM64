@@ -11,7 +11,8 @@
 
 #include "make_const_nonconst.h"
 
-#include "levels/castle_grounds/header.h"
+#include "actors_vanilla/castle_grounds/header.h"
 
-#include "levels/castle_grounds/areas/1/3/geo.inc.c"
-#include "levels/castle_grounds/areas/1/geo.inc.c"
+#include "actors_vanilla/castle_grounds/11/geo.inc.c"
+#include "actors_vanilla/castle_grounds/7/geo.inc.c"
+#include "actors_vanilla/castle_grounds/8/geo.inc.c"
