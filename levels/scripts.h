@@ -35,5 +35,6 @@ extern const LevelScript script_func_vo_lll[];
 extern const LevelScript script_func_vo_ssl[];
 extern const LevelScript script_func_vo_ddd[];
 extern const LevelScript script_func_vo_sl[];
+extern const LevelScript script_func_vo_wdw[];
 
 #endif

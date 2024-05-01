@@ -22,6 +22,7 @@
 #include "actors_vanilla/ssl/header.h"
 #include "actors_vanilla/ddd/header.h"
 #include "actors_vanilla/sl/header.h"
+#include "actors_vanilla/wdw/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"

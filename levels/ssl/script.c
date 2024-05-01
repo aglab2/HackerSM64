@@ -80,7 +80,6 @@ const LevelScript level_ssl_entry[] = {
     MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_6),
-    JUMP_LINK(script_func_global_6),
     JUMP_LINK(script_func_vo_ssl),
     LOAD_MODEL_FROM_GEO(MODEL_SSL_PALM_TREE,           palm_tree_geo),
     LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03,       ssl_geo_0005C0),
