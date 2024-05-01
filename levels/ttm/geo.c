@@ -13,8 +13,6 @@
 
 #include "levels/ttm/header.h"
 
-#include "levels/ttm/star_cage/geo.inc.c"
-#include "levels/ttm/rolling_log/geo.inc.c"
 #include "levels/ttm/areas/1/3/geo.inc.c"
 #include "levels/ttm/areas/1/4/geo.inc.c"
 #include "levels/ttm/areas/1/5/geo.inc.c"
@@ -38,8 +36,3 @@
 #include "levels/ttm/areas/2/geo.inc.c"
 #include "levels/ttm/areas/3/geo.inc.c"
 #include "levels/ttm/areas/4/geo.inc.c"
-#include "levels/ttm/blue_smiley/geo.inc.c"
-#include "levels/ttm/yellow_smiley/geo.inc.c"
-#include "levels/ttm/star_smiley/geo.inc.c"
-#include "levels/ttm/moon_smiley/geo.inc.c"
-#include "levels/ttm/slide_exit_podium/geo.inc.c"

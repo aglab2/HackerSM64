@@ -5,8 +5,6 @@
 #include "game/moving_texture.h"
 
 // geo
-extern const GeoLayout ttm_geo_000710[];
-extern const GeoLayout ttm_geo_000730[];
 extern const GeoLayout ttm_geo_000748[];
 extern const GeoLayout ttm_geo_000778[];
 extern const GeoLayout ttm_geo_0007A8[];
@@ -30,11 +28,6 @@ extern const GeoLayout ttm_geo_000A70[];
 extern const GeoLayout ttm_geo_000B5C[];
 extern const GeoLayout ttm_geo_000BEC[];
 extern const GeoLayout ttm_geo_000C84[];
-extern const GeoLayout ttm_geo_000D14[];
-extern const GeoLayout ttm_geo_000D4C[];
-extern const GeoLayout ttm_geo_000D84[];
-extern const GeoLayout ttm_geo_000DBC[];
-extern const GeoLayout ttm_geo_000DF4[];
 
 // leveldata
 extern const Gfx ttm_seg7_dl_0700A120[];
@@ -66,16 +59,11 @@ extern const Gfx ttm_seg7_dl_07011128[];
 extern const Gfx ttm_seg7_dl_07011608[];
 extern const Gfx ttm_seg7_dl_07011C78[];
 extern const Gfx ttm_seg7_dl_07011D78[];
-extern const Gfx ttm_seg7_dl_07012270[];
 extern const Gfx ttm_seg7_dl_07012388[];
 extern const Gfx ttm_seg7_dl_070123A0[];
 extern const Gfx ttm_seg7_dl_070123B8[];
 extern const Gfx ttm_seg7_dl_07012410[];
 extern struct Painting ttm_slide_painting;
-extern const Gfx ttm_seg7_dl_07013430[];
-extern const Gfx ttm_seg7_dl_07013608[];
-extern const Collision ttm_seg7_collision_pitoune_2[];
-extern const Collision ttm_seg7_collision_ukiki_cage[];
 extern const Collision ttm_seg7_area_1_collision[];
 extern const MacroObject ttm_seg7_area_1_macro_objs[];
 extern const Trajectory ttm_seg7_trajectory_070170A0[];
@@ -95,15 +83,9 @@ extern const Gfx ttm_seg7_dl_07024C78[];
 extern const Gfx ttm_seg7_dl_07025F48[];
 extern const Gfx ttm_seg7_dl_0702A1B8[];
 extern const Gfx ttm_seg7_dl_0702A8A0[];
-extern const Gfx ttm_seg7_dl_0702A9C0[];
-extern const Gfx ttm_seg7_dl_0702AAA8[];
-extern const Gfx ttm_seg7_dl_0702AB90[];
-extern const Gfx ttm_seg7_dl_0702AC78[];
-extern const Gfx ttm_seg7_dl_0702BB60[];
 extern const Collision ttm_seg7_area_2_collision[];
 extern const Collision ttm_seg7_area_3_collision[];
 extern const Collision ttm_seg7_area_4_collision[];
-extern const Collision ttm_seg7_collision_podium_warp[];
 extern const MacroObject ttm_seg7_area_2_macro_objs[];
 extern const MacroObject ttm_seg7_area_3_macro_objs[];
 extern const MacroObject ttm_seg7_area_4_macro_objs[];
