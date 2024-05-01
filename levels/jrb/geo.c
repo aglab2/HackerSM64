@@ -13,5 +13,4 @@
 
 #include "levels/jrb/header.h"
 
-#include "levels/jrb/areas/1/geo.inc.c"
-#include "levels/jrb/areas/2/geo.inc.c"
+#include "levels/jrb/geo.inc.c"
