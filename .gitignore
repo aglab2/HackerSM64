@@ -642,10 +642,10 @@ levels/ending/eu_028000.rgba16.png
 levels/hmc/0.rgba16.png
 levels/hmc/1.rgba16.png
 levels/hmc/2.rgba16.png
-levels/hmc/3.rgba16.png
-levels/hmc/4.rgba16.png
-levels/hmc/5.rgba16.png
-levels/hmc/6.rgba16.png
+actors_vanilla/hmc/3.rgba16.png
+actors_vanilla/hmc/4.rgba16.png
+actors_vanilla/hmc/5.rgba16.png
+actors_vanilla/hmc/6.rgba16.png
 levels/hmc/7.rgba16.png
 levels/intro/0.rgba16.png
 levels/intro/1.rgba16.png

@@ -30,5 +30,6 @@ extern const LevelScript script_func_vo_wf[];
 extern const LevelScript script_func_vo_jrb[];
 extern const LevelScript script_func_vo_ccm[];
 extern const LevelScript script_func_vo_bbh[];
+extern const LevelScript script_func_vo_hmc[];
 
 #endif

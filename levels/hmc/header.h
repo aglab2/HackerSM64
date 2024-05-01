@@ -5,13 +5,6 @@
 #include "game/moving_texture.h"
 
 // geo
-extern const GeoLayout hmc_geo_000530[];
-extern const GeoLayout hmc_geo_000548[];
-extern const GeoLayout hmc_geo_000570[];
-extern const GeoLayout hmc_geo_000588[];
-extern const GeoLayout hmc_geo_0005A0[];
-extern const GeoLayout hmc_geo_0005B8[];
-extern const GeoLayout hmc_geo_0005D0[];
 extern const GeoLayout hmc_geo_0005E8[];
 extern const GeoLayout hmc_geo_000618[];
 extern const GeoLayout hmc_geo_000658[];
@@ -61,28 +54,15 @@ extern const Gfx hmc_seg7_dl_0701F1B0[];
 extern const Gfx hmc_seg7_dl_0701F690[];
 extern const Gfx hmc_seg7_dl_0701F818[];
 extern const Gfx hmc_seg7_dl_0701FD58[];
-extern const Gfx hmc_seg7_dl_0701FFF8[];
 extern const Gfx hmc_seg7_dl_07020FD0[];
 extern const Gfx hmc_seg7_dl_07021760[];
 extern const Gfx hmc_seg7_dl_07021BA0[];
 extern const Gfx hmc_seg7_dl_070228A0[];
-extern const Gfx hmc_seg7_dl_07022AA0[];
-extern const Gfx hmc_seg7_dl_07022DA0[];
-extern const Gfx hmc_seg7_dl_07023090[];
-extern const Gfx hmc_seg7_dl_07023BC8[];
-extern const Gfx hmc_seg7_dl_07023E10[];
-extern const Gfx hmc_seg7_dl_07024110[];
-extern const Gfx hmc_seg7_dl_07024268[];
-extern const Gfx hmc_seg7_dl_070242A0[];
 extern const Texture *const hmc_seg7_painting_textures_07025518[];
 extern struct Painting cotmc_painting;
 extern const Collision hmc_seg7_collision_level[];
 extern const MacroObject hmc_seg7_macro_objs[];
 extern const RoomData hmc_seg7_rooms[];
-extern const Collision hmc_seg7_collision_elevator[];
-extern const Collision hmc_seg7_collision_grill_door[];
-extern const Collision hmc_seg7_collision_controllable_platform[];
-extern const Collision hmc_seg7_collision_controllable_platform_sub[];
 extern const Trajectory hmc_seg7_trajectory_checkerboard_platform[];
 extern const struct MovtexQuadCollection hmc_movtex_dorrie_pool_water[];
 extern const struct MovtexQuadCollection hmc_movtex_toxic_maze_mist[];
