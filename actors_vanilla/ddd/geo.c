@@ -16,3 +16,12 @@
 #include "actors_vanilla/ddd/pole/geo.inc.c"
 #include "actors_vanilla/ddd/sub_door/geo.inc.c"
 #include "actors_vanilla/ddd/submarine/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_ddd[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_DDD_BOWSER_SUB_DOOR, ddd_geo_000478),
+    LOAD_MODEL_FROM_GEO(MODEL_DDD_BOWSER_SUB,      ddd_geo_0004A0),
+    LOAD_MODEL_FROM_GEO(MODEL_DDD_POLE,            ddd_geo_000450),
+    RETURN(),
+};

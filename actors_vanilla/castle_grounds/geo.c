@@ -16,3 +16,12 @@
 #include "actors_vanilla/castle_grounds/11/geo.inc.c"
 #include "actors_vanilla/castle_grounds/7/geo.inc.c"
 #include "actors_vanilla/castle_grounds/8/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_castle_grounds[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_VCUTM_GRILL,  castle_grounds_geo_00070C),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_FLAG,         castle_grounds_geo_000660),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CANNON_GRILL, castle_grounds_geo_000724),
+    RETURN(),
+};

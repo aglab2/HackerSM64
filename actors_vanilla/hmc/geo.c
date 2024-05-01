@@ -20,3 +20,16 @@
 #include "actors_vanilla/hmc/arrow_platform/geo.inc.c"
 #include "actors_vanilla/hmc/arrow_platform_button/geo.inc.c"
 #include "actors_vanilla/hmc/elevator_platform/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_hmc[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_PLATFORM,       hmc_geo_0005A0),
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_METAL_ARROW_PLATFORM, hmc_geo_0005B8),
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_ELEVATOR_PLATFORM,    hmc_geo_0005D0),
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_ROLLING_ROCK,         hmc_geo_000548),
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_ROCK_PIECE,           hmc_geo_000570),
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_ROCK_SMALL_PIECE,     hmc_geo_000588),
+    LOAD_MODEL_FROM_GEO(MODEL_HMC_RED_GRILLS,           hmc_geo_000530),
+    RETURN(),
+};

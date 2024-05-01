@@ -20,3 +20,16 @@
 #include "actors_vanilla/ttm/star_smiley/geo.inc.c"
 #include "actors_vanilla/ttm/moon_smiley/geo.inc.c"
 #include "actors_vanilla/ttm/slide_exit_podium/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_ttm[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_SLIDE_EXIT_PODIUM, ttm_geo_000DF4),
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_ROLLING_LOG,       ttm_geo_000730),
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_STAR_CAGE,        ttm_geo_000710),
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_BLUE_SMILEY,       ttm_geo_000D14),
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_YELLOW_SMILEY,     ttm_geo_000D4C),
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_STAR_SMILEY,       ttm_geo_000D84),
+    LOAD_MODEL_FROM_GEO(MODEL_TTM_MOON_SMILEY,       ttm_geo_000DBC),
+    RETURN(),
+};

@@ -16,3 +16,12 @@
 #include "actors_vanilla/bob/chain_chomp_gate/geo.inc.c"
 #include "actors_vanilla/bob/seesaw_platform/geo.inc.c"
 #include "actors_vanilla/bob/grate_door/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_bob[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_CHAIN_CHOMP_GATE, bob_geo_000440),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM,  bob_geo_000458),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS,      bob_geo_000470),
+    RETURN(),
+};

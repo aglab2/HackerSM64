@@ -14,3 +14,11 @@
 #include "actors_vanilla/thi/header.h"
 
 #include "actors_vanilla/thi/thi_tops/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_thi[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_THI_HUGE_ISLAND_TOP, thi_geo_0005B0),
+    LOAD_MODEL_FROM_GEO(MODEL_THI_TINY_ISLAND_TOP, thi_geo_0005C8),
+    RETURN(),
+};

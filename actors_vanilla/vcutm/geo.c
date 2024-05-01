@@ -14,3 +14,10 @@
 #include "actors_vanilla/vcutm/header.h"
 
 #include "actors_vanilla/vcutm/seesaw/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_vcutm[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_VCUTM_SEESAW_PLATFORM, vcutm_geo_0001F0),
+    RETURN(),
+};

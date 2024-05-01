@@ -11,7 +11,6 @@ extern const GeoLayout lll_geo_000A10[];
 extern const GeoLayout lll_geo_000A28[];
 extern const GeoLayout lll_geo_000A40[];
 extern const GeoLayout lll_geo_000A60[];
-extern const GeoLayout lll_geo_000A78[];
 extern const GeoLayout lll_geo_000A90[];
 extern const GeoLayout lll_geo_000AA8[];
 extern const GeoLayout lll_geo_000AC0[];

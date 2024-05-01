@@ -2,6 +2,7 @@
 
 #include "types.h"
 
+extern const GeoLayout lll_geo_000A78[];
 extern const GeoLayout lll_geo_000B08[];
 extern const GeoLayout lll_geo_000B20[];
 extern const GeoLayout lll_geo_000B38[];

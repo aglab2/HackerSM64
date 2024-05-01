@@ -19,3 +19,15 @@
 #include "actors_vanilla/ssl/spindel/geo.inc.c"
 #include "actors_vanilla/ssl/moving_pyramid_wall/geo.inc.c"
 #include "actors_vanilla/ssl/pyramid_elevator/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_ssl[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_TOP,         ssl_geo_000618),
+    LOAD_MODEL_FROM_GEO(MODEL_SSL_GRINDEL,             ssl_geo_000734),
+    LOAD_MODEL_FROM_GEO(MODEL_SSL_SPINDEL,             ssl_geo_000764),
+    LOAD_MODEL_FROM_GEO(MODEL_SSL_MOVING_PYRAMID_WALL, ssl_geo_000794),
+    LOAD_MODEL_FROM_GEO(MODEL_SSL_PYRAMID_ELEVATOR,    ssl_geo_0007AC),
+    LOAD_MODEL_FROM_GEO(MODEL_SSL_TOX_BOX,             ssl_geo_000630),
+    RETURN(),
+};

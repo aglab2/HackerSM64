@@ -16,3 +16,12 @@
 #include "actors_vanilla/sl/unused_cracked_ice/geo.inc.c"
 #include "actors_vanilla/sl/unused_ice_shard/geo.inc.c"
 #include "actors_vanilla/sl/snow_mound/geo.inc.c"
+
+#include "level_commands.h"
+
+const LevelScript script_func_vo_sl[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_SL_SNOW_TRIANGLE,      sl_geo_000390),
+    LOAD_MODEL_FROM_GEO(MODEL_SL_CRACKED_ICE,        sl_geo_000360),
+    LOAD_MODEL_FROM_GEO(MODEL_SL_CRACKED_ICE_CHUNK,  sl_geo_000378),
+    RETURN(),
+};
