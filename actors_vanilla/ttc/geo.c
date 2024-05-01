@@ -1,0 +1,30 @@
+#include <ultra64.h>
+#include "sm64.h"
+#include "geo_commands.h"
+
+#include "game/level_geo.h"
+#include "game/geo_misc.h"
+#include "game/camera.h"
+#include "game/moving_texture.h"
+#include "game/screen_transition.h"
+#include "game/paintings.h"
+
+#include "make_const_nonconst.h"
+
+#include "actors_vanilla/ttc/header.h"
+
+#include "actors_vanilla/ttc/rotating_cube/geo.inc.c"
+#include "actors_vanilla/ttc/rotating_prism/geo.inc.c"
+#include "actors_vanilla/ttc/pendulum/geo.inc.c"
+#include "actors_vanilla/ttc/large_treadmill/geo.inc.c"
+#include "actors_vanilla/ttc/small_treadmill/geo.inc.c"
+#include "actors_vanilla/ttc/push_block/geo.inc.c"
+#include "actors_vanilla/ttc/rotating_hexagon/geo.inc.c"
+#include "actors_vanilla/ttc/rotating_triangle/geo.inc.c"
+#include "actors_vanilla/ttc/pit_block/geo.inc.c"
+#include "actors_vanilla/ttc/pit_block_2/geo.inc.c"
+#include "actors_vanilla/ttc/elevator_platform/geo.inc.c"
+#include "actors_vanilla/ttc/clock_hand/geo.inc.c"
+#include "actors_vanilla/ttc/spinner/geo.inc.c"
+#include "actors_vanilla/ttc/small_gear/geo.inc.c"
+#include "actors_vanilla/ttc/large_gear/geo.inc.c"
