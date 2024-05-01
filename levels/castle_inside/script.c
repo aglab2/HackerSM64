@@ -222,17 +222,13 @@ static const LevelScript script_func_local_4[] = {
 const LevelScript level_castle_inside_entry[] = {
     INIT_LEVEL(),
     LOAD_YAY0(        /*seg*/ 0x07, _castle_inside_segment_7SegmentRomStart, _castle_inside_segment_7SegmentRomEnd),
-    LOAD_YAY0_TEXTURE(/*seg*/ 0x09, _inside_yay0SegmentRomStart, _inside_yay0SegmentRomEnd),
+    LOAD_VANILLA_OBJECTS(castle_inside, inside),
     LOAD_YAY0(        /*seg*/ 0x06, _group15_yay0SegmentRomStart, _group15_yay0SegmentRomEnd),
     LOAD_RAW(         /*seg*/ 0x0D, _group15_geoSegmentRomStart,  _group15_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
     JUMP_LINK(script_func_global_16),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_BOWSER_TRAP,        castle_geo_000F18),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_WATER_LEVEL_PILLAR, castle_geo_001940),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CLOCK_MINUTE_HAND,  castle_geo_001530),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CLOCK_HOUR_HAND,    castle_geo_001548),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CLOCK_PENDULUM,     castle_geo_001518),
+    JUMP_LINK(script_func_vo_castle_inside),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR,        castle_door_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_WOODEN_DOOR,        wooden_door_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_METAL_DOOR,         metal_door_geo),
@@ -242,12 +238,6 @@ const LevelScript level_castle_inside_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_DOOR_1_STAR,        castle_door_1_star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_DOOR_3_STARS,       castle_door_3_stars_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR,           key_door_geo),
-    // The different sets of star doors all use different model IDs, despite them all loading the same geo layout.
-    // It is possible that star doors were originally going to have numbers on them, similar to the other locked doors.
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_30_STARS, castle_geo_000F00),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_8_STARS,  castle_geo_000F00),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_50_STARS, castle_geo_000F00),
-    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_70_STARS, castle_geo_000F00),
 
     AREA(/*index*/ 1, castle_geo_001400),
         OBJECT(/*model*/ MODEL_NONE,       /*pos*/ -5513,  717, -4324, /*angle*/ 0,  45, 0, /*behParam*/ 0x00140000, /*beh*/ bhvCastleFloorTrap),

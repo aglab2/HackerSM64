@@ -27,6 +27,7 @@
 #include "actors_vanilla/bitfs/header.h"
 #include "actors_vanilla/bits/header.h"
 #include "actors_vanilla/vcutm/header.h"
+#include "actors_vanilla/castle_inside/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
@@ -619,5 +620,20 @@ const LevelScript script_func_vo_bits[] = {
 
 const LevelScript script_func_vo_vcutm[] = {
     LOAD_MODEL_FROM_GEO(MODEL_VCUTM_SEESAW_PLATFORM, vcutm_geo_0001F0),
+    RETURN(),
+};
+
+const LevelScript script_func_vo_castle_inside[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_BOWSER_TRAP,        castle_geo_000F18),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_WATER_LEVEL_PILLAR, castle_geo_001940),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CLOCK_MINUTE_HAND,  castle_geo_001530),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CLOCK_HOUR_HAND,    castle_geo_001548),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CLOCK_PENDULUM,     castle_geo_001518),
+    // The different sets of star doors all use different model IDs, despite them all loading the same geo layout.
+    // It is possible that star doors were originally going to have numbers on them, similar to the other locked doors.
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_30_STARS, castle_geo_000F00),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_8_STARS,  castle_geo_000F00),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_50_STARS, castle_geo_000F00),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_STAR_DOOR_70_STARS, castle_geo_000F00),
     RETURN(),
 };
