@@ -28,6 +28,7 @@
 #include "actors_vanilla/ttc/header.h"
 #include "actors_vanilla/rr/header.h"
 #include "actors_vanilla/bitdw/header.h"
+#include "actors_vanilla/bitfs/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"

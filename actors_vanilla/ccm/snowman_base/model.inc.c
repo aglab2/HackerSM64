@@ -2,7 +2,7 @@
 
 // 0x07011958 - 0x07012158
 ALIGNED8 static const Texture ccm_seg7_texture_07011958[] = {
-#include "levels/ccm/12.rgba16.inc.c"
+#include "actors_vanilla/ccm/12.rgba16.inc.c"
 };
 
 // 0x07012158 - 0x07012258

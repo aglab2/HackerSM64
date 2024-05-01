@@ -6,7 +6,7 @@
 
 // 0x0702AD30 - 0x0702B530
 ALIGNED8 static const Texture ttm_seg7_texture_0702AD30[] = {
-#include "levels/ttm/8.rgba16.inc.c"
+#include "actors_vanilla/ttm/8.rgba16.inc.c"
 };
 
 // 0x0702B530 - 0x0702B570
