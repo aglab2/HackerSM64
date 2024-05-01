@@ -5,6 +5,7 @@
 #include "actors_vanilla/ccm/header.h"
 #include "actors_vanilla/ssl/header.h"
 #include "actors_vanilla/ttc/header.h"
+#include "actors_vanilla/rr/header.h"
 #include "actors/common0.h"
 #include "actors/group11.h"
 #include "actors/group17.h"

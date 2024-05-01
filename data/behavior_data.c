@@ -26,6 +26,7 @@
 #include "actors_vanilla/ttm/header.h"
 #include "actors_vanilla/thi/header.h"
 #include "actors_vanilla/ttc/header.h"
+#include "actors_vanilla/rr/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"

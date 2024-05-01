@@ -3,6 +3,7 @@
 #include "sm64.h"
 #include "geo_misc.h"
 
+#include "actors_vanilla/rr/header.h"
 #include "area.h"
 #include "engine/math_util.h"
 #include "level_update.h"
