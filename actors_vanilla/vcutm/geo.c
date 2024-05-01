@@ -11,6 +11,6 @@
 
 #include "make_const_nonconst.h"
 
-#include "levels/vcutm/header.h"
+#include "actors_vanilla/vcutm/header.h"
 
-#include "levels/vcutm/areas/1/geo.inc.c"
+#include "actors_vanilla/vcutm/seesaw/geo.inc.c"

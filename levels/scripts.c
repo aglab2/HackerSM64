@@ -26,6 +26,7 @@
 #include "actors_vanilla/bitdw/header.h"
 #include "actors_vanilla/bitfs/header.h"
 #include "actors_vanilla/bits/header.h"
+#include "actors_vanilla/vcutm/header.h"
 #include "actors/common0.h"
 #include "actors/common1.h"
 #include "actors/group0.h"
@@ -613,5 +614,10 @@ const LevelScript script_func_vo_bits[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BITS_STAIRCASE_FRAME2,       bits_geo_0006D0),
     LOAD_MODEL_FROM_GEO(MODEL_BITS_STAIRCASE_FRAME3,       bits_geo_0006E8),
     LOAD_MODEL_FROM_GEO(MODEL_BITS_STAIRCASE_FRAME4,       bits_geo_000700),
+    RETURN(),
+};
+
+const LevelScript script_func_vo_vcutm[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_VCUTM_SEESAW_PLATFORM, vcutm_geo_0001F0),
     RETURN(),
 };

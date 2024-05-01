@@ -9,6 +9,7 @@
 #include "actors_vanilla/bitdw/header.h"
 #include "actors_vanilla/bitfs/header.h"
 #include "actors_vanilla/bits/header.h"
+#include "actors_vanilla/vcutm/header.h"
 #include "actors/common0.h"
 #include "actors/group11.h"
 #include "actors/group17.h"

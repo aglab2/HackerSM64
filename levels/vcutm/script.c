@@ -39,7 +39,7 @@ static const LevelScript script_func_local_3[] = {
 
 const LevelScript level_vcutm_entry[] = {
     INIT_LEVEL(),
-    LOAD_YAY0_TEXTURE(/*seg*/ 0x09, _outside_yay0SegmentRomStart, _outside_yay0SegmentRomEnd),
+    LOAD_VANILLA_OBJECTS(vcutm, outside),
     LOAD_YAY0(        /*seg*/ 0x07, _vcutm_segment_7SegmentRomStart, _vcutm_segment_7SegmentRomEnd),
     LOAD_YAY0(        /*seg*/ 0x05, _group8_yay0SegmentRomStart, _group8_yay0SegmentRomEnd),
     LOAD_RAW(         /*seg*/ 0x0C, _group8_geoSegmentRomStart,  _group8_geoSegmentRomEnd),
@@ -49,7 +49,7 @@ const LevelScript level_vcutm_entry[] = {
     MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
     JUMP_LINK(script_func_global_1),
     JUMP_LINK(script_func_global_9),
-    LOAD_MODEL_FROM_GEO(MODEL_VCUTM_SEESAW_PLATFORM, vcutm_geo_0001F0),
+    JUMP_LINK(script_func_vo_vcutm),
     LOAD_MODEL_FROM_GEO(MODEL_VCUTM_WARP_PIPE,       warp_pipe_geo),
 
     AREA(/*index*/ 1, vcutm_geo_000208),
