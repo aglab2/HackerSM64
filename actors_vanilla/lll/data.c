@@ -12,6 +12,7 @@
 
 #include "actors_vanilla/lll/texture.inc.c"
 
+#include "actors_vanilla/lll/10/model.inc.c"
 #include "actors_vanilla/lll/moving_octagonal_mesh_platform/model.inc.c"
 #include "actors_vanilla/lll/drawbridge_part/model.inc.c"
 #include "actors_vanilla/lll/rotating_block_fire_bars/model.inc.c"
@@ -30,6 +31,7 @@
 #include "actors_vanilla/lll/drawbridge_part/collision.inc.c"
 #include "actors_vanilla/lll/rotating_block_fire_bars/collision.inc.c"
 #include "actors_vanilla/lll/wooden_float_small/collision.inc.c"
+#include "actors_vanilla/lll/10/collision.inc.c"
 #include "actors_vanilla/lll/collapsing_wooden_platform/collision.inc.c"
 #include "actors_vanilla/lll/rotating_hexagonal_ring/collision.inc.c"
 #include "actors_vanilla/lll/sinking_rectangular_platform/collision.inc.c"

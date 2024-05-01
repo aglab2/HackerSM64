@@ -25,7 +25,6 @@ extern const Gfx lll_seg7_dl_07015458[];
 extern const Gfx lll_seg7_dl_07015C88[];
 extern const Gfx lll_seg7_dl_07015E20[];
 extern const Gfx lll_seg7_dl_07016250[];
-extern const Gfx lll_seg7_dl_070165C8[];
 extern const Gfx lll_seg7_dl_07016B00[];
 extern const Gfx lll_seg7_dl_070174E0[];
 extern const Gfx lll_seg7_dl_070178A8[];

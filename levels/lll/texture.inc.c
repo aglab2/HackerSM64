@@ -23,11 +23,6 @@ ALIGNED8 static const Texture lll_seg7_texture_07004800[] = {
 #include "levels/lll/9.rgba16.inc.c"
 };
 
-// 0x07005800 - 0x07006000
-ALIGNED8 static const Texture lll_seg7_texture_07005800[] = {
-#include "levels/lll/11.rgba16.inc.c"
-};
-
 // 0x0700D000 - 0x0700D200
 ALIGNED8 static const Texture lll_seg7_texture_0700D000[] = {
 #include "levels/lll/26.rgba16.inc.c"

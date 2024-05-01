@@ -31,6 +31,7 @@ extern const GeoLayout lll_geo_bowser_puzzle_piece_14[];
 extern const GeoLayout lll_geo_000DD0[];
 extern const GeoLayout lll_geo_000DE8[];
 
+extern const Gfx lll_seg7_dl_070165C8[];
 extern const Gfx lll_seg7_dl_07018380[];
 extern const Gfx lll_seg7_dl_07018680[];
 extern const Gfx lll_seg7_dl_07018A30[];

@@ -28,6 +28,11 @@ ALIGNED8 static const Texture lll_seg7_texture_07005000[] = {
 #include "actors_vanilla/lll/10.rgba16.inc.c"
 };
 
+// 0x07005800 - 0x07006000
+ALIGNED8 static const Texture lll_seg7_texture_07005800[] = {
+#include "actors_vanilla/lll/11.rgba16.inc.c"
+};
+
 // 0x07006000 - 0x07006800
 ALIGNED8 static const Texture lll_seg7_texture_07006000[] = {
 #include "actors_vanilla/lll/12.rgba16.inc.c"

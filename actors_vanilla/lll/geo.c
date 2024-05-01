@@ -13,6 +13,7 @@
 
 #include "actors_vanilla/lll/header.h"
 
+#include "actors_vanilla/lll/10/geo.inc.c"
 #include "actors_vanilla/lll/moving_octagonal_mesh_platform/geo.inc.c"
 #include "actors_vanilla/lll/drawbridge_part/geo.inc.c"
 #include "actors_vanilla/lll/rotating_block_fire_bars/geo.inc.c"
