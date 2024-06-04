@@ -845,12 +845,12 @@ $(BUILD_DIR)/src/goddard/%.o: src/goddard/%.c
 $(BUILD_DIR)/src/menu/%.o: src/menu/%.c
 	$(call print,Compiling Menu:,$<,$@)
 	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/menu/$*.d  -o $@ $<
-$(BUILD_DIR)/src/ultra/%.o: src/ultra/%.c
-	$(call print,Compiling Ultra:,$<,$@)
-	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/ultra/$*.d  -o $@ $<
+$(BUILD_DIR)/src/game/texscroll.o: src/game/texscroll.c
+	$(call print,Compiling texscroll:,$<,$@)
+	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/game/texscroll.d  -o $@ $<
 $(BUILD_DIR)/src/%.o: src/%.c
 	$(call print,Compiling with sdata:,$<,$@)
-	$(V)$(CC) -c -G 64 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/$*.d  -o $@ $<
+	$(V)$(CC) -c -G 128 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/$*.d  -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)

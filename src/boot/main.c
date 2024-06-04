@@ -352,8 +352,8 @@ void load_sdata(void);
 void thread3_main(UNUSED void *arg) {
     setgp();
     setup_mesg_queues();
-    load_sdata();
     alloc_pool();
+    load_sdata();
     load_engine_code_segment();
 #ifdef PUPPYPRINT_DEBUG
     puppyprint_calculate_ram_usage_static();

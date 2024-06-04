@@ -192,7 +192,7 @@ SECTIONS
       BUILD_DIR/src/boot*.o(.data*);
       BUILD_DIR/src/audio*.o(.data*);
 #ifdef S2DEX_TEXT_ENGINE
-      BUILD_DIR/src/s2d_engine*.o(data*);
+      BUILD_DIR/src/s2d_engine*.o(.data*);
 #endif
       */ULTRALIB.a:*.o(.data*);
       */libhvqm2.a:*.o(.data*);
@@ -294,7 +294,8 @@ SECTIONS
       . = ALIGN(0x40);
    }
    END_NOLOAD(sbss)
-. = _engineSegmentBssEnd;
+
+   _poolStart = .;
 
 #if MEMORY_FRAGMENTATION_NO_FRAGMENTATION == MEMORY_FRAGMENTATION_LEVEL
    BEGIN_NOLOAD(framebuffer0)

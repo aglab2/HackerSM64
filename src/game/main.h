@@ -50,39 +50,39 @@ struct RumbleSettings {
 extern struct Config gConfig __attribute__((section(".data")));
 
 // extern OSThread gUnkThread;
-extern OSThread gIdleThread;
-extern OSThread gMainThread;
-extern OSThread gGameLoopThread;
-extern OSThread gSoundThread;
-extern OSThread hvqmThread;
+extern OSThread gIdleThread __attribute__((section(".data")));
+extern OSThread gMainThread __attribute__((section(".data")));
+extern OSThread gGameLoopThread __attribute__((section(".data")));
+extern OSThread gSoundThread __attribute__((section(".data")));
+extern OSThread hvqmThread __attribute__((section(".data")));
 #if ENABLE_RUMBLE
-extern OSThread gRumblePakThread;
+extern OSThread gRumblePakThread __attribute__((section(".data")));
 
-extern OSPfs gRumblePakPfs;
+extern OSPfs gRumblePakPfs __attribute__((section(".data")));
 #endif
 
-extern OSMesgQueue gPIMesgQueue;
-extern OSMesgQueue gIntrMesgQueue;
-extern OSMesgQueue gSPTaskMesgQueue;
+extern OSMesgQueue gPIMesgQueue __attribute__((section(".data")));
+extern OSMesgQueue gIntrMesgQueue __attribute__((section(".data")));
+extern OSMesgQueue gSPTaskMesgQueue __attribute__((section(".data")));
 #if ENABLE_RUMBLE
-extern OSMesgQueue gRumblePakSchedulerMesgQueue;
-extern OSMesgQueue gRumbleThreadVIMesgQueue;
+extern OSMesgQueue gRumblePakSchedulerMesgQueue __attribute__((section(".data")));
+extern OSMesgQueue gRumbleThreadVIMesgQueue __attribute__((section(".data")));
 #endif
-extern OSMesg gDmaMesgBuf[1];
-extern OSMesg gPIMesgBuf[32];
-extern OSMesg gSIEventMesgBuf[1];
-extern OSMesg gIntrMesgBuf[16];
-extern OSMesg gUnknownMesgBuf[16];
-extern OSIoMesg gDmaIoMesg;
+extern OSMesg gDmaMesgBuf[1] __attribute__((section(".data")));
+extern OSMesg gPIMesgBuf[32] __attribute__((section(".data")));
+extern OSMesg gSIEventMesgBuf[1] __attribute__((section(".data")));
+extern OSMesg gIntrMesgBuf[16] __attribute__((section(".data")));
+extern OSMesg gUnknownMesgBuf[16] __attribute__((section(".data")));
+extern OSIoMesg gDmaIoMesg __attribute__((section(".data")));
 extern OSMesg gMainReceivedMesg __attribute__((section(".data")));
-extern OSMesgQueue gDmaMesgQueue;
+extern OSMesgQueue gDmaMesgQueue __attribute__((section(".data")));
 extern OSMesgQueue gSIEventMesgQueue __attribute__((section(".data")));
 #if ENABLE_RUMBLE
-extern OSMesg gRumblePakSchedulerMesgBuf[1];
-extern OSMesg gRumbleThreadVIMesgBuf[1];
+extern OSMesg gRumblePakSchedulerMesgBuf[1] __attribute__((section(".data")));
+extern OSMesg gRumbleThreadVIMesgBuf[1] __attribute__((section(".data")));
 
-extern struct RumbleData gRumbleDataQueue[3];
-extern struct RumbleSettings gCurrRumbleSettings;
+extern struct RumbleData gRumbleDataQueue[3] __attribute__((section(".data")));
+extern struct RumbleSettings gCurrRumbleSettings __attribute__((section(".data")));
 #endif
 
 extern struct VblankHandler *gVblankHandler1 __attribute__((section(".data")));
@@ -94,7 +94,7 @@ extern s8 gResetTimer __attribute__((section(".data")));
 extern s8 gNmiResetBarsTimer __attribute__((section(".data")));
 extern s8 gDebugLevelSelect __attribute__((section(".data")));
 #ifdef VANILLA_DEBUG
-extern s8 gShowDebugText;
+extern s8 gShowDebugText __attribute__((section(".data")));
 #endif
 
 // Special struct that keeps track of whether its timer has been set.

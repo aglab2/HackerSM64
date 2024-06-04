@@ -45,7 +45,7 @@ struct MainPoolRegion {
 #ifndef MAIN_POOL_SINGLE_REGION
 extern struct MainPoolRegion* gMainPoolCurrentRegion __attribute__((section(".data")));
 #else
-extern struct MainPoolContext sMainPool __attribute__((section(".data")));
+extern struct MainPoolContext sMainPool __attribute__((section(".bss.sMainPool")));
 // There is only 1 region which is the first region
 #define gMainPoolCurrentRegion ((struct MainPoolRegion*) &sMainPool)
 #endif
@@ -168,5 +168,5 @@ void setup_dma_table_list(struct DmaHandlerList *list, void *srcAddr, void *buff
 s32 load_patchable_table(struct DmaHandlerList *list, s32 index);
 
 
-extern uintptr_t sSegmentROMTable[32];
+extern uintptr_t sSegmentROMTable[32] __attribute__((section(".bss.sSegmentROMTable")));
 #endif // MEMORY_H

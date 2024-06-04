@@ -163,6 +163,8 @@ extern u8 _sbssSegmentBssEnd[];
 #define FRAMEBUFFER1_END FRAMEBUFFER1_START + RENDER_BUFFER_BUFFER_SIZE
 #define FRAMEBUFFER2_END FRAMEBUFFER2_START + RENDER_BUFFER_BUFFER_SIZE
 
+extern u8 _poolStart[];
+
 /**
  * Initialize the main memory pool. This pool is conceptually regions
  * that grow inward from the left and right. It therefore only supports
@@ -180,20 +182,20 @@ void main_pool_init() {
 
 #if MEMORY_FRAGMENTATION_ZBUFFER_AND_FRAMEBUFFERS == MEMORY_FRAGMENTATION_LEVEL
     // Region before zbuffer and region after the framebuffer2
-    SET_REGION(0, _engineSegmentBssEnd, ZBUFFER_START);
+    SET_REGION(0, _poolStart, ZBUFFER_START);
     SET_REGION(1, FRAMEBUFFER2_END, _goddardSegmentStart);
 #endif
 
 #if MEMORY_FRAGMENTATION_ZBUFFER_AND_FRAMEBUFFERS_SPLIT == MEMORY_FRAGMENTATION_LEVEL
     // Regions before zbuffer, after the framebuffer2, between zbuffer and framebuffer0
     SET_REGION(0, 0x80600000, _goddardSegmentStart);
-    SET_REGION(1, _engineSegmentBssEnd, ZBUFFER_START);
+    SET_REGION(1, _poolStart, ZBUFFER_START);
     SET_REGION(2, FRAMEBUFFER2_END, 0x80600000);
 #endif
 
 #if MEMORY_FRAGMENTATION_ZBUFFER_AND_EACH_FRAMEBUFFER == MEMORY_FRAGMENTATION_LEVEL
     // Region before zbuffer, between fb0/fb1, after fb2
-    SET_REGION(0, _engineSegmentBssEnd, ZBUFFER_START);
+    SET_REGION(0, _poolStart, ZBUFFER_START);
     SET_REGION(1, FRAMEBUFFER0_END, FRAMEBUFFER1_START);
     SET_REGION(2, FRAMEBUFFER2_END, _goddardSegmentStart);
 #endif
