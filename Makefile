@@ -434,7 +434,9 @@ ifeq ($(COMPILER),gcc)
   CC      := $(CROSS)gcc
   CXX     := $(CROSS)g++
   $(BUILD_DIR)/actors/%.o:           OPT_FLAGS := -Ofast -mlong-calls
+  $(BUILD_DIR)/actors/%.o:           CFLAGS += -G 0
   $(BUILD_DIR)/levels/%.o:           OPT_FLAGS := -Ofast -mlong-calls
+  $(BUILD_DIR)/levels/%.o:           CFLAGS += -G 0
 else ifeq ($(COMPILER),clang)
   CC      := clang
   CXX     := clang++
@@ -475,17 +477,18 @@ C_DEFINES := $(foreach d,$(DEFINES),-D$(d))
 DEF_INC_CFLAGS := $(foreach i,$(INCLUDE_DIRS),-I$(i)) $(C_DEFINES)
 
 # C compiler options
-CFLAGS = -G 0 $(OPT_FLAGS) $(TARGET_CFLAGS) $(MIPSISET) $(DEF_INC_CFLAGS)
+CFLAGS = $(OPT_FLAGS) $(TARGET_CFLAGS) $(MIPSISET) $(DEF_INC_CFLAGS)
 ifeq ($(COMPILER),gcc)
-  CFLAGS += -mno-shared -march=vr4300 -mfix4300 -mabi=32 -mhard-float -mdivide-breaks -fno-stack-protector -fno-common -fno-zero-initialized-in-bss -fno-PIC -mno-abicalls -fno-strict-aliasing -fno-inline-functions -ffreestanding -fwrapv -Wall -Wextra
+  CFLAGS += -mno-shared -march=vr4300 -mfix4300 -mabi=32 -mhard-float -mdivide-breaks -fno-stack-protector -fno-common -mno-abicalls -fno-strict-aliasing -fno-inline-functions -ffreestanding -fwrapv -Wall -Wextra -Wno-trigraphs
   CFLAGS += -Wno-missing-braces
 else ifeq ($(COMPILER),clang)
-  CFLAGS += -mfpxx -target mips -mabi=32 -G 0 -mhard-float -fomit-frame-pointer -fno-stack-protector -fno-common -I include -I src/ -I $(BUILD_DIR)/include -fno-PIC -mno-abicalls -fno-strict-aliasing -fno-inline-functions -ffreestanding -fwrapv -Wall -Wextra
+  CFLAGS += -mfpxx -target mips -mabi=32 -mhard-float -fomit-frame-pointer -fno-stack-protector -fno-common -I include -I src/ -I $(BUILD_DIR)/include -fno-PIC -mno-abicalls -fno-strict-aliasing -fno-inline-functions -ffreestanding -fwrapv -Wall -Wextra -Wno-trigraphs
   CFLAGS += -Wno-missing-braces
 else
   CFLAGS += -non_shared -Wab,-r4300_mul -Xcpluscomm -Xfullwarn -signed -32
 endif
-ASMFLAGS = -G 0 $(OPT_FLAGS) $(TARGET_CFLAGS) -mips3 $(DEF_INC_CFLAGS) -mno-shared -march=vr4300 -mfix4300 -mabi=32 -mhard-float -mdivide-breaks -fno-stack-protector -fno-common -fno-zero-initialized-in-bss -fno-PIC -mno-abicalls -fno-strict-aliasing -fno-inline-functions -ffreestanding -fwrapv -Wall -Wextra
+CFLAGS += -Wno-overflow
+ASMFLAGS = -G 3 $(OPT_FLAGS) $(TARGET_CFLAGS) -mips3 $(DEF_INC_CFLAGS) -mno-shared -march=vr4300 -mfix4300 -mabi=32 -mhard-float -mdivide-breaks -fno-stack-protector -fno-common -mno-abicalls -fno-strict-aliasing -fno-inline-functions -ffreestanding -fwrapv -Wall -Wextra -Wno-trigraphs
 
 ASFLAGS     := -march=vr4300 -mabi=32 $(foreach i,$(INCLUDE_DIRS),-I$(i)) $(foreach d,$(DEFINES),--defsym $(d))
 RSPASMFLAGS := $(foreach d,$(DEFINES),-definelabel $(subst =, ,$(d)))
@@ -833,9 +836,25 @@ ifeq ($(FIXLIGHTS),1)
 DUMMY != $(PYTHON) $(FIXLIGHTS_PY) actors
 DUMMY != $(PYTHON) $(FIXLIGHTS_PY) levels
 endif
+$(BUILD_DIR)/src/boot/%.o: src/boot/%.c
+	$(call print,Compiling Boot:,$<,$@)
+	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/boot/$*.d  -o $@ $<
+$(BUILD_DIR)/src/goddard/%.o: src/goddard/%.c
+	$(call print,Compiling Goddard:,$<,$@)
+	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/goddard/$*.d  -o $@ $<
+$(BUILD_DIR)/src/menu/%.o: src/menu/%.c
+	$(call print,Compiling Menu:,$<,$@)
+	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/menu/$*.d  -o $@ $<
+$(BUILD_DIR)/src/ultra/%.o: src/ultra/%.c
+	$(call print,Compiling Ultra:,$<,$@)
+	$(V)$(CC) -c -G 0 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/ultra/$*.d  -o $@ $<
+$(BUILD_DIR)/src/%.o: src/%.c
+	$(call print,Compiling with sdata:,$<,$@)
+	$(V)$(CC) -c -G 64 $(CFLAGS) -MMD -MF $(BUILD_DIR)/src/$*.d  -o $@ $<
+
 $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)
-	$(V)$(CC) -c $(CFLAGS) -MMD -MF $(BUILD_DIR)/$*.d  -o $@ $<
+	$(V)$(CC) -c -G 0 -fno-zero-initialized-in-bss $(CFLAGS) -MMD -MF $(BUILD_DIR)/$*.d  -o $@ $<
 $(BUILD_DIR)/%.o: %.cpp
 	$(call print,Compiling (C++):,$<,$@)
 	$(V)$(CXX) -c $(CFLAGS) -std=c++17 -Wno-register -MMD -MF $(BUILD_DIR)/$*.d  -o $@ $<

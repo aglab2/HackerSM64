@@ -35,7 +35,7 @@ extern void detect_emulator();
  * Test for Console, Ares, or ParallelN64:
  * if (gEmulator & (EMU_CONSOLE | EMU_ARES | EMU_PARALLELN64))
  */
-extern enum Emulator gEmulator;
+extern enum Emulator gEmulator __attribute__((section(".data")));
 
 // Included for backwards compatibility when upgrading from HackerSM64 2.0
 #define gIsConsole ((gEmulator & EMU_CONSOLE) != 0)

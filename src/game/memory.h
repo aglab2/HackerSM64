@@ -29,7 +29,7 @@ struct DmaHandlerList {
 
 #define EFFECTS_MEMORY_POOL 0x4000
 
-extern struct MemoryPool *gEffectsMemoryPool;
+extern struct MemoryPool *gEffectsMemoryPool __attribute__((section(".data")));
 
 uintptr_t set_segment_base_addr(s32 segment, void *addr);
 void *get_segment_base_addr(s32 segment);
@@ -43,9 +43,9 @@ struct MainPoolRegion {
 };
 
 #ifndef MAIN_POOL_SINGLE_REGION
-extern struct MainPoolRegion* gMainPoolCurrentRegion;
+extern struct MainPoolRegion* gMainPoolCurrentRegion __attribute__((section(".data")));
 #else
-extern struct MainPoolContext sMainPool;
+extern struct MainPoolContext sMainPool __attribute__((section(".data")));
 // There is only 1 region which is the first region
 #define gMainPoolCurrentRegion ((struct MainPoolRegion*) &sMainPool)
 #endif
