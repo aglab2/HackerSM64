@@ -1046,6 +1046,7 @@ s32 obj_is_in_view(struct GraphNodeObject *node) {
     } else {
         cullingRadius = DEFAULT_CULLING_RADIUS;
     }
+    cullingRadius = DEFAULT_CULLING_RADIUS;
 
     // Check whether the object is not too far away or too close / behind the camera.
     // This makes the HOLP not update when the camera is far away, and it
@@ -1059,8 +1060,6 @@ s32 obj_is_in_view(struct GraphNodeObject *node) {
     if (absf(cameraToObjectDepth - VALID_DEPTH_MIDDLE) >= VALID_DEPTH_RANGE + cullingRadius) {
         return FALSE;
     }
-
-    return TRUE;
 
 #ifndef CULLING_ON_EMULATOR
     // If an emulator is detected, skip any other culling.
@@ -1082,7 +1081,9 @@ s32 obj_is_in_view(struct GraphNodeObject *node) {
     
     f32 hScreenEdge = -cameraToObjectDepth * gCurGraphNodeCamFrustum->halfFovHorizontal;
 
-    if (absf(node->cameraToObject[0]) > hScreenEdge + cullingRadius) {
+    // print_text_fmt_int(20, 20, "%d", absf(node->cameraToObject[0]));
+    // print_text_fmt_int(20, 40, "%d", hScreenEdge + cullingRadius);
+    if (absf(node->cameraToObject[0]) > 1500) {
         return FALSE;
     }
     return TRUE;
