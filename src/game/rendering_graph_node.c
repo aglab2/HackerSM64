@@ -1060,6 +1060,8 @@ s32 obj_is_in_view(struct GraphNodeObject *node) {
         return FALSE;
     }
 
+    return TRUE;
+
 #ifndef CULLING_ON_EMULATOR
     // If an emulator is detected, skip any other culling.
     if(!(gEmulator & NO_CULLING_EMULATOR_BLACKLIST)){
