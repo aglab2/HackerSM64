@@ -27,6 +27,7 @@
 #include "level_table.h"
 #include "config.h"
 #include "puppyprint.h"
+#include "profiling.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -2872,12 +2873,12 @@ void update_lakitu(struct Camera *c) {
     gLakituState.defMode = c->defMode;
 }
 
-
 /**
  * The main camera update function.
  * Gets controller input, checks for cutscenes, handles mode changes, and moves the camera
  */
 void update_camera(struct Camera *c) {
+    PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
     gCamera = c;
     update_camera_hud_status(c);
     if (c->cutscene == CUTSCENE_NONE
@@ -3094,6 +3095,7 @@ void update_camera(struct Camera *c) {
     }
 #endif
     gLakituState.lastFrameAction = sMarioCamState->action;
+    profiler_update(PROFILER_TIME_CAMERA, profiler_get_delta(PROFILER_DELTA_COLLISION) - first);
 }
 
 /**
@@ -3372,12 +3374,12 @@ void select_mario_cam_mode(void) {
 /**
  * Allocate the GraphNodeCamera's config.camera, and copy `c`'s focus to the Camera's area center point.
  */
-void create_camera(struct GraphNodeCamera *gc, struct AllocOnlyPool *pool) {
+void create_camera(struct GraphNodeCamera *gc) {
 #ifdef FORCED_CAMERA_MODE
     gc->config.mode = FORCED_CAMERA_MODE;
 #endif
     s16 mode = gc->config.mode;
-    struct Camera *c = alloc_only_pool_alloc(pool, sizeof(struct Camera));
+    struct Camera *c = main_pool_alloc(sizeof(struct Camera));
 
     gc->config.camera = c;
     c->mode = mode;
@@ -3407,7 +3409,7 @@ Gfx *geo_camera_main(s32 callContext, struct GraphNode *g, void *context) {
     struct GraphNodeCamera *gc = (struct GraphNodeCamera *) g;
     switch (callContext) {
         case GEO_CONTEXT_CREATE:
-            create_camera(gc, context);
+            create_camera(gc);
             break;
         case GEO_CONTEXT_RENDER:
             update_graph_node_camera(gc);
@@ -4761,6 +4763,9 @@ void start_cutscene(struct Camera *c, u8 cutscene) {
  * @return the victory cutscene to use
  */
 s32 determine_dance_cutscene(UNUSED struct Camera *c) {
+#ifdef NON_STOP_STARS
+    return CUTSCENE_DANCE_DEFAULT;
+#else
     u8 cutscene = CUTSCENE_NONE;
     u8 cutsceneIndex = 0;
     u8 starIndex = (gLastCompletedStarNum - 1) / 2;
@@ -4783,6 +4788,7 @@ s32 determine_dance_cutscene(UNUSED struct Camera *c) {
     }
     cutscene = sDanceCutsceneTable[cutsceneIndex];
     return cutscene;
+#endif
 }
 
 /**
@@ -11020,7 +11026,9 @@ Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context) 
             case CAM_FOV_APP_60:
                 approach_fov_60(marioState);
                 break;
-            //! No default case
+            default:
+                set_fov_45(marioState);
+                break;
         }
     }
 

@@ -70,11 +70,6 @@ u32 gTimeStopState;
 struct Object gObjectPool[OBJECT_POOL_CAPACITY];
 
 /**
- * A special object whose purpose is to act as a parent for macro objects.
- */
-struct Object gMacroObjectDefaultParent;
-
-/**
  * A pointer to gObjectListArray.
  * Given an object list index idx, gObjectLists[idx] is the head of a doubly
  * linked list of all currently spawned objects in the list.
@@ -147,7 +142,7 @@ struct MemoryPool *gObjectMemoryPool;
 s16 gCollisionFlags = COLLISION_FLAGS_NONE;
 TerrainData *gEnvironmentRegions;
 s32 gEnvironmentLevels[20];
-RoomData gDoorAdjacentRooms[60][2];
+struct TransitionRoomData gDoorAdjacentRooms[MAX_NUM_TRANSITION_ROOMS];
 s16 gMarioCurrentRoom;
 s16 gTHIWaterDrained;
 s16 gTTCSpeedSetting;
@@ -402,24 +397,11 @@ s32 unload_deactivated_objects_in_list(struct ObjectNode *objList) {
 /**
  * OR the object's respawn info with bits << 8. If bits = 0xFF, this prevents
  * the object from respawning after leaving and re-entering the area.
- * For macro objects, respawnInfo points to the 16 bit entry in the macro object
- * list. For other objects, it points to the 32 bit behaviorArg in the
- * SpawnInfo.
  */
 void set_object_respawn_info_bits(struct Object *obj, u8 bits) {
-    u32 *info32;
-    u16 *info16;
-
-    switch (obj->respawnInfoType) {
-        case RESPAWN_INFO_TYPE_NORMAL:
-            info32 = (u32 *) obj->respawnInfo;
-            *info32 |= bits << 8;
-            break;
-
-        case RESPAWN_INFO_TYPE_MACRO_OBJECT:
-            info16 = (u16 *) obj->respawnInfo;
-            *info16 |= bits << 8;
-            break;
+    obj->respawnInfo |= bits;
+    if (obj->respawnInfoPointer != NULL) {
+        *obj->respawnInfoPointer |= bits;
     }
 }
 
@@ -471,8 +453,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
         script = segmented_to_virtual(spawnInfo->behaviorScript);
 
         // If the object was previously killed/collected, don't respawn it
-        if ((spawnInfo->behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8))
-            != (RESPAWN_INFO_DONT_RESPAWN << 8)) {
+        if ((spawnInfo->respawnInfo & RESPAWN_INFO_DONT_RESPAWN) != RESPAWN_INFO_DONT_RESPAWN) {
             object = create_object(script);
 
             // Behavior parameters are often treated as four separate bytes, but
@@ -486,8 +467,8 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
             object->unused1 = 0;
 
             // Record death/collection in the SpawnInfo
-            object->respawnInfoType = RESPAWN_INFO_TYPE_NORMAL;
-            object->respawnInfo = &spawnInfo->behaviorArg;
+            object->respawnInfo = spawnInfo->respawnInfo;
+            object->respawnInfoPointer = &spawnInfo->respawnInfo;
 
             // Usually this checks if bparam4 is 1 to decide if this is mario
             // This change allows any object to use that param
@@ -522,10 +503,7 @@ void clear_objects(void) {
     gMarioObject = NULL;
     gMarioCurrentRoom = 0;
 
-    for (i = 0; i < 60; i++) {
-        gDoorAdjacentRooms[i][0] = 0;
-        gDoorAdjacentRooms[i][1] = 0;
-    }
+    bzero(gDoorAdjacentRooms, sizeof(gDoorAdjacentRooms));
 
     debug_unknown_level_select_check();
 
@@ -537,7 +515,7 @@ void clear_objects(void) {
         geo_reset_object_node(&gObjectPool[i].header.gfx);
     }
 
-    gObjectMemoryPool = mem_pool_init(OBJECT_MEMORY_POOL, MEMORY_POOL_LEFT);
+    gObjectMemoryPool = mem_pool_init(OBJECT_MEMORY_POOL);
     gObjectLists = gObjectListArray;
 
     clear_dynamic_surfaces();
@@ -547,11 +525,18 @@ void clear_objects(void) {
  * Update spawner and surface objects.
  */
 void update_terrain_objects(void) {
+    PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
     gObjectCounter = update_objects_in_list(&gObjectLists[OBJ_LIST_SPAWNER]);
-    profiler_update(PROFILER_TIME_SPAWNER);
+    profiler_update(PROFILER_TIME_SPAWNER, profiler_get_delta(PROFILER_DELTA_COLLISION) - first);
 
+#ifdef PUPPYPRINT_DEBUG
+    first = profiler_get_delta(PROFILER_DELTA_COLLISION);
+#endif
     gObjectCounter += update_objects_in_list(&gObjectLists[OBJ_LIST_SURFACE]);
-    profiler_update(PROFILER_TIME_DYNAMIC);
+    profiler_update(PROFILER_TIME_DYNAMIC, profiler_get_delta(PROFILER_DELTA_COLLISION) - first);
+
+    // If the dynamic surface pool has overflowed, throw an error.
+    assert((uintptr_t)gDynamicSurfacePoolEnd <= (uintptr_t)gDynamicSurfacePool + DYNAMIC_SURFACE_POOL_SIZE, "Dynamic surface pool size exceeded");
 }
 
 /**
@@ -563,12 +548,13 @@ void update_non_terrain_objects(void) {
 
     s32 i = 2;
     while ((listIndex = sObjectListUpdateOrder[i]) != -1) {
+        PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
         if (listIndex == OBJ_LIST_PLAYER) {
-            profiler_update(PROFILER_TIME_BEHAVIOR_BEFORE_MARIO);
+            profiler_update(PROFILER_TIME_BEHAVIOR_BEFORE_MARIO, profiler_get_delta(PROFILER_DELTA_COLLISION) - first);
         }
         gObjectCounter += update_objects_in_list(&gObjectLists[listIndex]);
         if (listIndex == OBJ_LIST_PLAYER) {
-            profiler_update(PROFILER_TIME_MARIO);
+            profiler_update(PROFILER_TIME_MARIO, profiler_get_delta(PROFILER_DELTA_COLLISION) - first);
         }
         i++;
     }
@@ -612,6 +598,22 @@ UNUSED static u16 unused_get_elapsed_time(u64 *cycleCounts, s32 index) {
 }
 
 /**
+ * Clear all floors tied to dynamic collision, as they become invalid once the dynamic
+ * surfaces are cleared.
+ * 
+ * NOTE: Checking over the full object pool is slower than checking against the linked lists of active
+ * objects until the active object pool is around half capacity, after which, this is faster.
+ * Change this function to use a linked list instead if you add any additional logic here whatsoever.
+ */
+void clear_dynamic_surface_references(void) {
+    for (s32 i = 0; i < OBJECT_POOL_CAPACITY; i++) {
+        if (gObjectPool[i].oFloor && gObjectPool[i].oFloor->flags & SURFACE_FLAG_DYNAMIC) {
+            gObjectPool[i].oFloor = NULL;
+        }
+    }
+}
+
+/**
  * Update all objects. This includes script execution, object collision detection,
  * and object surface management.
  */
@@ -645,6 +647,9 @@ void update_objects(UNUSED s32 unused) {
 
     // Update all other objects that haven't been updated yet
     update_non_terrain_objects();
+    
+    // Take a snapshot of the current collision processing time.
+    UNUSED u32 firstPoint = profiler_get_delta(PROFILER_DELTA_COLLISION); 
 
     // Unload any objects that have been deactivated
     unload_deactivated_objects();
@@ -663,6 +668,6 @@ void update_objects(UNUSED s32 unused) {
     }
 
     gPrevFrameObjectCount = gObjectCounter;
-    
-    profiler_update(PROFILER_TIME_BEHAVIOR_AFTER_MARIO);
+    // Set the recorded behaviour time, minus the difference between the snapshotted collision time and the actual collision time.
+    profiler_update(PROFILER_TIME_BEHAVIOR_AFTER_MARIO, profiler_get_delta(PROFILER_DELTA_COLLISION) - firstPoint);
 }

@@ -97,18 +97,19 @@ SECTIONS
    BEGIN_SEG(boot, 0x04000000)
    {
       KEEP(BUILD_DIR/asm/rom_header.o(.text*));
-      KEEP(BUILD_DIR/asm/boot.o(.text*));
+      KEEP(BUILD_DIR/asm/ipl3.o(.text*));
    }
    END_SEG(boot)
 
    . = (RAM_START + 0x400);
+#if MEMORY_FRAGMENTATION_NO_FRAGMENTATION == MEMORY_FRAGMENTATION_LEVEL
    BEGIN_NOLOAD(zbuffer)
    {
       BUILD_DIR/src/buffers/zbuffer.o(.bss*);
    }
    END_NOLOAD(zbuffer)
+#endif
 
-   . = _zbufferSegmentBssEnd;
    BEGIN_NOLOAD(buffers)
    {
       BUILD_DIR/src/buffers/buffers.o(.bss*);
@@ -147,8 +148,6 @@ SECTIONS
 
 /* hardcoded symbols to satisfy preliminary link for map parser */
 #ifndef DEBUG_MAP_STACKTRACE
-      parse_map               = MAP_PARSER_ADDRESS;
-      find_function_in_stack  = MAP_PARSER_ADDRESS;
       _mapDataSegmentRomStart = 0;
       gMapEntries   = 0;
       gMapEntrySize = 0;
@@ -159,19 +158,22 @@ SECTIONS
    {
       KEEP(BUILD_DIR/asm/entry.o(.text*));
       KEEP(BUILD_DIR/asm/n64_assert.o(.text*));
+#ifdef EEP
+      KEEP(BUILD_DIR/asm/vc_bin.o(.text*));
+#endif
+      KEEP(BUILD_DIR/asm/emux.o(.text*));
+      KEEP(BUILD_DIR/asm/pj64_get_count_factor_asm.o(.text*));
+      KEEP(BUILD_DIR/asm/round.o(.text*));
+      KEEP(BUILD_DIR/asm/fcr31.o(.text*));
 
       BUILD_DIR/src/boot*.o(.text*);
       BUILD_DIR/src/hvqm*.o(.text*);
       BUILD_DIR/src/usb*.o(.text*);
       BUILD_DIR/src/audio*.o(.text*);
 #ifdef S2DEX_TEXT_ENGINE
-      lib/libs2d_engine.a:*(.text*);
+      BUILD_DIR/src/s2d_engine*.o(.text*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(.text*);
-#else
-      */libultra_rom.a:*.o(.text*);
-#endif
+      */ULTRALIB.a:*.o(.text*);
       */libnustd.a:*.o(.text*);
       */libgcc.a:*.o(.text*);
       */librtc.a:*.o(.text*);
@@ -189,13 +191,9 @@ SECTIONS
       BUILD_DIR/src/boot*.o(.*data*);
       BUILD_DIR/src/audio*.o(.*data*);
 #ifdef S2DEX_TEXT_ENGINE
-      lib/libs2d_engine.a:*(.*data*);
+      BUILD_DIR/src/s2d_engine*.o(.*data*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(.data*);
-#else
-      */libultra_rom.a:*.o(.data*);
-#endif
+      */ULTRALIB.a:*.o(.data*);
       */libhvqm2.a:*.o(.data*);
       */librtc.a:*.o(.data*);
       */libz.a:*.o(.data*);
@@ -209,13 +207,9 @@ SECTIONS
       BUILD_DIR/src/usb*.o(.rodata*);
       BUILD_DIR/src/audio*.o(.rodata*);
 #ifdef S2DEX_TEXT_ENGINE
-      lib/libs2d_engine.a:*(.rodata*);
+      BUILD_DIR/src/s2d_engine*.o(.rodata*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(.rodata*);
-#else
-      */libultra_rom.a:*.o(.rodata*);
-#endif
+      */ULTRALIB.a:*.o(.rodata*);
       */libgcc.a:*.o(.rodata*);
       */librtc.a:*.o(.rodata*);
       */libz.a:*.o(.rodata*);
@@ -230,17 +224,11 @@ SECTIONS
       BUILD_DIR/src/usb*.o(.*bss*);
       BUILD_DIR/src/audio*.o(.*bss*);
 #ifdef S2DEX_TEXT_ENGINE
-      lib/libs2d_engine.a:*(.*bss*);
+      BUILD_DIR/src/s2d_engine*.o(.*bss*);
 #endif
-#if defined(ISVPRINT) || defined(UNF)
-      */libultra_d.a:*.o(COMMON);
-      */libultra_d.a:*.o(.scommon);
-      */libultra_d.a:*.o(.*bss*);
-#else
-      */libultra_rom.a:*.o(COMMON);
-      */libultra_rom.a:*.o(.scommon);
-      */libultra_rom.a:*.o(.*bss*);
-#endif
+      */ULTRALIB.a:*.o(COMMON);
+      */ULTRALIB.a:*.o(.scommon);
+      */ULTRALIB.a:*.o(.*bss*);
       */libhvqm2.a:*.o(.bss*);
       */librtc.a:*.o(.bss*);
       */libz.a:*.o(.bss*);
@@ -288,14 +276,54 @@ SECTIONS
    END_NOLOAD(engine)
 
    . = _engineSegmentBssEnd;
-   BEGIN_NOLOAD(framebuffers)
-   {
-      BUILD_DIR/src/buffers/framebuffers.o(.bss*);
-   }
-   END_NOLOAD(framebuffers)
 
-   __mainPoolStart = .;
-   __mainPoolSize  = (RAM_END - .);
+#if MEMORY_FRAGMENTATION_NO_FRAGMENTATION == MEMORY_FRAGMENTATION_LEVEL
+   BEGIN_NOLOAD(framebuffer0)
+   {
+      BUILD_DIR/src/buffers/framebuffer0.o(.bss*);
+   }
+   END_NOLOAD(framebuffer0)
+
+   BEGIN_NOLOAD(framebuffer1)
+   {
+      BUILD_DIR/src/buffers/framebuffer1.o(.bss*);
+   }
+   END_NOLOAD(framebuffer1)
+
+   BEGIN_NOLOAD(framebuffer2)
+   {
+      BUILD_DIR/src/buffers/framebuffer2.o(.bss*);
+   }
+   END_NOLOAD(framebuffer2)
+#else
+   . = ZBUFFER_START;
+   BEGIN_NOLOAD(zbuffer)
+   {
+      BUILD_DIR/src/buffers/zbuffer.o(.bss*);
+   }
+   END_NOLOAD(zbuffer)
+
+   . = FRAMEBUFFER0_START;
+   BEGIN_NOLOAD(framebuffer0)
+   {
+      BUILD_DIR/src/buffers/framebuffer0.o(.bss*);
+   }
+   END_NOLOAD(framebuffer0)
+
+   . = FRAMEBUFFER1_START;
+   BEGIN_NOLOAD(framebuffer1)
+   {
+      BUILD_DIR/src/buffers/framebuffer1.o(.bss*);
+   }
+   END_NOLOAD(framebuffer1)
+
+   . = FRAMEBUFFER2_START;
+   BEGIN_NOLOAD(framebuffer2)
+   {
+      BUILD_DIR/src/buffers/framebuffer2.o(.bss*);
+   }
+   END_NOLOAD(framebuffer2)
+#endif
 
    __expansionRamStart = (RAM_START + (RAM_1MB * 4));
 #ifndef USE_EXT_RAM
@@ -408,7 +436,6 @@ SECTIONS
 #ifdef PRELIMINARY
       GODDARD_SIZE = SIZEOF(.goddard) + SIZEOF(.goddard.noload);
 #else
-      ASSERT((. <= (SEG_POOL_START + POOL_SIZE)), "Error: extended past pool end.")
 #endif
 
    /* 0x268020 0x268020-0 [0] */

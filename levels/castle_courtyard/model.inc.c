@@ -1,6 +1,3 @@
-Lights1 castle_courtyard_dl_f3dlite_material_layer1_area1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
 Gfx castle_courtyard_dl__0E009010_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 castle_courtyard_dl__0E009010_ci4[] = {
@@ -484,7 +481,8 @@ Gfx mat_castle_courtyard_dl_f3dlite_material_layer1_area1[] = {
 	gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(255, 255, 255, 255),
-	gsSPSetLights1(castle_courtyard_dl_f3dlite_material_layer1_area1_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, castle_courtyard_dl__0E009010_pal_rgba16),
 	gsDPSetTile(0, 0, 0, 256, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
 	gsDPLoadTLUTCmd(5, 12),

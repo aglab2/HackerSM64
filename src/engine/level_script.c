@@ -5,6 +5,7 @@
 
 #include "sm64.h"
 #include "audio/external.h"
+#include "audio/synthesis.h"
 #include "buffers/framebuffers.h"
 #include "buffers/zbuffer.h"
 #include "game/area.h"
@@ -19,7 +20,6 @@
 #include "geo_layout.h"
 #include "graph_node.h"
 #include "level_script.h"
-#include "level_misc_macros.h"
 #include "level_commands.h"
 #include "math_util.h"
 #include "surface_collision.h"
@@ -28,6 +28,7 @@
 #include "game/puppycam2.h"
 #include "game/puppyprint.h"
 #include "game/puppylights.h"
+#include "game/emutest.h"
 
 #include "config.h"
 
@@ -52,8 +53,6 @@ enum ScriptStatus {
 };
 
 static uintptr_t sStack[NUM_TLB_SEGMENTS];
-
-static struct AllocOnlyPool *sLevelPool = NULL;
 
 static u16 sDelayFrames = 0;
 static u16 sDelayFrames2 = 0;
@@ -102,7 +101,7 @@ static s32 eval_script_op(s8 op, s32 arg) {
 
 static void level_cmd_load_and_execute(void) {
     main_pool_push_state();
-    load_segment(CMD_GET(s16, 2), CMD_GET(void *, 4), CMD_GET(void *, 8), MEMORY_POOL_LEFT, CMD_GET(void *, 16), CMD_GET(void *, 20));
+    load_segment(CMD_GET(s16, 2), CMD_GET(void *, 4), CMD_GET(void *, 8), CMD_GET(void *, 16), CMD_GET(void *, 20));
 
     *sStackTop++ = (uintptr_t) NEXT_CMD;
     *sStackTop++ = (uintptr_t) sStackBase;
@@ -118,7 +117,7 @@ static void level_cmd_exit_and_execute(void) {
     main_pool_push_state();
 
     load_segment(CMD_GET(s16, 2), CMD_GET(void *, 4), CMD_GET(void *, 8),
-            MEMORY_POOL_LEFT, CMD_GET(void *, 16), CMD_GET(void *, 20));
+            CMD_GET(void *, 16), CMD_GET(void *, 20));
 
     sStackTop = sStackBase;
     sCurrentCmd = segmented_to_virtual(targetAddr);
@@ -283,7 +282,7 @@ static void level_cmd_load_to_fixed_address(void) {
 
 static void level_cmd_load_raw(void) {
     load_segment(CMD_GET(s16, 2), CMD_GET(void *, 4), CMD_GET(void *, 8),
-            MEMORY_POOL_LEFT, CMD_GET(void *, 12), CMD_GET(void *, 16));
+            CMD_GET(void *, 12), CMD_GET(void *, 16));
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -295,7 +294,7 @@ static void level_cmd_load_yay0(void) {
 static void level_cmd_load_mario_head(void) {
 #ifdef KEEP_MARIO_HEAD
     // TODO: Fix these hardcoded sizes
-    void *addr = main_pool_alloc(DOUBLE_SIZE_ON_64_BIT(0xE1000), MEMORY_POOL_LEFT);
+    void *addr = main_pool_alloc(DOUBLE_SIZE_ON_64_BIT(0xE1000));
     if (addr != NULL) {
         gdm_init(addr, DOUBLE_SIZE_ON_64_BIT(0xE1000));
         gd_add_to_heap(gZBuffer, sizeof(gZBuffer)); // 0x25800
@@ -308,7 +307,7 @@ static void level_cmd_load_mario_head(void) {
 }
 
 static void level_cmd_load_yay0_texture(void) {
-    load_segment_decompress_heap(CMD_GET(s16, 2), CMD_GET(void *, 4), CMD_GET(void *, 8));
+    load_segment_decompress(CMD_GET(s16, 2), CMD_GET(void *, 4), CMD_GET(void *, 8));
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -320,7 +319,7 @@ static void level_cmd_change_area_skybox(void) {
 }
 
 static void level_cmd_init_level(void) {
-    init_graph_node_start(NULL, (struct GraphNodeStart *) &gObjParentGraphNode);
+    init_graph_node_start(FALSE, (struct GraphNodeStart *) &gObjParentGraphNode);
     clear_objects();
     clear_areas();
     main_pool_push_state();
@@ -346,6 +345,9 @@ void unmap_tlbs(void) {
                     osUnmapTLB(gTlbEntries);
                     gTlbSegments[i]--;
                     gTlbEntries--;
+#ifdef PUPPYPRINT_DEBUG
+                    set_segment_memory_printout(i, 0);
+#endif
                 }
             } else {
                 gTlbEntries -= gTlbSegments[i];
@@ -360,25 +362,19 @@ static void level_cmd_clear_level(void) {
     clear_area_graph_nodes();
     clear_areas();
     main_pool_pop_state();
+    // the game does a push on level load and a pop on level unload, we need to add another push to store state after the level has been loaded, so one more pop is needed
+    main_pool_pop_state();
     unmap_tlbs();
 
     sCurrentCmd = CMD_NEXT;
 }
 
 static void level_cmd_alloc_level_pool(void) {
-    if (sLevelPool == NULL) {
-        sLevelPool = alloc_only_pool_init(main_pool_available() - sizeof(struct AllocOnlyPool),
-                                          MEMORY_POOL_LEFT);
-    }
-
     sCurrentCmd = CMD_NEXT;
 }
 
 static void level_cmd_free_level_pool(void) {
     s32 i;
-
-    alloc_only_pool_resize(sLevelPool, sLevelPool->usedSpace);
-    sLevelPool = NULL;
 
     for (i = 0; i < AREA_COUNT; i++) {
         if (gAreaData[i].terrainData != NULL) {
@@ -386,6 +382,7 @@ static void level_cmd_free_level_pool(void) {
             break;
         }
     }
+    main_pool_push_state();
 
     sCurrentCmd = CMD_NEXT;
 }
@@ -396,7 +393,7 @@ static void level_cmd_begin_area(void) {
 
     if (areaIndex < AREA_COUNT) {
         struct GraphNodeRoot *screenArea =
-            (struct GraphNodeRoot *) process_geo_layout(sLevelPool, geoLayoutAddr);
+            (struct GraphNodeRoot *) process_geo_layout(geoLayoutAddr);
         struct GraphNodeCamera *node = (struct GraphNodeCamera *) screenArea->views[0];
 
         sCurrAreaIndex = areaIndex;
@@ -425,7 +422,7 @@ static void level_cmd_load_model_from_dl(void) {
 
     if (model < MODEL_ID_COUNT) {
         gLoadedGraphNodes[model] =
-            (struct GraphNode *) init_graph_node_display_list(sLevelPool, 0, layer, dl_ptr);
+            (struct GraphNode *) init_graph_node_display_list(TRUE, 0, layer, dl_ptr);
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -436,7 +433,7 @@ static void level_cmd_load_model_from_geo(void) {
     void *geo = CMD_GET(void *, 4);
 
     if (model < MODEL_ID_COUNT) {
-        gLoadedGraphNodes[model] = process_geo_layout(sLevelPool, geo);
+        gLoadedGraphNodes[model] = process_geo_layout(geo);
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -452,7 +449,7 @@ static void level_cmd_23(void) {
         // GraphNodeScale has a GraphNode at the top. This
         // is being stored to the array, so cast the pointer.
         gLoadedGraphNodes[model] =
-            (struct GraphNode *) init_graph_node_scale(sLevelPool, 0, layer, dl, scale);
+            (struct GraphNode *) init_graph_node_scale(TRUE, 0, layer, dl, scale);
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -464,6 +461,7 @@ static void level_cmd_init_mario(void) {
 
     gMarioSpawnInfo->activeAreaIndex = -1;
     gMarioSpawnInfo->areaIndex = 0;
+    gMarioSpawnInfo->respawnInfo = RESPAWN_INFO_NONE;
     gMarioSpawnInfo->behaviorArg = CMD_GET(u32, 4);
     gMarioSpawnInfo->behaviorScript = CMD_GET(void *, 8);
     gMarioSpawnInfo->model = gLoadedGraphNodes[CMD_GET(ModelID16, 0x2)]; // u8, 3?
@@ -475,10 +473,10 @@ static void level_cmd_init_mario(void) {
 static void level_cmd_place_object(void) {
     if (
         sCurrAreaIndex != -1
-        && ((CMD_GET(u8, 2) & (1 << (gCurrActNum - 1))) || (CMD_GET(u8, 2) == 0x1F))
+        && (CMD_GET(u8, 2) & (1 << (gCurrActNum - 1)))
     ) {
         ModelID16 model = CMD_GET(u32, 0x18);
-        struct SpawnInfo *spawnInfo = alloc_only_pool_alloc(sLevelPool, sizeof(struct SpawnInfo));
+        struct SpawnInfo *spawnInfo = main_pool_alloc(sizeof(struct SpawnInfo));
 
         vec3s_set(spawnInfo->startPos, CMD_GET(s16, 4),
                                        CMD_GET(s16, 6),
@@ -490,6 +488,7 @@ static void level_cmd_place_object(void) {
 
         spawnInfo->areaIndex = sCurrAreaIndex;
         spawnInfo->activeAreaIndex = sCurrAreaIndex;
+        spawnInfo->respawnInfo = RESPAWN_INFO_NONE;
 
         spawnInfo->behaviorArg = CMD_GET(u32, 16);
         spawnInfo->behaviorScript = CMD_GET(void *, 20);
@@ -505,7 +504,7 @@ static void level_cmd_place_object(void) {
 static void level_cmd_create_warp_node(void) {
     if (sCurrAreaIndex != -1) {
         struct ObjectWarpNode *warpNode =
-            alloc_only_pool_alloc(sLevelPool, sizeof(struct ObjectWarpNode));
+            main_pool_alloc(sizeof(struct ObjectWarpNode));
 
         warpNode->node.id = CMD_GET(u8, 2);
         warpNode->node.destLevel = CMD_GET(u8, 3) + CMD_GET(u8, 6);
@@ -528,7 +527,7 @@ static void level_cmd_create_instant_warp(void) {
     if (sCurrAreaIndex != -1) {
         if (gAreas[sCurrAreaIndex].instantWarps == NULL) {
             gAreas[sCurrAreaIndex].instantWarps =
-                alloc_only_pool_alloc(sLevelPool, INSTANT_WARP_INDEX_STOP * sizeof(struct InstantWarp));
+                main_pool_alloc(INSTANT_WARP_INDEX_STOP * sizeof(struct InstantWarp));
 
             for (i = INSTANT_WARP_INDEX_START; i < INSTANT_WARP_INDEX_STOP; i++) {
                 gAreas[sCurrAreaIndex].instantWarps[i].id = 0;
@@ -537,12 +536,12 @@ static void level_cmd_create_instant_warp(void) {
 
         warp = gAreas[sCurrAreaIndex].instantWarps + CMD_GET(u8, 2);
 
-        warp[0].id = 1;
+        warp[0].id = SURFACE_INSTANT_WARP_1B + CMD_GET(u8, 2);
         warp[0].area = CMD_GET(u8, 3);
 
-        vec3s_set(warp[0].displacement, CMD_GET(s16, 4),
-                                        CMD_GET(s16, 6),
-                                        CMD_GET(s16, 8));
+        warp[0].displacement[0] = CMD_GET(s32, 4);
+        warp[0].displacement[1] = CMD_GET(s32, 8);
+        warp[0].displacement[2] = CMD_GET(s32, 12);
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -563,7 +562,7 @@ static void level_cmd_create_painting_warp_node(void) {
     if (sCurrAreaIndex != -1) {
         if (gAreas[sCurrAreaIndex].paintingWarpNodes == NULL) {
             gAreas[sCurrAreaIndex].paintingWarpNodes =
-                alloc_only_pool_alloc(sLevelPool, NUM_PAINTINGS * sizeof(struct WarpNode));
+                main_pool_alloc(NUM_PAINTINGS * sizeof(struct WarpNode));
 
             for (i = 0; i < NUM_PAINTINGS; i++) {
                 gAreas[sCurrAreaIndex].paintingWarpNodes[i].id = 0;
@@ -587,7 +586,7 @@ static void level_cmd_3A(void) {
     if (sCurrAreaIndex != -1) {
         if ((val4 = gAreas[sCurrAreaIndex].unused) == NULL) {
             val4 = gAreas[sCurrAreaIndex].unused =
-                alloc_only_pool_alloc(sLevelPool, sizeof(struct UnusedArea28));
+                main_pool_alloc(sizeof(struct UnusedArea28));
         }
 
         val4->unk00 = CMD_GET(s16, 2);
@@ -603,22 +602,19 @@ static void level_cmd_3A(void) {
 static void level_cmd_create_whirlpool(void) {
     struct Whirlpool *whirlpool;
     s32 index = CMD_GET(u8, 2);
-    s32 beatBowser2 =
-        (save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR)) != 0;
 
-    if (CMD_GET(u8, 3) == WHIRLPOOL_COND_ALWAYS
-        || (CMD_GET(u8, 3) == WHIRLPOOL_COND_BOWSER2_NOT_BEATEN   && !beatBowser2)
-        || (CMD_GET(u8, 3) == WHIRLPOOL_COND_BOWSER2_BEATEN       && beatBowser2)
-        || (CMD_GET(u8, 3) == WHIRLPOOL_COND_AT_LEAST_SECOND_STAR && gCurrActNum >= 2)) {
-        if (sCurrAreaIndex != -1 && index < 2) {
-            if ((whirlpool = gAreas[sCurrAreaIndex].whirlpools[index]) == NULL) {
-                whirlpool = alloc_only_pool_alloc(sLevelPool, sizeof(struct Whirlpool));
-                gAreas[sCurrAreaIndex].whirlpools[index] = whirlpool;
-            }
-
-            vec3s_set(whirlpool->pos, CMD_GET(s16, 4), CMD_GET(s16, 6), CMD_GET(s16, 8));
-            whirlpool->strength = CMD_GET(s16, 10);
+    if (
+        sCurrAreaIndex != -1
+        && index < ARRAY_COUNT(gAreas[sCurrAreaIndex].whirlpools)
+        && (CMD_GET(u8, 3) & (1 << (gCurrActNum - 1)))
+    ) {
+        if ((whirlpool = gAreas[sCurrAreaIndex].whirlpools[index]) == NULL) {
+            whirlpool = main_pool_alloc(sizeof(struct Whirlpool));
+            gAreas[sCurrAreaIndex].whirlpools[index] = whirlpool;
         }
+
+        vec3s_set(whirlpool->pos, CMD_GET(s16, 4), CMD_GET(s16, 6), CMD_GET(s16, 8));
+        whirlpool->strength = CMD_GET(s16, 10);
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -642,7 +638,7 @@ static void level_cmd_set_terrain_data(void) {
         // The game modifies the terrain data and must be reset upon level reload.
         Collision *data = segmented_to_virtual(CMD_GET(void *, 4));
         u32 size = get_area_terrain_size(data) * sizeof(Collision);
-        gAreas[sCurrAreaIndex].terrainData = alloc_only_pool_alloc(sLevelPool, size);
+        gAreas[sCurrAreaIndex].terrainData = main_pool_alloc(size);
         memcpy(gAreas[sCurrAreaIndex].terrainData, data, size);
 #endif
     }
@@ -656,22 +652,8 @@ static void level_cmd_set_rooms(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
-static void level_cmd_set_macro_objects(void) {
-    if (sCurrAreaIndex != -1) {
-#ifndef NO_SEGMENTED_MEMORY
-        gAreas[sCurrAreaIndex].macroObjects = segmented_to_virtual(CMD_GET(void *, 4));
-#else
-        // The game modifies the macro object data (for example marking coins as taken),
-        // so it must be reset when the level reloads.
-        MacroObject *data = segmented_to_virtual(CMD_GET(void *, 4));
-        s32 len = 0;
-        while (data[len++] != MACRO_OBJECT_END()) {
-            len += 4;
-        }
-        gAreas[sCurrAreaIndex].macroObjects = alloc_only_pool_alloc(sLevelPool, len * sizeof(MacroObject));
-        memcpy(gAreas[sCurrAreaIndex].macroObjects, data, len * sizeof(MacroObject));
-#endif
-    }
+// Unused. Previously level_cmd_set_macro_objects
+static void level_cmd_39(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -735,18 +717,43 @@ static void level_cmd_show_dialog(void) {
 static void level_cmd_set_music(void) {
     if (sCurrAreaIndex != -1) {
         gAreas[sCurrAreaIndex].musicParam = CMD_GET(s16, 2);
-        gAreas[sCurrAreaIndex].musicParam2 = CMD_GET(s16, 4);
+#ifdef BETTER_REVERB
+        if (gEmulator & EMU_CONSOLE)
+            gAreas[sCurrAreaIndex].betterReverbPreset = CMD_GET(u8, 4);
+        else
+            gAreas[sCurrAreaIndex].betterReverbPreset = CMD_GET(u8, 5);
+#endif
+        gAreas[sCurrAreaIndex].musicParam2 = CMD_GET(s16, 6);
     }
     sCurrentCmd = CMD_NEXT;
 }
 
 static void level_cmd_set_menu_music(void) {
+#ifdef BETTER_REVERB
+    // Must come before set_background_music()
+    if (gEmulator & EMU_CONSOLE)
+        gBetterReverbPresetValue = CMD_GET(u8, 4);
+    else
+        gBetterReverbPresetValue = CMD_GET(u8, 5);
+#endif
     set_background_music(0, CMD_GET(s16, 2), 0);
     sCurrentCmd = CMD_NEXT;
 }
 
 static void level_cmd_fadeout_music(void) {
-    fadeout_music(CMD_GET(s16, 2));
+    s16 dur = CMD_GET(s16, 2);
+    if (sCurrAreaIndex != -1 && dur == 0) {
+        // Allow persistent block overrides for SET_BACKGROUND_MUSIC_WITH_REVERB
+        gAreas[sCurrAreaIndex].musicParam = 0x00;
+        gAreas[sCurrAreaIndex].musicParam2 = 0x00;
+#ifdef BETTER_REVERB
+        gAreas[sCurrAreaIndex].betterReverbPreset = 0x00;
+#endif
+    } else {
+        if (dur < 0)
+            dur = 0;
+        fadeout_music(dur);
+    }
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -797,9 +804,7 @@ static void level_cmd_puppyvolume(void) {
     if ((sPuppyVolumeStack[gPuppyVolumeCount] = mem_pool_alloc(gPuppyMemoryPool, sizeof(struct sPuppyVolume))) == NULL) {
         sCurrentCmd = CMD_NEXT;
         gPuppyError |= PUPPY_ERROR_POOL_FULL;
-#if PUPPYPRINT_DEBUG
         append_puppyprint_log("Puppycamera volume allocation failed.");
-#endif
         return;
     }
 
@@ -847,9 +852,7 @@ static void level_cmd_puppylight_node(void) {
 #ifdef PUPPYLIGHTS
     gPuppyLights[gNumLights] = mem_pool_alloc(gLightsPool, sizeof(struct PuppyLight));
     if (gPuppyLights[gNumLights] == NULL) {
-#if PUPPYPRINT_DEBUG
         append_puppyprint_log("Puppylight allocation failed.");
-#endif
         sCurrentCmd = CMD_NEXT;
         return;
     }
@@ -876,6 +879,17 @@ static void level_cmd_puppylight_node(void) {
     gNumLights++;
 
 #endif
+    sCurrentCmd = CMD_NEXT;
+}
+
+static void level_cmd_set_echo(void) {
+    if (sCurrAreaIndex >= 0 && sCurrAreaIndex < AREA_COUNT) {
+        gAreaData[sCurrAreaIndex].useEchoOverride = TRUE;
+        if (gEmulator & EMU_CONSOLE)
+            gAreaData[sCurrAreaIndex].echoOverride = CMD_GET(s8, 2);
+        else
+            gAreaData[sCurrAreaIndex].echoOverride = CMD_GET(s8, 3);
+    }
     sCurrentCmd = CMD_NEXT;
 }
 
@@ -937,7 +951,7 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*LEVEL_CMD_SET_MUSIC                   */ level_cmd_set_music,
     /*LEVEL_CMD_SET_MENU_MUSIC              */ level_cmd_set_menu_music,
     /*LEVEL_CMD_FADEOUT_MUSIC               */ level_cmd_fadeout_music,
-    /*LEVEL_CMD_SET_MACRO_OBJECTS           */ level_cmd_set_macro_objects,
+    /*LEVEL_CMD_39                          */ level_cmd_39, // previously level_cmd_set_macro_objects
     /*LEVEL_CMD_3A                          */ level_cmd_3A,
     /*LEVEL_CMD_CREATE_WHIRLPOOL            */ level_cmd_create_whirlpool,
     /*LEVEL_CMD_GET_OR_SET_VAR              */ level_cmd_get_or_set_var,
@@ -945,6 +959,7 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*LEVEL_CMD_CHANGE_AREA_SKYBOX          */ level_cmd_change_area_skybox,
     /*LEVEL_CMD_PUPPYLIGHT_ENVIRONMENT      */ level_cmd_puppylight_environment,
     /*LEVEL_CMD_PUPPYLIGHT_NODE             */ level_cmd_puppylight_node,
+    /*LEVEL_CMD_SET_ECHO                    */ level_cmd_set_echo,
 };
 
 struct LevelCommand *level_script_execute(struct LevelCommand *cmd) {
