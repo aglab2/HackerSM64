@@ -3085,6 +3085,17 @@ void update_camera(struct Camera *c) {
     gLakituState.lastFrameAction = sMarioCamState->action;
 }
 
+void reset_cs() {
+    gCutsceneTimer = 0;
+    sCutsceneShot = 0;
+    gCutsceneObjSpawn = CUTSCENE_OBJ_NONE;
+    gObjCutsceneDone = FALSE;
+    gCutsceneFocus = NULL;
+    
+    sObjectCutscene = CUTSCENE_NONE;
+    gRecentCutscene = CUTSCENE_NONE;
+}
+
 /**
  * Reset all the camera variables to their arcane defaults
  */

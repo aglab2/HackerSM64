@@ -2,7 +2,7 @@
 
 #include "game/print.h"
 
-#define FEUD_VERSION_LINE "VERSION 6"
+#define FEUD_VERSION_LINE "VERSION 7"
 
 struct Player
 {
@@ -46,7 +46,7 @@ struct FinalRound
     struct Answer answersAfter[5];
 };
 
-__attribute__((aligned(32))) struct FeudConfig
+__attribute__((aligned(256))) struct FeudConfig
 {
     char header[32];
     struct State state;
@@ -610,6 +610,7 @@ static void perform_buzzer_action()
     sCurrentResponder = currentRound() + o->oSubAction / 2;
 }
 
+extern void reset_cs();
 extern void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 extern BehaviorScript bhvPanel[];
 void bhv_ctl_loop()
@@ -948,24 +949,31 @@ void bhv_ctl_loop()
         }
     }
 
+    u8 wantCutscene = 0;
     if (sShowMonitor)
     {
-        gCamera->cutscene = CUTSCENE_MAIN_SCENE;
+        wantCutscene = CUTSCENE_MAIN_SCENE;
     }
     else
     {
         switch (sNormalFinalePosition)
         {
             case FP_LEFT:
-                gCamera->cutscene = CUTSCENE_LEFT;
+                wantCutscene = CUTSCENE_LEFT;
                 break;
             case FP_RIGHT:
-                gCamera->cutscene = CUTSCENE_RIGHT;
+                wantCutscene = CUTSCENE_RIGHT;
                 break;
             case FP_NEUTRAL:
-                gCamera->cutscene = 0;
+                wantCutscene = 0;
                 break;
         }
+    }
+
+    if (gCamera->cutscene != wantCutscene)
+    {
+        reset_cs();
+        gCamera->cutscene = wantCutscene;
     }
 
     // print_text_fmt_int(20, 60, "X %d", (int) gMarioStates->pos[0]);
