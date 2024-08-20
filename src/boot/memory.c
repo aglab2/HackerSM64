@@ -705,7 +705,7 @@ matches:
 }
 #endif
 
-#if defined(LZ4) || defined(LZ4T)
+#if defined(LZ4) || defined(LZ4T) || defined(YAY0)
 #define DMA_ASYNC_HEADER_SIZE 16
 #else
 #define DMA_ASYNC_HEADER_SIZE 0
@@ -755,7 +755,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 #elif RNC2
             Propack_UnpackM2(compressed, dest);
 #elif YAY0
-            slidstart(compressed, dest);
+            slidstart(compressed + 16, *size, dest, &asyncCtx);
 #elif MIO0
             decompress(compressed, dest);
 #elif LZ4

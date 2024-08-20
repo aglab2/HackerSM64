@@ -74,7 +74,7 @@ typedef enum { noDictCtx, usingDictCtxHc } dictCtx_directive;
 
 /*===   Constants   ===*/
 #define OPTIMAL_ML (int)((ML_MASK-1)+MINMATCH)
-#define LZ4_OPT_NUM   (1<<12)
+#define LZ4_OPT_NUM   (1<<16)
 
 
 /*===   Macros   ===*/
@@ -87,7 +87,12 @@ typedef enum { noDictCtx, usingDictCtxHc } dictCtx_directive;
 
 /*===   Hashing   ===*/
 #define LZ4HC_HASHSIZE 4
-#define HASH_FUNCTION(i)         (((i) * 2654435761U) >> ((4*8)-LZ4HC_HASH_LOG))
+#ifdef LZ4U
+#define HASH_MASK 0x00ffffffU
+#else
+#define HASH_MASK 0xffffffffU
+#endif
+#define HASH_FUNCTION(i)         (((i & 0x00ffffff) * 2654435761U) >> ((4*8)-LZ4HC_HASH_LOG))
 static U32 LZ4HC_hashPtr(const void* ptr) { return HASH_FUNCTION(LZ4_read32(ptr)); }
 
 #if defined(LZ4_FORCE_MEMORY_ACCESS) && (LZ4_FORCE_MEMORY_ACCESS==2)
@@ -776,7 +781,7 @@ LZ4HC_InsertAndGetWiderMatch (
             assert(matchPtr < ip);
             assert(longest >= 1);
             if (LZ4_read16(iLowLimit + longest - 1) == LZ4_read16(matchPtr - lookBackLength + longest - 1)) {
-                if (LZ4_read32(matchPtr) == pattern) {
+                if ((LZ4_read32(matchPtr) & HASH_MASK) == (pattern & HASH_MASK)) {
                     int const back = lookBackLength ? LZ4HC_countBack(ip, matchPtr, iLowLimit, prefixPtr) : 0;
                     matchLength = MINMATCH + (int)LZ4_count(ip+MINMATCH, matchPtr+MINMATCH, iHighLimit);
                     matchLength -= back;
@@ -790,7 +795,7 @@ LZ4HC_InsertAndGetWiderMatch (
             const BYTE* const matchPtr = dictStart + (matchIndex - dictIdx);
             assert(matchIndex >= dictIdx);
             if ( likely(matchIndex <= prefixIdx - 4)
-              && (LZ4_read32(matchPtr) == pattern) ) {
+              && ((LZ4_read32(matchPtr) & HASH_MASK) == (pattern & HASH_MASK)) ) {
                 int back = 0;
                 const BYTE* vLimit = ip + (prefixIdx - matchIndex);
                 if (vLimit > iHighLimit) vLimit = iHighLimit;
@@ -1247,7 +1252,7 @@ LZ4HC_compress_generic_internal (
         { lz4hc,   256, 16 },  /* 9 */
         { lz4opt,   96, 64 },  /*10==LZ4HC_CLEVEL_OPT_MIN*/
         { lz4opt,  512,128 },  /*11 */
-        { lz4opt,16384,LZ4_OPT_NUM },  /* 12==LZ4HC_CLEVEL_MAX */
+        { lz4opt,163840,LZ4_OPT_NUM },  /* 12==LZ4HC_CLEVEL_MAX */
     };
 
     DEBUGLOG(5, "LZ4HC_compress_generic_internal(src=%p, srcSize=%d)",
