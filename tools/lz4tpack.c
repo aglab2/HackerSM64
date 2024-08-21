@@ -47,6 +47,15 @@ static uint32_t sNibblesPushed = 0;
 
 static uint16_t* sDeferredNibblePtr = NULL;
 
+static void LZ4T_resetGlobals(void)
+{
+    sCurrentNibblePendingOutputPtr = NULL;
+    sCurrentNibble = 0;
+    sCurrentNibbleShift = 8;
+    sNibblesPushed = 0;
+    sDeferredNibblePtr = NULL;
+}
+
 #define TINY_LITERAL_LIMIT 21
 #define TINY_MINMATCH (MINMATCH - 1)
 // 0b0000 and 0b0111 are reserved
@@ -479,6 +488,43 @@ static char* LZ4T_unpack(const char* in)
     return dst;
 }
 
+// MARK: LZ4T Compressor
+
+static void* LZ4T_compress(const char* src, int srcSize, int* pcompSize, uint32_t* pfirstNibble)
+{
+    uint32_t firstNibble = 0;
+    char* dst = malloc(MAX_COMP_SIZE);
+    LZ4_streamHC_t* state = LZ4_createStreamHC();
+#ifdef FAVOR_DECOMPRESSION_SPEED
+    LZ4_favorDecompressionSpeed(state, 1);
+#endif
+    LZ4_setCompressionLevel(state, COMPRESSION_LEVEL);  
+    sCurrentNibblePendingOutputPtr = &firstNibble;
+    LOG("src=%p dst=%p srcSize=%u", src, dst, srcSize);
+    int compSize = LZ4_compress_HC_continue(state, (char*)src, dst, srcSize, MAX_COMP_SIZE);
+    LZ4_freeStreamHC(state);
+    if (sCurrentNibblePendingOutputPtr)
+    {
+        printf("Error: Nibble output pointer is not NULL after compression\n");
+        abort();
+    }
+    if (0 == compSize)
+    {
+        printf("Compression failed!\n");
+        abort();
+    }
+
+#if 0
+    char* buf = malloc(8 * 1024 * 1024);
+    patch_lz4_block(dst, compSize, buf, 8 * 1024 * 1024);
+    free(buf);
+#endif
+
+    *pcompSize = compSize;
+    *pfirstNibble = firstNibble;
+    return dst;
+}
+
 // MARK: Tools to work with files and output blocks
 
 static void saveBufferToFile(const char* buffer, size_t size, const char* filename)
@@ -518,41 +564,6 @@ static void* readFile(const char* filename, int* psize)
 
     *psize = size;
     return buffer;
-}
-
-static void* LZ4T_compress(const char* src, int srcSize, int* pcompSize, uint32_t* pfirstNibble)
-{
-    uint32_t firstNibble = 0;
-    char* dst = malloc(MAX_COMP_SIZE);
-    LZ4_streamHC_t* state = LZ4_createStreamHC();
-#ifdef FAVOR_DECOMPRESSION_SPEED
-    LZ4_favorDecompressionSpeed(state, 1);
-#endif
-    LZ4_setCompressionLevel(state, COMPRESSION_LEVEL);  
-    sCurrentNibblePendingOutputPtr = &firstNibble;
-    LOG("src=%p dst=%p srcSize=%u", src, dst, srcSize);
-    int compSize = LZ4_compress_HC_continue(state, (char*)src, dst, srcSize, MAX_COMP_SIZE);
-    LZ4_freeStreamHC(state);
-    if (sCurrentNibblePendingOutputPtr)
-    {
-        printf("Error: Nibble output pointer is not NULL after compression\n");
-        abort();
-    }
-    if (0 == compSize)
-    {
-        printf("Compression failed!\n");
-        abort();
-    }
-
-#if 0
-    char* buf = malloc(8 * 1024 * 1024);
-    patch_lz4_block(dst, compSize, buf, 8 * 1024 * 1024);
-    free(buf);
-#endif
-
-    *pcompSize = compSize;
-    *pfirstNibble = firstNibble;
-    return dst;
 }
 
 static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSize, bool isShortOffset, uint8_t minMatch, uint32_t firstNibble, const char* filename)
