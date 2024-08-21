@@ -310,58 +310,14 @@ static int LZ4T_unpack_size(const char** _in, int* _giganticCounts)
 #undef in
 }
 
-static void LZ4T_handle_match(char** _out, const char** _in, int* _nibblesHandled, int* _matchesCounts, int* _largeMatchesCounts, int32_t* _giganticMatchesCounts, int32_t* _nibbles, int tinyMatchLimit)
-{
-#define out (*_out)
-#define in (*_in)
-#define nibblesHandled (*_nibblesHandled)
-#define nibbles (*_nibbles)
-#define matchesCounts (*_matchesCounts)
-#define largeMatchesCounts (*_largeMatchesCounts)
-
-    LOG("%d: Handle match nibble 0x%x | 0x%x\n", nibblesHandled, ((uint32_t) nibbles) >> 28, tinyMatchLimit);
-    matchesCounts++;
-    uint16_t packedOffset = __builtin_bswap16(*(uint16_t*)in);
-    in += 2;
-
-    uint16_t nibble = (packedOffset >> 12) & 0xf;
-    uint16_t offset = (packedOffset & 0xfff) + 1;
-
-    LOG("Offset: %d, Nibble: 0x%x\n", offset, nibble);
-    int amount = TINY_MINMATCH + (((uint32_t) nibbles) >> 28);
-    LOG("Amount: %d\n", amount);
-    if (amount == tinyMatchLimit + 1)
-    {
-        LOG("Amount is %d, unpacking extras\n", tinyMatchLimit);
-        largeMatchesCounts++;
-        amount = LZ4T_unpack_size(&in, _giganticMatchesCounts) + tinyMatchLimit + 1;
-    }
-
-    LOG("Copying amount %d: %p %p\n", amount, out, out - offset);
-    for (int i = 0; i < amount; i++)
-    {
-        out[i] = out[i - offset];
-    }
-    out += amount;
-
-    LOG("Push in nibble: 0x%x\n", nibble);
-    nibbles &= ~0xf0000000;
-    nibbles |= (nibble << 28);
-
-#undef largeMatchesCounts
-#undef matchesCounts
-#undef nibbles
-#undef nibblesHandled
-#undef in
-#undef out
-}
-
 static char* LZ4T_unpack(const char* in)
 {
     const uint32_t* src = (const uint32_t*)in;
     uint32_t magicHeader = __builtin_bswap32(*src++);
     uint32_t srcSize = __builtin_bswap32(*src++);
-    uint32_t compSize = __builtin_bswap32(*src++);
+    uint16_t shortOffsetMask = in[8];
+    shortOffsetMask <<= 12;
+    int minMatch = in[9];
     int32_t nibbles = 0;
     int nibblesHandled = 0;
     int largeLiteralsCounts = 0;
@@ -389,7 +345,10 @@ static char* LZ4T_unpack(const char* in)
             }
         }
 
+        int tinyMatchLimit = TINY_MATCH_LIMIT;
         nibblesHandled++;
+
+        // literals
         if (nibbles < 0)
         {
             LOG("%d: Handle literal nibble 0x%x\n", nibblesHandled, ((uint32_t) nibbles) >> 28);
@@ -397,7 +356,6 @@ static char* LZ4T_unpack(const char* in)
             literalsCounts++;
             int amount = 7 & (nibbles >> 28);
             LOG("Amount: %d\n", amount);
-            bool loadExMatch = false;
             if (amount == 0)
             {
                 largeLiteralsCounts++;
@@ -407,7 +365,6 @@ static char* LZ4T_unpack(const char* in)
                 memcpy(out, in, amount);
                 out += amount;
                 in += amount;
-                loadExMatch = true;
             }
             else
             {
@@ -415,38 +372,81 @@ static char* LZ4T_unpack(const char* in)
                 LOG("Copying amount %d wildly: %p %p\n", amount, out, in);
                 out += amount;
                 in += amount;
-                loadExMatch = (7 != amount);
-                if (loadExMatch)
+                if (7 == amount)
+                {
+                    nibbles <<= 4;
+                    continue;
+                }
+                else
+                {
                     exMatchesAfterLimLiterals++;
+                }
             }
 
             nibbles <<= 4;
-            if (loadExMatch)
+            if (0 == nibbles)
             {
-                if (0 == nibbles)
+                nibbles = __builtin_bswap32(*(uint32_t*) in);
+                in += 4;
+                LOG("Loaded new pack of nibbles: %x\n", nibbles);
+                if (!nibbles)
                 {
-                    nibbles = __builtin_bswap32(*(uint32_t*) in);
-                    in += 4;
-                    LOG("Loaded new pack of nibbles: %x\n", nibbles);
-                    if (!nibbles)
-                    {
-                        break;
-                    }
+                    break;
                 }
-                nibblesHandled++;
-                exMatchesCounts++;
-                LZ4T_handle_match(&out, &in, &nibblesHandled, &matchesCounts, &largeMatchesCounts, &giganticMatchesCounts, &nibbles, TINY_MATCH_LIMIT_EX);
             }
+            nibblesHandled++;
+            exMatchesCounts++;
+            tinyMatchLimit = TINY_MATCH_LIMIT_EX;
         }
-        else
+
+        // matches
         {
-            LZ4T_handle_match(&out, &in, &nibblesHandled, &matchesCounts, &largeMatchesCounts, &giganticMatchesCounts, &nibbles, TINY_MATCH_LIMIT);
+            LOG("%d: Handle match nibble 0x%x | 0x%x\n", nibblesHandled, ((uint32_t) nibbles) >> 28, tinyMatchLimit);
+            matchesCounts++;
+            uint16_t offset = __builtin_bswap16(*(uint16_t*)in);
+            in += 2;
+            
+            uint32_t nibble = 0;
+            if (shortOffsetMask)
+            {
+                nibble = ((uint32_t) (offset & 0xf000)) << 16;
+                offset &= 0xfff;
+            }
+            offset++;
+
+            LOG("Offset: %d, Nibble: 0x%x\n", offset, nibble);
+            int amount = minMatch + (((uint32_t) nibbles) >> 28);
+            LOG("Amount: %d\n", amount);
+            if (amount == tinyMatchLimit + 1)
+            {
+                LOG("Amount is %d, unpacking extras\n", tinyMatchLimit);
+                largeMatchesCounts++;
+                amount = LZ4T_unpack_size(&in, &giganticMatchesCounts) + tinyMatchLimit + 1;
+            }
+
+            LOG("Copying amount %d: %p %p\n", amount, out, out - offset);
+            for (int i = 0; i < amount; i++)
+            {
+                out[i] = out[i - offset];
+            }
+            out += amount;
+
+            if (shortOffsetMask)
+            {
+                LOG("Push in nibble: 0x%x\n", nibble);
+                nibbles &= ~0xf0000000;
+                nibbles |= nibble;
+            }
+            else
+            {
+                nibbles <<= 4;
+            }
         }
     }
 
-    printf("U: Literals: %d (%d large, %d gigantic)\n", literalsCounts, largeLiteralsCounts, giganticLiteralsCounts);
-    printf("U: Matches: %d (%d large, %d gigantic)\n", matchesCounts, largeMatchesCounts, giganticMatchesCounts);
-    printf("U: Ex matches: %d (%d after !7)\n", exMatchesCounts, exMatchesAfterLimLiterals);
+    printf("Literals: %d (%d large, %d gigantic)\n", literalsCounts, largeLiteralsCounts, giganticLiteralsCounts);
+    printf("Matches: %d (%d large, %d gigantic)\n", matchesCounts, largeMatchesCounts, giganticMatchesCounts);
+    printf("Ex matches: %d (%d after !7)\n", exMatchesCounts, exMatchesAfterLimLiterals);
 
     return dst;
 }
