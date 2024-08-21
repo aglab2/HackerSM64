@@ -15,6 +15,7 @@
 #define match_combo_mask $s3
 #define len         $s4
 #define match_lim   $s5
+#define match_min   $s6
 #define v0_st       $s7
 
 #define dma_ctx     $s8
@@ -43,17 +44,18 @@ decompress_lz4u_full_fast:
     sw $s3, 0x24($sp)
     sw $s4, 0x28($sp)
     sw $s5, 0x2C($sp)
+    sw $s6, 0x30($sp)
     sw $s7, 0x34($sp)
     sw $s8, 0x38($sp)
 
     move $s0, $a0
-    move $s1, $a1
-    move $s2, $a2
-    move dma_ctx, $a3
+    lw $s1, 12($a0)
+    move $s2, $a1
+    move dma_ctx, $a2
     li match_combo_mask, 0xf0000000
 
     move dma_ptr, $a0
-    addiu dma_ptr, -16
+    addiu $s0, 16
 
 .Lloop:
     sub $t0, inbuf, dma_ptr                     # check if we need to wait for dma
@@ -111,11 +113,13 @@ decompress_lz4u_full_fast:
     addiu inbuf, 2
     srl match_off, match_combo, 16
 
+    beqz match_combo_mask, .Llz4t
     sll nibbles, 4
     srl nibbles, 4
     and off_nibble, match_combo, match_combo_mask
     or nibbles, off_nibble
     andi match_off, 0xfff
+.Llz4t:
 
     bne len, match_lim, .Lmatch
      add match_len, len, 2
@@ -188,6 +192,7 @@ decompress_lz4u_full_fast:
     lw $s3, 0x24($sp)
     lw $s4, 0x28($sp)
     lw $s5, 0x2C($sp)
+    lw $s6, 0x30($sp)
     lw $s7, 0x34($sp)
     lw $s8, 0x38($sp)
     jr $ra

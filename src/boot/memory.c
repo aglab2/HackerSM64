@@ -531,14 +531,16 @@ static void lz4_unpack(const uint8_t* inbuf, u32 inbufSize, uint8_t* dst, struct
 #endif
 
 #if defined(LZ4T) || defined(LZ4U)
-static void lz4tu_unpack(const uint8_t* restrict inbuf, int32_t nibbles, uint8_t* restrict dst, struct DMAAsyncCtx* ctx)
+static void lz4tu_unpack(const uint8_t* restrict inbuf, uint8_t* restrict dst, struct DMAAsyncCtx* ctx)
 {
 #define LOAD_FRESH_NIBBLES() if (nibbles == 0) { nibbles = GET_UNALIGNED4S(inbuf); if (UNLIKELY(!nibbles)) { return; } inbuf += 4; }
     // DMA checks is checking whether dmaLimit will be exceeded after reading the data.
     // 'dma_async_ctx_read' will wait for the current DMA request and fire the next DMA request
 #define DMA_CHECK(v) if (UNLIKELY(v > dmaLimit)) { dmaLimit = dma_async_ctx_read(ctx); }
 
-    const uint8_t* dmaLimit = inbuf - 16;
+    int32_t nibbles = *(int32_t*) (inbuf + 12);
+    const uint8_t* dmaLimit = inbuf;
+    inbuf += 16;
     while (1)
     {
         // we will need to read the data (literal or offset) so might as well do it unconditionally from the start
@@ -787,11 +789,11 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             else
                 lz4tu_unpack(compressed + DMA_ASYNC_HEADER_SIZE, *(int32_t *) (compressed + 12), dest, &asyncCtx);
 #elif LZ4U
-            extern int decompress_lz4u_full_fast(const void *inbuf, int insize, void *outbuf, void* dmaCtx);
+            extern int decompress_lz4u_full_fast(const void *inbuf, void *outbuf, void* dmaCtx);
             if (LIKELY(gIsConsole))
-                decompress_lz4u_full_fast(compressed + DMA_ASYNC_HEADER_SIZE, *(int32_t *) (compressed + 12), dest, &asyncCtx);
+                decompress_lz4u_full_fast(compressed, dest, &asyncCtx);
             else
-                lz4tu_unpack(compressed + DMA_ASYNC_HEADER_SIZE, *(int32_t *) (compressed + 12), dest, &asyncCtx);
+                lz4tu_unpack(compressed, dest, &asyncCtx);
 #endif
             osSyncPrintf("end decompress\n");
             set_segment_base_addr(segment, dest);
