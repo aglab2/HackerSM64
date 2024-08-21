@@ -520,7 +520,7 @@ static void* readFile(const char* filename, int* psize)
     return buffer;
 }
 
-static void* compress(const char* src, int srcSize, int* pcompSize, uint32_t* pfirstNibble)
+static void* LZ4T_compress(const char* src, int srcSize, int* pcompSize, uint32_t* pfirstNibble)
 {
     uint32_t firstNibble = 0;
     char* dst = malloc(MAX_COMP_SIZE);
@@ -555,7 +555,7 @@ static void* compress(const char* src, int srcSize, int* pcompSize, uint32_t* pf
     return dst;
 }
 
-static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSize, uint8_t shortOffsetMode, uint8_t minMatch, uint32_t firstNibble, const char* filename)
+static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSize, bool isShortOffset, uint8_t minMatch, uint32_t firstNibble, const char* filename)
 {
     FILE* out = fopen(filename, "wb");
     if (out == NULL)
@@ -565,8 +565,10 @@ static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSiz
     }
 
     uint32_t srcSizeBE = __builtin_bswap32(srcSize);
-    uint32_t magicHeader = 'LZ4T';
+    uint8_t shortOffsetMode = isShortOffset ? 0xf : 0;
+    uint8_t magicHeader[] = { 'L', 'Z', '0' + minMatch, shortOffsetMode ? 'U' : 'T' };
     uint16_t stub = 0;
+    minMatch--;
 
     fwrite(&magicHeader     , 1, sizeof(magicHeader)    , out);
     fwrite(&srcSizeBE       , 1, sizeof(srcSizeBE)      , out);
@@ -594,7 +596,7 @@ int main(int argc, char *argv[])
 
     int dstSize;
     uint32_t firstNibble;
-    char* dst = compress(src, srcSize, &dstSize, &firstNibble);
+    char* dst = LZ4T_compress(src, srcSize, &dstSize, &firstNibble);
 
     FILE* out = fopen(argv[2], "wb");
     if (out == NULL)
@@ -603,7 +605,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    saveCompressedBufferToFile(dst, dstSize, srcSize, LZ4T_IS_SHORT_OFFSET ? 0xf : 0, MINMATCH - 1, firstNibble, argv[2]);
+    saveCompressedBufferToFile(dst, dstSize, srcSize, LZ4T_IS_SHORT_OFFSET ? 0xf : 0, MINMATCH, firstNibble, argv[2]);
     free(dst);
 
     // Verifier
