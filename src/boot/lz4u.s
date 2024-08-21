@@ -52,7 +52,9 @@ decompress_lz4u_full_fast:
     lw $s1, 12($a0)
     move $s2, $a1
     move dma_ctx, $a2
-    li match_combo_mask, 0xf0000000
+    lbu match_combo_mask, 8($a0)
+    sll match_combo_mask, 28
+    lbu match_min, 9($a0)
 
     move dma_ptr, $a0
     addiu $s0, 16
@@ -122,7 +124,7 @@ decompress_lz4u_full_fast:
 .Llz4t:
 
     bne len, match_lim, .Lmatch
-     add match_len, len, 2
+     addu match_len, len, match_min
 
     # len is sign extended match_combo[8:15]
     sll match_combo, 16

@@ -269,7 +269,7 @@ BUILD_DIR_BASE := build
 # BUILD_DIR is the location where all build artifacts are placed
 BUILD_DIR      := $(BUILD_DIR_BASE)/$(VERSION)_$(CONSOLE)
 
-COMPRESS ?= lz4u
+COMPRESS ?= lz4t
 $(eval $(call validate-option,COMPRESS,mio0 yay0 lz4 lz4t lz4u gzip rnc1 rnc2 uncomp))
 ifeq ($(COMPRESS),gzip)
   DEFINES += GZIP=1

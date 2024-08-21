@@ -130,7 +130,7 @@ int LZ4HC_encodeSequence (
     }
     assert(offset <= LZ4_DISTANCE_MAX );
     assert(offset > 0);
-    LZ4_write16(op, __builtin_bswap16((U16)(offset))); op += 2;
+    LZ4_write16(op, __builtin_bswap16((U16)(offset - 1))); op += 2;
     LOG("Pushing offset: %d\n", offset);
 
     /* Encode MatchLength */
@@ -300,7 +300,7 @@ static void LZ4T_handle_match(char** _out, const char** _in, int* _nibblesHandle
 
     LOG("%d: Handle match nibble 0x%x | 0x%x\n", nibblesHandled, ((uint32_t) nibbles) >> 28, tinyMatchLimit);
     matchesCounts++;
-    uint16_t offset = __builtin_bswap16(*(uint16_t*)in);
+    uint16_t offset = 1 + __builtin_bswap16(*(uint16_t*)in);
     in += 2;
 
     LOG("Offset: %d\n", offset);
@@ -493,13 +493,17 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    uint32_t compSizeBE = __builtin_bswap32(compSize);
     uint32_t srcSizeBE = __builtin_bswap32(srcSize);
     uint32_t magicHeader = 'LZ4T';
+    uint8_t isU = 0;
+    uint8_t minMatch = MINMATCH - 1;
+    uint16_t stub = 0;
 
     fwrite(&magicHeader  , 1, sizeof(magicHeader), out);
     fwrite(&srcSizeBE    , 1, sizeof(srcSizeBE)  , out);
-    fwrite(&compSizeBE   , 1, sizeof(compSizeBE) , out);
+    fwrite(&isU          , 1, sizeof(isU)        , out);
+    fwrite(&minMatch     , 1, sizeof(minMatch)   , out);
+    fwrite(&stub         , 1, sizeof(stub)       , out);
     fwrite(&firstNibble  , 1, sizeof(firstNibble), out);
 
     fwrite(dst, compSize, 1, out);

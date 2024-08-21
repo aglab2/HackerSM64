@@ -538,6 +538,9 @@ static void lz4tu_unpack(const uint8_t* restrict inbuf, uint8_t* restrict dst, s
     // 'dma_async_ctx_read' will wait for the current DMA request and fire the next DMA request
 #define DMA_CHECK(v) if (UNLIKELY(v > dmaLimit)) { dmaLimit = dma_async_ctx_read(ctx); }
 
+    uint32_t shortOffsetMask = *(uint8_t*) (inbuf + 8);
+    shortOffsetMask <<= 28;
+    int matchMin = *(int8_t*) (inbuf + 9);
     int32_t nibbles = *(int32_t*) (inbuf + 12);
     const uint8_t* dmaLimit = inbuf;
     inbuf += 16;
@@ -638,20 +641,21 @@ matches:
         // It is 16 bit valid offset that fits in 'int', no need to do casts
         int matchOffset = matchCombo >> 16;
 
-#ifdef LZ4U
-        matchOffset &= 0xfff;
+        if (shortOffsetMask)
+        {
+            matchOffset &= 0xfff;
+            nibbles &= ~0xf0000000;
+            nibbles |= (matchCombo & shortOffsetMask);
+        }
+        else
+        {
+            nibbles <<= 4;
+        }
         matchOffset += 1;
-        nibbles &= ~0xf0000000;
-        nibbles |= (matchCombo & 0xf0000000);
-        const int minMatch = 3;
-#else
-        nibbles <<= 4;
-        const int minMatch = 4;
-#endif
 
         // If it is 'regular' match, len='7 & (nibbles >> 28)', otherwise extended match '(nibbles >> 28)'
         // We need to start preparing the value for 'matchLen' which is 'matchLim + 3 + exSize'
-        int matchLen = minMatch - 1 + len;
+        int matchLen = matchMin + len;
         if (matchLim == len)
         {
             // we want extended matchLen so pull it from data
@@ -689,15 +693,15 @@ matches:
         {
             if (1 == matchOffset)
             {
-                uint64_t data = *copySrc;
+                // I could use 64 bit integer here but generated code is disgusting
+                uint32_t data = *copySrc;
                 data |= data << 8;
                 data |= data << 16;
-                data |= data << 32;
                 do
                 {
-                    PUT_UNALIGNED8(data, dst);
-                    dst += 8;
-                    matchLen -= 8;
+                    PUT_UNALIGNED4(data, dst);
+                    dst += 4;
+                    matchLen -= 4;
                 } while (matchLen > 0);
                 dst += matchLen;            
             }
@@ -782,13 +786,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
                 decompress_lz4_full_fast(compressed + DMA_ASYNC_HEADER_SIZE, lz4CompSize, dest, &asyncCtx);
             else
                 lz4_unpack(compressed + DMA_ASYNC_HEADER_SIZE, lz4CompSize, dest, &asyncCtx);
-#elif LZ4T
-            extern int decompress_lz4t_full_fast(const void *inbuf, int insize, void *outbuf, void* dmaCtx);
-            if (LIKELY(gIsConsole))
-                decompress_lz4t_full_fast(compressed + DMA_ASYNC_HEADER_SIZE, *(int32_t *) (compressed + 12), dest, &asyncCtx);
-            else
-                lz4tu_unpack(compressed + DMA_ASYNC_HEADER_SIZE, *(int32_t *) (compressed + 12), dest, &asyncCtx);
-#elif LZ4U
+#elif defined(LZ4T) || defined(LZ4U)
             extern int decompress_lz4u_full_fast(const void *inbuf, void *outbuf, void* dmaCtx);
             if (LIKELY(gIsConsole))
                 decompress_lz4u_full_fast(compressed, dest, &asyncCtx);

@@ -1,7 +1,7 @@
 # Compress binary file
 $(BUILD_DIR)/%.szp: $(BUILD_DIR)/%.bin
 	$(call print,Compressing:,$<,$@)
-	$(V)$(LZ4UPACK) $< $@
+	$(V)$(LZ4TPACK) $< $@
 	$(V)$(LZ4TPACK) $< $@.lz4t
 	$(V)$(LZ3TPACK) $< $@.lz3t
 	$(V)$(LZ4PACK) $< $@.lz4

@@ -521,13 +521,17 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    uint32_t compSizeBE = __builtin_bswap32(compSize);
     uint32_t srcSizeBE = __builtin_bswap32(srcSize);
     uint32_t magicHeader = 'LZ4U';
+    uint8_t isU = 0xf;
+    uint8_t minMatch = MINMATCH - 1;
+    uint16_t stub = 0;
 
     fwrite(&magicHeader  , 1, sizeof(magicHeader), out);
     fwrite(&srcSizeBE    , 1, sizeof(srcSizeBE)  , out);
-    fwrite(&compSizeBE   , 1, sizeof(compSizeBE) , out);
+    fwrite(&isU          , 1, sizeof(isU)        , out);
+    fwrite(&minMatch     , 1, sizeof(minMatch)   , out);
+    fwrite(&stub         , 1, sizeof(stub)       , out);
     fwrite(&firstNibble  , 1, sizeof(firstNibble), out);
 
     fwrite(dst, compSize, 1, out);
