@@ -1,3 +1,5 @@
+// Written by aglab2
+
 #define LZ4_HC_STATIC_LINKING_ONLY
 #define LZ4_COMMONDEFS_ONLY
 #include "lz4hc.h"
@@ -7,6 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+// MARK: Definitions from LZ4HC to LZ4T packer
 
 #define MAX_COMP_SIZE (8*1024*1024)
 
@@ -332,6 +336,8 @@ static int LZ4T_unpack_size(const char** _in, int* _giganticCounts)
 #undef in
 }
 
+// MARK: LZ4T Verifier
+
 static char* LZ4T_unpack(const char* in)
 {
     const uint32_t* src = (const uint32_t*)in;
@@ -473,13 +479,15 @@ static char* LZ4T_unpack(const char* in)
     return dst;
 }
 
+// MARK: Tools to work with files and output blocks
+
 static void saveBufferToFile(const char* buffer, size_t size, const char* filename)
 {
     FILE* out = fopen(filename, "wb");
     if (out == NULL)
     {
-        LOG("Cannot create output file!\n");
-        return;
+        printf("Cannot create output file '%s'!\n", filename);
+        abort();
     }
 
     fwrite(buffer, size, 1, out);
@@ -487,27 +495,33 @@ static void saveBufferToFile(const char* buffer, size_t size, const char* filena
     fclose(out);
 }
 
-int main(int argc, char *argv[])
+static void* readFile(const char* filename, int* psize)
 {
-    if (argc < 3)
-    {
-        printf("Usage: %s [SRC_PATH] [DST_PATH]\n", argv[0]);
-        return -1;
-    }
-    
-    FILE *in = fopen(argv[1], "rb");
+    FILE* in = fopen(filename, "rb");
     if (in == NULL)
     {
-        printf("Cannot open input file!\n");
-        return -1;
+        printf("Cannot open input file '%s'\n", filename);
+        abort();
     }
-    fseek(in, 0, SEEK_END);
-    int srcSize = ftell(in);
-    fseek(in, 0, SEEK_SET);
-    char* src = malloc(srcSize);
-    size_t fread_result = fread(src, srcSize, 1, in);
-    fclose(in);
 
+    fseek(in, 0, SEEK_END);
+    int size = ftell(in);
+    fseek(in, 0, SEEK_SET);
+    char* buffer = malloc(size);
+    size_t fread_result = fread(buffer, size, 1, in);
+    fclose(in);
+    if (1 != fread_result)
+    {
+        printf("Failed to read input file '%s': %d != %d\n", filename, fread_result, size);
+        abort();
+    }
+
+    *psize = size;
+    return buffer;
+}
+
+static void* compress(const char* src, int srcSize, int* pcompSize, uint32_t* pfirstNibble)
+{
     uint32_t firstNibble = 0;
     char* dst = malloc(MAX_COMP_SIZE);
     LZ4_streamHC_t* state = LZ4_createStreamHC();
@@ -527,7 +541,7 @@ int main(int argc, char *argv[])
     if (0 == compSize)
     {
         printf("Compression failed!\n");
-        return -1;
+        abort();
     }
 
 #if 0
@@ -536,6 +550,52 @@ int main(int argc, char *argv[])
     free(buf);
 #endif
 
+    *pcompSize = compSize;
+    *pfirstNibble = firstNibble;
+    return dst;
+}
+
+static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSize, uint8_t shortOffsetMode, uint8_t minMatch, uint32_t firstNibble, const char* filename)
+{
+    FILE* out = fopen(filename, "wb");
+    if (out == NULL)
+    {
+        printf("Cannot create output file '%s'!\n", filename);
+        abort();
+    }
+
+    uint32_t srcSizeBE = __builtin_bswap32(srcSize);
+    uint32_t magicHeader = 'LZ4T';
+    uint16_t stub = 0;
+
+    fwrite(&magicHeader     , 1, sizeof(magicHeader)    , out);
+    fwrite(&srcSizeBE       , 1, sizeof(srcSizeBE)      , out);
+    fwrite(&shortOffsetMode , 1, sizeof(shortOffsetMode), out);
+    fwrite(&minMatch        , 1, sizeof(minMatch)       , out);
+    fwrite(&stub            , 1, sizeof(stub)           , out);
+    fwrite(&firstNibble     , 1, sizeof(firstNibble)    , out);
+
+    fwrite(dst, compSize, 1, out);
+
+    fclose(out);
+}
+
+int main(int argc, char *argv[])
+{
+    if (argc < 3)
+    {
+        printf("Usage: %s [SRC_PATH] [DST_PATH]\n", argv[0]);
+        return -1;
+    }
+
+    // Compression
+    int srcSize;
+    char* src = (char*) readFile(argv[1], &srcSize);
+
+    int dstSize;
+    uint32_t firstNibble;
+    char* dst = compress(src, srcSize, &dstSize, &firstNibble);
+
     FILE* out = fopen(argv[2], "wb");
     if (out == NULL)
     {
@@ -543,39 +603,13 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    uint32_t srcSizeBE = __builtin_bswap32(srcSize);
-    uint32_t magicHeader = 'LZ4U';
-    uint8_t isShortOffset = LZ4T_IS_SHORT_OFFSET ? 0xf : 0;
-    uint8_t minMatch = MINMATCH - 1;
-    uint16_t stub = 0;
-
-    fwrite(&magicHeader  , 1, sizeof(magicHeader)  , out);
-    fwrite(&srcSizeBE    , 1, sizeof(srcSizeBE)    , out);
-    fwrite(&isShortOffset, 1, sizeof(isShortOffset), out);
-    fwrite(&minMatch     , 1, sizeof(minMatch)     , out);
-    fwrite(&stub         , 1, sizeof(stub)         , out);
-    fwrite(&firstNibble  , 1, sizeof(firstNibble)  , out);
-
-    fwrite(dst, compSize, 1, out);
-
-    fclose(out);
-
+    saveCompressedBufferToFile(dst, dstSize, srcSize, LZ4T_IS_SHORT_OFFSET ? 0xf : 0, MINMATCH - 1, firstNibble, argv[2]);
     free(dst);
 
+    // Verifier
     {
-        FILE* in = fopen(argv[2], "rb");
-        if (in == NULL)
-        {
-            printf("Cannot open input file!\n");
-            return -1;
-        }
-        fseek(in, 0, SEEK_END);
-        int compTestSize = ftell(in);
-        fseek(in, 0, SEEK_SET);
-        char* compTest = malloc(compTestSize);
-        size_t fread_result = fread(compTest, compTestSize, 1, in);
-        fclose(in);
-
+        int compTestSize;
+        char* compTest = (char*) readFile(argv[2], &compTestSize);
         char* dec = LZ4T_unpack(compTest);
 
         if (0 != memcmp(dec, src, compTestSize))
