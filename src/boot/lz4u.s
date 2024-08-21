@@ -116,7 +116,6 @@ decompress_lz4u_full_fast:
     and off_nibble, match_combo, match_combo_mask
     or nibbles, off_nibble
     andi match_off, 0xfff
-    addiu match_off, 1
 
     bne len, match_lim, .Lmatch
      add match_len, len, 2
@@ -131,11 +130,11 @@ decompress_lz4u_full_fast:
     add match_len, len
 
 .Lmatch:
-    blt match_off, match_len, .Lmatch1_loop     # check if we can do 8-byte copy
+    ble match_off, match_len, .Lmatch1_loop     # check if we can do 8-byte copy
      sub v0_st, outbuf, match_off                 # calculate start of match
 .Lmatch8_loop:                                  # 8-byte copy loop
-    ldl $t0, 0(v0_st)                             # load 8 bytes
-    ldr $t0, 7(v0_st)
+    ldl $t0, -1(v0_st)                             # load 8 bytes
+    ldr $t0, 6(v0_st)
     addiu v0_st, 8
     sdl $t0, 0(outbuf)                          # store 8 bytes
     sdr $t0, 7(outbuf)
@@ -146,7 +145,7 @@ decompress_lz4u_full_fast:
      addu outbuf, match_len                     # adjust pointer remove extra bytes
 
 .Lmatch1_loop:                                  # 1-byte copy loop
-    lbu $t0, 0(v0_st)                             # load 1 byte
+    lbu $t0, -1(v0_st)                             # load 1 byte
     addiu v0_st, 1
     sb $t0, 0(outbuf)                           # store 1 byte
     addiu match_len, -1
