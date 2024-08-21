@@ -89,9 +89,9 @@ typedef enum { noDictCtx, usingDictCtxHc } dictCtx_directive;
 #define LZ4HC_HASHSIZE 4
 #ifdef LZ4T
 extern uint32_t LZ4T_hashMask;
-#define HASH_MASK LZ4T_hashMask
+#define LZ4T_HASH_MASK LZ4T_hashMask
 #else
-#define HASH_MASK 0xffffffffU
+#define LZ4T_HASH_MASK 0xffffffffU
 #endif
 #define HASH_FUNCTION(i)         (((i & 0x00ffffff) * 2654435761U) >> ((4*8)-LZ4HC_HASH_LOG))
 static U32 LZ4HC_hashPtr(const void* ptr) { return HASH_FUNCTION(LZ4_read32(ptr)); }
@@ -782,7 +782,7 @@ LZ4HC_InsertAndGetWiderMatch (
             assert(matchPtr < ip);
             assert(longest >= 1);
             if (LZ4_read16(iLowLimit + longest - 1) == LZ4_read16(matchPtr - lookBackLength + longest - 1)) {
-                if ((LZ4_read32(matchPtr) & HASH_MASK) == (pattern & HASH_MASK)) {
+                if ((LZ4_read32(matchPtr) & LZ4T_HASH_MASK) == (pattern & LZ4T_HASH_MASK)) {
                     int const back = lookBackLength ? LZ4HC_countBack(ip, matchPtr, iLowLimit, prefixPtr) : 0;
                     matchLength = MINMATCH + (int)LZ4_count(ip+MINMATCH, matchPtr+MINMATCH, iHighLimit);
                     matchLength -= back;
@@ -796,7 +796,7 @@ LZ4HC_InsertAndGetWiderMatch (
             const BYTE* const matchPtr = dictStart + (matchIndex - dictIdx);
             assert(matchIndex >= dictIdx);
             if ( likely(matchIndex <= prefixIdx - 4)
-              && ((LZ4_read32(matchPtr) & HASH_MASK) == (pattern & HASH_MASK)) ) {
+              && ((LZ4_read32(matchPtr) & LZ4T_HASH_MASK) == (pattern & LZ4T_HASH_MASK)) ) {
                 int back = 0;
                 const BYTE* vLimit = ip + (prefixIdx - matchIndex);
                 if (vLimit > iHighLimit) vLimit = iHighLimit;
