@@ -490,7 +490,27 @@ static char* LZ4T_unpack(const char* in)
 
 // MARK: LZ4T Compressor
 
-static void* LZ4T_compress(const char* src, int srcSize, int* pcompSize, uint32_t* pfirstNibble)
+struct SizedBuffer
+{
+    void* buffer;
+    size_t size;
+};
+
+static void freeSizedBuffer(struct SizedBuffer* data)
+{
+    free(data->buffer);
+}
+
+struct CompressedData
+{
+    struct SizedBuffer data;
+    uint32_t firstNibble;
+    bool isShortOffset;
+    uint8_t minMatch;
+    int srcSize;
+};
+
+static struct CompressedData LZ4T_compress(const char* src, int srcSize)
 {
     uint32_t firstNibble = 0;
     char* dst = malloc(MAX_COMP_SIZE);
@@ -520,9 +540,7 @@ static void* LZ4T_compress(const char* src, int srcSize, int* pcompSize, uint32_
     free(buf);
 #endif
 
-    *pcompSize = compSize;
-    *pfirstNibble = firstNibble;
-    return dst;
+    return (struct CompressedData) { (struct SizedBuffer) { dst, compSize }, firstNibble, LZ4T_IS_SHORT_OFFSET, MINMATCH, srcSize };
 }
 
 // MARK: Tools to work with files and output blocks
@@ -541,7 +559,7 @@ static void saveBufferToFile(const char* buffer, size_t size, const char* filena
     fclose(out);
 }
 
-static void* readFile(const char* filename, int* psize)
+static struct SizedBuffer readFile(const char* filename)
 {
     FILE* in = fopen(filename, "rb");
     if (in == NULL)
@@ -562,11 +580,10 @@ static void* readFile(const char* filename, int* psize)
         abort();
     }
 
-    *psize = size;
-    return buffer;
+    return (struct SizedBuffer) { buffer, size };
 }
 
-static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSize, bool isShortOffset, uint8_t minMatch, uint32_t firstNibble, const char* filename)
+static void saveCompressedBufferToFile(struct CompressedData* comp, const char* filename)
 {
     FILE* out = fopen(filename, "wb");
     if (out == NULL)
@@ -575,20 +592,21 @@ static void saveCompressedBufferToFile(const char* dst, int compSize, int srcSiz
         abort();
     }
 
-    uint32_t srcSizeBE = __builtin_bswap32(srcSize);
-    uint8_t shortOffsetMode = isShortOffset ? 0xf : 0;
-    uint8_t magicHeader[] = { 'L', 'Z', '0' + minMatch, shortOffsetMode ? 'U' : 'T' };
+    uint32_t srcSizeBE = __builtin_bswap32(comp->srcSize);
+    uint8_t shortOffsetMode = comp->isShortOffset ? 0xf : 0;
+    uint8_t magicHeader[] = { 'L', 'Z', '0' + comp->minMatch, comp->isShortOffset ? 'U' : 'T' };
     uint16_t stub = 0;
+    uint8_t minMatch = comp->minMatch;
     minMatch--;
 
-    fwrite(&magicHeader     , 1, sizeof(magicHeader)    , out);
-    fwrite(&srcSizeBE       , 1, sizeof(srcSizeBE)      , out);
-    fwrite(&shortOffsetMode , 1, sizeof(shortOffsetMode), out);
-    fwrite(&minMatch        , 1, sizeof(minMatch)       , out);
-    fwrite(&stub            , 1, sizeof(stub)           , out);
-    fwrite(&firstNibble     , 1, sizeof(firstNibble)    , out);
+    fwrite(&magicHeader      , 1, sizeof(magicHeader)      , out);
+    fwrite(&srcSizeBE        , 1, sizeof(srcSizeBE)        , out);
+    fwrite(&shortOffsetMode  , 1, sizeof(shortOffsetMode)  , out);
+    fwrite(&minMatch         , 1, sizeof(minMatch)         , out);
+    fwrite(&stub             , 1, sizeof(stub)             , out);
+    fwrite(&comp->firstNibble, 1, sizeof(comp->firstNibble), out);
 
-    fwrite(dst, compSize, 1, out);
+    fwrite(comp->data.buffer, comp->data.size, 1, out);
 
     fclose(out);
 }
@@ -602,39 +620,26 @@ int main(int argc, char *argv[])
     }
 
     // Compression
-    int srcSize;
-    char* src = (char*) readFile(argv[1], &srcSize);
-
-    int dstSize;
-    uint32_t firstNibble;
-    char* dst = LZ4T_compress(src, srcSize, &dstSize, &firstNibble);
-
-    FILE* out = fopen(argv[2], "wb");
-    if (out == NULL)
-    {
-        printf("Cannot create output file!\n");
-        return -1;
-    }
-
-    saveCompressedBufferToFile(dst, dstSize, srcSize, LZ4T_IS_SHORT_OFFSET ? 0xf : 0, MINMATCH, firstNibble, argv[2]);
-    free(dst);
+    struct SizedBuffer src = readFile(argv[1]);
+    struct CompressedData data = LZ4T_compress(src.buffer, src.size);
+    saveCompressedBufferToFile(&data, argv[2]);
+    freeSizedBuffer(&data.data);
 
     // Verifier
     {
-        int compTestSize;
-        char* compTest = (char*) readFile(argv[2], &compTestSize);
-        char* dec = LZ4T_unpack(compTest);
+        struct SizedBuffer compTest = readFile(argv[2]);
+        char* dec = LZ4T_unpack(compTest.buffer);
 
-        if (0 != memcmp(dec, src, compTestSize))
+        if (0 != memcmp(dec, src.buffer, src.size))
         {
             printf("Compression failed!\n");
             int i;
-            for (i = 0; i < compTestSize; i++)
+            for (i = 0; i < src.size; i++)
             {
-                if (dec[i] != src[i])
+                if (dec[i] != ((uint8_t*)src.buffer)[i])
                 {
-                    printf("Mismatch at %d: %x != %x\n", i, dec[i], src[i]);
-                    saveBufferToFile(dec, compTestSize, "dec.bin");
+                    printf("Mismatch at %d: %x != %x\n", i, dec[i], ((uint8_t*)src.buffer)[i]);
+                    saveBufferToFile(dec, src.size, "dec.bin");
                     break;
                 }
             }
@@ -642,9 +647,9 @@ int main(int argc, char *argv[])
         }
 
         free(dec);
-        free(compTest);
+        freeSizedBuffer(&compTest);
     }
 
-    free(src);
+    freeSizedBuffer(&src);
     return 0;
 }
