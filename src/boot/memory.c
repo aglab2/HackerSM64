@@ -531,7 +531,7 @@ static void lz4_unpack(const uint8_t* inbuf, u32 inbufSize, uint8_t* dst, struct
 #endif
 
 #if defined(LZ4T) || defined(LZ4U)
-static void lz4tu_unpack(const uint8_t* restrict inbuf, uint8_t* restrict dst, struct DMAAsyncCtx* ctx)
+static void lz4t_unpack(const uint8_t* restrict inbuf, uint8_t* restrict dst, struct DMAAsyncCtx* ctx)
 {
 #define LOAD_FRESH_NIBBLES() if (nibbles == 0) { nibbles = GET_UNALIGNED4S(inbuf); if (UNLIKELY(!nibbles)) { return; } inbuf += 4; }
     // DMA checks is checking whether dmaLimit will be exceeded after reading the data.
@@ -787,11 +787,11 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             else
                 lz4_unpack(compressed + DMA_ASYNC_HEADER_SIZE, lz4CompSize, dest, &asyncCtx);
 #elif defined(LZ4T) || defined(LZ4U)
-            extern int decompress_lz4u_full_fast(const void *inbuf, void *outbuf, void* dmaCtx);
+            extern int decompress_lz4t_full_fast(const void *inbuf, void *outbuf, void* dmaCtx);
             if (LIKELY(gIsConsole))
-                decompress_lz4u_full_fast(compressed, dest, &asyncCtx);
+                decompress_lz4t_full_fast(compressed, dest, &asyncCtx);
             else
-                lz4tu_unpack(compressed, dest, &asyncCtx);
+                lz4t_unpack(compressed, dest, &asyncCtx);
 #endif
             osSyncPrintf("end decompress\n");
             set_segment_base_addr(segment, dest);
