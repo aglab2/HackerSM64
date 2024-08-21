@@ -20,10 +20,28 @@
 #define LOG(...)
 #endif
 
+#ifdef LZSO
+int LZ4T_distanceMax = 4096;
+#else
+int LZ4T_distanceMax = 65535;
+#endif
+
+#ifdef LZ3
+uint32_t LZ4T_hashMask = 0x00ffffffU;
+int LZ4T_minMatch = 3;
+#else
+uint32_t LZ4T_hashMask = 0xffffffffU;
+int LZ4T_minMatch = 4;
+#endif
+
+#define LZ4T_IS_SHORT_OFFSET (4096 == LZ4T_distanceMax)
+
 static uint32_t* sCurrentNibblePendingOutputPtr = NULL;
 static uint32_t sCurrentNibble = 0;
 static uint32_t sCurrentNibbleShift = 8;
 static uint32_t sNibblesPushed = 0;
+
+static uint16_t* sDeferredNibblePtr = NULL;
 
 #define TINY_LITERAL_LIMIT 21
 #define TINY_MINMATCH (MINMATCH - 1)
@@ -36,6 +54,17 @@ static void LZ4T_pushNibble(BYTE** _op, uint32_t newNibble)
 {
     sNibblesPushed++;
     LOG("%d: Pushing nibble: %x\n", sNibblesPushed, newNibble);
+
+    if (sDeferredNibblePtr)
+    {
+        LOG("Deferred nibble: %x\n", newNibble);
+        uint16_t packedOffset = __builtin_bswap16(*sDeferredNibblePtr);
+        packedOffset |= (newNibble << 12);
+        *sDeferredNibblePtr = __builtin_bswap16(packedOffset);
+        sDeferredNibblePtr = NULL;
+        return;
+    }
+
     if (0 == sCurrentNibbleShift)
     {
         LOG("Requesting fresh nibbles\n");
@@ -130,7 +159,12 @@ int LZ4HC_encodeSequence (
     }
     assert(offset <= LZ4_DISTANCE_MAX );
     assert(offset > 0);
-    LZ4_write16(op, __builtin_bswap16((U16)(offset - 1))); op += 2;
+    LZ4_write16(op, __builtin_bswap16((U16)(offset - 1)));
+    if (LZ4T_IS_SHORT_OFFSET)
+    {
+        sDeferredNibblePtr = (uint16_t*)op;
+    }
+    op += 2;
     LOG("Pushing offset: %d\n", offset);
 
     /* Encode MatchLength */
@@ -246,8 +280,11 @@ int LZ4HC_sequencePrice(int litlen, int mlen)
     assert(mlen >= MINMATCH);
 
     price += LZ4HC_literalsPrice(litlen);
-    // nibble for encoding match
-    price += 1;
+    // nibble for encoding match is saved because it is rolled from offset in the stream
+    if (!LZ4T_IS_SHORT_OFFSET)
+    {
+        price += 1;
+    }
     int tinyMatchLimit = TINY_MATCH_LIMIT_EX;
     if (litlen <= TINY_LITERAL_LIMIT) {
         if ((litlen % 7) == 0)
@@ -507,17 +544,17 @@ int main(int argc, char *argv[])
     }
 
     uint32_t srcSizeBE = __builtin_bswap32(srcSize);
-    uint32_t magicHeader = 'LZ4T';
-    uint8_t isU = 0;
+    uint32_t magicHeader = 'LZ4U';
+    uint8_t isShortOffset = LZ4T_IS_SHORT_OFFSET ? 0xf : 0;
     uint8_t minMatch = MINMATCH - 1;
     uint16_t stub = 0;
 
-    fwrite(&magicHeader  , 1, sizeof(magicHeader), out);
-    fwrite(&srcSizeBE    , 1, sizeof(srcSizeBE)  , out);
-    fwrite(&isU          , 1, sizeof(isU)        , out);
-    fwrite(&minMatch     , 1, sizeof(minMatch)   , out);
-    fwrite(&stub         , 1, sizeof(stub)       , out);
-    fwrite(&firstNibble  , 1, sizeof(firstNibble), out);
+    fwrite(&magicHeader  , 1, sizeof(magicHeader)  , out);
+    fwrite(&srcSizeBE    , 1, sizeof(srcSizeBE)    , out);
+    fwrite(&isShortOffset, 1, sizeof(isShortOffset), out);
+    fwrite(&minMatch     , 1, sizeof(minMatch)     , out);
+    fwrite(&stub         , 1, sizeof(stub)         , out);
+    fwrite(&firstNibble  , 1, sizeof(firstNibble)  , out);
 
     fwrite(dst, compSize, 1, out);
 

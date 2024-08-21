@@ -665,6 +665,11 @@ LZ4_attach_dictionary(LZ4_stream_t* workingStream,
 #define LZ4_DECOMPRESS_INPLACE_MARGIN(compressedSize)          (((compressedSize) >> 8) + 32)
 #define LZ4_DECOMPRESS_INPLACE_BUFFER_SIZE(decompressedSize)   ((decompressedSize) + LZ4_DECOMPRESS_INPLACE_MARGIN(decompressedSize))  /**< note: presumes that compressedSize < decompressedSize. note2: margin is overestimated a bit, since it could use compressedSize instead */
 
+#ifdef LZ4T
+extern int LZ4T_distanceMax;
+#define LZ4_DISTANCE_MAX LZ4T_distanceMax
+#endif
+
 #ifndef LZ4_DISTANCE_MAX   /* history window size; can be user-defined at compile time */
 #  define LZ4_DISTANCE_MAX 65535   /* set to maximum value by default */
 #endif
