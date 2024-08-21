@@ -239,7 +239,7 @@ void  LZ4_free(void* p);
 /*-************************************
 *  Common Constants
 **************************************/
-#ifdef LZ4U
+#ifdef LZ3
 #define MINMATCH 3
 #else
 #define MINMATCH 4

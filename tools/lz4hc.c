@@ -87,7 +87,7 @@ typedef enum { noDictCtx, usingDictCtxHc } dictCtx_directive;
 
 /*===   Hashing   ===*/
 #define LZ4HC_HASHSIZE 4
-#ifdef LZ4U
+#ifdef LZ3
 #define HASH_MASK 0x00ffffffU
 #else
 #define HASH_MASK 0xffffffffU

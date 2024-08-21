@@ -44,5 +44,5 @@ def find_and_compare_files(directory, extensions):
 
 # Example usage
 directory_path = "./build"
-extensions = [".szp.lz4t", ".szp.yay0", ".szp.lz4", ".szp.lz4u"]  # List of extensions to check
+extensions = [".szp.lz4t", ".szp.lz3t", ".szp.yay0", ".szp.lz4", ".szp.lz4u", ".szp.lz3u"]  # List of extensions to check
 find_and_compare_files(directory_path, extensions)

@@ -7,7 +7,7 @@ CC           := gcc
 CXX          := g++
 CFLAGS       := -I. -O2 -s
 LDFLAGS      := -lm
-ALL_PROGRAMS := armips filesizer lz4pack lz4tpack lz4upack rncpack n64graphics n64graphics_ci mio0 slienc n64cksum textconv aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv flips
+ALL_PROGRAMS := armips filesizer lz4pack lz4tpack lz4upack lz3tpack lz3upack rncpack n64graphics n64graphics_ci mio0 slienc n64cksum textconv aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv flips
 LIBAUDIOFILE := audiofile/libaudiofile.a
 
 ifeq ($(OS),Windows_NT)
@@ -32,9 +32,13 @@ filesizer_SOURCES	:= filesizer.c
 lz4pack_SOURCES	:= lz4.c lz4hc.c lz4pack.c
 lz4pack_CFLAGS  := -flto
 lz4tpack_SOURCES	:= lz4.c lz4hc.c lz4tpack.c
-lz4tpack_CFLAGS  := -DLZ4T -DLZ4U -flto
+lz4tpack_CFLAGS  := -DLZ4T -flto
 lz4upack_SOURCES	:= lz4.c lz4hc.c lz4upack.c
-lz4upack_CFLAGS  := -DLZ4T -DLZ4U -flto -DLZ4_DISTANCE_MAX=4096
+lz4upack_CFLAGS  := -DLZ4T -flto -DLZ4_DISTANCE_MAX=4096
+lz3tpack_SOURCES	:= lz4.c lz4hc.c lz4tpack.c
+lz3tpack_CFLAGS  := -DLZ4T -DLZ3 -flto
+lz3upack_SOURCES	:= lz4.c lz4hc.c lz4upack.c
+lz3upack_CFLAGS  := -DLZ4T -DLZ3 -flto -DLZ4_DISTANCE_MAX=4096
 
 rncpack_SOURCES	:= rncpack.c
 
