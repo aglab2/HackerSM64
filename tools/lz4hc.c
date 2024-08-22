@@ -1253,7 +1253,7 @@ LZ4HC_compress_generic_internal (
         { lz4hc,   256, 16 },  /* 9 */
         { lz4opt,   96, 64 },  /*10==LZ4HC_CLEVEL_OPT_MIN*/
         { lz4opt,  512,128 },  /*11 */
-        { lz4opt,163840,LZ4_OPT_NUM },  /* 12==LZ4HC_CLEVEL_MAX */
+        { lz4opt,16384,LZ4_OPT_NUM },  /* 12==LZ4HC_CLEVEL_MAX */
     };
 
     DEBUGLOG(5, "LZ4HC_compress_generic_internal(src=%p, srcSize=%d)",
