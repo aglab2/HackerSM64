@@ -491,21 +491,26 @@ static char* LZ4T_unpack(const char* in)
     return dst;
 }
 
-static void saveBufferToFile(const char* buffer, size_t size, const char* filename);
-// TODO: Take in compressedSize
-static void LZ4T_verify(const char* orig, int origSize, const char* compressed)
+struct SizedBuffer
 {
-    char* dec = LZ4T_unpack(compressed);
+    void* buffer;
+    size_t size;
+};
 
-    if (0 != memcmp(dec, orig, origSize))
+static void saveBufferToFile(const char* buffer, size_t size, const char* filename);
+static void LZ4T_verify(const struct SizedBuffer* orig, const struct SizedBuffer* compressed)
+{
+    char* dec = LZ4T_unpack(compressed->buffer);
+
+    if (0 != memcmp(dec, orig->buffer, orig->size))
     {
         printf("Compression failed!\n");
-        for (int i = 0; i < origSize; i++)
+        for (int i = 0; i < orig->size; i++)
         {
-            if (dec[i] != orig[i])
+            if (dec[i] != ((uint8_t*) orig->buffer)[i])
             {
-                printf("Mismatch at %d: %x != %x\n", i, dec[i], orig[i]);
-                saveBufferToFile(dec, origSize, "dec.bin");
+                printf("Mismatch at %d: %x != %x\n", i, dec[i], ((uint8_t*) orig->buffer)[i]);
+                saveBufferToFile(dec, orig->size, "dec.bin");
                 break;
             }
         }
@@ -517,12 +522,6 @@ static void LZ4T_verify(const char* orig, int origSize, const char* compressed)
 }
 
 // MARK: LZ4T Block
-
-struct SizedBuffer
-{
-    void* buffer;
-    size_t size;
-};
 
 static void freeSizedBuffer(struct SizedBuffer* data)
 {
@@ -607,7 +606,7 @@ static void LZ4T_setMinMatchMode(bool isShort)
     }
 }
 
-static struct SizedBuffer LZ4T_compress(const char* src, int srcSize)
+static struct SizedBuffer LZ4T_compress(const struct SizedBuffer* data)
 {
     struct SizedBuffer comp = (struct SizedBuffer) { NULL, MAX_COMP_SIZE };
 
@@ -615,10 +614,10 @@ static struct SizedBuffer LZ4T_compress(const char* src, int srcSize)
     {
         LZ4T_setMinMatchMode(!!(i & 1));
         LZ4T_setOffsetMode(!!(i & 2));
-        struct SizedBuffer newCandidate = LZ4T_doCompress(src, srcSize);
+        struct SizedBuffer newCandidate = LZ4T_doCompress(data->buffer, data->size);
         STAT("Compressed to %d bytes with minMatch=%d, isShortOffset=%d\n", newCandidate.size, MINMATCH, LZ4T_IS_SHORT_OFFSET);
 
-        LZ4T_verify(src, srcSize, newCandidate.buffer);
+        LZ4T_verify(data, &newCandidate);
 
         if (newCandidate.size <= comp.size)
         {
@@ -685,7 +684,7 @@ int main(int argc, char *argv[])
 
     // Compression
     {
-        struct SizedBuffer data = LZ4T_compress(src.buffer, src.size);
+        struct SizedBuffer data = LZ4T_compress(&src);
         saveBufferToFile(data.buffer, data.size, argv[2]);
         freeSizedBuffer(&data);
     }
@@ -693,7 +692,7 @@ int main(int argc, char *argv[])
     // Verifier
     {
         struct SizedBuffer compTest = readFile(argv[2]);
-        LZ4T_verify(src.buffer, src.size, compTest.buffer);
+        LZ4T_verify(&src, &compTest);
         freeSizedBuffer(&compTest);
     }
 
