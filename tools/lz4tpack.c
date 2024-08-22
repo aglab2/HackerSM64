@@ -10,21 +10,21 @@
 #include <string.h>
 #include <stdio.h>
 
-// MARK: LZ4HC ops
-
+#define VERIFIER
 #define MAX_COMP_SIZE (8*1024*1024)
-
+// #define DEBUG
+// #define STATS
 // #define FAVOR_DECOMPRESSION_SPEED
 #define COMPRESSION_LEVEL LZ4HC_CLEVEL_MAX
 
-// #define DEBUG
+// MARK: LZ4HC ops
+
 #ifdef DEBUG
 #define LOG(...) printf(__VA_ARGS__)
 #else
 #define LOG(...)
 #endif
 
-// #define STATS
 #ifdef STATS
 #define STAT(...) printf(__VA_ARGS__)
 #else
@@ -317,19 +317,29 @@ struct SizedBuffer
     size_t size;
 };
 
+static void verifySizedBuffer(struct SizedBuffer* data, int amount)
+{
+    if (data->size < amount)
+    {
+        printf("Verifier fail: not enough data to verify %d bytes\n", amount);
+        abort();
+    }
+}
+
+static void moveSizedBuffer(struct SizedBuffer* data, int amount)
+{
+    data->buffer = (uint8_t*)data->buffer + amount;
+    data->size -= amount;
+}
+
 static uint8_t loadVerifyU8(struct SizedBuffer* data)
 {
     uint8_t value;
     size_t size = sizeof(value);
-    if (data->size < size)
-    {
-        printf("Verifier fail: not enough data to load %zu bytes\n", size);
-        abort();
-    }
 
+    verifySizedBuffer(data, size);
     value = *(uint8_t*)data->buffer;
-    data->buffer = (uint8_t*)data->buffer + size;
-    data->size -= size;
+    moveSizedBuffer(data, size);
 
     return value;
 }
@@ -338,15 +348,10 @@ static uint16_t loadVerifyU16(struct SizedBuffer* data)
 {
     uint16_t value;
     size_t size = sizeof(value);
-    if (data->size < size)
-    {
-        printf("Verifier fail: not enough data to load %zu bytes\n", size);
-        abort();
-    }
 
+    verifySizedBuffer(data, size);
     value = LZ4_read16(data->buffer);
-    data->buffer = (uint8_t*)data->buffer + size;
-    data->size -= size;
+    moveSizedBuffer(data, size);
 
     return value;
 }
@@ -355,46 +360,40 @@ static uint32_t loadVerifyU32(struct SizedBuffer* data)
 {
     uint32_t value;
     size_t size = sizeof(value);
-    if (data->size < size)
-    {
-        printf("Verifier fail: not enough data to load %zu bytes\n", size);
-        abort();
-    }
 
+    verifySizedBuffer(data, size);
     value = LZ4_read32(data->buffer);
-    data->buffer = (uint8_t*)data->buffer + size;
-    data->size -= size;
+    moveSizedBuffer(data, size);
 
     return value;
 }
 
-static void wildCopyVerify(struct SizedBuffer* data, void* out, int amount)
+static void wildCopyVerify(struct SizedBuffer* in, struct SizedBuffer* out, int amount)
 {
-    if (data->size < amount)
-    {
-        printf("Verifier fail: not enough data to copy %d bytes\n", amount);
-        abort();
-    }
+    verifySizedBuffer(in, amount);
+    verifySizedBuffer(out, amount);
 
-    LZ4_wildCopy8(out, data->buffer, out + amount);
-    data->buffer = (uint8_t*)data->buffer + amount;
-    data->size -= amount;
+    LZ4_wildCopy8(out->buffer, in->buffer, out->buffer + amount);
+    
+    moveSizedBuffer(in, amount);
+    moveSizedBuffer(out, amount);
 }
 
 static uint64_t wildLoadU64Verify(struct SizedBuffer* data, int size)
 {
     uint64_t value;
-    if (data->size < size)
-    {
-        printf("Verifier fail: not enough data to load %zu bytes\n", size);
-        abort();
-    }
-
+    verifySizedBuffer(data, size);
     LZ4_memcpy(&value, data->buffer, sizeof(uint64_t));
-    data->buffer = (uint8_t*)data->buffer + size;
-    data->size -= size;
+    moveSizedBuffer(data, size);
 
     return value;
+}
+
+static void wildStoreU64Verify(struct SizedBuffer* data, uint64_t value, int size)
+{
+    verifySizedBuffer(data, size);
+    LZ4_memcpy(data->buffer, &value, sizeof(uint64_t));
+    moveSizedBuffer(data, size);
 }
 
 static int LZ4T_unpack_size(struct SizedBuffer* in, int* _giganticCounts)
@@ -457,7 +456,7 @@ static char* LZ4T_unpack(struct SizedBuffer in)
     int exMatchesAfterLimLiterals = 0;
 
     char* dst = malloc(srcSize + 16);
-    char* out = dst;
+    struct SizedBuffer out = { dst, srcSize };
     while (1)
     {
         if (0 == nibbles)
@@ -486,16 +485,14 @@ static char* LZ4T_unpack(struct SizedBuffer in)
                 largeLiteralsCounts++;
                 LOG("Amount is 0, unpacking extras\n");
                 amount = LZ4T_unpack_size(&in, &giganticLiteralsCounts) + TINY_LITERAL_LIMIT + 1;
-                LOG("Copying amount %d via memcpy: %p %p\n", amount, out, in);
-                wildCopyVerify(&in, out, amount);
-                out += amount;
+                LOG("Copying amount %d via memcpy: %p %p\n", amount, out.buffer, in.buffer);
+                wildCopyVerify(&in, &out, amount);
             }
             else
             {
                 uint64_t value = wildLoadU64Verify(&in, amount);
-                *(uint64_t*)out = value;
-                LOG("Copying amount %d wildly: %p %p\n", amount, out, in);
-                out += amount;
+                wildStoreU64Verify(&out, value, amount);
+                LOG("Copying amount %d wildly: %p %p\n", amount, out.buffer, in.buffer);
                 if (7 == amount)
                 {
                     nibbles <<= 4;
@@ -546,10 +543,11 @@ static char* LZ4T_unpack(struct SizedBuffer in)
                 amount = LZ4T_unpack_size(&in, &giganticMatchesCounts) + tinyMatchLimit;
             }
 
-            LOG("Copying amount %d: %p %p\n", amount, out, out - offset);
-            uint8_t* cpy = out + amount;
-            LZ4_memcpy_using_offset(out, out - offset, cpy, offset);
-            out = cpy;
+            LOG("Copying amount %d: %p %p\n", amount, out.buffer, out.buffer - offset);
+            verifySizedBuffer(&out, amount);
+            uint8_t* cpy = (uint8_t*) out.buffer + amount;
+            LZ4_memcpy_using_offset(out.buffer, (uint8_t*) out.buffer - offset, cpy, offset);
+            moveSizedBuffer(&out, amount);
 
             if (shortOffsetMask)
             {
@@ -574,6 +572,8 @@ static char* LZ4T_unpack(struct SizedBuffer in)
 static void saveBufferToFile(const char* buffer, size_t size, const char* filename);
 static void LZ4T_verify(const struct SizedBuffer* orig, const struct SizedBuffer* compressed)
 {
+#ifdef VERIFIER
+
     char* dec = LZ4T_unpack(*compressed);
 
     if (0 != memcmp(dec, orig->buffer, orig->size))
@@ -593,6 +593,10 @@ static void LZ4T_verify(const struct SizedBuffer* orig, const struct SizedBuffer
     }
 
     free(dec);
+#else
+    (void) orig;
+    (void) compressed;
+#endif
 }
 
 // MARK: LZ4T Block
