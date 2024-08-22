@@ -257,8 +257,8 @@ BUILD_DIR_BASE := build
 # BUILD_DIR is the location where all build artifacts are placed
 BUILD_DIR      := $(BUILD_DIR_BASE)/$(VERSION)_$(CONSOLE)
 
-COMPRESS ?= rnc2
-$(eval $(call validate-option,COMPRESS,mio0 yay0 gzip rnc1 rnc2 uncomp))
+COMPRESS ?= lz4t
+$(eval $(call validate-option,COMPRESS,mio0 yay0 lz4t gzip rnc1 rnc2 uncomp))
 ifeq ($(COMPRESS),gzip)
   DEFINES += GZIP=1
   LIBZRULE := $(BUILD_DIR)/libz.a
@@ -271,6 +271,8 @@ else ifeq ($(COMPRESS),yay0)
   DEFINES += YAY0=1
 else ifeq ($(COMPRESS),mio0)
   DEFINES += MIO0=1
+else ifeq ($(COMPRESS),lz4t)
+  DEFINES += LZ4T=1
 else ifeq ($(COMPRESS),uncomp)
   DEFINES += UNCOMPRESSED=1
 endif
@@ -486,6 +488,7 @@ CPPFLAGS := -P -Wno-trigraphs $(DEF_INC_CFLAGS)
 
 # N64 tools
 YAY0TOOL              := $(TOOLS_DIR)/slienc
+LZ4TPACK              := $(TOOLS_DIR)/lz4tpack
 MIO0TOOL              := $(TOOLS_DIR)/mio0
 RNCPACK               := $(TOOLS_DIR)/rncpack
 ROMALIGN              := $(TOOLS_DIR)/romalign
@@ -720,6 +723,8 @@ else ifeq ($(COMPRESS),yay0)
 include compression/yay0rules.mk
 else ifeq ($(COMPRESS),mio0)
 include compression/mio0rules.mk
+else ifeq ($(COMPRESS),lz4t)
+include compression/lz4trules.mk
 else ifeq ($(COMPRESS),uncomp)
 include compression/uncomprules.mk
 endif
