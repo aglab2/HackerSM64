@@ -404,7 +404,7 @@ static char* LZ4T_unpack(const char* in)
                 LOG("Amount is 0, unpacking extras\n");
                 amount = LZ4T_unpack_size(&in, &giganticLiteralsCounts) + TINY_LITERAL_LIMIT + 1;
                 LOG("Copying amount %d via memcpy: %p %p\n", amount, out, in);
-                memcpy(out, in, amount);
+                LZ4_wildCopy8(out, in, out + amount);
                 out += amount;
                 in += amount;
             }
@@ -467,12 +467,9 @@ static char* LZ4T_unpack(const char* in)
             }
 
             LOG("Copying amount %d: %p %p\n", amount, out, out - offset);
-            // TODO: Optimize this
-            for (int i = 0; i < amount; i++)
-            {
-                out[i] = out[i - offset];
-            }
-            out += amount;
+            uint8_t* cpy = out + amount;
+            LZ4_memcpy_using_offset(out, out - offset, cpy, offset);
+            out = cpy;
 
             if (shortOffsetMask)
             {
