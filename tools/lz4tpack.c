@@ -1,9 +1,7 @@
 // Written by aglab2
 
 #define LZ4_HC_STATIC_LINKING_ONLY
-#define LZ4_COMMONDEFS_ONLY
-#include "lz4hc.h"
-#include "lz4.c"
+#include "lz4hc.c"
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -60,7 +58,7 @@ static void LZ4T_resetGlobals(void)
 // 0b0000 and 0b1111 are reserved
 #define TINY_MATCH_LIMIT_EX (14 + TINY_MINMATCH)
 
-static void LZ4T_pushNibble(BYTE** _op, uint32_t newNibble)
+LZ4_FORCE_INLINE void LZ4T_pushNibble(BYTE** _op, uint32_t newNibble)
 {
     sNibblesPushed++;
     LOG("%d: Pushing nibble: %x\n", sNibblesPushed, newNibble);
@@ -93,7 +91,7 @@ static void LZ4T_pushNibble(BYTE** _op, uint32_t newNibble)
     LOG("New nibble batch: 0x%x\n", sCurrentNibble);
 }
 
-static void LZ4T_encodeBitLen(BYTE** _op, int len)
+LZ4_FORCE_INLINE void LZ4T_encodeBitLen(BYTE** _op, int len)
 {
 #define op      (*_op)
     if (0 == len)
@@ -114,7 +112,10 @@ static void LZ4T_encodeBitLen(BYTE** _op, int len)
     }
 }
 
-int LZ4HC_encodeSequence (
+int LZ4_compressBound(int isize)
+{ MAX_COMP_SIZE; }
+
+LZ4_FORCE_INLINE int LZ4HC_encodeSequence (
     const BYTE** _ip,
     BYTE** _op,
     const BYTE** _anchor,
@@ -246,7 +247,7 @@ int LZ4T_lastLiterals (
 #undef anchor
 }
 
-static int LZ4T_bitCodePrice(int len)
+LZ4_FORCE_INLINE int LZ4T_bitCodePrice(int len)
 {
     if (0 == len)
         return 2;
@@ -263,7 +264,7 @@ static int LZ4T_bitCodePrice(int len)
 }
 
 // Counts are in nibbles so 1 byte is 2 nibbles
-int LZ4HC_literalsPrice(int const litlen)
+LZ4_FORCE_INLINE int LZ4HC_literalsPrice(int const litlen)
 {
     int price = litlen * 2;
     assert(litlen >= 0);
@@ -283,7 +284,7 @@ int LZ4HC_literalsPrice(int const litlen)
     return price;
 }
 
-int LZ4HC_sequencePrice(int litlen, int mlen)
+LZ4_FORCE_INLINE int LZ4HC_sequencePrice(int litlen, int mlen)
 {
     int price = 4 ; // 16-bit offset is 4 nibbles
     assert(litlen >= 0);

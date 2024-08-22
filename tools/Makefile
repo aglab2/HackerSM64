@@ -31,13 +31,13 @@ filesizer_SOURCES	:= filesizer.c
 
 lz4pack_SOURCES	:= lz4.c lz4hc.c lz4pack.c
 lz4pack_CFLAGS  := -flto
-lz4tpack_SOURCES	:= lz4.c lz4hc.c lz4tpack.c
-lz4tpack_CFLAGS  := -DLZ4T -flto -O3
-lz4upack_SOURCES	:= lz4.c lz4hc.c lz4tpack.c
+lz4tpack_SOURCES	:= lz4tpack.c
+lz4tpack_CFLAGS  := -DLZ4T -flto -O3 -fwhole-program
+lz4upack_SOURCES	:= lz4tpack.c
 lz4upack_CFLAGS  := -DLZ4T -flto -DLZSO
-lz3tpack_SOURCES	:= lz4.c lz4hc.c lz4tpack.c
+lz3tpack_SOURCES	:= lz4tpack.c
 lz3tpack_CFLAGS  := -DLZ4T -flto -DLZ3
-lz3upack_SOURCES	:= lz4.c lz4hc.c lz4tpack.c
+lz3upack_SOURCES	:= lz4tpack.c
 lz3upack_CFLAGS  := -DLZ4T -flto -DLZ3 -DLZSO
 
 rncpack_SOURCES	:= rncpack.c

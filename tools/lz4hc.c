@@ -324,7 +324,7 @@ LZ4_FORCE_INLINE int LZ4HC_encodeSequence (
 #undef anchor
 }
 #else
-extern int LZ4HC_encodeSequence (
+LZ4_FORCE_INLINE int LZ4HC_encodeSequence (
     const BYTE** _ip,
     BYTE** _op,
     const BYTE** _anchor,
@@ -1733,8 +1733,8 @@ LZ4_FORCE_INLINE int LZ4HC_sequencePrice(int litlen, int mlen)
     return price;
 }
 #else
-extern int LZ4HC_literalsPrice(int const litlen);
-extern int LZ4HC_sequencePrice(int litlen, int mlen);
+LZ4_FORCE_INLINE int LZ4HC_literalsPrice(int const litlen);
+LZ4_FORCE_INLINE int LZ4HC_sequencePrice(int litlen, int mlen);
 #endif
 
 
@@ -2027,7 +2027,7 @@ _last_literals:
          op += lastRunSize;
      }
 #else
-extern int LZ4T_lastLiterals (
+int LZ4T_lastLiterals (
     const BYTE** _ip,
     BYTE** _op,
     const BYTE** _anchor,
