@@ -12,7 +12,7 @@ static inline void lz4t_unpack(const uint8_t* restrict inbuf, uint8_t* restrict 
 {
     if (LIKELY(gIsConsole))
     {
-        return lz4t_unpack_fast(inbuf, dst, ctx);
+        return lz4t_unpack_slow(inbuf, dst, ctx);
     }
     else
     {

@@ -668,8 +668,6 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 }
 
 void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
-    UNUSED void *dest = NULL;
-
 #ifdef GZIP
     u32 compSize = (srcEnd - 4 - srcStart);
 #else
@@ -684,7 +682,13 @@ void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
 #ifdef UNCOMPRESSED
         dma_read(gDecompressionHeap, srcStart, srcEnd);
 #else
+# if DMA_ASYNC_HEADER_SIZE
+        dma_read(compressed, srcStart, srcStart + DMA_ASYNC_HEADER_SIZE);
+        struct DMAAsyncCtx asyncCtx;
+        dma_async_ctx_init(&asyncCtx, compressed + DMA_ASYNC_HEADER_SIZE, srcStart + DMA_ASYNC_HEADER_SIZE, srcEnd);
+# else
         dma_read(compressed, srcStart, srcEnd);
+# endif
 #endif
 #ifdef GZIP
         expand_gzip(compressed, gDecompressionHeap, compSize, (u32)size);
@@ -696,6 +700,8 @@ void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
         slidstart(compressed, gDecompressionHeap);
 #elif MIO0
         decompress(compressed, gDecompressionHeap);
+#elif LZ4T
+        lz4t_unpack(compressed, gDecompressionHeap, &asyncCtx);
 #endif
         set_segment_base_addr(segment, gDecompressionHeap); sSegmentROMTable[segment] = (uintptr_t) srcStart;
         main_pool_free(compressed);

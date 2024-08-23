@@ -1,3 +1,4 @@
+#define LZ4T
 #ifdef LZ4T
 
 #include "lz4t.h"
