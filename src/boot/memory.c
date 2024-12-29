@@ -19,6 +19,9 @@
 #ifdef LZ4T
 #include "lz4t.h"
 #endif
+#ifdef APLIB
+#include "aplib.h"
+#endif
 #ifdef UNF
 #include "usb/usb.h"
 #include "usb/debug.h"
@@ -373,6 +376,8 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
 
 #if defined(LZ4T)
 #define DMA_ASYNC_HEADER_SIZE 16
+#elif defined(APLIB)
+#define DMA_ASYNC_HEADER_SIZE 8
 #else
 #define DMA_ASYNC_HEADER_SIZE 0
 #endif
@@ -387,6 +392,8 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 
 #ifdef GZIP
     u32 compSize = (srcEnd - 4 - srcStart);
+#elif defined(APLIB)
+    u32 compSize = ALIGN16(srcEnd - srcStart + 8);
 #else
     u32 compSize = ALIGN16(srcEnd - srcStart);
 #endif
@@ -394,6 +401,14 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 #ifdef GZIP
     // Decompressed size from end of gzip
     u32 *size = (u32 *) (compressed + compSize);
+#elif defined(APLIB)
+    struct ApLibHeader {
+        u32 destLength;
+        u32 bufferLength;
+        u64 padding;
+    };
+    struct ApLibHeader *header = (struct ApLibHeader *)compressed;
+    u32 *size = &header->destLength;
 #else
     // Decompressed size from header (This works for non-mio0 because they also have the size in same place)
     u32 *size = (u32 *) (compressed + 4);
@@ -426,6 +441,8 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             decompress(compressed, dest);
 #elif LZ4T
             lz4t_unpack(compressed, dest, &asyncCtx);
+#elif APLIB
+            decompress_aplib_full_fast(compressed + DMA_ASYNC_HEADER_SIZE, srcEnd - srcStart - DMA_ASYNC_HEADER_SIZE, dest, &asyncCtx);
 #endif
             osSyncPrintf("end decompress\n");
             set_segment_base_addr(segment, dest);

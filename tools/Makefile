@@ -8,6 +8,7 @@ CXX          := g++
 CFLAGS       := -I. -O2 -s
 LDFLAGS      := -lm
 ALL_PROGRAMS := armips filesizer lz4tpack rncpack n64graphics n64graphics_ci mio0 slienc n64cksum aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv flips
+APLIB_COMPRESS := apultra/apultra
 LIBAUDIOFILE := audiofile/libaudiofile.a
 
 ifeq ($(OS),Windows_NT)
@@ -70,6 +71,8 @@ extract_data_for_mio_SOURCES := extract_data_for_mio.c
 skyconv_SOURCES := skyconv.c n64graphics.c utils.c
 skyconv_CFLAGS := -g -I../include
 
+aplib_compress: $(APLIB_COMPRESS)
+
 armips$(EXT): CC := $(CXX)
 armips_SOURCES := armips.cpp
 armips_CFLAGS  := -std=gnu++11 -fno-exceptions -fno-rtti -pipe
@@ -93,7 +96,7 @@ flips_CFLAGS := -Wall -Wextra -fopenmp -Os -flto -fuse-linker-plugin -fomit-fram
 -Wl,-z,relro,-z,now,--as-needed,--hash-style=gnu,--relax
 endif
 
-all-except-recomp: $(LIBAUDIOFILE) $(OUTPUTS)
+all-except-recomp: $(LIBAUDIOFILE) $(APLIB_COMPRESS) $(OUTPUTS)
 
 all: all-except-recomp
 
@@ -113,5 +116,8 @@ $(foreach p,$(BUILD_PROGRAMS),$(eval $(call COMPILE,$(p))))
 
 $(LIBAUDIOFILE):
 	@$(MAKE) -C audiofile
+
+$(APLIB_COMPRESS):
+	@$(MAKE) -C apultra
 
 .PHONY: all all-except-recomp clean distclean default
