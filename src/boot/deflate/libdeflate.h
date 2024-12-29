@@ -105,7 +105,7 @@ enum libdeflate_result {
  *     nonzero result code if decompression failed for another reason.
  */
 LIBDEFLATEAPI enum libdeflate_result
-libdeflate_deflate_decompress(struct libdeflate_decompressor *decompressor, const void *in, size_t in_nbytes, void *out);
+libdeflate_deflate_decompress(struct libdeflate_decompressor *decompressor, const void *in, size_t in_nbytes, void *out, void* asyncCtx);
 
 /*
  * libdeflate_free_decompressor() frees a decompressor that was allocated with

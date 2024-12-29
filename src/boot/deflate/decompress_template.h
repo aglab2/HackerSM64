@@ -41,11 +41,23 @@
 #  define EXTRACT_VARBITS8(word, count)	((word) & BITMASK((u8)(count)))
 #endif
 
+extern void* dma_async_ctx_read(void* ctx);
+static forceinline void libdeflate_dma_check(const uint8_t* check, const uint8_t** _dmaLimit, struct DMAAsyncCtx* ctx)
+{
+#define dmaLimit (*_dmaLimit)
+    if (check > dmaLimit)
+    {
+        dmaLimit = dma_async_ctx_read(ctx);
+    }
+#undef dmaLimit
+}
+
 static ATTRIBUTES MAYBE_UNUSED enum libdeflate_result
 FUNCNAME(struct libdeflate_decompressor * restrict d,
 	 const void * restrict in, size_t in_nbytes,
-	 void * restrict out)
+	 void * restrict out, void* asyncCtx)
 {
+	const u8* dmaLimit = in;
 	u8 *out_next = out;
 	// HackerSM64 patch: always fastloop out
 
@@ -274,9 +286,10 @@ next_block:
 		in_next += len;
 		out_next += len;
 		while (out_cur < out_next) {
-			store_u64_unaligned(load_u64_unaligned(in_cur), (u32 *) out_cur);
-			in_cur += 4;
-			out_cur += 4;
+			libdeflate_dma_check(in_cur, &dmaLimit, asyncCtx);
+			store_u64_unaligned(load_u64_unaligned(in_cur), (u64 *) out_cur);
+			in_cur += 8;
+			out_cur += 8;
 		}
 
 		goto block_done;

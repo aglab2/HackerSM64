@@ -205,6 +205,7 @@ typedef machine_word_t bitbuf_t;
  */
 #define REFILL_BITS_BRANCHLESS()					\
 do {									\
+	libdeflate_dma_check(in_next, &dmaLimit, asyncCtx); \
 	bitbuf |= get_unaligned_leword(in_next) << (u8)bitsleft;	\
 	in_next += sizeof(bitbuf_t) - 1;				\
 	in_next -= (bitsleft >> 3) & 0x7;				\
@@ -239,6 +240,7 @@ do {									\
 	    likely(in_end - in_next >= sizeof(bitbuf_t))) {		\
 		REFILL_BITS_BRANCHLESS();				\
 	} else {							\
+		libdeflate_dma_check(in_next, &dmaLimit, asyncCtx); \
 		while ((u8)bitsleft < CONSUMABLE_NBITS) {		\
 			if (likely(in_next != in_end)) {		\
 				bitbuf |= (bitbuf_t)*in_next++ <<	\
@@ -264,6 +266,7 @@ do {									\
 	if (0) {					\
 		REFILL_BITS_BRANCHLESS();				\
 	} else {							\
+		libdeflate_dma_check(in_next, &dmaLimit, asyncCtx); \
 		while ((u8)bitsleft < CONSUMABLE_NBITS) {		\
 			bitbuf |= (bitbuf_t)*in_next++ << (u8)bitsleft;	\
 			bitsleft += 8;					\
@@ -1106,9 +1109,9 @@ typedef enum libdeflate_result (*decompress_func_t)
 __attribute__((optimize("Os"))) LIBDEFLATEAPI enum libdeflate_result
 libdeflate_deflate_decompress(struct libdeflate_decompressor *d,
 			      const void *in, size_t in_nbytes,
-			      void *out)
+			      void *out, void* asyncCtx)
 {
-	return decompress_impl(d, in, in_nbytes, out);
+	return decompress_impl(d, in, in_nbytes, out, asyncCtx);
 }
 
 LIBDEFLATEAPI struct libdeflate_decompressor *

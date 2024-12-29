@@ -374,7 +374,7 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
     return dest;
 }
 
-#if defined(LZ4T)
+#if defined(LZ4T) || defined(GZIP)
 #define DMA_ASYNC_HEADER_SIZE 16
 #elif defined(APLIB)
 #define DMA_ASYNC_HEADER_SIZE 8
@@ -435,7 +435,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             osSyncPrintf("start decompress\n");
 #ifdef GZIP
             struct libdeflate_decompressor *dec = libdeflate_alloc_decompressor();
-            libdeflate_deflate_decompress(dec, compressed + 16, *(u32*) (compressed + 8), dest);
+            libdeflate_deflate_decompress(dec, compressed + 16, *(u32*) (compressed + 8), dest, &asyncCtx);
             libdeflate_free_decompressor(dec);
 #elif RNC1
             Propack_UnpackM1(compressed, dest);
