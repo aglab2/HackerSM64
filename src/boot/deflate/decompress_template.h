@@ -685,30 +685,6 @@ block_done:
 		goto next_block;
 
 	/* That was the last block. */
-
-	bitsleft = (u8)bitsleft;
-
-	/*
-	 * If any of the implicit appended zero bytes were consumed (not just
-	 * refilled) before hitting end of stream, then the data is bad.
-	 */
-	SAFETY_CHECK(overread_count <= (bitsleft >> 3));
-
-	/* Optionally return the actual number of bytes consumed. */
-	if (actual_in_nbytes_ret) {
-		/* Don't count bytes that were refilled but not consumed. */
-		in_next -= (bitsleft >> 3) - overread_count;
-
-		*actual_in_nbytes_ret = in_next - (u8 *)in;
-	}
-
-	/* Optionally return the actual number of bytes written. */
-	if (actual_out_nbytes_ret) {
-		*actual_out_nbytes_ret = out_next - (u8 *)out;
-	} else {
-		if (out_next != out_end)
-			return LIBDEFLATE_SHORT_OUTPUT;
-	}
 	return LIBDEFLATE_SUCCESS;
 }
 

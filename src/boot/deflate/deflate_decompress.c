@@ -1144,12 +1144,11 @@ libdeflate_deflate_decompress_ex(struct libdeflate_decompressor *d,
 __attribute__((optimize("Os"))) LIBDEFLATEAPI enum libdeflate_result
 libdeflate_deflate_decompress(struct libdeflate_decompressor *d,
 			      const void *in, size_t in_nbytes,
-			      void *out, size_t out_nbytes_avail,
-			      size_t *actual_out_nbytes_ret)
+			      void *out, size_t out_nbytes_avail)
 {
 	return libdeflate_deflate_decompress_ex(d, in, in_nbytes,
 						out, out_nbytes_avail,
-						NULL, actual_out_nbytes_ret);
+						NULL, NULL);
 }
 
 static forceinline struct libdeflate_decompressor *
