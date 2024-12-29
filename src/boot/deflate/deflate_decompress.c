@@ -1092,35 +1092,8 @@ typedef enum libdeflate_result (*decompress_func_t)
 #  define DEFAULT_IMPL deflate_decompress_default
 #endif
 
-#ifdef arch_select_decompress_func
-static enum libdeflate_result
-dispatch_decomp(struct libdeflate_decompressor *d,
-		const void *in, size_t in_nbytes,
-		void *out, size_t out_nbytes_avail,
-		size_t *actual_in_nbytes_ret, size_t *actual_out_nbytes_ret);
-
-static volatile decompress_func_t decompress_impl = dispatch_decomp;
-
-/* Choose the best implementation at runtime. */
-static enum libdeflate_result
-dispatch_decomp(struct libdeflate_decompressor *d,
-		const void *in, size_t in_nbytes,
-		void *out, size_t out_nbytes_avail,
-		size_t *actual_in_nbytes_ret, size_t *actual_out_nbytes_ret)
-{
-	decompress_func_t f = arch_select_decompress_func();
-
-	if (f == NULL)
-		f = DEFAULT_IMPL;
-
-	decompress_impl = f;
-	return f(d, in, in_nbytes, out, out_nbytes_avail,
-		 actual_in_nbytes_ret, actual_out_nbytes_ret);
-}
-#else
 /* The best implementation is statically known, so call it directly. */
 #  define decompress_impl DEFAULT_IMPL
-#endif
 
 /*
  * This is the main DEFLATE decompression routine.  See libdeflate.h for the
@@ -1130,25 +1103,12 @@ dispatch_decomp(struct libdeflate_decompressor *d,
  * handles calling the appropriate implementation depending on the CPU features
  * at runtime.
  */
-__attribute__((optimize("Os"))) static forceinline enum libdeflate_result
-libdeflate_deflate_decompress_ex(struct libdeflate_decompressor *d,
-				 const void *in, size_t in_nbytes,
-				 void *out, size_t out_nbytes_avail,
-				 size_t *actual_in_nbytes_ret,
-				 size_t *actual_out_nbytes_ret)
-{
-	return decompress_impl(d, in, in_nbytes, out, out_nbytes_avail,
-			       actual_in_nbytes_ret, actual_out_nbytes_ret);
-}
-
 __attribute__((optimize("Os"))) LIBDEFLATEAPI enum libdeflate_result
 libdeflate_deflate_decompress(struct libdeflate_decompressor *d,
 			      const void *in, size_t in_nbytes,
-			      void *out, size_t out_nbytes_avail)
+			      void *out)
 {
-	return libdeflate_deflate_decompress_ex(d, in, in_nbytes,
-						out, out_nbytes_avail,
-						NULL, NULL);
+	return decompress_impl(d, in, in_nbytes, out);
 }
 
 static forceinline struct libdeflate_decompressor *

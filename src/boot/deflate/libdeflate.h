@@ -84,7 +84,7 @@ libdeflate_alloc_compressor_ex(int compression_level,
 LIBDEFLATEAPI size_t
 libdeflate_deflate_compress(struct libdeflate_compressor *compressor,
 			    const void *in, size_t in_nbytes,
-			    void *out, size_t out_nbytes_avail);
+			    void *out);
 
 /*
  * libdeflate_deflate_compress_bound() returns a worst-case upper bound on the
@@ -233,9 +233,7 @@ enum libdeflate_result {
  *     nonzero result code if decompression failed for another reason.
  */
 LIBDEFLATEAPI enum libdeflate_result
-libdeflate_deflate_decompress(struct libdeflate_decompressor *decompressor,
-			      const void *in, size_t in_nbytes,
-			      void *out, size_t out_nbytes_avail);
+libdeflate_deflate_decompress(struct libdeflate_decompressor *decompressor, const void *in, size_t in_nbytes, void *out);
 
 /*
  * Like libdeflate_deflate_decompress(), but assumes the zlib wrapper format

@@ -44,11 +44,9 @@
 static ATTRIBUTES MAYBE_UNUSED enum libdeflate_result
 FUNCNAME(struct libdeflate_decompressor * restrict d,
 	 const void * restrict in, size_t in_nbytes,
-	 void * restrict out, size_t out_nbytes_avail,
-	 size_t *actual_in_nbytes_ret, size_t *actual_out_nbytes_ret)
+	 void * restrict out)
 {
 	u8 *out_next = out;
-	u8 * const out_end = out_next + out_nbytes_avail;
 	// HackerSM64 patch: always fastloop out
 
 	/* Input bitstream state; see deflate_decompress.c for documentation */
@@ -269,8 +267,6 @@ next_block:
 		in_next += 4;
 
 		SAFETY_CHECK(len == (u16)~nlen);
-		if (unlikely(len > out_end - out_next))
-			return LIBDEFLATE_INSUFFICIENT_SPACE;
 		SAFETY_CHECK(len <= in_end - in_next);
 
 		u8* out_cur = out_next;
@@ -638,16 +634,12 @@ generic_loop:
 		}
 		length = entry >> 16;
 		if (entry & HUFFDEC_LITERAL) {
-			if (unlikely(out_next == out_end))
-				return LIBDEFLATE_INSUFFICIENT_SPACE;
 			*out_next++ = length;
 			continue;
 		}
 		if (unlikely(entry & HUFFDEC_END_OF_BLOCK))
 			goto block_done;
 		length += EXTRACT_VARBITS8(saved_bitbuf, entry) >> (u8)(entry >> 8);
-		if (unlikely(length > out_end - out_next))
-			return LIBDEFLATE_INSUFFICIENT_SPACE;
 
 		if (!CAN_CONSUME(LENGTH_MAXBITS + OFFSET_MAXBITS))
 			REFILL_BITS();

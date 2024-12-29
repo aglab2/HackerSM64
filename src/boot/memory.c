@@ -440,7 +440,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             osSyncPrintf("start decompress\n");
 #ifdef GZIP
             struct libdeflate_decompressor *dec = libdeflate_alloc_decompressor();
-            libdeflate_deflate_decompress(dec, compressed, compSize, dest, *size + 128);
+            libdeflate_deflate_decompress(dec, compressed, compSize, dest);
             libdeflate_free_decompressor(dec);
 #elif RNC1
             Propack_UnpackM1(compressed, dest);
