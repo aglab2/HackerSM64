@@ -11,7 +11,7 @@
 #include "segment_symbols.h"
 #include "segments.h"
 #ifdef GZIP
-#include <gzip.h>
+#include "libz/libdeflate.h"
 #endif
 #if defined(RNC1) || defined(RNC2)
 #include <rnc.h>
@@ -382,6 +382,15 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
 #define DMA_ASYNC_HEADER_SIZE 0
 #endif
 
+#include "game/debug.h"
+
+#define DEBUG_ASSERTIONS
+#ifdef DEBUG_ASSERTIONS
+#define ASSERT_PRINTF(cond, fmt, ...) do{ if (!(cond)) { char msg[40]; sprintf(msg, fmt, ##__VA_ARGS__); error(msg); } }while(0)
+#else
+#define ASSERT_PRINTF(cond, fmt, ...) do{}while(0)
+#endif
+
 /**
  * Decompress the block of ROM data from srcStart to srcEnd and return a
  * pointer to an allocated buffer holding the decompressed data. Set the
@@ -430,7 +439,9 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
         if (dest != NULL) {
             osSyncPrintf("start decompress\n");
 #ifdef GZIP
-            expand_gzip(compressed, dest, compSize, (u32)size);
+            struct libdeflate_decompressor *dec = libdeflate_alloc_decompressor();
+            libdeflate_deflate_decompress(dec, compressed, compSize, dest, *size + 128, NULL);
+            libdeflate_free_decompressor(dec);
 #elif RNC1
             Propack_UnpackM1(compressed, dest);
 #elif RNC2
