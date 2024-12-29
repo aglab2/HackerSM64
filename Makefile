@@ -67,7 +67,7 @@ else ifeq ($(SAVETYPE),sram)
   DEFINES += SRAM=1
 endif
 
-DEFINES += NO_ERRNO_H=1 NO_GZIP=1
+DEFINES += NO_ERRNO_H=1
 
 # VERSION - selects the version of the game to build
 #   jp - builds the 1996 Japanese version
@@ -288,9 +288,6 @@ else ifeq ($(COMPRESS),aplib)
 else ifeq ($(COMPRESS),uncomp)
   DEFINES += UNCOMPRESSED=1
 endif
-
-GZIPVER ?= libdef
-$(eval $(call validate-option,GZIPVER,std libdef))
 
 # Whether to hide commands or not
 VERBOSE ?= 0
@@ -528,6 +525,7 @@ CPPFLAGS := -P -Wno-trigraphs $(DEF_INC_CFLAGS)
 YAY0TOOL              := $(TOOLS_DIR)/slienc
 MIO0TOOL              := $(TOOLS_DIR)/mio0
 LZ4TPACK              := $(TOOLS_DIR)/lz4tpack
+DEFLATEPACK           := $(TOOLS_DIR)/deflatepack
 APULTRA               := $(TOOLS_DIR)/apultra/apultra
 RNCPACK               := $(TOOLS_DIR)/rncpack
 FILESIZER             := $(TOOLS_DIR)/filesizer
@@ -541,11 +539,6 @@ EXTRACT_DATA_FOR_MIO  := $(TOOLS_DIR)/extract_data_for_mio
 SKYCONV               := $(TOOLS_DIR)/skyconv
 FIXLIGHTS_PY          := $(TOOLS_DIR)/fixlights.py
 FLIPS                 := $(TOOLS_DIR)/flips
-ifeq ($(GZIPVER),std)
-GZIP                  := gzip
-else
-GZIP                  := libdeflate-gzip
-endif
 # Use the system installed armips if available. Otherwise use the one provided with this repository.
 ifneq (,$(call find-command,armips))
   RSPASM              := armips

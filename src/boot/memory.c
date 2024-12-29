@@ -399,18 +399,13 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
 void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
     void *dest = NULL;
 
-#ifdef GZIP
-    u32 compSize = (srcEnd - 4 - srcStart);
-#elif defined(APLIB)
+#ifdef APLIB
     u32 compSize = ALIGN16(srcEnd - srcStart + 8);
 #else
     u32 compSize = ALIGN16(srcEnd - srcStart);
 #endif
     u8 *compressed = main_pool_alloc(compSize, MEMORY_POOL_RIGHT);
-#ifdef GZIP
-    // Decompressed size from end of gzip
-    u32 *size = (u32 *) (compressed + compSize);
-#elif defined(APLIB)
+#ifdef APLIB
     struct ApLibHeader {
         u32 destLength;
         u32 bufferLength;
@@ -440,7 +435,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             osSyncPrintf("start decompress\n");
 #ifdef GZIP
             struct libdeflate_decompressor *dec = libdeflate_alloc_decompressor();
-            libdeflate_deflate_decompress(dec, compressed, compSize, dest);
+            libdeflate_deflate_decompress(dec, compressed + 16, *(u32*) (compressed + 8), dest);
             libdeflate_free_decompressor(dec);
 #elif RNC1
             Propack_UnpackM1(compressed, dest);

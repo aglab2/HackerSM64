@@ -1111,17 +1111,10 @@ libdeflate_deflate_decompress(struct libdeflate_decompressor *d,
 	return decompress_impl(d, in, in_nbytes, out);
 }
 
-static forceinline struct libdeflate_decompressor *
-libdeflate_alloc_decompressor_ex(const struct libdeflate_options *options)
+LIBDEFLATEAPI struct libdeflate_decompressor *
+libdeflate_alloc_decompressor(void)
 {
 	struct libdeflate_decompressor *d;
-
-	/*
-	 * Note: if more fields are added to libdeflate_options, this code will
-	 * need to be updated to support both the old and new structs.
-	 */
-	if (options->sizeof_options != sizeof(*options))
-		return NULL;
 
 	// HackerSM64 patch - do not allow custom malloc/free functions
 	d = libdeflate_default_malloc_func(sizeof(*d));
@@ -1144,15 +1137,6 @@ libdeflate_alloc_decompressor_ex(const struct libdeflate_options *options)
 	 */
 	memset(d, 0, sizeof(*d));
 	return d;
-}
-
-LIBDEFLATEAPI struct libdeflate_decompressor *
-libdeflate_alloc_decompressor(void)
-{
-	static const struct libdeflate_options defaults = {
-		.sizeof_options = sizeof(defaults),
-	};
-	return libdeflate_alloc_decompressor_ex(&defaults);
 }
 
 LIBDEFLATEAPI void
