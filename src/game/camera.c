@@ -1144,7 +1144,19 @@ s32 snap_to_45_degrees(s16 angle) {
 #define MIN_CAMERA_DISTANCE 300.0f // Minimum distance between Mario and the camera.
 #define VERTICAL_RAY_OFFSET 300.0f // The ray is cast from 300 units above Mario in order to prevent small obstacles from constantly snapping the camera
 
-void eight_dir_collision_handler(struct Camera *c) {
+#define MIN_CAMERA_DISTANCE 160.0f // Minimum distance between Mario and the camera.
+#define VERTICAL_RAY_OFFSET 300.0f // The ray is cast from 300 units above Mario in order to prevent small obstacles from constantly snapping the camera
+
+static void cam_collision_advance(f32* val)
+{
+    *val -= 0.2f;
+    if (*val < 0.f)
+        *val = 0.f;
+}
+
+// courtesy of ReonuCam but rewritten for my usecases
+static void eight_dir_collision_handler(struct Camera *c)
+{
     struct Surface *surf;
 
     Vec3f camdir;
@@ -1152,36 +1164,97 @@ void eight_dir_collision_handler(struct Camera *c) {
     Vec3f thick;
     Vec3f hitpos;
 
-    vec3f_copy(origin,gMarioState->pos);
+    vec3f_copy(origin, gMarioState->pos);
 
     origin[1] += VERTICAL_RAY_OFFSET; 
+    if (origin[1] > gMarioState->ceilHeight - 10.f)
+        origin[1] = gMarioState->ceilHeight - 10.f;
+
     camdir[0] = c->pos[0] - origin[0];
     camdir[1] = c->pos[1] - origin[1];
+    // TODO: smooth this out a bit using smoothstep
+    if (-200.f < camdir[1] && camdir[1] < 320.f)
+        camdir[1] = 320.f;
+
     camdir[2] = c->pos[2] - origin[2];
 
+#if 0
+    print_text_fmt_int(20, 20, "C0 %d", c->pos[0]);
+    print_text_fmt_int(20, 40, "C1 %d", c->pos[1]);
+    print_text_fmt_int(20, 60, "C2 %d", c->pos[2]);
+
+    print_text_fmt_int(20, 120, "O0 %d", origin[0]);
+    print_text_fmt_int(20, 140, "O1 %d", origin[1]);
+    print_text_fmt_int(20, 160, "O2 %d", origin[2]);
+    
+    print_text_fmt_int(120, 120, "CD0 %d", camdir[0]);
+    print_text_fmt_int(120, 140, "CD1 %d", camdir[1]);
+    print_text_fmt_int(120, 160, "CD2 %d", camdir[2]);
+#endif
+
+    int yAffected = 0;
     find_surface_on_ray(origin, camdir, &surf, hitpos, (RAYCAST_FIND_FLOOR | RAYCAST_FIND_WALL | RAYCAST_FIND_CEIL));
+    if (surf && surf->normal.y < -0.6f) // ceiling
+    {
+#if 0
+        print_text_fmt_int(220, 20, "C %d", (int) (surf->normal.y * 1000.f));
+#endif
+        // cap the ceiling and cast ray from mario location instead
+        cam_collision_advance(&c->camCollisionProgress.y);
+        yAffected = 1;
+        c->pos[1] = hitpos[1] - 60.f;
+        camdir[1] = c->pos[1] - origin[1];
+        find_surface_on_ray(origin, camdir, &surf, hitpos, (RAYCAST_FIND_FLOOR | RAYCAST_FIND_WALL | RAYCAST_FIND_CEIL));
+    }
 
     if (surf) {
-        f32 distFromSurf = 100.0f;
+        if (!yAffected) {
+            yAffected = 1;
+            cam_collision_advance(&c->camCollisionProgress.y);
+        }
+        cam_collision_advance(&c->camCollisionProgress.xz);
+
         f32 dist;
-        f32 yDist = 0;
         Vec3f camToMario;
         vec3f_diff(camToMario, gMarioState->pos, hitpos);
-        s16 yaw = atan2s(camToMario[2], camToMario[0]);
-        vec3f_get_lateral_dist(hitpos,gMarioState->pos, &dist);
+        vec3f_get_lateral_dist(hitpos, gMarioState->pos, &dist);
         if (dist < MIN_CAMERA_DISTANCE) {
-            distFromSurf += (dist - MIN_CAMERA_DISTANCE); // If Mario runs right up to the screen, the camera pull back slightly...
-            yDist = MIN_CAMERA_DISTANCE - CLAMP(dist, 0, MIN_CAMERA_DISTANCE); // ...and also up slightly.
+            // close up camera
+            s16 yaw = atan2s(camToMario[2], camToMario[0]);
+            f32 distFromSurf = 100.f + (dist - MIN_CAMERA_DISTANCE); // If Mario runs right up to the screen, the camera pull back slightly...
+            f32 yDist = MIN_CAMERA_DISTANCE - CLAMP(dist, 0, MIN_CAMERA_DISTANCE); // ...and also up slightly.
+            thick[0] = sins(yaw) * distFromSurf;
+            thick[1] = yDist;
+            thick[2] = coss(yaw) * distFromSurf;
+            vec3f_add(hitpos,thick);
         }
-        thick[0] = sins(yaw) * distFromSurf;
-        thick[1] = yDist;
-        thick[2] = coss(yaw) * distFromSurf;
-        vec3f_add(hitpos,thick);
+        else
+        {
+            // move camera along the ray a tiny bit
+            Vec3f camRay;
+            vec3f_diff(camRay, hitpos, origin);
+            f32 camRayMag = vec3_mag(camRay);
+            if (camRayMag > 25.f)
+                vec3_scale(camRay, -25.f / camRayMag);
+
+            vec3_add(hitpos, camRay);
+        }
+
         vec3f_copy(c->pos,hitpos);
+#if 0
+        print_text_fmt_int(120, 20, "H0 %d", hitpos[0]);
+        print_text_fmt_int(120, 40, "H1 %d", hitpos[1]);
+        print_text_fmt_int(120, 60, "H2 %d", hitpos[2]);
+#endif
+    } else {
+        c->camCollisionProgress.xz = 1.f;
+    }
+
+    if (!yAffected) {
+        c->camCollisionProgress.y = 1.f;
     }
 
     c->yaw = atan2s(c->pos[2] - gMarioState->pos[2], c->pos[0] - gMarioState->pos[0]);
-
 }
 #endif
 
@@ -1245,6 +1318,9 @@ void reonucam_handler(struct Camera *c) {
 
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
+    c->paraCamOrigPos[0] = c->pos[0];
+    c->paraCamOrigPos[1] = c->pos[1];
+    c->paraCamOrigPos[2] = c->pos[2];
     sAreaYawChange = sAreaYaw - oldAreaYaw;
     eight_dir_collision_handler(c);
 }
@@ -1287,8 +1363,12 @@ void mode_8_directions_camera(struct Camera *c) {
 #endif
     lakitu_zoom(400.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
+    set_camera_height(c, pos[1]);
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
+    c->paraCamOrigPos[0] = c->pos[0];
+    c->paraCamOrigPos[1] = c->pos[1];
+    c->paraCamOrigPos[2] = c->pos[2];
     sAreaYawChange = sAreaYaw - oldAreaYaw;
 #ifdef EIGHT_DIR_CAMERA_COLLISION
     eight_dir_collision_handler(c);
@@ -2927,7 +3007,11 @@ void update_lakitu(struct Camera *c) {
     s16 newYaw;
 
     if (!(gCameraMovementFlags & CAM_MOVE_PAUSE_SCREEN)) {
-        newYaw = next_lakitu_state(newPos, newFoc, c->pos, c->focus, sOldPosition, sOldFocus,
+        Vec3f realCamPos;
+        realCamPos[0] = c->pos[0] * (1.f - c->camCollisionProgress.xz) + c->paraCamOrigPos[0] * c->camCollisionProgress.xz;
+        realCamPos[1] = c->pos[1] * (1.f - c->camCollisionProgress.y ) + c->paraCamOrigPos[1] * c->camCollisionProgress.y ;
+        realCamPos[2] = c->pos[2] * (1.f - c->camCollisionProgress.xz) + c->paraCamOrigPos[2] * c->camCollisionProgress.xz;
+        newYaw = next_lakitu_state(newPos, newFoc, realCamPos, c->focus, sOldPosition, sOldFocus,
                                    c->nextYaw);
         set_or_approach_s16_symmetric(&c->yaw, newYaw, sYawSpeed);
         sStatusFlags &= ~CAM_FLAG_UNUSED_CUTSCENE_ACTIVE;
@@ -3097,6 +3181,7 @@ void update_camera(struct Camera *c) {
         sYawSpeed = 0x400;
 
         if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
+            c->camCollisionProgress = (struct CamCollisionProgress){};
             switch (c->mode) {
                 case CAMERA_MODE_BEHIND_MARIO:
                     mode_behind_mario_camera(c);
@@ -3107,6 +3192,7 @@ void update_camera(struct Camera *c) {
                     break;
 
                 case CAMERA_MODE_WATER_SURFACE:
+                    c->camCollisionProgress = (struct CamCollisionProgress){};
                     mode_water_surface_camera(c);
                     break;
 
@@ -3120,10 +3206,19 @@ void update_camera(struct Camera *c) {
         } else {
             switch (c->mode) {
                 case CAMERA_MODE_BEHIND_MARIO:
-                    mode_behind_mario_camera(c);
+                    if (gMarioStates->action == ACT_FLYING)
+                    {
+                        c->camCollisionProgress = (struct CamCollisionProgress){};
+                        mode_behind_mario_camera(c);
+                    }
+                    else
+                    {
+                        mode_8_directions_camera(c);
+                    }
                     break;
 
                 case CAMERA_MODE_C_UP:
+                    c->camCollisionProgress = (struct CamCollisionProgress){};
                     mode_c_up_camera(c);
                     break;
 
@@ -3132,6 +3227,7 @@ void update_camera(struct Camera *c) {
                     break;
 
                 case CAMERA_MODE_INSIDE_CANNON:
+                    c->camCollisionProgress = (struct CamCollisionProgress){};
                     mode_cannon_camera(c);
                     break;
 
@@ -3559,7 +3655,9 @@ void create_camera(struct GraphNodeCamera *gc, struct AllocOnlyPool *pool) {
     c->areaCenY = gc->focus[1];
     c->areaCenZ = gc->focus[2];
     c->yaw = 0;
+    c->camCollisionProgress = (struct CamCollisionProgress){};
     vec3f_copy(c->pos, gc->pos);
+    vec3_copy(c->paraCamOrigPos, gc->pos);
     vec3f_copy(c->focus, gc->focus);
 }
 
@@ -6219,6 +6317,9 @@ struct CameraTrigger sCamBBH[] = {
  *
  * Each table is terminated with NULL_TRIGGER
  */
+struct CameraTrigger sCamCastleGrounds[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"
@@ -10554,26 +10655,26 @@ u8 sDanceCutsceneIndexTable[][4] = {
  * and if the result is non-zero, the camera will zoom out.
  */
 u8 sZoomOutAreaMasks[] = {
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // Unused         | Unused
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // Unused         | Unused
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // BBH            | CCM
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // CASTLE_INSIDE  | HMC
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // SSL            | BOB
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // SL             | WDW
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,1,0,0), // JRB            | THI
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // TTC            | RR
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // CASTLE_GROUNDS | BITDW
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // VCUTM          | BITFS
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // SA             | BITS
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // LLL            | DDD
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // WF             | ENDING
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // COURTYARD      | PSS
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // COTMC          | TOTWC
-    ZOOMOUT_AREA_MASK(1,0,0,0, 1,0,0,0), // BOWSER_1       | WMOTR
-    ZOOMOUT_AREA_MASK(0,0,0,0, 1,0,0,0), // Unused         | BOWSER_2
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // BOWSER_3       | Unused
-    ZOOMOUT_AREA_MASK(1,0,0,0, 0,0,0,0), // TTM            | Unused
-    ZOOMOUT_AREA_MASK(0,0,0,0, 0,0,0,0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // BBH            | CCM
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // SA             | BITS
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // LLL            | DDD
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // WF             | ENDING
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // COURTYARD      | PSS
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // COTMC          | TOTWC
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // BOWSER_1       | WMOTR
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // Unused         | BOWSER_2
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // BOWSER_3       | Unused
+	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 0, 0, 0, 0), // TTM            | Unused
+	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sZoomOutAreaMasks) - 1 == LEVEL_MAX / 2, "Make sure you edit sZoomOutAreaMasks when adding / removing courses.");
