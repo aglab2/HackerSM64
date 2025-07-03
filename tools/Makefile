@@ -7,7 +7,7 @@ CC           := gcc
 CXX          := g++
 CFLAGS       := -I. -O2 -s
 LDFLAGS      := -lm
-ALL_PROGRAMS := armips filesizer lz4tpack deflatepack rncpack n64graphics n64graphics_ci mio0 slienc n64cksum textconv aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv
+ALL_PROGRAMS := armips filesizer lz4tpack deflatepack rncpack n64graphics n64graphics_ci mio0 slienc n64cksum textconv aifc_decode aiff_extract_codebook vadpcm_enc tabledesign extract_data_for_mio skyconv aplibpack
 LIBAUDIOFILE := audiofile/libaudiofile.a
 
 OS := $(shell uname)
@@ -16,13 +16,8 @@ ifneq ($(OS), Darwin)
   ALL_PROGRAMS += flips
 endif
 
-ifeq ($(OS),Windows_NT)
-  EXT := .exe
-  OUTPUTS := $(ALL_PROGRAMS:=.exe)
-else
-  EXT :=
-  OUTPUTS := $(ALL_PROGRAMS)
-endif
+EXT := .exe
+OUTPUTS := $(ALL_PROGRAMS:=.exe)
 
 # Only build armips from tools if it is not found on the system
 ifeq ($(call find-command,armips),)
@@ -40,6 +35,9 @@ lz4tpack_CFLAGS  := -DLZ4T -flto -O3 -fwhole-program
 
 deflatepack_SOURCES	:= deflatepack.c libdeflate/deflate_compress.c libdeflate/utils.c
 deflatepack_CFLAGS  := -flto -O3 -fwhole-program
+
+aplibpack_SOURCES	:= aplib/apultra.c aplib/expand.c aplib/matchfinder.c aplib/shrink.c aplib/sssort.c aplib/trsort.c aplib/divsufsort.c
+aplibpack_CFLAGS  := -O2
 
 rncpack_SOURCES	:= rncpack.c
 
@@ -89,18 +87,9 @@ endif
 
 flips$(EXT): CC := $(CXX)
 flips_SOURCES := FlipsSrc/Flips.cpp
-ifeq ($(OS),Windows_NT)
 flips_CFLAGS := -Wall -Wextra -fopenmp -Os -flto -fuse-linker-plugin -fomit-frame-pointer -fmerge-all-constants \
 -fvisibility=hidden -fno-exceptions -fno-rtti -fno-unwind-tables -fno-asynchronous-unwind-tables \
 -ffunction-sections -fdata-sections -Wl,--gc-sections
-else
-flips_CFLAGS := -Wall -Wextra -fopenmp -Os -flto -fuse-linker-plugin -fomit-frame-pointer -fmerge-all-constants \
--fvisibility=hidden -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables \
--ffunction-sections -fdata-sections -Wl,--gc-sections \
--fvisibility=hidden -fno-exceptions -fno-rtti -fno-unwind-tables -fno-asynchronous-unwind-tables \
--ffunction-sections -fdata-sections -Wl,--gc-sections  \
--Wl,-z,relro,-z,now,--as-needed,--hash-style=gnu,--relax
-endif
 
 all-except-recomp: $(LIBAUDIOFILE) $(OUTPUTS)
 

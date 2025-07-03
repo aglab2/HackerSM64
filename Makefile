@@ -269,10 +269,12 @@ BUILD_DIR_BASE := build
 # BUILD_DIR is the location where all build artifacts are placed
 BUILD_DIR      := $(BUILD_DIR_BASE)/$(VERSION)_$(CONSOLE)
 
-COMPRESS ?= lz4t
-$(eval $(call validate-option,COMPRESS,mio0 yay0 lz4t gzip rnc1 rnc2 uncomp))
+COMPRESS ?= gzip
+$(eval $(call validate-option,COMPRESS,mio0 yay0 lz4t gzip rnc1 rnc2 aplib uncomp))
 ifeq ($(COMPRESS),gzip)
   DEFINES += GZIP=1
+else ifeq ($(COMPRESS),aplib)
+  DEFINES += APLIB=1
 else ifeq ($(COMPRESS),rnc1)
   DEFINES += RNC1=1
 else ifeq ($(COMPRESS),rnc2)
@@ -540,6 +542,7 @@ YAY0TOOL              := $(TOOLS_DIR)/slienc
 MIO0TOOL              := $(TOOLS_DIR)/mio0
 LZ4TPACK              := $(TOOLS_DIR)/lz4tpack
 DEFLATEPACK           := $(TOOLS_DIR)/deflatepack
+APLIBPACK             := $(TOOLS_DIR)/aplibpack
 RNCPACK               := $(TOOLS_DIR)/rncpack
 FILESIZER             := $(TOOLS_DIR)/filesizer
 N64CKSUM              := $(TOOLS_DIR)/n64cksum
@@ -793,6 +796,8 @@ else ifeq ($(COMPRESS),mio0)
 include compression/mio0rules.mk
 else ifeq ($(COMPRESS),lz4t)
 include compression/lz4trules.mk
+else ifeq ($(COMPRESS),aplib)
+include compression/aplibrules.mk
 else ifeq ($(COMPRESS),uncomp)
 include compression/uncomprules.mk
 endif

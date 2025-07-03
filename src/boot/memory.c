@@ -19,6 +19,9 @@
 #ifdef LZ4T
 #include "lz4t.h"
 #endif
+#ifdef APLIB
+#include "aplib.h"
+#endif
 #ifdef UNF
 #include "usb/usb.h"
 #include "usb/debug.h"
@@ -371,7 +374,7 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
     return dest;
 }
 
-#if defined(LZ4T) || defined(GZIP)
+#if defined(LZ4T) || defined(GZIP) || defined(APLIB)
 #define DMA_ASYNC_HEADER_SIZE 16
 #else
 #define DMA_ASYNC_HEADER_SIZE 0
@@ -388,7 +391,9 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
     u32 compSize = ALIGN16(srcEnd - srcStart);
     u8 *compressed = main_pool_alloc(compSize, MEMORY_POOL_RIGHT);
     // Decompressed size from header (This works for non-mio0 because they also have the size in same place)
+
     u32 *size = (u32 *) (compressed + 4);
+
     if (compressed != NULL) {
 #ifdef UNCOMPRESSED
         dest = main_pool_alloc(compSize, MEMORY_POOL_LEFT);
@@ -409,6 +414,8 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
             struct libdeflate_decompressor *dec = libdeflate_alloc_decompressor();
             libdeflate_deflate_decompress(dec, compressed + 16, *(u32*) (compressed + 8), dest, &asyncCtx);
             libdeflate_free_decompressor(dec);
+#elif APLIB
+            decompress_aplib_full_fast(compressed + 8, srcEnd - srcStart - 8, dest, &asyncCtx);
 #elif RNC1
             Propack_UnpackM1(compressed, dest);
 #elif RNC2
