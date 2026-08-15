@@ -123,7 +123,7 @@ const Gfx init_rdp[] = {
     gsDPSetTextureConvert(G_TC_FILT),
 
     gsDPSetCombineKey(G_CK_NONE),
-    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetAlphaCompareReal(G_AC_NONE),
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
     gsDPSetColorDither(G_CD_MAGICSQ),
     gsDPSetCycleType(G_CYC_FILL),
@@ -139,7 +139,6 @@ const Gfx init_rsp[] = {
     gsSPClearGeometryMode(G_CULL_FRONT | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD),
     gsSPSetGeometryMode(G_SHADE | G_SHADING_SMOOTH | G_CULL_BACK | G_LIGHTING),
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_OFF),
-    gsSPClipRatio(FRUSTRATIO_2),
     gsSPEndDisplayList(),
 };
 
@@ -288,6 +287,11 @@ void create_gfx_task_structure(void) {
     gGfxSPTask->task.t.ucode_data = gspL3DEX2_fifoDataStart;
     gGfxSPTask->task.t.ucode_size = ((u8 *) gspL3DEX2_fifoTextEnd - (u8 *) gspL3DEX2_fifoTextStart);
     gGfxSPTask->task.t.ucode_data_size = ((u8 *) gspL3DEX2_fifoDataEnd - (u8 *) gspL3DEX2_fifoDataStart);
+#elif   F3DEX3
+    gGfxSPTask->task.t.ucode = gspF3DEX3_fifoTextStart;
+    gGfxSPTask->task.t.ucode_data = gspF3DEX3_fifoDataStart;
+    gGfxSPTask->task.t.ucode_size = ((u8 *) gspF3DEX3_fifoTextEnd - (u8 *) gspF3DEX3_fifoTextStart);
+    gGfxSPTask->task.t.ucode_data_size = ((u8 *) gspF3DEX3_fifoDataEnd - (u8 *) gspF3DEX3_fifoDataStart);
 #elif  F3DZEX_GBI_2
     gGfxSPTask->task.t.ucode = gspF3DZEX2_PosLight_fifoTextStart;
     gGfxSPTask->task.t.ucode_data = gspF3DZEX2_PosLight_fifoDataStart;

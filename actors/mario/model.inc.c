@@ -6390,7 +6390,7 @@ Gfx mario_006_switch_option_left_hand_wing_cap_wings_mesh_layer_4_mat_override_m
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsDPSetEnvColor(255, 255, 255, 255),
-	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetAlphaCompareReal(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 
@@ -6537,7 +6537,7 @@ Gfx mario_000_displaylist_005_mesh_layer_1[] = {
 	gsSPDisplayList(mat_mario_shoes_v4_001),
 	gsSPDisplayList(mario_000_displaylist_005_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_mario_shoes_v4_001),
-	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetAlphaCompareReal(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 
@@ -6552,14 +6552,14 @@ Gfx mario_000_displaylist_005_mesh_layer_1_mat_override_metal_v4_001_0[] = {
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsDPSetEnvColor(255, 255, 255, 255),
-	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetAlphaCompareReal(G_AC_NONE),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsDPSetEnvColor(255, 255, 255, 255),
-	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetAlphaCompareReal(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 

@@ -369,8 +369,6 @@ void switch_ucode(s32 ucode) {
             }
             // Reload the necessary RSP settings
             gSPDisplayList(gDisplayListHead++, init_rsp);
-            // Set the clip ratio (see init_rsp)
-            gSPClipRatio(gDisplayListHead++, FRUSTRATIO_2);
             break;
     }
 }
@@ -802,7 +800,7 @@ Lights1 defaultLight = gdSPDefLights1(
     0x3F, 0x3F, 0x3F, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00
 );
 
-Vec3f globalLightDirection = { 0x28, 0x28, 0x28 };
+Vec3f globalLightDirection = { 0x49, 0x49, 0x49 };
 
 void setup_global_light() {
     Lights1* curLight = (Lights1*)alloc_display_list(sizeof(Lights1));
@@ -1514,8 +1512,17 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
 
         gMatStackIndex = 0;
         gCurrAnimType = ANIM_TYPE_NONE;
-        vec3s_set(viewport->vp.vtrans, node->x * 4, node->y * 4, 511);
-        vec3s_set(viewport->vp.vscale, node->width * 4, node->height * 4, 511);
+
+#ifdef F3DEX3
+        const int maxz = (G_NEW_MAXZ / 2);
+#else
+        const int maxz = 511;
+#endif
+
+        vec3s_set(viewport->vp.vtrans, node->x * 4, node->y * 4, maxz);
+        viewport->vp.vtrans[3] = 0;
+        vec3s_set(viewport->vp.vscale, node->width * 4, node->height * 4, maxz);
+        viewport->vp.vscale[3] = 0;
 
         if (b != NULL) {
             clear_framebuffer(clearColor);
@@ -1527,6 +1534,10 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
             clear_framebuffer(clearColor);
             make_viewport_clip_rect(c);
         }
+
+#ifdef F3DEX3
+        viewport->vp.vscale[1] = -viewport->vp.vscale[1];
+#endif
 
         mtxf_identity(gMatStack[gMatStackIndex]);
         mtxf_to_mtx(initialMatrix, gMatStack[gMatStackIndex]);

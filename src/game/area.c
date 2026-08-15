@@ -82,10 +82,17 @@ u8 sSpawnTypeFromWarpBhv[] = {
     MARIO_SPAWN_AIRBORNE_STAR_COLLECT, MARIO_SPAWN_AIRBORNE_DEATH,       MARIO_SPAWN_LAUNCH_STAR_COLLECT,   MARIO_SPAWN_LAUNCH_DEATH,
 };
 
-Vp gViewport = { {
+#ifdef F3DEX3
+static const Vp gViewport = { {
+    { (SCREEN_WIDTH/2)*4, -(SCREEN_HEIGHT/2)*4, G_NEW_MAXZ/2, 0, },
+    { (SCREEN_WIDTH/2)*4,  (SCREEN_HEIGHT/2)*4, G_NEW_MAXZ/2, 0, },
+} };
+#else
+static const Vp gViewport = { {
     { 640, 480, 511, 0 },
     { 640, 480, 511, 0 },
 } };
+#endif
 
 #if MULTILANG
 const char *gNoControllerMsg[] = {

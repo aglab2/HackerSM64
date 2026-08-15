@@ -684,7 +684,7 @@ static Gfx gd_dl_rdp_init[] = {
     gsDPSetTextureFilter(G_TF_BILERP),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetCombineKey(G_CK_NONE),
-    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetAlphaCompareReal(G_AC_NONE),
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
     gsDPNoOp(),
     gsDPSetColorDither(G_CD_MAGICSQ),
@@ -732,7 +732,7 @@ static Gfx gd_dl_sprite_start_tex_block[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetAlphaCompare(G_AC_THRESHOLD),
+    gsDPSetAlphaCompareReal(G_AC_THRESHOLD),
     gsDPSetBlendColor(0, 0, 0, 1),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_NOOP2),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -1851,10 +1851,13 @@ void gd_dl_lookat(struct ObjCamera *cam, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     lookat->l[1].l.dir[1] = LOOKAT_PACK(cam->unkE8[1][1]);
     lookat->l[1].l.dir[2] = LOOKAT_PACK(cam->unkE8[2][1]);
 
+#ifndef F3DEX3
     lookat->l[0].l.col[0] = 0;
     lookat->l[0].l.col[1] = 0;
     lookat->l[0].l.col[2] = 0;
+#endif
     lookat->l[0].l.pad1 = 0;
+#ifndef F3DEX3
     lookat->l[0].l.colc[0] = 0;
     lookat->l[0].l.colc[1] = 0;
     lookat->l[0].l.colc[2] = 0;
@@ -1862,11 +1865,14 @@ void gd_dl_lookat(struct ObjCamera *cam, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     lookat->l[1].l.col[0] = 0;
     lookat->l[1].l.col[1] = 0x80;
     lookat->l[1].l.col[2] = 0;
+#endif
     lookat->l[1].l.pad1 = 0;
+#ifndef F3DEX3
     lookat->l[1].l.colc[0] = 0;
     lookat->l[1].l.colc[1] = 0x80;
     lookat->l[1].l.colc[2] = 0;
     lookat->l[1].l.pad2 = 0;
+#endif
 
     lookat = &D_801BE790[0];
     lookat->l[0].l.dir[0] = 1;
@@ -1877,10 +1883,13 @@ void gd_dl_lookat(struct ObjCamera *cam, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     lookat->l[1].l.dir[1] = 1;
     lookat->l[1].l.dir[2] = 0;
 
+#ifndef F3DEX3
     lookat->l[0].l.col[0] = 0;
     lookat->l[0].l.col[1] = 0;
     lookat->l[0].l.col[2] = 0;
+#endif
     lookat->l[0].l.pad1 = 0;
+#ifndef F3DEX3
     lookat->l[0].l.colc[0] = 0;
     lookat->l[0].l.colc[1] = 0;
     lookat->l[0].l.colc[2] = 0;
@@ -1888,11 +1897,14 @@ void gd_dl_lookat(struct ObjCamera *cam, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     lookat->l[1].l.col[0] = 0;
     lookat->l[1].l.col[1] = 0x80;
     lookat->l[1].l.col[2] = 0;
+#endif
     lookat->l[1].l.pad1 = 0;
+#ifndef F3DEX3
     lookat->l[1].l.colc[0] = 0;
     lookat->l[1].l.colc[1] = 0x80;
     lookat->l[1].l.colc[2] = 0;
     lookat->l[1].l.pad2 = 0;
+#endif
 
     gSPLookAt(next_gfx(), osVirtualToPhysical(&D_801BE7D0[gGdFrameBufNum]));
     next_mtx();
@@ -2259,6 +2271,17 @@ static void gd_dl_viewport(void) {
 
     vp = &DL_CURRENT_VP(sCurrentGdDl);
 
+#ifdef F3DEX3
+    vp->vp.vscale[0] =  (s16)(sActiveView->lowerRight.x * 2.0f);  // x scale
+    vp->vp.vscale[1] = -(s16)(sActiveView->lowerRight.y * 2.0f);  // y scale
+    vp->vp.vscale[2] = G_NEW_MAXZ/2;  // z scale
+    vp->vp.vscale[3] = 0x000;
+
+    vp->vp.vtrans[0] =  (s16)((sActiveView->upperLeft.x * 4.0f) + (sActiveView->lowerRight.x * 2.0f));  // x offset
+    vp->vp.vtrans[1] =  (s16)((sActiveView->upperLeft.y * 4.0f) + (sActiveView->lowerRight.y * 2.0f));  // y offset
+    vp->vp.vtrans[2] = G_NEW_MAXZ/2;  // z offset
+    vp->vp.vtrans[3] = 0x000;
+#else
     vp->vp.vscale[0] = (s16)(sActiveView->lowerRight.x * 2.0f);  // x scale
     vp->vp.vscale[1] = (s16)(sActiveView->lowerRight.y * 2.0f);  // y scale
     vp->vp.vscale[2] = 0x1FF;  // z scale
@@ -2268,6 +2291,7 @@ static void gd_dl_viewport(void) {
     vp->vp.vtrans[1] = (s16)((sActiveView->upperLeft.y * 4.0f) + (sActiveView->lowerRight.y * 2.0f));  // y offset
     vp->vp.vtrans[2] = 0x1FF;  // z offset
     vp->vp.vtrans[3] = 0x000;
+#endif
 
     gSPViewport(next_gfx(), osVirtualToPhysical(vp));
     next_vp();
