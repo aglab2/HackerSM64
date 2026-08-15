@@ -33,6 +33,7 @@
 #include "puppyprint.h"
 #include "puppylights.h"
 #include "level_commands.h"
+#include "game/print.h"
 
 #include "config.h"
 
